@@ -1,0 +1,40 @@
+[
+  {
+    "date": "2026-09-15",
+    "title": "AB karşı-dron sanayisini Ukrayna eksenli bir ittifak altında topluyor; Güney Kore katmanlı hava savunmayı Avrupa'ya taşıyor",
+    "summary": "Yeni ihale ya da tedarik kararı yok; günün gelişmeleri yapısal. AB–Ukrayna Dron İttifakı ilk kez toplandı ve karşı-dron teknolojisini kapsamına aldı. ABD Hava Kuvvetleri'nin üs savunması arayışı fırlatıcı, namlulu sistem ve lazer olarak ayrı katmanlarda ilerliyor. Hanwha katmanlı hava savunma portföyünü Doğu Avrupa'ya açıyor.",
+    "alarm": false,
+    "alarm_title": "",
+    "decision_by": "2026-10-09",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "TOLGA",
+      "AB",
+      "ABD",
+      "Polonya",
+      "Rakip",
+      "Savunma Bütçesi"
+    ],
+    "path": "reports/2026-09-15.html"
+  },
+  {
+    "date": "2026-09-14",
+    "title": "ABD Hava Kuvvetleri namlulu orta kalibreli hava savunma için pazar araştırması açtı; tungsten mühimmat maliyetinin yeni kırılgan noktası",
+    "summary": "ABD Hava Kuvvetleri, üs savunması için 20–40 mm namlulu hava savunma sistemi arayışını resmî bir pazar araştırmasıyla ilan etti; TOLGA'nın yarıştığı segmentin tamamı aday olarak anılıyor. Lazer katmanı ilk kez ihracata açıldı. Tungsten fiyatının üçe katlanması mühimmat maliyet tabanını baskılıyor.",
+    "alarm": true,
+    "alarm_title": "USAF orta kalibreli namlulu hava savunma pazar araştırması — yanıt süresi 9 Ekim'de doluyor",
+    "decision_by": "2026-10-09",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "TOLGA",
+      "Mühimmat",
+      "ABD",
+      "Polonya",
+      "Rakip",
+      "Tedarik Zinciri"
+    ],
+    "path": "reports/2026-09-14.html"
+  }
+]

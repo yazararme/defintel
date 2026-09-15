@@ -1,0 +1,33 @@
+name: pull-drive
+on:
+  schedule:
+    - cron: '15-55/10 3 * * *'  # every 10 min, 06:15–06:55 Türkiye (task fires 06:00)
+    - cron: '30 4-12 * * *'     # then hourly catch-up, 07:30–15:30 Türkiye
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: publish
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install markdown pyyaml requests google-auth
+      - name: Pull reports from Drive
+        env:
+          GDRIVE_SA_KEY: ${{ secrets.GDRIVE_SA_KEY }}
+          DRIVE_FOLDER_ID: 1Bqj-FeX9IwOD9na53Ze7RteepjxRCCGB
+        run: python3 scripts/pull_drive.py
+      # Pushes made with GITHUB_TOKEN don't trigger build.yml, so build here.
+      - if: always()
+        run: |
+          git status --porcelain source | grep -q . || exit 0
+          python3 build.py
+          git config user.name "defintel-bot"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "report: $(date -u +%F) from Drive"
+          git push

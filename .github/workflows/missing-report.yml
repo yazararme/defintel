@@ -1,0 +1,21 @@
+name: missing-report
+on:
+  schedule:
+    - cron: '20 5 * * *'   # 08:20 Türkiye
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          today=$(TZ=Europe/Istanbul date +%F)
+          [ -f "source/$today.md" ] && { echo "$today report present"; exit 0; }
+          title="Rapor yok: $today"
+          gh issue list --state open --search "\"$title\" in:title" --json number -q '.[0].number' | grep -q . && exit 0
+          gh issue create --title "$title" --body "08:20 itibarıyla source/$today.md yok. Drive klasörünü ve pull-drive çalıştırmalarını kontrol et."
