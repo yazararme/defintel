@@ -5,6 +5,7 @@
     "summary": "Yeni ihale ya da sözleşme kararı yok. Falcon Peak 26.2'de ABD, 21 firmanın C-UAS çözümünü angajman maliyeti ve tali hasar dahil ölçülebilir kriterlerle test ediyor; namlulu ve düşük maliyetli kinetik katman ilk kez aynı tabloda karşılaştırılıyor. 15 Eylül'de NATO jetleri Litvanya hava sahasında bir dronu düşürdü. İngiliz ordusu bölük seviyesinde pompalı tüfek dahil katmanlı C-UAS denedi.",
     "alarm": false,
     "alarm_title": "",
+    "status": "izle",
     "decision_by": "2026-10-09",
     "tags": [
       "C-UAS",
@@ -24,6 +25,7 @@
     "summary": "Yeni ihale ya da tedarik kararı yok; günün gelişmeleri yapısal. AB–Ukrayna Dron İttifakı ilk kez toplandı ve karşı-dron teknolojisini kapsamına aldı. ABD Hava Kuvvetleri'nin üs savunması arayışı fırlatıcı, namlulu sistem ve lazer olarak ayrı katmanlarda ilerliyor. Hanwha katmanlı hava savunma portföyünü Doğu Avrupa'ya açıyor.",
     "alarm": false,
     "alarm_title": "",
+    "status": "izle",
     "decision_by": "2026-10-09",
     "tags": [
       "C-UAS",
@@ -43,6 +45,7 @@
     "summary": "ABD Hava Kuvvetleri, üs savunması için 20–40 mm namlulu hava savunma sistemi arayışını resmî bir pazar araştırmasıyla ilan etti; TOLGA'nın yarıştığı segmentin tamamı aday olarak anılıyor. Lazer katmanı ilk kez ihracata açıldı. Tungsten fiyatının üçe katlanması mühimmat maliyet tabanını baskılıyor.",
     "alarm": true,
     "alarm_title": "USAF orta kalibreli namlulu hava savunma pazar araştırması — yanıt süresi 9 Ekim'de doluyor",
+    "status": "alarm",
     "decision_by": "2026-10-09",
     "tags": [
       "C-UAS",

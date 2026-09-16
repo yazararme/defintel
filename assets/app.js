@@ -29,15 +29,15 @@
       if (visible) shown++;
     });
 
-    // hide a section label whose entries are all filtered out
-    document.querySelectorAll(".section-label").forEach(function (label) {
-      var any = false;
-      var n = label.nextElementSibling;
-      while (n && !n.classList.contains("section-label")) {
-        if (n.classList.contains("entry") && !n.hidden) { any = true; break; }
-        n = n.nextElementSibling;
-      }
+    // hide a section kicker whose feed is entirely filtered out
+    document.querySelectorAll(".kicker").forEach(function (label) {
+      var feed = label.nextElementSibling;
+      if (!feed || !feed.classList.contains("feed")) return;
+      var any = Array.prototype.some.call(feed.querySelectorAll(".entry"), function (el) {
+        return !el.hidden;
+      });
       label.hidden = !any;
+      feed.hidden = !any;
     });
 
     if (none) none.hidden = shown !== 0;
