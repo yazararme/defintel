@@ -1,8 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="DEFINTEL">
-  <rect width="512" height="512" fill="#14213D"/>
-  <g fill="#FFFFFF" fill-rule="evenodd">
-    <path d="M64 80 H192 a144 144 0 0 1 144 144 v64 a144 144 0 0 1 -144 144 H64 Z
-             M144 160 v192 h48 a64 64 0 0 0 64 -64 v-64 a64 64 0 0 0 -64 -64 Z"/>
-    <path d="M368 80 H448 V432 H368 Z"/>
-  </g>
+  <rect width="512" height="512" fill="#2F4C3B"/>
+  <path transform="translate(48.97 435.20) scale(0.26509 -0.26509)" fill="#FFFFFF" d="M1196 693Q1196 966 1054.0 1094.5Q912 1223 656 1223H371L353 1352H707Q967 1352 1139.5 1282.0Q1312 1212 1397.5 1070.0Q1483 928 1483 714Q1483 487 1382.5 327.5Q1282 168 1106.5 84.0Q931 0 708 0H353L371 130H680Q837 130 953.0 187.5Q1069 245 1132.5 369.5Q1196 494 1196 693ZM79 0V55L234 109V1243L79 1297V1352H508V0Z"/>
 </svg>
