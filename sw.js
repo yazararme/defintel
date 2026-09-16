@@ -2,7 +2,7 @@
 // Pages and the report index: network first, so a new day's report shows up
 // as soon as it is published; the cached copy is used only when offline.
 // Styles, scripts and icons: served from cache, refreshed in the background.
-const CACHE = "defintel-v13";
+const CACHE = "defintel-v14";
 
 self.addEventListener("install", () => self.skipWaiting());
 

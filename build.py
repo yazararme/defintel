@@ -19,6 +19,8 @@ import pathlib
 import re
 import sys
 
+import enrich
+
 try:
     import markdown
     import yaml
@@ -104,9 +106,17 @@ def label_table_cells(table_html):
     return table_html[: body.start()] + labelled + table_html[body.end():]
 
 
-def render_body(md_text):
+def render_body(md_text, developments=()):
+    # A bullet list that starts right under a bold lead-in ("**Taşınanlar:**")
+    # would otherwise stay inside that paragraph; give it the blank line it needs.
+    md_text = re.sub(
+        r"(?m)^(?P<line>(?!\s*[-*+] )(?!\s*\d+[.)] )(?!\|)(?!#).+\S)\n(?=- )",
+        r"\g<line>" "\n\n",
+        md_text,
+    )
     md = markdown.Markdown(extensions=["tables", "fenced_code", "attr_list", "sane_lists"])
     out = md.convert(md_text)
+    out = enrich.enrich(out, developments)
     out = re.sub(r"<table>.*?</table>", lambda m: label_table_cells(m.group(0)), out, flags=re.S)
     out = out.replace("<table>", '<div class="table-wrap"><table>')
     out = out.replace("</table>", "</table></div>")
@@ -199,6 +209,17 @@ FOOT = """<footer class="foot">
 def build_report(meta, body_html, iso):
     title = meta.get("title") or f"{tr_date(iso)} raporu"
 
+    banner = (
+        f'<p class="alarmbar">{html.escape(str(meta.get("alarm_title") or "Alarm"))}</p>'
+        if meta.get("alarm")
+        else ""
+    )
+    deadline = (
+        f'<p class="deadline-chip">Dış son tarih: {tr_date(meta["decision_by"])}</p>'
+        if meta.get("decision_by")
+        else ""
+    )
+
     rail = [
         '<div class="rail-block"><span class="rail-label">Tarih</span>'
         f'<span class="rail-value num">{tr_date(iso, weekday=True)}</span></div>'
@@ -212,7 +233,10 @@ def build_report(meta, body_html, iso):
   <div class="report-grid">
     <aside class="rail">{''.join(rail)}</aside>
     <article class="column">
+      {banner}
       <h1 class="report-title">{html.escape(title)}</h1>
+      {deadline}
+      {enrich.nav(meta.get("developments") or [])}
       <div class="prose">
 {body_html}
       </div>
@@ -228,6 +252,23 @@ def build_report(meta, body_html, iso):
 
 def entry_html(r):
     rail = [f'<time class="datestamp num">{tr_date(r["date"])}</time>']
+    if r["alarm"]:
+        rail.append('<span class="badge badge--alarm">Alarm</span>')
+    if r.get("decision_by"):
+        rail.append(f'<span class="badge num">Son tarih · {tr_short(r["decision_by"])}</span>')
+
+    heads = [d for d in (r.get("developments") or [])
+             if str(d.get("home", "gelismeler")).lower() == "gelismeler"]
+    chips = ""
+    if heads:
+        shown = [html.escape(str(d.get("label") or d.get("id") or "")) for d in heads[:3]]
+        more = len(heads) - len(shown)
+        chips = (
+            '<div class="entry-chips">'
+            + "".join(f"<span>{t}</span>" for t in shown)
+            + (f"<span>+{more}</span>" if more > 0 else "")
+            + "</div>"
+        )
 
     haystack = " ".join(
         [r["date"], tr_date(r["date"]), tr_short(r["date"]), r.get("title", ""),
@@ -241,6 +282,7 @@ def entry_html(r):
   <div class="entry-main">
     <h2 class="entry-title">{html.escape(r.get('title', ''))}</h2>
     <p class="entry-summary">{html.escape(r.get('summary', ''))}</p>
+    {chips}
   </div>
 </a>"""
 
@@ -308,7 +350,8 @@ def main():
             print(f"  ! skipped {path.name}: {exc}")
             continue
 
-        body_html = render_body(body)
+        developments = meta.get("developments") or []
+        body_html = render_body(body, developments)
         (OUT / f"{iso}.html").write_text(build_report(meta, body_html, iso), encoding="utf-8")
 
         reports.append(
@@ -321,6 +364,7 @@ def main():
                 "status": status_of(meta, iso),
                 "decision_by": str(meta["decision_by"]) if meta.get("decision_by") else None,
                 "tags": [str(t) for t in meta.get("tags", [])],
+                "developments": developments,
                 "path": f"reports/{iso}.html",
             }
         )

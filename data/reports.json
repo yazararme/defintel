@@ -17,6 +17,58 @@
       "NATO/NSPA",
       "Rakip"
     ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Falcon Peak 26.2",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Litvanya hava sahası ihlali",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "İngiliz ordusunun bölük seviyesi C-UAS denemesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "Project Halo Shield",
+        "home": "rakip"
+      },
+      {
+        "id": "G5",
+        "label": "XM30'da organik C-UAS boşluğu",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "MBDA ve WITU Counter Mass Interceptor",
+        "home": "rakip"
+      },
+      {
+        "id": "G7",
+        "label": "Airbility önleyici yatırımı",
+        "home": "rakip"
+      },
+      {
+        "id": "G8",
+        "label": "USAF orta kalibreli namlulu hava savunma pazar araştırması",
+        "home": "izleme"
+      },
+      {
+        "id": "G9",
+        "label": "Malezya MERAD (RMK-13)",
+        "home": "izleme"
+      },
+      {
+        "id": "G10",
+        "label": "ABD Deniz Piyadeleri Drone Round",
+        "home": "izleme"
+      }
+    ],
     "path": "reports/2026-09-16.html"
   },
   {
@@ -37,6 +89,43 @@
       "Rakip",
       "Savunma Bütçesi"
     ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "AB–Ukrayna Dron İttifakı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "ABD üs savunmasının katmanlara bölünmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "Hanwha katmanlı hava savunma ihracatı",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "Almanya'nın Typhon ve Tomahawk alımı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "LIG D&A ve Rheinmetall kısa menzil füzesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G6",
+        "label": "Malezya MERAD (RMK-13)",
+        "home": "izleme"
+      },
+      {
+        "id": "G7",
+        "label": "ABD Deniz Piyadeleri Drone Round",
+        "home": "izleme"
+      }
+    ],
     "path": "reports/2026-09-15.html"
   },
   {
@@ -56,6 +145,88 @@
       "Polonya",
       "Rakip",
       "Tedarik Zinciri"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "USAF orta kalibreli namlulu hava savunma pazar araştırması",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "MSPO 2026",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "AeroVironment lazer ihracatı",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "Tungsten fiyatı ve ABD'nin Elmet yatırımı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "SGT STOUT ve topçu koruma doktrini",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "Avrupa'da pamuk linteri darboğazı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Rheinmetall 155 mm mühimmat siparişi",
+        "home": "rakip"
+      },
+      {
+        "id": "G8",
+        "label": "Rheinmetall Skyranger üretim ölçeği",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "Kongsberg PROTECTOR radar entegrasyonu",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "Aselsan MSPO ihracat sözleşmesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "Hanwha Systems MSPO gösterimi",
+        "home": "rakip"
+      },
+      {
+        "id": "G12",
+        "label": "Patria MUSCL pasif radar",
+        "home": "rakip"
+      },
+      {
+        "id": "G13",
+        "label": "Malezya MERAD (RMK-13)",
+        "home": "izleme"
+      },
+      {
+        "id": "G14",
+        "label": "ABD iç güvenlik C-UAS talebi",
+        "home": "izleme"
+      },
+      {
+        "id": "G15",
+        "label": "Türk savunma ve havacılık ihracatı",
+        "home": "izleme"
+      },
+      {
+        "id": "G16",
+        "label": "ABD Deniz Piyadeleri Drone Round",
+        "home": "izleme"
+      }
     ],
     "path": "reports/2026-09-14.html"
   }
