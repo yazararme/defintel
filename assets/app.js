@@ -313,6 +313,15 @@
       if (set) openGroup(set.getAttribute("data-group"));
     }
     setTimeout(function () { goTo(id, false); }, 60);
+
+    // Web fonts land after the first paint and move everything down a little;
+    // line the target up again once they are in.
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () {
+        var el = document.getElementById(id);
+        if (el) el.scrollIntoView({ block: "start" });
+      });
+    }
   }
 
   window.addEventListener("hashchange", fromHash);
