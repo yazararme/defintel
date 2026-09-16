@@ -1,6 +1,7 @@
 name = "defintel-push"
 main = "worker.js"
 compatibility_date = "2026-09-01"
+preview_urls = false
 
 [vars]
 SITE_ORIGIN = "https://defintel.shadovi.com"
@@ -12,5 +13,3 @@ VAPID_PUBLIC_KEY = "BLOHxsm23_gz-DmV0E9xyB3RVQTkCwv06uPv_pme7VApr61x_gnNGGPkTnEI
 [[kv_namespaces]]
 binding = "SUBS"
 id = "17630dd6f40a4561827c292f04f7f2bb"
-
-preview_urls = false

@@ -2,7 +2,7 @@
 // Pages and the report index: network first, so a new day's report shows up
 // as soon as it is published; the cached copy is used only when offline.
 // Styles, scripts and icons: served from cache, refreshed in the background.
-const CACHE = "defintel-v1";
+const CACHE = "defintel-v2";
 
 self.addEventListener("install", () => self.skipWaiting());
 
@@ -29,19 +29,25 @@ self.addEventListener("push", (event) => {
   event.waitUntil(
     (async () => {
       let title = "Yeni rapor";
+      let body = "";
       let url = "./index.html";
       try {
         const res = await fetch("./data/reports.json", { cache: "no-store" });
         const list = await res.json();
         if (list.length) {
-          title = list[0].alarm ? "⚠️ " + list[0].title : list[0].title;
-          url = "./" + list[0].path;
+          const r = list[0];
+          title = r.alarm ? "⚠️ " + r.title : r.title;
+          body = new Intl.DateTimeFormat("tr-TR", { day: "numeric", month: "long" }).format(
+            new Date(r.date + "T00:00:00")
+          );
+          if (r.alarm && r.alarm_title) body += " · " + r.alarm_title;
+          url = "./" + r.path;
         }
       } catch {
         /* offline: fall back to the generic title */
       }
-      await self.registration.showNotification("DEFINTEL", {
-        body: title,
+      await self.registration.showNotification(title, {
+        body,
         icon: "./assets/icons/icon-192.png",
         badge: "./assets/icons/icon-192.png",
         tag: "defintel-report",
