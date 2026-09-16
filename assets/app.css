@@ -43,6 +43,10 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
+/* .entry sets display:grid, which would otherwise beat the browser's own
+   [hidden] rule and leave filtered-out rows on screen. */
+[hidden] { display: none !important; }
+
 html { -webkit-text-size-adjust: 100%; }
 
 body {
