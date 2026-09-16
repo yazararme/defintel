@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="DEFINTEL">
+  <rect width="512" height="512" fill="#14213D"/>
+  <g transform="translate(61.5 90.8) scale(0.9442)" fill="#FFFFFF">
+    <path fill-rule="evenodd" d="M0 0 H115 A175 175 0 0 1 115 350 H0 Z
+                                 M92 92 H115 A83 83 0 0 1 115 258 H92 Z"/>
+    <path d="M320 0 H412 V350 H320 Z"/>
+  </g>
+</svg>
