@@ -288,8 +288,10 @@
         set.hidden = open;
         group.setAttribute("aria-expanded", open ? "false" : "true");
         if (!open) {
+          // the set itself is display:contents, so measure its first chip
           var track = nav.querySelector(".devnav-track");
-          if (track) track.scrollLeft = set.offsetLeft - 12;
+          var first = set.querySelector("a.chip");
+          if (track && first) track.scrollLeft = first.offsetLeft - 12;
         }
         return;
       }
