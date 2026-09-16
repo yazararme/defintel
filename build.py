@@ -141,7 +141,6 @@ def head(title, depth=0):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;display=swap">
 <link rel="stylesheet" href="{up}{asset("app.css")}">
-<link rel="icon" type="image/svg+xml" href="{up}{asset("icons/favicon.svg")}">
 <link rel="icon" type="image/png" sizes="32x32" href="{up}{asset("icons/favicon-32.png")}">
 <link rel="icon" type="image/png" sizes="16x16" href="{up}{asset("icons/favicon-16.png")}">
 <link rel="apple-touch-icon" sizes="180x180" href="{up}{asset("icons/apple-touch-icon.png")}">
