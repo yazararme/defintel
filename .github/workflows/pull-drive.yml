@@ -35,11 +35,12 @@ jobs:
           echo "published=yes" >> "$GITHUB_OUTPUT"
 
       # Tell the push service a new report is out, so phones get a notification.
-      - if: steps.publish.outputs.published == 'yes' && env.PUSH_URL != ''
+      - if: steps.publish.outputs.published == 'yes'
         env:
           PUSH_URL: ${{ secrets.PUSH_URL }}
           NOTIFY_SECRET: ${{ secrets.NOTIFY_SECRET }}
         run: |
+          [ -n "$PUSH_URL" ] || { echo "no push service configured"; exit 0; }
           code=$(curl -s -o /tmp/notify.out -w '%{http_code}' -X POST "$PUSH_URL/notify" \
             -H "Authorization: Bearer $NOTIFY_SECRET")
           echo "notify: $code $(cat /tmp/notify.out)"
