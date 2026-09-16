@@ -168,13 +168,6 @@ FOOT = """<footer class="foot">
 """
 
 
-def tag_list(tags, cls="tags"):
-    if not tags:
-        return ""
-    items = "".join(f"<span>{html.escape(str(t))}</span>" for t in tags)
-    return f'<div class="{cls}">{items}</div>'
-
-
 def build_report(meta, body_html, iso):
     title = meta.get("title") or f"{tr_date(iso)} raporu"
 
@@ -182,11 +175,6 @@ def build_report(meta, body_html, iso):
         '<div class="rail-block"><span class="rail-label">Tarih</span>'
         f'<span class="rail-value num">{tr_date(iso, weekday=True)}</span></div>'
     ]
-    if meta.get("tags"):
-        rail.append(
-            '<div class="rail-block"><span class="rail-label">Etiketler</span>'
-            f'{tag_list(meta["tags"], "tags tags--stack")}</div>'
-        )
 
     return (
         head(f"{title} — {SITE_NAME}", depth=1)
@@ -212,7 +200,8 @@ def entry_html(r):
     rail = [f'<time class="datestamp num">{tr_date(r["date"])}</time>']
 
     haystack = " ".join(
-        [r["date"], r.get("title", ""), r.get("summary", "")] + [str(t) for t in r.get("tags", [])]
+        [r["date"], tr_date(r["date"]), tr_short(r["date"]), r.get("title", ""),
+         r.get("summary", "")] + [str(t) for t in r.get("tags", [])]
     ).lower()
 
     return f"""<a class="entry" href="{r['path']}"
@@ -222,7 +211,6 @@ def entry_html(r):
   <div class="entry-main">
     <h2 class="entry-title">{html.escape(r.get('title', ''))}</h2>
     <p class="entry-summary">{html.escape(r.get('summary', ''))}</p>
-    {tag_list(r.get('tags', []))}
   </div>
 </a>"""
 
@@ -230,18 +218,7 @@ def entry_html(r):
 def build_index(reports, version):
     if not reports:
         body = '<p class="empty">Henüz rapor yok.</p>'
-        tagbar = ""
     else:
-        all_tags = sorted({str(t) for r in reports for t in r.get("tags", [])})
-        tagbar = (
-            '<nav class="tagbar" id="tagbar" aria-label="Etikete göre süz">'
-            + "".join(
-                f'<button class="tag" type="button" aria-pressed="false" '
-                f'data-tag="{html.escape(t)}">{html.escape(t)}</button>'
-                for t in all_tags
-            )
-            + "</nav>"
-        )
         body = '<div class="feed">' + "".join(entry_html(r) for r in reports) + "</div>"
         body += '<p class="empty" id="noresults" hidden>Bu filtreyle eşleşen rapor yok.</p>'
 
@@ -250,7 +227,7 @@ def build_index(reports, version):
         + masthead()
         + f"""<main class="wrap">
   <div class="controls">
-    <input class="search" id="q" type="search" placeholder="Ara: konu, tarih, etiket…" autocomplete="off">
+    <input class="search" id="q" type="search" placeholder="Ara: konu ya da tarih…" autocomplete="off">
     <button class="notify" type="button" id="notify" hidden aria-pressed="false"
             data-push="{PUSH_ENDPOINT}" data-vapid="{VAPID_PUBLIC_KEY}">
       <svg class="notify-bell" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true">
@@ -261,7 +238,6 @@ def build_index(reports, version):
       <span class="notify-label">Bildirimler</span>
     </button>
   </div>
-  {tagbar}
   {body}
 </main>
 <script>

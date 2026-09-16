@@ -3,16 +3,11 @@
   "use strict";
 
   var q = document.getElementById("q");
-  var tagbar = document.getElementById("tagbar");
   var none = document.getElementById("noresults");
   var entries = Array.prototype.slice.call(document.querySelectorAll(".entry"));
-  var active = new Set();
 
   function norm(s) {
-    return (s || "")
-      .toLocaleLowerCase("tr")
-      .replace(/ı/g, "i")
-      .replace(/İ/g, "i");
+    return (s || "").toLocaleLowerCase("tr").replace(/ı/g, "i").replace(/İ/g, "i");
   }
 
   function apply() {
@@ -20,24 +15,9 @@
     var shown = 0;
 
     entries.forEach(function (el) {
-      var hay = norm(el.getAttribute("data-search"));
-      var tags = (el.getAttribute("data-tags") || "").split("|");
-      var okText = !term || hay.indexOf(term) !== -1;
-      var okTags = active.size === 0 || tags.some(function (t) { return active.has(t); });
-      var visible = okText && okTags;
+      var visible = !term || norm(el.getAttribute("data-search")).indexOf(term) !== -1;
       el.hidden = !visible;
       if (visible) shown++;
-    });
-
-    // hide a section kicker whose feed is entirely filtered out
-    document.querySelectorAll(".kicker").forEach(function (label) {
-      var feed = label.nextElementSibling;
-      if (!feed || !feed.classList.contains("feed")) return;
-      var any = Array.prototype.some.call(feed.querySelectorAll(".entry"), function (el) {
-        return !el.hidden;
-      });
-      label.hidden = !any;
-      feed.hidden = !any;
     });
 
     if (none) none.hidden = shown !== 0;
@@ -47,17 +27,6 @@
     q.addEventListener("input", apply);
     q.addEventListener("keydown", function (e) {
       if (e.key === "Escape") { q.value = ""; apply(); }
-    });
-  }
-
-  if (tagbar) {
-    tagbar.addEventListener("click", function (e) {
-      var btn = e.target.closest(".tag");
-      if (!btn) return;
-      var tag = btn.getAttribute("data-tag");
-      if (active.has(tag)) { active.delete(tag); btn.setAttribute("aria-pressed", "false"); }
-      else { active.add(tag); btn.setAttribute("aria-pressed", "true"); }
-      apply();
     });
   }
 
