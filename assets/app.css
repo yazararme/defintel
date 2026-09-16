@@ -402,3 +402,65 @@ a { color: var(--brand); text-underline-offset: 2px; }
   }
   .prose td:empty { display: none; }
 }
+
+/* ---------- kurulum / bildirim daveti ---------- */
+
+.promptbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  background: var(--paper);
+  border-top: 1px solid var(--rule-2);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, .06);
+  padding: 14px 0 max(14px, env(safe-area-inset-bottom));
+}
+
+.promptbar-inner {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.promptbar-text {
+  margin: 0;
+  flex: 1 1 320px;
+  font-size: 15.5px;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.promptbar-text strong { color: var(--ink); font-weight: 600; }
+.promptbar-text b { font-weight: 600; color: var(--ink); }
+
+.promptbar-actions { display: flex; gap: 10px; flex: 0 0 auto; }
+
+.pbtn {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  color: var(--paper);
+  background: var(--brand);
+  border: 1px solid var(--brand);
+  border-radius: var(--radius, 2px);
+  cursor: pointer;
+}
+.pbtn:hover { opacity: .9; }
+.pbtn--quiet { color: var(--muted); background: none; border-color: var(--rule-2); }
+.pbtn--quiet:hover { color: var(--ink); border-color: var(--ink); }
+
+/* hangi yönergenin görüneceğini platform belirler */
+.for-chrome, .for-ios, .for-manual { display: none; }
+#installbar[data-kind="chrome"] .for-chrome,
+#installbar[data-kind="ios"] .for-ios,
+#installbar[data-kind="manual"] .for-manual { display: inline; }
+#installbar[data-kind="chrome"] button.for-chrome { display: inline-block; }
+
+@media (max-width: 600px) {
+  .promptbar-inner { gap: 12px; }
+  .promptbar-actions { width: 100%; }
+  .pbtn { flex: 1; }
+}

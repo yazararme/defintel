@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;display=swap">
-<link rel="stylesheet" href="../assets/app.css?v=325ac0b6">
+<link rel="stylesheet" href="../assets/app.css?v=bcab8e77">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png?v=62f37bc6">
 <link rel="icon" type="image/png" sizes="64x64" href="../assets/icons/favicon-64.png?v=a5e52d30">
 <link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/favicon-16.png?v=e3877a81">
@@ -20,7 +20,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("../sw.js");</script>
 </head>
-<body>
+<body data-push="https://defintel-push.yazararme-c30.workers.dev" data-vapid="BLOHxsm23_gz-DmV0E9xyB3RVQTkCwv06uPv_pme7VApr61x_gnNGGPkTnEI3mNekR7lzZGxNL9hATzaaOYsEZo">
 <header class="masthead">
   <div class="wrap masthead-inner">
     <a class="wordmark" href="../index.html">DEFINTEL</a>
@@ -145,6 +145,33 @@
     </article>
   </div>
 </main>
+<div class="promptbar" id="installbar" hidden role="region" aria-label="Uygulama olarak yükle">
+  <div class="wrap promptbar-inner">
+    <p class="promptbar-text">
+      <strong>DEFINTEL'i uygulama olarak ekle.</strong>
+      <span class="for-chrome">Raporlar tek dokunuşla açılır, çevrimdışı da okunur.</span>
+      <span class="for-ios">Paylaş düğmesine dokun, ardından <b>Ana Ekrana Ekle</b>.</span>
+      <span class="for-manual">Tarayıcı menüsünden <b>Uygulamayı yükle</b>.</span>
+    </p>
+    <span class="promptbar-actions">
+      <button class="pbtn for-chrome" type="button" data-action="install">Yükle</button>
+      <button class="pbtn pbtn--quiet" type="button" data-action="close">Kapat</button>
+    </span>
+  </div>
+</div>
+<div class="promptbar" id="notifycard" hidden role="region" aria-label="Bildirim izni">
+  <div class="wrap promptbar-inner">
+    <p class="promptbar-text">
+      <strong>Yeni rapor çıkınca haber verelim mi?</strong>
+      <span>Her sabah rapor yayınlandığında tek bildirim; istediğinde kapatırsın.</span>
+    </p>
+    <span class="promptbar-actions">
+      <button class="pbtn" type="button" data-action="enable">Aç</button>
+      <button class="pbtn pbtn--quiet" type="button" data-action="later">Şimdi değil</button>
+    </span>
+  </div>
+</div>
+<script src="../assets/app.js?v=35468219" defer></script>
 <footer class="foot">
   <div class="wrap">
     Yalnızca kamuya açık kaynaklara dayanır; doğrulanmamış iddialar raporda ayrıca işaretlenir.

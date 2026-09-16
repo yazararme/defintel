@@ -143,7 +143,7 @@ def head(title, depth=0):
 <meta name="apple-mobile-web-app-capable" content="yes">
 <script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("{up}sw.js");</script>
 </head>
-<body>
+<body data-push="{PUSH_ENDPOINT}" data-vapid="{VAPID_PUBLIC_KEY}">
 """
 
 
@@ -156,6 +156,34 @@ def masthead(up=""):
 </header>
 """
 
+
+PROMPTS = """<div class="promptbar" id="installbar" hidden role="region" aria-label="Uygulama olarak yükle">
+  <div class="wrap promptbar-inner">
+    <p class="promptbar-text">
+      <strong>DEFINTEL'i uygulama olarak ekle.</strong>
+      <span class="for-chrome">Raporlar tek dokunuşla açılır, çevrimdışı da okunur.</span>
+      <span class="for-ios">Paylaş düğmesine dokun, ardından <b>Ana Ekrana Ekle</b>.</span>
+      <span class="for-manual">Tarayıcı menüsünden <b>Uygulamayı yükle</b>.</span>
+    </p>
+    <span class="promptbar-actions">
+      <button class="pbtn for-chrome" type="button" data-action="install">Yükle</button>
+      <button class="pbtn pbtn--quiet" type="button" data-action="close">Kapat</button>
+    </span>
+  </div>
+</div>
+<div class="promptbar" id="notifycard" hidden role="region" aria-label="Bildirim izni">
+  <div class="wrap promptbar-inner">
+    <p class="promptbar-text">
+      <strong>Yeni rapor çıkınca haber verelim mi?</strong>
+      <span>Her sabah rapor yayınlandığında tek bildirim; istediğinde kapatırsın.</span>
+    </p>
+    <span class="promptbar-actions">
+      <button class="pbtn" type="button" data-action="enable">Aç</button>
+      <button class="pbtn pbtn--quiet" type="button" data-action="later">Şimdi değil</button>
+    </span>
+  </div>
+</div>
+"""
 
 FOOT = """<footer class="foot">
   <div class="wrap">
@@ -192,6 +220,8 @@ def build_report(meta, body_html, iso):
   </div>
 </main>
 """
+        + PROMPTS
+        + f'<script src="../{asset("app.js")}" defer></script>\n'
         + FOOT
     )
 
@@ -228,8 +258,7 @@ def build_index(reports, version):
         + f"""<main class="wrap">
   <div class="controls">
     <input class="search" id="q" type="search" placeholder="Ara: konu ya da tarih…" autocomplete="off">
-    <button class="notify" type="button" id="notify" hidden aria-pressed="false"
-            data-push="{PUSH_ENDPOINT}" data-vapid="{VAPID_PUBLIC_KEY}">
+    <button class="notify" type="button" id="notify" hidden aria-pressed="false">
       <svg class="notify-bell" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true">
         <path d="M8 1.6a3.6 3.6 0 0 0-3.6 3.6c0 2.5-.5 3.7-1.1 4.5-.3.4 0 1 .5 1h8.4c.5 0 .8-.6.5-1-.6-.8-1.1-2-1.1-4.5A3.6 3.6 0 0 0 8 1.6Z"
               fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
@@ -260,6 +289,7 @@ def build_index(reports, version):
 </script>
 <script src="{asset("app.js")}" defer></script>
 """
+        + PROMPTS
         + FOOT
     )
 
