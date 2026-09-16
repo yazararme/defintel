@@ -227,8 +227,15 @@ def build_index(reports, version):
         + f"""<main class="wrap">
   <div class="controls">
     <input class="search" id="q" type="search" placeholder="Ara: konu, tarih, etiket…" autocomplete="off">
-    <button class="tag notify" type="button" id="notify" hidden
-            data-push="{PUSH_ENDPOINT}" data-vapid="{VAPID_PUBLIC_KEY}">Bildirimleri aç</button>
+    <button class="notify" type="button" id="notify" hidden aria-pressed="false"
+            data-push="{PUSH_ENDPOINT}" data-vapid="{VAPID_PUBLIC_KEY}">
+      <svg class="notify-bell" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true">
+        <path d="M8 1.6a3.6 3.6 0 0 0-3.6 3.6c0 2.5-.5 3.7-1.1 4.5-.3.4 0 1 .5 1h8.4c.5 0 .8-.6.5-1-.6-.8-1.1-2-1.1-4.5A3.6 3.6 0 0 0 8 1.6Z"
+              fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+        <path d="M6.6 12.2a1.5 1.5 0 0 0 2.8 0" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+      <span class="notify-label">Bildirimler</span>
+    </button>
   </div>
   {tagbar}
   {body}

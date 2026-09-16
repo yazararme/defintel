@@ -97,15 +97,30 @@
     });
   }
 
-  function paint(on) {
-    btn.textContent = on ? "Bildirimler açık" : "Bildirimleri aç";
-    btn.setAttribute("aria-pressed", on ? "true" : "false");
+  var label = btn.querySelector(".notify-label");
+
+  function paint(state) {
+    var text = {
+      on: "Bildirimler açık",
+      off: "Bildirimler",
+      blocked: "Bildirimler kapalı",
+      failed: "Bildirim kurulamadı",
+    }[state];
+    label.textContent = text;
+    btn.setAttribute("aria-pressed", state === "on" ? "true" : "false");
+    btn.setAttribute("data-state", state);
+    btn.title =
+      state === "on"
+        ? "Yeni rapor yayınlandığında bu cihaza bildirim gelir. Kapatmak için dokun."
+        : state === "blocked"
+        ? "Bildirim izni reddedilmiş. Cihaz ayarlarından açabilirsin."
+        : "Yeni rapor yayınlandığında bu cihaza bildirim gönderilsin.";
     btn.hidden = false;
   }
 
   navigator.serviceWorker.ready.then(function (reg) {
     reg.pushManager.getSubscription().then(function (sub) {
-      paint(!!sub);
+      paint(sub ? "on" : Notification.permission === "denied" ? "blocked" : "off");
 
       btn.addEventListener("click", function () {
         btn.disabled = true;
@@ -115,20 +130,20 @@
             if (current) {
               return send("/unsubscribe", current)
                 .then(function () { return current.unsubscribe(); })
-                .then(function () { paint(false); });
+                .then(function () { paint("off"); });
             }
             return Notification.requestPermission().then(function (permission) {
               if (permission !== "granted") {
-                btn.textContent = "Bildirimler engelli";
+                paint("blocked");
                 return;
               }
               return reg.pushManager
                 .subscribe({ userVisibleOnly: true, applicationServerKey: keyBytes(vapid) })
                 .then(function (fresh) { return send("/subscribe", fresh); })
-                .then(function () { paint(true); });
+                .then(function () { paint("on"); });
             });
           })
-          .catch(function () { btn.textContent = "Bildirim kurulamadı"; })
+          .catch(function () { paint("failed"); })
           .then(function () { btn.disabled = false; });
       });
     });

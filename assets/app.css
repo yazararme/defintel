@@ -476,7 +476,37 @@ a:hover { text-decoration-thickness: 2px; }
   .prose { max-width: none; font-size: 11pt; }
 }
 
-/* bildirim düğmesi, arama kutusunun yanında */
-.controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-.controls .search { flex: 1 1 240px; }
-.notify[aria-pressed="true"] { border-color: var(--ok); color: var(--ok); }
+/* ---------- bildirim düğmesi ---------- */
+
+.notify {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex: 0 0 auto;
+  padding: 8px 14px 8px 11px;
+  font: inherit;
+  font-size: 13.5px;
+  line-height: 1.2;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: color .15s, border-color .15s, background .15s;
+}
+.notify:hover { color: var(--ink-2); border-color: var(--ink-2); }
+.notify:focus-visible { outline: 2px solid var(--link); outline-offset: 1px; }
+.notify:disabled { opacity: .55; cursor: default; }
+.notify-bell { flex: none; }
+
+.notify[aria-pressed="true"] {
+  color: var(--ink);
+  border-color: var(--ink);
+  background: var(--surface-2);
+}
+.notify[aria-pressed="true"] .notify-bell { color: var(--accent); }
+.notify[data-state="blocked"] { color: var(--muted); border-style: dashed; cursor: default; }
+
+@media (max-width: 480px) {
+  .notify { width: 100%; justify-content: center; }
+}
