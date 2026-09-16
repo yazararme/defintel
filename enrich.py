@@ -197,20 +197,25 @@ def nav(developments):
         return f'<a class="chip" href="#{gid.lower()}">{html.escape(text)}</a>'
 
     parts = [chip(*c) for c in groups["gelismeler"]]
+    toggles = []
     for key, title in (("rakip", "Rakipler"), ("izleme", "İzleme")):
         if not groups[key]:
             continue
-        parts.append(
+        # the toggle stays pinned on the right; its chips open inside the track
+        toggles.append(
             f'<button class="chip chip--group" type="button" data-group="{key}"'
             f' aria-expanded="false">{title} +{len(groups[key])}</button>'
+        )
+        parts.append(
             f'<span class="chip-set" data-group="{key}" hidden>'
             + "".join(chip(*c) for c in groups[key])
             + "</span>"
         )
 
-    if not parts:
+    if not parts and not toggles:
         return ""
+    pinned = f'<div class="devnav-groups">{"".join(toggles)}</div>' if toggles else ""
     return (
         '<nav class="devnav" id="devnav" aria-label="Gelişmeler">'
-        '<div class="devnav-track">' + "".join(parts) + "</div></nav>"
+        '<div class="devnav-track">' + "".join(parts) + "</div>" + pinned + "</nav>"
     )

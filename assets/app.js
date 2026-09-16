@@ -287,6 +287,10 @@
         var open = group.getAttribute("aria-expanded") === "true";
         set.hidden = open;
         group.setAttribute("aria-expanded", open ? "false" : "true");
+        if (!open) {
+          var track = nav.querySelector(".devnav-track");
+          if (track) track.scrollLeft = set.offsetLeft - 12;
+        }
         return;
       }
       var chip = e.target.closest("a.chip");
