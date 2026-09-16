@@ -31,7 +31,7 @@ OUT = ROOT / "reports"
 DATA = ROOT / "data"
 
 SITE_NAME = "DEFINTEL"
-SITE_TAGLINE = "MKE stratejik pazar istihbaratı · günlük tarama"
+SITE_TAGLINE = "MKE stratejik pazar istihbaratı"
 # Push service (Cloudflare Worker). Empty string hides the notification button.
 PUSH_ENDPOINT = "https://defintel-push.yazararme-c30.workers.dev"
 VAPID_PUBLIC_KEY = "BLOHxsm23_gz-DmV0E9xyB3RVQTkCwv06uPv_pme7VApr61x_gnNGGPkTnEI3mNekR7lzZGxNL9hATzaaOYsEZo"
@@ -122,6 +122,12 @@ def render_body(md_text):
     return out
 
 
+def asset(name):
+    """assets/x?v=hash — a changed file gets a new URL, so no stale cache."""
+    digest = hashlib.sha256((ROOT / "assets" / name).read_bytes()).hexdigest()[:8]
+    return f"assets/{name}?v={digest}"
+
+
 def head(title, depth=0):
     up = "../" * depth
     return f"""<!DOCTYPE html>
@@ -134,7 +140,7 @@ def head(title, depth=0):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;display=swap">
-<link rel="stylesheet" href="{up}assets/app.css">
+<link rel="stylesheet" href="{up}{asset("app.css")}">
 <link rel="icon" type="image/png" sizes="32x32" href="{up}assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" href="{up}assets/icons/apple-touch-icon.png">
 <link rel="manifest" href="{up}manifest.webmanifest">
@@ -148,13 +154,11 @@ def head(title, depth=0):
 """
 
 
-def masthead(up="", stat=""):
-    stat_html = f'<span class="masthead-stat">{html.escape(stat)}</span>' if stat else ""
+def masthead(up=""):
     return f"""<header class="masthead">
   <div class="wrap masthead-inner">
     <a class="wordmark" href="{up}index.html">{SITE_NAME}</a>
     <span class="tagline">{SITE_TAGLINE}</span>
-    {stat_html}
   </div>
 </header>
 """
@@ -194,11 +198,6 @@ def build_report(meta, body_html, iso):
         '<div class="rail-block"><span class="rail-label">Tarih</span>'
         f'<span class="rail-value num">{tr_date(iso, weekday=True)}</span></div>'
     ]
-    if meta.get("decision_by"):
-        rail.append(
-            '<div class="rail-block"><span class="rail-label">Karar tarihi</span>'
-            f'<span class="rail-value num">{tr_short(meta["decision_by"])}</span></div>'
-        )
     rail.append(
         '<div class="rail-block"><span class="rail-label">Durum</span>'
         f"{status_mark(status)}</div>"
@@ -234,10 +233,10 @@ def build_report(meta, body_html, iso):
 
 
 def entry_html(r):
-    rail = [f'<time class="datestamp num">{tr_date(r["date"])}</time>']
-    if r.get("decision_by"):
-        rail.append(f'<span class="deadline num">Karar · {tr_short(r["decision_by"])}</span>')
-    rail.append(status_mark(r["status"]))
+    rail = [
+        f'<time class="datestamp num">{tr_date(r["date"])}</time>',
+        status_mark(r["status"]),
+    ]
 
     haystack = " ".join(
         [r["date"], r.get("title", ""), r.get("summary", "")] + [str(t) for t in r.get("tags", [])]
@@ -280,12 +279,9 @@ def build_index(reports, version):
             )
         body += '<p class="empty" id="noresults" hidden>Bu filtreyle eşleşen rapor yok.</p>'
 
-    alarm_days = sum(1 for r in reports if r["alarm"])
-    stat = f"{len(reports)} rapor · {alarm_days} alarm günü" if reports else "arşiv boş"
-
     return (
         head(f"{SITE_NAME} — {SITE_TAGLINE}")
-        + masthead(stat=stat)
+        + masthead()
         + f"""<main class="wrap">
   <div class="controls">
     <input class="search" id="q" type="search" placeholder="Ara: konu, tarih, etiket…" autocomplete="off">
@@ -320,7 +316,7 @@ def build_index(reports, version):
   window.addEventListener("focus", check);
 }})();
 </script>
-<script src="assets/app.js" defer></script>
+<script src="{asset("app.js")}" defer></script>
 """
         + FOOT
     )
