@@ -73,7 +73,6 @@ a { color: var(--brand); text-underline-offset: 2px; }
 .rail-label,
 .tags span,
 .tag,
-.status,
 .datestamp,
 .tagline,
 .backlink,
@@ -261,48 +260,8 @@ a { color: var(--brand); text-underline-offset: 2px; }
 .tags span { white-space: nowrap; }
 .tags span + span::before { content: "· "; color: var(--rule-2); }
 
-.tags--stack { flex-direction: column; gap: 4px; }
+.tags--stack { flex-direction: column; gap: 4px; color: var(--ink); }
 .tags--stack span + span::before { content: none; }
-
-/* ---------- status ---------- */
-
-.status {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--muted);
-  white-space: nowrap;
-}
-.status .dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: currentColor;
-  flex: none;
-}
-.status--temiz { color: var(--ok); }
-.status--izle  { color: var(--watch); }
-.status--alarm { color: var(--alarm); }
-
-.statusbar {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin: 18px 0 30px;
-  padding: 10px 14px;
-  border-left: 2px solid var(--rule-2);
-  background: none;
-}
-.statusbar--temiz { border-left-color: var(--ok); }
-.statusbar--izle  { border-left-color: var(--watch); }
-.statusbar--alarm { border-left-color: var(--alarm); background: var(--alarm-tint); }
-.statusbar-note {
-  font-family: var(--serif);
-  font-size: 15.5px;
-  line-height: 1.45;
-  color: var(--ink-2);
-}
 
 /* ---------- report page ---------- */
 
@@ -336,6 +295,8 @@ a { color: var(--brand); text-underline-offset: 2px; }
 .rail-block { display: flex; flex-direction: column; gap: 5px; }
 .rail-label { color: var(--muted); }
 .rail-value { font-family: var(--mono); font-size: 12px; color: var(--ink-2); }
+
+.report .tags span { color: var(--ink); }
 
 .report-title {
   margin: 0;
@@ -450,7 +411,9 @@ a { color: var(--brand); text-underline-offset: 2px; }
   .rail-block { flex-direction: row; align-items: baseline; gap: 8px; }
   .tags--stack { flex-direction: row; gap: 0 6px; }
   .tags--stack span + span::before { content: "· "; color: var(--rule-2); }
-  .report-title { order: -1; }
+  .report .tags span { color: var(--ink); }
+
+.report-title { order: -1; }
 }
 
 @media (max-width: 700px) {
@@ -460,7 +423,9 @@ a { color: var(--brand); text-underline-offset: 2px; }
   .entry { grid-template-columns: minmax(0, 1fr); gap: 10px; }
   .entry-rail { flex-direction: row; flex-wrap: wrap; gap: 6px 14px; align-items: center; }
   .entry-title { font-size: 21px; }
-  .report-title { font-size: 27px; }
+  .report .tags span { color: var(--ink); }
+
+.report-title { font-size: 27px; }
 
   /* Üç sütunlu tablo telefona sığmıyor: her satırı etiketli bloğa çevir. */
   .prose table, .prose tbody, .prose tr, .prose td { display: block; width: 100%; }

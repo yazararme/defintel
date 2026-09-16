@@ -42,11 +42,10 @@ TR_MONTHS = [
 ]
 TR_DAYS = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"]
 
-# Three reading states, derived from front matter the agent already writes:
-#   alarm: true                  -> alarm  (something fired)
-#   a deadline still ahead of us -> izle   (watch it)
-#   neither                      -> temiz  (nothing pending)
-STATUS_LABEL = {"alarm": "Alarm", "izle": "İzle", "temiz": "Temiz"}
+# Reading state, kept in data/reports.json for downstream use; not shown on the page.
+#   alarm: true                  -> alarm
+#   a deadline still ahead of us -> izle
+#   neither                      -> temiz
 
 
 def tr_date(iso, weekday=False):
@@ -70,14 +69,6 @@ def status_of(meta, iso):
     if deadline and str(deadline) >= str(iso):
         return "izle"
     return "temiz"
-
-
-def status_note(meta, iso, status):
-    if status == "alarm":
-        return meta.get("alarm_title") or "Alarm eşiğini aşan gelişme var"
-    if status == "izle":
-        return f"Açık dış son tarih: {tr_short(meta['decision_by'])}"
-    return "Alarm eşiğini aşan gelişme yok"
 
 
 def split_frontmatter(text):
@@ -177,14 +168,6 @@ FOOT = """<footer class="foot">
 """
 
 
-def status_mark(status, extra=""):
-    cls = f"status status--{status}" + (f" {extra}" if extra else "")
-    return (
-        f'<span class="{cls}"><span class="dot" aria-hidden="true"></span>'
-        f"{STATUS_LABEL[status]}</span>"
-    )
-
-
 def tag_list(tags, cls="tags"):
     if not tags:
         return ""
@@ -194,16 +177,11 @@ def tag_list(tags, cls="tags"):
 
 def build_report(meta, body_html, iso):
     title = meta.get("title") or f"{tr_date(iso)} raporu"
-    status = status_of(meta, iso)
 
     rail = [
         '<div class="rail-block"><span class="rail-label">Tarih</span>'
         f'<span class="rail-value num">{tr_date(iso, weekday=True)}</span></div>'
     ]
-    rail.append(
-        '<div class="rail-block"><span class="rail-label">Durum</span>'
-        f"{status_mark(status)}</div>"
-    )
     if meta.get("tags"):
         rail.append(
             '<div class="rail-block"><span class="rail-label">Etiketler</span>'
@@ -214,15 +192,11 @@ def build_report(meta, body_html, iso):
         head(f"{title} — {SITE_NAME}", depth=1)
         + masthead(up="../")
         + f"""<main class="wrap report">
-  <a class="backlink" href="../index.html">← Tüm raporlar</a>
+  <a class="backlink" href="../index.html">← Geri</a>
   <div class="report-grid">
     <aside class="rail">{''.join(rail)}</aside>
     <article class="column">
       <h1 class="report-title">{html.escape(title)}</h1>
-      <div class="statusbar statusbar--{status}">
-        {status_mark(status)}
-        <span class="statusbar-note">{html.escape(status_note(meta, iso, status))}</span>
-      </div>
       <div class="prose">
 {body_html}
       </div>
@@ -235,10 +209,7 @@ def build_report(meta, body_html, iso):
 
 
 def entry_html(r):
-    rail = [
-        f'<time class="datestamp num">{tr_date(r["date"])}</time>',
-        status_mark(r["status"]),
-    ]
+    rail = [f'<time class="datestamp num">{tr_date(r["date"])}</time>']
 
     haystack = " ".join(
         [r["date"], r.get("title", ""), r.get("summary", "")] + [str(t) for t in r.get("tags", [])]
@@ -271,14 +242,7 @@ def build_index(reports, version):
             )
             + "</nav>"
         )
-        lead, rest = reports[0], reports[1:]
-        body = '<h2 class="kicker">Son rapor</h2><div class="feed">' + entry_html(lead) + "</div>"
-        if rest:
-            body += (
-                '<h2 class="kicker">Arşiv</h2><div class="feed">'
-                + "".join(entry_html(r) for r in rest)
-                + "</div>"
-            )
+        body = '<div class="feed">' + "".join(entry_html(r) for r in reports) + "</div>"
         body += '<p class="empty" id="noresults" hidden>Bu filtreyle eşleşen rapor yok.</p>'
 
     return (
