@@ -22,7 +22,8 @@ jobs:
           DRIVE_FOLDER_ID: 1Bqj-FeX9IwOD9na53Ze7RteepjxRCCGB
         run: python3 scripts/pull_drive.py
       # Pushes made with GITHUB_TOKEN don't trigger build.yml, so build here.
-      - if: always()
+      - id: publish
+        if: always()
         run: |
           git status --porcelain source | grep -q . || exit 0
           python3 build.py
@@ -31,3 +32,15 @@ jobs:
           git add -A
           git commit -m "report: $(date -u +%F) from Drive"
           git push
+          echo "published=yes" >> "$GITHUB_OUTPUT"
+
+      # Tell the push service a new report is out, so phones get a notification.
+      - if: steps.publish.outputs.published == 'yes' && env.PUSH_URL != ''
+        env:
+          PUSH_URL: ${{ secrets.PUSH_URL }}
+          NOTIFY_SECRET: ${{ secrets.NOTIFY_SECRET }}
+        run: |
+          code=$(curl -s -o /tmp/notify.out -w '%{http_code}' -X POST "$PUSH_URL/notify" \
+            -H "Authorization: Bearer $NOTIFY_SECRET")
+          echo "notify: $code $(cat /tmp/notify.out)"
+          [ "$code" = "200" ]

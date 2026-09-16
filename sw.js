@@ -23,6 +23,47 @@ self.addEventListener("fetch", (event) => {
   event.respondWith(isAsset ? staleWhileRevalidate(req, event) : networkFirst(req));
 });
 
+// A push carries no text. Read the site's own report list and announce the
+// newest one, so the notification always matches what is actually published.
+self.addEventListener("push", (event) => {
+  event.waitUntil(
+    (async () => {
+      let title = "Yeni rapor";
+      let url = "./index.html";
+      try {
+        const res = await fetch("./data/reports.json", { cache: "no-store" });
+        const list = await res.json();
+        if (list.length) {
+          title = list[0].alarm ? "⚠️ " + list[0].title : list[0].title;
+          url = "./" + list[0].path;
+        }
+      } catch {
+        /* offline: fall back to the generic title */
+      }
+      await self.registration.showNotification("DEFINTEL", {
+        body: title,
+        icon: "./assets/icons/icon-192.png",
+        badge: "./assets/icons/icon-192.png",
+        tag: "defintel-report",
+        data: { url },
+      });
+    })()
+  );
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  const target = new URL(event.notification.data?.url || "./index.html", self.location.href).href;
+  event.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((wins) => {
+      for (const w of wins) {
+        if (w.url.startsWith(self.registration.scope)) return w.focus().then(() => w.navigate(target));
+      }
+      return self.clients.openWindow(target);
+    })
+  );
+});
+
 async function networkFirst(req) {
   const cache = await caches.open(CACHE);
   try {

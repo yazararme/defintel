@@ -69,3 +69,68 @@
     }
   });
 })();
+
+/* Bildirim düğmesi: yeni rapor yayınlandığında telefona bildirim gönderilmesi için
+   tarayıcıyı push servisine kaydeder. Sunucu adresi ve anahtar HTML'den gelir. */
+(function () {
+  "use strict";
+
+  var btn = document.getElementById("notify");
+  if (!btn) return;
+  var api = btn.getAttribute("data-push");
+  var vapid = btn.getAttribute("data-vapid");
+  var supported =
+    api && vapid && "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
+  if (!supported) return;
+
+  function keyBytes(base64) {
+    var padded = (base64 + "===".slice((base64.length + 3) % 4)).replace(/-/g, "+").replace(/_/g, "/");
+    var raw = atob(padded);
+    return Uint8Array.from(raw, function (c) { return c.charCodeAt(0); });
+  }
+
+  function send(path, sub) {
+    return fetch(api + path, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ endpoint: sub.endpoint }),
+    });
+  }
+
+  function paint(on) {
+    btn.textContent = on ? "Bildirimler açık" : "Bildirimleri aç";
+    btn.setAttribute("aria-pressed", on ? "true" : "false");
+    btn.hidden = false;
+  }
+
+  navigator.serviceWorker.ready.then(function (reg) {
+    reg.pushManager.getSubscription().then(function (sub) {
+      paint(!!sub);
+
+      btn.addEventListener("click", function () {
+        btn.disabled = true;
+        reg.pushManager
+          .getSubscription()
+          .then(function (current) {
+            if (current) {
+              return send("/unsubscribe", current)
+                .then(function () { return current.unsubscribe(); })
+                .then(function () { paint(false); });
+            }
+            return Notification.requestPermission().then(function (permission) {
+              if (permission !== "granted") {
+                btn.textContent = "Bildirimler engelli";
+                return;
+              }
+              return reg.pushManager
+                .subscribe({ userVisibleOnly: true, applicationServerKey: keyBytes(vapid) })
+                .then(function (fresh) { return send("/subscribe", fresh); })
+                .then(function () { paint(true); });
+            });
+          })
+          .catch(function () { btn.textContent = "Bildirim kurulamadı"; })
+          .then(function () { btn.disabled = false; });
+      });
+    });
+  });
+})();

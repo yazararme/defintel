@@ -31,6 +31,9 @@ OUT = ROOT / "reports"
 DATA = ROOT / "data"
 
 SITE_NAME = "DEFINTEL"
+# Push service (Cloudflare Worker). Empty string hides the notification button.
+PUSH_ENDPOINT = ""
+VAPID_PUBLIC_KEY = "BLOHxsm23_gz-DmV0E9xyB3RVQTkCwv06uPv_pme7VApr61x_gnNGGPkTnEI3mNekR7lzZGxNL9hATzaaOYsEZo"
 SITE_TAGLINE = "MKE stratejik pazar istihbaratı · günlük tarama"
 
 TR_MONTHS = [
@@ -224,6 +227,8 @@ def build_index(reports, version):
         + f"""<main class="wrap">
   <div class="controls">
     <input class="search" id="q" type="search" placeholder="Ara: konu, tarih, etiket…" autocomplete="off">
+    <button class="tag notify" type="button" id="notify" hidden
+            data-push="{PUSH_ENDPOINT}" data-vapid="{VAPID_PUBLIC_KEY}">Bildirimleri aç</button>
   </div>
   {tagbar}
   {body}

@@ -1,0 +1,14 @@
+name = "defintel-push"
+main = "worker.js"
+compatibility_date = "2026-09-01"
+
+[vars]
+SITE_ORIGIN = "https://defintel.shadovi.com"
+VAPID_SUBJECT = "mailto:yazararme@gmail.com"
+VAPID_PUBLIC_KEY = "BLOHxsm23_gz-DmV0E9xyB3RVQTkCwv06uPv_pme7VApr61x_gnNGGPkTnEI3mNekR7lzZGxNL9hATzaaOYsEZo"
+
+# NOTIFY_SECRET and VAPID_PRIVATE_JWK are secrets, set with `wrangler secret put`.
+
+[[kv_namespaces]]
+binding = "SUBS"
+id = "PLACEHOLDER"
