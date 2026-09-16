@@ -11,4 +11,6 @@ VAPID_PUBLIC_KEY = "BLOHxsm23_gz-DmV0E9xyB3RVQTkCwv06uPv_pme7VApr61x_gnNGGPkTnEI
 
 [[kv_namespaces]]
 binding = "SUBS"
-id = "PLACEHOLDER"
+id = "17630dd6f40a4561827c292f04f7f2bb"
+
+preview_urls = false

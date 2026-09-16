@@ -32,7 +32,7 @@ DATA = ROOT / "data"
 
 SITE_NAME = "DEFINTEL"
 # Push service (Cloudflare Worker). Empty string hides the notification button.
-PUSH_ENDPOINT = ""
+PUSH_ENDPOINT = "https://defintel-push.yazararme-c30.workers.dev"
 VAPID_PUBLIC_KEY = "BLOHxsm23_gz-DmV0E9xyB3RVQTkCwv06uPv_pme7VApr61x_gnNGGPkTnEI3mNekR7lzZGxNL9hATzaaOYsEZo"
 SITE_TAGLINE = "MKE stratejik pazar istihbaratı · günlük tarama"
 
