@@ -115,9 +115,10 @@ def main():
     items = day.get("items", [])
 
     pending = [i for i in items if i["url"] not in cache]
+    print(f"{len(items)} başlık · önbellekte {len(items) - len(pending)} · çevrilecek {len(pending)}")
     if args.limit and args.limit > 0:
         pending = pending[: args.limit]
-    print(f"{len(items)} başlık · önbellekte {len(items) - len(pending)} · çevrilecek {len(pending)}")
+        print(f"  (deneme: ilk {len(pending)} başlık)")
 
     for start in range(0, len(pending), args.batch):
         chunk = pending[start:start + args.batch]
