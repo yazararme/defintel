@@ -751,3 +751,100 @@ zaten yapıyor ve iki cihazda da aynı. Masaüstünde tek fark ölçüden geliyo
 
 **Yapılmayacak:** `<details name="clips">` (tek-açık akordeon), 2 satır kırpma + solma, görünüm genişliğine
 bağlı duruş hâli, özet için ayrı JS durum yönetimi.
+
+---
+
+## Revizyon 4 — kısmi kapsama
+
+### R4.0 — Ölçüm: bu bir kapsama sorunu değil, tahsis sorunu
+
+`data/news/2026-09-17.json`, 540 kalem, 123'ünde `summary_tr`. Özetlerin nereye gittiği:
+
+| Dağılım | Sonuç |
+|---|---|
+| Dosya sırasındaki konum | Hepsi ilk **128** kalemin içinde (yayın zamanına göre baş taraf) |
+| Kategoriye göre | **Genel Savunma Gündemi 107** · C-UAS 11 · Politika 3 · İhale 1 · Hafif Silah 1 |
+| Kademeye göre | tier B **102** · tier A 21 |
+| Öne çıkanlar (12 satır) | **4** |
+
+Yani günlük bütçenin **%87'si, varsayılan olarak kapalı olan ve içinde ikinci bir katlama bulunan Genel
+kovasına** harcanıyor; yöneticinin sayfasının tamamı olan 12 satıra 4 özet düşüyor. Bütçe zaten doğru
+büyüklükte (123 ≈ varsayılan görünür satır sayısı) — **yanlış satırlara dönük.**
+
+Bu, tartışmayı değiştiriyor: soru "kapsama nasıl %100'e çıkar" değil, "aynı 110 çağrı doğru satırlara nasıl
+yönlendirilir". Sıralama düzeltilince Öne çıkanlar 4/12'den ~12/12'ye çıkar — **ek maliyet sıfır.**
+
+### R4.1 — Asıl tasarım hatası: tek bir şekil iki anlam taşıyor
+
+Bugün "chevron yok" iki ayrı şeyi anlatıyor ve okuyucu ikisini ayırt edemiyor:
+
+- *"Bu satır hiçbir zaman özet kapsamında değildi"* → 417 satır, **normal**
+- *"Bu satırın özeti olmalıydı, alamadık"* → ~2 satır, **arıza**
+
+Bu ikisi aynı göründüğü sürece okuyucu haklı olarak "bilgi eksik / hata var" diyor. Çözüm chevronu her satıra
+dağıtmak değil, **kapsamı görünür kılmak.**
+
+**İlke: tekdüzelik blok içinde zorunludur, sayfa genelinde değil.** Bir blokta bazı satırlar açılıyor bazıları
+açılmıyorsa bozuk görünür; bloktan bloğa şekil değişmesi ise derinlik farkı olarak okunur — yeter ki fark
+okuyucunun görebildiği bir şeyle (sıra, katlama) ilişkili olsun. Bugünkü karışıklık *yayın zamanıyla*
+ilişkili; yayın zamanı sayfada görünmüyor, o yüzden rastgele görünüyor.
+
+### R4.2 — Kapsam tanımı: "katlama açmadan görebildiğin her satır"
+
+> **Özet kapsamı = varsayılan görünür küme.** Öne çıkanlar'ın 12'si + her kategorinin ilk 15/20'si.
+> "+N daha" arkasındaki kuyruk ve Genel kovasının tamamı **tasarım gereği kapsam dışıdır.**
+
+Kendi kendini belgeleyen bir kural: *tıklamadan görüyorsan özeti vardır.* Sonucu şu — her blok kendi içinde
+tekdüze olur:
+
+| Blok | Şekil | Tekdüze mi |
+|---|---|---|
+| Öne çıkanlar | hepsi chevronlu | ✔ (± günlük ~2 arıza, işaretli) |
+| Kategori ilk 15/20 | hepsi chevronlu | ✔ |
+| "+N daha" içi | hiçbiri chevronsuz | ✔ |
+| Genel kovası | hiçbiri chevronsuz | ✔ |
+
+Bütçe değişmiyor: bugünkü 123 çağrı bu kümeyi zaten karşılıyor.
+
+### R4.3 — Seçeneklerin sıralaması
+
+1. **(c) Kaynakta düzelt — ama "%100'e çıkar" olarak değil, "kapsamı sıralamaya bağla" olarak.** Zorunlu ve
+   tek başına sorunun büyük kısmını çözüyor (R4.0). Tavan ~%98 olduğu için tek başına yetmez.
+2. **(b) Sessiz işaret — ama yalnızca kapsam içindeki arızaya.** Kapsamdaki bir satırın özeti alınamadıysa
+   meta satırının sonuna `--muted` bir jeton: `özet alınamadı`. Günde ~2 satır. Bu, ürünün zaten kurduğu dile
+   uyuyor: `Medya takibi yok`, `16 kaynak yanıt vermedi`, devre dışı `daybar` okları — **bu sitede yokluk
+   gizlenmez, söylenir.** Kapsam dışı 417 satıra bu jeton **konmaz**; olmayan bir arızayı duyurmak olur.
+3. **(d) Karışık şekilleri kabul et** — reddedildi: müşteri bir gün içinde fark etti, ampirik olarak yanlış.
+4. **(a) Her satıra chevron** — reddedildi ve en kötüsü. Chevron içerik vaat eder; dokunup yalnızca kaynak
+   bağlantısı bulan okuyucuya 400 satır boyunca "chevron değersizdir" öğretilir. Görünür bir tutarsızlığı,
+   affordance'ın sistematik olarak yalan söylemesiyle takas etmek olur.
+
+### R4.4 — Q1: katman kuralı yaşar, ama tekdüzelik şartına bağlanır
+
+"Öne çıkanlar'da açık" okuma görevi için hâlâ doğru (Rev 3.0'daki gerekçe değişmedi). Bozan şey kuralın
+kendisi değil, **yüklemin görünmez olması**: 12 satırın tamamı aynı katmanda ama dördü açık — okuyucu kuralı
+göremediği için rastgelelik görüyor.
+
+**Karar:** açıklık, katman + veri tekdüzeliğinin birlikte sağlandığı durumda verilir.
+
+> Öne çıkanlar bloğundaki **her** satırın özeti varsa hepsi `open` render edilir; **bir tanesi bile eksikse
+> hiçbiri açılmaz.** Build zamanında üç satırlık bir kontrol.
+
+Kendi kendini iyileştiren bir kural: getirici bir sabah tökezlerse gün sessizce "hepsi kapalı"ya düşer,
+"bazıları rastgele açık"a değil. İyi günlerin kolaylığı korunur, kötü günlerde tutarlılık hiç kaybedilmez —
+ve müşterinin şikâyet ettiği karışık durum bir daha hiçbir koşulda yayınlanamaz. "Kapsama yakın-tam olana
+kadar her şey kapalı" seçeneğine göre üstünlüğü bu: iyi günleri cezalandırmıyor.
+
+### Uygulama listesi — Revizyon 4
+
+| # | Dosya | Değişiklik | Kabul testi |
+|---|---|---|---|
+| R4-P0-1 | özetleyici (`scripts/…`) | Seçim sırası yayın zamanı yerine **R1-P1-1'deki `news_score`** olur; kapsam = varsayılan görünür küme (Öne çıkanlar 12 + her kategorinin ilk 15/20). Bütçe (~110-125 çağrı) değişmez. | 2026-09-17 yeniden koşturulduğunda Öne çıkanlar'ın 12 satırının ≥11'inde `summary_tr` bulunur; `Genel Savunma Gündemi`ne düşen özet sayısı 107'den ≤10'a iner. |
+| R4-P0-2 | `build.py` → `clip_html` | Kalem kapsam içindeyse (`item["summary_scope"] is True`) ama `summary_tr` yoksa, meta satırının sonuna `<span class="clip-nosum">özet alınamadı</span>` eklenir. Kapsam dışı satıra hiçbir şey eklenmez. | Kapsam içi arızalı satırda jeton görünür; `Genel Savunma Gündemi` içindeki hiçbir satırda geçmez; `grep -c "özet alınamadı"` ≤ 5. |
+| R4-P0-3 | `build.py` → Öne çıkanlar bloğu | `open_summary = all(r.get("summary_tr") for r in highlights)`; blok tek bir kararla ya tamamen açık ya tamamen kapalı render edilir. | Bir kalemin `summary_tr`'si elle silindiğinde üretilen sayfada `<details class="clip" open` sayısı 0 olur; geri konulduğunda 12 olur. Hiçbir çıktıda "bloğun bir kısmı açık" durumu oluşmaz. |
+| R4-P0-4 | `assets/app.css` | `.clip-nosum { color: var(--muted); }` — mono 10,5px meta dilinde, ek vurgu yok. Meta jeton tavanı bu tek durumda 4'e çıkar. | Jeton meta satırının geri kalanıyla aynı ağırlıkta; renkli ya da ikonlu değil. |
+| R4-P1-1 | `build.py` → medya sayfası başlık istatistiği | `stat` satırına kapsama eklenir: `… · {n}/{m} özet`. Sayfa üstündeki mevcut `50 kaynak okundu · 528 başlık…` diliyle aynı yerde. | 17 Eylül sayfası `· 123/125 özet` benzeri bir jeton gösterir; sayılar `data/news/*.json` ile eşleşir. |
+| R4-P1-2 | `scripts/…` + `data/news/*.json` | Kaleme `summary_scope: true/false` alanı yazılır ki build hangi satırın kapsamda olduğunu bilsin (bugün çıkarsanamıyor). | `python3 build.py` alan yokken de hatasız koşar (eski günler için `summary_scope` yoksa kapsam dışı sayılır). |
+
+**Yapılmayacak:** her satıra chevron; kapsam dışı satırlara "özet yok" jetonu; kapsamı %100'e zorlamak için
+ödeme duvarı arkasındaki kaynakları zorlama; Öne çıkanlar'da kısmi açıklık.

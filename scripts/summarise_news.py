@@ -1,13 +1,14 @@
 """Two-sentence Turkish summaries for the headlines a reader actually sees.
 
 Deliberately not "translate everything": the article text is fetched only for
-the top N items of the day, summarised rather than reproduced, and cached by
-URL so it is paid for once.
+the rows the page shows without opening a fold (build.default_visible), and the
+result is summarised rather than reproduced and cached by URL so it is paid for
+once. Summarising anything else spends the budget where nobody is looking.
 
 Reads   : data/news/YYYY-MM-DD.json
-Writes  : the same file, adding "summary_tr" to the items it could summarise
+Writes  : the same file, adding "summary_tr" and "summary_scope" to each item
 Cache   : data/news/summaries.json
-Usage   : python3 scripts/summarise_news.py [--date …] [--limit 20] [--batch 5]
+Usage   : python3 scripts/summarise_news.py [--date …] [--limit 0] [--batch 5]
 """
 
 import argparse
@@ -115,7 +116,7 @@ def parse_pairs(text):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", default=dt.datetime.now(dt.timezone.utc).date().isoformat())
-    ap.add_argument("--limit", type=int, default=20)
+    ap.add_argument("--limit", type=int, default=0, help="0 = kapsamın tamamı")
     ap.add_argument("--batch", type=int, default=5)
     args = ap.parse_args()
 
@@ -126,11 +127,14 @@ def main():
     day = json.loads(day_file.read_text(encoding="utf-8"))
     cache = load(CACHE, {})
     items = day.get("items", [])
-    # Rank exactly as the page does; otherwise the summaries land on whatever
-    # was published last, not on what the reader sees at the top.
-    ranked = [item for _, _, item in build.rank_news(items, args.date, build.cited_urls(args.date))]
-    todo = [i for i in ranked if i["url"] not in cache][: args.limit]
-    print(f"{len(items)} kalem · özetlenecek {len(todo)}")
+    # Scope is the page's own "visible without opening a fold" set, read from
+    # build so the two can't drift: a summary on a row nobody sees is spend
+    # without a reader, and a visible row without one looks like a fault.
+    scope = build.default_visible(items, args.date, build.cited_urls(args.date))
+    todo = [i for i in scope if i["url"] not in cache]
+    if args.limit:
+        todo = todo[: args.limit]
+    print(f"{len(items)} kalem · kapsam {len(scope)} · özetlenecek {len(todo)}")
 
     fetched, failures = [], []
     for item in todo:
@@ -155,13 +159,18 @@ def main():
                 cache[chunk[n - 1][0]["url"]] = summary
         print(f"  · {start + 1}-{start + len(chunk)}: {len(pairs)}/{len(chunk)} özet")
 
+    # Kapsam dosyaya yazılıyor: build, bir satırın özetsizliği normal mi arıza mı
+    # olduğunu başka türlü çıkaramaz.
+    in_scope = {i["url"] for i in scope}
     for item in items:
+        item["summary_scope"] = item["url"] in in_scope
         if cache.get(item["url"]):
             item["summary_tr"] = cache[item["url"]]
 
+    covered = sum(1 for i in items if i.get("summary_scope") and i.get("summary_tr"))
     day_file.write_text(json.dumps(day, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     CACHE.write_text(json.dumps(cache, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-    print(f"  · {sum(1 for i in items if i.get('summary_tr'))} kalemde özet · önbellek {len(cache)}")
+    print(f"  · kapsamda {covered}/{len(scope)} özet · önbellek {len(cache)}")
 
 
 if __name__ == "__main__":

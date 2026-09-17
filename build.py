@@ -408,6 +408,72 @@ def rank_news(items, day, cited):
     return sorted(ranked, key=lambda row: (-row[0], row[1]))
 
 
+HIGHLIGHT_MAX = 12
+HIGHLIGHT_PER_SOURCE = 2
+CATEGORY_ALL_UNDER = 20   # bu sayıya kadar kategori bütünüyle açık durur
+CATEGORY_HEAD = 15        # aşarsa açık kalan baş kısım, gerisi "+N daha" arkasında
+
+
+def category_head(rows):
+    """Bir kategorinin katlama açmadan görünen baş kısmı."""
+    return rows if len(rows) <= CATEGORY_ALL_UNDER else rows[:CATEGORY_HEAD]
+
+
+def news_layout(items, day, cited):
+    """Sayfanın varsayılan görünümü: (öne çıkanlar, [(kategori, sıralı satırlar)]).
+
+    Hem `build_news_page` hem `scripts/summarise_news.py` buradan okuyor. Özet
+    kapsamı "katlama açmadan görebildiğin her satır" diye tanımlandığına göre
+    sayfanın şeklini iki yerde ayrı ayrı tarif etmek kapsamı sessizce kaydırırdı.
+    """
+    ranked = rank_news(items, day, cited)
+
+    buckets = {}
+    for row in ranked:
+        buckets.setdefault(row[2].get("category") or GENERAL, []).append(row)
+    order = ([n for n in NEWS_ORDER if n != GENERAL]
+             + sorted(set(buckets) - set(NEWS_ORDER)) + [GENERAL])
+    present = [(name, sorted(buckets[name], key=lambda r: (-r[0], r[1])))
+               for name in order if buckets.get(name)]
+
+    # Öne çıkanlar: analistin listeye giriş noktası — kategoriler arası, puana
+    # göre, kaynak başına en fazla ikisi
+    top, quota = [], {}
+    for row in ranked:
+        source = row[2].get("source", "")
+        if quota.get(source, 0) >= HIGHLIGHT_PER_SOURCE:
+            continue
+        quota[source] = quota.get(source, 0) + 1
+        top.append(row)
+        if len(top) == HIGHLIGHT_MAX:
+            break
+
+    return top, present
+
+
+def default_visible(items, day, cited):
+    """Özet kapsamı: tıklamadan görüyorsan özeti vardır.
+
+    Öne çıkanlar'ın 12'si + her kategorinin açık baş kısmı, sayfa sırasında.
+    "+N daha" arkasındaki kuyruk ve Genel kovasının tamamı tasarım gereği
+    kapsam dışı — orada özet satır başına gürültü olurdu.
+    """
+    top, present = news_layout(items, day, cited)
+    rows = list(top)
+    for name, bucket in present:
+        if name != GENERAL:
+            rows += category_head(bucket)
+
+    seen, out = set(), []
+    for _, _, item in rows:
+        url = norm_url(item.get("url"))
+        if url in seen:
+            continue
+        seen.add(url)
+        out.append(item)
+    return out
+
+
 def load_news():
     """One file per day, written by scripts/collect_news.py."""
     days = {}
@@ -438,6 +504,10 @@ def clip_html(item, day, cited, open_summary=False):
         meta.append(tr_date(item["published"]))
     if item.get("also"):
         meta.append(f'+{len(item["also"])}')
+    # Kapsam içindeyken özet gelmemişse söylenir; kapsam dışındaki 400+ satıra
+    # konmaz, olmayan bir arızayı duyurmak olurdu. Bu sitede yokluk gizlenmez.
+    if item.get("summary_scope") is True and not item.get("summary_tr"):
+        meta.append('<span class="clip-nosum">özet alınamadı</span>')
 
     url = html.escape(item["url"], quote=True)
     title = html.escape(item.get("title_tr") or item["title"])
@@ -481,18 +551,18 @@ def clip_list(rows, day, cited, open_summary=False):
 
 
 def news_section(name, rows, day, cited):
-    """Bir kategori: ≤20 kalem tamamen açık, fazlası ilk 15 + katlanmış kalan."""
+    """Bir kategori: baş kısmı açık, kuyruğu "+N daha" arkasında."""
     head_html = (
         f'<h2 class="kicker" id="{cat_id(name)}">{html.escape(news_label(name))}'
         f' <span class="kicker-count num">{len(rows)}</span></h2>'
     )
-    ranked = sorted(rows, key=lambda r: (-r[0], r[1]))
-    if len(ranked) <= 20:
-        return head_html + clip_list(ranked, day, cited)
-    rest = ranked[15:]
+    shown = category_head(rows)
+    rest = rows[len(shown):]
+    if not rest:
+        return head_html + clip_list(shown, day, cited)
     return (
         head_html
-        + clip_list(ranked[:15], day, cited)
+        + clip_list(shown, day, cited)
         + f'<details class="more"><summary>+{len(rest)} daha</summary>'
         + clip_list(rest, day, cited)
         + "</details>"
@@ -529,26 +599,12 @@ def general_section(rows, day, cited):
 
 def build_news_page(day, data, prev_day, next_day, has_report, cited):
     items = data.get("items", [])
-    ranked = rank_news(items, day, cited)
+    top, present = news_layout(items, day, cited)
 
-    buckets = {}
-    for row in ranked:
-        buckets.setdefault(row[2].get("category") or GENERAL, []).append(row)
-    order = ([n for n in NEWS_ORDER if n != GENERAL]
-             + sorted(set(buckets) - set(NEWS_ORDER)) + [GENERAL])
-    present = [(name, buckets[name]) for name in order if buckets.get(name)]
-
-    # 1 · ÖNE ÇIKANLAR: analistin listeye giriş noktası — kategoriler arası,
-    # puana göre, kaynak başına en fazla 2
-    top, quota = [], {}
-    for row in ranked:
-        source = row[2].get("source", "")
-        if quota.get(source, 0) >= 2:
-            continue
-        quota[source] = quota.get(source, 0) + 1
-        top.append(row)
-        if len(top) == 12:
-            break
+    # Blok tek bir kararla ya tamamen açık ya tamamen kapalı: bir satırı bile
+    # eksik olan blokta "bazıları rastgele açık" görüntüsü doğuyor ve okuyucu
+    # göremediği kuralı rastgelelik sanıyor. Karar satırlar render edilmeden önce.
+    top_open = all(row[2].get("summary_tr") for row in top)
 
     body = [
         '<section class="highlights" id="one-cikanlar">'
@@ -556,7 +612,7 @@ def build_news_page(day, data, prev_day, next_day, has_report, cited):
         f' <span class="kicker-count num">{len(top)}</span></h2>'
         # Özetin değeri ekrandaki kalem sayısıyla ters orantılı: burada okunuyor,
         # kategori taramasında satır başına gürültü oluyor.
-        + clip_list(top, day, cited, open_summary=True)
+        + clip_list(top, day, cited, open_summary=top_open)
         + "</section>"
     ]
     for name, rows in present:
@@ -582,9 +638,13 @@ def build_news_page(day, data, prev_day, next_day, has_report, cited):
     defined = data.get("scanned_sources", 0)
     unread = data.get("failed_sources", 0)
     read = defined - unread
+    # kapsam yazılmamış eski günlerde (scope 0) jeton hiç basılmaz
+    scope = [i for i in items if i.get("summary_scope") is True]
+    covered = sum(1 for i in scope if i.get("summary_tr"))
     stat = (
         f'{read} kaynak okundu · {data.get("unique_items", 0)} başlık'
         f' · son {data.get("window_hours", 48)} saat'
+        + (f' · {covered}/{len(scope)} özet' if scope else "")
         + (f' · {unread} kaynak yanıt vermedi' if unread else "")
     )
     return (

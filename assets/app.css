@@ -868,6 +868,9 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
 /* sayfadaki tek renkli meta jetonu: brifingin kendisinin kullandığı kalem */
 .clip-cited { color: var(--brand); font-weight: 400; }
 
+/* kapsam içindeki arıza; meta diliyle aynı ağırlıkta söylenir, vurgulanmaz */
+.clip-nosum { color: var(--muted); }
+
 /* katlanan kategoriler ve artık kovası */
 .more { margin: 0 0 8px; }
 .more > summary,
