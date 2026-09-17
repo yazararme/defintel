@@ -259,15 +259,12 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None, news_days=(
         else ""
     )
 
+    # The day bar above already carries the date and the link to that day's
+    # clippings, so the rail only repeats what the reader just read.
     rail = [
         '<div class="rail-block"><span class="rail-label">Tarih</span>'
         f'<span class="rail-value num">{tr_date(iso, weekday=True)}</span></div>'
     ]
-    if iso in news_days:
-        rail.append(
-            '<div class="rail-block"><span class="rail-label">Medya takibi</span>'
-            f'<a class="rail-value" href="../haberler/{iso}.html">Günün tam listesi →</a></div>'
-        )
 
     return (
         head(f"{title} — {SITE_NAME}", depth=1)

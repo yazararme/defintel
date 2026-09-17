@@ -406,7 +406,8 @@ a { color: var(--brand); text-underline-offset: 2px; }
 
 @media (max-width: 860px) {
   .report-grid { grid-template-columns: minmax(0, 1fr); gap: 22px; }
-  .rail {
+  .rail { display: none; }   /* gün çubuğu aynı bilgiyi taşıyor */
+  .rail--unused {
     position: static;
     flex-direction: row;
     flex-wrap: wrap;
