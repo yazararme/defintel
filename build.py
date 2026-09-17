@@ -35,7 +35,7 @@ DATA = ROOT / "data"
 NEWS_DATA = DATA / "news"
 
 SITE_NAME = "DEFINTEL"
-SITE_TAGLINE = "MKE stratejik pazar istihbaratı"
+SITE_TAGLINE = "Savunma pazarı · günlük bülten"
 # Push service (Cloudflare Worker). Empty string hides the notification button.
 PUSH_ENDPOINT = "https://defintel-push.yazararme-c30.workers.dev"
 VAPID_PUBLIC_KEY = "BLOHxsm23_gz-DmV0E9xyB3RVQTkCwv06uPv_pme7VApr61x_gnNGGPkTnEI3mNekR7lzZGxNL9hATzaaOYsEZo"
@@ -329,6 +329,14 @@ NEWS_ORDER = [
 # Hiçbir kategori terimini tutturamayan kalemlerin kovası: bir kategori değil, artık.
 GENERAL = "Genel Savunma Gündemi"
 
+# Veri anahtarı "MKE" kalıyor (collect_news.py ile eşleşsin diye); ekranda
+# şirket adı en büyük bölüm başlığı olarak durmasın.
+NEWS_LABELS = {"MKE": "Doğrudan ilgili"}
+
+
+def news_label(name):
+    return NEWS_LABELS.get(name, name)
+
 NEWS_CORE = {
     "MKE", "C-UAS ve Hava Savunma", "Topçu ve Mühimmat",
     "İhale ve Sözleşmeler", "Rakip Duyuruları",
@@ -435,7 +443,7 @@ def clip_list(rows, day, cited):
 def news_section(name, rows, day, cited):
     """Bir kategori: ≤20 kalem tamamen açık, fazlası ilk 15 + katlanmış kalan."""
     head_html = (
-        f'<h2 class="kicker" id="{cat_id(name)}">{html.escape(name)}'
+        f'<h2 class="kicker" id="{cat_id(name)}">{html.escape(news_label(name))}'
         f' <span class="kicker-count num">{len(rows)}</span></h2>'
     )
     ranked = sorted(rows, key=lambda r: (-r[0], r[1]))
@@ -515,7 +523,7 @@ def build_news_page(day, data, prev_day, next_day, has_report, cited):
 
     # aynı liste iki biçimde: dar ekranda yapışkan çip şeridi, geniş ekranda rail
     jumps = [("one-cikanlar", "Öne çıkanlar", len(top))]
-    jumps += [(cat_id(name), name, len(rows)) for name, rows in present]
+    jumps += [(cat_id(name), news_label(name), len(rows)) for name, rows in present]
     chips = "".join(
         f'<a class="chip" href="#{anchor}">{html.escape(label)}'
         f' <span class="chip-count num">{count}</span></a>'
