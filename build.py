@@ -30,7 +30,9 @@ except ImportError:
 ROOT = pathlib.Path(__file__).parent
 SRC = ROOT / "source"
 OUT = ROOT / "reports"
+NEWS_OUT = ROOT / "haberler"
 DATA = ROOT / "data"
+NEWS_DATA = DATA / "news"
 
 SITE_NAME = "DEFINTEL"
 SITE_TAGLINE = "MKE stratejik pazar istihbaratı"
@@ -157,11 +159,17 @@ def head(title, depth=0):
 """
 
 
-def masthead(up=""):
+def masthead(up="", latest_news=None):
+    link = (
+        f'<a class="masthead-link" href="{up}haberler/{latest_news}.html">Medya takibi</a>'
+        if latest_news
+        else ""
+    )
     return f"""<header class="masthead">
   <div class="wrap masthead-inner">
     <a class="wordmark" href="{up}index.html">{SITE_NAME}</a>
     <span class="tagline">{SITE_TAGLINE}</span>
+    {link}
   </div>
 </header>
 """
@@ -206,7 +214,7 @@ FOOT = """<footer class="foot">
 """
 
 
-def build_report(meta, body_html, iso):
+def build_report(meta, body_html, iso, news_days=(), latest_news=None):
     title = meta.get("title") or f"{tr_date(iso)} raporu"
 
     banner = (
@@ -224,10 +232,15 @@ def build_report(meta, body_html, iso):
         '<div class="rail-block"><span class="rail-label">Tarih</span>'
         f'<span class="rail-value num">{tr_date(iso, weekday=True)}</span></div>'
     ]
+    if iso in news_days:
+        rail.append(
+            '<div class="rail-block"><span class="rail-label">Medya takibi</span>'
+            f'<a class="rail-value" href="../haberler/{iso}.html">O günün tam listesi →</a></div>'
+        )
 
     return (
         head(f"{title} — {SITE_NAME}", depth=1)
-        + masthead(up="../")
+        + masthead(up="../", latest_news=latest_news)
         + f"""<main class="wrap report">
   <a class="backlink" href="../index.html">← Geri</a>
   <div class="report-grid">
@@ -242,6 +255,85 @@ def build_report(meta, body_html, iso):
       </div>
     </article>
   </div>
+</main>
+"""
+        + PROMPTS
+        + f'<script src="../{asset("app.js")}" defer></script>\n'
+        + FOOT
+    )
+
+
+NEWS_ORDER = [
+    "MKE", "C-UAS ve Hava Savunma", "Topçu ve Mühimmat", "Rakip Duyuruları",
+    "İhale ve Sözleşmeler", "Deniz ve İnsansız Sistemler", "Hafif Silah ve Mayın",
+    "Tedarik Zinciri", "Politika ve Regülasyon", "Genel Savunma Gündemi",
+]
+
+
+def load_news():
+    """One file per day, written by scripts/collect_news.py."""
+    days = {}
+    for path in sorted(NEWS_DATA.glob("*.json")):
+        try:
+            days[path.stem] = json.loads(path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            print(f"  ! skipped {path.name}: {exc}")
+    return days
+
+
+def clip_html(item):
+    meta = [html.escape(item.get("source", ""))]
+    if item.get("also"):
+        meta.append("+ " + html.escape(", ".join(item["also"][:3])))
+    if item.get("published"):
+        meta.append(tr_date(item["published"]))
+    if item.get("country"):
+        meta.append(html.escape(item["country"]))
+    return (
+        '<li class="clip">'
+        f'<a href="{html.escape(item["url"], quote=True)}" target="_blank" rel="noopener">'
+        f'{html.escape(item["title"])}</a>'
+        f'<span class="clip-meta">{" · ".join(meta)}</span></li>'
+    )
+
+
+def build_news_page(day, data, prev_day, next_day, has_report, latest_news):
+    buckets = {}
+    for item in data.get("items", []):
+        buckets.setdefault(item.get("category") or "Genel Savunma Gündemi", []).append(item)
+
+    body = []
+    for name in NEWS_ORDER + sorted(set(buckets) - set(NEWS_ORDER)):
+        items = buckets.get(name)
+        if not items:
+            continue
+        body.append(
+            f'<h2 class="kicker">{html.escape(name)} <span class="kicker-count">{len(items)}</span></h2>'
+            '<ul class="clips">' + "".join(clip_html(i) for i in items) + "</ul>"
+        )
+
+    nav = []
+    if prev_day:
+        nav.append(f'<a class="backlink" href="{prev_day}.html">← {tr_date(prev_day)}</a>')
+    if has_report:
+        nav.append(f'<a class="backlink" href="../reports/{day}.html">O günün brifingi →</a>')
+    if next_day:
+        nav.append(f'<a class="backlink" href="{next_day}.html">{tr_date(next_day)} →</a>')
+
+    stat = (
+        f'{data.get("scanned_sources", 0)} kaynak · {data.get("unique_items", 0)} başlık'
+        f' · son {data.get("window_hours", 48)} saat'
+    )
+    return (
+        head(f"Medya takibi · {tr_date(day)} — {SITE_NAME}", depth=1)
+        + masthead(up="../", latest_news=latest_news)
+        + f"""<main class="wrap news">
+  <div class="news-head">
+    <h1 class="report-title">Medya takibi · {tr_date(day)}</h1>
+    <p class="news-stat num">{stat}</p>
+    <nav class="news-nav">{" ".join(nav)}</nav>
+  </div>
+  {"".join(body) or '<p class="empty">Bu gün için kayıt yok.</p>'}
 </main>
 """
         + PROMPTS
@@ -287,7 +379,7 @@ def entry_html(r):
 </a>"""
 
 
-def build_index(reports, version):
+def build_index(reports, version, latest_news=None):
     if not reports:
         body = '<p class="empty">Henüz rapor yok.</p>'
     else:
@@ -296,7 +388,7 @@ def build_index(reports, version):
 
     return (
         head(f"{SITE_NAME} — {SITE_TAGLINE}")
-        + masthead()
+        + masthead(latest_news=latest_news)
         + f"""<main class="wrap">
   <div class="controls">
     <input class="search" id="q" type="search" placeholder="Ara: konu ya da tarih…" autocomplete="off">
@@ -341,6 +433,10 @@ def main():
     DATA.mkdir(exist_ok=True)
     SRC.mkdir(exist_ok=True)
 
+    news = load_news()
+    news_days = sorted(news)
+    latest_news = news_days[-1] if news_days else None
+
     reports = []
     for path in sorted(SRC.glob("*.md")):
         iso = path.stem
@@ -352,7 +448,9 @@ def main():
 
         developments = meta.get("developments") or []
         body_html = render_body(body, developments)
-        (OUT / f"{iso}.html").write_text(build_report(meta, body_html, iso), encoding="utf-8")
+        (OUT / f"{iso}.html").write_text(
+            build_report(meta, body_html, iso, news_days, latest_news), encoding="utf-8"
+        )
 
         reports.append(
             {
@@ -380,7 +478,20 @@ def main():
         b"".join(p.name.encode() + p.read_bytes() for p in sorted(SRC.glob("*.md")))
     ).hexdigest()[:16]
     (DATA / "version.txt").write_text(version + "\n", encoding="utf-8")
-    (ROOT / "index.html").write_text(build_index(reports, version), encoding="utf-8")
+    if news_days:
+        NEWS_OUT.mkdir(exist_ok=True)
+        report_days = {r["date"] for r in reports}
+        for i, day in enumerate(news_days):
+            page = build_news_page(
+                day, news[day],
+                news_days[i - 1] if i else None,
+                news_days[i + 1] if i + 1 < len(news_days) else None,
+                day in report_days, latest_news,
+            )
+            (NEWS_OUT / f"{day}.html").write_text(page, encoding="utf-8")
+            print(f"  · haberler/{day}.html ({news[day].get('unique_items', 0)} başlık)")
+
+    (ROOT / "index.html").write_text(build_index(reports, version, latest_news), encoding="utf-8")
     (ROOT / ".nojekyll").touch()
 
     print(f"  · index.html  ({len(reports)} rapor)")

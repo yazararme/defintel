@@ -48,43 +48,54 @@ DEFENCE_TERMS = [
     "nato", "radar", "jammer", "karıştırıcı", "shotgun", "gun system", "silah",
 ]
 
-# Category -> terms. First match wins; anything else lands in "Diğer".
+# Category -> terms, in priority order. Short terms are matched on word
+# boundaries: "safe" as a plain word matched half the English-language feeds.
 CATEGORIES = [
     ("C-UAS ve Hava Savunma", [
-        "c-uas", "counter-uas", "counter-drone", "anti-drone", "drone defen", "dron savunma",
-        "air defen", "hava savunma", "shorad", "manpads", "skyranger", "jammer", "karıştırıc",
-        "interceptor", "önleyici", "uav", "uas", "drone", "dron", "loitering", "dolanan",
+        "c-uas", "counter-uas", "counter drone", "counter-drone", "anti-drone", "drone defen",
+        "dron savunma", "air defen", "hava savunma", "shorad", "manpads", "skyranger",
+        "jammer", "karıştırıc", "interceptor", "önleyici", "uav", "uas", "drone", "dron",
+        "loitering", "dolanan mühimmat", "patriot", "nasams", "iron dome", "s-400",
     ]),
     ("Topçu ve Mühimmat", [
         "artillery", "topçu", "howitzer", "obüs", "mortar", "havan", "ammunition", "mühimmat",
-        "munition", "shell", "155mm", "155 mm", "105mm", "propellant", "barut", "fuze",
-        "fünye", "airburst", "proximity", "nitrocellulose", "nitroselüloz",
+        "munition", "shell", "155mm", "155 mm", "105mm", "120mm", "30mm", "35mm", "propellant",
+        "barut", "fuze", "fünye", "airburst", "proximity", "nitrocellulose", "nitroselüloz",
+        "rocket artillery", "mlrs", "himars",
     ]),
     ("Deniz ve İnsansız Sistemler", [
-        "naval", "deniz", "frigate", "fırkateyn", "submarine", "denizalt", "usv", "uuv",
-        "mine", "mayın", "torpedo",
+        "naval", "frigate", "fırkateyn", "submarine", "denizalt", "corvette", "korvet",
+        "usv", "uuv", "sea drone", "deniz araç", "torpedo", "mayın gemi",
     ]),
     ("Hafif Silah ve Mayın", [
         "rifle", "tüfek", "small arms", "hafif silah", "machine gun", "makineli",
-        "demining", "geçit açma", "ied",
-    ]),
-    ("Politika ve Regülasyon", [
-        "export control", "ihracat kontrol", "itar", "caatsa", "sanction", "yaptırım",
-        "edf", "asap", "safe", "nspa", "regulation", "regülasyon", "policy", "politika",
-        "budget", "bütçe", "parliament", "meclis",
+        "demining", "mayın temizleme", "geçit açma", "sniper", "keskin nişancı",
     ]),
     ("Tedarik Zinciri", [
         "supply chain", "tedarik zinciri", "tungsten", "rare earth", "nadir toprak",
-        "steel", "çelik", "copper", "bakır", "semiconductor", "çip", "shortage", "darboğaz",
+        "steel price", "çelik", "copper", "bakır", "semiconductor", "chip shortage",
+        "shortage", "darboğaz", "raw material", "hammadde",
     ]),
     ("İhale ve Sözleşmeler", [
-        "tender", "ihale", "contract", "sözleşme", "award", "order", "sipariş", "deal",
-        "procure", "tedarik", "rfi", "rfp", "solicitation",
+        "tender", "ihale", "contract", "sözleşme", "awarded", "awards", "order for",
+        "sipariş", "procure", "tedarik", "rfi", "rfp", "solicitation", "framework agreement",
+        "çerçeve anlaşma", "signs", "imzala", "deal",
+    ]),
+    ("Politika ve Regülasyon", [
+        "export control", "ihracat kontrol", "itar", "caatsa", "sanction", "yaptırım",
+        "regulation", "regülasyon", "defence policy", "savunma politika", "defense budget",
+        "savunma bütçe", "parliament approve", "meclis", "nato summit", "eu defence",
+    ]),
+    ("Rakip Duyuruları", [
+        "rheinmetall", "hanwha", "aselsan", "roketsan", "elbit", "knds", "nexter",
+        "bae systems", "leonardo", "kongsberg", "saab", "nammo", "anduril", "epirus",
+        "droneshield", "norinco", "raytheon", "lockheed", "northrop", "mbda", "diehl",
+        "junghans", "thales", "rtx",
     ]),
 ]
 
-MKE_TERMS = ["mke", "makine ve kimya", "tolga", "boran", "attila", "attİla", "mpt-76", "pirana", "barkın"]
-
+MKE_TERMS = ["mke", "makine ve kimya", "tolga", "boran", "attila", "mpt-76", "pirana", "barkın"]
+GENERAL = "Genel Savunma Gündemi"
 
 def norm(text):
     text = unicodedata.normalize("NFKD", (text or "").lower())
@@ -170,31 +181,37 @@ def read_feed(source):
 
 
 SOURCE_HINTS = [
-    ("C-UAS ve Hava Savunma", ["c-uas", "dron", "drone", "insansız", "hava savunma"]),
+    ("C-UAS ve Hava Savunma", ["c-uas", "dron savunma", "insansız"]),
     ("Topçu ve Mühimmat", ["mühimmat", "topçu"]),
-    ("Deniz ve İnsansız Sistemler", ["deniz"]),
-    ("Rakip Duyuruları", ["rakip", "kurumsal", "üretici"]),
-    ("Politika ve Regülasyon", ["politika", "regülasyon", "resmî", "nato", "ab savunma"]),
+    ("Deniz ve İnsansız Sistemler", ["deniz sistem"]),
+    ("Rakip Duyuruları", ["rakip kurumsal", "üretici duyuru"]),
 ]
+
+
+def has_term(text, term):
+    term = norm(term).strip()
+    if len(term) <= 5 and " " not in term:
+        return re.search(rf"\b{re.escape(term)}\b", text) is not None
+    return term in text
 
 
 def categorise(title, source=None):
     text = norm(title)
-    if any(term in text for term in (norm(t) for t in MKE_TERMS)):
+    if any(has_term(text, t) for t in MKE_TERMS):
         return "MKE"
     for name, terms in CATEGORIES:
-        if any(norm(term) in text for term in terms):
+        if any(has_term(text, t) for t in terms):
             return name
     scope = norm((source or {}).get("kapsam", ""))
     for name, terms in SOURCE_HINTS:
         if any(norm(term) in scope for term in terms):
             return name
-    return "Diğer"
+    return GENERAL
 
 
 def looks_defence(title):
     text = norm(title)
-    return any(norm(term) in text for term in DEFENCE_TERMS)
+    return any(has_term(text, term) for term in DEFENCE_TERMS)
 
 
 def main():
