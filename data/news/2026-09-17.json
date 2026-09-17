@@ -3,12 +3,12 @@
  "window_hours": 48,
  "scanned_sources": 66,
  "failed_sources": 16,
- "collected_items": 572,
- "unique_items": 527,
+ "collected_items": 573,
+ "unique_items": 528,
  "categories": {
   "C-UAS ve Hava Savunma": 77,
   "Deniz ve İnsansız Sistemler": 17,
-  "Genel Savunma Gündemi": 350,
+  "Genel Savunma Gündemi": 351,
   "Hafif Silah ve Mayın": 2,
   "Politika ve Regülasyon": 8,
   "Rakip Duyuruları": 33,
@@ -1271,6 +1271,17 @@
    "also": []
   },
   {
+   "title": "Aşil Kalkanı’nda Çelişki: Yunanistan’dan Farklı Açıklama",
+   "url": "https://www.savunmasanayist.com/asil-kalkaninda-celiski-yunanistandan-farkli-aciklama/",
+   "source": "SavunmaSanayiST",
+   "country": "TR",
+   "lang": "tr",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
    "title": "3. İstif Sınıfı Fırkateyn İzmit’in Testleri Başladı",
    "url": "https://www.savunmasanayist.com/istif-sinifi-firkateyn-izmit-deniz-kabul-testleri/",
    "source": "SavunmaSanayiST",
@@ -1533,6 +1544,17 @@
    ]
   },
   {
+   "title": "Politico сообщает об обсуждении партией Мерца возможности смены канцлера Германии",
+   "url": "https://www.interfax.ru/world/1116710",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
    "title": "Вылов минтая в РФ к середине сентября увеличился на 1,7% до 1,7 млн т",
    "url": "https://www.interfax.ru/business/1116707",
    "source": "Interfax",
@@ -1570,17 +1592,6 @@
   {
    "title": "Президент Азербайджана заявил о слабом влиянии ООН на протяжении последних 30 лет",
    "url": "https://www.interfax.ru/world/1116692",
-   "source": "Interfax",
-   "country": "RU",
-   "lang": "ru",
-   "tier": "B",
-   "published": "2026-09-17",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "Банк Англии сохранил ставку на уровне 3,75%",
-   "url": "https://www.interfax.ru/business/1116684",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -2073,6 +2084,17 @@
    "country": "AE",
    "lang": "en",
    "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Polski generał obejmuje kluczowe stanowisko w strukturach NATO",
+   "url": "https://defence24.pl/polityka-obronna/polski-general-obejmuje-kluczowe-stanowisko-w-strukturach-nato",
+   "source": "Defence24 (PL)",
+   "country": "PL",
+   "lang": "pl",
+   "tier": "A",
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": []
@@ -4689,17 +4711,6 @@
   {
    "title": "Rewolucja w wyposażeniu żołnierza. „Zielona lista” skraca drogę innowacji na pole walki",
    "url": "https://defence24.pl/sily-zbrojne/rewolucja-w-wyposazeniu-zolnierza-zielona-lista-skraca-droge-innowacji-na-pole-walki",
-   "source": "Defence24 (PL)",
-   "country": "PL",
-   "lang": "pl",
-   "tier": "A",
-   "published": "2026-09-16",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "Szwedzki samolot zwiadowczy nad Polską. Obserwował obwód Królewiecki",
-   "url": "https://defence24.pl/polityka-obronna/szwedzki-samolot-zwiadowczy-nad-polska-obserwowal-obwod-krolewiecki",
    "source": "Defence24 (PL)",
    "country": "PL",
    "lang": "pl",
