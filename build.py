@@ -320,9 +320,14 @@ def build_news_page(day, data, prev_day, next_day, has_report, latest_news):
     if next_day:
         nav.append(f'<a class="backlink" href="{next_day}.html">{tr_date(next_day)} →</a>')
 
+    # "66 kaynak" okunan değil tanımlı kaynak sayısıydı; okunanı yaz, farkı da göster
+    defined = data.get("scanned_sources", 0)
+    unread = data.get("failed_sources", 0)
+    read = defined - unread
     stat = (
-        f'{data.get("scanned_sources", 0)} kaynak · {data.get("unique_items", 0)} başlık'
+        f'{read} kaynak okundu · {data.get("unique_items", 0)} başlık'
         f' · son {data.get("window_hours", 48)} saat'
+        + (f' · {unread} kaynak yanıt vermedi' if unread else "")
     )
     return (
         head(f"Medya takibi · {tr_date(day)} — {SITE_NAME}", depth=1)
