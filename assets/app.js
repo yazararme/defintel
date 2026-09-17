@@ -210,8 +210,9 @@
 
   function paint(state) {
     if (!btn) return;
+    // when it is already on, the bell alone says so — the words were just noise
     label.textContent = {
-      on: "Bildirimler açık",
+      on: "",
       off: "Bildirimler",
       blocked: "Bildirimler kapalı",
       failed: "Bildirim kurulamadı",

@@ -253,11 +253,9 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None, news_days=(
         if meta.get("alarm")
         else ""
     )
-    deadline = (
-        f'<p class="deadline-chip">Dış son tarih: {tr_date(meta["decision_by"])}</p>'
-        if meta.get("decision_by")
-        else ""
-    )
+    # decision_by is explained inside the development it belongs to; a chip
+    # under the title only repeated a date with no context.
+    deadline = ""
 
     # The day bar above already carries the date and the link to that day's
     # clippings, so the rail only repeats what the reader just read.
@@ -537,8 +535,6 @@ def entry_html(r):
     rail = [f'<time class="datestamp num">{tr_date(r["date"])}</time>']
     if r["alarm"]:
         rail.append('<span class="badge badge--alarm">Alarm</span>')
-    if r.get("decision_by"):
-        rail.append(f'<span class="badge num">Son tarih · {tr_short(r["decision_by"])}</span>')
 
     heads = [d for d in (r.get("developments") or [])
              if str(d.get("home", "gelismeler")).lower() == "gelismeler"]

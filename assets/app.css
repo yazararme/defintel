@@ -218,7 +218,8 @@ a { color: var(--brand); text-underline-offset: 2px; }
 .notify:focus-visible { outline: 1px solid var(--brand); outline-offset: 3px; }
 .notify:disabled { opacity: .5; cursor: default; }
 .notify-bell { flex: none; }
-.notify[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--rule-2); }
+.notify[aria-pressed="true"] { color: var(--ink); border-bottom-color: transparent; gap: 0; }
+.notify[aria-pressed="true"] .notify-label:empty { display: none; }
 .notify[aria-pressed="true"] .notify-bell { color: var(--ok); }
 .notify[data-state="blocked"] { color: var(--muted); cursor: default; }
 
