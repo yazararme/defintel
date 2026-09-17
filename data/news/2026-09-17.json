@@ -11,10 +11,10 @@
   "Genel Savunma Gündemi": 378,
   "Hafif Silah ve Mayın": 1,
   "Politika ve Regülasyon": 9,
-  "Rakip Duyuruları": 30,
+  "Rakip Duyuruları": 31,
   "Tedarik Zinciri": 1,
   "Topçu ve Mühimmat": 18,
-  "İhale ve Sözleşmeler": 20
+  "İhale ve Sözleşmeler": 19
  },
  "items": [
   {
@@ -27,7 +27,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Lesotho ve Güney Afrika, kaçak silahların büyük çaplı imhasında iş birliği yapıyor"
+   "title_tr": "Lesotho ve Güney Afrika, kaçak silahların büyük çaplı imhasında iş birliği yapıyor",
+   "summary_tr": "Lesotho Mounted Police Service, SA Police Service ve Interpol iş birliğiyle Lesotho'da suç operasyonlarında ele geçirilen 1.787 ruhsatsız silah Güney Afrika'ya nakledilerek imha edildi; operasyon Afrika Birliği'nin Silencing the Guns kampanyası kapsamındaki Afrika Af Ayı etkinlikleri çerçevesinde gerçekleştirildi. Bu adım, SAPS'ın iki ay önce 11.859 silahı imha etmesinin ardından bölgesel kolluk iş birliğinin sürdüğünü gösteriyor."
   },
   {
    "title": "DCD Defence reveals new Bushbuck vehicle",
@@ -39,7 +40,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "DCD Defence yeni Bushbuck aracını tanıttı"
+   "title_tr": "DCD Defence yeni Bushbuck aracını tanıttı",
+   "summary_tr": "DCD Protected Mobility, DCD Defence adını alarak AAD 2026 fuarında yeni Bushbuck hafif taktik aracını tanıttı; EN 1522 B6 balistik korumaya ve STANAG 4569 Seviye 1 uyumuna sahip 7 tonluk araç, tekli/çiftli kabin, zırhlı personel taşıyıcı, komuta ve ambulans gibi çok sayıda versiyona dönüştürülebiliyor. Şirket aynı fuarda Husky mayın tespit aracı (1981'den beri hizmette, 7.500 patlamadan sağ çıkmış) ve Springbuck MRAP ailesini de sergiledi."
   },
   {
    "title": "Motshekga opens AAD 2026 with call for sovereign capability and industrial growth",
@@ -51,7 +53,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Motshekga, egemen kabiliyet ve sanayi büyümesi çağrısıyla AAD 2026'yı açtı"
+   "title_tr": "Motshekga, egemen kabiliyet ve sanayi büyümesi çağrısıyla AAD 2026'yı açtı",
+   "summary_tr": "Güney Afrika Savunma Bakanı Angie Motshekga, 16 Eylül 2026'da Tshwane'deki Waterkloof Hava Üssü'nde AAD 2026 fuarını açarken temmuzdaki Savunma Sanayii Lekgotla'sında kararlaştırılan yerlileştirme, egemen kapasite, düzenleyici reform ve ihracat hedeflerini vurguladı. Yardımcı Bakan Bantu Holomisa da fuarın uluslararası iş birliği ve yatırım fırsatları için önemine dikkat çekti; AAD 2026, 16-20 Eylül tarihleri arasında düzenleniyor."
   },
   {
    "title": "Burkina Faso reveals new Sky Dragon air defence system",
@@ -63,7 +66,8 @@
    "published": "2026-09-17",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
-   "title_tr": "Burkina Faso yeni Sky Dragon hava savunma sistemini tanıttı"
+   "title_tr": "Burkina Faso yeni Sky Dragon hava savunma sistemini tanıttı",
+   "summary_tr": "Burkina Faso, 1 Eylül'de yayınlanan bir videoyla Çin Norinco üretimi Sky Dragon 30 hava savunma sistemini envanterine kattığını gösterdi; 30 km menzilli, 18 km irtifaya ulaşan ve kızılötesi güdümlü sistem aynı anda 12 hedefi vurabiliyor. Ülke, Ibrahim Traore liderliğinde dördüncü yıl kutlamaları kapsamında son yıllarda Çin'den zırhlı araç, roketatar ve topçu sistemleri gibi kapsamlı askeri tedarikler gerçekleştiriyor."
   },
   {
    "title": "PIC Wire & Cable partners with Hiconnex to expand into SA and the UAE",
@@ -75,7 +79,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "PIC Wire & Cable, Hiconnex ile ortaklık kurarak Güney Afrika ve BAE'ye açılıyor"
+   "title_tr": "PIC Wire & Cable, Hiconnex ile ortaklık kurarak Güney Afrika ve BAE'ye açılıyor",
+   "summary_tr": "Güney Afrikalı Hiconnex ile ABD merkezli havacılık ve savunma kablo/konnektör üreticisi PIC Wire & Cable, 22 Mayıs 2026'da imzalanan anlaşmayla Hiconnex'i Güney Afrika ve Birleşik Arap Emirlikleri'nde PIC'in münhasır distribütörü ilan etti. Anlaşma, PIC'in ürün gamı ile Hiconnex'in bölgesel OEM ilişkilerini ve sertifikasyonlarını birleştirerek her iki şirketin bu stratejik pazarlarda büyümesini hedefliyor."
   },
   {
    "title": "Parthenius Air debuts Zerathis Blindspot intelligence portal at AAD 2026",
@@ -87,7 +92,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Parthenius Air, AAD 2026'da Zerathis Blindspot istihbarat portalını tanıttı"
+   "title_tr": "Parthenius Air, AAD 2026'da Zerathis Blindspot istihbarat portalını tanıttı",
+   "summary_tr": "Güney Afrikalı Parthenius Air, AAD 2026 fuarında Zerathis Blindspot istihbarat portalını tanıttı; sistem, Eylül 2024'te başlayan bir platin madeni dağıtımında 19 ay boyunca %97 fırsat engelleme oranına ulaştığını duyurdu. Platform, sensör verilerini tek bir istihbarat resminde birleştirerek güvenlik operasyonlarının tahmin edilebilir hale gelmesini önlemeyi amaçlıyor."
   },
   {
    "title": "AVI-SPL and Matternet partner on drone delivery for service logistics",
@@ -99,7 +105,8 @@
    "published": "2026-09-17",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
-   "title_tr": "AVI-SPL ve Matternet, hizmet lojistiği için drone teslimatında iş birliği yapıyor"
+   "title_tr": "AVI-SPL ve Matternet, hizmet lojistiği için drone teslimatında iş birliği yapıyor",
+   "summary_tr": "AVI-SPL ile Matternet, büyükşehirlerde saha teknisyenlerine ekipman ve yedek parça ulaştırmak amacıyla otonom drone teslimat ortaklığı kurdu. Matternet'in M2 drone sistemi ABD ve Avrupa'da 60.000'den fazla ticari uçuşu destekledi ve FAA sertifikalarına sahip."
   },
   {
    "title": "Leonardo unveils containerised Falcon Shield C-UAS system",
@@ -111,7 +118,8 @@
    "published": "2026-09-17",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
-   "title_tr": "Leonardo, konteynerize Falcon Shield C-UAS sistemini tanıttı"
+   "title_tr": "Leonardo, konteynerize Falcon Shield C-UAS sistemini tanıttı",
+   "summary_tr": "Leonardo, Marshall Land Systems ile geliştirdiği ve DVD fuarında tanıtılan konteynerize Falcon Shield karşı-İHA (C-UAS) sistemini duyurdu; sistem HYAS komuta kontrol ve Nerio ULR gözetleme yeteneklerini standart bir ISO konteynerine entegre ediyor. Falcon Shield, 2018'den beri Orcus adıyla İngiltere Kraliyet Hava Kuvvetleri'nde kullanılıyor."
   },
   {
    "title": "AEye and Swiftstrike AI to integrate lidar into C-UAS systems",
@@ -123,7 +131,8 @@
    "published": "2026-09-17",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
-   "title_tr": "AEye ve Swiftstrike AI, lidarı C-UAS sistemlerine entegre edecek"
+   "title_tr": "AEye ve Swiftstrike AI, lidarı C-UAS sistemlerine entegre edecek",
+   "summary_tr": "ABD'li AEye ve İsveçli Swiftstrike AI, AEye'ın 1,5 km menzilli STRATOS lidar sensörünü Swiftstrike'ın C-UAS platformlarına entegre etmek için iş birliği yapacak. Amaç, küçük hava hedeflerinin tespit ve sınıflandırma menzilini artırmak; henüz üretim sözleşmesi veya müşteri açıklanmadı."
   },
   {
    "title": "Skykraft appoints Rob Weaver as interim CEO",
@@ -135,7 +144,8 @@
    "published": "2026-09-17",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
-   "title_tr": "Skykraft, Rob Weaver'ı geçici CEO olarak atadı"
+   "title_tr": "Skykraft, Rob Weaver'ı geçici CEO olarak atadı",
+   "summary_tr": "Avustralyalı uzay altyapı şirketi Skykraft, 10 Eylül 2026 itibarıyla Rob Weaver'ı geçici CEO olarak atadı; Weaver, görevi Michael Frater'dan devraldı. Şirket, kalıcı CEO için önümüzdeki aylarda küresel bir işe alım süreci başlatacağını belirtti."
   },
   {
    "title": "Flyby Guys launches Drone Assistant regulatory intelligence platform",
@@ -147,7 +157,8 @@
    "published": "2026-09-17",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
-   "title_tr": "Flyby Guys, Drone Assistant düzenleyici istihbarat platformunu başlattı"
+   "title_tr": "Flyby Guys, Drone Assistant düzenleyici istihbarat platformunu başlattı",
+   "summary_tr": "Flyby Guys, drone operatörlerinin ABD, Avustralya, İngiltere, Yeni Zelanda ve EASA üyesi ülkeler dahil çeşitli yargı bölgelerindeki mevzuatı sorgulayabilmesini sağlayan Drone Assistant platformunu piyasaya sürdü. Platform, özellikle BVLOS ve Specific Category operasyonları yürüten ticari operatörleri hedefliyor ve şirketin 31 pazarı kıyaslayan Drone Regulation Index 2026 raporuyla eş zamanlı duyuruldu."
   },
   {
    "title": "U-EXPAND project launches to advance U-space communications and surveillance",
@@ -159,7 +170,8 @@
    "published": "2026-09-17",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
-   "title_tr": "U-EXPAND projesi, U-space iletişim ve gözetimini geliştirmek için başlatıldı"
+   "title_tr": "U-EXPAND projesi, U-space iletişim ve gözetimini geliştirmek için başlatıldı",
+   "summary_tr": "D-Flight liderliğindeki bir konsorsiyum, SESAR Joint Undertaking tarafından finanse edilen U-EXPAND projesini Roma'da resmen başlattı; üç yıllık program U-space için gelişmiş haberleşme, seyrüsefer ve gözetim teknolojilerini, 5G ağlarının kullanımını ve VFR pilotlarının entegrasyonunu geliştirecek."
   },
   {
    "title": "BAE wins work to modernise American assault ship",
@@ -171,7 +183,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "BAE, Amerikan amfibi hücum gemisini modernize etme işini kazandı"
+   "title_tr": "BAE, Amerikan amfibi hücum gemisini modernize etme işini kazandı",
+   "summary_tr": "BAE Systems, USS Boxer (LHD 4) amfibi hücum gemisinin San Diego'daki deniz üssünde modernizasyon, bakım ve onarım çalışmalarını kapsayan ve opsiyonlarla birlikte 180 milyon dolara ulaşabilecek sabit fiyatlı Selected Restricted Availability sözleşmesini kazandı."
   },
   {
    "title": "Engine fault response led to fatal Merlin ditching",
@@ -183,7 +196,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Motor arızası tepkisi, Merlin'in ölümcül şekilde suya inişine yol açtı"
+   "title_tr": "Motor arızası tepkisi, Merlin'in ölümcül şekilde suya inişine yol açtı",
+   "summary_tr": "İngiltere'nin resmi soruşturmasına göre, 4 Eylül 2024'te Manş Denizi'nde HMS Queen Elizabeth'e dönüşü sırasında düşen Merlin Mk4 ZJ135 helikopterinde, bir motorun arızalanıp aşırı güç üretmesi karşısında mürettebatın hatalı teşhis koyup sağlam iki motoru kapatması kazanın nedeni oldu; Handling Pilot koltuğunun yanlış ayarlanması nedeniyle kaçamayarak hayatını kaybederken diğer iki mürettebat kurtuldu."
   },
   {
    "title": "Ferguson Marine to build tugboats for commercial sale",
@@ -195,7 +209,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Ferguson Marine, ticari satış için römorkör inşa edecek"
+   "title_tr": "Ferguson Marine, ticari satış için römorkör inşa edecek",
+   "summary_tr": "İskoçya Ekonomi ve Ulaştırma Bakanı Stephen Flynn, MV Glen Rosa'nın 2026 sonunda tesliminden sonra 2027 için sipariş defterinde iş bulunmayan devlet malı Ferguson Marine tersanesine, ticari satış amacıyla römorkör inşa etmesi için işletme sermayesi desteği verilmesini onayladı; tersane muhtemelen Hollandalı Damen gibi bir gemi üreticisiyle hazır bir tasarım üzerinden çalışacak."
   },
   {
    "title": "Military AI pushed deeper into UK combat systems",
@@ -207,7 +222,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Askeri yapay zeka, İngiltere'nin muharebe sistemlerine daha derinlemesine nüfuz ediyor"
+   "title_tr": "Askeri yapay zeka, İngiltere'nin muharebe sistemlerine daha derinlemesine nüfuz ediyor",
+   "summary_tr": "İngiltere Savunma Bakanlığı, 2026-27 ile 2029-30 mali yılları arasında yapay zekaya 300 milyon sterlik özel yatırım ayırdı; bu tutarın 100 milyonu Taskforce RAID'e, 100 milyonu Programme FRONTIER'e, 80 milyonu Kara Komuta Kontrol uygulamalarına ve 20 milyonu su altı gözetleme AI'sına gidiyor. Bakan Luke Pollard, 2030-2035 dönemi için henüz özel bir fon ayrılmadığını, AI'nın Digital Targeting Web ve Project ASGARD gibi daha büyük programlara da entegre edildiğini belirtti."
   },
   {
    "title": "Britain contracts drone-ship sensors to track air threats",
@@ -219,7 +235,8 @@
    "published": "2026-09-17",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
-   "title_tr": "Britanya, hava tehditlerini takip etmek için drone gemisi sensörleri sözleşmesi imzaladı"
+   "title_tr": "Britanya, hava tehditlerini takip etmek için drone gemisi sensörleri sözleşmesi imzaladı",
+   "summary_tr": "Project HORUS kapsamında Royal Navy, hava tehditlerini tespit edip izlemek için sensörlerle donatılmış insansız deniz platformları için sözleşme imzaladığını doğruladı; proje personel riskini azaltan dağıtık algılama sağlamayı hedefliyor. Mart ayında kamuya duyurulan gereksinimlere göre platformların 30-90 gün boyunca insan müdahalesi olmadan görevde kalması ve dron, seyir füzesi ile savaş uçaklarını en az 15 deniz mili mesafeden tespit etmesi öngörülüyordu."
   },
   {
    "title": "RAF to fight above Britain in huge air defence exercise",
@@ -231,7 +248,8 @@
    "published": "2026-09-17",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
-   "title_tr": "RAF, büyük hava savunma tatbikatında Britanya semalarında uçacak"
+   "title_tr": "RAF, büyük hava savunma tatbikatında Britanya semalarında uçacak",
+   "summary_tr": "RAF, 14 Eylül-2 Ekim tarihleri arasında İngiltere, Almanya, İtalya, Hollanda ve ABD'den personel ve uçakların katıldığı Cobra Warrior 26-2 tatbikatını düzenliyor; tatbikat Typhoon, F-35, P-8A Poseidon ve Voyager gibi uçakları NATO E-3A ve KC-135 platformlarıyla bir araya getiriyor. Hava Kuvvetleri Komutanı Sir Harv Smyth, Rusya'nın oluşturduğu tehdit nedeniyle bunun 35 yıllık kariyerinin en tehlikeli dönemi olduğunu söyledi."
   },
   {
    "title": "Falklands Typhoon fighters to be swapped for later aircraft",
@@ -243,7 +261,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Falkland Adaları'ndaki Typhoon uçakları daha yeni uçaklarla değiştirilecek"
+   "title_tr": "Falkland Adaları'ndaki Typhoon uçakları daha yeni uçaklarla değiştirilecek",
+   "summary_tr": "1435 Filo'ya bağlı Falkland Adaları'ndaki dört Tranche 1 Typhoon uçağı, Kasım-Aralık 2027'de yapılacak rotasyonda mevcut filodan dört Tranche 2 Typhoon ile değiştirilecek. Bakan Luke Pollard, geri dönen Tranche 1 uçaklarının imha öncesi 'Reduce to Produce' programına tabi tutularak 2040'a kadar hizmette kalacak Tranche 2 ve Tranche 3 filolarını desteklemek için kullanılacağını açıkladı."
   },
   {
    "title": "Rutte says Europe must take greater NATO security burden",
@@ -255,7 +274,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rutte, Avrupa'nın NATO güvenlik yükünü daha fazla üstlenmesi gerektiğini söyledi"
+   "title_tr": "Rutte, Avrupa'nın NATO güvenlik yükünü daha fazla üstlenmesi gerektiğini söyledi",
+   "summary_tr": "NATO Genel Sekreteri Mark Rutte, Berlin'deki Alman Büyükelçiler Konferansı'nda Avrupa-ABD ilişkisindeki dönüşümü 'NATO 3.0' olarak nitelendirerek Avrupalı müttefiklerin savunma yükünün daha büyük bir kısmını üstlenmesi gerektiğini söyledi. Rutte, Almanya'nın Litvanya'da kalıcı konuşlanan zırhlı tugayına ve artan savunma üretimine değinerek Leipzig havalimanındaki Rus hibrit saldırısı karşısında Almanya'ya destek verdiğini belirtti."
   },
   {
    "title": "UK again rules out compulsory military service",
@@ -1625,6 +1645,18 @@
    "title_tr": "3. İstif Sınıfı Fırkateyn İzmit'in Testleri Başladı"
   },
   {
+   "title": "US trade chief pressed Brazil to review Anglo American nickel sale to China",
+   "url": "https://www.scmp.com/news/china/diplomacy/article/3367913/us-trade-chief-pressed-brazil-review-anglo-american-nickel-sale-china?utm_source=rss_feed",
+   "source": "SCMP (Çin)",
+   "country": "HK",
+   "lang": "en",
+   "tier": "C",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "ABD ticaret temsilcisi Brezilya'ya Anglo American'ın Çin'e nikel satışını gözden geçirmesi için baskı yaptı"
+  },
+  {
    "title": "US sanctions boost China’s science-driven innovation by over 70%, study finds",
    "url": "https://www.scmp.com/news/china/science/article/3367792/us-sanctions-boost-chinas-science-driven-innovation-over-70-study-finds?utm_source=rss_feed",
    "source": "SCMP (Çin)",
@@ -2947,6 +2979,30 @@
    "title_tr": "Japon Global Hawk drone'u kazada denize düştü"
   },
   {
+   "title": "L3Harris Starts Production On Tranche 3 Satellites, Expects All Deliveries By Early 2029",
+   "url": "https://www.defensedaily.com/l3harris-starts-production-on-tranche-3-satellites-expects-all-deliveries-by-early-2029/missile-defense/",
+   "source": "Defense Daily",
+   "country": "US",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "L3Harris, Tranche 3 uydularının üretimine başladı, tüm teslimatların 2029 başına kadar tamamlanmasını bekliyor"
+  },
+  {
+   "title": "Edge Cybersecurity Firm TigerByte Cyber Exits Stealth With $10 Million",
+   "url": "https://www.defensedaily.com/edge-cybersecurity-firm-tigerbyte-cyber-exits-stealth-with-10-million/cyber/",
+   "source": "Defense Daily",
+   "country": "US",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Uç Nokta Siber Güvenlik Firması TigerByte Cyber, 10 Milyon Dolarla Gizlilikten Çıktı"
+  },
+  {
    "title": "Army Corps Assessing Sensors, Software, C2 For C-UAS In Latest Scarlet Dragon Innovation Event",
    "url": "https://www.defensedaily.com/army-corps-assessing-sensors-software-c2-for-c-uas-in-latest-scarlet-dragon-innovation-event/unmanned-systems/",
    "source": "Defense Daily",
@@ -3595,6 +3651,18 @@
    "title_tr": "Özel Fotoğraflar, İran'ın Saldırısının Körfez'deki ABD Üssünü Yok Ettiğini Ortaya Koyuyor"
   },
   {
+   "title": "U.S. Department of States approves potential $24.3 billion sale of 48 Lockheed Martin F-35 Lightning II stealth fighters to Saudi Arabia",
+   "url": "https://defence-industry.eu/u-s-department-of-states-approves-potential-24-3-billion-sale-of-48-lockheed-martin-f-35-lightning-ii-stealth-fighters-to-saudi-arabia/",
+   "source": "Defence Industry Europe",
+   "country": "EU",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Rakip Duyuruları",
+   "also": [],
+   "title_tr": "ABD Dışişleri Bakanlığı, Suudi Arabistan'a 48 adet Lockheed Martin F-35 Lightning II gizli savaş uçağının 24,3 milyar dolarlık olası satışını onayladı"
+  },
+  {
    "title": "U.S. Air Force weighs first new F-16 order since 2005 to fill fighter gap left by aging fleet and limited F-35, F-15EX deliveries",
    "url": "https://defence-industry.eu/u-s-air-force-weighs-first-new-f-16-order-since-2005-to-fill-fighter-gap-left-by-aging-fleet-and-limited-f-35-f-15ex-deliveries/",
    "source": "Defence Industry Europe",
@@ -3701,18 +3769,6 @@
    "category": "Rakip Duyuruları",
    "also": [],
    "title_tr": "Hanwha Defense USA, Philadelphia tersanesindeki iş gücünün yaklaşık 2.500'e ikiye katlandığını açıkladı, tarihi tersanede ABD Donanması gemi inşasını yeniden canlandırmayı hedefliyor"
-  },
-  {
-   "title": "U.S. Air Force F-16s mark 45 years in Europe with AESA radar upgrades, dispersed operations and continued missions on NATO’s eastern flank",
-   "url": "https://defence-industry.eu/u-s-air-force-f-16s-mark-45-years-in-europe-with-aesa-radar-upgrades-dispersed-operations-and-continued-missions-on-natos-eastern-flank/",
-   "source": "Defence Industry Europe",
-   "country": "EU",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-17",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "ABD Hava Kuvvetleri F-16'ları, AESA radar yükseltmeleri, dağınık operasyonlar ve NATO'nun doğu kanadındaki süregelen görevlerle Avrupa'da 45. yılını kutluyor"
   },
   {
    "title": "U.S. approves Saudi F-35 sale after year of signals",
@@ -6142,18 +6198,6 @@
    "title_tr": "'Transaksiyonel' Amerika, Hindistan'a Çin ile gelecekteki bir sınır krizinde yardım edecek mi?"
   },
   {
-   "title": "Why I am grateful for Asean’s endless meetings",
-   "url": "https://www.scmp.com/opinion/asia-opinion/article/3367076/why-i-am-grateful-aseans-endless-meetings?utm_source=rss_feed",
-   "source": "SCMP (Çin)",
-   "country": "HK",
-   "lang": "en",
-   "tier": "C",
-   "published": "2026-09-15",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "ASEAN'ın bitmek bilmeyen toplantılarına neden minnettarım"
-  },
-  {
    "title": "DJI Neo 3 Box Leaks With an RC Mini the FCC Already Approved",
    "url": "https://dronexl.co/2026/09/15/dji-neo-3-leak-rc-mini-fcc/",
    "source": "DroneXL",
@@ -6176,18 +6220,6 @@
    "category": "C-UAS ve Hava Savunma",
    "also": [],
    "title_tr": "USAFE komutanı, Avrupa'da CCA drone kullanımına dair 'senaryolar' paylaştı"
-  },
-  {
-   "title": "SDA hopes to keep certain decision-making authorities as Congress weighs its future",
-   "url": "https://defensescoop.com/2026/09/15/sda-hopes-to-keep-certain-authorities-as-congress-weighs-its-future/",
-   "source": "DefenseScoop",
-   "country": "US",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-15",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "SDA, Kongre geleceğini değerlendirirken bazı karar alma yetkilerini korumayı umuyor"
   },
   {
    "title": "How a MAGA influencer with ties to Russia became Trump’s Arctic adviser",
@@ -6224,18 +6256,6 @@
    "category": "Genel Savunma Gündemi",
    "also": [],
    "title_tr": "NGA yetkilisi, Siber Komutanlık'ta üst düzey yapay zeka görevine getirildi"
-  },
-  {
-   "title": "Castelion Gets First Production Lot Order For Blackbeard",
-   "url": "https://www.defensedaily.com/castelion-gets-first-production-lot-order-for-blackbeard/navy-usmc/",
-   "source": "Defense Daily",
-   "country": "US",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-15",
-   "category": "İhale ve Sözleşmeler",
-   "also": [],
-   "title_tr": "Castelion, Blackbeard için İlk Üretim Partisi Siparişini Aldı"
   },
   {
    "title": "Weekly Threats di Telsy",
