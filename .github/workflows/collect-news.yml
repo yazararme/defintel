@@ -8,8 +8,8 @@ on:
         description: 'Kaç saatlik pencere taransın'
         default: '48'
       summarise_limit:
-        description: 'Kaç kaleme Türkçe özet çıkarılsın (0 = kapalı)'
-        default: '110'
+        description: 'Kaç kaleme özet (0 = kapsamın tamamı, -1 = atla)'
+        default: '0'
       translate_limit:
         description: 'Kaç başlık çevrilsin (0 = hepsi)'
         default: '0'
@@ -43,9 +43,10 @@ jobs:
         run: |
           python3 scripts/translate_news.py --limit "${{ inputs.translate_limit || '0' }}" \
             || echo "çeviri atlandı"
-          # Scheduled runs summarise everything the page shows by default.
-          LIMIT="${{ inputs.summarise_limit || '110' }}"
-          if [ "$LIMIT" != "0" ]; then
+          # 0 = the whole default-visible set (the script's own scope);
+          # -1 skips summarising altogether.
+          LIMIT="${{ inputs.summarise_limit || '0' }}"
+          if [ "$LIMIT" != "-1" ]; then
             python3 scripts/summarise_news.py --limit "$LIMIT" || echo "özet atlandı"
           fi
 
