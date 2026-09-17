@@ -31,6 +31,7 @@ jobs:
           git config user.email "actions@github.com"
           git add -A
           git commit -m "report: $(date -u +%F) from Drive"
+          git pull --rebase --autostash origin main
           git push
           echo "published=yes" >> "$GITHUB_OUTPUT"
 

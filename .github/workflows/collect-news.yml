@@ -20,7 +20,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install requests google-auth feedparser
+      - run: pip install requests google-auth feedparser markdown pyyaml
       - env:
           GDRIVE_SA_KEY: ${{ secrets.GDRIVE_SA_KEY }}
           DRIVE_FOLDER_ID: 1Bqj-FeX9IwOD9na53Ze7RteepjxRCCGB
@@ -30,8 +30,10 @@ jobs:
       - if: inputs.dry_run == false
         run: |
           git status --porcelain data/news | grep -q . || exit 0
+          python3 build.py
           git config user.name "defintel-bot"
           git config user.email "actions@github.com"
-          git add data/news
+          git add -A
           git commit -m "news: $(date -u +%F) candidates"
+          git pull --rebase --autostash origin main
           git push
