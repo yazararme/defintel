@@ -22,6 +22,8 @@ import tempfile
 import requests
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+# Pinned so a CLI default change can't silently alter output quality.
+MODEL = "sonnet"
 NEWS_DIR = ROOT / "data" / "news"
 CACHE = NEWS_DIR / "summaries.json"
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
@@ -70,7 +72,7 @@ def claude(prompt):
     try:
         run = subprocess.run(
             ["claude", "-p", prompt, "--output-format", "json",
-             "--dangerously-skip-permissions"],
+             "--model", MODEL, "--dangerously-skip-permissions"],
             capture_output=True, text=True, timeout=600, cwd=tempfile.gettempdir(),
         )
     except (OSError, subprocess.TimeoutExpired) as exc:

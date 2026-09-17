@@ -9,7 +9,7 @@ on:
         default: '48'
       summarise_limit:
         description: 'Kaç kaleme Türkçe özet çıkarılsın (0 = kapalı)'
-        default: '0'
+        default: '110'
       translate_limit:
         description: 'Kaç başlık çevrilsin (0 = hepsi)'
         default: '0'
@@ -43,9 +43,10 @@ jobs:
         run: |
           python3 scripts/translate_news.py --limit "${{ inputs.translate_limit || '0' }}" \
             || echo "çeviri atlandı"
-          if [ "${{ inputs.summarise_limit || '0' }}" != "0" ]; then
-            python3 scripts/summarise_news.py --limit "${{ inputs.summarise_limit }}" \
-              || echo "özet atlandı"
+          # Scheduled runs summarise everything the page shows by default.
+          LIMIT="${{ inputs.summarise_limit || '110' }}"
+          if [ "$LIMIT" != "0" ]; then
+            python3 scripts/summarise_news.py --limit "$LIMIT" || echo "özet atlandı"
           fi
 
       - if: github.event_name == 'schedule' || inputs.dry_run == false

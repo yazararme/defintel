@@ -20,6 +20,8 @@ import sys
 import tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+# Pinned so a CLI default change can't silently alter output quality.
+MODEL = "haiku"
 NEWS_DIR = ROOT / "data" / "news"
 CACHE = NEWS_DIR / "translations.json"
 
@@ -54,7 +56,7 @@ def claude(prompt):
     try:
         run = subprocess.run(
             ["claude", "-p", prompt, "--output-format", "json",
-             "--dangerously-skip-permissions"],
+             "--model", MODEL, "--dangerously-skip-permissions"],
             capture_output=True, text=True, timeout=600, cwd=tempfile.gettempdir(),
         )
     except (OSError, subprocess.TimeoutExpired) as exc:
