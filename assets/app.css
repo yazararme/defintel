@@ -812,13 +812,37 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
   border-bottom: 1px solid var(--rule);
   max-width: 72ch;
 }
-.clip a {
+/* > : gövdedeki "Kaynağa git" çipi bu kuralların dışında kalsın */
+.clip > a {
   display: block;
   padding: 11px 0;
   color: var(--ink);
   text-decoration: none;
 }
-.clip a:hover .clip-title { color: var(--brand); text-decoration: underline; text-underline-offset: 3px; }
+.clip > a:hover .clip-title { color: var(--brand); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Özetli satır: tetik <summary>'nin tamamı, hedef gövdedeki ayrı bağlantı.
+   role / tabindex / elle aria-expanded yazılmaz — <details> semantiğini bozar. */
+.clip > summary {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 68px;      /* tek satırlık başlıkta bile başparmakla ıskalanmasın */
+  padding: 11px 0;
+  cursor: pointer;
+  list-style: none;
+}
+.clip > summary::-webkit-details-marker { display: none; }
+.clip > summary:hover .clip-title { color: var(--brand); }
+.clip > summary:focus-visible { outline: 1px solid var(--brand); outline-offset: 2px; }
+
+/* "burada dahası var" bilgisinin yeri meta satırı; yüzen bir ikon değil */
+.clip > summary .clip-meta::after { content: " ▾"; }
+.clip[open] > summary .clip-meta::after { content: " ▴"; }
+
+.clip-body { padding: 0 0 13px; }
+
+.clip-body .entry-go { margin-top: 10px; }
 
 .clip-title {
   display: -webkit-box;
@@ -829,6 +853,8 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
   font-size: 16px;
   line-height: 1.30;
 }
+/* açıkken kırpmaya gerek yok: okuyucu zaten bu satırı okumayı seçti */
+.clip[open] > summary .clip-title { display: block; }
 
 .clip-meta {
   display: block;
@@ -891,19 +917,17 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
   .clip { max-width: none; }
 }
 
-/* çeviri: Türkçe başlık ana satır, özgünü altında — jargonda şüphe uyanırsa
-   okuyucu aynı yerde asıl başlığı görsün */
+/* çeviri: Türkçe başlık duruş hâlinde, özgünü gövdede — jargonda şüphe uyanırsa
+   okuyucu asıl başlığı açtığı yerde görsün, tararken 35px yer yemesin */
 .clip-orig {
-  display: block;
-  margin-top: 2px;
+  margin: 0 0 6px;
   font-size: 13.5px;
   line-height: 1.3;
   color: var(--muted);
 }
 
 .clip-summary {
-  display: block;
-  margin-top: 5px;
+  margin: 0;
   font-size: 15px;
   line-height: 1.45;
   color: var(--ink-2);

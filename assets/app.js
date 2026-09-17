@@ -4,7 +4,11 @@
 
   var q = document.getElementById("q");
   var none = document.getElementById("noresults");
-  var entries = Array.prototype.slice.call(document.querySelectorAll(".entry"));
+  // arşivde .entry kartları, kupür sayfasında .clip satırları — ikisi de data-search taşır
+  var rows = Array.prototype.slice.call(document.querySelectorAll("[data-search]"));
+  // duruş hâli HTML'de yazılı; süzme bitince oraya dönmek için bir kez okunuyor
+  var folds = Array.prototype.slice.call(document.querySelectorAll("details"));
+  var resting = folds.map(function (el) { return el.open; });
 
   function norm(s) {
     return (s || "").toLocaleLowerCase("tr").replace(/ı/g, "i").replace(/İ/g, "i");
@@ -14,10 +18,20 @@
     var term = norm(q ? q.value.trim() : "");
     var shown = 0;
 
-    entries.forEach(function (el) {
+    if (!term) folds.forEach(function (el, i) { el.open = resting[i]; });
+
+    rows.forEach(function (el) {
       var visible = !term || norm(el.getAttribute("data-search")).indexOf(term) !== -1;
       el.hidden = !visible;
-      if (visible) shown++;
+      if (!visible) return;
+      shown++;
+      // Eşleşme özetin içinde olabilir, üstelik satır kapalı bir bölümün içinde
+      // durabilir: satırı ve onu saran bölümleri aç, temizlenince hepsi geri döner.
+      if (term) {
+        for (var p = el; p; p = p.parentElement) {
+          if (p.tagName === "DETAILS") p.open = true;
+        }
+      }
     });
 
     if (none) none.hidden = shown !== 0;

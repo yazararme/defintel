@@ -423,8 +423,14 @@ def load_news():
     return days
 
 
-def clip_html(item, day, cited):
-    """Tüm satır tek bağlantı: başlık + en fazla üç jetonluk meta."""
+def clip_html(item, day, cited, open_summary=False):
+    """Özetli satır açılır bir öğe, özetsiz satır tek bağlantı.
+
+    Özet, İngilizce makaleyi *açmamak* için var; o yüzden özetli satırın birincil
+    eylemi "özeti oku" oluyor ve kaynak bağlantısı gövdeye iniyor — iki hedefi olan
+    bir yüzey tek bağlantı olamaz. Duruş hâlinde iki anatomi neredeyse özdeş görünür;
+    farkı chevronun varlığı söyler.
+    """
     meta = [html.escape(item.get("source", ""))]
     if norm_url(item.get("url")) in cited:
         meta.append('<span class="clip-cited">Brifingde</span>')
@@ -432,20 +438,46 @@ def clip_html(item, day, cited):
         meta.append(tr_date(item["published"]))
     if item.get("also"):
         meta.append(f'+{len(item["also"])}')
+
+    url = html.escape(item["url"], quote=True)
+    title = html.escape(item.get("title_tr") or item["title"])
+    summary = item.get("summary_tr")
+    # özet metni de aranabilir olmalı, yoksa yalnızca özette geçen bir ad bulunamaz
+    haystack = html.escape(
+        " ".join([item.get("title_tr") or "", item["title"], item.get("source", ""), summary or ""])
+    )
+    row = (
+        f'<span class="clip-title">{title}</span>'
+        f'<span class="clip-meta">{" · ".join(meta)}</span>'
+    )
+
+    if not summary:
+        return (
+            f'<li class="clip" data-search="{haystack}">'
+            f'<a href="{url}" target="_blank" rel="noopener">{row}</a></li>'
+        )
+
+    # İngilizce başlık bir doğrulama öğesi, tarama öğesi değil: gövdede duruyor.
+    orig = (
+        f'<p class="clip-orig">{html.escape(item["title"])}</p>'
+        if item.get("title_tr") else ""
+    )
     return (
-        '<li class="clip">'
-        f'<a href="{html.escape(item["url"], quote=True)}" target="_blank" rel="noopener">'
-        f'<span class="clip-title">{html.escape(item.get("title_tr") or item["title"])}</span>'
-        + (f'<span class="clip-orig">{html.escape(item["title"])}</span>'
-           if item.get("title_tr") else "")
-        + (f'<span class="clip-summary">{html.escape(item["summary_tr"])}</span>'
-           if item.get("summary_tr") else "")
-        + f'<span class="clip-meta">{" · ".join(meta)}</span></a></li>'
+        f'<li><details class="clip"{" open" if open_summary else ""} data-search="{haystack}">'
+        f"<summary>{row}</summary>"
+        f'<div class="clip-body">{orig}'
+        f'<p class="clip-summary">{html.escape(summary)}</p>'
+        f'<a class="entry-go" href="{url}" target="_blank" rel="noopener">Kaynağa git ↗</a>'
+        "</div></details></li>"
     )
 
 
-def clip_list(rows, day, cited):
-    return '<ul class="clips">' + "".join(clip_html(r[2], day, cited) for r in rows) + "</ul>"
+def clip_list(rows, day, cited, open_summary=False):
+    return (
+        '<ul class="clips">'
+        + "".join(clip_html(r[2], day, cited, open_summary) for r in rows)
+        + "</ul>"
+    )
 
 
 def news_section(name, rows, day, cited):
@@ -522,7 +554,9 @@ def build_news_page(day, data, prev_day, next_day, has_report, cited):
         '<section class="highlights" id="one-cikanlar">'
         '<h2 class="kicker">Öne çıkanlar'
         f' <span class="kicker-count num">{len(top)}</span></h2>'
-        + clip_list(top, day, cited)
+        # Özetin değeri ekrandaki kalem sayısıyla ters orantılı: burada okunuyor,
+        # kategori taramasında satır başına gürültü oluyor.
+        + clip_list(top, day, cited, open_summary=True)
         + "</section>"
     ]
     for name, rows in present:
@@ -562,6 +596,9 @@ def build_news_page(day, data, prev_day, next_day, has_report, cited):
     <h1 class="report-title">Medya takibi · {tr_date(day)}</h1>
     <p class="news-stat num">{stat}</p>
   </div>
+  <div class="controls">
+    <input class="search" id="q" type="search" placeholder="Ara: başlık, kaynak ya da özet…" autocomplete="off">
+  </div>
   <nav class="devnav catbar" id="catbar" aria-label="Kategoriler">
     <div class="devnav-track">{chips}</div>
   </nav>
@@ -569,6 +606,7 @@ def build_news_page(day, data, prev_day, next_day, has_report, cited):
     <aside class="rail news-rail">{rail}</aside>
     <div class="news-column">
       {"".join(body) if items else '<p class="empty">Bu gün için kayıt yok.</p>'}
+      <p class="empty" id="noresults" hidden>Bu aramayla eşleşen kupür yok.</p>
     </div>
   </div>
 </main>

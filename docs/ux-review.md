@@ -610,3 +610,144 @@ Arayüzde (rapor gövdesi dışında) şirket adının geçtiği ya da geçebile
 
 Kontrol: bu üç değişiklikten sonra üretilen HTML'de "MKE" dizgisi **yalnızca** footer'daki sorumluluk reddinde
 ve rapor gövdesinde geçmeli — `grep -o "MKE" index.html | wc -l` = 1.
+
+---
+
+## Revizyon 3 — özet açılır kapanır
+
+Yeni alan: `summary_tr` (bugün 20 kalemde deneme, hedef ~110/gün). `title_tr` zaten 533 kalemin 519'unda var.
+Özet uzunluğu: min 245, medyan **405**, max 476 karakter.
+
+### R3.0 — Müşteri haklı; ama sebep üç katmanlı yapının çökmesi değil
+
+Ölçüm, 390px'te (`.wrap` iç genişliği 354px):
+
+| Satır parçası | Yükseklik |
+|---|---|
+| `clip-title` (16px/1.3, ~2 satır) | 42px |
+| `clip-orig` (13,5px/1.3, ~2 satır) | 35px |
+| `clip-summary` (15px/1.45, 405 karakter ≈ **8,3 satır**) | **180px** |
+| `clip-meta` + `padding` | 36px |
+| **Toplam** | **~293px** — 844px'lik telefonda içerik alanının %42'si |
+
+110 kalem × 293px = **~32.000px** kaydırma. Özetten önce aynı 110 kalem ≈ 8.600px'ti. Yani özet, varsayılan
+görünümü **3,7 katına** çıkarıyor.
+
+Üç katmanlı yapı *kalem sayısını* yönetiyordu (528 → ~110) ve o işi hâlâ yapıyor. Özet ise yeni bir eksen açtı:
+**kalem başına maliyet** (78px → 293px). Yapının bu eksende hiçbir kolu yok — dolayısıyla bu "dikişlerin
+görünür olması" değil, yapının hiç ölçmediği bir büyüklüğün 3,7 kat artması. Müşteri doğru şeyi görüyor.
+
+Ama asıl bulgu şu: **özetin değeri, ekrandaki kalem sayısıyla ters orantılı.** Yöneticinin Öne çıkanlar'daki
+12 kalemi için özet *ürünün kendisidir* — İngilizce makaleyi açmamasını sağlayan şey odur; 12 × 293px ≈ 5 ekran,
+kabul edilebilir. Analistin kategori taramasında ise aynı özet satır başına gürültüdür; o başlıkları
+*neyi okuyacağına karar vermek için* tarıyor. Dolayısıyla doğru cevap tek tip akordeon değil:
+
+> **Duruş hâli katmana bağlıdır:** Öne çıkanlar'da özetler **açık**, kategorilerde ve Genel kovasında **kapalı.**
+
+Bu, "mevcut uzunluk iyi" isteğini bozmadan karşılıyor: adamın gerçekten okuduğu yerde özet tam haliyle duruyor.
+
+### R3.1 — Mekanizma: `<details>`, kendi yazdığımız hiçbir durum yok
+
+`<details>`/`<summary>` bedavaya veriyor: odaklanabilir tetik, Enter/Space, `aria-expanded`'ın örtük karşılığı,
+ekran okuyucuda "açılır öğe, kapalı/açık" duyurusu, JS kapalıyken çalışma. Sayfada zaten iki örneği var
+(`.more`, `.general`). Yeni JS yazılmaz.
+
+### R3.2 — Dokunma çatışması: satır artık bağlantı değil, açıcıdır
+
+Bugün `<li class="clip">` tamamen tek bir `<a href="…" target="_blank">`. İçine açıcı koymak iç içe bağlantı
+demek — hem geçersiz hem belirsiz. Çatışmayı **sıklıkla** çözüyorum: özet zaten *makaleyi açmamak için* var.
+Kaynak İngilizce/Lehçe/Rusça, yeni sekmede açılıyor ve okuyucuyu uygulamadan çıkarıyor; özet ise ürünün kendisi.
+O hâlde satırın birincil eylemi "özeti oku", ikincil eylemi "kaynağa git"tir.
+
+**Karar:** `summary_tr` taşıyan satır `<details class="clip">` olur; `<summary>` başlık + meta taşır, gövde
+özet + kaynak bağlantısını taşır. Bu, Revizyon 1'de arşiv kartına uygulanan ilkenin aynısı — *iki hedefi olan
+bir yüzey tek bağlantı olamaz* — yani site içinde tutarlı.
+
+```
+KAPALI (~78px, özetten önceki maliyetin aynısı)
+┌────────────────────────────────────────────┐
+│ DroneShield, ABD Ordusu ISV'lerinde C-UAS  │  summary > .clip-title
+│ kurulumunu tamamladı                       │  serif 16px/1.3 · --ink · clamp 3
+│ UNMANNED AIRSPACE · BRİFİNGDE           ▾  │  .clip-meta + ::after chevron
+└────────────────────────────────────────────┘
+
+AÇIK
+│ …aynı başlık…                              │
+│ DroneShield completes C-UAS installation…  │  .clip-orig · 13,5px · --muted
+│ DroneShield, JIATF-401 programı kapsamında │  .clip-summary · 15px/1.45 · --ink-2
+│ ABD Ordusu Piyade Takım Araçlarına…        │
+│ ┌──────────────────┐                       │
+│ │ KAYNAĞA GİT ↗    │                       │  .entry-go (Rev 1'den) · ≥40px
+│ └──────────────────┘                       │
+```
+
+- **`clip-orig` duruş hâlinden çıkar, gövdeye iner.** Türkçe başlığın İngilizce eşi bir *doğrulama* öğesi,
+  tarama öğesi değil; kapalı satırda 35px yer yiyor ve hiçbir tarama kararına girmiyor.
+- **Chevron `clip-meta`'nın sonunda**, `--muted`, `::after` ile: `▾` kapalı, `▴` açık. Sağ üst köşede yüzen bir
+  ikon değil — "burada dahası var" bilgisinin yeri meta satırıdır. Tetik `<summary>`'nin tamamı (≥68px).
+- **`summary_tr` olmayan satır bugünkü `<a>` olarak kalır** — chevronsuz, tek dokunuşta kaynağa gider.
+  Boş açıcı gösterilmez. İki anatomi duruşta neredeyse özdeş görünür; farkı chevronun varlığı söyler.
+- `.clip > summary` ile `.more > summary` görsel olarak ayrışmalı: `.more` bir *bölüm* kontrolü
+  (mono, uppercase, tam genişlik), `.clip` bir *satır*.
+
+### R3.3 — Otomatik kapanma: hayır
+
+Müşterinin istediği "B açılınca A kapansın" davranışı iki nedenle reddediliyor:
+
+1. **Tarayan okuyucu karşılaştırır.** Bu sayfanın işi aynı olayın farklı kaynaklardaki hallerini (`also[]`),
+   ya da "Rakip Duyuruları"ndaki beş hamleyi yan yana tartmaktır. Tek-açık kuralı karşılaştırmayı imkânsız
+   kılar ve okuyucuya aynı satırı ikinci kez açtırır.
+2. **Kaydırma zıplaması.** Görüş alanının *üstünde* kalan A kapanınca sayfa parmağın altında ~215px yukarı
+   sıçrar — klasik akordeon hatası, uzun sayfada daha da kötü. Tek çözümü JS ile kaydırma telafisi, o da kırılgan.
+
+Not: bu davranış artık JS'siz de mümkün — `<details name="clips">` (Chrome 120+, Safari 17.4+, Firefox 130+)
+tek-açık akordeon yapar. Bilerek kullanmıyoruz; aynı zıplama sorunu onda da var. Ama **karar tek öznitelikle
+geri alınabilir**: müşteri gördükten sonra ısrar ederse `name="clips"` eklemek yeterli.
+
+Asıl cevap şu: otomatik kapanma, kapalı duruş hâlinin zaten çözdüğü bir korkuyu çözüyor. Satırlar 78px'e
+indiğinde sayfa onun korktuğu gibi büyüyemez; beş özet açmak 5 × ~215px ekler, istediğinde kapatır.
+
+### R3.4 — Alternatif (2 satır kırpma + solma) neden seçilmedi
+
+- Özetler **iki cümle** ve ilk cümle tek başına ~200 karakter ≈ **4-5 satır**. 2 satırlık kırpma tam cümle
+  ortasından, üstelik sayı ve özel ad yoğun bir metinde keser — bu tür düzyazıda mümkün olan en kötü kesme.
+- Sorunu ancak yarılar: 110 × 2 satır ≈ 4.800px yine eklenir.
+- Solma (`linear-gradient(transparent, var(--paper))`) zayıf bir affordance ve zemin rengine bağlı — koyu temada
+  ve `--paper-2` zeminli bloklarda ayrıca ayarlanması gerekir.
+- Erişilebilir bir "devamı" tetiği için yine `<details>` ya da JS lazım; yani kırpma `<details>`'i ortadan
+  kaldırmıyor, üstüne biniyor.
+
+**Peek ihtiyacını Türkçe başlık zaten karşılıyor** — `title_tr` 519 kalemde var ve tam da bu iş için.
+
+### R3.5 — Masaüstü: aynı davranış
+
+Duruş hâli görünüm genişliğine göre değişmez. Sebep: `<details open>` bir öznitelik, CSS ile medya sorgusundan
+kontrol edilemez; JS ile ≥1000px'te açmak ise aynı URL'yi aynı kişinin iki cihazında farklı davrandırır ve
+açık/kapalı durumu düzenin değil okuyucunun kararıdır. Katman farkı (Öne çıkanlar açık, gerisi kapalı) işi
+zaten yapıyor ve iki cihazda da aynı. Masaüstünde tek fark ölçüden geliyor: 72ch sütunda 405 karakter
+~6 satıra iniyor, yani açmanın maliyeti kendiliğinden düşük.
+
+### R3.6 — Klavye ve ekran okuyucu
+
+`<details>` doğru kullanıldığında ek ARIA gerekmez. Üç kural:
+
+1. **`<summary>` içine `<a>` konmaz.** Kaynak bağlantısı gövdededir; bu hem iç içe etkileşimi hem SR'de
+   çift duyuruyu önler. (Tetik `<summary>`, hedef ayrı bir bağlantı — sekme sırası: özet tetiği → kaynak çipi.)
+2. Varsayılan üçgen `list-style: none` + `::-webkit-details-marker { display: none }` ile gizlenir, yerine
+   `::after` chevron gelir; öğe odaklanabilir kalır ve `:focus-visible { outline: 1px solid var(--brand);
+   outline-offset: 2px }` görünür olur.
+3. `role`, `tabindex`, elle `aria-expanded` **yazılmaz** — üçü de `<details>`'in kendi semantiğini bozar.
+
+### Uygulama listesi — Revizyon 3
+
+| # | Dosya | Değişiklik | Kabul testi |
+|---|---|---|---|
+| R3-P0-1 | `build.py` → `clip_html(item, day, cited, open_summary=False)` | `summary_tr` varsa satır `<details class="clip"{" open" if open_summary else ""}>` + `<summary>` (`clip-title` + `clip-meta`) + gövde (`clip-orig`, `clip-summary`, `<a class="entry-go" href=… target="_blank" rel="noopener">Kaynağa git ↗</a>`). `summary_tr` yoksa bugünkü `<a>` anatomisi aynen kalır. `clip-orig` artık duruş hâlinde değil. | 390px'te kapalı `.clip` yüksekliği ≤85px; açıkken özet ve kaynak çipi görünür; `summary_tr` olmayan satırda `<details>` ve chevron yok. |
+| R3-P0-2 | `build.py` → `clip_list` / `highlights` çağrıları | Öne çıkanlar bloğu `open_summary=True`, kategori ve Genel listeleri `open_summary=False` ile çağrılır. | `haberler/2026-09-17.html` içinde `<details class="clip" open` sayısı = Öne çıkanlar'daki özetli kalem sayısı; kategori listelerinde 0. |
+| R3-P0-3 | `assets/app.css` | Yeni `.clip > summary` (cursor:pointer, `list-style:none`, `::-webkit-details-marker{display:none}`, `padding:11px 0`, `:focus-visible` outline). `.clip-meta::after { content:" ▾" }` / `.clip[open] .clip-meta::after { content:" ▴" }`. `.clip-orig` `margin-top` gövde içi değere ayarlanır. `.clip > summary` ile `.more > summary` görsel olarak ayrışır. | Klavyeyle `Tab` → `<summary>` odaklanır ve görünür outline alır, `Enter`/`Space` açar/kapatır; VoiceOver "açılır öğe, kapalı" der. |
+| R3-P0-4 | `assets/app.css` | `.clip-title { -webkit-line-clamp: 3 }` duruş hâlinde korunur; `.clip[open] .clip-title` kırpma kaldırılır (açıkken tam başlık görünür). | 155 karakterlik en uzun başlık kapalıyken 3 satır, açıkken tam görünür. |
+| R3-P1-1 | `assets/app.js` → arama filtresi (R2/P2-2 ile birlikte) | Filtre etkinken eşleşen `.clip` `<details>`'i otomatik `open` yapılır ki eşleşme özette ise görünsün; filtre temizlenince eski hâle döner. | "Redback" araması sonucu eşleşen satırın özeti açık gelir; `Escape` sonrası tekrar kapanır. |
+| R3-P1-2 | `build.py` → `clip_html` | `summary_tr` varsa `data-search` haystack'ine özet metni de eklenir. | Yalnızca özette geçen bir kelime (ör. "JIATF") aramada o satırı bulur. |
+
+**Yapılmayacak:** `<details name="clips">` (tek-açık akordeon), 2 satır kırpma + solma, görünüm genişliğine
+bağlı duruş hâli, özet için ayrı JS durum yönetimi.
