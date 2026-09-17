@@ -23,12 +23,19 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install requests google-auth feedparser markdown pyyaml
+      - run: npm install -g @anthropic-ai/claude-code
       - env:
           GDRIVE_SA_KEY: ${{ secrets.GDRIVE_SA_KEY }}
           DRIVE_FOLDER_ID: 1Bqj-FeX9IwOD9na53Ze7RteepjxRCCGB
         run: |
           python3 scripts/collect_news.py --hours "${{ inputs.hours || '48' }}" \
             ${{ inputs.dry_run == true && '--dry-run' || '' }}
+      # Translation runs on the Claude subscription token, not an API key.
+      - if: github.event_name == 'schedule' || inputs.dry_run == false
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: python3 scripts/translate_news.py || echo "çeviri atlandı"
+
       - if: github.event_name == 'schedule' || inputs.dry_run == false
         run: |
           git status --porcelain data/news | grep -q . || exit 0
