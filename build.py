@@ -411,7 +411,11 @@ def rank_news(items, day, cited):
 def load_news():
     """One file per day, written by scripts/collect_news.py."""
     days = {}
+    # data/news also holds translations.json and the candidate lists; only the
+    # date-named files are days.
     for path in sorted(NEWS_DATA.glob("*.json")):
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", path.stem):
+            continue
         try:
             days[path.stem] = json.loads(path.read_text(encoding="utf-8"))
         except Exception as exc:
