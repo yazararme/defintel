@@ -34,6 +34,12 @@ jobs:
           git push
           echo "published=yes" >> "$GITHUB_OUTPUT"
 
+      # Structure check runs AFTER publishing on purpose: a report with a broken
+      # cross-reference still goes out, but the run fails so GitHub emails us.
+      - name: Check report structure
+        if: always()
+        run: python3 scripts/check_reports.py
+
       # Tell the push service a new report is out, so phones get a notification.
       - if: steps.publish.outputs.published == 'yes'
         env:

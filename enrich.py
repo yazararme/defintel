@@ -138,7 +138,11 @@ def link_citations(text, dev_ids):
             lambda m: f'<a class="xref" href="#k{m.group(1)}">[K{m.group(1)}]</a>',
             token,
         )
-        token = token.replace("bkz. EK", '<a class="xref" href="#ek">bkz. EK</a>')
+        token = re.sub(
+            r"(bkz\. EK|EK'te|EK'de|EK'e)",
+            lambda m: f'<a class="xref" href="#ek">{m.group(1)}</a>',
+            token,
+        )
         token = token.replace(
             "bkz. ALARMLAR", '<a class="xref" href="#alarmlar">bkz. ALARMLAR</a>'
         )
