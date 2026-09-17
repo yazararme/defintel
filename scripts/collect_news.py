@@ -214,6 +214,46 @@ def looks_defence(title):
     return any(has_term(text, term) for term in DEFENCE_TERMS)
 
 
+# The agent reads this file, so keep it small enough to be read whole and put
+# the categories it acts on first.
+CANDIDATE_ORDER = [
+    "MKE", "C-UAS ve Hava Savunma", "Topçu ve Mühimmat", "Rakip Duyuruları",
+    "İhale ve Sözleşmeler", "Deniz ve İnsansız Sistemler", "Hafif Silah ve Mayın",
+    "Tedarik Zinciri", "Politika ve Regülasyon", "Genel Savunma Gündemi",
+]
+CANDIDATE_LIMIT = 260
+
+
+def write_candidates(day, payload, by_category):
+    lines = [
+        f"# Aday başlıklar · {day}",
+        "",
+        f"{payload['scanned_sources']} kaynak tarandı, son {payload['window_hours']} saat, "
+        f"{payload['unique_items']} tekil başlık. Bu dosya en fazla {CANDIDATE_LIMIT} kalem taşır; "
+        f"tam liste: https://defintel.shadovi.com/haberler/{day}.html",
+        "",
+    ]
+    used = 0
+    for name in CANDIDATE_ORDER + sorted(set(by_category) - set(CANDIDATE_ORDER)):
+        items = by_category.get(name) or []
+        if not items or used >= CANDIDATE_LIMIT:
+            continue
+        room = CANDIDATE_LIMIT - used
+        lines.append(f"## {name} ({len(items)})")
+        for item in items[:room]:
+            extra = f" +{len(item['also'])} yayın" if item.get("also") else ""
+            lines.append(
+                f"- {item['title']} — {item['source']}, {item['published'] or '?'}"
+                f"{extra} — {item['url']}"
+            )
+        if len(items) > room:
+            lines.append(f"- … bu kategoride {len(items) - room} kalem daha var, tam listede.")
+        lines.append("")
+        used += min(len(items), room)
+    (OUT_DIR / f"{day}-aday.md").write_text("\n".join(lines), encoding="utf-8")
+    print(f"  · data/news/{day}-aday.md ({used} kalem)")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true", help="only report counts")
@@ -291,6 +331,8 @@ def main():
         print(f"  ! {name}: {error}")
 
     if not args.dry_run:
+        write_candidates(today, payload, by_category)
+
         OUT_DIR.mkdir(parents=True, exist_ok=True)
         (OUT_DIR / f"{today}.json").write_text(
             json.dumps(payload, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
