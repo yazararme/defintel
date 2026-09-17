@@ -235,7 +235,7 @@ def build_report(meta, body_html, iso, news_days=(), latest_news=None):
     if iso in news_days:
         rail.append(
             '<div class="rail-block"><span class="rail-label">Medya takibi</span>'
-            f'<a class="rail-value" href="../haberler/{iso}.html">O günün tam listesi →</a></div>'
+            f'<a class="rail-value" href="../haberler/{iso}.html">Günün tam listesi →</a></div>'
         )
 
     return (
@@ -316,7 +316,7 @@ def build_news_page(day, data, prev_day, next_day, has_report, latest_news):
     if prev_day:
         nav.append(f'<a class="backlink" href="{prev_day}.html">← {tr_date(prev_day)}</a>')
     if has_report:
-        nav.append(f'<a class="backlink" href="../reports/{day}.html">O günün brifingi →</a>')
+        nav.append(f'<a class="backlink" href="../reports/{day}.html">Günün brifingi →</a>')
     if next_day:
         nav.append(f'<a class="backlink" href="{next_day}.html">{tr_date(next_day)} →</a>')
 
