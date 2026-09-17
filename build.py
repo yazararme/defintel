@@ -438,6 +438,8 @@ def clip_html(item, day, cited):
         f'<span class="clip-title">{html.escape(item.get("title_tr") or item["title"])}</span>'
         + (f'<span class="clip-orig">{html.escape(item["title"])}</span>'
            if item.get("title_tr") else "")
+        + (f'<span class="clip-summary">{html.escape(item["summary_tr"])}</span>'
+           if item.get("summary_tr") else "")
         + f'<span class="clip-meta">{" · ".join(meta)}</span></a></li>'
     )
 
