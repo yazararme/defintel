@@ -21,6 +21,9 @@ import tempfile
 
 import requests
 
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
+import build  # noqa: E402 — the page's own ranking, so we summarise what is read first
+
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 # Pinned so a CLI default change can't silently alter output quality.
 MODEL = "sonnet"
@@ -123,7 +126,10 @@ def main():
     day = json.loads(day_file.read_text(encoding="utf-8"))
     cache = load(CACHE, {})
     items = day.get("items", [])
-    todo = [i for i in items if i["url"] not in cache][: args.limit]
+    # Rank exactly as the page does; otherwise the summaries land on whatever
+    # was published last, not on what the reader sees at the top.
+    ranked = [item for _, _, item in build.rank_news(items, args.date, build.cited_urls(args.date))]
+    todo = [i for i in ranked if i["url"] not in cache][: args.limit]
     print(f"{len(items)} kalem · özetlenecek {len(todo)}")
 
     fetched, failures = [], []
