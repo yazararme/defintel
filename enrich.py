@@ -170,6 +170,22 @@ def fold_appendix(text):
     )
 
 
+# The agent writes "MKE portföyü…" in the table headers. The site is MKE's but
+# does not need to shout it on every row; renaming at render keeps the prompt
+# untouched and is reversible.
+HEADER_RENAMES = {
+    "MKE portföyü için ne ifade ediyor": "Ürün portföyü için ne ifade ediyor",
+    "MKE portföyüne etkisi": "Ürün portföyüne etkisi",
+}
+
+
+def rename_headers(text):
+    for old, new in HEADER_RENAMES.items():
+        text = text.replace(f"<th>{old}</th>", f"<th>{new}</th>")
+        text = text.replace(f'data-label="{old}"', f'data-label="{new}"')
+    return text
+
+
 def enrich(text, developments):
     dev_ids = {str(d.get("id", "")).lower() for d in developments if d.get("id")}
     text = add_heading_anchors(text)
@@ -177,7 +193,7 @@ def enrich(text, developments):
     text = add_source_anchors(text)
     text = add_table_badges(text, dev_ids)
     text = link_citations(text, dev_ids)
-    return fold_appendix(text)
+    return fold_appendix(rename_headers(text))
 
 
 def nav(developments):
