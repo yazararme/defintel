@@ -210,13 +210,15 @@
 
   function paint(state) {
     if (!btn) return;
-    // when it is already on, the bell alone says so — the words were just noise
     label.textContent = {
-      on: "",
+      on: "Bildirimler açık",
       off: "Bildirimler",
       blocked: "Bildirimler kapalı",
       failed: "Bildirim kurulamadı",
     }[state];
+    // Açıkken zil tek başına yetiyor; etiket CSS'te görsel olarak gizleniyor ama
+    // DOM'da kalıyor, yoksa düğmenin erişilebilir adı yok olur.
+    btn.classList.toggle("notify--on", state === "on");
     btn.setAttribute("aria-pressed", state === "on" ? "true" : "false");
     btn.setAttribute("data-state", state);
     btn.title =

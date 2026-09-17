@@ -206,6 +206,36 @@ def daybar(kind, day, prev, nxt, cross_day, up=""):
 """
 
 
+def endnav(kind, day, prev, cross_day, cross_count=None, up=""):
+    """Sayfa sonundaki çıkış yolu.
+
+    `daybar` okumaya başlamadan önceki niyeti karşılıyor; okuyucu asıl niyetini
+    brifingi bitirdiği anda kuruyor ve orada yapışkan şerit çoktan kaybolmuş
+    oluyor. Aynı üç hedef, tam cümleyle.
+    """
+    same = "brifingi" if kind == "report" else "medya takibi"
+    other = "medya takibi" if kind == "report" else "brifing"
+    links = []
+    if prev:
+        links.append(f'<a class="endnav-go" href="{prev}.html">← {tr_date(prev)} {same}</a>')
+
+    if not cross_day:
+        links.append(f'<span class="endnav-go endnav-go--off">Bu gün için {other} yok</span>')
+    elif kind == "report":
+        links.append(
+            f'<a class="endnav-go" href="{up}haberler/{cross_day}.html">'
+            f"Bu günün medya takibi · {cross_count} başlık →</a>"
+        )
+    else:
+        links.append(f'<a class="endnav-go" href="{up}reports/{cross_day}.html">Bu günün brifingi →</a>')
+
+    links.append(f'<a class="endnav-go" href="{up}index.html">Tüm raporlar</a>')
+    return f"""<nav class="endnav" aria-label="Sayfa sonu">
+  <div class="wrap endnav-inner">{"".join(links)}</div>
+</nav>
+"""
+
+
 PROMPTS = """<div class="promptbar" id="installbar" hidden role="region" aria-label="Uygulama olarak yükle">
   <div class="wrap promptbar-inner">
     <p class="promptbar-text">
@@ -245,7 +275,7 @@ FOOT = """<footer class="foot">
 """
 
 
-def build_report(meta, body_html, iso, prev_day=None, next_day=None, news_days=()):
+def build_report(meta, body_html, iso, prev_day=None, next_day=None, news_counts=None):
     title = meta.get("title") or f"{tr_date(iso)} raporu"
 
     banner = (
@@ -255,7 +285,6 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None, news_days=(
     )
     # decision_by is explained inside the development it belongs to; a chip
     # under the title only repeated a date with no context.
-    deadline = ""
 
     # The day bar above already carries the date and the link to that day's
     # clippings, so the rail only repeats what the reader just read.
@@ -264,17 +293,19 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None, news_days=(
         f'<span class="rail-value num">{tr_date(iso, weekday=True)}</span></div>'
     ]
 
+    news_counts = news_counts or {}
+    cross_day = iso if iso in news_counts else None
+
     return (
         head(f"{title} — {SITE_NAME}", depth=1)
         + masthead(up="../")
-        + daybar("report", iso, prev_day, next_day, iso if iso in news_days else None, up="../")
+        + daybar("report", iso, prev_day, next_day, cross_day, up="../")
         + f"""<main class="wrap report">
   <div class="report-grid">
     <aside class="rail">{''.join(rail)}</aside>
     <article class="column">
       {banner}
       <h1 class="report-title">{html.escape(title)}</h1>
-      {deadline}
       {enrich.nav(meta.get("developments") or [])}
       <div class="prose">
 {body_html}
@@ -283,6 +314,7 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None, news_days=(
   </div>
 </main>
 """
+        + endnav("report", iso, prev_day, cross_day, news_counts.get(iso), up="../")
         + PROMPTS
         + f'<script src="../{asset("app.js")}" defer></script>\n'
         + FOOT
@@ -525,52 +557,55 @@ def build_news_page(day, data, prev_day, next_day, has_report, cited):
   </div>
 </main>
 """
+        + endnav("news", day, prev_day, day if has_report else None, up="../")
         + PROMPTS
         + f'<script src="../{asset("app.js")}" defer></script>\n'
         + FOOT
     )
 
 
-def entry_html(r):
-    rail = [f'<time class="datestamp num">{tr_date(r["date"])}</time>']
+def entry_html(r, news_counts):
+    day = r["date"]
+    rail = [f'<time class="datestamp num">{tr_date(day)}</time>']
     if r["alarm"]:
         rail.append('<span class="badge badge--alarm">Alarm</span>')
 
-    heads = [d for d in (r.get("developments") or [])
-             if str(d.get("home", "gelismeler")).lower() == "gelismeler"]
-    chips = ""
-    if heads:
-        shown = [html.escape(str(d.get("label") or d.get("id") or "")) for d in heads[:3]]
-        more = len(heads) - len(shown)
-        chips = (
-            '<div class="entry-chips">'
-            + "".join(f"<span>{t}</span>" for t in shown)
-            + (f"<span>+{more}</span>" if more > 0 else "")
-            + "</div>"
-        )
+    # İki yüzü olan bir günün seçicisi, yüzü de seçtirmek zorunda: kartın tamamı
+    # tek bağlantı olduğunda arşivden kupür listesine giden hiçbir yol yoktu.
+    count = news_counts.get(day)
+    clips = (
+        f'<a class="entry-go" href="haberler/{day}.html">Medya takibi · {count} →</a>'
+        if count is not None
+        else '<span class="entry-go entry-go--off">Medya takibi yok</span>'
+    )
 
+    # Gelişme etiketleri karttan kalktı; arama zayıflamasın diye haystack'te kalıyorlar.
+    labels = [str(d.get("label") or d.get("id") or "") for d in (r.get("developments") or [])]
     haystack = " ".join(
-        [r["date"], tr_date(r["date"]), tr_short(r["date"]), r.get("title", ""),
-         r.get("summary", "")] + [str(t) for t in r.get("tags", [])]
+        [day, tr_date(day), tr_short(day), r.get("title", ""), r.get("summary", "")]
+        + [str(t) for t in r.get("tags", [])] + labels
     ).lower()
 
-    return f"""<a class="entry" href="{r['path']}"
+    return f"""<article class="entry"
    data-tags="{html.escape('|'.join(str(t) for t in r.get('tags', [])))}"
    data-search="{html.escape(haystack)}">
   <div class="entry-rail">{''.join(rail)}</div>
   <div class="entry-main">
-    <h2 class="entry-title">{html.escape(r.get('title', ''))}</h2>
+    <h2 class="entry-title"><a href="{r['path']}">{html.escape(r.get('title', ''))}</a></h2>
     <p class="entry-summary">{html.escape(r.get('summary', ''))}</p>
-    {chips}
+    <div class="entry-nav">
+      <a class="entry-go" href="{r['path']}">Brifing →</a>
+      {clips}
+    </div>
   </div>
-</a>"""
+</article>"""
 
 
-def build_index(reports, version):
+def build_index(reports, version, news_counts):
     if not reports:
         body = '<p class="empty">Henüz rapor yok.</p>'
     else:
-        body = '<div class="feed">' + "".join(entry_html(r) for r in reports) + "</div>"
+        body = '<div class="feed">' + "".join(entry_html(r, news_counts) for r in reports) + "</div>"
         body += '<p class="empty" id="noresults" hidden>Bu filtreyle eşleşen rapor yok.</p>'
 
     return (
@@ -622,6 +657,8 @@ def main():
 
     news = load_news()
     news_days = sorted(news)
+    # kupür çipi o günün başlık sayısını taşıyor: dokunmak için somut bir sebep
+    news_counts = {day: data.get("unique_items", 0) for day, data in news.items()}
 
     # daybar komşuları için önce hangi günlerin gerçekten rapor verdiğini bil
     sources = []
@@ -642,7 +679,7 @@ def main():
                 meta, body_html, iso,
                 sources[i - 1][0] if i else None,
                 sources[i + 1][0] if i + 1 < len(sources) else None,
-                news_days,
+                news_counts,
             ),
             encoding="utf-8",
         )
@@ -691,7 +728,9 @@ def main():
                 f" · {hits} brifing atıflı)"
             )
 
-    (ROOT / "index.html").write_text(build_index(reports, version), encoding="utf-8")
+    (ROOT / "index.html").write_text(
+        build_index(reports, version, news_counts), encoding="utf-8"
+    )
     (ROOT / ".nojekyll").touch()
 
     print(f"  · index.html  ({len(reports)} rapor)")

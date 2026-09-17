@@ -432,3 +432,117 @@ bağlanmalı. `CACHE = "defintel-v14"` sabiti yalnızca `sw.js` kendisi değişi
 - Kalem silme. Analistin sözleşmesi "her şey burada"; yalnızca varsayılan görünürlük değişir.
 - Yeni renk, yeni font ailesi, yeni token, koyu/açık tema anahtarı.
 - Backend, arama indeksi, kullanıcı tercihi saklama (mevcut `localStorage` snooze anahtarları dışında).
+
+---
+
+## Revizyon 1 — kart gezinmesi ve son tarih
+
+P0 sonrası müşteri geri bildirimi (4 şikâyet + 1 karşı öneri) üzerine. Canlı sayfalar yeniden incelendi.
+
+### R1.0 — Gözlem: müşteri haklı, ama sebep sandığı sebep değil
+
+Arşivdeki **dört kartın dördü de aynı "9 Ekim" rozetini taşıyor** — çünkü `decision_by` aynı duran dış son
+tarihi (USAF pazar araştırması, G8) her gün frontmatter'a taşınıyor. Yani rozet günler arasında hiçbir fark
+üretmiyor, dört farklı günü birbirinin aynı gösteriyor.
+
+Karşı ürün bağlantısı konusunda da: **P1-5'teki `endnav` hiç uygulanmadı.** Bugün "Medya takibi →"
+sayfada *tek bir yerde* var — 3.000 kelimelik brifingin en üstünde, okumaya başladığın anda kaybolan
+yapışkan şeritte. Sezgiye aykırı gelmesinin sebebi bağlantının yanlış yerde olması değil, **tek yerde
+olması**: okuyucu niyeti üç ayrı anda kuruyor (okumaya başlamadan önce = arşiv kartı, okurken = `daybar`,
+okuyup bitirince = sayfa sonu) ve bugün bunlardan yalnızca biri karşılanıyor.
+
+### R1.1 — `decision_by`: yalnızca brifing gövdesinde kalır
+
+**Karar: arayüzden tamamen çekilir; `reports.json` alanı ve `status_of()` kullanımı aynen korunur.**
+Bir son tarih ancak *neyin* dolduğunu ve *kimin* sahibi olduğunu gördüğünde eyleme dönüşür; `deadline-chip`
+ile arşiv rozeti bu ikisini de atıp geriye yalın bir tarih bırakıyor — müşterinin "bunun neyle ilgisi var"
+sorusu birebir bu. Gövdedeki ALARMLAR bloğu ise doğru işi zaten yapıyor: *"Devam eden dış son tarih: ABD Hava
+Kuvvetleri'nin … yanıt süresi 9 Ekim 2026'da doluyor (bkz. G8) … [K9]"* — gelişme bağlantısı, kaynak ve durum
+bir arada. "Son N gün kalınca göster" varyantı da aynı yerden düşüyor: 8 Ekim'de kart yine yalnızca "9 Ekim"
+diyecek, neyin dolduğunu yine söylemeyecek; üstelik gerçekten kritik olduğu gün analist onu zaten ALARMLAR'a
+yazmış olacak. Kart düzeyinde işaretlenmeye değer tek durum `alarm` — onun da rozeti zaten var. Alan veride
+kalır (bugün `status` alanını besliyor); ileride gerekirse doğru biçim ham tarih değil, durum işaretidir.
+
+### R1.2 — `entry-chips` yerine ne gelir: kart iki kapılı olur
+
+**Karar: müşterinin modeli bu noktada daha doğru, `daybar` da yerinde kalır — ikisi çelişmiyor.**
+`daybar` bir günün *içinde* hareketi çözer (gün D'desin, D'nin öteki yüzünü istiyorsun); arşiv kartı ise
+güne *girişi* çözer. Bugün kartın tamamı tek bir `<a href="reports/…">` olduğu için arşivden kupür listesine
+giden hiçbir yol yok — önce brifingi açıp sonra `daybar`'ı bulmak gerekiyor. İlk incelemedeki
+"arşiv sadece gün seçicidir" ifadesi eksikti: **iki yüzü olan bir günün seçicisi, yüzü de seçtirmek zorunda.**
+
+Kart artık bütünüyle tıklanabilir olmaz — iki hedefi olan bir kartta tüm yüzeyi tek hedefe bağlamak yanlış
+dokunuşları garantiler. Başlık birincil bağlantıdır (375px'te 3 satır ≈ 80px'lik hedef), alt satırdaki iki
+etiketli bağlantı da forku görünür kılar. Geçersiz iç içe `<a>` ve overlay hilesi gerekmez.
+
+**Kart anatomisi — 375px**
+
+```
+┌──────────────────────────────────────────┐
+│ 17 EYLÜL 2026   [ALARM]                  │  rail · mono 11,5px · --ink-2
+│                                          │       alarm rozeti varsa; son tarih rozeti YOK
+│ Rusya'nın jet motorlu dron kullanımı     │  h2 > a · serif 21px/600/1.25 · --ink
+│ beş ayda altı katına çıktı; DVD 2026'da  │  line-clamp: 3 · BRİFİNGE GİDER
+│ araç üstü kısa menzilli hava savunma…    │
+│                                          │
+│ Yeni ihale ya da sözleşme kararı yok.    │  p · serif 16,5px · --ink-2
+│ Rusya Ağustos'ta yaklaşık 2.850 jet…     │  line-clamp: 3 · bağlantı DEĞİL
+│                                          │
+│ ┌──────────┐ ┌────────────────────────┐  │  entry-nav · mono 11px · 0.08em
+│ │BRİFİNG → │ │ MEDYA TAKİBİ · 528 →   │  │  kenarlıklı çip · min-height 40px
+│ └──────────┘ └────────────────────────┘  │  tek satıra sığar (≈283px < 339px)
+└──────────────────────────────────────────┘
+```
+
+- İki çip de gerçek `<a>`; `--brand` metin, `1px solid var(--rule-2)` kenar, `padding: 10px 12px`.
+- Kupür çipi **başlık sayısını taşır** (`data/news/D.json` → `unique_items`) — dokunmak için somut bir
+  sebep, boş bir etiket değil.
+- **Kupür listesi olmayan gün** (bugün 14–16 Eylül, dört kartın üçü):
+  `<span class="entry-go entry-go--off">Medya takibi yok</span>` — kenarlıksız, `--muted`, oksuz.
+  Gizlenmez: satır satır beliren/kaybolan bir affordance bozuk görünür, ayrıca kupür hattının hangi günden
+  itibaren çalıştığını dürüstçe belgeler. `daybar`'daki `--off` muamelesiyle birebir aynı.
+- **Masaüstü** yalnızca şunda ayrışır: `.entry` grid'i `172px rail + 1fr`'ye döner, tarih ve alarm rozeti
+  sol sütunda dikey yığılır, başlık 23px olur. `entry-nav` satırı birebir aynıdır — iki çip, aynı yerde,
+  `entry-summary`'nin altında. İkinci bir masaüstü düzeni tanımlanmaz.
+- Silinen `entry-chips` gelişme etiketleri **`data-search` haystack'ine eklenir**, yoksa arama zayıflar
+  (eski P2-4'ün yarısı buraya taşındı).
+
+### R1.3 — `daybar` kalır, üç şey değişir
+
+Konumu ve yapısı doğru; sorun tek başına olması. Üç düzeltme:
+
+1. **Karşı ürün bağlantısı çip olur.** Bugün `MEDYA TAKİBİ →` 11px uppercase mono, çıplak metin — başlık
+   gibi okunuyor. `1px solid var(--rule-2)` + `padding: 6px 10px` ile `.chip` diline girer; kenarlıklı şey
+   basılabilir okunur, çıplak büyük harf dizisi okunmaz.
+2. **`endnav` nihayet uygulanır** (P1-5 hiç çıkmamıştı). Sayfa sonunda tam cümle için yer var:
+   `← 16 Eylül brifingi` · `Bu günün medya takibi · 528 başlık →` · `Tüm raporlar`. Okuyucu niyeti asıl
+   burada kuruyor — brifingi bitirdiği anda.
+3. **Oklar aynen kalır.** `‹`/`›` etiketle değiştirilmez: 375px'te ortada tarih için ~86px, çipler için
+   ~120px gidiyor, gün adı yazacak yer yok; `aria-label` zaten doğru ve oklar ürün içinde kalıyor.
+   Anlaşılırlık sorunu okun kendisinde değil, tek affordance olmasındaydı — (1) ve (2) onu kapatıyor.
+
+### R1.4 — Bildirim düğmesi: açıkken yalnızca ikon
+
+**Karar: abone olunduğunda ikon-only, olunmadığında etiketli. Gizlenmez, taşınmaz.**
+Etiket bir kazanım metni — "böyle bir şey var, açabilirsin" — ve yalnızca kapalı durumda iş görüyor. Açıkken
+düğmenin tek görevi, nadiren ve bilinçli yapılan "kapat" eylemi için bulunabilir kalmak; `--ok` tonlu zil +
+`aria-pressed="true"` + `title` bunu karşılıyor. Tamamen gizlemek yanlış: iptal edilemeyen abonelik karanlık
+desendir. Başka yere (footer) taşımak daha da yanlış: **kapalı** durumda keşfedilemez hale gelir ki
+benimsemeyi belirleyen durum odur. Not: bu düğme aslında her sayfada değil, yalnızca `build_index()` içinde —
+yani açık durumun maliyeti tek sayfada tek satır, gizlemeye değecek bir kazanç yok.
+`blocked` durumu etiketini korur ("Bildirimler kapalı"), çünkü o durumun açıklanması gerekir.
+
+### Uygulama listesi — Revizyon 1
+
+| # | Dosya | Değişiklik | Kabul testi |
+|---|---|---|---|
+| R1-P0-1 | `build.py` → `entry_html(r, news_counts)` | Kart `<a class="entry">` yerine `<article class="entry">` olur; `entry-title` içine `<a href="{r['path']}">` girer. `decision_by` rozeti ve `entry-chips` bloğu tamamen silinir. Sonuna `<div class="entry-nav">` eklenir: `<a class="entry-go" href="{r['path']}">Brifing →</a>` + gün için kupür varsa `<a class="entry-go" href="haberler/{d}.html">Medya takibi · {n} →</a>`, yoksa `<span class="entry-go entry-go--off">Medya takibi yok</span>`. Gelişme etiketleri `data-search` haystack'ine eklenir. | `index.html` içinde `entry-chips` ve `Son tarih ·` dizgeleri hiç geçmez; 17 Eylül kartında `Medya takibi · 528 →`, 14/15/16 Eylül kartlarında `Medya takibi yok` görünür; kart başına tam olarak 3 `<a>` (başlık + iki çip, ikincisi devre dışıysa 2). |
+| R1-P0-2 | `build.py` → `main()` / `build_index()` | `news_counts = {day: data.get("unique_items", 0) for day, data in news.items()}` hesaplanır ve `build_index(reports, version, news_counts)` üzerinden `entry_html`'e geçer. | `python3 build.py` hatasız koşar; `index.html` içindeki sayı `data/news/2026-09-17.json`'daki `unique_items` ile birebir eşleşir. |
+| R1-P0-3 | `build.py` → `build_report()` | `deadline` değişkeni ve `{deadline}` yerleşimi silinir. `status_of()`, `reports.json`'daki `decision_by` ve `status` alanları **değişmez**. | Dört brifing sayfasının hiçbirinde `deadline-chip` sınıfı geçmez; `data/reports.json` içinde `"decision_by": "2026-10-09"` hâlâ vardır. |
+| R1-P0-4 | `assets/app.css` | `.entry-chips`, `.entry-chips span`, `.deadline-chip` ve alarm dışı `.badge` kuralları silinir (`.badge--alarm` kalır, `.badge` temel kuralı ona hizmet ettiği için korunur). `.entry:hover .entry-title` → `.entry-title a:hover`. `.entry-title a { color: inherit; text-decoration: none }`. Yeni `.entry-nav` (flex, gap 10px, margin-top 12px, wrap) ve `.entry-go` (mono 11px, `0.08em`, uppercase, `--brand`, `1px solid var(--rule-2)`, `padding: 10px 12px`, `min-height: 40px`) + `.entry-go--off { color: var(--muted); border-color: transparent; }`. | 375px'te iki `.entry-go` tek satıra sığar ve ikisinin de `getBoundingClientRect().height >= 40`; kart gövdesinde boş alana dokunmak hiçbir yere gitmez. |
+| R1-P0-5 | `assets/app.css` | `.daybar-link` çipleşir: `border: 1px solid var(--rule-2); padding: 6px 10px; border-radius: 2px`. `.daybar-link--off` kenarlığı `transparent` olur. `daybar` yüksekliği 48px'te kalır. | 375px'te `daybar` tek satır, taşma yok; `.daybar-link` görünür kenarlık taşır ve yüksekliği ≥32px. |
+| R1-P0-6 | `assets/app.js` → `paint()` + `assets/app.css` | `paint()` içine `btn.classList.toggle("notify--on", state === "on")` eklenir; `label.textContent` ataması aynen kalır (erişilebilir ad korunur). CSS: `.notify--on .notify-label { position:absolute; width:1px; height:1px; overflow:hidden; clip-path: inset(50%); }` ve `.notify--on { min-width:44px; min-height:44px; justify-content:center; }`. `blocked` durumu etiketli kalır. | Abone durumda `#notify` yalnızca zil gösterir, genişliği ≤48px, `aria-pressed="true"` ve erişilebilir adı hâlâ "Bildirimler açık"; abone değilken "Bildirimler" metni görünür. |
+| R1-P1-1 | `build.py` → yeni `endnav(kind, day, prev, cross_day, cross_count, up)` | Her iki sayfa tipinde `PROMPTS`'tan önce: `← {tr_date(prev)} brifingi` · `Bu günün medya takibi · {n} başlık →` (yoksa `Bu gün için medya takibi yok`, `--off`) · `Tüm raporlar`. `padding-bottom: 96px` ile promptbar'ın altında kalmaz. | Brifing sayfasının en altına inildiğinde promptbar'ın örtmediği üç bağlantı görünür; her biri ≥44px; kupür bağlantısı sayfanın kendi gününe gider. |
+| R1-P1-2 | `assets/app.js` → arşiv filtresi | `querySelectorAll(".entry")` seçicisi korunur (kart `<article class="entry">` olarak aynı sınıfı taşıdığı için değişiklik gerekmez) — yalnızca regresyon testi. | Arşivde "Redback" araması 17 Eylül kartını bulur, `Escape` temizler, `#noresults` doğru çalışır. |
+
+Not: `assets/` dosyaları `asset()` ile hash'lendiği için bu revizyonda da `sw.js` dokunulmaz.

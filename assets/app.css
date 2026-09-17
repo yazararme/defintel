@@ -159,19 +159,24 @@ a { color: var(--brand); text-underline-offset: 2px; }
 }
 .daybar-date:hover { color: var(--brand); }
 
+/* Kenarlıklı şey basılabilir okunur; çıplak büyük harf dizisi başlık gibi okunuyordu. */
 .daybar-link {
   display: flex;
   align-items: center;
-  height: 44px;
+  min-height: 32px;
   margin-left: auto;
+  padding: 6px 10px;
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--brand);
   text-decoration: none;
+  border: 1px solid var(--rule-2);
+  border-radius: 2px;
 }
-.daybar-link--off { color: var(--muted); }
+.daybar-link:hover { border-color: var(--brand); }
+.daybar-link--off { color: var(--muted); border-color: transparent; }
 
 /* ---------- controls ---------- */
 
@@ -219,9 +224,19 @@ a { color: var(--brand); text-underline-offset: 2px; }
 .notify:disabled { opacity: .5; cursor: default; }
 .notify-bell { flex: none; }
 .notify[aria-pressed="true"] { color: var(--ink); border-bottom-color: transparent; gap: 0; }
-.notify[aria-pressed="true"] .notify-label:empty { display: none; }
 .notify[aria-pressed="true"] .notify-bell { color: var(--ok); }
 .notify[data-state="blocked"] { color: var(--muted); cursor: default; }
+
+/* Abone olunduğunda etiket kazanım metni olmaktan çıkıyor; ekrandan kalkar ama
+   DOM'da kalır — iptal edilemeyen abonelik karanlık desen, adsız düğme de öyle. */
+.notify--on { min-width: 44px; min-height: 44px; justify-content: center; }
+.notify--on .notify-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
 
 /* ---------- section kickers ---------- */
 
@@ -252,10 +267,7 @@ a { color: var(--brand); text-underline-offset: 2px; }
   gap: 8px 32px;
   padding: 22px 0;
   border-bottom: 1px solid var(--rule);
-  color: inherit;
-  text-decoration: none;
 }
-.entry:hover .entry-title { text-decoration: underline; text-decoration-thickness: 1px; }
 
 .entry-rail {
   display: flex;
@@ -275,6 +287,8 @@ a { color: var(--brand); text-underline-offset: 2px; }
   letter-spacing: -0.005em;
   max-width: var(--measure);
 }
+.entry-title a { color: inherit; text-decoration: none; }
+.entry-title a:hover { text-decoration: underline; text-decoration-thickness: 1px; }
 
 .entry-summary {
   margin: 0 0 10px;
@@ -283,6 +297,38 @@ a { color: var(--brand); text-underline-offset: 2px; }
   font-size: 16.5px;
   line-height: 1.55;
 }
+
+.entry-title, .entry-summary {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Kartın iki kapısı: tüm yüzeyi tek hedefe bağlamak yanlış dokunuşu garantiliyordu. */
+.entry-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.entry-go {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 10px 12px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand);
+  text-decoration: none;
+  border: 1px solid var(--rule-2);
+  border-radius: 2px;
+}
+.entry-go:hover { border-color: var(--brand); }
+.entry-go--off { color: var(--muted); border-color: transparent; }
 
 /* ---------- report page ---------- */
 
@@ -386,7 +432,44 @@ a { color: var(--brand); text-underline-offset: 2px; }
 }
 .prose th:last-child, .prose td:last-child { padding-right: 0; }
 
+/* ---------- sayfa sonu gezinmesi ---------- */
+
+.endnav {
+  margin-top: 48px;
+  padding-bottom: 96px;   /* kurulum/bildirim çubuğu bu bağlantıları örtmesin */
+  border-top: 1px solid var(--rule);
+}
+
+/* .endnav-inner aynı zamanda .wrap: dar ekrandaki `padding` kısayolu buradaki
+   dikey değerleri ezerdi, o yüzden alt boşluk .endnav'ın üzerinde duruyor. */
+.endnav-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 18px;
+}
+
+.endnav-go {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 11px 14px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand);
+  text-decoration: none;
+  border: 1px solid var(--rule-2);
+  border-radius: 2px;
+}
+.endnav-go:hover { border-color: var(--brand); }
+.endnav-go--off { color: var(--muted); border-color: transparent; }
+
 /* ---------- foot ---------- */
+
+/* endnav zaten 96px boşluk bırakıyor; footer bir kez daha bırakmasın */
+body:has(.endnav) .foot { margin-top: 0; }
 
 .foot {
   margin-top: 60px;
@@ -516,7 +599,7 @@ a { color: var(--brand); text-underline-offset: 2px; }
   .pbtn { flex: 1; }
 }
 
-/* ---------- rapor başlığı: alarm ve son tarih ---------- */
+/* ---------- rapor başlığı: alarm bandı ---------- */
 
 .alarmbar {
   margin: 0 0 14px;
@@ -526,18 +609,6 @@ a { color: var(--brand); text-underline-offset: 2px; }
   color: var(--ink);
   font-size: 15.5px;
   line-height: 1.4;
-}
-
-.deadline-chip {
-  display: inline-block;
-  margin: 12px 0 0;
-  padding: 4px 10px;
-  border: 1px solid var(--rule-2);
-  font-family: var(--mono);
-  font-size: 11.5px;
-  letter-spacing: 0.06em;
-  color: var(--ink-2);
-  font-variant-numeric: tabular-nums;
 }
 
 /* ---------- gezinme şeridi ---------- */
@@ -653,7 +724,7 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
 /* ---------- kaynaklar ve ek ---------- */
 
 .prose li.source { font-size: 15.5px; line-height: 1.45; }
-.prose li.source a { word-break: break-word; }
+.prose li.source a { word-break: break-word; overflow-wrap: anywhere; }
 .background-tag { color: var(--muted); }
 
 .appendix {
@@ -684,22 +755,6 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
   color: var(--muted);
 }
 .badge--alarm { color: var(--alarm); border-color: var(--alarm); }
-
-.entry-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 10px;
-}
-.entry-chips span {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.04em;
-  padding: 3px 8px;
-  color: var(--muted);
-  background: var(--paper-2);
-  border-radius: 999px;
-}
 
 /* ---------- medya takibi ---------- */
 
