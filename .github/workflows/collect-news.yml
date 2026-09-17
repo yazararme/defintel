@@ -1,5 +1,7 @@
 name: collect-news
 on:
+  schedule:
+    - cron: '40 2 * * *'   # 05:40 Türkiye — ajanın 06:00 çalıştırmasından önce
   workflow_dispatch:
     inputs:
       hours:
@@ -25,9 +27,9 @@ jobs:
           GDRIVE_SA_KEY: ${{ secrets.GDRIVE_SA_KEY }}
           DRIVE_FOLDER_ID: 1Bqj-FeX9IwOD9na53Ze7RteepjxRCCGB
         run: |
-          python3 scripts/collect_news.py --hours "${{ inputs.hours }}" \
+          python3 scripts/collect_news.py --hours "${{ inputs.hours || '48' }}" \
             ${{ inputs.dry_run == true && '--dry-run' || '' }}
-      - if: inputs.dry_run == false
+      - if: github.event_name == 'schedule' || inputs.dry_run == false
         run: |
           git status --porcelain data/news | grep -q . || exit 0
           python3 build.py
