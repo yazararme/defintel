@@ -61,8 +61,12 @@ def claude(prompt):
         print(f"  ! claude çağrısı başarısız: {exc}")
         return None
     if run.returncode != 0:
-        detail = (run.stderr.strip() or run.stdout.strip())[:300]
-        print(f"  ! claude çıkış kodu {run.returncode}: {detail}")
+        envelope = load_json_text(run.stdout) or {}
+        detail = " | ".join(
+            str(envelope.get(k)) for k in ("subtype", "is_error", "result", "error")
+            if envelope.get(k) is not None
+        ) or (run.stderr.strip() or run.stdout.strip())
+        print(f"  ! claude çıkış kodu {run.returncode}: {detail[:400]}")
         return None
     envelope = load_json_text(run.stdout)
     if isinstance(envelope, dict):
@@ -99,6 +103,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", default=dt.datetime.now(dt.timezone.utc).date().isoformat())
     ap.add_argument("--batch", type=int, default=60)
+    ap.add_argument("--limit", type=int, help="yalnızca ilk N başlığı çevir (deneme)")
     args = ap.parse_args()
 
     day_file = NEWS_DIR / f"{args.date}.json"
@@ -110,6 +115,8 @@ def main():
     items = day.get("items", [])
 
     pending = [i for i in items if i["url"] not in cache]
+    if args.limit and args.limit > 0:
+        pending = pending[: args.limit]
     print(f"{len(items)} başlık · önbellekte {len(items) - len(pending)} · çevrilecek {len(pending)}")
 
     for start in range(0, len(pending), args.batch):
