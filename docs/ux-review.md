@@ -546,3 +546,67 @@ yani açık durumun maliyeti tek sayfada tek satır, gizlemeye değecek bir kaza
 | R1-P1-2 | `assets/app.js` → arşiv filtresi | `querySelectorAll(".entry")` seçicisi korunur (kart `<article class="entry">` olarak aynı sınıfı taşıdığı için değişiklik gerekmez) — yalnızca regresyon testi. | Arşivde "Redback" araması 17 Eylül kartını bulur, `Escape` temizler, `#noresults` doğru çalışır. |
 
 Not: `assets/` dosyaları `asset()` ile hash'lendiği için bu revizyonda da `sw.js` dokunulmaz.
+
+---
+
+## Revizyon 2 — isimlendirme
+
+### R2.0 — Önce bir düzeltme: tagline 375px'te zaten görünmüyor
+
+P0-3 ile `.tagline` `@media (max-width: 559px)` altında `display: none` oldu (`app.css:116`). Yani bu dizginin
+telefonda wordmark'ın yanına sığma derdi kalmadı; **asıl işi artık iki yerde:** `index.html`'in `<title>`'ı
+(tarayıcı sekmesi, yer imi) ve `manifest.webmanifest`'in `name` alanı (Android kurulum sayfası, uygulama
+listesi, uygulama bilgisi). Karar da buna göre verilmeli: "wordmark'ın yanında ne iyi durur" değil,
+**"bu şey bir uygulama listesinde nasıl adlanmalı"**.
+
+Bu yüzden "tagline'ı tamamen at" önerisi masada değil: masthead'den atılabilir (telefonda fiilen atılmış
+durumda) ama `<title>` ve `manifest.name` bir şey yazmak zorunda — çıplak "DEFINTEL" altı ay sonra ana
+ekrandaki yeşil ikonun ne olduğunu kimseye hatırlatmaz. Dizgi var olmak zorunda; soru yalnızca ne diyeceği.
+
+`noindex` açık olduğu için bu dizginin arama motoruyla işi yok. Maruz kaldığı yüzeyler: telefonun ana ekranı,
+uygulama değiştirici, kurulum sayfası ve omzunun üzerinden bakan kişi. "Bağırmasın" isteği tam olarak bu
+yüzeyler için anlamlı.
+
+### R2.1 — Tagline adayları
+
+| # | Aday | Uzunluk | Gerekçe |
+|---|---|---|---|
+| A | **Savunma pazarı · günlük bülten** | 30 | *Ne* + *hangi sıklıkta*, başka hiçbir iddia yok. "Bülten" Türkçe kurumsal kullanımda düz ve nötr bir kelime; ne "analiz" ne "stratejik" der, uygulama listesinde de kendini açıklar. |
+| B | Günlük savunma pazarı analizi | 29 | Değerle açılıyor, iyi okunuyor; ama "analiz" iddiası sitenin iki ürününden yalnızca birini karşılıyor — medya takibi sayfası makine üretimi, orada analiz yok. Masthead tüm siteyi adlandırdığı için fazla söz vermiş olur. |
+| C | Savunma pazarı günlüğü | 22 | En kısası ve en masthead'vari olanı; ama Türkçede "günlük" ismi önce *diary* çağrıştırıyor ve sıklığı A kadar net söylemiyor. |
+
+**Ship: A — "Savunma pazarı · günlük bülten".** Orta nokta wordmark'la aynı tipografik dili konuşuyor
+(`daybar` ve `clip-meta` zaten `·` ile ayırıyor), 30 karakter ≥560px'te wordmark'ın yanına rahat sığıyor,
+ve kurulum sayfasında tek başına okunduğunda da anlamlı: savunma pazarı, günlük.
+
+Kaçınılan kalıplar: "Savunma pazarı takibi" — "Medya takibi" nav etiketiyle çakışıyor, okuyucu ikisini
+karıştırır. "Her sabah masanızda", "sektörün nabzı" vb. — pazarlama tonu, bu okuyucu kitlesine yanlış ses.
+
+### R2.2 — Dizgi envanteri
+
+Arayüzde (rapor gövdesi dışında) şirket adının geçtiği ya da geçebileceği her yer:
+
+| Yer | Dizgi | Karar | Gerekçe |
+|---|---|---|---|
+| `build.py:38` `SITE_TAGLINE` → masthead `.tagline` | "MKE stratejik pazar istihbaratı" | **Değiştir** → "Savunma pazarı · günlük bülten" | R2.1. Tek kaynak; masthead ve `<title>` aynı sabitten besleniyor. |
+| `build.py:612` `head(f"{SITE_NAME} — {SITE_TAGLINE}")` → `index.html` `<title>` | aynı dizgi | **Kendiliğinden düzelir** | Sabit değişince sekme başlığı da düzelir; ayrı düzenleme gerekmez. |
+| `manifest.webmanifest:2` `"name"` | "DEFINTEL — MKE stratejik pazar istihbaratı" | **Değiştir** → "DEFINTEL — Savunma pazarı · günlük bülten" | En çok maruz kalan ikinci dizgi: Android kurulum sayfası ve uygulama bilgisi burayı gösterir. Ayrı dosyada olduğu için `SITE_TAGLINE` ile elle eşlenmeli — ikisi kolayca ayrışır. |
+| `manifest` `"short_name"` | "DEFINTEL" | **Kalsın** | Ana ekran etiketi; wordmark sabit. |
+| `build.py:161` `apple-mobile-web-app-title` | "DEFINTEL" | **Kalsın** | iOS ana ekran etiketi; aynı gerekçe. |
+| `build.py:300, 541` rapor ve medya sayfası `<title>` | "… — DEFINTEL" | **Kalsın** | Şirket adı geçmiyor; sekmede günün başlığı görünüyor, doğru davranış. |
+| `build.py:270` footer | "MKE'nin resmî görüşünü yansıtmaz." | **Kalsın** | Sabit. Ayrıca doğru yer: adın geçmesi *gereken* tek yüzey yasal sorumluluk reddidir. |
+| `build.py:329, 337` `NEWS_ORDER` / `NEWS_CORE` içindeki `"MKE"` kategorisi | kupür sayfasında `<h2 class="kicker">MKE</h2>` olarak render olur | **Görünen etiketi değiştir** → "Doğrudan ilgili" | Bugün 0 kalem düşüyor (`data/news/2026-09-17.json`), ama `collect_news.py` `MKE_TERMS` tuttuğu gün sayfaya büyük harflerle şirket adını basar — hem de en üstteki bölüm başlığı olarak. Veri anahtarı `"MKE"` kalsın (iki dosyada birden değişmesin), yalnızca render sırasında eşlensin — tablo başlıklarında uygulanan yöntemin aynısı. |
+| `sw.js:31-44` bildirim metni | rapor başlığı + tarih (+ `alarm_title`) | **Kalsın** | Şirket adı zaten geçmiyor. En savunmasız yüzey burası — bildirim kilit ekranında, toplantıda görünür — ve bugün doğru davranıyor; `body`'ye kurum adı eklemek cazip gelirse eklenmemeli. |
+| `build.py:209-234` `PROMPTS` kurulum/bildirim metinleri | "DEFINTEL'i uygulama olarak ekle.", "Yeni rapor çıkınca haber verelim mi?" | **Kalsın** | Şirket adı geçmiyor, ton zaten sade. |
+| `README.md` | "MKE" geçiyor | **Kapsam dışı** | Depo belgesi, arayüz değil. |
+
+### Uygulama listesi — Revizyon 2
+
+| # | Dosya | Değişiklik | Kabul testi |
+|---|---|---|---|
+| R2-P0-1 | `build.py:38` | `SITE_TAGLINE = "Savunma pazarı · günlük bülten"` | `python3 build.py` sonrası `grep -rl "stratejik pazar istihbaratı" . --include=*.html` hiçbir şey döndürmez; `index.html` `<title>` = `DEFINTEL — Savunma pazarı · günlük bülten`. |
+| R2-P0-2 | `manifest.webmanifest` | `"name": "DEFINTEL — Savunma pazarı · günlük bülten"` | Chrome DevTools → Application → Manifest'te `name` yeni dizgiyi gösterir; `short_name` hâlâ `DEFINTEL`. |
+| R2-P1-1 | `build.py` → `build_news_page()` | Kategori başlığı yazılırken görünen etiket eşlemesi: `NEWS_LABELS = {"MKE": "Doğrudan ilgili"}`, `NEWS_LABELS.get(name, name)`. Veri anahtarı ve `collect_news.py` değişmez. | `MKE` kategorisinde en az bir kalem bulunan bir günde kupür sayfası `<h2 class="kicker">Doğrudan ilgili` basar; `NEWS_ORDER` sıralaması (en üstte) korunur. |
+
+Kontrol: bu üç değişiklikten sonra üretilen HTML'de "MKE" dizgisi **yalnızca** footer'daki sorumluluk reddinde
+ve rapor gövdesinde geçmeli — `grep -o "MKE" index.html | wc -l` = 1.
