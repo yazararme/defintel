@@ -17,6 +17,7 @@ import pathlib
 import re
 import subprocess
 import sys
+import tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 NEWS_DIR = ROOT / "data" / "news"
@@ -45,17 +46,23 @@ def load(path, default):
 
 
 def claude(prompt):
-    """One `claude -p` call. Returns the assistant's text, or None on failure."""
+    """One `claude -p` call. Returns the assistant's text, or None on failure.
+
+    Runs from a scratch directory: inside a repo the CLI wants to establish
+    trust for the project first, which it cannot do without a terminal.
+    """
     try:
         run = subprocess.run(
-            ["claude", "-p", prompt, "--output-format", "json"],
-            capture_output=True, text=True, timeout=600,
+            ["claude", "-p", prompt, "--output-format", "json",
+             "--dangerously-skip-permissions"],
+            capture_output=True, text=True, timeout=600, cwd=tempfile.gettempdir(),
         )
     except (OSError, subprocess.TimeoutExpired) as exc:
         print(f"  ! claude çağrısı başarısız: {exc}")
         return None
     if run.returncode != 0:
-        print(f"  ! claude çıkış kodu {run.returncode}: {run.stderr.strip()[:200]}")
+        detail = (run.stderr.strip() or run.stdout.strip())[:300]
+        print(f"  ! claude çıkış kodu {run.returncode}: {detail}")
         return None
     envelope = load_json_text(run.stdout)
     if isinstance(envelope, dict):
