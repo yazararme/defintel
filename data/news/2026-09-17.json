@@ -2,18 +2,18 @@
  "date": "2026-09-17",
  "window_hours": 48,
  "scanned_sources": 66,
- "failed_sources": 16,
- "collected_items": 573,
- "unique_items": 528,
+ "failed_sources": 17,
+ "collected_items": 539,
+ "unique_items": 535,
  "categories": {
-  "C-UAS ve Hava Savunma": 77,
-  "Deniz ve İnsansız Sistemler": 17,
-  "Genel Savunma Gündemi": 351,
+  "C-UAS ve Hava Savunma": 71,
+  "Deniz ve İnsansız Sistemler": 15,
+  "Genel Savunma Gündemi": 374,
   "Hafif Silah ve Mayın": 2,
-  "Politika ve Regülasyon": 8,
-  "Rakip Duyuruları": 33,
+  "Politika ve Regülasyon": 6,
+  "Rakip Duyuruları": 30,
   "Topçu ve Mühimmat": 20,
-  "İhale ve Sözleşmeler": 20
+  "İhale ve Sözleşmeler": 17
  },
  "items": [
   {
@@ -149,6 +149,61 @@
    "also": []
   },
   {
+   "title": "RAF to fight above Britain in huge air defence exercise",
+   "url": "https://ukdefencejournal.org.uk/raf-to-fight-above-britain-in-huge-air-defence-exercise/",
+   "source": "UK Defence Journal",
+   "country": "GB",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "C-UAS ve Hava Savunma",
+   "also": []
+  },
+  {
+   "title": "Falklands Typhoon fighters to be swapped for later aircraft",
+   "url": "https://ukdefencejournal.org.uk/falklands-typhoon-fighters-to-be-swapped-for-later-aircraft/",
+   "source": "UK Defence Journal",
+   "country": "GB",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Rutte says Europe must take greater NATO security burden",
+   "url": "https://ukdefencejournal.org.uk/rutte-says-europe-must-take-greater-nato-security-burden/",
+   "source": "UK Defence Journal",
+   "country": "GB",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "UK again rules out compulsory military service",
+   "url": "https://ukdefencejournal.org.uk/uk-again-rules-out-compulsory-military-service/",
+   "source": "UK Defence Journal",
+   "country": "GB",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Royal Navy ice patrol ship replacement still undecided",
+   "url": "https://ukdefencejournal.org.uk/royal-navy-ice-patrol-ship-replacement-still-undecided/",
+   "source": "UK Defence Journal",
+   "country": "GB",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
    "title": "Babcock reports strong demand across defence markets",
    "url": "https://ukdefencejournal.org.uk/babcock-reports-strong-demand-across-defence-markets/",
    "source": "UK Defence Journal",
@@ -168,6 +223,248 @@
    "tier": "A",
    "published": "2026-09-17",
    "category": "C-UAS ve Hava Savunma",
+   "also": []
+  },
+  {
+   "title": "Ukraine's economy loses $22-$44 mln per hour during air raid downtime — minister",
+   "url": "https://tass.com/economy/2189171",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Russia won’t go for truce without tackling root causes of Ukraine crisis — envoy to OSCE",
+   "url": "https://tass.com/politics/2189169",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Iran’s UN mission objects to US designation for IAEA Board membership",
+   "url": "https://tass.com/world/2189163",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Iran summons German ambassador over alleged interference in domestic affairs",
+   "url": "https://tass.com/world/2189161",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Russia now has every right to end Ukrainian conflict on its terms — Brazilian expert",
+   "url": "https://tass.com/world/2189157",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Russia says report on Bucha falsification to be submitted to international courts",
+   "url": "https://tass.com/politics/2189155",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Iran proposes suspending IAEA Board membership for US — statement",
+   "url": "https://tass.com/world/2189153",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Russian Emergencies Ministry Il-76 crew honored in Serbia for fighting wildfires",
+   "url": "https://tass.com/world/2189151",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Russia presents report proving Kiev staged Bucha incident",
+   "url": "https://tass.com/society/2189149",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Azov militants passed off as civilians allegedly killed in Bucha — Ukraine tribunal",
+   "url": "https://tass.com/society/2189147",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Bank of Russia raises dollar exchange rate to 84.5 rubles for September 18",
+   "url": "https://tass.com/economy/2189145",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Bank of Russia purchases yuan worth $23.6 mln with settlements on September 16",
+   "url": "https://tass.com/economy/2189143",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Up to 3% of Russians with bank accounts expected to use digital ruble by 2027 — lawmaker",
+   "url": "https://tass.com/economy/2189141",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Russian embassies abroad subjected to extreme pressure ahead of elections — Zakharova",
+   "url": "https://tass.com/politics/2189139",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Preparation of Akkuyu NPP Unit 1’s control system for pre-commissioning begins",
+   "url": "https://tass.com/economy/2189135",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "UN Secretariat to spend long time washing away disgrace over Bucha provocation — diplomat",
+   "url": "https://tass.com/politics/2189133",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Forty Russian museums to hold exhibitions on Crimean Scythian gold collection",
+   "url": "https://tass.com/society/2189129",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Russia, China can help establish global military tech rules — expert",
+   "url": "https://tass.com/world/2189123",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Russia says UN upholds West, Kiev’s position on Bucha, rather than investigating",
+   "url": "https://tass.com/politics/2189121",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Representatives of 29 nations consult on establishing SCO Development Bank",
+   "url": "https://tass.com/economy/2189119",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Russian diplomat says neither West nor UN sends lists of names of Bucha incident victims",
+   "url": "https://tass.com/politics/2189117",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Bucha falsification was not Kiev first 'myth built on blood' — Kherson legislator",
+   "url": "https://tass.com/politics/2189115",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
    "also": []
   },
   {
@@ -1029,204 +1326,6 @@
    "also": []
   },
   {
-   "title": "India to take necessary measures following US adoption of Russia-Iran sanctions act — MFA",
-   "url": "https://tass.com/world/2188769",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-17",
-   "category": "Politika ve Regülasyon",
-   "also": []
-  },
-  {
-   "title": "Zaporozhye NPP chief urges world not to treat attacks on nuclear sites as norm",
-   "url": "https://tass.com/society/2188771",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-17",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "Ukraine becomes bankrupt country, has no reserves to recover — Russian senator",
-   "url": "https://tass.com/politics/2188767",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-17",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "Russia’s chief election official to report on readiness for parliamentary vote",
-   "url": "https://tass.com/politics/2188765",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-17",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "Fire breaks out at oil refinery near Yaroslavl after drone attack",
-   "url": "https://tass.com/emergencies/2188763",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-17",
-   "category": "C-UAS ve Hava Savunma",
-   "also": []
-  },
-  {
-   "title": "Trump plans to hold meeting on Iran on UN General Assembly sidelines — Axios",
-   "url": "https://tass.com/world/2188753",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-17",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "North Korea’s nuclear status is irreversible — politician",
-   "url": "https://tass.com/world/2188751",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-17",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "Japanese government tenders technical resignation before reshuffle",
-   "url": "https://tass.com/world/2188749",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-17",
-   "category": "İhale ve Sözleşmeler",
-   "also": []
-  },
-  {
-   "title": "US may stop trade with EU if Canada becomes associated member — Trump",
-   "url": "https://tass.com/world/2188747",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-17",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "North Korea to remain nuclear power that resists enemy — deputy defense minister",
-   "url": "https://tass.com/world/2188741",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-17",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "US, allies boost potential for nuclear war — North Korea’s deputy defense minister",
-   "url": "https://tass.com/world/2188733",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-17",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "Pacific fleet’s Ufa submarine fires Kalibr missiles during drills",
-   "url": "https://tass.com/defense/2188729",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-17",
-   "category": "Deniz ve İnsansız Sistemler",
-   "also": []
-  },
-  {
-   "title": "Crew-13 mission comprising Russian cosmonaut Teteryatnikov due in early October — NASA",
-   "url": "https://tass.com/science/2188727",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-17",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "UK chief of Defense Staff says Russia noticeably boosted its military might",
-   "url": "https://tass.com/world/2188725",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-17",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "Canada formally applies to join northern Europe’s military initiative",
-   "url": "https://tass.com/world/2188723",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-17",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "Trump believes Iran seeks deal with US but not yet ready for it",
-   "url": "https://tass.com/world/2188721",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-17",
-   "category": "İhale ve Sözleşmeler",
-   "also": []
-  },
-  {
-   "title": "US orbital weapon becomes part of arsenal against Russian, Chinese satellites — Bloomberg",
-   "url": "https://tass.com/world/2188717",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-17",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "Russian companies in talks with Japan, S. Korea on resuming direct flights — diplomat",
-   "url": "https://tass.com/economy/2188715",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-17",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
    "title": "Schwerer Waffenträger Infanterie: Ausbildungsstart in Bergen",
    "url": "https://soldat-und-technik.de/2026/09/taktik-ausbildung/50013/schwerer-waffentraeger-infanterie-2/",
    "source": "Soldat und Technik",
@@ -1271,6 +1370,17 @@
    "also": []
   },
   {
+   "title": "ABD İstihbaratı Suudi F-35 Satışına Şerh Düştü",
+   "url": "https://www.savunmasanayist.com/abd-istihbarati-suudi-f-35-satisina-serh-dustu/",
+   "source": "SavunmaSanayiST",
+   "country": "TR",
+   "lang": "tr",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
    "title": "Aşil Kalkanı’nda Çelişki: Yunanistan’dan Farklı Açıklama",
    "url": "https://www.savunmasanayist.com/asil-kalkaninda-celiski-yunanistandan-farkli-aciklama/",
    "source": "SavunmaSanayiST",
@@ -1290,6 +1400,17 @@
    "tier": "A",
    "published": "2026-09-17",
    "category": "Deniz ve İnsansız Sistemler",
+   "also": []
+  },
+  {
+   "title": "Rare honour: Trump will greet Xi at Joint Base Andrews, not just White House",
+   "url": "https://www.scmp.com/news/china/diplomacy/article/3367905/rare-honour-trump-will-greet-xi-andrews-not-just-white-house?utm_source=rss_feed",
+   "source": "SCMP (Çin)",
+   "country": "HK",
+   "lang": "en",
+   "tier": "C",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
    "also": []
   },
   {
@@ -1414,6 +1535,17 @@
    "also": []
   },
   {
+   "title": "TKMS ATLAS UK Awarded UK MOD NGCM Torpedo Defence System Contract",
+   "url": "https://www.navalnews.com/naval-news/2026/09/tkms-atlas-uk-awarded-uk-mod-ngcm-torpedo-defence-system-contract/",
+   "source": "Naval News",
+   "country": "FR",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Deniz ve İnsansız Sistemler",
+   "also": []
+  },
+  {
    "title": "Indonesia’s First Aircraft Carrier: Former Italian Ship ‘Garibaldi’ Reaches Domestic Waters",
    "url": "https://www.navalnews.com/naval-news/2026/09/indonesias-first-aircraft-carrier-former-italian-ship-garibaldi-reaches-domestic-waters/",
    "source": "Naval News",
@@ -1469,83 +1601,151 @@
    "also": []
   },
   {
-   "title": "한미 원팀 폭발물처리 ‘완벽 호흡’",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260918/19/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
-   "tier": "B",
-   "published": "2026-09-17",
-   "category": "Genel Savunma Gündemi",
-   "also": [
-    "Kookbang Ilbo",
-    "Kookbang Ilbo",
-    "Kookbang Ilbo",
-    "Kookbang Ilbo",
-    "Kookbang Ilbo",
-    "Kookbang Ilbo",
-    "Kookbang Ilbo",
-    "Kookbang Ilbo",
-    "Interfax",
-    "Interfax",
-    "Interfax",
-    "Interfax",
-    "Interfax",
-    "Interfax",
-    "Interfax",
-    "Interfax",
-    "Interfax",
-    "Interfax",
-    "Interfax",
-    "Interfax",
-    "Interfax",
-    "Interfax",
-    "Interfax",
-    "Interfax",
-    "Interfax",
-    "Interfax",
-    "Interfax",
-    "Kookbang Ilbo",
-    "Kookbang Ilbo",
-    "Kookbang Ilbo",
-    "Kookbang Ilbo",
-    "Kookbang Ilbo",
-    "Kookbang Ilbo",
-    "Kookbang Ilbo",
-    "Kookbang Ilbo",
-    "Kookbang Ilbo",
-    "Kookbang Ilbo",
-    "Kookbang Ilbo"
-   ]
-  },
-  {
-   "title": "국방재정 분야 AI 활용 업무혁신 공유",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260918/4/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
+   "title": "Спецпосланник президента США по Белоруссии провел переговоры с премьером Латвии",
+   "url": "https://www.interfax.ru/world/1116721",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
    "tier": "B",
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": []
   },
   {
-   "title": "[도약하는 지상군, 자랑스러운 K방산] 다족형 로봇과 함께 경계작전 이상 무",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260918/1/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
+   "title": "Аэропорт \"Жуковский\" работает по согласованию",
+   "url": "https://www.interfax.ru/moscow/1116720",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
    "tier": "B",
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
-   "also": [
-    "Kookbang Ilbo",
-    "Kookbang Ilbo"
-   ]
+   "also": []
+  },
+  {
+   "title": "Землетрясение магнитудой 6,5 произошло у Алеутских островов",
+   "url": "https://www.interfax.ru/world/1116719",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Президент Румынии предложил члену Европарламента Мурешану сформировать кабмин",
+   "url": "https://www.interfax.ru/world/1116718",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Зернотрейдер \"Родные поля\" взыскал с экс-владельца Ходыкина 24 млрд руб. дивидендов",
+   "url": "https://www.interfax.ru/russia/1116717",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "\"Дочка\" General Motors поставила Lockheed Martin первую партию компонентов для ракет Patriot",
+   "url": "https://www.interfax.ru/world/1116716",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "C-UAS ve Hava Savunma",
+   "also": []
+  },
+  {
+   "title": "Российский и французский дипломаты обсудили ситуацию на Украине",
+   "url": "https://www.interfax.ru/russia/1116715",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Один человек погиб, двое пострадали из-за падения обломков БПЛА в Саудовской Аравии",
+   "url": "https://www.interfax.ru/world/1116714",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "От Белого дома потребовали отчет об использовании доходов от венесуэльской нефти",
+   "url": "https://www.interfax.ru/world/1116712",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Представители Армении и США обсудили сотрудничество в сфере обороны",
+   "url": "https://www.interfax.ru/world/1116713",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Центральный Московский ипподром открылся после комплексной реконструкции",
+   "url": "https://www.interfax.ru/moscow/1116711",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
   },
   {
    "title": "Politico сообщает об обсуждении партией Мерца возможности смены канцлера Германии",
    "url": "https://www.interfax.ru/world/1116710",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "РФ и Узбекистан будут обмениваться опытом в предупреждении коррупции",
+   "url": "https://www.interfax.ru/russia/1116709",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "ОАЭ вернулись в пятерку самых популярных направлений для отдыха",
+   "url": "https://www.interfax.ru/business/1116708",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -1566,6 +1766,17 @@
    "also": []
   },
   {
+   "title": "Берлин направит истребители для усиления защиты Латвии на фоне инцидентов с БПЛА",
+   "url": "https://www.interfax.ru/world/1116706",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
    "title": "Ирландия отказалась от участия в \"Евровидении-2027\" из-за Израиля",
    "url": "https://www.interfax.ru/culture/1116704",
    "source": "Interfax",
@@ -1577,21 +1788,85 @@
    "also": []
   },
   {
-   "title": "Международные резервы РФ с 4 по 11 сентября увеличились на $4,7 млрд",
-   "url": "https://www.interfax.ru/business/1116696",
+   "title": "В Иркутской области ограничат выход людей в леса из-за медведей",
+   "url": "https://www.interfax.ru/russia/1116705",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
    "tier": "B",
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
-   "also": [
-    "Interfax"
-   ]
+   "also": []
   },
   {
-   "title": "Президент Азербайджана заявил о слабом влиянии ООН на протяжении последних 30 лет",
-   "url": "https://www.interfax.ru/world/1116692",
+   "title": "МИД не получил ответы от стран на ноты о безопасном голосовании для граждан РФ",
+   "url": "https://www.interfax.ru/russia/1116702",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Для аэропорта Геленджика отменили ограничения, для Калуги - ввели",
+   "url": "https://www.interfax.ru/russia/1116703",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "В Горловке в результате атаки БПЛА ранены двое взрослых и трое детей",
+   "url": "https://www.interfax.ru/russia/1116701",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Делегация РФ представит доклад о событиях в Буче на Генассамблее ООН",
+   "url": "https://www.interfax.ru/russia/1116700",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Бывший министр связи Никифоров заочно арестован по обвинению в мошенничестве",
+   "url": "https://www.interfax.ru/russia/1116699",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Власти РФ готовы помогать компенсировать издержки на защиту объектов при подтверждении вложений",
+   "url": "https://www.interfax.ru/russia/1116697",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "МВД отметило снижение преступности в России с начала года",
+   "url": "https://www.interfax.ru/russia/1116698",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -1766,6 +2041,17 @@
    "also": []
   },
   {
+   "title": "KAPLAN AP: First vehicle pre-delivery acceptance tests successfully completed",
+   "url": "https://euro-sd.com/2026/09/news/land/53880/kaplan-apc/",
+   "source": "European Security & Defence",
+   "country": "DE",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Topçu ve Mühimmat",
+   "also": []
+  },
+  {
    "title": "Team BOXER UK: British manufacturing at its best",
    "url": "https://euro-sd.com/2026/09/news/exclusive-news/53869/team-boxer-uk-british-manufacturing-at-its-best/",
    "source": "European Security & Defence",
@@ -1821,17 +2107,6 @@
    "also": [
     "EDR Magazine"
    ]
-  },
-  {
-   "title": "DroneShield Completes Installation and Acceptance of DroneSentry-X Mk2 Under U.S. JIATF-401 Program",
-   "url": "https://euro-sd.com/2026/09/news/cyber-coms/53814/droneshield-completes-installation-and-acceptance-of-dronesentry-x-mk2-under-u-s-jiatf-401-program/",
-   "source": "European Security & Defence",
-   "country": "DE",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-17",
-   "category": "Rakip Duyuruları",
-   "also": []
   },
   {
    "title": "Beweis F-35: Wie Stealth trotz Vernetzung funktioniert",
@@ -2034,6 +2309,17 @@
    "also": []
   },
   {
+   "title": "US Navy awards defense startup $200 million for Blackbeard hypersonic missile",
+   "url": "https://www.defensenews.com/news/your-navy/2026/09/17/us-navy-awards-defense-startup-200-million-for-blackbeard-hypersonic-missile/",
+   "source": "Defense News",
+   "country": "US",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "İhale ve Sözleşmeler",
+   "also": []
+  },
+  {
    "title": "UK must focus on the Atlantic, ‘foundation’ of Britain’s security: Navy chief",
    "url": "https://www.defensenews.com/global/europe/2026/09/17/uk-must-focus-on-the-atlantic-foundation-of-britains-security-navy-chief/",
    "source": "Defense News",
@@ -2078,12 +2364,67 @@
    "also": []
   },
   {
+   "title": "Lockheed Martin Fast-Tracks PAC-3® MSE Components in Less Than One Month in Partnership with GM Defense",
+   "url": "https://english.defensearabia.com/partnership-underscores-american-manufacturing-expertise/",
+   "source": "Defense Arabia",
+   "country": "AE",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Rakip Duyuruları",
+   "also": []
+  },
+  {
    "title": "Bell Commemorates First Production AH-1Z Aircraft for Nigeria",
    "url": "https://english.defensearabia.com/bell-commemorates-first-production-ah-1z-aircraft-for-nigeria/",
    "source": "Defense Arabia",
    "country": "AE",
    "lang": "en",
    "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Putin mobilizuje Rosjan przed wyborami. „Nasz wspólny wkład w zwycięstw",
+   "url": "https://defence24.pl/wojna-na-ukrainie-raport-specjalny-defence24/putin-mobilizuje-rosjan-przed-wyborami-nasz-wspolny-wklad-w-zwyciestw",
+   "source": "Defence24 (PL)",
+   "country": "PL",
+   "lang": "pl",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Kanada chce dołączyć do elitarnych europejskich sił szybkiego reagowania",
+   "url": "https://defence24.pl/polityka-obronna/kanada-chce-dolaczyc-do-elitarnych-europejskich-sil-szybkiego-reagowania",
+   "source": "Defence24 (PL)",
+   "country": "PL",
+   "lang": "pl",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Stanowcze słowa Vance’a o Izraelu. „Nie możemy pozwolić na podporządkowanie”",
+   "url": "https://defence24.pl/geopolityka/stanowcze-slowa-vancea-o-izraelu-nie-mozemy-pozwolic-na-podporzadkowanie",
+   "source": "Defence24 (PL)",
+   "country": "PL",
+   "lang": "pl",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Wiceszef MON zapowiada rozwój zdolności rażenia i satelitarnych Wojska Polskiego",
+   "url": "https://defence24.pl/polityka-obronna/wiceszef-mon-zapowiada-rozwoj-zdolnosci-razenia-i-satelitarnych-wojska-polskiego",
+   "source": "Defence24 (PL)",
+   "country": "PL",
+   "lang": "pl",
+   "tier": "A",
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": []
@@ -2463,6 +2804,28 @@
    "also": []
   },
   {
+   "title": "Danish F-35s make first Greenland landing during NATO Arctic Sentry mission with US and Canadian fighters operating across the region",
+   "url": "https://defence-industry.eu/danish-f-35s-make-first-greenland-landing-during-nato-arctic-sentry-mission-with-us-and-canadian-fighters-operating-across-the-region/",
+   "source": "Defence Industry Europe",
+   "country": "EU",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "U.S. Air Force to begin Boeing 737 Max 8 purchases under planned $250 million deal to expand transport and logistics capacity",
+   "url": "https://defence-industry.eu/u-s-air-force-to-begin-boeing-737-max-8-purchases-under-planned-250-million-deal-to-expand-transport-and-logistics-capacity/",
+   "source": "Defence Industry Europe",
+   "country": "EU",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "İhale ve Sözleşmeler",
+   "also": []
+  },
+  {
    "title": "Lockheed Martin receives first GM Defense-made PAC-3 MSE components just 22 days after signing production contract",
    "url": "https://defence-industry.eu/lockheed-martin-receives-first-gm-defense-made-pac-3-mse-components-just-22-days-after-signing-production-contract/",
    "source": "Defence Industry Europe",
@@ -2548,28 +2911,6 @@
    "tier": "A",
    "published": "2026-09-17",
    "category": "C-UAS ve Hava Savunma",
-   "also": []
-  },
-  {
-   "title": "DroneShield completes DroneSentry-X Mk2 installation on U.S. Infantry Squad Vehicles, establishing initial operational capability",
-   "url": "https://defence-industry.eu/droneshield-completes-dronesentry-x-mk2-installation-on-u-s-infantry-squad-vehicles-establishing-initial-operational-capability/",
-   "source": "Defence Industry Europe",
-   "country": "EU",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-17",
-   "category": "Rakip Duyuruları",
-   "also": []
-  },
-  {
-   "title": "Defender targets UK military vehicle tender and NATO market with three new Wolf Series II variants",
-   "url": "https://defence-industry.eu/defender-targets-uk-military-vehicle-tender-and-nato-market-with-three-new-wolf-series-ii-variants/",
-   "source": "Defence Industry Europe",
-   "country": "EU",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-17",
-   "category": "İhale ve Sözleşmeler",
    "also": []
   },
   {
@@ -2700,6 +3041,39 @@
    "country": "PK",
    "lang": "en",
    "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Lockheed reaches deal to boost production of secretive JATM missile",
+   "url": "https://breakingdefense.com/2026/09/lockheed-reaches-deal-to-boost-production-of-secretive-jatm-missile/",
+   "source": "Breaking Defense",
+   "country": "US",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "İhale ve Sözleşmeler",
+   "also": []
+  },
+  {
+   "title": "What the Pentagon is testing along the US-Mexico border",
+   "url": "https://breakingdefense.com/2026/09/what-the-pentagon-is-testing-along-the-us-mexico-border/",
+   "source": "Breaking Defense",
+   "country": "US",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Air Force seeks 737 MAX for VIP airlift",
+   "url": "https://breakingdefense.com/2026/09/air-force-seeks-737-max-for-vip-airlift/",
+   "source": "Breaking Defense",
+   "country": "US",
+   "lang": "en",
+   "tier": "A",
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": []
@@ -3081,61 +3455,6 @@
    "also": []
   },
   {
-   "title": "Babcock to explore building Ukraine-proven ground robots",
-   "url": "https://ukdefencejournal.org.uk/babcock-to-explore-building-ukraine-proven-ground-robots/",
-   "source": "UK Defence Journal",
-   "country": "GB",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-16",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "Aircraft carrier arrives at on the Clyde in Scotland",
-   "url": "https://ukdefencejournal.org.uk/aircraft-carrier-arrives-at-on-the-clyde-in-scotland/",
-   "source": "UK Defence Journal",
-   "country": "GB",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-16",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "Clyde maritime alliance launches with defence growth focus",
-   "url": "https://ukdefencejournal.org.uk/clyde-maritime-alliance-launches-with-defence-growth-focus/",
-   "source": "UK Defence Journal",
-   "country": "GB",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-16",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "British Army moves to restore long-range anti-tank strike",
-   "url": "https://ukdefencejournal.org.uk/british-army-moves-to-restore-long-range-anti-tank-strike/",
-   "source": "UK Defence Journal",
-   "country": "GB",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-16",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "Army to replace Watchkeeper with Ukraine-proven drone",
-   "url": "https://ukdefencejournal.org.uk/army-to-replace-watchkeeper-with-ukraine-proven-drone/",
-   "source": "UK Defence Journal",
-   "country": "GB",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-16",
-   "category": "C-UAS ve Hava Savunma",
-   "also": []
-  },
-  {
    "title": "How The Air Force Patched Up A Shrapnel-Damaged KC-135",
    "url": "https://www.twz.com/air/how-the-air-force-patched-up-a-shrapnel-damaged-kc-135",
    "source": "The War Zone",
@@ -3298,50 +3617,6 @@
    "tier": "B",
    "published": "2026-09-16",
    "category": "İhale ve Sözleşmeler",
-   "also": []
-  },
-  {
-   "title": "France cannot afford funding Ukraine because of financial situation — Le Pen",
-   "url": "https://tass.com/world/2188713",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-16",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "Trump hopes war with Iran about to end",
-   "url": "https://tass.com/world/2188709",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-16",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "US Congress passes bill to toughen sanctions against Russia",
-   "url": "https://tass.com/world/2188707",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-16",
-   "category": "Politika ve Regülasyon",
-   "also": []
-  },
-  {
-   "title": "Two Moscow-bound drones taken down by Russian air defenses",
-   "url": "https://tass.com/emergencies/2188705",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-16",
-   "category": "C-UAS ve Hava Savunma",
    "also": []
   },
   {
@@ -3848,17 +4123,6 @@
    "tier": "A",
    "published": "2026-09-16",
    "category": "Deniz ve İnsansız Sistemler",
-   "also": []
-  },
-  {
-   "title": "Hanwha Ocean to Conduct ROK Navy’s First Outsourced Destroyer Overhaul",
-   "url": "https://www.navalnews.com/naval-news/2026/09/hanwha-ocean-roks-sejong-the-great-overhaul/",
-   "source": "Naval News",
-   "country": "FR",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-16",
-   "category": "Rakip Duyuruları",
    "also": []
   },
   {
@@ -4676,50 +4940,6 @@
    "also": []
   },
   {
-   "title": "Pistorius i Hegseth o redukcji sił USA oraz Tomahawkach",
-   "url": "https://defence24.pl/geopolityka/pistorius-nadal-brak-jasnosci-co-do-harmonogramu-wycofania-wojsk-usa",
-   "source": "Defence24 (PL)",
-   "country": "PL",
-   "lang": "pl",
-   "tier": "A",
-   "published": "2026-09-16",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "Alerty RCB i wstrzymane loty. Wojsko zabezpieczało niebo [AKTUALIZACJA]",
-   "url": "https://defence24.pl/sily-zbrojne/alerty-rcb-i-wstrzymane-loty-wojsko-zabezpiecza-niebo",
-   "source": "Defence24 (PL)",
-   "country": "PL",
-   "lang": "pl",
-   "tier": "A",
-   "published": "2026-09-16",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "Środowy przegląd mediów; Kolejne Patrioty dla Ukrainy?; Polska czeka na decyzję USA",
-   "url": "https://defence24.pl/polityka-obronna/srodowy-przeglad-mediow-kolejne-patrioty-dla-ukrainy-polska-czeka-na-decyzje-usa",
-   "source": "Defence24 (PL)",
-   "country": "PL",
-   "lang": "pl",
-   "tier": "A",
-   "published": "2026-09-16",
-   "category": "C-UAS ve Hava Savunma",
-   "also": []
-  },
-  {
-   "title": "Rewolucja w wyposażeniu żołnierza. „Zielona lista” skraca drogę innowacji na pole walki",
-   "url": "https://defence24.pl/sily-zbrojne/rewolucja-w-wyposazeniu-zolnierza-zielona-lista-skraca-droge-innowacji-na-pole-walki",
-   "source": "Defence24 (PL)",
-   "country": "PL",
-   "lang": "pl",
-   "tier": "A",
-   "published": "2026-09-16",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
    "title": "Russian General Anton Grunis confirmed dead in Ukraine",
    "url": "https://defence24.com/armed-forces/russian-general-anton-grunis-confirmed-dead-in-ukraine",
    "source": "Defence24 (EN)",
@@ -4973,28 +5193,6 @@
    "also": []
   },
   {
-   "title": "How the industrial base is responding to Air Force, Space Force needs",
-   "url": "https://breakingdefense.com/2026/09/how-the-industrial-base-is-responding-to-air-force-space-force-needs/",
-   "source": "Breaking Defense",
-   "country": "US",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-16",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "A surprise engine team up, plus a budget warning from space",
-   "url": "https://breakingdefense.com/2026/09/a-surprise-engine-team-up-plus-a-budget-warning-from-space/",
-   "source": "Breaking Defense",
-   "country": "US",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-16",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
    "title": "Darwin-based USMC Ospreys hone expeditionary skills in Philippines",
    "url": "https://www.asianmilitaryreview.com/2026/09/darwin-based-usmc-ospreys-hone-expeditionary-skills-in-philippines-foc/",
    "source": "Asian Military Review",
@@ -5206,17 +5404,6 @@
    "also": []
   },
   {
-   "title": "Les États-Unis admettent avoir mis des armes spatiales en orbite",
-   "url": "https://www.opex360.com/2026/09/15/les-etats-unis-admettent-avoir-mis-des-armes-spatiales-en-orbite/",
-   "source": "Opex360",
-   "country": "FR",
-   "lang": "fr",
-   "tier": "B",
-   "published": "2026-09-15",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
    "title": "UK confirms SSN-AUKUS will start production in 2027",
    "url": "https://www.naval-technology.com/news/uk-confirms-ssn-aukus-will-start-production-in-2027/",
    "source": "Naval Technology",
@@ -5225,61 +5412,6 @@
    "tier": "B",
    "published": "2026-09-15",
    "category": "Deniz ve İnsansız Sistemler",
-   "also": []
-  },
-  {
-   "title": "Castelion bags US Navy order for Blackbeard hypersonic missiles",
-   "url": "https://www.naval-technology.com/news/castelion-us-navy-blackbeard-missile/",
-   "source": "Naval Technology",
-   "country": "GB",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-15",
-   "category": "İhale ve Sözleşmeler",
-   "also": []
-  },
-  {
-   "title": "Germany lays keel for third Class 424 ship, eyes fourth vessel",
-   "url": "https://www.naval-technology.com/news/rheinmetall-germany-intelligence-vessel/",
-   "source": "Naval Technology",
-   "country": "GB",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-15",
-   "category": "Deniz ve İnsansız Sistemler",
-   "also": []
-  },
-  {
-   "title": "Boeing wins $562m US Navy production contract for MQ-25A Stingray",
-   "url": "https://www.naval-technology.com/news/boeing-mq-25a-us-navy/",
-   "source": "Naval Technology",
-   "country": "GB",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-15",
-   "category": "İhale ve Sözleşmeler",
-   "also": []
-  },
-  {
-   "title": "방위사업청, ‘2026 국제 함정 기술 콘퍼런스’ 개최",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260916/13/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
-   "tier": "B",
-   "published": "2026-09-15",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "동명·한빛부대 파견 1년 연장한다",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260916/5/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
-   "tier": "B",
-   "published": "2026-09-15",
-   "category": "Genel Savunma Gündemi",
    "also": []
   },
   {
@@ -5307,28 +5439,6 @@
   {
    "title": "Matternet to Fly Repair Parts to Technicians, No Launch Date Set",
    "url": "https://dronexl.co/2026/09/15/matternet-avi-spl-drone-delivery-repair-parts/",
-   "source": "DroneXL",
-   "country": "US",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-15",
-   "category": "C-UAS ve Hava Savunma",
-   "also": []
-  },
-  {
-   "title": "Electra CEO Keynotes Ohio Air Mobility Forum, EL9 Not Flying Yet",
-   "url": "https://dronexl.co/2026/09/15/electra-keynote-naamif-2026-springfield-ohio/",
-   "source": "DroneXL",
-   "country": "US",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-15",
-   "category": "C-UAS ve Hava Savunma",
-   "also": []
-  },
-  {
-   "title": "Zipline Asks FAA For 220,000 Texas Drone Deliveries A Day",
-   "url": "https://dronexl.co/2026/09/15/zipline-faa-texas-draft-ea-220000-deliveries/",
    "source": "DroneXL",
    "country": "US",
    "lang": "en",
@@ -5525,28 +5635,6 @@
    "also": []
   },
   {
-   "title": "Italian NATO jet downs drone in Lithuania, minister says it probably came from Russia",
-   "url": "https://www.defensenews.com/global/europe/2026/09/15/italian-nato-jet-downs-drone-in-lithuania-minister-says-it-probably-came-from-russia/",
-   "source": "Defense News",
-   "country": "US",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-15",
-   "category": "C-UAS ve Hava Savunma",
-   "also": []
-  },
-  {
-   "title": "Russian frigate fires flares towards Danish military helicopter",
-   "url": "https://www.defensenews.com/global/europe/2026/09/15/russian-frigate-fires-flares-towards-danish-military-helicopter/",
-   "source": "Defense News",
-   "country": "US",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-15",
-   "category": "Deniz ve İnsansız Sistemler",
-   "also": []
-  },
-  {
    "title": "Castelion Gets First Production Lot Order For Blackbeard",
    "url": "https://www.defensedaily.com/castelion-gets-first-production-lot-order-for-blackbeard/navy-usmc/",
    "source": "Defense Daily",
@@ -5657,39 +5745,6 @@
    "also": []
   },
   {
-   "title": "Shifting market sands: LeoLabs moves to sell new mobile space radar directly to allies",
-   "url": "https://breakingdefense.com/2026/09/shifting-market-sands-leolabs-moves-to-sell-new-mobile-space-radar-directly-to-allies/",
-   "source": "Breaking Defense",
-   "country": "US",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-15",
-   "category": "Genel Savunma Gündemi",
-   "also": []
-  },
-  {
-   "title": "Diehl and Elbit demonstrate SkyStriker munition in Germany",
-   "url": "https://www.army-technology.com/news/diehl-elbit-germany-skystriker/",
-   "source": "Army Technology",
-   "country": "GB",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-15",
-   "category": "Topçu ve Mühimmat",
-   "also": []
-  },
-  {
-   "title": "Patria wins contract for MUSCL radar with unnamed European Nato ally",
-   "url": "https://www.army-technology.com/news/patria-muscl-radar-contract/",
-   "source": "Army Technology",
-   "country": "GB",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-15",
-   "category": "İhale ve Sözleşmeler",
-   "also": []
-  },
-  {
    "title": "Weekly Threats di Telsy",
    "url": "https://www.analisidifesa.it/2026/09/weekly-threats-di-telsy-3/",
    "source": "Analisi Difesa",
@@ -5742,28 +5797,6 @@
    "tier": "B",
    "published": "2026-09-15",
    "category": "Topçu ve Mühimmat",
-   "also": []
-  },
-  {
-   "title": "USAF, Northrop Grumman complete inert Sentinel ICBM pad assembly",
-   "url": "https://www.airforce-technology.com/news/usaf-sentinel-icbm-vertical-integration/",
-   "source": "Airforce Technology",
-   "country": "GB",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-15",
-   "category": "Rakip Duyuruları",
-   "also": []
-  },
-  {
-   "title": "Swarm Aero unveils Gamera strike drone aimed at deterring China",
-   "url": "https://www.airforce-technology.com/news/swarm-aero-gamera-strike-drone/",
-   "source": "Airforce Technology",
-   "country": "GB",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-15",
-   "category": "C-UAS ve Hava Savunma",
    "also": []
   },
   {
@@ -5884,7 +5917,7 @@
   },
   {
    "source": "DefenseHere",
-   "error": "SSLError: HTTPSConnectionPool(host='www.defensehere.com', port=443): Max retries exceeded with url: /feed/ (Ca"
+   "error": "feed parsed but empty"
   },
   {
    "source": "Unmanned Systems Technology",
@@ -5901,6 +5934,10 @@
   {
    "source": "Asia Pacific Defence Reporter",
    "error": "HTTPError: 403 Client Error: Forbidden for url: https://asiapacificdefencereporter.com/feed/"
+  },
+  {
+   "source": "Kookbang Ilbo",
+   "error": "ConnectTimeout: HTTPConnectionPool(host='kookbang.dema.mil.kr', port=80): Max retries exceeded with url: /dema"
   },
   {
    "source": "Hartpunkt",
