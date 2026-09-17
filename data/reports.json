@@ -1,5 +1,92 @@
 [
   {
+    "date": "2026-09-17",
+    "title": "Rusya'nın jet motorlu dron kullanımı beş ayda altı katına çıktı; DVD 2026'da araç üstü kısa menzilli hava savunma aynı gün üç ayrı paketle sahneye çıktı",
+    "summary": "Yeni ihale ya da sözleşme kararı yok. Rusya Ağustos'ta yaklaşık 2.850 jet motorlu dron kullandı (Haziran'da ~450); 240-500 km/s hız bandı namlulu ve mühimmat tabanlı C-UAS'ın hedef zarfını yukarı kaydırıyor. 16-17 Eylül'deki DVD 2026'da araç üstü kısa menzilli hava savunma üç ayrı konfigürasyonla tanıtıldı. Avrupa Parlamentosu savunma izin ve transfer süreçlerini hızlandıran paketi onayladı.",
+    "alarm": false,
+    "alarm_title": "",
+    "status": "izle",
+    "decision_by": "2026-10-09",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "TOLGA",
+      "Mühimmat",
+      "Rakip",
+      "AB",
+      "Fuar",
+      "Doktrin"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Jet motorlu dron tehdidinin ölçeği",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "DVD 2026'da araç üstü kısa menzil yığılması",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "Hanwha ve Lockheed Martin UK AS21 Redback 40 mm",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "Avrupa Parlamentosu savunma hazırlık paketi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "DroneShield ISV kurulumu ve IOC",
+        "home": "rakip"
+      },
+      {
+        "id": "G6",
+        "label": "Moog RIwP taretli Boxer",
+        "home": "rakip"
+      },
+      {
+        "id": "G7",
+        "label": "GEREON UGV ve Mark 1 önleyici",
+        "home": "rakip"
+      },
+      {
+        "id": "G8",
+        "label": "USAF orta kalibreli namlulu hava savunma pazar araştırması",
+        "home": "izleme"
+      },
+      {
+        "id": "G9",
+        "label": "DHS C-UAS Track One yeniden değerlendirmesi",
+        "home": "izleme"
+      },
+      {
+        "id": "G10",
+        "label": "ABD Ordusu 50 mm namlulu C-UAS arayışı",
+        "home": "izleme"
+      },
+      {
+        "id": "G11",
+        "label": "Küresel C-UAS harcaması",
+        "home": "izleme"
+      },
+      {
+        "id": "G12",
+        "label": "Malezya MERAD (RMK-13)",
+        "home": "izleme"
+      },
+      {
+        "id": "G13",
+        "label": "ABD Deniz Piyadeleri Drone Round",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-09-17.html"
+  },
+  {
     "date": "2026-09-16",
     "title": "ABD'de C-UAS değerlendirmesi 'angajman maliyeti'ni ölçülebilir kritere çeviriyor; NATO doğu kanadında dron ihlalleri kısa menzil talebini besliyor",
     "summary": "Yeni ihale ya da sözleşme kararı yok. Falcon Peak 26.2'de ABD, 21 firmanın C-UAS çözümünü angajman maliyeti ve tali hasar dahil ölçülebilir kriterlerle test ediyor; namlulu ve düşük maliyetli kinetik katman ilk kez aynı tabloda karşılaştırılıyor. 15 Eylül'de NATO jetleri Litvanya hava sahasında bir dronu düşürdü. İngiliz ordusu bölük seviyesinde pompalı tüfek dahil katmanlı C-UAS denedi.",
