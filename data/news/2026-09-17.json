@@ -2,18 +2,19 @@
  "date": "2026-09-17",
  "window_hours": 48,
  "scanned_sources": 66,
- "failed_sources": 17,
- "collected_items": 536,
- "unique_items": 533,
+ "failed_sources": 16,
+ "collected_items": 543,
+ "unique_items": 540,
  "categories": {
-  "C-UAS ve Hava Savunma": 63,
-  "Deniz ve İnsansız Sistemler": 13,
-  "Genel Savunma Gündemi": 378,
+  "C-UAS ve Hava Savunma": 64,
+  "Deniz ve İnsansız Sistemler": 14,
+  "Genel Savunma Gündemi": 386,
   "Hafif Silah ve Mayın": 1,
+  "MKE": 1,
   "Politika ve Regülasyon": 9,
   "Rakip Duyuruları": 31,
   "Tedarik Zinciri": 1,
-  "Topçu ve Mühimmat": 18,
+  "Topçu ve Mühimmat": 14,
   "İhale ve Sözleşmeler": 19
  },
  "items": [
@@ -174,6 +175,19 @@
    "summary_tr": "D-Flight liderliğindeki bir konsorsiyum, SESAR Joint Undertaking tarafından finanse edilen U-EXPAND projesini Roma'da resmen başlattı; üç yıllık program U-space için gelişmiş haberleşme, seyrüsefer ve gözetim teknolojilerini, 5G ağlarının kullanımını ve VFR pilotlarının entegrasyonunu geliştirecek."
   },
   {
+   "title": "Royal Navy gives no dates for key Hybrid Navy design stages",
+   "url": "https://ukdefencejournal.org.uk/royal-navy-gives-no-dates-for-key-hybrid-navy-design-stages/",
+   "source": "UK Defence Journal",
+   "country": "GB",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Kraliyet Donanması, Hybrid Donanması tasarım aşamaları için tarih vermedi",
+   "summary_tr": "İngiltere Savunma Bakanı Luke Pollard, Muhafazakar Milletvekili Ben Obese-Jecty'nin sorularına karşın Type 91, Type 94 ve Common Combat Vessel programlarının tasarım aşamaları için tarih vermedi; Common Combat Vessel'ın en az altı adet üretilmesi planlanıyor ve bu gemiler Type 45 muhriplerinin 2030'ların ortasından itibaren emekliye ayrılmasıyla eş zamanlı olarak devreye girecek. Hangi tersanenin bu gemileri üreteceği de henüz belirlenmedi."
+  },
+  {
    "title": "BAE wins work to modernise American assault ship",
    "url": "https://ukdefencejournal.org.uk/bae-wins-work-to-modernise-american-assault-ship/",
    "source": "UK Defence Journal",
@@ -287,19 +301,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "İngiltere zorunlu askerliği yeniden reddetti"
-  },
-  {
-   "title": "Royal Navy ice patrol ship replacement still undecided",
-   "url": "https://ukdefencejournal.org.uk/royal-navy-ice-patrol-ship-replacement-still-undecided/",
-   "source": "UK Defence Journal",
-   "country": "GB",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-17",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Kraliyet Donanması'nın buz devriye gemisinin yenilenmesi hâlâ belirsiz"
+   "title_tr": "İngiltere zorunlu askerliği yeniden reddetti",
+   "summary_tr": "İngiltere Savunma Bakanı Lord Coaker, Lord Naseby'nin sorusuna yanıtında hükümetin zorunlu askerlik getirmeye yönelik bir planı olmadığını, 1963'ten bu yana profesyonel gönüllü ordu politikasının sürdürüldüğünü belirtti. Bunun yerine 2025 Stratejik Savunma Gözden Geçirmesi sonrası başlatılan 18-25 yaş arasına yönelik gönüllü \"Gap Year\" programı gibi girişimlerle gençlerin orduya çekilmesi hedefleniyor."
   },
   {
    "title": "Recruitment of citizens as mercenaries for military operations seriously threats security environment – ​​SSS chief",
@@ -311,7 +314,21 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Vatandaşların askeri operasyonlar için paralı asker olarak istihdamı güvenlik ortamını ciddi şekilde tehdit ediyor – SSS Başkanı"
+   "title_tr": "Vatandaşların askeri operasyonlar için paralı asker olarak istihdamı güvenlik ortamını ciddi şekilde tehdit ediyor – SSS Başkanı",
+   "summary_tr": "Azerbaycan Devlet Güvenlik Servisi Başkanı Ali Naghiyev, Kazakistan'da düzenlenen Türk Dilli Devletler Özel Servisler Konferansı'nın 28. toplantısında, vatandaşların askeri operasyonlar için paralı asker olarak devşirilmesinin ve çatışma bölgelerinden silah, mühimmat ve patlayıcı kaçakçılığının güvenlik ortamı için ciddi bir tehdit oluşturduğunu söyledi."
+  },
+  {
+   "title": "USMC Used Its Expeditionary Operations Playbook In Combat For First Time During Epic Fury",
+   "url": "https://www.twz.com/sea/usmc-used-its-expeditionary-operations-playbook-in-combat-for-first-time-during-epic-fury",
+   "source": "The War Zone",
+   "country": "US",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "USMC, Epic Fury operasyonu sırasında ilk kez Muharebe İçin Yürütülen Operasyonlar Rehberi'ni kullandı",
+   "summary_tr": "ABD Deniz Piyadeleri'nin 31. Deniz Piyade Sefer Birliği (31st MEU), Ocak-Temmuz arasındaki sefer görevinde İran'a karşı Operation Epic Fury kapsamında Expeditionary Advanced Base Operations (EABO) konseptini ilk kez muharebe ortamında uyguladı; birlik Tripoli Amphibious Ready Group ile ileri sensör üsleri ve ileri silahlanma-yakıt ikmal noktaları (FARP) kurarak uçakları ikmal etti. Yetkililer bunu 2020'de Force Design 2030 planıyla geliştirilen konseptin gerçek savaşta doğrulandığı önemli bir aşama olarak nitelendirdi."
   },
   {
    "title": "F-16 Crashes In Michigan",
@@ -323,7 +340,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Michigan'da F-16 düştü"
+   "title_tr": "Michigan'da F-16 düştü",
+   "summary_tr": "ABD Hava Kuvvetleri'ne ait 149. Avcı Kanadı'na bağlı bir F-16 Fighting Falcon, Michigan'ın Blair Township bölgesinde düştü; pilot kurtulma koltuğuyla atlayarak kurtuldu ve stabil durumda bildirildi. Hava trafik kontrol kayıtlarına göre pilotun kanat arkadaşı olası kuş çarpması nedeniyle mayday çağrısı yaptı ve bölgede yetkililerce sığınma emri verildi."
   },
   {
    "title": "F-35 Sale To Saudi Arabia Approved By State Department",
@@ -335,7 +353,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "F-35'in Suudi Arabistan'a Satışı Dışişleri Bakanlığı Tarafından Onaylandı"
+   "title_tr": "F-35'in Suudi Arabistan'a Satışı Dışişleri Bakanlığı Tarafından Onaylandı",
+   "summary_tr": "ABD Dışişleri Bakanlığı, Suudi Arabistan'a 24,3 milyar dolar değerinde 48 adet F-35 Lightning II uçağı ile 49 Pratt & Whitney F135-PW-100 motorunun satışını onayladı. Bu, Washington'ın Arap devletlerine bu gelişmiş savaş uçağını satma konusundaki uzun süreli çekincesinden önemli bir politika değişikliğini işaret ediyor."
   },
   {
    "title": "New-Build F-16s For The USAF Is An Idea That Won’t Go Away, For Good Reason",
@@ -347,7 +366,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "USAF İçin Yeni Üretim F-16'lar Fikri Haklı Nedenlerle Bir Türlü Vazgeçilmiyor"
+   "title_tr": "USAF İçin Yeni Üretim F-16'lar Fikri Haklı Nedenlerle Bir Türlü Vazgeçilmiyor",
+   "summary_tr": "Lockheed Martin ve ABD Hava Kuvvetleri, F-16 Block 70'in geliştirilmiş bir türevi olan F-16G adlı yeni üretim F-16 konseptini yeniden görüşüyor; konformal yakıt tankları, 600 galonluk kanat tankları, IRST sistemi ve Sniper hedefleme podu içeriyor. Hava Kuvvetleri henüz alım kararı vermedi, ancak yaşlanan ve küçülen filo nedeniyle fikir 2025'ten beri üst düzeyde tartışılıyor."
   },
   {
    "title": "Pentagon Cuts New AIM-260 Air-To-Air Missile Production Deal, Testing Accelerating",
@@ -359,7 +379,34 @@
    "published": "2026-09-17",
    "category": "İhale ve Sözleşmeler",
    "also": [],
-   "title_tr": "Pentagon Yeni AIM-260 Hava-Hava Füzesi Üretim Anlaşması İmzaladı, Testler Hızlanıyor"
+   "title_tr": "Pentagon Yeni AIM-260 Hava-Hava Füzesi Üretim Anlaşması İmzaladı, Testler Hızlanıyor",
+   "summary_tr": "Pentagon ile Lockheed Martin, AIM-260 Joint Advanced Tactical Missile (JATM) füzelerinin çok yıllık üretim ve teslimatına zemin hazırlayan bir çerçeve anlaşması imzaladı; anlaşma ABD ordusu yanında Avustralya gibi müttefiklere yapılacak satışları da kapsıyor. Füze halen geliştirme aşamasında olup Hava Kuvvetleri Test Merkezi testlerin hızlandırıldığını açıkladı."
+  },
+  {
+   "title": "Russian diplomatic missions do everything to ensure security at polling stations abroad",
+   "url": "https://tass.com/politics/2189303",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Rus diplomatik misyonları yurt dışında oy kullanma istasyonlarında güvenliği sağlamak için her şeyi yapıyor",
+   "summary_tr": "Rusya Dışişleri Bakanlığı Sözcüsü Maria Zakharova, yurt dışındaki Rus diplomatik misyonlarının seçim merkezlerinde güvenliği sağlamak için gerekli tüm adımları attığını ve Merkez Seçim Komisyonu ile gerçek zamanlı iletişim halinde olduklarını açıkladı."
+  },
+  {
+   "title": "First voters arrive at polling stations as elections begin in Russia",
+   "url": "https://tass.com/politics/2189301",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "İlk seçmenler, Rusya'da seçimler başlarken oy kullanma istasyonlarına geldi",
+   "summary_tr": "Rusya'da 18-20 Eylül tarihlerinde yapılan Devlet Duması ve diğer düzeydeki seçimler kapsamında ilk seçmenler, sandıkların 17 Eylül'de Moskova saatiyle 23:00'te (Kamçatka'da yerel saatle 08:00) açılmasının ardından Uzak Doğu'daki oy merkezlerine gelmeye başladı."
   },
   {
    "title": "FACTBOX: Single Voting Day in Russia",
@@ -371,7 +418,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "BİLGİ KUTUSU: Rusya'da Tek Oylama Günü"
+   "title_tr": "BİLGİ KUTUSU: Rusya'da Tek Oylama Günü",
+   "summary_tr": "Rusya'da 9. Devlet Duması ve bölgesel/yerel seçimler için Tek Oylama Günü kapsamında 18-20 Eylül 2026'da oylama yapılıyor; bu uygulama 2005'ten beri düzenli aralıklarla yürütülüyor."
   },
   {
    "title": "Three civilians killed, 10 injured in Ukrainian attacks on DPR in past day",
@@ -383,7 +431,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Ukrayna'nın DPR'ye Saldırılarında Son 24 Saatte 3 Sivil Öldü, 10 Kişi Yaralandı"
+   "title_tr": "Ukrayna'nın DPR'ye Saldırılarında Son 24 Saatte 3 Sivil Öldü, 10 Kişi Yaralandı",
+   "summary_tr": "Ukrayna Silahlı Kuvvetlerinin son 24 saatte Donetsk Halk Cumhuriyeti'ndeki yerleşimlere düzenlediği İHA ve patlayıcı saldırılarında 3 sivil öldü, 4'ü çocuk olmak üzere 10 kişi yaralandı; ayrıca konut ve altyapı tesisleri hasar gördü."
   },
   {
    "title": "F·16 fighter jet crashes in Michigan — TV",
@@ -395,7 +444,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "F-16 savaş uçağı Michigan'da düştü — TV"
+   "title_tr": "F-16 savaş uçağı Michigan'da düştü — TV",
+   "summary_tr": "Michigan eyaletinin kuzeyinde bir F-16 savaş uçağı düştü; pilot kurtarma koltuğuyla atlayarak hastaneye kaldırıldı ve durumu stabil, kazanın nedeni henüz açıklanmadı."
   },
   {
    "title": "US not to levy tariffs on China before Trump meets Xi — Bloomberg",
@@ -407,7 +457,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "ABD, Trump-Şi görüşmesinden önce Çin'e gümrük vergisi uygulamayacak — Bloomberg"
+   "title_tr": "ABD, Trump-Şi görüşmesinden önce Çin'e gümrük vergisi uygulamayacak — Bloomberg",
+   "summary_tr": "Bloomberg'e göre ABD, Çin lideri Şi Cinping'in 24 Eylül'de beklenen Washington ziyareti öncesinde ve sırasında Çin'e yeni gümrük tarifesi uygulamayacak; ticaret soruşturmasında önerilen %7,5'lik ek tarifenin açıklanması ise ertelendi."
   },
   {
    "title": "Iran thanks Russia, China for vetoing US anti-Iran sanctions resolution at UN",
@@ -419,7 +470,8 @@
    "published": "2026-09-17",
    "category": "Politika ve Regülasyon",
    "also": [],
-   "title_tr": "İran, BM'de ABD'nin İran karşıtı yaptırım kararını veto ettikleri için Rusya ve Çin'e teşekkür etti"
+   "title_tr": "İran, BM'de ABD'nin İran karşıtı yaptırım kararını veto ettikleri için Rusya ve Çin'e teşekkür etti",
+   "summary_tr": "İran, BM Güvenlik Konseyi'nde İran'a yönelik yaptırımları denetleyen Uzmanlar Paneli'nin görev süresini 2027'ye kadar uzatmayı öngören ABD taslağını veto eden Rusya ve Çin'e teşekkür etti; oylamada çekimser kalan Somali ve Pakistan'a da teşekkür edildi."
   },
   {
    "title": "First polling stations for State Duma elections open in Kamchatka and Chukotka",
@@ -431,7 +483,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Devlet Duması seçimleri için ilk oy sandıkları Kamçatka ve Çukotka'da açıldı"
+   "title_tr": "Devlet Duması seçimleri için ilk oy sandıkları Kamçatka ve Çukotka'da açıldı",
+   "summary_tr": "Rusya'da Devlet Duması seçimleri için üç günlük oylamanın ilk günü Kamçatka'da 178, Çukotka'da 54 sabit oy merkeziyle başladı; ilk kez Donetsk, Lugansk, Herson ve Zaporojye sakinleri de seçime katılıyor, seçimlerde 10 parti yarışıyor."
   },
   {
    "title": "US starts dismantling air defense systems in northern Iraq ahead of troop withdrawal — TV",
@@ -443,7 +496,8 @@
    "published": "2026-09-17",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
-   "title_tr": "ABD, asker çekilmeden önce kuzey Irak'taki hava savunma sistemlerini sökmeye başladı — TV"
+   "title_tr": "ABD, asker çekilmeden önce kuzey Irak'taki hava savunma sistemlerini sökmeye başladı — TV",
+   "summary_tr": "ABD, Irak Kürdistan Bölgesi'ndeki hava savunma sistemlerini sökmeye başladı; uluslararası koalisyon güçlerinin Irak'tan tam çekilişi 30 Eylül 2026'da tamamlanacak."
   },
   {
    "title": "State Department admits US troops face Arctic gear problems",
@@ -455,7 +509,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Dışişleri Bakanlığı, ABD askerlerinin Arktik ekipman sorunlarıyla karşılaştığını kabul etti"
+   "title_tr": "Dışişleri Bakanlığı, ABD askerlerinin Arktik ekipman sorunlarıyla karşılaştığını kabul etti",
+   "summary_tr": "ABD'nin Arktik Büyükelçiliği'ne aday gösterilen Julia Nesheiwat, Senato onay duruşmasında ABD askerlerinin soğuk hava ekipmanı eksikliği nedeniyle Norveç üniforma ve botlarını kullanmak zorunda kaldığını ve Rusya'nın bölgede, özellikle Kuzey Deniz Yolu üzerinde, baskın konumda olduğunu kabul etti."
   },
   {
    "title": "Saudi Arabia strikes Yemen almost 40 times over day, Houthis claim",
@@ -467,7 +522,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Suudi Arabistan, Yemen'e bir günde neredeyse 40 kez saldırdı, Husiler iddia etti"
+   "title_tr": "Suudi Arabistan, Yemen'e bir günde neredeyse 40 kez saldırdı, Husiler iddia etti",
+   "summary_tr": "Husiler, Suudi Arabistan hava kuvvetlerinin son 24 saatte Yemen'in Taiz ve Hajjah eyaletlerine yaklaşık 37 hava saldırısı düzenlediğini ve sivil ölü ile yaralı olduğunu açıkladı."
   },
   {
    "title": "Iran never to capitulate, already controls military situation in region — journalist",
@@ -479,7 +535,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "İran asla teslim olmayacak, bölgedeki askeri durumu zaten kontrol ediyor — gazeteci"
+   "title_tr": "İran asla teslim olmayacak, bölgedeki askeri durumu zaten kontrol ediyor — gazeteci",
+   "summary_tr": "Brezilyalı gazeteci Pepe Escobar, İran'ın hiçbir zaman teslim olmayacağını ve Hürmüz ile Bab el-Mendeb Boğazları'nı müttefiki Husiler'le birlikte kontrol ederek bölgedeki askeri durumu elinde tuttuğunu söyledi; ABD'nin şu an İran'a karşı ekonomik savaş yürütmeye çalıştığını belirtti."
   },
   {
    "title": "West stands to gain from breaking Russia, Belarus apart — Lukashenko",
@@ -491,7 +548,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Batı, Rusya ile Belarus'u ayırmaktan kazançlı çıkar — Lukaşenko"
+   "title_tr": "Batı, Rusya ile Belarus'u ayırmaktan kazançlı çıkar — Lukaşenko",
+   "summary_tr": "Belarus Devlet Başkanı Lukashenko, Batı'nın Rusya ile Belarus arasına nifak sokmaya çalıştığını ancak bunun başarılı olamayacağını, hedefin aslında doğudaki kaynak zengini topraklar olduğunu söyledi."
   },
   {
    "title": "US issues visas to Iran’s president, foreign minister to participate in UN session — AP",
@@ -503,7 +561,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "ABD, BM oturumuna katılmaları için İran Cumhurbaşkanı ve Dışişleri Bakanı'na vize verdi — AP"
+   "title_tr": "ABD, BM oturumuna katılmaları için İran Cumhurbaşkanı ve Dışişleri Bakanı'na vize verdi — AP",
+   "summary_tr": "ABD, BM Genel Kurulu için İran Cumhurbaşkanı Masoud Pezeshkian ve Dışişleri Bakanı Abbas Araghchi'ye vize verdi; heyet seyahat kısıtlamalarına ve lüks mal alım yasağına tabi olacak ve geçen yıla göre daha küçük olacak."
   },
   {
    "title": "German chancellor says unconditional transatlantic friendship may be over",
@@ -515,7 +574,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Alman Başbakan, koşulsuz transatlantik dostluğun sona ermiş olabileceğini söyledi"
+   "title_tr": "Alman Başbakan, koşulsuz transatlantik dostluğun sona ermiş olabileceğini söyledi",
+   "summary_tr": "Almanya Başbakanı Friedrich Merz, ABD ile ilişkilerin köklü biçimde değiştiğini ve koşulsuz transatlantik dostluk döneminin muhtemelen sona erdiğini söyleyerek Almanya'nın savunma harcamalarını artırdığını vurguladı."
   },
   {
    "title": "White House develops strategy for post-war containment of Iran — Axios",
@@ -527,7 +587,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Beyaz Saray, İran'ın savaş sonrası çevrelenmesi için strateji geliştiriyor — Axios"
+   "title_tr": "Beyaz Saray, İran'ın savaş sonrası çevrelenmesi için strateji geliştiriyor — Axios",
+   "summary_tr": "Axios'a göre Beyaz Saray, İran savaşı sonrası dönem için bölgesel müttefikleri de içeren, İsrail-komşuları normalleşmesini genişletmeyi ve İran'ı çevrelemeyi hedefleyen bir strateji hazırlıyor; Trump'ın Netanyahu ile BM Genel Kurulu'nda görüşmesi bekleniyor."
   },
   {
    "title": "Trump needs to decide what to do with US troops in Middle East — Axios",
@@ -539,7 +600,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Trump'ın Orta Doğu'daki ABD askerleriyle ne yapacağına karar vermesi gerekiyor — Axios"
+   "title_tr": "Trump'ın Orta Doğu'daki ABD askerleriyle ne yapacağına karar vermesi gerekiyor — Axios",
+   "summary_tr": "Axios'a göre Trump, Orta Doğu'daki ABD askerlerinin mevcut sayıda uzun süre kalamayacağını belirterek yakında bir karar vermesi gerektiği bildirildi; Trump ayrıca İran'a yönelik önemli bir kararı yakında açıklayacağını söyledi."
   },
   {
    "title": "IN BRIEF: Putin’s key statements at a cabinet meeting on economic issues",
@@ -551,7 +613,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "ÖZET: Putin'in Ekonomik Konularla İlgili Kabine Toplantısındaki Önemli Açıklamaları"
+   "title_tr": "ÖZET: Putin'in Ekonomik Konularla İlgili Kabine Toplantısındaki Önemli Açıklamaları",
+   "summary_tr": "Putin, 14 Eylül itibarıyla yıllık enflasyonun %6,2'ye gerilediğini, Ağustos'ta federal bütçenin 606 milyar ruble fazla verdiğini ve işsizliğin %2,3 ile tarihi düşük seviyede seyrettiğini açıkladı; 2027 bütçesinde önceliğin savunma kapasitesinin güçlendirilmesi olacağını belirtti. Bütçe açığının, varil başına 50 dolar gibi muhafazakar bir petrol fiyatı varsayımıyla yaklaşık %2 olması bekleniyor."
   },
   {
    "title": "Three Russians to compete at 2026 ISU Denis Ten Memorial event in Kazakhstan",
@@ -563,7 +626,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Üç Rus sporcu, Kazakistan'da 2026 ISU Denis Ten Anma Etkinliği'nde yarışacak"
+   "title_tr": "Üç Rus sporcu, Kazakistan'da 2026 ISU Denis Ten Anma Etkinliği'nde yarışacak",
+   "summary_tr": "Rus patenciler Alexandra Trusova, Petr Gumennik ve Vladislav Dikidzhi, 7-10 Ekim'de Kazakistan'ın Almatı kentinde düzenlenecek 2026 ISU Denis Ten Memorial Challenge turnuvasına katılacak. ISU, 2022'de Ukrayna gerekçesiyle askıya aldığı Rus sporculara 2026/27 sezonundan itibaren tarafsız statüde uluslararası müsabakalara katılım izni vermişti."
   },
   {
    "title": "Russia projects 2% budget deficit even under conservative oil price estimate — Putin",
@@ -575,7 +639,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya, muhafazakar petrol fiyatı tahmininde bile %2 bütçe açığı öngörüyor — Putin"
+   "title_tr": "Rusya, muhafazakar petrol fiyatı tahmininde bile %2 bütçe açığı öngörüyor — Putin",
+   "summary_tr": "Putin, ekonomiyle ilgili bir toplantıda Rusya'nın federal bütçe açığının, muhafazakar bir petrol fiyatı tahminine dayanarak yaklaşık %2 olmasının beklendiğini açıkladı."
   },
   {
    "title": "Putin extends 2014 food embargo until 2029",
@@ -587,7 +652,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Putin, 2014 gıda ambargosunu 2029'a kadar uzattı"
+   "title_tr": "Putin, 2014 gıda ambargosunu 2029'a kadar uzattı",
+   "summary_tr": "Putin, ABD, AB, Avustralya, Norveç, Kanada ve Ukrayna gibi ülkelere yönelik 2014'te getirilen tarım ürünleri ambargosunu 2029'a kadar uzatan bir kararname imzaladı."
   },
   {
    "title": "Trump says to discuss Iran with regional allies at UN",
@@ -599,7 +665,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Trump, BM'de İran'ı bölgesel müttefiklerle görüşeceğini söyledi"
+   "title_tr": "Trump, BM'de İran'ı bölgesel müttefiklerle görüşeceğini söyledi",
+   "summary_tr": "Trump, 22-26 ve 28 Eylül'de New York'ta düzenlenecek BM Genel Kurulu kapsamında Suudi Arabistan, BAE, Katar, Bahreyn, Kuveyt ve Umman temsilcileriyle bir araya gelerek İran ile savaş konusunda bölgesel müttefiklerin tutumunu öğrenmeyi planlıyor. Trump'ın Genel Kurul konuşması 22 Eylül'de gerçekleşecek."
   },
   {
    "title": "Slovak PM worried about 'pretext' in the making leading to major NATO-Russia conflict",
@@ -611,7 +678,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Slovak Başbakan, büyük bir NATO-Rusya çatışmasına yol açacak bir 'bahane' hazırlandığından endişeli"
+   "title_tr": "Slovak Başbakan, büyük bir NATO-Rusya çatışmasına yol açacak bir 'bahane' hazırlandığından endişeli",
+   "summary_tr": "Slovak Başbakan Robert Fico, NATO ile Rusya arasında büyük bir çatışma çıkarmak için bahane arayan aktörler olduğundan endişe duyduğunu açıkladı. Rusya Dışişleri Bakanı Sergey Lavrov ise Moskova'nın Batı'ya saldırma niyeti olmadığını ancak Avrupa saldırırsa bunun çok kısa ama farklı bir savaş olacağını daha önce vurgulamıştı."
   },
   {
    "title": "Trump says to make 'big decision' on Iran as war at pivotal point",
@@ -623,7 +691,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Trump, savaş kritik bir noktadayken İran konusunda 'büyük karar' vereceğini söyledi"
+   "title_tr": "Trump, savaş kritik bir noktadayken İran konusunda 'büyük karar' vereceğini söyledi",
+   "summary_tr": "ABD Başkanı Donald Trump, İran ile savaşın kritik bir eşiğe geldiğini ve İran rejimine yönelik saldırıları yeniden başlatıp başlatmama konusunda yakında büyük bir karar vereceğini söyledi."
   },
   {
    "title": "Russia's annual inflation slows to 6.2% as of September 14 — Putin",
@@ -635,7 +704,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya'nın yıllık enflasyonu 14 Eylül itibarıyla %6,2'ye geriledi — Putin"
+   "title_tr": "Rusya'nın yıllık enflasyonu 14 Eylül itibarıyla %6,2'ye geriledi — Putin",
+   "summary_tr": "Rusya Devlet Başkanı Vladimir Putin, 14 Eylül itibarıyla yıllık enflasyonun yüzde 6,2'ye gerilediğini ve bunun geçen yılın aynı dönemine göre belirgin bir düşüş olduğunu, 2025'in ilk çeyrek sonunda enflasyonun hâlâ yüzde 10,3 ile çift haneli olduğunu belirtti."
   },
   {
    "title": "Putin outlines Russia's 2027 federal budget priorities",
@@ -647,7 +717,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Putin, Rusya'nın 2027 federal bütçe önceliklerini açıkladı"
+   "title_tr": "Putin, Rusya'nın 2027 federal bütçe önceliklerini açıkladı",
+   "summary_tr": "Putin, Rusya'nın 2027 federal bütçesinde sosyal yükümlülüklerin yerine getirilmesi, vatandaş güvenliğinin sağlanması ve savunma kapasitesinin güçlendirilmesinin mutlak öncelik olması gerektiğini söyledi."
   },
   {
    "title": "Central Bank, government efforts to curb inflation yielding results — Putin",
@@ -659,7 +730,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Merkez Bankası ve hükümetin enflasyonu düşürme çabaları sonuç veriyor — Putin"
+   "title_tr": "Merkez Bankası ve hükümetin enflasyonu düşürme çabaları sonuç veriyor — Putin",
+   "summary_tr": "Putin, Merkez Bankası ve hükümetin enflasyonu düşürmeye yönelik ortak çabalarının sonuç verdiğini, bu kapsamda yıllık enflasyonun 14 Eylül itibarıyla yüzde 6,2'ye gerilediğini belirtti."
   },
   {
    "title": "Trump reports 'major progress' on establishing US Army base in Poland",
@@ -671,7 +743,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Trump, Polonya'da ABD ordusu üssü kurulmasında 'büyük ilerleme' kaydedildiğini bildirdi"
+   "title_tr": "Trump, Polonya'da ABD ordusu üssü kurulmasında 'büyük ilerleme' kaydedildiğini bildirdi",
+   "summary_tr": "ABD Başkanı Trump, Polonya'da bir ABD ordu üssü kurulmasına yönelik çalışmalarda önemli ilerleme kaydedildiğini ve yerin çok yakında açıklanacağını duyurdu."
   },
   {
    "title": "AUKUS should be directed against Russia as well — UK envoy",
@@ -683,7 +756,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "AUKUS, Rusya'ya karşı da yönlendirilmeli — İngiltere büyükelçisi"
+   "title_tr": "AUKUS, Rusya'ya karşı da yönlendirilmeli — İngiltere büyükelçisi",
+   "summary_tr": "İngiltere'nin özel temsilcisi Stephen Lovegrove, AUKUS ittifakının sadece Hint-Pasifik değil Avrupa-Atlantik bölgesi de dahil olmak üzere Rusya'ya karşı da yönlendirilmesini önerdi; Avustralya Büyükelçisi Greg Moriarty ise 100'den fazla Avustralyalı denizcinin ABD'de eğitim gördüğünü, 140'tan fazlasının ise nükleer denizaltılarda eğitimi tamamladığını açıkladı."
   },
   {
    "title": "Russia to raise issue of Bucha falsification on OSCE platform — permanent representative",
@@ -695,7 +769,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya, Buça çarpıtmasını AGİT platformunda gündeme getirecek — daimi temsilci"
+   "title_tr": "Rusya, Buça çarpıtmasını AGİT platformunda gündeme getirecek — daimi temsilci",
+   "summary_tr": "Rusya'nın AGİT Daimi Temsilcisi Dmitry Polyansky, Maxim Grigoriyev'in Bucha olaylarına ilişkin Ukrayna'nın sahte kanıt ürettiğini gösteren yeni raporunun AGİT'in Hofburg toplantısında yeniden gündeme getirileceğini söyledi."
   },
   {
    "title": "EU, NATO risk turning hybrid war against Russia into traditional one — envoy to OSCE",
@@ -707,7 +782,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "AB ve NATO, Rusya'ya karşı hibrit savaşı geleneksel savaşa dönüştürme riski taşıyor — AGİT büyükelçisi"
+   "title_tr": "AB ve NATO, Rusya'ya karşı hibrit savaşı geleneksel savaşa dönüştürme riski taşıyor — AGİT büyükelçisi",
+   "summary_tr": "Rusya'nın AGİT Daimi Temsilcisi Dmitry Polyansky, AB ve NATO'nun son bir buçuk ayda attığı adımların Rusya'ya yönelik hibrit savaşı geleneksel bir savaşa dönüştürme riski taşıdığını söyledi ve Rusya'nın AB veya NATO'ya saldırma planı olmadığını yineledi."
   },
   {
    "title": "Russian stock market closes lower as major indices drop within 2%",
@@ -719,7 +795,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rus borsası, ana endekslerin %2'ye varan düşüşüyle günü düşüşle kapattı"
+   "title_tr": "Rus borsası, ana endekslerin %2'ye varan düşüşüyle günü düşüşle kapattı",
+   "summary_tr": "17 Eylül'de MOEX endeksi %1,57 düşüşle 2.248,87 puana, RTS endeksi %1,97 düşüşle 838,3 puana geriledi; yıllık enflasyon %6,29'dan %6,27'ye gerilerken Samolet Group %5,1 yükselip günün en çok kazandıran hissesi olurken Lenta, 18 Eylül'de MOEX endeksinden çıkarılma öncesinde %5,6 düşüşle en çok kaybettiren hisse oldu."
   },
   {
    "title": "Situation in Kiev looks like regime’s end is near — French colonel",
@@ -731,7 +808,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Kiev'deki durum, rejimin sonunun yaklaştığını gösteriyor — Fransız albay"
+   "title_tr": "Kiev'deki durum, rejimin sonunun yaklaştığını gösteriyor — Fransız albay",
+   "summary_tr": "Fransız albay Herve Carresse, Kiev yönetiminin sonunun yaklaştığını, orduda ciddi komuta ve mühimmat sorunları bulunduğunu ve personelin %40-50'sinin yabancı paralı askerlerden oluşmasının planlandığını söyledi. Uzmana göre Ukrayna topçusu ve savaş uçağı sayısı çok azaldı, Batı füze stokları tükendi."
   },
   {
    "title": "Slovak PM announces plans to visit Ukraine on Friday",
@@ -743,7 +821,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Slovak Başbakan, Cuma günü Ukrayna'yı ziyaret etme planlarını açıkladı"
+   "title_tr": "Slovak Başbakan, Cuma günü Ukrayna'yı ziyaret etme planlarını açıkladı",
+   "summary_tr": "Slovakya Başbakanı Robert Fico, 18 Eylül'de Ukrayna'ya birkaç saatlik bir ziyaret yapacağını ve aynı gece dönüş yapacağını duyurdu."
   },
   {
    "title": "Kiev’s attempts to disrupt election campaign in Russia fail — OSCE envoy",
@@ -755,7 +834,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Kiev'in Rusya'daki seçim kampanyasını sekteye uğratma girişimleri başarısız oldu — AGİT büyükelçisi"
+   "title_tr": "Kiev'in Rusya'daki seçim kampanyasını sekteye uğratma girişimleri başarısız oldu — AGİT büyükelçisi",
+   "summary_tr": "Rusya'nın AGİT Daimi Temsilcisi Dmitry Polyansky, Temmuz-Eylül döneminde günlük yüzlerce Ukrayna dronu ve füzesiyle Rus enerji ve altyapı tesislerinin vurulmasının 18-20 Eylül'deki Duma seçimlerini bozma amacı taşıdığını ancak başarısız olduğunu söyledi."
   },
   {
    "title": "New US sanctions bill puts Russia's trade partners in crosshairs — RSPP deputy head",
@@ -767,7 +847,8 @@
    "published": "2026-09-17",
    "category": "Politika ve Regülasyon",
    "also": [],
-   "title_tr": "Yeni ABD yaptırım yasa tasarısı Rusya'nın ticaret ortaklarını hedef alıyor — RSPP Başkan Yardımcısı"
+   "title_tr": "Yeni ABD yaptırım yasa tasarısı Rusya'nın ticaret ortaklarını hedef alıyor — RSPP Başkan Yardımcısı",
+   "summary_tr": "ABD Temsilciler Meclisi, Rusya'ya yönelik yaptırımları sıkılaştıran ve Rus petrol-gazının büyük alıcılarına %100'e kadar ikincil tarif getirmeyi öngören yasayı 262'ye 159 oyla kabul ederek Trump'ın onayına gönderdi; RSPP Başkan Yardımcısı Alexander Murychev, düzenlemenin asıl amacının Rusya'nın Çin, Hindistan ve Avrupalı ticaret ortaklarına baskı yapmak olduğunu belirtti."
   },
   {
    "title": "Over 116,000 public observers prepared to monitor Russian elections — Civic Chamber",
@@ -779,7 +860,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "116.000'den fazla bağımsız gözlemci Rusya seçimlerini izlemeye hazır — Kamu Odası"
+   "title_tr": "116.000'den fazla bağımsız gözlemci Rusya seçimlerini izlemeye hazır — Kamu Odası",
+   "summary_tr": "Rusya Sivil Meclisi'nden Alexey Peskov, 18-20 Eylül'deki Devlet Duması seçimlerini izlemek için ülke çapında 2.634 etkinlikte 116.000'den fazla gözlemcinin eğitildiğini duyurdu."
   },
   {
    "title": "US ready to approve delivery of ten missiles for Patriot from Germany to Ukraine",
@@ -791,7 +873,8 @@
    "published": "2026-09-17",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
-   "title_tr": "ABD, Almanya'dan Ukrayna'ya on Patriot füzesinin teslimatını onaylamaya hazır"
+   "title_tr": "ABD, Almanya'dan Ukrayna'ya on Patriot füzesinin teslimatını onaylamaya hazır",
+   "summary_tr": "ABD Dışişleri Bakanlığı, Almanya'da bulunan on adet MIM-104E GEM-T Patriot füzesinin 29,6 milyon dolar karşılığında Ukrayna'ya transferini onaylamaya hazır olduğunu Kongre kayıtlarında bildirdi. Trump geçen hafta Ukrayna'ya eski tip Patriot füzelerinin üretim lisansının verilmesinin de görüşüldüğünü açıklamıştı."
   },
   {
    "title": "Kiev sponsors' role, no UN response: Russian diplomat on Bucha",
@@ -803,7 +886,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Kiev destekçilerinin rolü, BM'den yanıt yok: Rus diplomattan Bucha açıklaması"
+   "title_tr": "Kiev destekçilerinin rolü, BM'den yanıt yok: Rus diplomattan Bucha açıklaması",
+   "summary_tr": "Rusya Dışişleri Bakanlığı Sözcüsü Maria Zakharova, BM'nin Bucha olaylarına ilişkin Rusya'nın taleplerine yanıt vermemesinin, olayların Batı, özellikle İngiltere tarafından İstanbul görüşmelerini baltalamak için kurgulanan bir provokasyon olduğunu bir kez daha kanıtladığını söyledi. Zakharova, öldürülenlerin isim listesinin BM, Batı medyası ya da Kiev yönetimi tarafından hiçbir zaman sunulmadığını ve BM Genel Sekreteri Guterres'in bilerek Rusya karşıtı kampanyaya alet olduğunu belirtti."
   },
   {
    "title": "Russia calls on the West at UN to halt dangerous actions regarding Iran",
@@ -815,7 +899,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya, BM'de Batı'yı İran konusunda tehlikeli adımlardan vazgeçmeye çağırdı"
+   "title_tr": "Rusya, BM'de Batı'yı İran konusunda tehlikeli adımlardan vazgeçmeye çağırdı",
+   "summary_tr": "Rusya'nın BM Daimi Temsilcisi Vasili Nebenzya, İran yaptırımlarını izleyen uzman panelinin görev süresinin uzatılmasına ilişkin oylamanın ardından, Batılı ülkeleri İran konusundaki 'tehlikeli' politikalarına son vermeye çağırdı. Rusya ve Çin, geçen perşembe ABD'nin panelin görev süresini Eylül 2027'ye kadar uzatmayı öngören karar tasarısını BM Güvenlik Konseyi'nde bloke etmişti."
   },
   {
    "title": "Europe gives little thought to Ukraine's fate in attempt to hurt Russia — diplomat",
@@ -827,7 +912,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Avrupa, Rusya'ya zarar verme çabasında Ukrayna'nın kaderini pek umursamıyor — diplomat"
+   "title_tr": "Avrupa, Rusya'ya zarar verme çabasında Ukrayna'nın kaderini pek umursamıyor — diplomat",
+   "summary_tr": "Rusya'nın AGİT Daimi Temsilcisi Dmitri Polyanski, Viyana'daki AGİT Daimi Konseyi toplantısında Avrupa'nın, Ukrayna Rusya'yı zayıflatmaya devam ettiği sürece Zelenski'nin artan otoriterliği, siyasi tutuklular ve yolsuzluk dahil her şeye göz yumduğunu söyledi. Polyanski, Avrupalı siyasetçilerin çatışmanın kök nedenlerine yönelik çözüm çabalarını baltaladığını ve barış istemediğini belirtti."
   },
   {
    "title": "Ukraine's economy loses $22-$44 mln per hour during air raid downtime — minister",
@@ -839,7 +925,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Ukrayna ekonomisi hava saldırısı alarmlarında saatte 22-44 milyon dolar kaybediyor — bakan"
+   "title_tr": "Ukrayna ekonomisi hava saldırısı alarmlarında saatte 22-44 milyon dolar kaybediyor — bakan",
+   "summary_tr": "Ukrayna Ekonomi ve Çevre Bakanı Alexander Kravchenko, hava saldırısı alarmları nedeniyle her saatlik iş durmasının ekonomiye 1-2 milyar hryvnia (22,25-44,5 milyon dolar) zarar verdiğini açıkladı. Ağustos ayının son haftasında alarmların toplam 58 saati aştığını belirten bakan, ihracat ablukası ve lojistik aksaklıklarıyla birlikte ekonominin ciddi baskı altında olduğunu vurguladı."
   },
   {
    "title": "Russia won’t go for truce without tackling root causes of Ukraine crisis — envoy to OSCE",
@@ -851,7 +938,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya, Ukrayna krizinin kök nedenleri ele alınmadan ateşkese gitmeyecek — AGİT nezdindeki temsilci"
+   "title_tr": "Rusya, Ukrayna krizinin kök nedenleri ele alınmadan ateşkese gitmeyecek — AGİT nezdindeki temsilci",
+   "summary_tr": "Rusya'nın OSCE nezdindeki daimi temsilcisi Dmitry Polyansky, Ukrayna krizinin kök nedenlerini ortadan kaldıracak bir barış anlaşmasına varılmadan ateşkes kabul etmeyeceklerini belirtti. Polyansky, Rusya'nın özel askeri operasyonu hedeflerine ulaşana kadar sürdüreceğini ve Batı'dan gelen askeri desteği hedef almaya devam edeceklerini ekledi."
   },
   {
    "title": "Iran’s UN mission objects to US designation for IAEA Board membership",
@@ -863,7 +951,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "İran'ın BM Temsilciliği, ABD'nin IAEA Yönetim Kurulu üyeliği atamasına itiraz etti"
+   "title_tr": "İran'ın BM Temsilciliği, ABD'nin IAEA Yönetim Kurulu üyeliği atamasına itiraz etti",
+   "summary_tr": "İran'ın Cenevre'deki BM Daimi Temsilciliği, IAEA Genel Konferansı'nın 70. Olağan Oturumu'nda ABD'nin Yönetim Kurulu üyeliğine yönelik itirazını yineledi. Tahran, ABD'nin kurulda bulunmasının yapısal bir çıkar çatışması yaratacağını ve Ajans'ın tarafsızlığını zedeleyeceğini savundu."
   },
   {
    "title": "Iran summons German ambassador over alleged interference in domestic affairs",
@@ -875,7 +964,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "İran, iç işlerine karıştığı iddiasıyla Alman büyükelçiyi bakanlığa çağırdı"
+   "title_tr": "İran, iç işlerine karıştığı iddiasıyla Alman büyükelçiyi bakanlığa çağırdı",
+   "summary_tr": "İran Dışişleri Bakanlığı, Almanya Şansölyesi Friedrich Merz'in İran hakkındaki açıklamaları ve Almanya'nın iç işlere karışması gerekçesiyle Almanya'nın Tahran Büyükelçisi Axel Dittmann'ı bakanlığa çağırdı. İranlı yetkili Alireza Yousefi ayrıca Almanya'nın İsrail'e askeri ve siyasi desteğini eleştirdi."
   },
   {
    "title": "Russia now has every right to end Ukrainian conflict on its terms — Brazilian expert",
@@ -887,7 +977,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya'nın artık Ukrayna çatışmasını kendi şartlarıyla sona erdirmeye tam hakkı var — Brezilyalı uzman"
+   "title_tr": "Rusya'nın artık Ukrayna çatışmasını kendi şartlarıyla sona erdirmeye tam hakkı var — Brezilyalı uzman",
+   "summary_tr": "Brezilyalı gazeteci Pepe Escobar, NATO'nun Rusya'ya karşı sivil altyapı ve sivilleri hedef alan bir savaş yürüttüğünü öne sürerek Rusya'nın artık Ukrayna çatışmasını kendi şartlarıyla sonlandırma hakkına sahip olduğunu söyledi. Escobar, Ukrayna'nın Avrupa yüzünden iflas ettiğini de iddia etti."
   },
   {
    "title": "Russia says report on Bucha falsification to be submitted to international courts",
@@ -899,7 +990,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya, Bucha sahtekarlığına ilişkin raporun uluslararası mahkemelere sunulacağını açıkladı"
+   "title_tr": "Rusya, Bucha sahtekarlığına ilişkin raporun uluslararası mahkemelere sunulacağını açıkladı",
+   "summary_tr": "Rusya Dışişleri Bakanlığı Sözcüsü Maria Zakharova, Buça olaylarının çarpıtılmasına ilişkin bir raporun Rus kolluk kuvvetlerine ve uluslararası mahkeme ile kuruluşlara sunulacağını açıkladı. 30 Mart 2022'de Rusya'nın Buça bölgesinden çekilmesinin ardından yayılan görüntülerin sahte olduğu iddiasıyla Rusya'da daha önce bir soruşturma açılmıştı."
   },
   {
    "title": "Iran proposes suspending IAEA Board membership for US — statement",
@@ -911,7 +1003,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "İran, ABD'nin IAEA Yönetim Kurulu üyeliğinin askıya alınmasını önerdi — açıklama"
+   "title_tr": "İran, ABD'nin IAEA Yönetim Kurulu üyeliğinin askıya alınmasını önerdi — açıklama",
+   "summary_tr": "İran, IAEA'nın 70. Genel Konferansı öncesinde ABD'nin, 2025-2026'da İsrail ile birlikte İran'ın nükleer tesislerine 18 dalga saldırı düzenlediğini öne sürerek Kurul üyeliğinin askıya alınmasını önerdi. Öneri, IAEA tüzüğünün Madde XIX.B hükmüne dayanıyor ve kabulü Genel Konferans'ta üçte iki çoğunluk oyu gerektiriyor."
   },
   {
    "title": "Russian Emergencies Ministry Il-76 crew honored in Serbia for fighting wildfires",
@@ -923,7 +1016,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya Acil Durumlar Bakanlığı'nın Il-76 mürettebatı, orman yangınlarıyla mücadelesi nedeniyle Sırbistan'da onurlandırıldı"
+   "title_tr": "Rusya Acil Durumlar Bakanlığı'nın Il-76 mürettebatı, orman yangınlarıyla mücadelesi nedeniyle Sırbistan'da onurlandırıldı",
+   "summary_tr": "Rusya Acil Durumlar Bakanlığı'na ait bir Il-76 uçağının Sırbistan'daki orman yangınlarıyla mücadele eden mürettebatı, Uluslararası Polis Teşkilatı tarafından ödüllendirildi. Uçak 20 Ağustos'tan bu yana 65 sefer yaparak 2.730 ton su bıraktı ve 19 Eylül'de Rusya'ya dönecek."
   },
   {
    "title": "Russia presents report proving Kiev staged Bucha incident",
@@ -935,7 +1029,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya, Bucha olayının Kiev tarafından kurgulandığını kanıtlayan raporu sundu"
+   "title_tr": "Rusya, Bucha olayının Kiev tarafından kurgulandığını kanıtlayan raporu sundu",
+   "summary_tr": "Ukraynalı Neo-Naziler Uluslararası Kamu Mahkemesi Başkanı Maksim Grigoryev, TASS'ta düzenlenen basın toplantısında Mart 2022'deki Buça olaylarının Kiev tarafından kurgulandığını iddia eden bir rapor sundu. Rapora göre çatışmalarda ölen Ukraynalı askerler ve hastalıktan ölen sivillerin Rusya tarafından öldürüldüğü şeklinde sunulduğu öne sürülüyor."
   },
   {
    "title": "Azov militants passed off as civilians allegedly killed in Bucha — Ukraine tribunal",
@@ -947,7 +1042,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Bucha'da öldürüldüğü iddia edilen siviller aslında Azov militanlarıydı — Ukrayna mahkemesi"
+   "title_tr": "Bucha'da öldürüldüğü iddia edilen siviller aslında Azov militanlarıydı — Ukrayna mahkemesi",
+   "summary_tr": "Grigoryev, TASS'taki basın toplantısında Buça'daki anıt levhalarda adı geçen bazı kişilerin aslında Azov taburu mensubu askerler olduğunu, ancak Ukrayna tarafından sivil kurban olarak gösterildiğini iddia etti. İddiaya göre bu kişiler arasında keskin nişancılar, bir askeri pilot ve bir istihbarat albayı bulunuyor."
   },
   {
    "title": "Bank of Russia raises dollar exchange rate to 84.5 rubles for September 18",
@@ -959,7 +1055,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya Merkez Bankası, 18 Eylül için dolar kurunu 84,5 rubleye yükseltti"
+   "title_tr": "Rusya Merkez Bankası, 18 Eylül için dolar kurunu 84,5 rubleye yükseltti",
+   "summary_tr": "Rusya Merkez Bankası 18 Eylül 2026 için dolar kurunu 33,61 kopek artışla 84,5093 rubleye, euro kurunu 37,09 kopek artışla 97,4984 rubleye yükseltti. Yuan kuru da 3,31 kopek artarak 12,5788 rubleye çıktı."
   },
   {
    "title": "Bank of Russia purchases yuan worth $23.6 mln with settlements on September 16",
@@ -971,7 +1068,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya Merkez Bankası, 16 Eylül'de 23,6 milyon dolar değerinde yuan satın aldı"
+   "title_tr": "Rusya Merkez Bankası, 16 Eylül'de 23,6 milyon dolar değerinde yuan satın aldı",
+   "summary_tr": "Rusya Merkez Bankası, 16 Eylül 2026 valörle iç piyasada 2 milyar ruble (23,6 milyon dolar) tutarında yuan satın aldı; bir önceki gün de 15 Eylül valörle aynı miktarda yuan alımı yapılmıştı."
   },
   {
    "title": "Up to 3% of Russians with bank accounts expected to use digital ruble by 2027 — lawmaker",
@@ -983,7 +1081,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Banka hesabı olan Rusların %3'e kadarının 2027'ye kadar dijital rubleyi kullanması bekleniyor — milletvekili"
+   "title_tr": "Banka hesabı olan Rusların %3'e kadarının 2027'ye kadar dijital rubleyi kullanması bekleniyor — milletvekili",
+   "summary_tr": "Rusya Devlet Duması Finansal Piyasalar Komitesi Başkanı Anatoli Aksakov, 1 Eylül'de başlayan dijital ruble uygulamasının 2027 başına kadar banka hesabı olan Rusların yüzde 3'üne ulaşmasını beklediğini, bazı iPhone kullanıcılarında bağlantı sorunları yaşandığını belirtti."
   },
   {
    "title": "Russian embassies abroad subjected to extreme pressure ahead of elections — Zakharova",
@@ -995,7 +1094,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya'nın yurt dışındaki büyükelçilikleri seçimler öncesinde aşırı baskıya maruz kalıyor — Zaharova"
+   "title_tr": "Rusya'nın yurt dışındaki büyükelçilikleri seçimler öncesinde aşırı baskıya maruz kalıyor — Zaharova",
+   "summary_tr": "Rusya Dışişleri Bakanlığı Sözcüsü Maria Zakharova, 18-20 Eylül'de yapılacak Devlet Duması seçimleri öncesinde yurt dışındaki Rus büyükelçiliklerinin ağır baskı altında olduğunu ve Zaporojye'de bir oy merkezine Ukrayna dronu saldırdığını söyledi; seçimlere ilk kez Donetsk, Lugansk, Herson ve Zaporojye bölgeleri de katılacak."
   },
   {
    "title": "Preparation of Akkuyu NPP Unit 1’s control system for pre-commissioning begins",
@@ -1007,7 +1107,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Akkuyu NGS 1. Ünitesi'nin kontrol sisteminde devreye alma öncesi hazırlıklar başladı"
+   "title_tr": "Akkuyu NGS 1. Ünitesi'nin kontrol sisteminde devreye alma öncesi hazırlıklar başladı",
+   "summary_tr": "Rosatom'un Türkiye'de inşa ettiği Akkuyu Nükleer Santrali'nin 1. ünitesinde, fiziksel devreye almadan önceki hazırlık aşaması olan Otomatik Süreç Kontrol Sistemi'nin (APCS) devreye alma öncesi çalışmaları başladı."
   },
   {
    "title": "UN Secretariat to spend long time washing away disgrace over Bucha provocation — diplomat",
@@ -1019,7 +1120,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "BM Sekretaryası, Bucha provokasyonuyla ilgili utancı temizlemek için uzun zaman harcayacak — diplomat"
+   "title_tr": "BM Sekretaryası, Bucha provokasyonuyla ilgili utancı temizlemek için uzun zaman harcayacak — diplomat",
+   "summary_tr": "Zakharova, Ukraynalı neo-Nazilerin suçlarını inceleyen Uluslararası Halk Mahkemesi raporuna atıfla, BM Sekretaryası'nın Buça provokasyonundaki rolünün hesabını vereceğini ve bu utancı silmenin uzun süreceğini söyledi."
   },
   {
    "title": "Forty Russian museums to hold exhibitions on Crimean Scythian gold collection",
@@ -1031,7 +1133,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Kırk Rus müzesi Kırım İskit altınları koleksiyonu üzerine sergiler düzenleyecek"
+   "title_tr": "Kırk Rus müzesi Kırım İskit altınları koleksiyonu üzerine sergiler düzenleyecek",
+   "summary_tr": "Rusya Kültür Bakanlığı, Hollanda'nın 2023'te Ukrayna'ya gönderdiği Kırım İskit altınları koleksiyonuyla ilgili yaklaşık 40 Rus müzesinin yıl sonuna kadar sergiler hazırlayacağını açıkladı. Koleksiyonun mülkiyeti, Kırım'ın 2014'te Rusya'ya katılmasından bu yana Rusya ile Ukrayna arasında tartışmalı."
   },
   {
    "title": "Russia, China can help establish global military tech rules — expert",
@@ -1043,7 +1146,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya ve Çin, küresel askeri teknoloji kurallarının oluşturulmasına yardımcı olabilir — uzman"
+   "title_tr": "Rusya ve Çin, küresel askeri teknoloji kurallarının oluşturulmasına yardımcı olabilir — uzman",
+   "summary_tr": "Tsinghua Üniversitesi'nden Prof. Wu Dahui, yapay zeka ve yeni askeri teknolojiler alanında henüz uluslararası kural bulunmadığını belirterek Rusya ve Çin'in bu alanda küresel standartlar oluşturulmasına katkı sağlayabileceğini söyledi. Açıklama, Pekin Xiangshan Forumu kapsamında TASS'a yapıldı."
   },
   {
    "title": "Russia says UN upholds West, Kiev’s position on Bucha, rather than investigating",
@@ -1055,7 +1159,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya, BM'nin Bucha konusunu soruşturmak yerine Batı ve Kiev'in tutumunu desteklediğini söyledi"
+   "title_tr": "Rusya, BM'nin Bucha konusunu soruşturmak yerine Batı ve Kiev'in tutumunu desteklediğini söyledi",
+   "summary_tr": "Rusya Dışişleri Bakanlığı Sözcüsü Maria Zakharova, BM'nin Buça olayında tarafsız bir soruşturma yürütmek yerine Batı ve Kiev'in pozisyonunu desteklediğini söyledi. Rusya'nın Mart 2022'de Kiev çevresinden ve Buça'dan çekilmesinin ardından ölü bedenlerin ortaya çıkmasıyla ilgili görüntülerin sahte bilgi yayma amacıyla kullanıldığı iddiasıyla Rusya'da ceza davası açılmıştı."
   },
   {
    "title": "Representatives of 29 nations consult on establishing SCO Development Bank",
@@ -1067,7 +1172,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "29 ülkenin temsilcisi SCO Kalkınma Bankası'nın kurulmasına ilişkin istişarelerde bulundu"
+   "title_tr": "29 ülkenin temsilcisi SCO Kalkınma Bankası'nın kurulmasına ilişkin istişarelerde bulundu",
+   "summary_tr": "29 ülkenin temsilcileri, Hangzhou'da Şanghay İşbirliği Örgütü (ŞİÖ) Kalkınma Bankası'nın kurulmasına yönelik beşinci istişare turunu tamamladı. Bankanın kurulması siyasi kararı 1 Eylül 2025'teki Tianjin Zirvesi'nde alınmış, 1 Eylül 2026'daki Bişkek Deklarasyonu ise sürecin ilerlemesini memnuniyetle karşılamıştı."
   },
   {
    "title": "Russian diplomat says neither West nor UN sends lists of names of Bucha incident victims",
@@ -1079,7 +1185,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rus diplomat, ne Batı'nın ne de BM'nin Bucha olayı kurbanlarının isim listelerini gönderdiğini söyledi"
+   "title_tr": "Rus diplomat, ne Batı'nın ne de BM'nin Bucha olayı kurbanlarının isim listelerini gönderdiğini söyledi",
+   "summary_tr": "Rusya Dışişleri Bakanlığı Sözcüsü Maria Zakharova, BM, Batı medyası ve Kiev yönetiminin yıllardır Buça'da öldürüldüğü iddia edilen sivillerin isim listelerini sunmadığını söyledi. Zakharova, bu durumun Batı medyasının tarafsızlığına ilişkin şüpheleri artırdığını belirtti."
   },
   {
    "title": "Bucha falsification was not Kiev first 'myth built on blood' — Kherson legislator",
@@ -1091,7 +1198,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Bucha sahtekarlığı Kiev'in 'kan üzerine kurulu' ilk efsanesi değildi — Herson milletvekili"
+   "title_tr": "Bucha sahtekarlığı Kiev'in 'kan üzerine kurulu' ilk efsanesi değildi — Herson milletvekili",
+   "summary_tr": "Kherson Bölge Duması üyesi Alexander Fomin, Buça'daki olayların çarpıtılmasının Kiev yönetiminin 2014'ten beri sürdürdüğü ilk 'kanla inşa edilmiş mit' olmadığını söyledi; TASS'ta 17 Eylül'de sunulan bir rapor, Buça olaylarının sahte olduğunu ortaya koyuyor. Rus Dışişleri Bakanlığı Sözcüsü Maria Zakharova, Kiev'in öldürülen Azov taburu ve toprak savunma güçleri üyelerinin cesetlerini Buça'da öldürülmüş siviller gibi gösterdiğini belirtti."
   },
   {
    "title": "EU sanctions cause more pain for Italian firms than for Russia — Italy's Deputy PM",
@@ -1103,7 +1211,8 @@
    "published": "2026-09-17",
    "category": "Politika ve Regülasyon",
    "also": [],
-   "title_tr": "AB yaptırımları Rusya'dan çok İtalyan şirketlerine zarar veriyor — İtalya Başbakan Yardımcısı"
+   "title_tr": "AB yaptırımları Rusya'dan çok İtalyan şirketlerine zarar veriyor — İtalya Başbakan Yardımcısı",
+   "summary_tr": "İtalya Başbakan Yardımcısı Matteo Salvini, AB'nin 21 paket yaptırımının Rusya'dan çok İtalyan şirketlerine zarar verdiğini söyledi; 20. paketin metninin 83 sayfa olduğunu belirtti. Salvini, 14 Eylül'de Rusya'da faaliyet gösteren 350 İtalyan firmasının temsilcileriyle görüştü ve hükümetin Rus turistlere vize yasağı önerilerine karşı olduğunu vurguladı."
   },
   {
    "title": "Russia committed to bringing Scythian gold back to rightful home in Crimea — historian",
@@ -1115,7 +1224,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya, İskit altınlarını Kırım'daki asıl yurduna geri getirmeye kararlı — tarihçi"
+   "title_tr": "Rusya, İskit altınlarını Kırım'daki asıl yurduna geri getirmeye kararlı — tarihçi",
+   "summary_tr": "Rus Askeri Tarih Derneği bilim direktörü Mikhail Myagkov, Kasım 2023'te Kiev'e nakledilen ve halen Kiev Peçersk Lavra'da tutulan İskit altınlarının Kırım'a iadesi için Rusya'nın mücadeleyi zamanaşımı olmaksızın sürdüreceğini açıkladı. Şubat-Ağustos 2014'te Amsterdam'daki Allard Pierson Müzesi'nde sergilenen 2.000'den fazla eser, Haziran 2023'te Hollanda Yüksek Mahkemesi kararıyla Ukrayna'ya devredilmişti."
   },
   {
    "title": "iPhone 18 Pro Max hits Moscow black market ahead of launch, fetching up to $10,700",
@@ -1127,7 +1237,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "iPhone 18 Pro Max, lansmandan önce Moskova karaborsasında 10.700 dolara kadar satılıyor"
+   "title_tr": "iPhone 18 Pro Max, lansmandan önce Moskova karaborsasında 10.700 dolara kadar satılıyor",
+   "summary_tr": "Apple'ın iPhone 18 Pro Max modeli, 18 Eylül'deki resmi küresel satış tarihinden bir gün önce Moskova'daki 'Gorbuşka' elektronik pazarında 550.000-900.000 ruble (6.534-10.692 dolar) fiyatla karaborsada satışa çıktı. Satıcılar, arz arttıkça fiyatların 350.000-400.000 ruble aralığına düşmesini bekliyor."
   },
   {
    "title": "Expert says Moldova seeks to bring Gagauzia, Transnistria under control with Kiev’s help",
@@ -1139,7 +1250,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Uzman, Moldova'nın Kiev'in yardımıyla Gagavuzya ve Transdinyester'i kontrol altına almaya çalıştığını söylüyor"
+   "title_tr": "Uzman, Moldova'nın Kiev'in yardımıyla Gagavuzya ve Transdinyester'i kontrol altına almaya çalıştığını söylüyor",
+   "summary_tr": "TASS'a yazan tarihçi Igor Ivanenko, Moldova yönetiminin Ukrayna'nın kapattığı sınırlardan yararlanarak Gagavuzya ve Transdinyester üzerindeki kontrolünü artırmaya çalıştığını belirtti; Transdinyester'e ek vergiler getirildi ve Gagavuzya'nın bazı yetkileri Anayasa Mahkemesi kararıyla iptal edildi. Habere göre bugün Transdinyester'in Rusya'ya bağlanma yönündeki bağımsızlık referandumunun (yüzde 97 evet) 20. yıldönümü, Gagavuzya'da ise 2014'teki benzer referandumun (yüzde 96 evet) yıldönümü olarak anılıyor."
   },
   {
    "title": "Russia-China military cooperation potential lies in AI, drones — expert",
@@ -1151,7 +1263,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya-Çin askeri işbirliğinin potansiyeli yapay zeka ve dronlarda yatıyor — uzman"
+   "title_tr": "Rusya-Çin askeri işbirliğinin potansiyeli yapay zeka ve dronlarda yatıyor — uzman",
+   "summary_tr": "Tsinghua Üniversitesi'nden Prof. Wu Dahui, TASS'a yaptığı açıklamada Rusya-Çin askeri işbirliğinin gelecekte yapay zeka, büyük veri, siber tehditler ve insansız sistemler gibi yeni askeri teknolojilere yönelmesi gerektiğini söyledi. Geleneksel işbirliği alanlarının (tatbikatlar, deniz ve hava devriyeleri) zaten yüksek seviyede olduğunu belirtti."
   },
   {
    "title": "The West turns blind eye on Ukrainian bombing strikes on Russian polling stations — MFA",
@@ -1163,7 +1276,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Batı, Ukrayna'nın Rus seçim sandıklarına yönelik saldırılarına göz yumuyor — Dışişleri Bakanlığı"
+   "title_tr": "Batı, Ukrayna'nın Rus seçim sandıklarına yönelik saldırılarına göz yumuyor — Dışişleri Bakanlığı",
+   "summary_tr": "Rusya Dışişleri Bakanlığı Sözcüsü Maria Zakharova, Batı'nın Rusya'daki oy verme merkezlerine yönelik Ukrayna saldırılarını ve can kayıplarını görmezden geldiğini söyledi. 18-20 Eylül'de yapılacak Devlet Duması seçimlerinde Donetsk, Lugansk, Herson ve Zaporojye bölgeleri ilk kez oy kullanacak ve 10 parti yarışacak."
   },
   {
    "title": "Russia’s electricity exports down slightly in eight months of this year",
@@ -1175,7 +1289,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya'nın elektrik ihracatı bu yılın ilk sekiz ayında hafif düştü"
+   "title_tr": "Rusya'nın elektrik ihracatı bu yılın ilk sekiz ayında hafif düştü",
+   "summary_tr": "Inter RAO yönetim kurulu üyesi Alexandra Panina, Rusya'nın 2026 yılının Ocak-Ağustos döneminde elektrik ihracatının geçen yılın aynı dönemine göre hafif düşüş gösterdiğini açıkladı. Yılın ilk yarısında Kazakistan'a ihracat %20,3 artışla 1,68 milyar kWh'ye çıkarken, Moğolistan'a sevkiyat %6 azaldı."
   },
   {
    "title": "Kiev portrays killed fighters as allegedly civilian victims of Bucha events — Russia’s MFA",
@@ -1187,7 +1302,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Kiev, öldürülen savaşçıları Bucha olaylarının sözde sivil kurbanları olarak gösteriyor — Rusya Dışişleri Bakanlığı"
+   "title_tr": "Kiev, öldürülen savaşçıları Bucha olaylarının sözde sivil kurbanları olarak gösteriyor — Rusya Dışişleri Bakanlığı",
+   "summary_tr": "Rusya Dışişleri Bakanlığı Sözcüsü Maria Zakharova, Kiev yönetiminin öldürülen Azov taburu militanlarını Bucha'da öldürülmüş siviller olarak gösterdiğini iddia etti. TASS'ta düzenlenen basın toplantısında, Ukraynalı Neonaziler'in Suçlarına İlişkin Uluslararası Kamu Mahkemesi'nin raporunun Bucha olaylarındaki sahteciliği ortaya koyduğunu belirtti."
   },
   {
    "title": "Russia says report on Bucha falsification to be distributed at Dialogue on Fakes 4.0 forum",
@@ -1199,7 +1315,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya, Bucha sahtekarlığına ilişkin raporun Dialogue on Fakes 4.0 forumunda dağıtılacağını açıkladı"
+   "title_tr": "Rusya, Bucha sahtekarlığına ilişkin raporun Dialogue on Fakes 4.0 forumunda dağıtılacağını açıkladı",
+   "summary_tr": "Zakharova, Bucha olaylarının sahte olduğunu ortaya koyan raporun 22 Eylül'de Moskova'da düzenlenecek ve yaklaşık 2.000 gazeteci ile bloggerin katılacağı 'Dialogue on Fakes 4.0' forumunda dağıtılacağını duyurdu. Forumda uluslararası bağımsız soruşturma çağrısı yapılması bekleniyor."
   },
   {
    "title": "Russia to present report on provocation in Bucha during UN General Assembly",
@@ -1211,7 +1328,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya, BM Genel Kurulu sırasında Bucha'daki provokasyona ilişkin raporu sunacak"
+   "title_tr": "Rusya, BM Genel Kurulu sırasında Bucha'daki provokasyona ilişkin raporu sunacak",
+   "summary_tr": "Rusya Dışişleri Bakanlığı Sözcüsü Maria Zakharova, Dışişleri Bakanı Sergey Lavrov başkanlığındaki Rus heyetinin BM Genel Kurulu'nda Bucha'daki provokasyona ilişkin bir rapor sunacağını açıkladı. Rapor, Ukraynalı Neo-Naziler Tarafından İşlenen Suçlar Uluslararası Kamu Mahkemesi tarafından hazırlandı ve Bucha olaylarının çarpıtıldığını öne sürüyor."
   },
   {
    "title": "Tribunal says has evidence Ukraine deliberately killed own citizens",
@@ -1223,7 +1341,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Mahkeme, Ukrayna'nın kendi vatandaşlarını kasıtlı olarak öldürdüğüne dair kanıtı olduğunu açıkladı"
+   "title_tr": "Mahkeme, Ukrayna'nın kendi vatandaşlarını kasıtlı olarak öldürdüğüne dair kanıtı olduğunu açıkladı",
+   "summary_tr": "Ukraynalı Neo-Naziler Tarafından İşlenen Suçlar Uluslararası Kamu Mahkemesi Başkanı Maxim Grigoryev, Kiev yönetiminin propaganda amacıyla kendi sivillerini kasıtlı olarak öldürdüğüne dair kanıtları bulunduğunu ve Batılı gazetecilerin bu sahnelenen olaylara dahil olduğunu iddia etti. Grigoryev, uluslararası toplumu bu konuda sessiz kalmamaya çağırdı."
   },
   {
    "title": "Russia says harbors no illusions about new international investigations into Bucha",
@@ -1235,7 +1354,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya, Bucha ile ilgili yeni uluslararası soruşturmalar konusunda hiçbir yanılsaması olmadığını söyledi"
+   "title_tr": "Rusya, Bucha ile ilgili yeni uluslararası soruşturmalar konusunda hiçbir yanılsaması olmadığını söyledi",
+   "summary_tr": "Zakharova, Bucha'da öldürüldüğü öne sürülen sivillerin bazılarının şehirde hiç yaşamadığına dair yeni verilerin uluslararası medya tarafından araştırılması çağrısında bulundu, ancak BM'nin taraflı tutumu nedeniyle bu konuda bir beklentisi olmadığını belirtti. Rapor'un Kiev yönetiminin militan ve askerleri sivil olarak gösterdiğine dair kanıtlar içerdiğini savundu."
   },
   {
    "title": "Russia’s Kalashnikov Group delivers large batch of SVD sniper rifles to state customer",
@@ -1247,7 +1367,8 @@
    "published": "2026-09-17",
    "category": "Hafif Silah ve Mayın",
    "also": [],
-   "title_tr": "Rusya'nın Kalashnikov Group şirketi, devlet müşterisine büyük bir SVD keskin nişancı tüfeği partisi teslim etti"
+   "title_tr": "Rusya'nın Kalashnikov Group şirketi, devlet müşterisine büyük bir SVD keskin nişancı tüfeği partisi teslim etti",
+   "summary_tr": "Kalashnikov Group, 2026 devlet sözleşmeleri kapsamında Hava İndirme Kuvvetleri, Deniz Piyadeleri ve özel harekat birimleri için katlanır dipçikli 7,62 mm SVDS Dragunov keskin nişancı tüfeklerinden büyük bir parti teslim etti. Şirket, 2025'te SVDS üretimini 2024'e kıyasla on üç katına çıkardığını ve talebin 2026'da da sürdüğünü bildirdi."
   },
   {
    "title": "Russia's international reserves up $4.7 bln to $758.2 bln in a week — Central Bank",
@@ -1259,7 +1380,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya'nın uluslararası rezervleri bir haftada 4,7 milyar dolar artarak 758,2 milyar dolara yükseldi — Merkez Bankası"
+   "title_tr": "Rusya'nın uluslararası rezervleri bir haftada 4,7 milyar dolar artarak 758,2 milyar dolara yükseldi — Merkez Bankası",
+   "summary_tr": "Rusya Merkez Bankası'na göre ülkenin uluslararası rezervleri 11 Eylül 2026 itibarıyla bir haftada 4,7 milyar dolar (%0,6) artışla 758,2 milyar dolara yükseldi. Artış esas olarak pozitif yeniden değerlemeden kaynaklandı; 4 Eylül'de rezervler 753,5 milyar dolar seviyesindeydi."
   },
   {
    "title": "Rosoboronexport presents Amur-1650 submarine, Karakurt corvette in Pretoria",
@@ -1331,7 +1453,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya Dışişleri Bakanlığı, Bucha sahtekarlığını İngiliz medyasının organize ettiğini hatırlattı"
+   "title_tr": "Rusya Dışişleri Bakanlığı, Bucha sahtekarlığını İngiliz medyasının organize ettiğini hatırlattı",
+   "summary_tr": "Rusya Dışişleri Bakanlığı Sözcüsü Maria Zakharova, İngiliz medyasının ve BBC'nin, İstanbul görüşmelerini bozmak amacıyla Buça'daki olayların küresel çapta çarpıtılmış anlatımını organize ettiğini ve Boris Johnson'a bu senaryoda başrol verildiğini iddia etti. Rusya, 30 Mart 2022'de Kiev yakınları ve Buça'dan iyi niyet göstergesi olarak çekilmiş, birkaç gün sonra Batı televizyonlarında sokaklarda cesetlerin göründüğü görüntüler yayınlanmıştı."
   },
   {
    "title": "Fact-checkers from all over world investigate Bucha events — Russian Foreign Ministry",
@@ -1343,7 +1466,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Dünyanın dört bir yanından doğrulama uzmanları Bucha olaylarını araştırıyor — Rusya Dışişleri Bakanlığı"
+   "title_tr": "Dünyanın dört bir yanından doğrulama uzmanları Bucha olaylarını araştırıyor — Rusya Dışişleri Bakanlığı",
+   "summary_tr": "Zakharova, dünyanın dört bir yanından fact-checker'ların Buça provokasyonunu birden fazla yönden araştırdığını ve bu olayı çarpıtanların hesap vermesi gerektiğini söyledi. Rusya'da Rus ordusu hakkında sahte bilgi yayma suçlamasıyla ceza soruşturması açılmıştı."
   },
   {
    "title": "Russia says UN secretary-general involved in plot to blame Moscow for Bucha provocation",
@@ -1355,7 +1479,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya, BM Genel Sekreteri'nin Bucha provokasyonunun suçunu Moskova'ya yıkma planına dahil olduğunu söyledi"
+   "title_tr": "Rusya, BM Genel Sekreteri'nin Bucha provokasyonunun suçunu Moskova'ya yıkma planına dahil olduğunu söyledi",
+   "summary_tr": "Zakharova, BM Genel Sekreteri Antonio Guterres'i Buça'daki cinayetlerden Rusya'yı sorumlu tutma planına dahil olmak ve tarafsızlık ilkesini çiğnemekle suçladı; Aralık 2022'de yayımlanan BM İnsan Hakları Yüksek Komiseri Volker Türk'ün raporunun ana çarpıtılmış kaynaklardan biri olduğunu ve Guterres'in yıllardır bulgularını yeniden incelemediğini belirtti."
   },
   {
    "title": "Russia declares late opposition activist’s daughter internationally wanted",
@@ -1367,7 +1492,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya, hayatını kaybeden muhalefet aktivistinin kızını uluslararası arananlar listesine aldı"
+   "title_tr": "Rusya, hayatını kaybeden muhalefet aktivistinin kızını uluslararası arananlar listesine aldı",
+   "summary_tr": "Rusya, istenmeyen bir kuruluşun üyesi olmakla suçlanan merhum muhalif Boris Nemtsov'un kızı Zhanna Nemtsova'yı uluslararası aranan listesine aldı; Moskova Şehir Mahkemesi 31 Temmuz'da verilen gıyabi tutuklama kararını onayladı. Nemtsova, Almanya'nın Bonn şehrinde faaliyet gösteren ve 2024'te Rusya'da istenmeyen ilan edilen Boris Nemtsov Özgürlük Vakfı'nın kurucu ortağı ve başkanı."
   },
   {
    "title": "Most mercenaries go to Ukraine only for money — former SBU officer",
@@ -1379,7 +1505,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Paralı askerlerin çoğu Ukrayna'ya sadece para için gidiyor — eski SBU yetkilisi"
+   "title_tr": "Paralı askerlerin çoğu Ukrayna'ya sadece para için gidiyor — eski SBU yetkilisi",
+   "summary_tr": "Eski SBU görevlisi Vasili Prozorov, Rusya karşıtlığı motivasyonuyla Ukrayna'ya gelen paralı askerlerin çoğunun Rus ordusu tarafından etkisiz hale getirildiğini, şimdi ise ağırlıklı olarak Latin Amerika'dan para amaçlı paralı askerlerin geldiğini söyledi. Açıklama, Prozorov'un yabancı paralı askerlerin 2014'ten bu yana Ukrayna'daki rolünü anlattığı kitabının tanıtımı için TASS'ta düzenlenen basın toplantısında yapıldı."
   },
   {
    "title": "Nearly 14,000 Russians abroad have already voted early — Election Commission chairwoman",
@@ -1391,7 +1518,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Yurt dışındaki yaklaşık 14.000 Rus vatandaşı şimdiden erken oy kullandı — Seçim Komisyonu Başkanı"
+   "title_tr": "Yurt dışındaki yaklaşık 14.000 Rus vatandaşı şimdiden erken oy kullandı — Seçim Komisyonu Başkanı",
+   "summary_tr": "Rusya Merkez Seçim Komisyonu Başkanı Ella Pamfilova, yurt dışında yaşayan yaklaşık 14.000 Rus vatandaşının Devlet Duması seçimleri için erken oy kullandığını açıkladı. Bonn'daki konsolosluğun kapatılması gibi zorluklara rağmen diplomatların yurt dışındaki vatandaşların oy kullanmasını sağladığını belirtti."
   },
   {
    "title": "Price of Brent oil down below $102 per barrel on London’s ICE first since September 10",
@@ -1403,7 +1531,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Brent petrolün fiyatı, Londra ICE borsasında 10 Eylül'den bu yana ilk kez varil başına 102 doların altına düştü"
+   "title_tr": "Brent petrolün fiyatı, Londra ICE borsasında 10 Eylül'den bu yana ilk kez varil başına 102 doların altına düştü",
+   "summary_tr": "Londra ICE borsasında Kasım 2026 vadeli Brent petrol fiyatı 10 Eylül'den bu yana ilk kez 102 doların altına inerek %3,7 düşüşle 101,91 dolara geriledi. Ekim vadeli WTI petrolü ise %2,59 düşüşle 99,78 dolara indi."
   },
   {
    "title": "UN chief fails to provide names of Bucha dead despite requests — diplomat",
@@ -1415,7 +1544,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "BM Genel Sekreteri, taleplere rağmen Bucha'daki ölülerin isimlerini sağlayamadı — diplomat"
+   "title_tr": "BM Genel Sekreteri, taleplere rağmen Bucha'daki ölülerin isimlerini sağlayamadı — diplomat",
+   "summary_tr": "Rusya Dışişleri Bakanlığı Sözcüsü Maria Zakharova, BM Genel Sekreteri Antonio Guterres'in Bucha'da öldürülenlere ait isim listelerini beş yıla yakın süredir tekrarlanan taleplere rağmen sunmadığını söyledi. Açıklama, Ukraynalı neo-Nazilerin suçlarına ilişkin bir raporu sunan TASS basın toplantısında yapıldı."
   },
   {
    "title": "NATO recon aircraft flying over Poland parallel to Kaliningrad Region border",
@@ -1427,7 +1557,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "NATO keşif uçağı, Kaliningrad Bölgesi sınırına paralel olarak Polonya üzerinde uçuyor"
+   "title_tr": "NATO keşif uçağı, Kaliningrad Bölgesi sınırına paralel olarak Polonya üzerinde uçuyor",
+   "summary_tr": "AB hava trafik kontrol kaynağına göre NATO'ya ait bir Bombardier ARTEMIS II keşif uçağı, Romanya'daki Constanta üssünden kalkarak Polonya hava sahasında Kaliningrad sınırına paralel, ancak sınıra yaklaşmadan uçuyor. Aynı anda Lüksemburg'a ait bir NATO AWACS uçağı da Poznan'ın güneydoğusunda belirli bir güzergahta tur atıyor."
   },
   {
    "title": "Russia tries to inform countries whose citizens fighting as mercenaries in Ukraine — envoy",
@@ -1439,7 +1570,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya, vatandaşları Ukrayna'da paralı asker olarak savaşan ülkeleri bilgilendirmeye çalışıyor — temsilci"
+   "title_tr": "Rusya, vatandaşları Ukrayna'da paralı asker olarak savaşan ülkeleri bilgilendirmeye çalışıyor — temsilci",
+   "summary_tr": "Rusya Dışişleri Bakanlığı Kiev rejiminin suçlarından sorumlu Büyükelçi Rodion Miroshnik, bazı ülkelerin talebi üzerine kendi vatandaşlarının Ukrayna'da paralı asker olarak savaştığına dair bilgileri ilgili ülkelerle paylaştıklarını söyledi. Bazı paralı askerlerin öldürüldüğünü, bazılarının hâlâ çatıştığını belirtti."
   },
   {
    "title": "Some forces in Europe ready to hear Russia out on issue of mercenaries in Ukraine — envoy",
@@ -1451,7 +1583,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Avrupa'daki bazı güçler, Ukrayna'daki paralı askerler konusunda Rusya'yı dinlemeye hazır — temsilci"
+   "title_tr": "Avrupa'daki bazı güçler, Ukrayna'daki paralı askerler konusunda Rusya'yı dinlemeye hazır — temsilci",
+   "summary_tr": "Rusya Dışişleri Bakanlığı Büyükelçisi Rodion Miroshnik, Ukrayna'daki yabancı paralı askerlere ilişkin Rus açıklamalarını dikkate almaya hazır Avrupalı siyasi güçler bulunduğunu, bunların Brüksel'deki AB üçlüsünden farklı olarak Ukrayna'ya yardımda suç ortaklığı taşımadığını söyledi."
   },
   {
    "title": "Russia immediately declared in 2022 that events in Bucha were provocation — MFA",
@@ -1463,7 +1596,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya, Bucha'daki olayların bir provokasyon olduğunu 2022'de derhal açıkladı — Dışişleri Bakanlığı"
+   "title_tr": "Rusya, Bucha'daki olayların bir provokasyon olduğunu 2022'de derhal açıkladı — Dışişleri Bakanlığı",
+   "summary_tr": "Rusya Dışişleri Bakanlığı Sözcüsü Maria Zakharova, Rusya'nın 2022'de Bucha'daki olayların bir provokasyon ve dezenformasyon olduğunu hemen açıkladığını belirtti; Rus ordusu 30 Mart 2022'de Kiev bölgesinden, Bucha dahil, iyi niyet göstergesi olarak çekilmiş, birkaç gün sonra Batılı yayın kuruluşları sokaklarda cesetler gösteren görüntüler yayınlamıştı."
   },
   {
    "title": "Over 60,000 Russian officials convicted of corruption in 5 years — prosecutor general",
@@ -1475,7 +1609,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "5 yılda 60.000'den fazla Rus yetkili yolsuzluktan mahkum edildi — başsavcı"
+   "title_tr": "5 yılda 60.000'den fazla Rus yetkili yolsuzluktan mahkum edildi — başsavcı",
+   "summary_tr": "Rusya Başsavcısı Alexander Gutsan, son beş yılda 60.000'den fazla yetkilinin yolsuzluktan mahkum edildiğini ve el konulan malların değerinin 800 milyar ruble (9,5 milyar dolar)'yi aştığını açıkladı; Şubat 2026'da kabul edilen bir federal yasa kripto para birimlerinin yolsuzluk davalarında el konulmasını da mümkün kıldı."
   },
   {
    "title": "IOC greenlights rowing events on crocodile-infested river at 2032 Olympics",
@@ -1487,7 +1622,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "IOC, 2032 Olimpiyatları'nda kürek yarışlarına timsah kaynayan nehirde onay verdi"
+   "title_tr": "IOC, 2032 Olimpiyatları'nda kürek yarışlarına timsah kaynayan nehirde onay verdi",
+   "summary_tr": "Uluslararası Olimpiyat Komitesi, 2032 Brisbane Olimpiyat ve Paralimpik Oyunları'nda kürek ve kano sprint yarışmalarının Queensland'in Rockhampton kentindeki timsahlarla dolu Fitzroy Nehri'nde yapılmasını onayladı; oyunlar 23 Temmuz-8 Ağustos, Paralimpik Oyunlar ise 24 Ağustos-5 Eylül 2032 tarihlerinde düzenlenecek."
   },
   {
    "title": "CIS meeting to discuss supplies of military equipment — Russian Defense Ministry",
@@ -1499,7 +1635,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "BDT toplantısında askeri teçhizat tedariki görüşülecek — Rusya Savunma Bakanlığı"
+   "title_tr": "BDT toplantısında askeri teçhizat tedariki görüşülecek — Rusya Savunma Bakanlığı",
+   "summary_tr": "Kırgızistan'ın Cholpon-Ata kentinde başlayan BDT Savunma Bakanları Konseyi Hava Savunma Koordinasyon Komitesi'nin 63. toplantısında, 2026 yılına ait askeri teçhizat teslimatları ile 2027 için ortak askeri tatbikat ve bilimsel araştırma planları görüşülüyor."
   },
   {
    "title": "Forcing shift away from hydrocarbons is 'green hypocrisy' — Russian Deputy FM",
@@ -1511,7 +1648,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Hidrokarbonlardan uzaklaşmaya zorlamak 'yeşil ikiyüzlülük' — Rusya Dışişleri Bakan Yardımcısı"
+   "title_tr": "Hidrokarbonlardan uzaklaşmaya zorlamak 'yeşil ikiyüzlülük' — Rusya Dışişleri Bakan Yardımcısı",
+   "summary_tr": "Rus Dışişleri Bakan Yardımcısı Alexander Alimov, bazı gelişmiş ülkelerin hidrokarbonlardan hızlı ve zorunlu vazgeçilmesini dayatmasını 'yeşil ikiyüzlülük' olarak nitelendirdi ve tamamen yeşil ekonomilerin şu an mevcut olmadığını söyledi. Alimov bu tür politikaların küresel ısınmayı yavaşlatmak için kabul edilemez ve yapay bir reçete olduğunu belirtti."
   },
   {
    "title": "Drug cartels send gunmen to Ukraine to gain combat experience — former SBU officer",
@@ -1523,7 +1661,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Uyuşturucu kartelleri savaş deneyimi kazanmak için Ukrayna'ya silahlı adam gönderiyor — eski SBU yetkilisi"
+   "title_tr": "Uyuşturucu kartelleri savaş deneyimi kazanmak için Ukrayna'ya silahlı adam gönderiyor — eski SBU yetkilisi",
+   "summary_tr": "Eski SBU subayı Vasili Prozorov, Kolombiyalı ve Meksikalı uyuşturucu kartellerinin özellikle drone kullanımı konusunda cephe deneyimi kazanmak için silahlı adamlarını Ukrayna tarafında savaşmaya gönderdiğini iddia etti. Prozorov'a göre deneyim kazanan bu kişiler Batı tarafından Ukrayna'ya tedarik edilen silahlarla Latin Amerika'ya dönüyor ve kartellerden ikramiye alıyor; ayrıca Kolombiya'da hükümete ait helikopterlerin bu kişilerce kullanılan FPV drone'larla düşürüldüğü örnekler verildi."
   },
   {
    "title": "Price of Brent oil down below $103 per barrel on London’s ICE first since September 10",
@@ -1535,31 +1674,8 @@
    "published": "2026-09-17",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Brent petrolün varil fiyatı Londra ICE'de 10 Eylül'den bu yana ilk kez $103'ün altına indi"
-  },
-  {
-   "title": "Many African countries expressing interest in Kalashnikov products — company",
-   "url": "https://tass.com/defense/2188995",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-17",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Birçok Afrika ülkesi Kalashnikov ürünlerine ilgi gösteriyor — şirket"
-  },
-  {
-   "title": "Free trade deal between EAEU, Indonesia to enter into force by year-end — EEC",
-   "url": "https://tass.com/economy/2188993",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-17",
-   "category": "İhale ve Sözleşmeler",
-   "also": [],
-   "title_tr": "EAEU-Endonezya serbest ticaret anlaşması yıl sonuna kadar yürürlüğe girecek — EEC"
+   "title_tr": "Brent petrolün varil fiyatı Londra ICE'de 10 Eylül'den bu yana ilk kez $103'ün altına indi",
+   "summary_tr": "Londra ICE borsasında Kasım 2026 vadeli Brent petrol fiyatı, 10 Eylül 2026'dan bu yana ilk kez varil başına 103 doların altına inerek yüzde 2,78 düşüşle 102,89 dolara geriledi, ardından kayıplarını yüzde 2,54'e daraltarak 103,14 dolara yükseldi. Aynı dönemde Ekim vadeli WTI petrolü de yüzde 1,86 düşüşle 100,52 dolardan işlem gördü."
   },
   {
    "title": "Schwerer Waffenträger Infanterie: Ausbildungsstart in Bergen",
@@ -1643,6 +1759,18 @@
    "category": "Deniz ve İnsansız Sistemler",
    "also": [],
    "title_tr": "3. İstif Sınıfı Fırkateyn İzmit'in Testleri Başladı"
+  },
+  {
+   "title": "US families ramp up efforts for loved ones’ release from China ahead of Xi’s visit",
+   "url": "https://www.scmp.com/news/china/diplomacy/article/3367914/us-families-ramp-efforts-loved-ones-release-china-ahead-xis-visit?utm_source=rss_feed",
+   "source": "SCMP (Çin)",
+   "country": "HK",
+   "lang": "en",
+   "tier": "C",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "ABD aileleri, Xi'nin ziyareti öncesi yakınlarının Çin'den serbest bırakılması için çabaları artırıyor"
   },
   {
    "title": "US trade chief pressed Brazil to review Anglo American nickel sale to China",
@@ -2749,6 +2877,42 @@
    "title_tr": "Unseenlabs Ve Airbus, Fransa'nın Geleceğin Askeri Sinyal İstihbaratı Uydularını Geliştirecek"
   },
   {
+   "title": "AVI-SPL and Matternet Partner on Drone Delivery for Field Technicians",
+   "url": "https://dronelife.com/2026/09/17/avi-spl-and-matternet-partner-on-drone-delivery-for-field-technicians/",
+   "source": "DroneLife",
+   "country": "US",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "C-UAS ve Hava Savunma",
+   "also": [],
+   "title_tr": "AVI-SPL ve Matternet, Saha Teknisyenleri için İnsansız Hava Aracı Teslimatında iş birliği yaptı"
+  },
+  {
+   "title": "City of Raleigh Uses Drones, AI Technology to Create Digital Twin",
+   "url": "https://dronelife.com/2026/09/17/city-of-raleigh-uses-drones-ai-technology-to-create-digital-twin/",
+   "source": "DroneLife",
+   "country": "US",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Raleigh Şehri, Dijital İkiz oluşturmak için İnsansız Hava Araçları ve Yapay Zeka Teknolojisini kullanıyor"
+  },
+  {
+   "title": "Northern Plains UAS Test Site Flies Medical and Agricultural BVLOS Demos on Vantis at NASAO",
+   "url": "https://dronelife.com/2026/09/17/northern-plains-uas-test-site-flies-medical-and-agricultural-bvlos-demos-on-vantis-at-nasao/",
+   "source": "DroneLife",
+   "country": "US",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "C-UAS ve Hava Savunma",
+   "also": [],
+   "title_tr": "Northern Plains UAS Test Site, NASAO'da Vantis'te Tıbbi ve Tarımsal BVLOS gösterimlerini uçurdu"
+  },
+  {
    "title": "SkyDrive and Verty Target Commercial eVTOL Operations in South Korea by 2028",
    "url": "https://dronelife.com/2026/09/17/skydrive-verty-south-korea-evtol-operations/",
    "source": "DroneLife",
@@ -2785,6 +2949,18 @@
    "title_tr": "Haritalardan Operasyonel İstihbarata: Savunma Sektörü Haritalama İş Akışını Nasıl Değiştiriyor"
   },
   {
+   "title": "Africom’s new Defense Economics Office set up to drive outsized security returns",
+   "url": "https://defensescoop.com/2026/09/17/africom-defense-economics-office/",
+   "source": "DefenseScoop",
+   "country": "US",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Africom'un yeni Savunma Ekonomisi Bürosu, aşırı güvenlik kazançları sağlamak için kuruldu"
+  },
+  {
    "title": "Space Force advancing on-orbit tracking for airborne and ground-based targets",
    "url": "https://defensescoop.com/2026/09/17/space-force-advancing-on-orbit-tracking-for-airborne-and-ground-based-targets/",
    "source": "DefenseScoop",
@@ -2795,6 +2971,121 @@
    "category": "Genel Savunma Gündemi",
    "also": [],
    "title_tr": "Uzay Kuvvetleri, Havadan Ve Yerden Hedefler İçin Yörünge Üstü Takip Kapasitesini Geliştiriyor"
+  },
+  {
+   "title": "ABD yönetimi, Suudi Arabistan’a 24,3 milyar dolarlık 48 adet F-35 satışına onay verdi",
+   "url": "https://defensehere.com/tr/abd-yonetimi-suudi-arabistana-243-milyar-dolarlik-48-adet-f-35-satisina-onay-verdi/",
+   "source": "DefenseHere",
+   "country": "TR",
+   "lang": "tr",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "ABD yönetimi, Suudi Arabistan'a 24,3 milyar dolarlık 48 adet F-35 satışına onay verdi"
+  },
+  {
+   "title": "Indra, SQUALL seyir füzesini tanıttı",
+   "url": "https://defensehere.com/tr/indra-squall-seyir-fuzesini-tanitti/",
+   "source": "DefenseHere",
+   "country": "TR",
+   "lang": "tr",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "HAVELSAN Girişimcilik Merkezi için başvurular başladı",
+   "url": "https://defensehere.com/tr/havelsan-girisimcilik-merkezi-icin-basvurular-basladi/",
+   "source": "DefenseHere",
+   "country": "TR",
+   "lang": "tr",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Viasat ve PGZ uzay alanında iş birliği planlıyor",
+   "url": "https://defensehere.com/tr/viasat-ve-pgz-uzay-alaninda-is-birligi-planliyor/",
+   "source": "DefenseHere",
+   "country": "TR",
+   "lang": "tr",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "ABD ve Lockheed Martin’den AIM-260 üretim kapasitesini artırma anlaşması",
+   "url": "https://defensehere.com/tr/abd-ve-lockheed-martinden-aim-260-uretim-kapasitesini-artirma-anlasmasi/",
+   "source": "DefenseHere",
+   "country": "TR",
+   "lang": "tr",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Rakip Duyuruları",
+   "also": [],
+   "title_tr": "ABD ve Lockheed Martin'den AIM-260 üretim kapasitesini artırma anlaşması"
+  },
+  {
+   "title": "NASA’nın Ay Keşif Uydusu, Ay’da devasa krater keşfetti",
+   "url": "https://defensehere.com/tr/nasanin-ay-kesif-uydusu-ayda-devasa-krater-kesfetti/",
+   "source": "DefenseHere",
+   "country": "TR",
+   "lang": "tr",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "NASA'nın Ay Keşif Uydusu, Ay'da devasa krater keşfetti"
+  },
+  {
+   "title": "TÜRKSAT 7A uydusu çalışmalarında son aşamaya gelindi",
+   "url": "https://defensehere.com/tr/turksat-7a-uydusu-calismalarinda-son-asamaya-gelindi/",
+   "source": "DefenseHere",
+   "country": "TR",
+   "lang": "tr",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "5G yatırım yükümlülükleri için sektör paydaşları bir araya geldi",
+   "url": "https://defensehere.com/tr/5g-yatirim-yukumlulukleri/",
+   "source": "DefenseHere",
+   "country": "TR",
+   "lang": "tr",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": []
+  },
+  {
+   "title": "Yunanistan’a 60’ıncı F-16 Viper savaş uçağı teslim edildi",
+   "url": "https://defensehere.com/tr/yunanistana-60inci-f-16-viper-savas-ucagi-teslim-edildi/",
+   "source": "DefenseHere",
+   "country": "TR",
+   "lang": "tr",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Yunanistan'a 60'ıncı F-16 Viper savaş uçağı teslim edildi"
+  },
+  {
+   "title": "Endonezya heyeti MKE’de: İhracat ve iş birliği alanları görüşüldü",
+   "url": "https://defensehere.com/tr/endonezya-heyeti-mkede/",
+   "source": "DefenseHere",
+   "country": "TR",
+   "lang": "tr",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "MKE",
+   "also": [],
+   "title_tr": "Endonezya heyeti MKE'de: İhracat ve iş birliği alanları görüşüldü"
   },
   {
    "title": "PAF Accepts Second Batch of Bell 412EPX Aircraft",
@@ -3651,6 +3942,18 @@
    "title_tr": "Özel Fotoğraflar, İran'ın Saldırısının Körfez'deki ABD Üssünü Yok Ettiğini Ortaya Koyuyor"
   },
   {
+   "title": "BAE Systems Australia secures $32 million contract to keep Mk 45 naval guns combat-ready on Hobart destroyers and Anzac frigates",
+   "url": "https://defence-industry.eu/bae-systems-australia-secures-32-million-contract-to-keep-mk-45-naval-guns-combat-ready-on-hobart-destroyers-and-anzac-frigates/",
+   "source": "Defence Industry Europe",
+   "country": "EU",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "Deniz ve İnsansız Sistemler",
+   "also": [],
+   "title_tr": "BAE Systems Australia, Hobart destroyerları ve Anzac fırkateyni üzerinde Mk 45 deniz toplarını savaş hazırlığında tutmak için 32 milyon dolarlık sözleşmeyi güvence altına aldı"
+  },
+  {
    "title": "U.S. Department of States approves potential $24.3 billion sale of 48 Lockheed Martin F-35 Lightning II stealth fighters to Saudi Arabia",
    "url": "https://defence-industry.eu/u-s-department-of-states-approves-potential-24-3-billion-sale-of-48-lockheed-martin-f-35-lightning-ii-stealth-fighters-to-saudi-arabia/",
    "source": "Defence Industry Europe",
@@ -3757,18 +4060,6 @@
    "category": "İhale ve Sözleşmeler",
    "also": [],
    "title_tr": "Lockheed Martin, üretim sözleşmesini imzalamasının ardından yalnızca 22 gün sonra GM Defense yapımı ilk PAC-3 MSE bileşenlerini teslim aldı"
-  },
-  {
-   "title": "Hanwha Defense USA says Philadelphia shipyard workforce has doubled to nearly 2,500, aims to restore U.S. Navy shipbuilding at historic yard",
-   "url": "https://defence-industry.eu/hanwha-defense-usa-says-philadelphia-shipyard-workforce-has-doubled-to-nearly-2500-aims-to-restore-u-s-navy-shipbuilding-at-historic-yard/",
-   "source": "Defence Industry Europe",
-   "country": "EU",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-17",
-   "category": "Rakip Duyuruları",
-   "also": [],
-   "title_tr": "Hanwha Defense USA, Philadelphia tersanesindeki iş gücünün yaklaşık 2.500'e ikiye katlandığını açıkladı, tarihi tersanede ABD Donanması gemi inşasını yeniden canlandırmayı hedefliyor"
   },
   {
    "title": "U.S. approves Saudi F-35 sale after year of signals",
@@ -3925,6 +4216,18 @@
    "category": "Genel Savunma Gündemi",
    "also": [],
    "title_tr": "Pakistan, BM Güvenlik Konseyi'ne Afganistan kaynaklı terör tehditlerine gerektiğinde meşru müdafaa çerçevesinde karşılık vereceğini bildirdi"
+  },
+  {
+   "title": "Army adds $234M in undefinitized contract funding for Black Hawk deal",
+   "url": "https://breakingdefense.com/2026/09/army-adds-234m-in-undefinitized-contract-funding-for-black-hawk-deal/",
+   "source": "Breaking Defense",
+   "country": "US",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-17",
+   "category": "İhale ve Sözleşmeler",
+   "also": [],
+   "title_tr": "Ordu, Black Hawk anlaşması için 234 milyon dolarlık tanımlanmamış sözleşme fonu ekledi"
   },
   {
    "title": "Northrop eyes munitions supply work, Lockheed eyes funding: CEOs",
@@ -5344,18 +5647,6 @@
    "title_tr": "FirstEnergy Hibesi, Eğitimciler ve Polis İçin Drone Eğitimini Genişletiyor"
   },
   {
-   "title": "GeoCue Launches TrueView 550 Aerial LiDAR System at INTERGEO",
-   "url": "https://dronelife.com/2026/09/16/high-performance-drone-lidar-geocue/",
-   "source": "DroneLife",
-   "country": "US",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-16",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "GeoCue, TrueView 550 Havadan LiDAR Sistemini INTERGEO'da Tanıttı"
-  },
-  {
    "title": "LaNeve tells soldiers that decision to revert experimental drone unit back to infantry roots predated his tenure as acting Army chief",
    "url": "https://defensescoop.com/2026/09/16/gen-laneve-army-experimental-drone-unit/",
    "source": "DefenseScoop",
@@ -6052,18 +6343,6 @@
    "title_tr": "Dünyanın en çok yönlü saldırı uçaklarından biri C-UAS görevini üstleniyor"
   },
   {
-   "title": "German-Israeli company FTS unveils new light combat vehicle for German Special Forces",
-   "url": "https://breakingdefense.com/2026/09/german-israeli-company-fts-unveils-new-light-airborne-combat-vehicle/",
-   "source": "Breaking Defense",
-   "country": "US",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-16",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Alman-İsrail şirketi FTS, Alman Özel Kuvvetleri için yeni hafif muharebe aracını tanıttı"
-  },
-  {
    "title": "Darwin-based USMC Ospreys hone expeditionary skills in Philippines",
    "url": "https://www.asianmilitaryreview.com/2026/09/darwin-based-usmc-ospreys-hone-expeditionary-skills-in-philippines-foc/",
    "source": "Asian Military Review",
@@ -6186,18 +6465,6 @@
    "title_tr": "ABD'nin yörüngedeki silahları doğrulamasının ardından Çin uzay savaşı konusunda uyardı"
   },
   {
-   "title": "Will ‘transactional’ America assist India in a future border crisis with China?",
-   "url": "https://www.scmp.com/news/china/diplomacy/article/3367644/will-transactional-america-assist-india-future-border-crisis-china?utm_source=rss_feed",
-   "source": "SCMP (Çin)",
-   "country": "HK",
-   "lang": "en",
-   "tier": "C",
-   "published": "2026-09-15",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "'Transaksiyonel' Amerika, Hindistan'a Çin ile gelecekteki bir sınır krizinde yardım edecek mi?"
-  },
-  {
    "title": "DJI Neo 3 Box Leaks With an RC Mini the FCC Already Approved",
    "url": "https://dronexl.co/2026/09/15/dji-neo-3-leak-rc-mini-fcc/",
    "source": "DroneXL",
@@ -6210,18 +6477,6 @@
    "title_tr": "DJI Neo 3 Kutusu, FCC'nin Zaten Onayladığı RC Mini ile Sızdırıldı"
   },
   {
-   "title": "USAFE boss shares ‘vignettes’ for CCA drone employment in Europe",
-   "url": "https://defensescoop.com/2026/09/15/cca-drones-europe-usafe/",
-   "source": "DefenseScoop",
-   "country": "US",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-15",
-   "category": "C-UAS ve Hava Savunma",
-   "also": [],
-   "title_tr": "USAFE komutanı, Avrupa'da CCA drone kullanımına dair 'senaryolar' paylaştı"
-  },
-  {
    "title": "How a MAGA influencer with ties to Russia became Trump’s Arctic adviser",
    "url": "https://www.defenseone.com/ideas/2026/09/how-maga-influencer-ties-russia-became-trumps-arctic-adviser/416013/",
    "source": "Defense One",
@@ -6232,78 +6487,6 @@
    "category": "Genel Savunma Gündemi",
    "also": [],
    "title_tr": "Rusya ile bağlantılı bir MAGA fenomeni Trump'ın Arktik danışmanı nasıl oldu"
-  },
-  {
-   "title": "Agencies spent nearly $10 billion for feds not to work in 2025",
-   "url": "https://www.defenseone.com/policy/2026/09/agencies-spent-nearly-10-billion-feds-not-work-2025/416041/",
-   "source": "Defense One",
-   "country": "US",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-15",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Kurumlar 2025'te federal çalışanların çalışmaması için yaklaşık 10 milyar dolar harcadı"
-  },
-  {
-   "title": "NGA official takes top AI job at Cyber Command",
-   "url": "https://www.defenseone.com/technology/2026/09/nga-official-assumes-top-ai-role-cyber-command/416014/",
-   "source": "Defense One",
-   "country": "US",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-15",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "NGA yetkilisi, Siber Komutanlık'ta üst düzey yapay zeka görevine getirildi"
-  },
-  {
-   "title": "Weekly Threats di Telsy",
-   "url": "https://www.analisidifesa.it/2026/09/weekly-threats-di-telsy-3/",
-   "source": "Analisi Difesa",
-   "country": "IT",
-   "lang": "it",
-   "tier": "B",
-   "published": "2026-09-15",
-   "category": "Topçu ve Mühimmat",
-   "also": [],
-   "title_tr": "Telsy'den Haftalık Tehditler"
-  },
-  {
-   "title": "In orbita i satelliti per l’osservazione Copernicus Sentinel-3C e Earth Explorer FLEX",
-   "url": "https://www.analisidifesa.it/2026/09/in-orbita-i-satelliti-per-losservazione-copernicus-sentinel-3c-e-earth-explorer-flex/",
-   "source": "Analisi Difesa",
-   "country": "IT",
-   "lang": "it",
-   "tier": "B",
-   "published": "2026-09-15",
-   "category": "Topçu ve Mühimmat",
-   "also": [],
-   "title_tr": "Gözlem Uyduları Copernicus Sentinel-3C ve Earth Explorer FLEX Yörüngeye Yerleşti"
-  },
-  {
-   "title": "Frodi e corruzione nelle forniture militari all’Ucraina. Il report svelato dal New York Times",
-   "url": "https://www.analisidifesa.it/2026/09/frodi-e-corruzione-nelle-forniture-militari-allucraina-il-report-svelato-dal-new-york-times/",
-   "source": "Analisi Difesa",
-   "country": "IT",
-   "lang": "it",
-   "tier": "B",
-   "published": "2026-09-15",
-   "category": "Topçu ve Mühimmat",
-   "also": [],
-   "title_tr": "Ukrayna'ya Askeri Tedariklerde Yolsuzluk ve Rüşvet. New York Times'ın Ortaya Çıkardığı Rapor"
-  },
-  {
-   "title": "Gli Houthi danno scacco matto ai sauditi",
-   "url": "https://www.analisidifesa.it/2026/09/gli-houthi-danno-scacco-matto-ai-sauditi/",
-   "source": "Analisi Difesa",
-   "country": "IT",
-   "lang": "it",
-   "tier": "B",
-   "published": "2026-09-15",
-   "category": "Topçu ve Mühimmat",
-   "also": [],
-   "title_tr": "Husiler Suudilere Şah Mat Diyor"
   },
   {
    "title": "Kazakhstan to boost purchases of Russian gas",
@@ -6429,10 +6612,6 @@
  "failures": [
   {
    "source": "The Defense Post",
-   "error": "feed parsed but empty"
-  },
-  {
-   "source": "DefenseHere",
    "error": "feed parsed but empty"
   },
   {
