@@ -20,7 +20,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install requests google-auth
+      - run: pip install requests google-auth feedparser
       - env:
           GDRIVE_SA_KEY: ${{ secrets.GDRIVE_SA_KEY }}
           DRIVE_FOLDER_ID: 1Bqj-FeX9IwOD9na53Ze7RteepjxRCCGB

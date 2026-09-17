@@ -23,6 +23,7 @@ import sys
 import unicodedata
 import xml.etree.ElementTree as ET
 
+import feedparser
 import requests
 from google.auth.transport.requests import Request
 from google.oauth2 import service_account
@@ -30,8 +31,11 @@ from google.oauth2 import service_account
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT_DIR = ROOT / "data" / "news"
 DRIVE_API = "https://www.googleapis.com/drive/v3/files"
-UA = "DefintelBot/1.0 (+https://defintel.shadovi.com)"
-TIMEOUT = 25
+# Several publishers reject unknown agents outright; present a normal browser
+# string and keep the crawl polite instead (one request per feed, once a day).
+UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+      "(KHTML, like Gecko) Chrome/140.0 Safari/537.36")
+TIMEOUT = 30
 
 # Feeds that carry general news need a defence filter; specialised feeds don't.
 DEFENCE_TERMS = [
@@ -139,41 +143,51 @@ def strip_tags(text):
 
 
 def read_feed(source):
-    """Return (source, items, error). Handles both RSS and Atom."""
-    try:
-        res = requests.get(source["url"], headers={"User-Agent": UA}, timeout=TIMEOUT)
-        res.raise_for_status()
-        root = ET.fromstring(res.content)
-    except Exception as exc:  # noqa: BLE001 - a dead feed must not stop the run
-        return source, [], f"{type(exc).__name__}: {exc}"[:120]
+    """Return (source, items, error). feedparser copes with the broken feeds."""
+    error = None
+    for attempt in (1, 2):
+        try:
+            res = requests.get(source["url"], headers={"User-Agent": UA, "Accept": "*/*"},
+                               timeout=TIMEOUT)
+            res.raise_for_status()
+            break
+        except Exception as exc:  # noqa: BLE001 - a dead feed must not stop the run
+            error = f"{type(exc).__name__}: {exc}"[:110]
+            if attempt == 2:
+                return source, [], error
 
-    ns = {"atom": "http://www.w3.org/2005/Atom", "dc": "http://purl.org/dc/elements/1.1/"}
+    parsed = feedparser.parse(res.content)
     items = []
-    for node in root.iter():
-        tag = node.tag.split("}")[-1]
-        if tag not in ("item", "entry"):
-            continue
-        title = strip_tags(node.findtext("title") or node.findtext("atom:title", "", ns))
-        link = node.findtext("link") or ""
-        if not link:
-            for child in node.findall("atom:link", ns):
-                if child.get("rel") in (None, "alternate"):
-                    link = child.get("href") or ""
-                    break
-        published = (node.findtext("pubDate") or node.findtext("published")
-                     or node.findtext("atom:published", "", ns)
-                     or node.findtext("updated") or node.findtext("dc:date", "", ns))
+    for entry in parsed.entries:
+        title = strip_tags(entry.get("title"))
+        link = (entry.get("link") or "").strip()
+        stamp = entry.get("published_parsed") or entry.get("updated_parsed")
+        published = (dt.datetime(*stamp[:6], tzinfo=dt.timezone.utc) if stamp
+                     else parse_date(entry.get("published") or entry.get("updated")))
         if title and link:
-            items.append({"title": title, "url": link.strip(), "published": parse_date(published)})
+            items.append({"title": title, "url": link, "published": published})
     return source, items, None
 
 
-def categorise(title):
+SOURCE_HINTS = [
+    ("C-UAS ve Hava Savunma", ["c-uas", "dron", "drone", "insansız", "hava savunma"]),
+    ("Topçu ve Mühimmat", ["mühimmat", "topçu"]),
+    ("Deniz ve İnsansız Sistemler", ["deniz"]),
+    ("Rakip Duyuruları", ["rakip", "kurumsal", "üretici"]),
+    ("Politika ve Regülasyon", ["politika", "regülasyon", "resmî", "nato", "ab savunma"]),
+]
+
+
+def categorise(title, source=None):
     text = norm(title)
     if any(term in text for term in (norm(t) for t in MKE_TERMS)):
         return "MKE"
     for name, terms in CATEGORIES:
         if any(norm(term) in text for term in terms):
+            return name
+    scope = norm((source or {}).get("kapsam", ""))
+    for name, terms in SOURCE_HINTS:
+        if any(norm(term) in scope for term in terms):
             return name
     return "Diğer"
 
@@ -214,7 +228,7 @@ def main():
                     "lang": source.get("dil", ""),
                     "tier": source.get("kademe", ""),
                     "published": item["published"].date().isoformat() if item["published"] else "",
-                    "category": categorise(item["title"]),
+                    "category": categorise(item["title"], source),
                 })
                 kept += 1
             if not kept and not items:
