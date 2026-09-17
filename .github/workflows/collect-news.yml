@@ -1,0 +1,37 @@
+name: collect-news
+on:
+  workflow_dispatch:
+    inputs:
+      hours:
+        description: 'Kaç saatlik pencere taransın'
+        default: '48'
+      dry_run:
+        description: 'Yalnızca say, dosya yazma'
+        type: boolean
+        default: true
+permissions:
+  contents: write
+concurrency: publish
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests google-auth
+      - env:
+          GDRIVE_SA_KEY: ${{ secrets.GDRIVE_SA_KEY }}
+          DRIVE_FOLDER_ID: 1Bqj-FeX9IwOD9na53Ze7RteepjxRCCGB
+        run: |
+          python3 scripts/collect_news.py --hours "${{ inputs.hours }}" \
+            ${{ inputs.dry_run == true && '--dry-run' || '' }}
+      - if: inputs.dry_run == false
+        run: |
+          git status --porcelain data/news | grep -q . || exit 0
+          git config user.name "defintel-bot"
+          git config user.email "actions@github.com"
+          git add data/news
+          git commit -m "news: $(date -u +%F) candidates"
+          git push
