@@ -45,6 +45,7 @@ TR_MONTHS = [
     "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık",
 ]
 TR_DAYS = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"]
+TR_DAYS_SHORT = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"]
 
 # Reading state, kept in data/reports.json for downstream use; not shown on the page.
 #   alarm: true                  -> alarm
@@ -64,6 +65,13 @@ def tr_short(iso):
     import datetime
     d = datetime.date.fromisoformat(str(iso))
     return f"{d.day} {TR_MONTHS[d.month - 1]}"
+
+
+def tr_daybar(iso):
+    """'17 Eyl · Per' — 375px'te daybar'ı taşırmayacak kadar kısa."""
+    import datetime
+    d = datetime.date.fromisoformat(str(iso))
+    return f"{d.day} {TR_MONTHS[d.month - 1][:3]} · {TR_DAYS_SHORT[d.weekday()]}"
 
 
 def status_of(meta, iso):
@@ -159,19 +167,42 @@ def head(title, depth=0):
 """
 
 
-def masthead(up="", latest_news=None):
-    link = (
-        f'<a class="masthead-link" href="{up}haberler/{latest_news}.html">Medya takibi</a>'
-        if latest_news
-        else ""
-    )
+def masthead(up=""):
     return f"""<header class="masthead">
   <div class="wrap masthead-inner">
     <a class="wordmark" href="{up}index.html">{SITE_NAME}</a>
     <span class="tagline">{SITE_TAGLINE}</span>
-    {link}
   </div>
 </header>
+"""
+
+
+def daybar(kind, day, prev, nxt, cross_day, up=""):
+    """Okunan günün tek gezinme şeridi: ürün içinde ‹/›, ortada arşiv, sağda karşı ürün.
+
+    Karşı ürün her zaman aynı güne gider; o gün için karşı sayfa yoksa bağlantı
+    tıklanamaz hale gelir ama kaldırılmaz — yokluğu da bilgidir.
+    """
+    def arrow(target, glyph, label):
+        if target:
+            return f'<a class="daybar-arrow" href="{target}.html" aria-label="{label}">{glyph}</a>'
+        return f'<span class="daybar-arrow" aria-disabled="true" aria-label="{label}">{glyph}</span>'
+
+    if kind == "report":
+        cross = f'<a class="daybar-link" href="{up}haberler/{cross_day}.html">MEDYA TAKİBİ →</a>'
+        missing = '<span class="daybar-link daybar-link--off">Medya takibi yok</span>'
+    else:
+        cross = f'<a class="daybar-link" href="{up}reports/{cross_day}.html">← BRİFİNG</a>'
+        missing = '<span class="daybar-link daybar-link--off">Brifing yok</span>'
+
+    return f"""<nav class="daybar" aria-label="Gün gezinmesi">
+  <div class="wrap daybar-inner">
+    {arrow(prev, "‹", "Önceki gün")}
+    <a class="daybar-date num" href="{up}index.html">{tr_daybar(day)}</a>
+    {arrow(nxt, "›", "Sonraki gün")}
+    {cross if cross_day else missing}
+  </div>
+</nav>
 """
 
 
@@ -214,7 +245,7 @@ FOOT = """<footer class="foot">
 """
 
 
-def build_report(meta, body_html, iso, news_days=(), latest_news=None):
+def build_report(meta, body_html, iso, prev_day=None, next_day=None, news_days=()):
     title = meta.get("title") or f"{tr_date(iso)} raporu"
 
     banner = (
@@ -240,9 +271,9 @@ def build_report(meta, body_html, iso, news_days=(), latest_news=None):
 
     return (
         head(f"{title} — {SITE_NAME}", depth=1)
-        + masthead(up="../", latest_news=latest_news)
+        + masthead(up="../")
+        + daybar("report", iso, prev_day, next_day, iso if iso in news_days else None, up="../")
         + f"""<main class="wrap report">
-  <a class="backlink" href="../index.html">← Geri</a>
   <div class="report-grid">
     <aside class="rail">{''.join(rail)}</aside>
     <article class="column">
@@ -268,6 +299,78 @@ NEWS_ORDER = [
     "İhale ve Sözleşmeler", "Deniz ve İnsansız Sistemler", "Hafif Silah ve Mayın",
     "Tedarik Zinciri", "Politika ve Regülasyon", "Genel Savunma Gündemi",
 ]
+# Hiçbir kategori terimini tutturamayan kalemlerin kovası: bir kategori değil, artık.
+GENERAL = "Genel Savunma Gündemi"
+
+NEWS_CORE = {
+    "MKE", "C-UAS ve Hava Savunma", "Topçu ve Mühimmat",
+    "İhale ve Sözleşmeler", "Rakip Duyuruları",
+}
+NEWS_SIDE = {
+    "Deniz ve İnsansız Sistemler", "Hafif Silah ve Mayın",
+    "Tedarik Zinciri", "Politika ve Regülasyon",
+}
+TIER_POINTS = {"A": 12, "B": 4, "C": 0}
+
+TR_SLUG = str.maketrans({
+    "ı": "i", "İ": "i", "ş": "s", "Ş": "s", "ğ": "g", "Ğ": "g",
+    "ü": "u", "Ü": "u", "ö": "o", "Ö": "o", "ç": "c", "Ç": "c",
+})
+
+
+def cat_id(name):
+    """'C-UAS ve Hava Savunma' -> 'kat-c-uas-ve-hava-savunma'."""
+    return "kat-" + re.sub(r"[^a-z0-9]+", "-", name.translate(TR_SLUG).lower()).strip("-")
+
+
+def norm_url(url):
+    """Aynı sayfayı gösteren iki adresi eşitle: sorgu, çapa ve sondaki / atılır."""
+    return str(url or "").split("?")[0].split("#")[0].rstrip("/").lower()
+
+
+def cited_urls(day):
+    """O günün brifingindeki adresler — bir kupürün alabileceği en güçlü sinyal."""
+    path = SRC / f"{day}.md"
+    if not path.exists():
+        return set()
+    found = re.findall(r"https?://[^\s<>\")]+", path.read_text(encoding="utf-8"))
+    return {norm_url(u.rstrip(".,;")) for u in found}
+
+
+def news_score(item, day, cited, seen=0):
+    """Kupürün sıralama puanı.
+
+    `seen`: aynı kaynaktan bu kalemden daha yüksek puanlı kaç kalem olduğu.
+    Ceza yalnızca 5'inciden sonra işler — tek kaynak sayfanın beşte birini
+    yazabiliyor, ama ilk beş kalemi cezalandırmak sinyali de siliyor.
+    """
+    category = item.get("category") or GENERAL
+    score = 100 if norm_url(item.get("url")) in cited else 0
+    score += 25 if category in NEWS_CORE else 10 if category in NEWS_SIDE else 0
+    score += TIER_POINTS.get(item.get("tier"), 0)
+    score += 6 * min(len(item.get("also") or []), 3)
+    published = item.get("published")
+    score += 6 if published == day else 2 if published else 0
+    return score - 8 * max(0, seen - 5)
+
+
+def rank_news(items, day, cited):
+    """(puan, dosya sırası, kalem) listesi, puana göre.
+
+    Kaynak cezası kalemin dosyadaki sırasına göre dağıtılsaydı bir kaynağın
+    hangi kaleminin cezalandırıldığı rastlantı olurdu; önce cezasız puana göre
+    sıralanıyor, ceza o sırada dağıtılıyor. Aynı veriden hep aynı liste çıkar.
+    """
+    ordered = sorted(
+        ((news_score(item, day, cited), i, item) for i, item in enumerate(items)),
+        key=lambda row: (-row[0], row[1]),
+    )
+    seen, ranked = {}, []
+    for _, i, item in ordered:
+        source = item.get("source", "")
+        seen[source] = seen.get(source, 0) + 1
+        ranked.append((news_score(item, day, cited, seen[source]), i, item))
+    return sorted(ranked, key=lambda row: (-row[0], row[1]))
 
 
 def load_news():
@@ -281,44 +384,122 @@ def load_news():
     return days
 
 
-def clip_html(item):
+def clip_html(item, day, cited):
+    """Tüm satır tek bağlantı: başlık + en fazla üç jetonluk meta."""
     meta = [html.escape(item.get("source", ""))]
-    if item.get("also"):
-        meta.append("+ " + html.escape(", ".join(item["also"][:3])))
-    if item.get("published"):
+    if norm_url(item.get("url")) in cited:
+        meta.append('<span class="clip-cited">Brifingde</span>')
+    if item.get("published") and item["published"] != day:
         meta.append(tr_date(item["published"]))
-    if item.get("country"):
-        meta.append(html.escape(item["country"]))
+    if item.get("also"):
+        meta.append(f'+{len(item["also"])}')
     return (
         '<li class="clip">'
         f'<a href="{html.escape(item["url"], quote=True)}" target="_blank" rel="noopener">'
-        f'{html.escape(item["title"])}</a>'
-        f'<span class="clip-meta">{" · ".join(meta)}</span></li>'
+        f'<span class="clip-title">{html.escape(item["title"])}</span>'
+        f'<span class="clip-meta">{" · ".join(meta)}</span></a></li>'
     )
 
 
-def build_news_page(day, data, prev_day, next_day, has_report, latest_news):
-    buckets = {}
-    for item in data.get("items", []):
-        buckets.setdefault(item.get("category") or "Genel Savunma Gündemi", []).append(item)
+def clip_list(rows, day, cited):
+    return '<ul class="clips">' + "".join(clip_html(r[2], day, cited) for r in rows) + "</ul>"
 
-    body = []
-    for name in NEWS_ORDER + sorted(set(buckets) - set(NEWS_ORDER)):
-        items = buckets.get(name)
-        if not items:
+
+def news_section(name, rows, day, cited):
+    """Bir kategori: ≤20 kalem tamamen açık, fazlası ilk 15 + katlanmış kalan."""
+    head_html = (
+        f'<h2 class="kicker" id="{cat_id(name)}">{html.escape(name)}'
+        f' <span class="kicker-count num">{len(rows)}</span></h2>'
+    )
+    ranked = sorted(rows, key=lambda r: (-r[0], r[1]))
+    if len(ranked) <= 20:
+        return head_html + clip_list(ranked, day, cited)
+    rest = ranked[15:]
+    return (
+        head_html
+        + clip_list(ranked[:15], day, cited)
+        + f'<details class="more"><summary>+{len(rest)} daha</summary>'
+        + clip_list(rest, day, cited)
+        + "</details>"
+    )
+
+
+def general_section(rows, day, cited):
+    """Artık kovası: kapalı açılır, içinde taranmaya değer üst küme + tam döküm.
+
+    Üst kümenin ölçütü müşterinin kendi kaynak kademelendirmesi (tier A) ve
+    kaynak başına tavan; yeni bir anahtar kelime sözlüğü denendi, işe yaramadı.
+    """
+    worth, seen, picked = [], {}, set()
+    for row in sorted(rows, key=lambda r: (-r[0], r[1])):
+        source = row[2].get("source", "")
+        if row[2].get("tier") != "A" or seen.get(source, 0) >= 3:
             continue
-        body.append(
-            f'<h2 class="kicker">{html.escape(name)} <span class="kicker-count">{len(items)}</span></h2>'
-            '<ul class="clips">' + "".join(clip_html(i) for i in items) + "</ul>"
-        )
+        seen[source] = seen.get(source, 0) + 1
+        worth.append(row)
+        picked.add(row[1])
+    rest = sorted((r for r in rows if r[1] not in picked), key=lambda r: r[1])
 
-    nav = []
-    if prev_day:
-        nav.append(f'<a class="backlink" href="{prev_day}.html">← {tr_date(prev_day)}</a>')
-    if has_report:
-        nav.append(f'<a class="backlink" href="../reports/{day}.html">Günün brifingi →</a>')
-    if next_day:
-        nav.append(f'<a class="backlink" href="{next_day}.html">{tr_date(next_day)} →</a>')
+    return (
+        '<details class="general">'
+        f'<summary class="kicker" id="{cat_id(GENERAL)}">{html.escape(GENERAL)}'
+        f' <span class="kicker-count num">{len(rows)}</span></summary>'
+        f'<h3 class="subkicker">Taramaya değer <span class="kicker-count num">{len(worth)}</span></h3>'
+        + clip_list(worth, day, cited)
+        + f'<details class="more"><summary>Tam döküm ({len(rest)})</summary>'
+        + clip_list(rest, day, cited)
+        + "</details></details>"
+    )
+
+
+def build_news_page(day, data, prev_day, next_day, has_report, cited):
+    items = data.get("items", [])
+    ranked = rank_news(items, day, cited)
+
+    buckets = {}
+    for row in ranked:
+        buckets.setdefault(row[2].get("category") or GENERAL, []).append(row)
+    order = ([n for n in NEWS_ORDER if n != GENERAL]
+             + sorted(set(buckets) - set(NEWS_ORDER)) + [GENERAL])
+    present = [(name, buckets[name]) for name in order if buckets.get(name)]
+
+    # 1 · ÖNE ÇIKANLAR: analistin listeye giriş noktası — kategoriler arası,
+    # puana göre, kaynak başına en fazla 2
+    top, quota = [], {}
+    for row in ranked:
+        source = row[2].get("source", "")
+        if quota.get(source, 0) >= 2:
+            continue
+        quota[source] = quota.get(source, 0) + 1
+        top.append(row)
+        if len(top) == 12:
+            break
+
+    body = [
+        '<section class="highlights" id="one-cikanlar">'
+        '<h2 class="kicker">Öne çıkanlar'
+        f' <span class="kicker-count num">{len(top)}</span></h2>'
+        + clip_list(top, day, cited)
+        + "</section>"
+    ]
+    for name, rows in present:
+        body.append(general_section(rows, day, cited) if name == GENERAL
+                    else news_section(name, rows, day, cited))
+
+    # aynı liste iki biçimde: dar ekranda yapışkan çip şeridi, geniş ekranda rail
+    jumps = [("one-cikanlar", "Öne çıkanlar", len(top))]
+    jumps += [(cat_id(name), name, len(rows)) for name, rows in present]
+    chips = "".join(
+        f'<a class="chip" href="#{anchor}">{html.escape(label)}'
+        f' <span class="chip-count num">{count}</span></a>'
+        for anchor, label, count in jumps
+    )
+    rail = "".join(
+        f'<a class="news-rail-row{" news-rail-row--rest" if label == GENERAL else ""}"'
+        f' href="#{anchor}"><span>{html.escape(label)}</span>'
+        f'<span class="num">{count}</span></a>'
+        for anchor, label, count in jumps
+    )
 
     # "66 kaynak" okunan değil tanımlı kaynak sayısıydı; okunanı yaz, farkı da göster
     defined = data.get("scanned_sources", 0)
@@ -331,14 +512,22 @@ def build_news_page(day, data, prev_day, next_day, has_report, latest_news):
     )
     return (
         head(f"Medya takibi · {tr_date(day)} — {SITE_NAME}", depth=1)
-        + masthead(up="../", latest_news=latest_news)
+        + masthead(up="../")
+        + daybar("news", day, prev_day, next_day, day if has_report else None, up="../")
         + f"""<main class="wrap news">
   <div class="news-head">
     <h1 class="report-title">Medya takibi · {tr_date(day)}</h1>
     <p class="news-stat num">{stat}</p>
-    <nav class="news-nav">{" ".join(nav)}</nav>
   </div>
-  {"".join(body) or '<p class="empty">Bu gün için kayıt yok.</p>'}
+  <nav class="devnav catbar" id="catbar" aria-label="Kategoriler">
+    <div class="devnav-track">{chips}</div>
+  </nav>
+  <div class="news-grid">
+    <aside class="rail news-rail">{rail}</aside>
+    <div class="news-column">
+      {"".join(body) if items else '<p class="empty">Bu gün için kayıt yok.</p>'}
+    </div>
+  </div>
 </main>
 """
         + PROMPTS
@@ -384,7 +573,7 @@ def entry_html(r):
 </a>"""
 
 
-def build_index(reports, version, latest_news=None):
+def build_index(reports, version):
     if not reports:
         body = '<p class="empty">Henüz rapor yok.</p>'
     else:
@@ -393,7 +582,7 @@ def build_index(reports, version, latest_news=None):
 
     return (
         head(f"{SITE_NAME} — {SITE_TAGLINE}")
-        + masthead(latest_news=latest_news)
+        + masthead()
         + f"""<main class="wrap">
   <div class="controls">
     <input class="search" id="q" type="search" placeholder="Ara: konu ya da tarih…" autocomplete="off">
@@ -440,21 +629,29 @@ def main():
 
     news = load_news()
     news_days = sorted(news)
-    latest_news = news_days[-1] if news_days else None
 
-    reports = []
+    # daybar komşuları için önce hangi günlerin gerçekten rapor verdiğini bil
+    sources = []
     for path in sorted(SRC.glob("*.md")):
-        iso = path.stem
         try:
             meta, body = split_frontmatter(path.read_text(encoding="utf-8"))
         except Exception as exc:
             print(f"  ! skipped {path.name}: {exc}")
             continue
+        sources.append((path.stem, meta, body))
 
+    reports = []
+    for i, (iso, meta, body) in enumerate(sources):
         developments = meta.get("developments") or []
         body_html = render_body(body, developments)
         (OUT / f"{iso}.html").write_text(
-            build_report(meta, body_html, iso, news_days, latest_news), encoding="utf-8"
+            build_report(
+                meta, body_html, iso,
+                sources[i - 1][0] if i else None,
+                sources[i + 1][0] if i + 1 < len(sources) else None,
+                news_days,
+            ),
+            encoding="utf-8",
         )
 
         reports.append(
@@ -487,16 +684,21 @@ def main():
         NEWS_OUT.mkdir(exist_ok=True)
         report_days = {r["date"] for r in reports}
         for i, day in enumerate(news_days):
+            cited = cited_urls(day)
             page = build_news_page(
                 day, news[day],
                 news_days[i - 1] if i else None,
                 news_days[i + 1] if i + 1 < len(news_days) else None,
-                day in report_days, latest_news,
+                day in report_days, cited,
             )
             (NEWS_OUT / f"{day}.html").write_text(page, encoding="utf-8")
-            print(f"  · haberler/{day}.html ({news[day].get('unique_items', 0)} başlık)")
+            hits = sum(1 for it in news[day].get("items", []) if norm_url(it.get("url")) in cited)
+            print(
+                f'  · haberler/{day}.html ({news[day].get("unique_items", 0)} başlık'
+                f" · {hits} brifing atıflı)"
+            )
 
-    (ROOT / "index.html").write_text(build_index(reports, version, latest_news), encoding="utf-8")
+    (ROOT / "index.html").write_text(build_index(reports, version), encoding="utf-8")
     (ROOT / ".nojekyll").touch()
 
     print(f"  · index.html  ({len(reports)} rapor)")

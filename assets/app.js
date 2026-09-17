@@ -249,7 +249,8 @@
 (function () {
   "use strict";
 
-  var nav = document.getElementById("devnav");
+  // brifingdeki devnav ya da medya sayfasındaki catbar; ikisi de aynı şerit
+  var nav = document.querySelector(".devnav");
 
   function flash(el) {
     el.classList.add("flash");

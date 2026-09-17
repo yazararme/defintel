@@ -32,6 +32,8 @@ def section_id(heading_text):
         return "ek"
     if "ALARM" in t:
         return "alarmlar"
+    if "ÖZET" in t:
+        return "ozet"
     return None
 
 
