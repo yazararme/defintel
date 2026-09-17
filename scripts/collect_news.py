@@ -97,6 +97,17 @@ CATEGORIES = [
 MKE_TERMS = ["mke", "makine ve kimya", "tolga", "boran", "attila", "mpt-76", "pirana", "barkın"]
 GENERAL = "Genel Savunma Gündemi"
 
+def title_key(title):
+    """Dedupe key that survives non-Latin scripts.
+
+    norm() strips anything outside a-z0-9 for keyword matching; using it here
+    collapsed every Korean, Russian and Japanese headline to the empty string,
+    so one item swallowed all the others as duplicates.
+    """
+    key = " ".join(re.sub(r"[^\w\s]+", " ", (title or "").casefold(), flags=re.U).split())
+    return key[:70] if len(key) >= 12 else ""
+
+
 def norm(text):
     text = unicodedata.normalize("NFKD", (text or "").lower())
     text = text.replace("ı", "i").replace("İ", "i").replace("ş", "s").replace("ğ", "g")
@@ -295,15 +306,16 @@ def main():
     seen_urls, seen_titles, unique = set(), {}, []
     for item in sorted(collected, key=lambda i: (i["published"], i["source"]), reverse=True):
         url_key = re.sub(r"[?#].*$", "", item["url"]).rstrip("/")
-        title_key = " ".join(norm(item["title"]).split())[:70]
+        key = title_key(item["title"])
         if url_key in seen_urls:
             continue
-        if title_key in seen_titles:
-            seen_titles[title_key]["also"].append(item["source"])
+        if key and key in seen_titles:
+            seen_titles[key]["also"].append(item["source"])
             continue
         seen_urls.add(url_key)
         item["also"] = []
-        seen_titles[title_key] = item
+        if key:
+            seen_titles[key] = item
         unique.append(item)
 
     by_category = {}
