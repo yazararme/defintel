@@ -32,7 +32,10 @@ self.addEventListener("push", (event) => {
       let body = "";
       let url = "./index.html";
       try {
-        const res = await fetch("./data/reports.json", { cache: "no-store" });
+        // no-store skips the browser's cache; the query string also makes the
+        // CDN treat this as a miss, so the phone can't be told about a report
+        // list an edge node is still holding from yesterday.
+        const res = await fetch("./data/reports.json?t=" + Date.now(), { cache: "no-store" });
         const list = await res.json();
         if (list.length) {
           const r = list[0];

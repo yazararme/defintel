@@ -42,12 +42,35 @@ jobs:
         run: python3 scripts/check_reports.py
 
       # Tell the push service a new report is out, so phones get a notification.
+      #
+      # Only once the new report is actually live. The push carries no text: the
+      # phone wakes up and fetches data/reports.json itself, so a notification
+      # sent before Pages finishes deploying announces YESTERDAY's report. That
+      # is what happened on 18 Sep — commit 03:21:27, notify 03:21:29, deploy
+      # finished 03:21:52, and three phones were told "17 Eylül".
       - if: steps.publish.outputs.published == 'yes'
         env:
           PUSH_URL: ${{ secrets.PUSH_URL }}
           NOTIFY_SECRET: ${{ secrets.NOTIFY_SECRET }}
+          SITE: https://defintel.shadovi.com
         run: |
           [ -n "$PUSH_URL" ] || { echo "no push service configured"; exit 0; }
+          expect=$(python3 -c "import json;print(json.load(open('data/reports.json'))[0]['date'])")
+          echo "beklenen tarih: $expect"
+          live=""
+          for i in $(seq 1 60); do
+            live=$(curl -sf -H 'Cache-Control: no-cache' "$SITE/data/reports.json?cb=$RANDOM$i" \
+              | python3 -c "import json,sys;print(json.load(sys.stdin)[0]['date'])" 2>/dev/null) || live=""
+            [ "$live" = "$expect" ] && break
+            sleep 10
+          done
+          if [ "$live" != "$expect" ]; then
+            echo "::error::site hâlâ $live gösteriyor, bildirim gönderilmedi"
+            exit 1
+          fi
+          # Bir uç düğüm yeniyi görüyor diye hepsi görüyor demek değil; kısa pay.
+          echo "canlı: $live ($((i * 10))s) · 20s pay"
+          sleep 20
           code=$(curl -s -o /tmp/notify.out -w '%{http_code}' -X POST "$PUSH_URL/notify" \
             -H "Authorization: Bearer $NOTIFY_SECRET")
           echo "notify: $code $(cat /tmp/notify.out)"
