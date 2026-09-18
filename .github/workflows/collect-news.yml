@@ -36,6 +36,11 @@ jobs:
         run: |
           python3 scripts/collect_news.py --hours "${{ inputs.hours || '48' }}" \
             ${{ inputs.dry_run == true && '--dry-run' || '' }}
+      # Which publishers let the translate proxy through. Only hosts we have
+      # never asked about are probed, so most days this is a handful of
+      # requests; a new feed costs one.
+      - if: github.event_name == 'schedule' || inputs.dry_run == false
+        run: python3 scripts/probe_proxy.py || echo "vekil yoklaması atlandı"
       # Translation runs on the Claude subscription token, not an API key.
       - if: github.event_name == 'schedule' || inputs.dry_run == false
         env:

@@ -844,6 +844,9 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
 
 .clip-body .entry-go { margin-top: 10px; }
 
+/* İki bitişik dokunma hedefi sınırda yanlış hedefi verir; aralarını aç. */
+.clip-body .entry-go + .entry-go { margin-left: 8px; }
+
 .clip-title {
   display: -webkit-box;
   -webkit-line-clamp: 3;

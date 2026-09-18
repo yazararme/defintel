@@ -848,3 +848,96 @@ kadar her şey kapalı" seçeneğine göre üstünlüğü bu: iyi günleri cezal
 
 **Yapılmayacak:** her satıra chevron; kapsam dışı satırlara "özet yok" jetonu; kapsamı %100'e zorlamak için
 ödeme duvarı arkasındaki kaynakları zorlama; Öne çıkanlar'da kısmi açıklık.
+
+---
+
+## Revizyon 5 — çeviri vekili
+
+### R5.0 — Karar: (a), üç şartla
+
+Müşterinin baştan beri söylediği kullanıcı gerçeği belirleyici: **okuyucu İngilizce okumuyor.** Bu doğruysa
+İngilizce özgün sayfa onun için bir "hedef" değil, bir *başarısızlık hâli*. O hâlde onu ikincil yapmak bir
+indirgeme değil, bir düzeltme. Bugün sitenin her katmanı Türkçe — `title_tr` 519/533 satırda, özetler Türkçe,
+arayüz Türkçe — ve İngilizceyi yalnızca **niyetin en yüksek olduğu anda**, dokunuşun hedefinde veriyoruz.
+
+Ayrıca ~400 satırın gövdesi yok; (b) onlara hiçbir şey vermiyor. Ve "o hâlde her satır katlansın" yolu Rev 4'te
+doğru gerekçeyle kapatıldı: chevron içerik vaat eder, boşa açılan chevron affordance'ı sistematik olarak
+yalancı yapar. Yani (b) ile (a-dışı her şey) elenerek değil, kullanıcı gerçeğiyle doğrudan (a)'ya varıyoruz.
+
+> **Her kupür bağlantısı vekil üzerinden gider. İstisna yok. Özgün metin, gövdesi olan satırlarda etiketli
+> bir çip olarak durur.**
+
+Üç şart:
+
+1. **Kaynakça muaf.** Brifingdeki `[K1]…` bağlantıları (`enrich.py`) **hiçbir zaman** vekile çevrilmez.
+   Kupür bir *okuma* nesnesi, kaynakça bir *delil* nesnesidir; delil kayıt kaynağını göstermek zorundadır.
+   Dosya sınırı da net: `clip_html` çevirir, `enrich.add_source_anchors` çevirmez.
+2. **Tek satırlık kapatma anahtarı.** `build.py` başında `TRANSLATE_PROXY = True`. Aşağıdaki maruziyet notu
+   nedeniyle bu kararın tek satırda geri alınabilir olması şart.
+3. **Sayfa düzeyinde beyan** (R5.2).
+
+### R5.1 — Müşterinin bilerek alması gereken karar: maruziyet
+
+Bugün okuyucunun dokunuşu doğrudan yayıncıya gidiyor. Vekille birlikte **her dışa açılan dokunuş Google'a
+gider**: URL, zamanlama, okuyucunun IP'si. Sızan şey makalenin içeriği değil — o zaten kamuya açık — **seçim
+örüntüsü**: bir Türk devlet savunma üreticisinin yöneticilerinin hangi başlıkları, hangi sırayla, hangi gün
+okuduğu. Bu ürünün asıl değerli tarafı da tam olarak o örüntü (50 mm namlu, Malezya ihalesi, Hanwha).
+Sitenin `noindex` + özel duruşuyla tutarlı olan şey, bunun sessizce varsayılan olması değil, **bilinerek
+seçilmesidir.** Teknik bir veto değil; müşterinin bir kez bakıp onaylaması gereken bir madde — ve onaylamazsa
+şart 2'deki anahtar bir satırda kapatır.
+
+### R5.2 — Dürüstlük: bir kez söyle, her satırda değil
+
+Google çubuğu dokunuştan *sonra* beliriyor ve dokunmadan önce nereye gidildiğini söylemiyor; yani kendiliğinden
+yeterli değil. Ama satır başına jeton koymak Rev 4'te reddedilen hatanın aynısı olur — **normal bir durumu
+400 kez duyurmak.** Doğru yer sayfa başındaki istatistik satırı, mevcut dille aynı yerde:
+
+`50 kaynak okundu · 528 başlık · son 48 saat · başlıklar Türkçe çeviriyle açılır`
+
+Gövdesi olan satırlarda beyan zaten somut: iki çip yan yana durur ve etiketlerin kendisi açıklar —
+`Özgün metin ↗` (Rev 3'teki `Kaynağa git ↗` bu isme döner; artık ikisi de "kaynak" olduğu için o etiket
+ayırt etmiyor). Satır başına ek işaret yok.
+
+### R5.3 — 403: evet, ama alan adı başına, kalem başına değil
+
+Engelleme yayıncı düzeyinde (Soldat und Technik kendi sitesinin tamamında vekili reddediyor), makale düzeyinde
+değil. Dolayısıyla 540 kalemi değil, **~50 tekil alan adını** yoklamak yeter — haftada bir, sonucu
+`data/translate-hosts.json`'da tutularak. Zaten ağ işi yapan toplayıcı/özetleyici tarafında, build.py'ye ağ
+girmeden.
+
+Bilinmeyen alan adı için varsayılan **iyimser** (vekil kullanılır): yanlış-iyimserin bedeli okuyucunun bir
+Google hata sayfasına düşüp geri dönmesi; yanlış-kötümserin bedeli ise Türkçe okuyan birine sessizce İngilizce
+sayfa vermek — ikincisi daha sinsi ve daha sık. Yoklama yapılıyorken iyimser varsayım doğru taraf.
+
+P0'da bugün ölçülen tek engelli alan adı sabit bir listeye yazılır (stopgap); yoklama P1.
+
+### R5.4 — Özetleri değersizleştiriyor mu? Hayır — ama kuyruğun değerini değiştiriyor
+
+Değişen şey özetin işi değil, **özetsiz 400 satırın** değeri: dün onlar Türkçe okuyan için çıkmaz sokaktı,
+bugün okunabilir hâle geliyor. Özetin işi değişmiyor, çünkü her iki tüketim yerinde de onu okuyan kişi
+**sayfadan çıkmamayı seçmiş** kişidir: Öne çıkanlar'daki yönetici 12 makaleyi açmayacak (4 dakikası var),
+kategorideki analist ise özeti zaten bilerek dokunup açtı. İkisi de teaser değil, muhteva istiyor.
+
+**Prompta yapılacak tek değişiklik:** özet artık *kendi kendine yeterli* olmak zorunda değil, çünkü tam metin
+bir dokunuş ötede. O hâlde dengeli kapsama yerine **karar verdiren tek sert veriyi öne alsın** (sayı, tarih,
+aktör) ve "ayrıntı için kaynağa bakınız" türü bağlayıcı cümleleri bıraksın. **Kısaltılmasın** — iki cümle ve
+mevcut yoğunluk korunur; teaser'a çevirmek yöneticinin birincil kullanımını kırar.
+
+Yan fayda: Türkçe başlık → Türkçe makale artık tutarlı. Bugünkü `title_tr` → İngilizce sayfa sıçraması
+kalkıyor.
+
+### Uygulama listesi — Revizyon 5
+
+| # | Dosya | Değişiklik | Kabul testi |
+|---|---|---|---|
+| R5-P0-1 | `build.py` → yeni `tr_url(url)` + `TRANSLATE_PROXY = True` | Host dönüşümü: `-` → `--`, `.` → `-`, sonuna `.translate.goog`; yol ve sorgu korunur, `?_x_tr_sl=auto&_x_tr_tl=tr&_x_tr_hl=tr` eklenir (var olan sorgu varsa `&` ile). `TRANSLATE_PROXY=False` iken fonksiyon URL'i olduğu gibi döndürür. | `tr_url("https://www.army-technology.com/news/x/")` == `https://www-army--technology-com.translate.goog/news/x/?_x_tr_sl=auto&_x_tr_tl=tr&_x_tr_hl=tr`; bayrak `False` iken üretilen HTML'de `translate.goog` hiç geçmez. |
+| R5-P0-2 | `build.py` → `clip_html` | Satırın birincil `href`'i `tr_url(item["url"])` olur. Gövdesi olan satırda (Rev 3 `<details>`) `Kaynağa git ↗` çipi **`Özgün metin ↗`** olarak yeniden adlandırılır ve `item["url"]`'e (çevrilmemiş) gider. Gövdesiz satıra ek bağlantı konmaz. | Her `.clip` birincil bağlantısı `translate.goog` içerir; her açık `<details>` gövdesinde tam olarak bir `Özgün metin` bağlantısı vardır ve `translate.goog` **içermez**. |
+| R5-P0-3 | `build.py` → `build_news_page()` stat satırı | Sona `· başlıklar Türkçe çeviriyle açılır` eklenir (yalnızca `TRANSLATE_PROXY` açıkken). | Medya sayfası başlığında dizgi görünür; `TRANSLATE_PROXY=False` iken görünmez. |
+| R5-P0-4 | `enrich.py` → `add_source_anchors` | **Değişmez.** Kaynakça URL'leri vekile çevrilmez; bu bir "yapılmayacak" maddesi ve regresyon testidir. | `reports/2026-09-17.html` içinde `translate.goog` dizgisi **hiç** geçmez; 14 `[K…]` bağlantısının hepsi özgün alan adına gider. |
+| R5-P0-5 | `build.py` → `TRANSLATE_BLOCK` sabiti | Bugün ölçülen engelli alan adları elle yazılır (`soldat-und-technik.de`); bu hostlardaki kalemler özgün URL'e bağlanır. Geçici çözüm. | Soldat und Technik kalemi `translate.goog` içermeyen bir bağlantı taşır. |
+| R5-P1-1 | toplayıcı/özetleyici + `data/translate-hosts.json` | Tekil alan adı başına haftada bir HEAD yoklaması; sonuç dosyada tutulur, `build.py` yalnızca okur (build ağa çıkmaz). Bilinmeyen host iyimser (vekil kullanılır). `TRANSLATE_BLOCK` sabiti bu dosyayla değiştirilir. | ~50 yoklama ile dosya üretilir; engelli listelenen hostların kalemleri özgün URL alır; dosya yokken build hatasız koşar ve hepsi vekile gider. |
+| R5-P1-2 | özetleyici promptu | "Kendi kendine yeterli olma" zorunluluğu kalkar: iki cümle ve mevcut yoğunluk korunur, ama en karar verdiren sert veri (sayı/tarih/aktör) ilk cümleye alınır; "ayrıntı için kaynağa bakınız" türü bağlayıcılar çıkarılır. | Yeni günün özetlerinde ilk cümle bir sayı ya da özel ad ile açılır; uzunluk medyanı 350-450 karakter bandında kalır. |
+
+**Yapılmayacak:** kaynakçayı vekile çevirmek; her satıra "çeviri" jetonu; gövdesiz satıra ikinci bağlantı
+sıkıştırmak; her satırı katlamak (Rev 4 gerekçesi geçerli); özetleri teaser'a kısaltmak; kalem başına 403
+yoklaması.

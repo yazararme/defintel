@@ -14,10 +14,12 @@ Nothing else in the repo has to be touched by hand.
 
 import hashlib
 import html
+import functools
 import json
 import pathlib
 import re
 import sys
+import urllib.parse as up
 
 import enrich
 
@@ -39,6 +41,17 @@ SITE_TAGLINE = "Savunma pazarı · günlük bülten"
 # Push service (Cloudflare Worker). Empty string hides the notification button.
 PUSH_ENDPOINT = "https://defintel-push.yazararme-c30.workers.dev"
 VAPID_PUBLIC_KEY = "BLOHxsm23_gz-DmV0E9xyB3RVQTkCwv06uPv_pme7VApr61x_gnNGGPkTnEI3mNekR7lzZGxNL9hATzaaOYsEZo"
+
+# Kupür bağlantıları Google Çeviri vekilinden geçsin mi? Okuyucu İngilizce
+# okumuyor; İngilizce özgün sayfa onun için hedef değil, başarısızlık hâli.
+# Bedeli: dışa açılan her dokunuş Google'a gider (adres, zaman, IP) — sızan
+# içerik değil, hangi başlığın okunduğu örüntüsü. Kapatmak bu tek satır.
+TRANSLATE_PROXY = True
+# Vekili reddeden yayıncılar. Engelleme site düzeyinde, makale düzeyinde değil;
+# dosya scripts/probe_proxy.py tarafından yazılır, bilinmeyen alan adı geçer
+# sayılır (yanlış iyimserin bedeli bir geri tuşu, yanlış kötümserinki sessizce
+# İngilizce sayfa vermek).
+TRANSLATE_HOSTS = DATA / "translate-hosts.json"
 
 TR_MONTHS = [
     "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran",
@@ -363,6 +376,43 @@ def norm_url(url):
     return str(url or "").split("?")[0].split("#")[0].rstrip("/").lower()
 
 
+@functools.lru_cache(maxsize=1)
+def blocked_hosts():
+    """Vekili reddettiği ölçülen alan adları. Dosya yoksa kimse engelli değil."""
+    try:
+        known = json.loads(TRANSLATE_HOSTS.read_text(encoding="utf-8"))
+    except Exception:
+        return frozenset()
+    return frozenset(host for host, ok in known.items() if ok is False)
+
+
+def proxy_url(url):
+    """Adresin koşulsuz vekil hâli: konak noktaları -, tireler --. Yoklayıcı da kullanır."""
+    parts = up.urlsplit(url)
+    host = parts.hostname or ""
+    if not host or parts.scheme not in ("http", "https"):
+        return url
+    mangled = host.replace("-", "--").replace(".", "-") + ".translate.goog"
+    query = up.parse_qsl(parts.query) + [
+        ("_x_tr_sl", "auto"), ("_x_tr_tl", "tr"), ("_x_tr_hl", "tr"),
+    ]
+    return up.urlunsplit(("https", mangled, parts.path, up.urlencode(query), parts.fragment))
+
+
+def tr_url(url, lang=""):
+    """Kupürün gideceği adres: kural elverdiğince vekil, elvermezse özgün.
+
+    Yalnızca kupürler için. Brifingin kaynakçası özgün adresi gösterir; orası
+    bir okuma nesnesi değil, delil — neyin okunduğunu değil nerede yazdığını
+    söylemek zorunda. Türkçe yayınlar da vekile girmez: çevrilecek bir şey yok,
+    kazanç sıfır, bedeli (Google'a giden bir dokunuş daha) sıfır değil.
+    """
+    host = up.urlsplit(url).hostname or ""
+    if not TRANSLATE_PROXY or lang == "tr" or host in blocked_hosts():
+        return url
+    return proxy_url(url)
+
+
 def cited_urls(day):
     """O günün brifingindeki adresler — bir kupürün alabileceği en güçlü sinyal."""
     path = SRC / f"{day}.md"
@@ -509,7 +559,8 @@ def clip_html(item, day, cited, open_summary=False):
     if item.get("summary_scope") is True and not item.get("summary_tr"):
         meta.append('<span class="clip-nosum">özet alınamadı</span>')
 
-    url = html.escape(item["url"], quote=True)
+    url = html.escape(tr_url(item["url"], item.get("lang", "")), quote=True)
+    raw_url = html.escape(item["url"], quote=True)
     title = html.escape(item.get("title_tr") or item["title"])
     summary = item.get("summary_tr")
     # özet metni de aranabilir olmalı, yoksa yalnızca özette geçen bir ad bulunamaz
@@ -537,7 +588,12 @@ def clip_html(item, day, cited, open_summary=False):
         f"<summary>{row}</summary>"
         f'<div class="clip-body">{orig}'
         f'<p class="clip-summary">{html.escape(summary)}</p>'
-        f'<a class="entry-go" href="{url}" target="_blank" rel="noopener">Kaynağa git ↗</a>'
+        # Gövdede iki hedef: okumaya devam (Türkçe tam metin) ve doğrulama
+        # (özgün dildeki sayfa). Sıra niyete göre — okuyan çoğunluk önce gelir.
+        + (f'<a class="entry-go" href="{url}" target="_blank" rel="noopener">Türkçe oku ↗</a>'
+           if url != raw_url else "")
+        + f'<a class="entry-go entry-go--off" href="{raw_url}" target="_blank" rel="noopener">'
+        "Özgün metin ↗</a>"
         "</div></details></li>"
     )
 
@@ -646,6 +702,9 @@ def build_news_page(day, data, prev_day, next_day, has_report, cited):
         f' · son {data.get("window_hours", 48)} saat'
         + (f' · {covered}/{len(scope)} özet' if scope else "")
         + (f' · {unread} kaynak yanıt vermedi' if unread else "")
+        # Google çubuğu ancak dokunuştan sonra beliriyor; beyan bir kez burada
+        # duruyor, 500 satırın her birinde bir jeton olarak değil.
+        + (" · başlıklar Türkçe çeviriyle açılır" if TRANSLATE_PROXY else "")
     )
     return (
         head(f"Medya takibi · {tr_date(day)} — {SITE_NAME}", depth=1)
@@ -788,15 +847,17 @@ def main():
     for i, (iso, meta, body) in enumerate(sources):
         developments = meta.get("developments") or []
         body_html = render_body(body, developments)
-        (OUT / f"{iso}.html").write_text(
-            build_report(
-                meta, body_html, iso,
-                sources[i - 1][0] if i else None,
-                sources[i + 1][0] if i + 1 < len(sources) else None,
-                news_counts,
-            ),
-            encoding="utf-8",
+        page = build_report(
+            meta, body_html, iso,
+            sources[i - 1][0] if i else None,
+            sources[i + 1][0] if i + 1 < len(sources) else None,
+            news_counts,
         )
+        # Kaynakça delildir: nerede yazdığını göstermek zorunda. Vekil yalnızca
+        # kupürlerin; brifingde görünürse birileri onu yanlış yere taşımıştır.
+        if "translate.goog" in page:
+            sys.exit(f"{iso}: brifingde çeviri vekili bağlantısı var")
+        (OUT / f"{iso}.html").write_text(page, encoding="utf-8")
 
         reports.append(
             {
