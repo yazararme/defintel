@@ -1,5 +1,67 @@
 [
   {
+    "date": "2026-09-18",
+    "title": "ABD'nin 1,5 milyar $'lık DHS karşı-dron kanalı 9+7 firmayla kapandı; küçük kalibre mühimmat 2031'e kadar tek tedarikçiye bağlandı",
+    "summary": "Yeni ihale açılmadı; günün gelişmeleri tedarikçi havuzlarının kapanmasıyla ilgili. DHS'in 1,5 milyar $'lık karşı-dron sözleşmesinde Anduril 17 Eylül'de Track One'a eklendi ve iki kanal 9 ve 7 firmayla kesinleşti. ABD Ordusu 5,56, 7,62 ve 12,7 mm mühimmat tedarikini tek teklifle 2031'e kadar Olin Winchester'a bağladı. Rheinmetall üç haneli milyon € bandında 155 mm siparişi açıkladı; sınırda kullanılan lazerin atış başına 3 $ rakamı angajman maliyeti tartışmasını yeniden kurdu.",
+    "alarm": false,
+    "alarm_title": "",
+    "status": "izle",
+    "decision_by": "2026-10-09",
+    "tags": [
+      "C-UAS",
+      "Mühimmat",
+      "Hafif Silah",
+      "Topçu",
+      "Hava Savunma",
+      "ABD",
+      "Rakip",
+      "İhale"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "DHS C-UAS Track One kapandı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Olin Winchester küçük kalibre çerçevesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "Rheinmetall 155 mm siparişi",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "LOCUST lazerinin atış başına maliyeti",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "XM30 birlik test aşaması",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "USAF orta kalibreli namlulu hava savunma pazar araştırması",
+        "home": "izleme"
+      },
+      {
+        "id": "G7",
+        "label": "Malezya MERAD (RMK-13)",
+        "home": "izleme"
+      },
+      {
+        "id": "G8",
+        "label": "ABD Deniz Piyadeleri Drone Round",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-09-18.html"
+  },
+  {
     "date": "2026-09-17",
     "title": "Rusya'nın jet motorlu dron kullanımı beş ayda altı katına çıktı; DVD 2026'da araç üstü kısa menzilli hava savunma aynı gün üç ayrı paketle sahneye çıktı",
     "summary": "Yeni ihale ya da sözleşme kararı yok. Rusya Ağustos'ta yaklaşık 2.850 jet motorlu dron kullandı (Haziran'da ~450); 240-500 km/s hız bandı namlulu ve mühimmat tabanlı C-UAS'ın hedef zarfını yukarı kaydırıyor. 16-17 Eylül'deki DVD 2026'da araç üstü kısa menzilli hava savunma üç ayrı konfigürasyonla tanıtıldı. Avrupa Parlamentosu savunma izin ve transfer süreçlerini hızlandıran paketi onayladı.",
