@@ -239,7 +239,11 @@ def write_candidates(day, payload, by_category):
     lines = [
         f"# Aday başlıklar · {day}",
         "",
-        f"{payload['scanned_sources']} kaynak tarandı, son {payload['window_hours']} saat, "
+        # "66 kaynak tarandı" tanımlı kaynak sayısıydı, okunan değil — sitede
+        # düzeltilen aynı hata burada da duruyordu.
+        f"{payload['scanned_sources'] - payload['failed_sources']} kaynak okundu"
+        + (f" ({payload['failed_sources']} kaynak yanıt vermedi)" if payload['failed_sources'] else "")
+        + f", son {payload['window_hours']} saat, "
         f"{payload['unique_items']} tekil başlık. Bu dosya en fazla {CANDIDATE_LIMIT} kalem taşır; "
         f"tam liste: https://defintel.shadovi.com/haberler/{day}.html",
         "",
