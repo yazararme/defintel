@@ -539,7 +539,7 @@ def load_news():
     return days
 
 
-def clip_html(item, day, cited, open_summary=False):
+def clip_html(item, day, cited):
     """Özetli satır açılır bir öğe, özetsiz satır tek bağlantı.
 
     Özet, İngilizce makaleyi *açmamak* için var; o yüzden özetli satırın birincil
@@ -584,7 +584,7 @@ def clip_html(item, day, cited, open_summary=False):
         if item.get("title_tr") else ""
     )
     return (
-        f'<li><details class="clip"{" open" if open_summary else ""} data-search="{haystack}">'
+        f'<li><details class="clip" data-search="{haystack}">'
         f"<summary>{row}</summary>"
         f'<div class="clip-body">{orig}'
         f'<p class="clip-summary">{html.escape(summary)}</p>'
@@ -598,10 +598,10 @@ def clip_html(item, day, cited, open_summary=False):
     )
 
 
-def clip_list(rows, day, cited, open_summary=False):
+def clip_list(rows, day, cited):
     return (
         '<ul class="clips">'
-        + "".join(clip_html(r[2], day, cited, open_summary) for r in rows)
+        + "".join(clip_html(r[2], day, cited) for r in rows)
         + "</ul>"
     )
 
@@ -657,18 +657,14 @@ def build_news_page(day, data, prev_day, next_day, has_report, cited):
     items = data.get("items", [])
     top, present = news_layout(items, day, cited)
 
-    # Blok tek bir kararla ya tamamen açık ya tamamen kapalı: bir satırı bile
-    # eksik olan blokta "bazıları rastgele açık" görüntüsü doğuyor ve okuyucu
-    # göremediği kuralı rastgelelik sanıyor. Karar satırlar render edilmeden önce.
-    top_open = all(row[2].get("summary_tr") for row in top)
-
     body = [
         '<section class="highlights" id="one-cikanlar">'
         '<h2 class="kicker">Öne çıkanlar'
         f' <span class="kicker-count num">{len(top)}</span></h2>'
-        # Özetin değeri ekrandaki kalem sayısıyla ters orantılı: burada okunuyor,
-        # kategori taramasında satır başına gürültü oluyor.
-        + clip_list(top, day, cited, open_summary=top_open)
+        # Öne çıkanlar da kapalı başlar. Sayfa bir tarama yüzeyi: önce 12 başlık
+        # görünür, özet isteyen açar. Açık başlayan blok ekranın ilk görüntüsünü
+        # üç satıra düşürüyordu.
+        + clip_list(top, day, cited)
         + "</section>"
     ]
     for name, rows in present:
