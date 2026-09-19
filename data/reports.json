@@ -1,5 +1,77 @@
 [
   {
+    "date": "2026-09-19",
+    "title": "Letonya imzalı Archer niyet mektubunu bozup fiyat, teslim süresi ve yerli sanayi katılımı gerekçesiyle Çek Morana'ya geçti; 50 mm güdümlü yakınlık fünyeli mermi uçuş testini geçti",
+    "summary": "Yeni ihale açılmadı; günün gelişmeleri bir NATO üyesinin obüs kararını tersine çevirmesi ve namlulu hava savunmasının kalibre-fünye tarafındaki ilerleme. Letonya, Haziran 2025'te 18 adet Archer için imzaladığı niyet mektubunu bırakıp Çek Excalibur Army'nin Morana 155 mm obüsünü seçti; gerekçe fiyat, teslim süresi ve yerli sanayi katılımı. Northrop Grumman 50 mm güdümlü, yakınlık fünyeli Raid Hunter mermisini XM913 topundan uçurdu. Körfez'de EDGE ve Hanwha yerli üretim içeren hava savunma term sheet'i imzaladı; ABD'de 665 milyon $'lık C-UAS test-değerlendirme siparişi itiraza uğradı.",
+    "alarm": false,
+    "alarm_title": "",
+    "status": "izle",
+    "decision_by": "2026-10-09",
+    "tags": [
+      "Topçu",
+      "ATTİLA",
+      "Mühimmat",
+      "C-UAS",
+      "Hava Savunma",
+      "Körfez",
+      "Rakip",
+      "İhale"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Letonya Morana 155 mm kararı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Raid Hunter 50 mm yakınlık fünyeli mermi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "EDGE–Hanwha Körfez hava savunma term sheet'i",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "665 milyon $'lık C-UAS test siparişine itiraz",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "JIATF-401 SOUTHCOM C-UAS alımı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "TYTAN TI-03 THeMIS entegrasyonu",
+        "home": "rakip"
+      },
+      {
+        "id": "G7",
+        "label": "USAF orta kalibreli namlulu hava savunma pazar araştırması",
+        "home": "izleme"
+      },
+      {
+        "id": "G8",
+        "label": "Malezya MERAD (RMK-13)",
+        "home": "izleme"
+      },
+      {
+        "id": "G9",
+        "label": "ABD Deniz Piyadeleri Drone Round",
+        "home": "izleme"
+      },
+      {
+        "id": "G10",
+        "label": "JIATF-401 yönlendirilmiş enerji pilot programı",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-09-19.html"
+  },
+  {
     "date": "2026-09-18",
     "title": "ABD'nin 1,5 milyar $'lık DHS karşı-dron kanalı 9+7 firmayla kapandı; küçük kalibre mühimmat 2031'e kadar tek tedarikçiye bağlandı",
     "summary": "Yeni ihale açılmadı; günün gelişmeleri tedarikçi havuzlarının kapanmasıyla ilgili. DHS'in 1,5 milyar $'lık karşı-dron sözleşmesinde Anduril 17 Eylül'de Track One'a eklendi ve iki kanal 9 ve 7 firmayla kesinleşti. ABD Ordusu 5,56, 7,62 ve 12,7 mm mühimmat tedarikini tek teklifle 2031'e kadar Olin Winchester'a bağladı. Rheinmetall üç haneli milyon € bandında 155 mm siparişi açıkladı; sınırda kullanılan lazerin atış başına 3 $ rakamı angajman maliyeti tartışmasını yeniden kurdu.",
