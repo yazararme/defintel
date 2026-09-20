@@ -2,15 +2,15 @@
  "date": "2026-09-20",
  "window_hours": 48,
  "scanned_sources": 66,
- "failed_sources": 16,
- "collected_items": 353,
- "unique_items": 351,
+ "failed_sources": 17,
+ "collected_items": 338,
+ "unique_items": 336,
  "categories": {
   "C-UAS ve Hava Savunma": 40,
-  "Deniz ve İnsansız Sistemler": 7,
-  "Genel Savunma Gündemi": 268,
+  "Deniz ve İnsansız Sistemler": 6,
+  "Genel Savunma Gündemi": 252,
   "Politika ve Regülasyon": 1,
-  "Rakip Duyuruları": 10,
+  "Rakip Duyuruları": 12,
   "Topçu ve Mühimmat": 11,
   "İhale ve Sözleşmeler": 14
  },
@@ -723,146 +723,16 @@
    "summary_tr": "Cochin Shipyard, 18 Eylül 2026'da Hindistan Deniz Kuvvetleri için ilk Yeni Nesil Füze Gemisi'nin (NGMV) omurga koyma törenini gerçekleştirdi; CSL, Mart 2023'te altı NGMV için 9.804 kror rupi (yaklaşık 1 milyar dolar) değerinde sözleşme imzalamıştı. Gemiler BrahMos füzeleri, VLSRSAM hava savunma sistemi ve BEL MFR radarlarıyla donatılacak, ilk teslimat 2027 başında bekleniyor."
   },
   {
-   "title": "접경지역 발전 위해 민·관·군 협력위 신설",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/18/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
+   "title": "Памфилова заявила, что фейки о якобы массовом недопуске наблюдателей на выборах не подтвердились",
+   "url": "https://www.interfax.ru/russia/1117225",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
    "tier": "B",
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Sınır bölgesinin geliştirilmesi için sivil-kamu-askeri işbirliği komitesi kuruldu",
-   "summary_scope": false
-  },
-  {
-   "title": "북한, 일주일여 만에 단거리 탄도미사일 발사",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/17/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Kuzey Kore bir hafta içinde kısa menzilli balistik füze fırlattı",
-   "summary_scope": false
-  },
-  {
-   "title": "한미, 전작권 전환 가속화 협력 강화 공감",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/16/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Güney Kore-ABD savaş alanı komutanlığı geçişi hızlandırma işbirliğini güçlendirmede fikir birliği",
-   "summary_scope": false
-  },
-  {
-   "title": "AI·드론 기술 활용 군 의료체계 발전 논의",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/13/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "AI ve drone teknolojisiyle askeri tıbbi sistem gelişimi ele alındı",
-   "summary_scope": false
-  },
-  {
-   "title": "[도약하는 지상군, 자랑스러운 K방산] 세계가 인정하는 K방산의 첨단기술",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/11/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "[Sıçrama yapan kara kuvvetleri, gururlu K-savunma] Dünya tarafından kabul edilen K-savunmanın ileri teknolojisi",
-   "summary_scope": false
-  },
-  {
-   "title": "‘초격차 솔루션’ 세계 바다에 굳건한 닻",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/9/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "'Aşırı fark yaratan çözüm' dünya denizlerinde sağlam çapa",
-   "summary_scope": false
-  },
-  {
-   "title": "“조용하지만 강인한 헌신 있었기에…”",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/8/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Sessiz ama güçlü adanmışlık vardı...",
-   "summary_scope": false
-  },
-  {
-   "title": "외국군 수탁생과 뜻깊은 어울림 마당",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/6/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Yabancı askeri öğrencilerle anlamlı bir araya gelme alanı",
-   "summary_scope": false
-  },
-  {
-   "title": "남수단에 한국어·태권도 전파 결실",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/4/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Güney Sudan'a Korece ve taekwondo yayılması meyvesini verdi",
-   "summary_scope": false
-  },
-  {
-   "title": "국군의 뿌리 현재적 의미 조명",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/3/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Orduların kökleri güncel anlamı aydınlatıldı",
-   "summary_scope": false
-  },
-  {
-   "title": "소매 걷은 장병들, 헌혈증 2136장 기부",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/2/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Kolları sıvayan askerleri 2.136 kan bağışı sertifikası bağışladı",
+   "title_tr": "Pamfilova: Seçimlerde gözlemci katılım engelleme iddiaları yalanlandı",
    "summary_scope": false
   },
   {
@@ -1178,19 +1048,6 @@
    "summary_scope": false
   },
   {
-   "title": "Китай за восемь месяцев увеличил закупки пшеницы в России в семь раз",
-   "url": "https://www.interfax.ru/business/1117200",
-   "source": "Interfax",
-   "country": "RU",
-   "lang": "ru",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Çin sekiz ayda Rusya'dan buğday alımını yedi kat artırdı",
-   "summary_scope": false
-  },
-  {
    "title": "Oil, Alliances, And Ultimatums: Is It Time To End The Indo‑American Bromance?",
    "url": "https://www.indiandefensenews.in/2026/09/oil-alliances-and-ultimatums-is-it-time.html",
    "source": "Indian Defence News",
@@ -1453,6 +1310,19 @@
    "title_tr": "Ukrayna'nın SBU'su İlk Jet Shahed Vurulufunu Kameraya Aldı, İnterceptor Adını Açıklamıyor",
    "summary_scope": true,
    "summary_tr": "Ukrayna'nın SBU'su, 19 Eylül 2026'da yayınlanan görüntülerde jet motorlu bir Rus Shahed/Geran-5 dronunu (yaklaşık 600 km/sa hızla) vuran yeni bir engelleyici drone kullandığını duyurdu; Zelensky 67 şirketin bu alanda çalıştığını ve iki şirketin muharebe testlerini geçtiğini söyledi, ancak drone ve maliyeti hakkında detay verilmedi. Aynı dönemde ABD Dışişleri Bakanlığı, Ukrayna'ya 2,68 milyar dolarlık hava savunma paketi (füze ve radarlar) satışını onayladı ancak bu pakette engelleyici drone bulunmuyor."
+  },
+  {
+   "title": "“Barış Kartalı” ilk test uçuşunu 16 yıl önce bugün gerçekleştirdi",
+   "url": "https://defensehere.com/tr/baris-kartlari-ilk-test-ucusunu-gerceklestirdi/",
+   "source": "DefenseHere",
+   "country": "TR",
+   "lang": "tr",
+   "tier": "A",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Barış Kartalı ilk test uçuşunu 16 yıl önce bugün gerçekleştirdi",
+   "summary_scope": false
   },
   {
    "title": "Raytheon Australia DSelivers Capabilities to Meet Future Electromagnetic Spectrum Operation’s Needs",
@@ -2659,19 +2529,6 @@
    "summary_tr": "Alman savunma medyası hartpunkt'ta yayımlanan analiz, Almanya'nın F127 hava savunma fırkateynleri için ABD'nin Aegis sistemi, SPY-6 radarı ve balistik füze savunma teknolojisine yoğun bağımlılığının ulusal egemenlik ve tedarik güvenliği açısından risk oluşturduğunu belirtiyor. Örnek olarak İsviçre'nin Patriot sipariş teslimatlarının ABD tarafından ertelenmesi ve İran savaşında ABD'nin füze stoklarının azalması gösteriliyor."
   },
   {
-   "title": "국가보훈부, 유엔참전국 감사 만찬 개최",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260920/1/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Veteran Bakanlığı, BM Katılımcı Ülkeler İçin Minnet Ziyafeti Düzenledi",
-   "summary_scope": false
-  },
-  {
    "title": "Pantsir‑S1M: India’s Proposed Shield Against Drone Swarms",
    "url": "https://www.indiandefensenews.in/2026/09/pantsirs1m-indias-proposed-shield.html",
    "source": "Indian Defence News",
@@ -2977,6 +2834,45 @@
    "also": [],
    "title_tr": "NASA Kennedy İnsansız Hava Aracı Davası: Çinli Turist Suçu İtiraf Etti, Ceza Yüzüne Mahkum",
    "summary_scope": false
+  },
+  {
+   "title": "Türk savunma sanayiinde çeşitli görevlerde bulunan Yusuf Çalık vefat etti",
+   "url": "https://defensehere.com/tr/yusuf-calik-vefat-etti/",
+   "source": "DefenseHere",
+   "country": "TR",
+   "lang": "tr",
+   "tier": "A",
+   "published": "2026-09-19",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "summary_scope": false
+  },
+  {
+   "title": "MÜSİAD EXPO 2026’da “TURAÇ” da var",
+   "url": "https://defensehere.com/tr/musiad-expo-2026da-turac-da-var/",
+   "source": "DefenseHere",
+   "country": "TR",
+   "lang": "tr",
+   "tier": "A",
+   "published": "2026-09-19",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "MÜSİAD EXPO 2026'da TURAÇ da var",
+   "summary_scope": false
+  },
+  {
+   "title": "ASELSAN’ın yeni deniz silahı: SMASH 300",
+   "url": "https://defensehere.com/tr/aselsanin-yeni-deniz-silah-sistemi-smash-300/",
+   "source": "DefenseHere",
+   "country": "TR",
+   "lang": "tr",
+   "tier": "A",
+   "published": "2026-09-19",
+   "category": "Rakip Duyuruları",
+   "also": [],
+   "title_tr": "ASELSAN'ın yeni deniz silahı: SMASH 300",
+   "summary_scope": true,
+   "summary_tr": "ASELSAN, su üstü tehditlere ve mini/mikro İHA'lara karşı kullanılmak üzere yapay zekâ destekli hedef tespit algoritmalarına sahip 25 mm Uzaktan Komutalı Stabilize Deniz Silah Sistemi SMASH 300'ü tanıttı. Sistem, ATOM Akıllı Mühimmat ile entegre çalışacak ve AURA Drone Radarı ile gemideki diğer sensörlerle bağlantı kurabilecek."
   },
   {
    "title": "KSAL Sebut PT. PAL dan Fincantieri akan Memodernisasi Kapal Induk",
@@ -3785,20 +3681,6 @@
    "summary_tr": "Thales, 17 Eylül'de NATO ve müttefik ülkeler için Palantir'in ABD merkezli Maven Smart System NATO (MSS NATO) sistemine rakip olarak yapay zeka destekli 'HexaForce' komuta yazılımını tanıttı; Fransa'nın Artemis.IA projesinden türeyen ve NATO CWIX 2026 tatbikatında test edilen sistem, dijital egemenlik ve NATO FMN standartlarıyla uyumluluk kaygılarına yanıt olarak geliştirildi."
   },
   {
-   "title": "TKMS ATLAS UK secures Royal Navy NGCM torpedo defence contract",
-   "url": "https://www.naval-technology.com/news/tkms-atlas-uk-ngcm-torpedo-defence/",
-   "source": "Naval Technology",
-   "country": "GB",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "Deniz ve İnsansız Sistemler",
-   "also": [],
-   "title_tr": "TKMS ATLAS UK Royal Navy NGCM torpido savunması sözleşmesini güvence altına aldı",
-   "summary_scope": true,
-   "summary_tr": "TKMS ATLAS UK, İngiltere Savunma Bakanlığı'nın Kraliyet Donanması denizaltıları için torpido karşı tedbir sistemlerini yenileyecek Next Generation Countermeasure (NGCM) programı ihalesini kazandı; sözleşme Ekim 2025-Ekim 2032 arasını kapsıyor ve yaklaşık 35 milyon sterlin (47 milyon dolar) değerinde olduğu tahmin ediliyor. Şirket, Babcock International ile iş birliği yapacak ve programın İngiltere'de yaklaşık 80 iş istihdam etmesi bekleniyor."
-  },
-  {
    "title": "NAVANTIA Celebrates Naming of BAM-IS Submarine Rescue Vessel",
    "url": "https://www.navalnews.com/naval-news/2026/09/navantia-celebrates-naming-of-bam-is-submarine-rescue-vessel/",
    "source": "Naval News",
@@ -3933,6 +3815,84 @@
    "title_tr": "Pentagon, Drone Egemenliği Programının en son 'Gauntlet' yarışmasında en iyi performans gösterenleri açıkladı",
    "summary_scope": true,
    "summary_tr": "Pentagon'un İHA programı kapsamındaki ikinci 'Gauntlet' yarışması Fort Carson, Colorado'da yapıldı; 19 şirketten 23 platform 1.858 sorti uçtu ve Savunma Bakanlığı bu havuzdan yaklaşık 60.000 drone satın almayı planlıyor, 2027'ye kadar toplam 200.000'den fazla İHA hedefleniyor."
+  },
+  {
+   "title": "MSB’den “Birliğin Gücü-2026 Tatbikatı”na ilişkin paylaşım",
+   "url": "https://defensehere.com/tr/msbden-birligin-gucu-2026-tatbikati/",
+   "source": "DefenseHere",
+   "country": "TR",
+   "lang": "tr",
+   "tier": "A",
+   "published": "2026-09-18",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "MSB'den \"Birliğin Gücü-2026 Tatbikatı\"na ilişkin paylaşım",
+   "summary_scope": false
+  },
+  {
+   "title": "İspanyol Donanmasının yeni gemisine A-21 Poseidón adı verildi",
+   "url": "https://defensehere.com/tr/ispanyol-donanmasinin-yeni-gemisine-a-21-poseidon-adi-verildi/",
+   "source": "DefenseHere",
+   "country": "TR",
+   "lang": "tr",
+   "tier": "A",
+   "published": "2026-09-18",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "summary_scope": false
+  },
+  {
+   "title": "KNDS, Hindistan’ın yeni hafif taarruz helikopterleri için 126 taret tedarik edecek",
+   "url": "https://defensehere.com/tr/knds-hindistanin-yeni-hafif-taarruz-helikopterleri-icin-126-taret-tedarik-edecek/",
+   "source": "DefenseHere",
+   "country": "TR",
+   "lang": "tr",
+   "tier": "A",
+   "published": "2026-09-18",
+   "category": "İhale ve Sözleşmeler",
+   "also": [],
+   "title_tr": "KNDS, Hindistan'ın yeni hafif taarruz helikopterleri için 126 taret tedarik edecek",
+   "summary_scope": true,
+   "summary_tr": "KNDS, Hindistan Silahlı Kuvvetlerinin hafif taarruz helikopterleri için 126 adet yeni üretim 20 mm THL20 taret tedarik edecek. Bu anlaşma, KNDS ile Hindistan arasında 2006'da başlayan ve daha önce ALH helikopterleri için 136 adet THL20 tedarikini de kapsayan iş birliğinin devamı niteliğinde."
+  },
+  {
+   "title": "MÜSİAD EXPO 2026, 23–26 Eylül’de İstanbul Fuar Merkezi’nde",
+   "url": "https://defensehere.com/tr/musiad-expo-2026-23-26-eylulde/",
+   "source": "DefenseHere",
+   "country": "TR",
+   "lang": "tr",
+   "tier": "A",
+   "published": "2026-09-18",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "MÜSİAD EXPO 2026, 23–26 Eylül'de İstanbul Fuar Merkezi'nde",
+   "summary_scope": false
+  },
+  {
+   "title": "BAE Systems ile Avustralya arasında Mk 45 deniz topları için yeni anlaşma",
+   "url": "https://defensehere.com/tr/bae-systems-ile-avustralya-arasinda-mk-45-deniz-toplari-icin-yeni-anlasma/",
+   "source": "DefenseHere",
+   "country": "TR",
+   "lang": "tr",
+   "tier": "A",
+   "published": "2026-09-18",
+   "category": "Rakip Duyuruları",
+   "also": [],
+   "summary_scope": true,
+   "summary_tr": "BAE Systems Australia, Avustralya'nın Hobart sınıfı muhripleri ve Anzac sınıfı fırkateynlerindeki Mk 45 deniz toplarının bakımı için 32 milyon dolarlık beş yıllık anlaşma imzaladı."
+  },
+  {
+   "title": "İstanbul Havalimanı’nın yeni pisti hizmete açıldı",
+   "url": "https://defensehere.com/tr/istanbul-havalimaninin-yeni-pisti-acildi/",
+   "source": "DefenseHere",
+   "country": "TR",
+   "lang": "tr",
+   "tier": "A",
+   "published": "2026-09-18",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "İstanbul Havalimanı'nın yeni pisti hizmete açıldı",
+   "summary_scope": false
   },
   {
    "title": "U.S. Approves Possible F-35 Sale to Saudi Arabia",
@@ -4461,20 +4421,6 @@
    "summary_tr": "Savunma sektörü, özellikle havacılık alanı, platin gibi stratejik metallere bağımlı durumda."
   },
   {
-   "title": "BAE Systems OneArc wins US Army contract for embedded vehicle training",
-   "url": "https://www.army-technology.com/news/bae-systems-onearc-us-army/",
-   "source": "Army Technology",
-   "country": "GB",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "İhale ve Sözleşmeler",
-   "also": [],
-   "title_tr": "BAE Systems OneArc ABD Ordusu Gömülü Araç Eğitimi Sözleşmesi Kazanıyor",
-   "summary_scope": true,
-   "summary_tr": "BAE Systems OneArc, ABD Ordusu'nun Force Development Innovation & Assessment (FDIA) girişimi kapsamında, Fort Hood, Teksas'taki bir müfreze muharebe aracına Gömülü Kolektif Eğitim (ECT) sistemini entegre etmek üzere sözleşme aldı; bu, ticari bir gömülü eğitim sisteminin bir ABD Ordusu muharebe platformuna ilk kez kurulması anlamına geliyor."
-  },
-  {
    "title": "Tanto tuonò che piovve",
    "url": "https://www.analisidifesa.it/2026/09/tanto-tuono-che-piovve-2/",
    "source": "Analisi Difesa",
@@ -4486,158 +4432,11 @@
    "also": [],
    "summary_scope": true,
    "summary_tr": "İtalya Savunma Bakanlığı, Husilerin Yemen kıyısı ve Kızıldeniz adalarının kontrolünü ele geçirmesinin ardından Bab el-Mandeb Boğazı'ndan geçen ticari gemilere refakat için ulusal bir deniz misyonu başlatmayı değerlendiriyor. Bu arada Taif üssündeki İtalyan Eurofighter Typhoon uçağı, Husilerin Suudi üssüne yönelik bombardımanında hasar gördü."
-  },
-  {
-   "title": "US clears $24.3bn F-35 stealth fighter jets sale to Saudi Arabia",
-   "url": "https://www.airforce-technology.com/news/us-f35-saudi-arabia/",
-   "source": "Airforce Technology",
-   "country": "GB",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "ABD Suudi Arabistan'a 24,3 Milyar $ F-35 Gizli Savaşçı Satışını Onaylıyor",
-   "summary_scope": false
-  },
-  {
-   "title": "One war is not enough: Russia instigating trade fights within Eurasian Economic Union",
-   "url": "https://eurasianet.org/one-war-is-not-enough-russia-instigating-trade-fights-within-eurasian-economic-union",
-   "source": "Eurasianet",
-   "country": "US",
-   "lang": "en",
-   "tier": "B",
-   "published": "",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Bir Savaş Yeterli Değil: Rusya Avrasya Ekonomik Birliği'nde Ticaret Çatışmaları Başlatıyor",
-   "summary_scope": false
-  },
-  {
-   "title": "Kazakhstan to boost purchases of Russian gas",
-   "url": "https://eurasianet.org/kazakhstan-to-boost-purchases-of-russian-gas",
-   "source": "Eurasianet",
-   "country": "US",
-   "lang": "en",
-   "tier": "B",
-   "published": "",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Kazakistan, Rus gazı alımlarını artıracak",
-   "summary_scope": false
-  },
-  {
-   "title": "Uzbek fruit exporters looking to break into US market",
-   "url": "https://eurasianet.org/uzbek-fruit-exporters-looking-to-break-into-us-market",
-   "source": "Eurasianet",
-   "country": "US",
-   "lang": "en",
-   "tier": "B",
-   "published": "",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Özbek meyve ihracatçıları ABD pazarına girmeyi hedefliyor",
-   "summary_scope": false
-  },
-  {
-   "title": "Enter East Asian Tiger: South Korea to boost its economic footprint in Central Asia",
-   "url": "https://eurasianet.org/enter-east-asian-tiger-south-korea-to-boost-its-economic-footprint-in-central-asia",
-   "source": "Eurasianet",
-   "country": "US",
-   "lang": "en",
-   "tier": "B",
-   "published": "",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Doğu Asya Kaplanı Sahnede: Güney Kore, Orta Asya'daki ekonomik ayak izini artıracak",
-   "summary_scope": false
-  },
-  {
-   "title": "Russia turns off gas taps to Armenia",
-   "url": "https://eurasianet.org/russia-turns-off-gas-taps-to-armenia",
-   "source": "Eurasianet",
-   "country": "US",
-   "lang": "en",
-   "tier": "B",
-   "published": "",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Rusya, Ermenistan'a giden gaz musluklarını kapattı",
-   "summary_scope": false
-  },
-  {
-   "title": "Kazakh oil industry struggling amid global energy crisis",
-   "url": "https://eurasianet.org/kazakh-oil-industry-struggling-amid-global-energy-crisis",
-   "source": "Eurasianet",
-   "country": "US",
-   "lang": "en",
-   "tier": "B",
-   "published": "",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Kazak petrol sektörü küresel enerji krizinde zorlanıyor",
-   "summary_scope": false
-  },
-  {
-   "title": "BRICS seeking to diminish US influence over global economy",
-   "url": "https://eurasianet.org/brics-seeking-to-diminish-us-influence-over-global-economy",
-   "source": "Eurasianet",
-   "country": "US",
-   "lang": "en",
-   "tier": "B",
-   "published": "",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "BRICS, ABD'nin küresel ekonomi üzerindeki etkisini azaltmaya çalışıyor",
-   "summary_scope": false
-  },
-  {
-   "title": "Care: Economic infrastructure we cannot afford to ignore in Europe and Central Asia",
-   "url": "https://eurasianet.org/care-economic-infrastructure-we-cannot-afford-to-ignore-in-europe-and-central-asia",
-   "source": "Eurasianet",
-   "country": "US",
-   "lang": "en",
-   "tier": "B",
-   "published": "",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Dikkat: Avrupa ve Orta Asya'da Göz Ardı Edemeyeceğimiz Ekonomik Altyapı",
-   "summary_scope": false
-  },
-  {
-   "title": "Russia aiming to take away Central Asian wheat markets from Kazakhstan",
-   "url": "https://eurasianet.org/russia-aiming-to-take-away-central-asian-wheat-markets-from-kazakhstan",
-   "source": "Eurasianet",
-   "country": "US",
-   "lang": "en",
-   "tier": "B",
-   "published": "",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Rusya, Orta Asya buğday pazarlarını Kazakistan'dan almayı hedefliyor",
-   "summary_scope": false
-  },
-  {
-   "title": "China using Central Asia as pass-through for shady trade with Iran",
-   "url": "https://eurasianet.org/china-using-central-asia-as-pass-through-for-shady-trade-with-iran",
-   "source": "Eurasianet",
-   "country": "US",
-   "lang": "en",
-   "tier": "B",
-   "published": "",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Çin, İran ile Şaibeli Ticarette Orta Asya'yı Transit Güzergah Olarak Kullanıyor",
-   "summary_scope": false
   }
  ],
  "failures": [
   {
    "source": "The Defense Post",
-   "error": "feed parsed but empty"
-  },
-  {
-   "source": "DefenseHere",
    "error": "feed parsed but empty"
   },
   {
@@ -4657,6 +4456,10 @@
    "error": "HTTPError: 403 Client Error: Forbidden for url: https://asiapacificdefencereporter.com/feed/"
   },
   {
+   "source": "Kookbang Ilbo",
+   "error": "ConnectTimeout: HTTPConnectionPool(host='kookbang.dema.mil.kr', port=80): Max retries exceeded with url: /dema"
+  },
+  {
    "source": "Hartpunkt",
    "error": "HTTPError: 403 Client Error: Forbidden for url: https://www.hartpunkt.de/feed/"
   },
@@ -4667,6 +4470,10 @@
   {
    "source": "Report.az",
    "error": "HTTPError: 403 Client Error: Forbidden for url: https://report.az/en/rss/"
+  },
+  {
+   "source": "Eurasianet",
+   "error": "HTTPError: 520 Server Error: <none> for url: https://eurasianet.org/rss"
   },
   {
    "source": "Elbit Systems",
