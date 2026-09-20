@@ -208,6 +208,9 @@ a { color: var(--brand); text-underline-offset: 2px; }
   align-items: center;
   gap: 7px;
   flex: 0 0 auto;
+  /* Açıkken 44px'e çıkıyordu ama asıl dokunulacak hâl kapalı olan: 30px'lik
+     bir hedefe parmakla basılmıyor. Yükseklik her durumda 44. */
+  min-height: 44px;
   padding: 7px 0;
   font-family: var(--mono);
   font-size: 11.5px;
@@ -581,6 +584,12 @@ body:has(.endnav) .foot { margin-top: 0; }
 .promptbar-actions { display: flex; gap: 10px; flex: 0 0 auto; }
 
 .pbtn {
+  /* Kurulum ve bildirim istemlerinin tek eylemi bunlar; 33px'e parmakla
+     basılmıyor ve ikisi yan yana durduğu için yanlış düğme kolay. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
   font-family: var(--mono);
   font-size: 11.5px;
   letter-spacing: 0.08em;

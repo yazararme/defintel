@@ -166,6 +166,11 @@
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ endpoint: sub.endpoint }),
+    }).then(function (res) {
+      // fetch yalnızca ağ koptuğunda reddeder; 500 de "başarılı" sayılıyordu ve
+      // düğme, sunucunun hiç duymadığı bir aboneliği "açık" diye boyuyordu.
+      if (!res.ok) throw new Error(path + " " + res.status);
+      return res;
     });
   }
 
@@ -175,7 +180,14 @@
         if (permission !== "granted") return "blocked";
         return reg.pushManager
           .subscribe({ userVisibleOnly: true, applicationServerKey: keyBytes(vapid) })
-          .then(function (sub) { return tell("/subscribe", sub); })
+          .then(function (sub) {
+            // Sunucu kaydı alamadıysa tarayıcıdaki abonelik de kalmamalı:
+            // kalırsa bir sonraki açılışta getSubscription() onu görür, düğme
+            // "açık" boyanır ve hiçbir zaman bildirim gelmez.
+            return tell("/subscribe", sub).catch(function (err) {
+              return sub.unsubscribe().then(function () { throw err; });
+            });
+          })
           .then(function () { return "on"; });
       });
     });
@@ -209,10 +221,12 @@
           card.hidden = true;
           return snooze("defintel:notify", 7);
         }
-        subscribe().then(function (state) {
-          card.hidden = true;
-          paint(state);
-        });
+        subscribe()
+          .catch(function () { return "failed"; })
+          .then(function (state) {
+            card.hidden = true;
+            paint(state);
+          });
       });
     });
   }
@@ -229,17 +243,26 @@
       off: "Bildirimler",
       blocked: "Bildirimler kapalı",
       failed: "Bildirim kurulamadı",
+      "failed-off": "Bildirim kapatılamadı",
     }[state];
     // Açıkken zil tek başına yetiyor; etiket CSS'te görsel olarak gizleniyor ama
     // DOM'da kalıyor, yoksa düğmenin erişilebilir adı yok olur.
+    // Sınıf görünüşü, aria-pressed gerçeği söyler ve burada ikisi ayrışır:
+    // "failed-off"ta abonelik hâlâ ayakta (basılı), ama zil "açık" görünümüne
+    // geçerse etiket CSS'te gizlenir ve hata mesajı ekrandan kalkar. Etiket
+    // kalsın, sonraki dokunuş da açmayı değil kapatmayı tekrar denesin.
     btn.classList.toggle("notify--on", state === "on");
-    btn.setAttribute("aria-pressed", state === "on" ? "true" : "false");
+    btn.setAttribute("aria-pressed", state === "on" || state === "failed-off" ? "true" : "false");
     btn.setAttribute("data-state", state);
     btn.title =
       state === "on"
         ? "Yeni rapor yayınlandığında bu cihaza bildirim gelir. Kapatmak için dokun."
         : state === "blocked"
         ? "Bildirim izni reddedilmiş. Cihaz ayarlarından açabilirsin."
+        : state === "failed-off"
+        ? "Abonelik sunucuda duruyor, bildirim gelmeye devam eder. Tekrar dene."
+        : state === "failed"
+        ? "Abonelik kurulamadı, bildirim gelmeyecek. Tekrar dene."
         : "Yeni rapor yayınlandığında bu cihaza bildirim gönderilsin.";
     btn.hidden = false;
   }
@@ -248,14 +271,19 @@
     navigator.serviceWorker.ready
       .then(function (reg) { return reg.pushManager.getSubscription(); })
       .then(function (sub) {
-        paint(sub ? "on" : Notification.permission === "denied" ? "blocked" : "off");
+        paint(Notification.permission === "denied" ? "blocked" : sub ? "on" : "off");
 
         btn.addEventListener("click", function () {
           btn.disabled = true;
-          var busy = btn.getAttribute("aria-pressed") === "true" ? unsubscribe() : subscribe();
-          busy
+          // Kapatma hatası ile açma hatası aynı şey değil: biri "bildirim
+          // gelmeyecek", diğeri "gelmeye devam edecek" demek. Etiket ikisini
+          // ayırmazsa okuyucu yanlış olanı doğru sanır.
+          var on = btn.getAttribute("aria-pressed") === "true";
+          (on
+            ? unsubscribe().catch(function () { return "failed-off"; })
+            : subscribe().catch(function () { return "failed"; })
+          )
             .then(paint)
-            .catch(function () { paint("failed"); })
             .then(function () { btn.disabled = false; });
         });
       });
