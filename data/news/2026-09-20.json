@@ -2,17 +2,17 @@
  "date": "2026-09-20",
  "window_hours": 48,
  "scanned_sources": 66,
- "failed_sources": 16,
- "collected_items": 358,
- "unique_items": 356,
+ "failed_sources": 17,
+ "collected_items": 343,
+ "unique_items": 341,
  "categories": {
   "C-UAS ve Hava Savunma": 40,
   "Deniz ve İnsansız Sistemler": 7,
-  "Genel Savunma Gündemi": 272,
+  "Genel Savunma Gündemi": 257,
   "Politika ve Regülasyon": 1,
-  "Rakip Duyuruları": 11,
+  "Rakip Duyuruları": 10,
   "Topçu ve Mühimmat": 11,
-  "İhale ve Sözleşmeler": 14
+  "İhale ve Sözleşmeler": 15
  },
  "items": [
   {
@@ -41,6 +41,32 @@
    "title_tr": "Türk Tulpar orta tankı Leonardo türeviyle devreye girdi",
    "summary_scope": true,
    "summary_tr": "Otokar'ın Tulpar orta tankı, Leonardo'nun 120 mm'lik HITFACT MkII kulesiyle entegre edilerek statik ve dinamik koşullarda canlı atış testlerinden geçti ve tüm test hedeflerini karşıladı."
+  },
+  {
+   "title": "Azerbaijani Defense Ministry presents review of events of last week (VIDEO)",
+   "url": "https://www.trend.az/azerbaijan/4225976.html",
+   "source": "Trend.az",
+   "country": "AZ",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Azerbaycan Savunma Bakanlığı geçen haftanın incelemesini sundu (VİDEO)",
+   "summary_scope": false
+  },
+  {
+   "title": "Iran signs contract to increase oil production at Azadegan Field",
+   "url": "https://www.trend.az/iran/4225963.html",
+   "source": "Trend.az",
+   "country": "AZ",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "İhale ve Sözleşmeler",
+   "also": [],
+   "title_tr": "İran Azadegan Sahası'nda petrol üretimini artırmak için sözleşme imzaladı",
+   "summary_scope": true
   },
   {
    "title": "Azerbaijan's Customs Committee opens tender for Mazimgara checkpoint upgrade",
@@ -121,6 +147,19 @@
    "also": [],
    "title_tr": "Azerbaycan, Agjabadi ilçesinde yeni okul için ihale açtı",
    "summary_scope": true
+  },
+  {
+   "title": "Trump orders triumphal arch converted into military complex",
+   "url": "https://tass.com/world/2190301",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Trump zafer kemerini askeri komplekse dönüştürmeyi emretti",
+   "summary_scope": false
   },
   {
    "title": "Vucic plans to meet with Lavrov at UN General Assembly session",
@@ -553,6 +592,19 @@
    "summary_scope": false
   },
   {
+   "title": "New North Korea-Russia bridge delivers a powerful message to China",
+   "url": "https://www.scmp.com/opinion/asia-opinion/article/3367489/new-north-korea-russia-bridge-delivers-powerful-message-china?utm_source=rss_feed",
+   "source": "SCMP (Çin)",
+   "country": "HK",
+   "lang": "en",
+   "tier": "C",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Yeni Kuzey Kore-Rusya köprüsü Çin'e güçlü mesaj veriyor",
+   "summary_scope": false
+  },
+  {
    "title": "Does Trump’s new AI Force signal tech race escalation ahead of Xi Jinping summit?",
    "url": "https://www.scmp.com/news/china/diplomacy/article/3368158/does-trumps-new-ai-force-signal-tech-race-escalation-ahead-xi-jinping-summit?utm_source=rss_feed",
    "source": "SCMP (Çin)",
@@ -671,146 +723,81 @@
    "summary_tr": "Cochin Shipyard, 18 Eylül 2026'da Hindistan Deniz Kuvvetleri için ilk Yeni Nesil Füze Gemisi'nin (NGMV) omurga koyma törenini gerçekleştirdi; CSL, Mart 2023'te altı NGMV için 9.804 kror rupi (yaklaşık 1 milyar dolar) değerinde sözleşme imzalamıştı. Gemiler BrahMos füzeleri, VLSRSAM hava savunma sistemi ve BEL MFR radarlarıyla donatılacak, ilk teslimat 2027 başında bekleniyor."
   },
   {
-   "title": "접경지역 발전 위해 민·관·군 협력위 신설",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/18/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
+   "title": "Два человека погибли в аварии на МКАД с участием \"Газели\"",
+   "url": "https://www.interfax.ru/moscow/1117222",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
    "tier": "B",
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Sınır bölgesinin geliştirilmesi için sivil-kamu-askeri işbirliği komitesi kuruldu",
+   "title_tr": "MKAD'da Gazel aracının katıldığı kazada iki kişi öldü",
    "summary_scope": false
   },
   {
-   "title": "북한, 일주일여 만에 단거리 탄도미사일 발사",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/17/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
+   "title": "Капремонт аэродрома \"Кречевицы\" в Великом Новгороде планируется завершить до 2029 г.",
+   "url": "https://www.interfax.ru/russia/1117221",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
    "tier": "B",
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Kuzey Kore bir hafta içinde kısa menzilli balistik füze fırlattı",
+   "title_tr": "Krechevichy hava meydanının kapsamlı onarımı 2029'a kadar tamamlanacak",
    "summary_scope": false
   },
   {
-   "title": "한미, 전작권 전환 가속화 협력 강화 공감",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/16/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
+   "title": "Выручка РФ от экспорта пива в Китай за 8 месяцев снизилась до $4,1 млн",
+   "url": "https://www.interfax.ru/business/1117220",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
    "tier": "B",
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Güney Kore-ABD savaş alanı komutanlığı geçişi hızlandırma işbirliğini güçlendirmede fikir birliği",
+   "title_tr": "Rusya'nın 8 ayda Çin'e bira ihracatından geliri 4,1 milyon dolara düştü",
    "summary_scope": false
   },
   {
-   "title": "AI·드론 기술 활용 군 의료체계 발전 논의",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/13/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
+   "title": "Около 105 тыс. россиян, по данным на 12:00 мск, проголосовали за рубежом на выборах в ГД",
+   "url": "https://www.interfax.ru/russia/1117219",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
    "tier": "B",
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "AI ve drone teknolojisiyle askeri tıbbi sistem gelişimi ele alındı",
+   "title_tr": "105 bin Rus yurt dışında Devlet Duma seçimlerinde oy kullandı",
    "summary_scope": false
   },
   {
-   "title": "[도약하는 지상군, 자랑스러운 K방산] 세계가 인정하는 K방산의 첨단기술",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/11/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
+   "title": "В Ростовской области из-за схода с рельсов грузовых вагонов задерживаются четыре поезда",
+   "url": "https://www.interfax.ru/russia/1117218",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
    "tier": "B",
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "[Sıçrama yapan kara kuvvetleri, gururlu K-savunma] Dünya tarafından kabul edilen K-savunmanın ileri teknolojisi",
+   "title_tr": "Rostov Bölgesi'nde yük vagonları raydan çıktı, dört tren gecikti",
    "summary_scope": false
   },
   {
-   "title": "‘초격차 솔루션’ 세계 바다에 굳건한 닻",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/9/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
+   "title": "В МГИК заявили о масштабных хакерских атаках на систему столичного электронного голосования",
+   "url": "https://www.interfax.ru/moscow/1117217",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
    "tier": "B",
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "'Aşırı fark yaratan çözüm' dünya denizlerinde sağlam çapa",
-   "summary_scope": false
-  },
-  {
-   "title": "“조용하지만 강인한 헌신 있었기에…”",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/8/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Sessiz ama güçlü adanmışlık vardı...",
-   "summary_scope": false
-  },
-  {
-   "title": "외국군 수탁생과 뜻깊은 어울림 마당",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/6/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Yabancı askeri öğrencilerle anlamlı bir araya gelme alanı",
-   "summary_scope": false
-  },
-  {
-   "title": "남수단에 한국어·태권도 전파 결실",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/4/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Güney Sudan'a Korece ve taekwondo yayılması meyvesini verdi",
-   "summary_scope": false
-  },
-  {
-   "title": "국군의 뿌리 현재적 의미 조명",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/3/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Orduların kökleri güncel anlamı aydınlatıldı",
-   "summary_scope": false
-  },
-  {
-   "title": "소매 걷은 장병들, 헌혈증 2136장 기부",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/2/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Kolları sıvayan askerleri 2.136 kan bağışı sertifikası bağışladı",
+   "title_tr": "MGIK başkent elektronik oylama sistemine karşı siber saldırıları açıkladı",
    "summary_scope": false
   },
   {
@@ -1061,84 +1048,6 @@
    "summary_scope": false
   },
   {
-   "title": "Два радара ВСУ уничтожены \"Геранями\" в Одесской и Днепропетровской областях",
-   "url": "https://www.interfax.ru/russia/1117197",
-   "source": "Interfax",
-   "country": "RU",
-   "lang": "ru",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Odesa ve Dnipropetrovsk bölgelerinde iki Ukrayna radar istasyonu \"Geran\" tarafından imha edildi",
-   "summary_scope": false
-  },
-  {
-   "title": "Правительство КЧР ушло в отставку после избрания нового главы республики",
-   "url": "https://www.interfax.ru/russia/1117196",
-   "source": "Interfax",
-   "country": "RU",
-   "lang": "ru",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Karacay-Çerkez Cumhuriyet Hükümeti yeni başkanın seçilmesinden sonra istifa etti",
-   "summary_scope": false
-  },
-  {
-   "title": "Два человека стали жертвами медведя в Томской области",
-   "url": "https://www.interfax.ru/russia/1117195",
-   "source": "Interfax",
-   "country": "RU",
-   "lang": "ru",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Tomsk Bölgesi'nde iki kişi ayı tarafından öldürüldü",
-   "summary_scope": false
-  },
-  {
-   "title": "ВСУ ударили по избирательному участку в школе в Запорожской области",
-   "url": "https://www.interfax.ru/russia/1117194",
-   "source": "Interfax",
-   "country": "RU",
-   "lang": "ru",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Ukrayna Silahlı Kuvvetleri Zaporojya Bölgesi'nde bir okuldaki seçim merkezine saldırdı",
-   "summary_scope": false
-  },
-  {
-   "title": "Минобороны РФ заявило об ударе по автомобильному мосту в Одесской области",
-   "url": "https://www.interfax.ru/russia/1117193",
-   "source": "Interfax",
-   "country": "RU",
-   "lang": "ru",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Rusya Savunma Bakanlığı Odesa Bölgesi'nde bir karayolu köprüsüne saldırı olduğunu açıkladı",
-   "summary_scope": false
-  },
-  {
-   "title": "Аэропорты Сочи и Геленджика вновь обслуживают рейсы",
-   "url": "https://www.interfax.ru/russia/1117192",
-   "source": "Interfax",
-   "country": "RU",
-   "lang": "ru",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Sochi ve Gelendzhik havaalanları yeniden uçuşlara hizmet vermeye başladı",
-   "summary_scope": false
-  },
-  {
    "title": "Oil, Alliances, And Ultimatums: Is It Time To End The Indo‑American Bromance?",
    "url": "https://www.indiandefensenews.in/2026/09/oil-alliances-and-ultimatums-is-it-time.html",
    "source": "Indian Defence News",
@@ -1178,19 +1087,6 @@
    "summary_scope": false
   },
   {
-   "title": "Kolkata Set For Kusha ADS Deployment Amid Bangladesh's Mecca Pact Dynamics",
-   "url": "https://www.indiandefensenews.in/2026/09/kolkata-set-for-kusha-ads-deployment.html",
-   "source": "Indian Defence News",
-   "country": "IN",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Kolkata, Bangladeş'in Mekke Anlaşması Dinamikleri Ortasında Kusha ADS Konuşlandırılması İçin Hazırlanıyor",
-   "summary_scope": false
-  },
-  {
    "title": "India–Pakistan Conflict At Sea: What’s Really Happening?",
    "url": "https://www.indiandefensenews.in/2026/09/indiapakistan-conflict-at-sea-whats.html",
    "source": "Indian Defence News",
@@ -1201,6 +1097,45 @@
    "category": "Genel Savunma Gündemi",
    "also": [],
    "title_tr": "Hindistan-Pakistan Deniz Çatışması: Gerçekte Ne Oluyor?",
+   "summary_scope": false
+  },
+  {
+   "title": "Sukhoi Su-57 Pixel Camouflage Redefines Stealth Against American Grey Doctrine",
+   "url": "https://www.indiandefensenews.in/2026/09/sukhoi-su-57-pixel-camouflage-redefines.html",
+   "source": "Indian Defence News",
+   "country": "IN",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Sukhoi Su-57 Piksel Kamuflajı Amerikan Gri Doktrinesi Karşısında Gizliliği Yeniden Tanımlıyor",
+   "summary_scope": false
+  },
+  {
+   "title": "Indian Army Enhances Technical Preparedness Along The LAC",
+   "url": "https://www.indiandefensenews.in/2026/09/indian-army-enhances-technical.html",
+   "source": "Indian Defence News",
+   "country": "IN",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Hindistan Ordusu LAC Boyunca Teknik Hazırlığı Geliştiriyor",
+   "summary_scope": false
+  },
+  {
+   "title": "Kolkata Set For Kusha ADS Deployment Amid Bangladesh's Mecca Pact Dynamics",
+   "url": "https://www.indiandefensenews.in/2026/09/kolkata-set-for-kusha-ads-deployment.html",
+   "source": "Indian Defence News",
+   "country": "IN",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Kolkata, Bangladeş'in Mekke Anlaşması Dinamikleri Ortasında Kusha ADS Konuşlandırılması İçin Hazırlanıyor",
    "summary_scope": false
   },
   {
@@ -1256,19 +1191,6 @@
    "summary_scope": false
   },
   {
-   "title": "Sukhoi Su-57 Pixel Camouflage Redefines Stealth Against American Grey Doctrine",
-   "url": "https://www.indiandefensenews.in/2026/09/sukhoi-su-57-pixel-camouflage-redefines.html",
-   "source": "Indian Defence News",
-   "country": "IN",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Sukhoi Su-57 Piksel Kamuflajı Amerikan Gri Doktrinesi Karşısında Gizliliği Yeniden Tanımlıyor",
-   "summary_scope": false
-  },
-  {
    "title": "Houthis Threaten Pakistan With Ballistic Missile Strikes On Karachi Over Saudi Troop Deployment",
    "url": "https://www.indiandefensenews.in/2026/09/houthis-threaten-pakistan-with.html",
    "source": "Indian Defence News",
@@ -1279,19 +1201,6 @@
    "category": "Genel Savunma Gündemi",
    "also": [],
    "title_tr": "Hutiler, Suudi Asker Konuşlandırması Nedeniyle Pakistan'ı Karaçi'ye Balistik Füze Saldırılarıyla Tehdit Ediyor",
-   "summary_scope": false
-  },
-  {
-   "title": "Indian Army Enhances Technical Preparedness Along The LAC",
-   "url": "https://www.indiandefensenews.in/2026/09/indian-army-enhances-technical.html",
-   "source": "Indian Defence News",
-   "country": "IN",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Hindistan Ordusu LAC Boyunca Teknik Hazırlığı Geliştiriyor",
    "summary_scope": false
   },
   {
@@ -2370,19 +2279,6 @@
    "summary_scope": false
   },
   {
-   "title": "State Duma election voters’ turnout exceeds 32.58% as of 2:00 p.m. Moscow time — CEC",
-   "url": "https://tass.com/politics/2190071",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Devlet Duması seçim oy katılımı Moskova saati 14:00 itibariyle %32,58'i aştı — MYK",
-   "summary_scope": false
-  },
-  {
    "title": "Bronco und Terrex auf MSPO: ST Engineering zielt auf Europa",
    "url": "https://soldat-und-technik.de/2026/09/sut-plus/50039/bronco-und-terrex-auf/",
    "source": "Soldat und Technik",
@@ -2604,19 +2500,6 @@
    "title_tr": "F127: ABD Teknolojisine Aşırı Güvenilmesi Artık Uygun Değil",
    "summary_scope": true,
    "summary_tr": "Alman savunma medyası hartpunkt'ta yayımlanan analiz, Almanya'nın F127 hava savunma fırkateynleri için ABD'nin Aegis sistemi, SPY-6 radarı ve balistik füze savunma teknolojisine yoğun bağımlılığının ulusal egemenlik ve tedarik güvenliği açısından risk oluşturduğunu belirtiyor. Örnek olarak İsviçre'nin Patriot sipariş teslimatlarının ABD tarafından ertelenmesi ve İran savaşında ABD'nin füze stoklarının azalması gösteriliyor."
-  },
-  {
-   "title": "국가보훈부, 유엔참전국 감사 만찬 개최",
-   "url": "http://kookbang.dema.mil.kr/newsWeb/20260920/1/ATCE_CTGR_0010010000/view.do",
-   "source": "Kookbang Ilbo",
-   "country": "KR",
-   "lang": "ko",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Veteran Bakanlığı, BM Katılımcı Ülkeler İçin Minnet Ziyafeti Düzenledi",
-   "summary_scope": false
   },
   {
    "title": "Pantsir‑S1M: India’s Proposed Shield Against Drone Swarms",
@@ -3599,19 +3482,6 @@
    "summary_scope": false
   },
   {
-   "title": "Silver Wotan 2026: Bundeswehr trainiert auf Insel Gotland",
-   "url": "https://soldat-und-technik.de/2026/09/neu/50035/silver-wotan-2026-gotland/",
-   "source": "Soldat und Technik",
-   "country": "DE",
-   "lang": "de",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Silver Wotan 2026: Bundeswehr Gotland Adasında eğitim yapıyor",
-   "summary_scope": false
-  },
-  {
    "title": "Trump signs bill targeting China’s Russia energy imports days before Xi’s US visit",
    "url": "https://www.scmp.com/news/us/economy-trade-business/article/3368079/trump-signs-bill-targeting-chinas-russia-energy-imports-days-xis-us-visit?utm_source=rss_feed",
    "source": "SCMP (Çin)",
@@ -4293,32 +4163,6 @@
    "summary_scope": false
   },
   {
-   "title": "FA-50PL opóźnione. Prezes KAI o nowym harmonogramie [WYWIAD]",
-   "url": "https://defence24.pl/przemysl/fa-50pl-opoznione-prezes-kai-o-nowym-harmonogramie-wywiad",
-   "source": "Defence24 (PL)",
-   "country": "PL",
-   "lang": "pl",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "FA-50PL Gecikmiş. KAI Başkanı Yeni Takvimde [RÖPORTAJ]",
-   "summary_scope": false
-  },
-  {
-   "title": "Imponujące premiery lotnicze. NATO Days w Ostrawie już w weekend",
-   "url": "https://defence24.pl/sily-zbrojne/imponujace-premiery-i-sprawdzone-hity-nato-days-w-ostrawie-juz-w-weekend",
-   "source": "Defence24 (PL)",
-   "country": "PL",
-   "lang": "pl",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "İtibarlı Havacılık Öncülleri. Ostrava'da NATO Günleri Bu Hafta Sonu",
-   "summary_scope": false
-  },
-  {
    "title": "Expert commentary on the judgment of the Shanghai Maritime Court",
    "url": "https://defence24.com/other/expert-commentary-on-the-judgment-of-the-shanghai-maritime-court",
    "source": "Defence24 (EN)",
@@ -4329,32 +4173,6 @@
    "category": "Genel Savunma Gündemi",
    "also": [],
    "title_tr": "Şanghay Deniz Mahkemesi Kararı Hakkında Uzman Yorumu",
-   "summary_scope": false
-  },
-  {
-   "title": "Impressive premieres and proven hits. NATO Days in Ostrava this weekend",
-   "url": "https://defence24.com/armed-forces/impressive-premieres-and-proven-hits-nato-days-in-ostrava-this-weekend",
-   "source": "Defence24 (EN)",
-   "country": "PL",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "İtibarlı Öncüller ve Kanıtlanmış Başarılar. Ostrava'da NATO Günleri Bu Hafta Sonu",
-   "summary_scope": false
-  },
-  {
-   "title": "US moves MQ-9 Reapers to South America",
-   "url": "https://defence24.com/defence-policy/us-moves-mq-9-reapers-to-south-america",
-   "source": "Defence24 (EN)",
-   "country": "PL",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "ABD, MQ-9 Reapers'ları Güney Amerika'ya Taşıyor",
    "summary_scope": false
   },
   {
@@ -4496,7 +4314,8 @@
    "category": "Topçu ve Mühimmat",
    "also": [],
    "title_tr": "Modern Askeri Teknolojinin Arkasındaki Stratejik Metaller",
-   "summary_scope": true
+   "summary_scope": true,
+   "summary_tr": "Savunma sektörü, özellikle havacılık alanı, platin gibi stratejik metallere bağımlı durumda."
   },
   {
    "title": "BAE Systems OneArc wins US Army contract for embedded vehicle training",
@@ -4538,20 +4357,6 @@
    "title_tr": "IDV ABD Ordusu 'Engineer Autonomous Breaching Capability' İnisiyatifi İçin Seçildi",
    "summary_scope": true,
    "summary_tr": "Leonardo grubuna bağlı IDV, ABD kara kuvvetlerinin \"Engineer Autonomous Breaching Capability\" programı için seçilen dört şirketten biri oldu ve VIKING insansız kara aracına dayalı otonom mayın/engel geçiş sistemi geliştirecek."
-  },
-  {
-   "title": "Otokar e Leonardo integrano e testano il TULPAR con la torretta HITFACT MkII da 120 mm",
-   "url": "https://www.analisidifesa.it/2026/09/otokar-e-leonardo-integrano-e-testano-il-tulpar-con-la-torretta-hitfact-mkii-da-120-mm/",
-   "source": "Analisi Difesa",
-   "country": "IT",
-   "lang": "it",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "Rakip Duyuruları",
-   "also": [],
-   "title_tr": "Otokar ve Leonardo TULPAR'ı 120 mm HITFACT MkII Toresi ile Entegre Ediyor",
-   "summary_scope": true,
-   "summary_tr": "Otokar ve Leonardo, TULPAR platformu ile HITFACT MkII 120 mm taretinin entegrasyon ve canlı atış testlerini statik ve dinamik koşullarda başarıyla tamamladı. HITFACT, 120 mm düz namlulu topuyla MBT seviyesinde ateş gücünü hafif/orta platformlara taşıyan dünyadaki tek sistem olma özelliğini taşıyor."
   },
   {
    "title": "US clears $24.3bn F-35 stealth fighter jets sale to Saudi Arabia",
@@ -4721,6 +4526,10 @@
   {
    "source": "Asia Pacific Defence Reporter",
    "error": "HTTPError: 403 Client Error: Forbidden for url: https://asiapacificdefencereporter.com/feed/"
+  },
+  {
+   "source": "Kookbang Ilbo",
+   "error": "ConnectTimeout: HTTPConnectionPool(host='kookbang.dema.mil.kr', port=80): Max retries exceeded with url: /dema"
   },
   {
    "source": "Hartpunkt",
