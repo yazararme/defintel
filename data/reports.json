@@ -1,5 +1,87 @@
 [
   {
+    "date": "2026-09-20",
+    "title": "ABD Deniz Piyadeleri 400 bin çok parçacıklı 5,56 mm anti-dron mermisi aldı ve 2027 için 1 milyon daha planlıyor; Pentagon 60 bin dronluk alımın ikinci eleme sonuçlarını açıkladı",
+    "summary": "Yeni ihale açılmadı; günün ağırlığı hafif silah ve küçük dron tarafında. ABD Deniz Piyadeleri 400.000 adet 5,56 mm çok parçacıklı anti-dron mermisi aldı, 2027 mali yılında 1 milyon adet daha planlıyor. Pentagon'un Drone Dominance programında Gauntlet 2, 19 firma arasından yaklaşık 60.000 dronluk alımın kazananlarını belirledi. XM30'da organik C-UAS şartı Kongre gündemine taşındı; SGT STOUT obüs mevzilerini korumak için tatbikatta kullanıldı.",
+    "alarm": false,
+    "alarm_title": "",
+    "status": "izle",
+    "decision_by": "2026-10-09",
+    "tags": [
+      "C-UAS",
+      "Mühimmat",
+      "Hafif Silah",
+      "Dolanan Mühimmat",
+      "Hava Savunma",
+      "ABD",
+      "Polonya",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "ABD Deniz Piyadeleri Drone Round alımları",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Drone Dominance Gauntlet 2 sonuçları",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "XM30'da organik C-UAS sorusu Kongre gündeminde",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "SGT STOUT obüs mevzisi koruması",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "Hanwha Polonya'da 40 mm C-UAS ve lazer",
+        "home": "rakip"
+      },
+      {
+        "id": "G6",
+        "label": "Akash Orta Asya ihracatı",
+        "home": "rakip"
+      },
+      {
+        "id": "G7",
+        "label": "Leonardo konteynerli Falcon Shield",
+        "home": "rakip"
+      },
+      {
+        "id": "G8",
+        "label": "IDV EABC geçit açma seçimi",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "ABD Donanması uygun maliyetli önleyici",
+        "home": "izleme"
+      },
+      {
+        "id": "G10",
+        "label": "USAF orta kalibreli namlulu hava savunma pazar araştırması",
+        "home": "izleme"
+      },
+      {
+        "id": "G11",
+        "label": "Malezya MERAD (RMK-13)",
+        "home": "izleme"
+      },
+      {
+        "id": "G12",
+        "label": "665 milyon $'lık C-UAS test siparişine itiraz",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-09-20.html"
+  },
+  {
     "date": "2026-09-19",
     "title": "Letonya imzalı Archer niyet mektubunu bozup fiyat, teslim süresi ve yerli sanayi katılımı gerekçesiyle Çek Morana'ya geçti; 50 mm güdümlü yakınlık fünyeli mermi uçuş testini geçti",
     "summary": "Yeni ihale açılmadı; günün gelişmeleri bir NATO üyesinin obüs kararını tersine çevirmesi ve namlulu hava savunmasının kalibre-fünye tarafındaki ilerleme. Letonya, Haziran 2025'te 18 adet Archer için imzaladığı niyet mektubunu bırakıp Çek Excalibur Army'nin Morana 155 mm obüsünü seçti; gerekçe fiyat, teslim süresi ve yerli sanayi katılımı. Northrop Grumman 50 mm güdümlü, yakınlık fünyeli Raid Hunter mermisini XM913 topundan uçurdu. Körfez'de EDGE ve Hanwha yerli üretim içeren hava savunma term sheet'i imzaladı; ABD'de 665 milyon $'lık C-UAS test-değerlendirme siparişi itiraza uğradı.",
