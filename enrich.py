@@ -59,7 +59,10 @@ def add_item_anchors(text):
     def li(m):
         gid = m.group(1).lower()
         return (
-            f'<li id="{gid}"><strong class="ganchor">{m.group(2)}</strong>'
+            # group(1) ("G12") düşerse geriye öksüz bir " · " kalıyordu ve
+            # çapaya atlayan okuyucu vardığını doğrulayamıyordu. add_heading_anchors
+            # aynı işi baştan beri doğru yapıyor; iki yol artık tutarlı.
+            f'<li id="{gid}"><strong class="ganchor">{m.group(1)}{m.group(2)}</strong>'
             f"{COPY.format(aid=gid)}"
         )
 

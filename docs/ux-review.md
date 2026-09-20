@@ -941,3 +941,127 @@ kalkıyor.
 **Yapılmayacak:** kaynakçayı vekile çevirmek; her satıra "çeviri" jetonu; gövdesiz satıra ikinci bağlantı
 sıkıştırmak; her satırı katlamak (Rev 4 gerekçesi geçerli); özetleri teaser'a kısaltmak; kalem başına 403
 yoklaması.
+
+---
+
+## Revizyon 6 — çapa dili ve tablet
+
+### A. ALARMLAR satırı
+
+#### R6.1 — Önce hata: `enrich.py` varış işaretini siliyor
+
+`add_item_anchors` yakaladığı `G12`'yi çıktıya yazmıyor; yalnızca ondan sonraki parçayı basıyor:
+
+```python
+return (f'<li id="{gid}"><strong class="ganchor">{m.group(2)}</strong>' …)
+#                                                  ^^^^^^^^^^^ group(1) ("G12") düşüyor
+```
+
+Sonuç, dört günün hepsinde ve tüm RAKİP HAREKETLERİ / İZLEME LİSTESİ kalemlerinde:
+`<li id="g12"><strong class="ganchor"> · Malezya MERAD (RMK-13)</strong>` — öksüz bir " · " ve varış işareti yok.
+`add_heading_anchors` aynı işi doğru yapıyor (`{m.group(1)}` ile tam etiketi basıyor); yani iki yol tutarsız,
+`<h3>` tarafı sağlam, `<li>` tarafı bozuk. **Tek satırlık düzeltme**, zevk meselesi değil.
+
+#### R6.2 — `G#` nerede görünür, nerede görünmez
+
+`G#` **konumsal** bir id: aynı `g10` 14 Eylül'de "Aselsan", 17 Eylül'de "ABD Ordusu 50 mm arayışı". Yani günler
+arasında hiçbir anlamı yok — kopyalanan bir `#g10` bağlantısı ertesi gün başka bir şeye gider.
+
+Ayrım şu: **`G#` bir gün içinde meşru bir kısa tutamaktır, ama hiçbir satırın tek yükü olamaz.**
+
+| Yer | Görünür mü | Gerekçe |
+|---|---|---|
+| Hedefteki etiket (`<h3>`, `<li>`) | **Evet** — `G12 · Malezya MERAD` | Varış teyidi; R6.1'in bozduğu şey tam olarak bu |
+| Gövde içi atıf (`bkz. G8`, tablo rozetleri) | **Evet, değişmiyor** | Okuyucu ilk hedefte eşleşmeyi öğrenir; kısa ve akıcı |
+| **ALARMLAR satırı** | **Hayır** | Belgenin ilk satırı: okuyucu konvansiyonu henüz öğrenmedi ve orada id *tek yük*. `"G12 ne demek bilmiyorsun"` haklı. |
+| Kopyalanan bağlantı (`#g12`) | Zaten görünmüyor | Ama günler arası kaymayı belgele (P1) |
+
+#### R6.3 — Satır ne olmalı: (b), ama bağlantı yük değil bonus
+
+Seçim **(b)** — bağlantı kalır, etiketi *şey* olur, id değil. Ama asıl kural: **satır bağlantıya dokunmadan
+da kendi başına yeterli olmalı.** İşi "yangın yok, iki tarih geliyor" ise tarih + ad yeter; id hiçbir şey katmaz.
+
+```
+Alarm yok.
+
+DIŞ SON TARİHLER
+9 Ekim      USAF orta kalibre pazar araştırması →
+24 Aralık   665 milyon $'lık C-UAS test siparişine itiraz →
+```
+
+- Tarih `--watch` renginde (Rev 1'de bu token'a verilen iş), ad bağlantının kendisi, hedef `#g10`.
+- Her son tarih kendi satırında; virgüllü tek satır telefonda okunmuyor.
+- **Satır elle yazılmaz, `developments[]`'ten üretilir.** Bunun için frontmatter'a isteğe bağlı `due` alanı:
+  `{id: G10, label: "…", home: izleme, due: 2026-10-09}`. `decision_by` türetilir (`min(due)`), `status_of()`
+  aynen çalışır. Kazanç: elle yazılmış id kalmaz, etiket hedefle **garantili** aynıdır, ölü çapa üretilemez.
+
+#### R6.4 — Prompt kuralı: "tekrar etme" → "sahibi olsun, atıf tek yönlü olsun"
+
+Bugünkü kural ("aynı olguyu iki kez yazma, çapraz atıf ver") olgunun **hiçbir yerde** yaşamamasına yol açıyor:
+ALARMLAR "bkz. G10" diyor, G10 "yanıt süresi için bkz. ALARMLAR" diyor. Yerine:
+
+> **Her olgunun tek bir sahip bölümü vardır. Atıf sahibe doğru tek yönlüdür; atıf yapan taraf sahibin tek
+> ayırt edici verisini (tarih, sayı, aktör) tekrarlayabilir, açıklamasını tekrarlayamaz. Bir atıf, kendisini
+> işaret eden bölüme geri işaret edemez.**
+
+Son tarihler için uygulaması: **ALARMLAR tarihin ve adın sahibidir** (açıklama yok), **G# açıklamanın
+sahibidir** (geri bağlantı yok). "Yanıt süresi için bkz. ALARMLAR" cümleleri kalkar.
+
+### B. Tablet
+
+#### R6.5 — Teşhis: iki uç da aynı hatanın iki yüzü — ölçü serbest bırakılmış
+
+Ölçüm `--measure: 66ch ≈ 573px` (1024'te ölçülen sütun genişliği). Bugün:
+
+- **768/820/834 (portre, <860):** rail gizleniyor, sütun **640-706px**'e kadar geriliyor — ölçünün %12-23 üstü.
+  Tek sütun durumunda hiçbir şey ölçüyü sınırlamıyor.
+- **1024/1180 (yatay, >860):** rail dönüyor ama `report-grid` sola dayalı; 785px'lik ızgara (172+40+573)
+  976px'lik alanda sola yapışıyor, sağda büyüyen boşluk kalıyor (276/175 → 276/231).
+- **Medya sayfasında asimetri:** `.clip { max-width: 72ch }` kalemi kırpıyor ama `<ul>` geriliyor, dolayısıyla
+  boşluk hep sağda toplanıyor (43 sol / 78 sağ).
+
+Ortak sebep: **ölçü hiçbir durumda ortalanmıyor.** Kırpma var, hizalama yok.
+
+#### R6.6 — Kurallar
+
+**Kural 1 (en yüksek getirili, tek satır) — tek sütun durumunda ölçü ortalanır.**
+Rail gizliyken `article.column` ve medya listesi kabı `max-width: var(--measure)` / `72ch` + `margin-inline: auto`
+alır. Kırpmayı kalemden (`.clip`) kaba taşı. 834'te 706px sol-dayalı yerine **573px ortalanmış**, boşluklar
+~130/130 simetrik olur.
+
+**Kural 2 — rail 860'ta değil, 920px'te döner.**
+Izgara genişliği 172 + 40 + 573 = **785px**; artı `.wrap` dolgusu 48 = 833 (nefes payı sıfır). Rahat eşik
+785 + 48 + ~87 pay = **920px**. Bu eşik iPad portreyi (834) tek sütunda, iPad yatayı (1024) rail'li durumda
+bırakır — cihazın iki hâli iki farklı düzene temiz ayrılır.
+
+**Kural 3 — rail'li durumda ızgaranın kendisi ortalanır.**
+`.report-grid { max-width: calc(var(--rail) + 40px + var(--measure)); margin-inline: auto; }`.
+1024'te ~120/120, 1180'de ~197/197 simetrik. Okuma sütunu sayfa merkezinin sağında kalır — iki sütunlu
+editoryal düzende beklenen davranış, 276/231'den her koşulda iyi.
+
+**Kural 4 — `@media (min-width: 1000px)` iki sütunlu Öne çıkanlar kuralı kaldırılır.**
+Kendi hatamın düzeltmesi: o kural ilk incelemede, satırlar 293px'ken yazıldı. Rev 3 satırları **78px**'e
+indirdi, 12 kalem ≈ 940px ≈ 1,2 ekran — çözdüğü sorun ortadan kalktı. Üstelik rail döndüğünde içerik sütunu
+72ch'e (≈625px) kapalı; iki sütun = 292px, üç satırlık başlık + meta için fazla dar. Tek sütun kalır.
+
+**Kural 5 — döndürme metin bloğunu değiştirmez.**
+Kurallar 1-3'ten sonra 834 → 1180 dönüşünde sütun genişliği **her iki hâlde de 573px**; değişen yalnızca
+rail'in varlığı ve boşluklar. Tabletin breakpoint sorusunun cevabı bu: *döndürme kromu değiştirir, metin
+bloğunu asla.*
+
+### Uygulama listesi — Revizyon 6
+
+| # | Dosya | Değişiklik | Kabul testi |
+|---|---|---|---|
+| R6-P0-1 | `enrich.py` → `add_item_anchors` | `{m.group(2)}` → `{m.group(1)}{m.group(2)}`. | `reports/2026-09-20.html` içinde `<strong class="ganchor">G12 · ` geçer; hiçbir `ganchor` " · " ile başlamaz (`grep -c '"ganchor"> ·'` = 0). |
+| R6-P0-2 | `assets/app.css` | **Kural 1:** tek sütun durumunda `article.column` `max-width: var(--measure)`, medya liste kabı `max-width: 72ch`, ikisi de `margin-inline: auto`; `.clip` üzerindeki `max-width` kaba taşınır. | 768/820/834'te sütun ≤580px ve sol/sağ boşluk farkı ≤4px. |
+| R6-P0-3 | `assets/app.css` | **Kural 2:** `@media (max-width: 860px)` → `(max-width: 919px)`; rail'li kurallar `(min-width: 920px)`. | 834'te rail gizli, 1024'te görünür; 900px'te tek sütun. |
+| R6-P0-4 | `assets/app.css` | **Kural 3:** `.report-grid` ve `.news-grid` → `max-width: calc(var(--rail) + 40px + var(--measure))` (medyada `72ch`) + `margin-inline: auto`. | 1024 ve 1180'de sol/sağ boşluk farkı ≤4px. |
+| R6-P0-5 | `assets/app.css` | **Kural 4:** `@media (min-width: 1000px)` `.highlights { columns: 2 }` bloğu silinir. | Hiçbir genişlikte Öne çıkanlar iki sütun değil; `grep -c "columns: 2" assets/app.css` = 0. |
+| R6-P0-6 | rapor promptu | R6.4'teki sahiplik kuralı; "bkz. ALARMLAR" geri bağlantıları kaldırılır; ALARMLAR satırı tarih + ad taşır, açıklama taşımaz. | Yeni günün raporunda `bkz. ALARMLAR` geçmez; ALARMLAR satırındaki her son tarih bir ada sahiptir. |
+| R6-P1-1 | `build.py` + frontmatter şeması | `developments[]`'e isteğe bağlı `due`; ALARMLAR son tarih listesi bu alandan **üretilir** (tarih `--watch`, ad bağlantı, hedef `#g{id}`). `decision_by` = `min(due)` olarak türetilir, `status_of()` değişmez. | `due` taşıyan bir raporda liste otomatik doğar ve her ad gerçek bir çapaya gider (ölü `href` yok); `due` yoksa eski davranış korunur. |
+| R6-P1-2 | `build.py` → `copylink` | Kopyalanan bağlantı gün bağlamı taşıdığı için zaten tam URL; `title` metnine "bu çapa yalnızca bu güne aittir" notu eklenir. | Kopyala düğmesinin `title`'ı gün-özgüllüğünü söyler. |
+
+**Yapılmayacak:** `G#`'yi hedeften de kaldırmak (varış teyidi gider); gövde içi `G#` atıflarını etikete
+çevirmek (28+ karakterlik adlar cümle ortasında okunmuyor); ölçüyü tablette genişletmek; ALARMLAR satırını
+elle yazmaya devam etmek.

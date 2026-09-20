@@ -340,6 +340,9 @@ a { color: var(--brand); text-underline-offset: 2px; }
   gap: 40px;
   align-items: start;
   margin-top: 26px;
+  /* Izgara 172+40+573 = 785px; wrap 1080'e kadar büyüyor. Ortalanmazsa
+     fark tamamen sağda birikiyordu (1180'de 276 sol / 231 sağ). */
+  justify-content: center;
 }
 
 .rail {
@@ -488,8 +491,15 @@ body:has(.endnav) .foot { margin-top: 0; }
 
 /* ---------- narrow screens ---------- */
 
-@media (max-width: 860px) {
-  .report-grid { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+@media (max-width: 920px) {
+  /* Tek sütuna düşünce ölçüyü sınırlayan hiçbir şey kalmıyordu: 834'te metin
+     706px'e geriliyordu (66ch ≈ 573'ün %23 üstü) ve sola yapışıyordu. Kırpmayı
+     kaba taşıyıp ortalıyoruz — döndürme kromu değiştirir, metin bloğunu asla. */
+  .report-grid {
+    grid-template-columns: minmax(0, var(--measure));
+    justify-content: center;
+    gap: 22px;
+  }
   .rail { display: none; }   /* gün çubuğu aynı bilgiyi taşıyor */
   .rail--unused {
     position: static;
@@ -772,9 +782,12 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
 /* Tarama belgesi: solda yapışkan kategori listesi, sağda kupürler. */
 .news-grid {
   display: grid;
-  grid-template-columns: var(--rail) minmax(0, 1fr);
+  /* Kırpma kalemde değil kapta: 1fr kalan alanı yutunca <ul> geriliyor,
+     kalem 72ch'te duruyor ve artan boşluk hep sağda birikiyordu. */
+  grid-template-columns: var(--rail) minmax(0, 72ch);
   gap: 40px;
   align-items: start;
+  justify-content: center;
 }
 
 .news-rail { gap: 0; }
@@ -810,7 +823,6 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
 
 .clip {
   border-bottom: 1px solid var(--rule);
-  max-width: 72ch;
 }
 /* > : gövdedeki "Kaynağa git" çipi bu kuralların dışında kalsın */
 .clip > a {
@@ -907,20 +919,18 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
   color: var(--ink-2);
 }
 
-@media (min-width: 1000px) {
-  /* 12 kalem tek ekrana sığsın; kategori listeleri asla sütunlanmaz */
-  .highlights .clips { columns: 2; column-gap: 40px; }
-  .highlights .clip { break-inside: avoid; }
-}
+/* İki sütunlu Öne çıkanlar kuralı kaldırıldı: satırlar 293px'ken yazılmıştı,
+   katlanır özetler onları 78px'e indirdi — 12 kalem zaten ~1,2 ekran. Raf
+   dönünce sütun 292px'e düşüyor ve üç satırlık başlık için fazla dar. */
 
-@media (max-width: 860px) {
-  .news-grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
+@media (max-width: 920px) {
+  .news-grid {
+    grid-template-columns: minmax(0, 72ch);
+    justify-content: center;
+    gap: 0;
+  }
   .news-rail { display: none; }
   .catbar { display: flex; }
-}
-
-@media (max-width: 700px) {
-  .clip { max-width: none; }
 }
 
 /* çeviri: Türkçe başlık duruş hâlinde, özgünü gövdede — jargonda şüphe uyanırsa
