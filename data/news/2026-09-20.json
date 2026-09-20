@@ -2,17 +2,17 @@
  "date": "2026-09-20",
  "window_hours": 48,
  "scanned_sources": 66,
- "failed_sources": 17,
- "collected_items": 343,
- "unique_items": 341,
+ "failed_sources": 16,
+ "collected_items": 353,
+ "unique_items": 351,
  "categories": {
   "C-UAS ve Hava Savunma": 40,
   "Deniz ve İnsansız Sistemler": 7,
-  "Genel Savunma Gündemi": 257,
+  "Genel Savunma Gündemi": 268,
   "Politika ve Regülasyon": 1,
   "Rakip Duyuruları": 10,
   "Topçu ve Mühimmat": 11,
-  "İhale ve Sözleşmeler": 15
+  "İhale ve Sözleşmeler": 14
  },
  "items": [
   {
@@ -723,6 +723,175 @@
    "summary_tr": "Cochin Shipyard, 18 Eylül 2026'da Hindistan Deniz Kuvvetleri için ilk Yeni Nesil Füze Gemisi'nin (NGMV) omurga koyma törenini gerçekleştirdi; CSL, Mart 2023'te altı NGMV için 9.804 kror rupi (yaklaşık 1 milyar dolar) değerinde sözleşme imzalamıştı. Gemiler BrahMos füzeleri, VLSRSAM hava savunma sistemi ve BEL MFR radarlarıyla donatılacak, ilk teslimat 2027 başında bekleniyor."
   },
   {
+   "title": "접경지역 발전 위해 민·관·군 협력위 신설",
+   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/18/ATCE_CTGR_0010010000/view.do",
+   "source": "Kookbang Ilbo",
+   "country": "KR",
+   "lang": "ko",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Sınır bölgesinin geliştirilmesi için sivil-kamu-askeri işbirliği komitesi kuruldu",
+   "summary_scope": false
+  },
+  {
+   "title": "북한, 일주일여 만에 단거리 탄도미사일 발사",
+   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/17/ATCE_CTGR_0010010000/view.do",
+   "source": "Kookbang Ilbo",
+   "country": "KR",
+   "lang": "ko",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Kuzey Kore bir hafta içinde kısa menzilli balistik füze fırlattı",
+   "summary_scope": false
+  },
+  {
+   "title": "한미, 전작권 전환 가속화 협력 강화 공감",
+   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/16/ATCE_CTGR_0010010000/view.do",
+   "source": "Kookbang Ilbo",
+   "country": "KR",
+   "lang": "ko",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Güney Kore-ABD savaş alanı komutanlığı geçişi hızlandırma işbirliğini güçlendirmede fikir birliği",
+   "summary_scope": false
+  },
+  {
+   "title": "AI·드론 기술 활용 군 의료체계 발전 논의",
+   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/13/ATCE_CTGR_0010010000/view.do",
+   "source": "Kookbang Ilbo",
+   "country": "KR",
+   "lang": "ko",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "AI ve drone teknolojisiyle askeri tıbbi sistem gelişimi ele alındı",
+   "summary_scope": false
+  },
+  {
+   "title": "[도약하는 지상군, 자랑스러운 K방산] 세계가 인정하는 K방산의 첨단기술",
+   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/11/ATCE_CTGR_0010010000/view.do",
+   "source": "Kookbang Ilbo",
+   "country": "KR",
+   "lang": "ko",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "[Sıçrama yapan kara kuvvetleri, gururlu K-savunma] Dünya tarafından kabul edilen K-savunmanın ileri teknolojisi",
+   "summary_scope": false
+  },
+  {
+   "title": "‘초격차 솔루션’ 세계 바다에 굳건한 닻",
+   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/9/ATCE_CTGR_0010010000/view.do",
+   "source": "Kookbang Ilbo",
+   "country": "KR",
+   "lang": "ko",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "'Aşırı fark yaratan çözüm' dünya denizlerinde sağlam çapa",
+   "summary_scope": false
+  },
+  {
+   "title": "“조용하지만 강인한 헌신 있었기에…”",
+   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/8/ATCE_CTGR_0010010000/view.do",
+   "source": "Kookbang Ilbo",
+   "country": "KR",
+   "lang": "ko",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Sessiz ama güçlü adanmışlık vardı...",
+   "summary_scope": false
+  },
+  {
+   "title": "외국군 수탁생과 뜻깊은 어울림 마당",
+   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/6/ATCE_CTGR_0010010000/view.do",
+   "source": "Kookbang Ilbo",
+   "country": "KR",
+   "lang": "ko",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Yabancı askeri öğrencilerle anlamlı bir araya gelme alanı",
+   "summary_scope": false
+  },
+  {
+   "title": "남수단에 한국어·태권도 전파 결실",
+   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/4/ATCE_CTGR_0010010000/view.do",
+   "source": "Kookbang Ilbo",
+   "country": "KR",
+   "lang": "ko",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Güney Sudan'a Korece ve taekwondo yayılması meyvesini verdi",
+   "summary_scope": false
+  },
+  {
+   "title": "국군의 뿌리 현재적 의미 조명",
+   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/3/ATCE_CTGR_0010010000/view.do",
+   "source": "Kookbang Ilbo",
+   "country": "KR",
+   "lang": "ko",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Orduların kökleri güncel anlamı aydınlatıldı",
+   "summary_scope": false
+  },
+  {
+   "title": "소매 걷은 장병들, 헌혈증 2136장 기부",
+   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/2/ATCE_CTGR_0010010000/view.do",
+   "source": "Kookbang Ilbo",
+   "country": "KR",
+   "lang": "ko",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Kolları sıvayan askerleri 2.136 kan bağışı sertifikası bağışladı",
+   "summary_scope": false
+  },
+  {
+   "title": "В Подмосковье госпитализированы 17 пострадавших в результате ночной атаки дронов",
+   "url": "https://www.interfax.ru/moscow/1117224",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Moskova'da gece drone saldırısında 17 yaralı hastaneye kaldırıldı",
+   "summary_scope": false
+  },
+  {
+   "title": "Глава ЦИК РФ сообщила о более тысячи волн DDoS-атак на инфраструктуру в избирательном процессе",
+   "url": "https://www.interfax.ru/russia/1117223",
+   "source": "Interfax",
+   "country": "RU",
+   "lang": "ru",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Rusya seçim altyapısına karşı bin'den fazla DDoS saldırısı",
+   "summary_scope": false
+  },
+  {
    "title": "Два человека погибли в аварии на МКАД с участием \"Газели\"",
    "url": "https://www.interfax.ru/moscow/1117222",
    "source": "Interfax",
@@ -1019,32 +1188,6 @@
    "category": "Genel Savunma Gündemi",
    "also": [],
    "title_tr": "Çin sekiz ayda Rusya'dan buğday alımını yedi kat artırdı",
-   "summary_scope": false
-  },
-  {
-   "title": "Поставки мяса птицы из Китая в РФ в августе впервые превысили российский экспорт в эту страну",
-   "url": "https://www.interfax.ru/business/1117199",
-   "source": "Interfax",
-   "country": "RU",
-   "lang": "ru",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Ağustos'ta Çin'den Rusya'ya kanatlı hayvan eti ithalatı ilk kez Rusya'nın bu ülkeye olan ihracatını aştı",
-   "summary_scope": false
-  },
-  {
-   "title": "ЦИК зафиксировала вброс бюллетеней членами УИК в Марий Эл",
-   "url": "https://www.interfax.ru/russia/1117198",
-   "source": "Interfax",
-   "country": "RU",
-   "lang": "ru",
-   "tier": "B",
-   "published": "2026-09-20",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Merkezi Seçim Komitesi Mari El'de seçim komitesi üyeleri tarafından oy pusulalarının atılmasını kaydetti",
    "summary_scope": false
   },
   {
@@ -1728,6 +1871,20 @@
    "also": [],
    "title_tr": "Türkiye, Suudi Arabistan'ın Askeri İhtiyaçlarını Karşılamaya Hazır Olduğunu Söyledi",
    "summary_scope": false
+  },
+  {
+   "title": "America, la superpotenza che ha smarrito il centro",
+   "url": "https://www.analisidifesa.it/2026/09/america-la-superpotenza-che-ha-smarrito-il-centro/",
+   "source": "Analisi Difesa",
+   "country": "IT",
+   "lang": "it",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Topçu ve Mühimmat",
+   "also": [],
+   "title_tr": "Amerika, merkezini yitiren süper güç",
+   "summary_scope": true,
+   "summary_tr": "Andrea Muratore'nin \"C'era una volta l'America\" adlı kitabı, ABD'nin 11 Eylül 2001 sonrası Afganistan ve Irak müdahaleleriyle askeri üstünlüğünü koruduğunu ancak siyasi zaferler üretemediğini, bu süreçte Çin'in DTÖ'ye girerek (11 Aralık 2001) güçlendiğini ve Ağustos 2021'de Kabil'in düşüşüyle simgelenen bu stratejik yönelim kaybının Trump'ın yükselişine zemin hazırladığını ele alıyor."
   },
   {
    "title": "Guerra e politica: le opinioni degli italiani",
@@ -2500,6 +2657,19 @@
    "title_tr": "F127: ABD Teknolojisine Aşırı Güvenilmesi Artık Uygun Değil",
    "summary_scope": true,
    "summary_tr": "Alman savunma medyası hartpunkt'ta yayımlanan analiz, Almanya'nın F127 hava savunma fırkateynleri için ABD'nin Aegis sistemi, SPY-6 radarı ve balistik füze savunma teknolojisine yoğun bağımlılığının ulusal egemenlik ve tedarik güvenliği açısından risk oluşturduğunu belirtiyor. Örnek olarak İsviçre'nin Patriot sipariş teslimatlarının ABD tarafından ertelenmesi ve İran savaşında ABD'nin füze stoklarının azalması gösteriliyor."
+  },
+  {
+   "title": "국가보훈부, 유엔참전국 감사 만찬 개최",
+   "url": "http://kookbang.dema.mil.kr/newsWeb/20260920/1/ATCE_CTGR_0010010000/view.do",
+   "source": "Kookbang Ilbo",
+   "country": "KR",
+   "lang": "ko",
+   "tier": "B",
+   "published": "2026-09-19",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Veteran Bakanlığı, BM Katılımcı Ülkeler İçin Minnet Ziyafeti Düzenledi",
+   "summary_scope": false
   },
   {
    "title": "Pantsir‑S1M: India’s Proposed Shield Against Drone Swarms",
@@ -3575,20 +3745,6 @@
    "summary_scope": false
   },
   {
-   "title": "Beijing, Taipei need peace deal before reunification, Taiwanese scholar says",
-   "url": "https://www.scmp.com/news/china/politics/article/3368054/beijing-taipei-need-peace-deal-reunification-taiwanese-scholar-says?utm_source=rss_feed",
-   "source": "SCMP (Çin)",
-   "country": "HK",
-   "lang": "en",
-   "tier": "C",
-   "published": "2026-09-18",
-   "category": "İhale ve Sözleşmeler",
-   "also": [],
-   "title_tr": "Pekin, Taipei'nin birleşme öncesinde barış anlaşmasına ihtiyacı var — Taiwan'lı bilim insanı",
-   "summary_scope": true,
-   "summary_tr": "Tayvanlı siyaset bilimci Chang Ya-chung, Pekin'deki Xiangshan Forumu'nda, yeniden birleşme sonrası siyasi düzenlemeler konuşulmadan önce Pekin ile Taipei arasında düşmanlıkları sona erdiren resmi bir barış anlaşması imzalanması gerektiğini savundu. Chang, Hong Kong ve Makao'ya uygulanan \"tek ülke, iki sistem\" formülünün Tayvan toplumunda karşılık bulmadığını söyledi."
-  },
-  {
    "title": "Un avion de combat italien Eurofighter F2000 a été touché lors d’une attaque des rebelles houthistes en Arabie saoudite",
    "url": "https://www.opex360.com/2026/09/18/un-avion-de-combat-italien-eurofighter-f2000-a-ete-touche-lors-dune-attaque-des-rebelles-houthistes-en-arabie-saoudite/",
    "source": "Opex360",
@@ -4150,19 +4306,6 @@
    "summary_scope": false
   },
   {
-   "title": "„Rajd korporacyjny” w Armenii na Rosję. Są pierwsze groźby Kremla",
-   "url": "https://defence24.pl/geopolityka/rajd-korporacyjny-w-armenii-na-rosje-sa-pierwsze-grozby-kremla",
-   "source": "Defence24 (PL)",
-   "country": "PL",
-   "lang": "pl",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Ermenistan'da Rusya'ya Karşı 'Kurumsal Rali'. Kremlin'den İlk Tehditler",
-   "summary_scope": false
-  },
-  {
    "title": "Expert commentary on the judgment of the Shanghai Maritime Court",
    "url": "https://defence24.com/other/expert-commentary-on-the-judgment-of-the-shanghai-maritime-court",
    "source": "Defence24 (EN)",
@@ -4345,20 +4488,6 @@
    "summary_tr": "İtalya Savunma Bakanlığı, Husilerin Yemen kıyısı ve Kızıldeniz adalarının kontrolünü ele geçirmesinin ardından Bab el-Mandeb Boğazı'ndan geçen ticari gemilere refakat için ulusal bir deniz misyonu başlatmayı değerlendiriyor. Bu arada Taif üssündeki İtalyan Eurofighter Typhoon uçağı, Husilerin Suudi üssüne yönelik bombardımanında hasar gördü."
   },
   {
-   "title": "IDV selezionata per l’iniziativa “Engineer Autonomous Breaching Capability” dell’U.S. Army",
-   "url": "https://www.analisidifesa.it/2026/09/idv-selezionata-per-liniziativa-engineer-autonomous-breaching-capability-dellu-s-army/",
-   "source": "Analisi Difesa",
-   "country": "IT",
-   "lang": "it",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "Topçu ve Mühimmat",
-   "also": [],
-   "title_tr": "IDV ABD Ordusu 'Engineer Autonomous Breaching Capability' İnisiyatifi İçin Seçildi",
-   "summary_scope": true,
-   "summary_tr": "Leonardo grubuna bağlı IDV, ABD kara kuvvetlerinin \"Engineer Autonomous Breaching Capability\" programı için seçilen dört şirketten biri oldu ve VIKING insansız kara aracına dayalı otonom mayın/engel geçiş sistemi geliştirecek."
-  },
-  {
    "title": "US clears $24.3bn F-35 stealth fighter jets sale to Saudi Arabia",
    "url": "https://www.airforce-technology.com/news/us-f35-saudi-arabia/",
    "source": "Airforce Technology",
@@ -4526,10 +4655,6 @@
   {
    "source": "Asia Pacific Defence Reporter",
    "error": "HTTPError: 403 Client Error: Forbidden for url: https://asiapacificdefencereporter.com/feed/"
-  },
-  {
-   "source": "Kookbang Ilbo",
-   "error": "ConnectTimeout: HTTPConnectionPool(host='kookbang.dema.mil.kr', port=80): Max retries exceeded with url: /dema"
   },
   {
    "source": "Hartpunkt",
