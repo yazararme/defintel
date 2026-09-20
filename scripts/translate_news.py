@@ -24,6 +24,8 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 MODEL = "haiku"
 NEWS_DIR = ROOT / "data" / "news"
 CACHE = NEWS_DIR / "translations.json"
+# Bunun altında bölmek anlamsız: hata artık uzunluk değil, o başlığın kendisidir.
+MIN_BATCH = 8
 
 PROMPT = """Aşağıdaki savunma sanayii haber başlıklarını Türkçeye çevir.
 
@@ -101,6 +103,38 @@ def parse_pairs(text):
     return pairs
 
 
+def translate_chunk(chunk, cache, depth=0):
+    """Bir partiyi çevirip önbelleğe yaz; kaç başlık geldiğini döndür.
+
+    Boş dönen parti sessizce kaybolmamalı: 20 Eylül'de iki parti boş döndü ve
+    120 başlık İngilizce kaldı — kayıp yalnızca sayfada görüldü. Boş dönerse
+    bir kez daha denenir, yine boşsa parti ikiye bölünür. Bölmek işe yarıyor
+    çünkü en olası sebep çıktının uzunluktan kesilip JSON'un kapanmaması;
+    yarısı kesilmiyor. Önbellek URL bazlı olduğu için tekrar bedava.
+    """
+    if not chunk:
+        return 0
+    listing = "\n".join(f'{n}. {i["title"]}' for n, i in enumerate(chunk, 1))
+    pairs = parse_pairs(claude(PROMPT.replace("{items}", listing)))
+    got = 0
+    for n, turkish in pairs:
+        if 1 <= n <= len(chunk):
+            cache[chunk[n - 1]["url"]] = turkish
+            got += 1
+    if got:
+        return got
+    if depth == 0:
+        print(f"    ! {len(chunk)} başlık boş döndü, tekrar deneniyor")
+        return translate_chunk(chunk, cache, depth + 1)
+    if len(chunk) > MIN_BATCH:
+        half = len(chunk) // 2
+        print(f"    ! yine boş, {len(chunk)} başlık ikiye bölünüyor")
+        return (translate_chunk(chunk[:half], cache, depth + 1)
+                + translate_chunk(chunk[half:], cache, depth + 1))
+    print(f"    ! {len(chunk)} başlık çevrilemedi, özgün hâlleriyle kalacak")
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", default=dt.datetime.now(dt.timezone.utc).date().isoformat())
@@ -124,16 +158,8 @@ def main():
 
     for start in range(0, len(pending), args.batch):
         chunk = pending[start:start + args.batch]
-        listing = "\n".join(f'{n}. {i["title"]}' for n, i in enumerate(chunk, 1))
-        pairs = parse_pairs(claude(PROMPT.replace("{items}", listing)))
-        got = 0
-        for n, turkish in pairs:
-            if 1 <= n <= len(chunk):
-                cache[chunk[n - 1]["url"]] = turkish
-                got += 1
+        got = translate_chunk(chunk, cache)
         print(f"  · {start + 1}-{start + len(chunk)}: {got}/{len(chunk)} çevrildi")
-        if not got:
-            print("  ! bu parti boş döndü, kalanlar özgün başlıkla kalacak")
 
     for item in items:
         turkish = cache.get(item["url"])
