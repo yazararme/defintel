@@ -2,20 +2,32 @@
  "date": "2026-09-20",
  "window_hours": 48,
  "scanned_sources": 66,
- "failed_sources": 15,
- "collected_items": 391,
- "unique_items": 389,
+ "failed_sources": 16,
+ "collected_items": 358,
+ "unique_items": 356,
  "categories": {
-  "C-UAS ve Hava Savunma": 46,
-  "Deniz ve İnsansız Sistemler": 9,
-  "Genel Savunma Gündemi": 283,
+  "C-UAS ve Hava Savunma": 40,
+  "Deniz ve İnsansız Sistemler": 7,
+  "Genel Savunma Gündemi": 272,
   "Politika ve Regülasyon": 1,
-  "Rakip Duyuruları": 19,
-  "Tedarik Zinciri": 1,
-  "Topçu ve Mühimmat": 13,
-  "İhale ve Sözleşmeler": 17
+  "Rakip Duyuruları": 11,
+  "Topçu ve Mühimmat": 11,
+  "İhale ve Sözleşmeler": 14
  },
  "items": [
+  {
+   "title": "NATO military chiefs tell industry they are ready to buy",
+   "url": "https://ukdefencejournal.org.uk/nato-military-chiefs-tell-industry-they-are-ready-to-buy/",
+   "source": "UK Defence Journal",
+   "country": "GB",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "NATO askeri liderler endüstriye satın almaya hazır olduklarını söyledi",
+   "summary_scope": false
+  },
   {
    "title": "Turkish Tulpar medium tank fires with Leonardo turret",
    "url": "https://ukdefencejournal.org.uk/turkish-tulpar-medium-tank-fires-with-leonardo-turret/",
@@ -29,6 +41,46 @@
    "title_tr": "Türk Tulpar orta tankı Leonardo türeviyle devreye girdi",
    "summary_scope": true,
    "summary_tr": "Otokar'ın Tulpar orta tankı, Leonardo'nun 120 mm'lik HITFACT MkII kulesiyle entegre edilerek statik ve dinamik koşullarda canlı atış testlerinden geçti ve tüm test hedeflerini karşıladı."
+  },
+  {
+   "title": "Azerbaijan's Customs Committee opens tender for Mazimgara checkpoint upgrade",
+   "url": "https://www.trend.az/azerbaijan/4225744.html",
+   "source": "Trend.az",
+   "country": "AZ",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "İhale ve Sözleşmeler",
+   "also": [],
+   "title_tr": "Azerbaycan Gümrük Komitesi Mazimgara sınır kapısı yükseltilmesi için ihale açtı",
+   "summary_scope": true
+  },
+  {
+   "title": "Turkmen branch of Italy's Eni opens prequalification for testing services tender",
+   "url": "https://www.trend.az/casia/turkmenistan/4225761.html",
+   "source": "Trend.az",
+   "country": "AZ",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "İhale ve Sözleşmeler",
+   "also": [],
+   "title_tr": "İtalya'nın Eni'sinin Türkmen şubesi test hizmetleri ihalesinin ön yeterlilik açıklamasını yaptı",
+   "summary_scope": true
+  },
+  {
+   "title": "“Contract of the Century” lays foundation for new stage in Azerbaijan’s economic history — minister",
+   "url": "https://www.trend.az/azerbaijan/4225943.html",
+   "source": "Trend.az",
+   "country": "AZ",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "İhale ve Sözleşmeler",
+   "also": [],
+   "title_tr": "\"Yüzyılın Sözleşmesi\" Azerbaycan'ın ekonomik tarihinde yeni dönemin temelini oluşturuyor",
+   "summary_scope": true,
+   "summary_tr": "Azerbaycan'da 20 Eylül 1994'te imzalanan ve modern ekonomik tarihin temelini oluşturan 'Yüzyılın Sözleşmesi'nin 32. yıldönümü anıldı; Ekonomi Bakanı Mikayil Cabbarov'un açıklamasına göre ACG sahalarından 1 Eylül 2026 itibarıyla 628 milyon ton petrol ve 253 milyar metreküp gaz üretildi."
   },
   {
    "title": "Turkmennebit opens international tender for plant and drilling equipment",
@@ -69,6 +121,123 @@
    "also": [],
    "title_tr": "Azerbaycan, Agjabadi ilçesinde yeni okul için ihale açtı",
    "summary_scope": true
+  },
+  {
+   "title": "Vucic plans to meet with Lavrov at UN General Assembly session",
+   "url": "https://tass.com/world/2190299",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Vuçiç BM Genel Kurulu oturumunda Lavrov ile görüşmeyi planlıyor",
+   "summary_scope": false
+  },
+  {
+   "title": "TASS Director General opens OANA Executive Committee meeting in Moscow",
+   "url": "https://tass.com/politics/2190297",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "TASS Genel Müdürü Moskova'da OANA İcra Komitesi toplantısını açıyor",
+   "summary_scope": false
+  },
+  {
+   "title": "Russians choose future for their children by voting today — human rights commissioner",
+   "url": "https://tass.com/politics/2190295",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Ruslar bugün oy vererek çocuklarının geleceğini seçiyor",
+   "summary_scope": false
+  },
+  {
+   "title": "More than 45% of Russians have voted in the election as of Sunday morning — CEC chairwoman",
+   "url": "https://tass.com/politics/2190291",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Pazar sabahı itibariyle Rusların %45'inden fazlası seçimde oy kullandı",
+   "summary_scope": false
+  },
+  {
+   "title": "Chairwoman of Central Election Commission says term \"unfriendly countries\" is too mild",
+   "url": "https://tass.com/politics/2190273",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Merkezi Seçim Komisyonu Başkanı \"düşman ülkeler\" teriminin çok hafif olduğunu söyledi",
+   "summary_scope": false
+  },
+  {
+   "title": "Polling stations close in Russia’s easternmost regions, Kamchatka, Chukotka",
+   "url": "https://tass.com/politics/2190271",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Rusya'nın en doğu bölgelerinde, Kamçatka ve Çukotka'da sandık kapatılıyor",
+   "summary_scope": false
+  },
+  {
+   "title": "Two people killed in drone attack on bus in Kherson Region — CEC chairwoman",
+   "url": "https://tass.com/politics/2190267",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "C-UAS ve Hava Savunma",
+   "also": [],
+   "title_tr": "Herson Bölgesi'nde otobüse yapılan drone saldırısında iki kişi öldü",
+   "summary_scope": false
+  },
+  {
+   "title": "Iran will keep Strait of Hormuz closed until US accepts its terms — parliamentary speaker",
+   "url": "https://tass.com/world/2190249",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "İran, Ormuz Boğazını ABD şartlarını kabul edene kadar kapalı tutacak",
+   "summary_scope": false
+  },
+  {
+   "title": "Russian air defenses repel largest-ever Ukrainian drone attack, mayor says",
+   "url": "https://tass.com/politics/2190247",
+   "source": "TASS",
+   "country": "RU",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "C-UAS ve Hava Savunma",
+   "also": [],
+   "title_tr": "Rus hava savunması şimdiye kadarki en büyük Ukrayna drone saldırısını geri itti",
+   "summary_scope": false
   },
   {
    "title": "Russian air defenses down 1,110 Ukrainian drones overnight",
@@ -384,6 +553,58 @@
    "summary_scope": false
   },
   {
+   "title": "Does Trump’s new AI Force signal tech race escalation ahead of Xi Jinping summit?",
+   "url": "https://www.scmp.com/news/china/diplomacy/article/3368158/does-trumps-new-ai-force-signal-tech-race-escalation-ahead-xi-jinping-summit?utm_source=rss_feed",
+   "source": "SCMP (Çin)",
+   "country": "HK",
+   "lang": "en",
+   "tier": "C",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Trump'ın yeni AI Force Xi Jinping zirvesi öncesinde teknoloji yarışının tırmanışını işaret ediyor mu?",
+   "summary_scope": false
+  },
+  {
+   "title": "China needs US-style immigration policy to win tech rivalry with Washington: expert",
+   "url": "https://www.scmp.com/news/china/diplomacy/article/3367534/china-needs-us-style-immigration-policy-win-tech-rivalry-washington-expert?utm_source=rss_feed",
+   "source": "SCMP (Çin)",
+   "country": "HK",
+   "lang": "en",
+   "tier": "C",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Çin, Washington ile teknoloji rekabetini kazanmak için ABD tarzı göçmenlik politikasına ihtiyaç duyuyor",
+   "summary_scope": false
+  },
+  {
+   "title": "Low pay, job insecurity for China’s trainee doctors a turn-off for young talent",
+   "url": "https://www.scmp.com/news/china/science/article/3367856/low-pay-job-insecurity-chinas-trainee-doctors-turn-young-talent?utm_source=rss_feed",
+   "source": "SCMP (Çin)",
+   "country": "HK",
+   "lang": "en",
+   "tier": "C",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Çin'in stajyer doktorları için düşük ücret ve iş güvensizliği genç yetenekleri caydırıyor",
+   "summary_scope": false
+  },
+  {
+   "title": "Middle powers don’t have to wait for a Trump-Xi-Putin summit",
+   "url": "https://www.scmp.com/opinion/world-opinion/article/3367866/middle-powers-dont-have-wait-trump-xi-putin-summit?utm_source=rss_feed",
+   "source": "SCMP (Çin)",
+   "country": "HK",
+   "lang": "en",
+   "tier": "C",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Orta güçler Trump-Xi-Putin zirvesini beklemeye mecbur değil",
+   "summary_scope": false
+  },
+  {
    "title": "Reporter’s note: two Delhis, one weekend – when the world came to dinner",
    "url": "https://www.scmp.com/news/china/diplomacy/article/3368120/reporters-note-two-delhis-one-weekend-when-world-came-dinner?utm_source=rss_feed",
    "source": "SCMP (Çin)",
@@ -407,6 +628,85 @@
    "category": "Genel Savunma Gündemi",
    "also": [],
    "title_tr": "Çinli avukatlar, yolsuzluk soruşturmacıları kapıya geldiğinde koçluk sunuyor",
+   "summary_scope": false
+  },
+  {
+   "title": "L’Irlande a confirmé la commande de cinq radars de surveillance aérienne auprès de la France",
+   "url": "https://www.opex360.com/2026/09/20/lirlande-a-confirme-la-commande-de-cinq-radars-de-surveillance-aerienne-aupres-de-la-france/",
+   "source": "Opex360",
+   "country": "FR",
+   "lang": "fr",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "İrlanda, Fransa'dan beş hava gözetleme radarı sipariş ettiğini onayladı",
+   "summary_scope": false
+  },
+  {
+   "title": "Transport stratégique : L’Agence européenne de défense évoque une modernisation «en profondeur» des Antonov AN-124",
+   "url": "https://www.opex360.com/2026/09/20/transport-strategique-lagence-europeenne-de-defense-evoque-une-modernisation-en-profondeur-des-antonov-an-124/",
+   "source": "Opex360",
+   "country": "FR",
+   "lang": "fr",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Stratejik Taşımacılık: Avrupa Savunma Ajansı Antonov AN-124'ün \"derinlemesine\" modernizasyonundan söz ediyor",
+   "summary_scope": false
+  },
+  {
+   "title": "Cochin Shipyard Lays Keel for Indian Navy’s First NGMV",
+   "url": "https://www.navalnews.com/naval-news/2026/09/cochin-shipyard-lays-keel-for-indian-navys-first-ngmv/",
+   "source": "Naval News",
+   "country": "FR",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-20",
+   "category": "C-UAS ve Hava Savunma",
+   "also": [],
+   "title_tr": "Cochin Shipyard Hindistan Donanması'nın ilk NGMV için keel atıyor",
+   "summary_scope": true,
+   "summary_tr": "Cochin Shipyard, 18 Eylül 2026'da Hindistan Deniz Kuvvetleri için ilk Yeni Nesil Füze Gemisi'nin (NGMV) omurga koyma törenini gerçekleştirdi; CSL, Mart 2023'te altı NGMV için 9.804 kror rupi (yaklaşık 1 milyar dolar) değerinde sözleşme imzalamıştı. Gemiler BrahMos füzeleri, VLSRSAM hava savunma sistemi ve BEL MFR radarlarıyla donatılacak, ilk teslimat 2027 başında bekleniyor."
+  },
+  {
+   "title": "접경지역 발전 위해 민·관·군 협력위 신설",
+   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/18/ATCE_CTGR_0010010000/view.do",
+   "source": "Kookbang Ilbo",
+   "country": "KR",
+   "lang": "ko",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Sınır bölgesinin geliştirilmesi için sivil-kamu-askeri işbirliği komitesi kuruldu",
+   "summary_scope": false
+  },
+  {
+   "title": "북한, 일주일여 만에 단거리 탄도미사일 발사",
+   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/17/ATCE_CTGR_0010010000/view.do",
+   "source": "Kookbang Ilbo",
+   "country": "KR",
+   "lang": "ko",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Kuzey Kore bir hafta içinde kısa menzilli balistik füze fırlattı",
+   "summary_scope": false
+  },
+  {
+   "title": "한미, 전작권 전환 가속화 협력 강화 공감",
+   "url": "http://kookbang.dema.mil.kr/newsWeb/20260921/16/ATCE_CTGR_0010010000/view.do",
+   "source": "Kookbang Ilbo",
+   "country": "KR",
+   "lang": "ko",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Güney Kore-ABD savaş alanı komutanlığı geçişi hızlandırma işbirliğini güçlendirmede fikir birliği",
    "summary_scope": false
   },
   {
@@ -514,8 +814,8 @@
    "summary_scope": false
   },
   {
-   "title": "Движение по Крымскому мосту перекрыто",
-   "url": "https://www.interfax.ru/russia/1117177",
+   "title": "Памфилова заявила, что выборы в РФ проходят в соответствии с законом",
+   "url": "https://www.interfax.ru/russia/1117216",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -523,12 +823,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Kırım Köprüsü üzerindeki trafik kapatıldı",
+   "title_tr": "Pamfilova Rusya'daki seçimlerin yasa uyarınca yapıldığını açıkladı",
    "summary_scope": false
   },
   {
-   "title": "Явка на выборах в России превысила 45%",
-   "url": "https://www.interfax.ru/russia/1117176",
+   "title": "Сергей Меняйло вновь избран главой Северной Осетии",
+   "url": "https://www.interfax.ru/russia/1117215",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -536,12 +836,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusya'daki seçim katılımı %45'i aştı",
+   "title_tr": "Sergei Menyaylo yeniden Kuzey Osetya'nın başkanı seçildi",
    "summary_scope": false
   },
   {
-   "title": "Темрезов переизбран главой Карачаево-Черкессии",
-   "url": "https://www.interfax.ru/russia/1117175",
+   "title": "РФ в августе увеличила выручку от экспорта гречихи в КНР до $4,9 млн",
+   "url": "https://www.interfax.ru/business/1117214",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -549,12 +849,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Temrezov, Karachay-Çerkesya başkanı olarak yeniden seçildi",
+   "title_tr": "Rusya Ağustos'ta Çin'e karabuğday ihracatından elde ettiği geliri 4,9 milyon dolara çıkardı",
    "summary_scope": false
   },
   {
-   "title": "Два человека погибли из-за атаки БПЛА на автобус в Херсонской области, один из них - член УИК",
-   "url": "https://www.interfax.ru/russia/1117173",
+   "title": "Пострадавший из-за атаки БПЛА в Подмосковье мужчина скончался в больнице",
+   "url": "https://www.interfax.ru/moscow/1117213",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -562,12 +862,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Herson bölgesinde otobüse yapılan drone saldırısında iki kişi öldü, biri seçim komisyonu üyesi",
+   "title_tr": "Moskova'nın dışındaki drone saldırısında yaralanan bir adam hastanede hayatını kaybetti",
    "summary_scope": false
   },
   {
-   "title": "Джошуа Ван защитил титул чемпиона UFC в наилегчайшем весе",
-   "url": "https://www.sport-interfax.ru/1117172",
+   "title": "Три аэропорта в ЯНАО возобновили работу",
+   "url": "https://www.interfax.ru/russia/1117212",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -575,12 +875,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Joshua Van, UFC'de en hafif ağırlık kategorisinde şampiyonluk unvanını korudu",
+   "title_tr": "YANAO'daki üç havaalanı işlemlerini yeniden başlattı",
    "summary_scope": false
   },
   {
-   "title": "Двум десяткам человек потребовалась помощь после атаки дронов в Подмосковье",
-   "url": "https://www.interfax.ru/moscow/1117171",
+   "title": "Дзюба усомнился, что продолжит карьеру",
+   "url": "https://www.sport-interfax.ru/1117211",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -588,12 +888,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Moskova yakınlarında drone saldırısından sonra yirmi kişiye yardım gerekti",
+   "title_tr": "Dzyuba kariyerine devam edeceğinden şüphe etti",
    "summary_scope": false
   },
   {
-   "title": "Явка на ДЭГ на федеральной платформе достигла 85%",
-   "url": "https://www.interfax.ru/russia/1117170",
+   "title": "Якушев заявил, что явка в Единый день голосования превышает показатели 2021 года",
+   "url": "https://www.interfax.ru/russia/1117210",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -601,12 +901,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Federal platformda dijital seçim katılımı %85'e ulaştı",
+   "title_tr": "Yakushev Birleşik Oy Verme Günü'ndeki katılım oranının 2021 yılı göstergelerini aştığını açıkladı",
    "summary_scope": false
   },
   {
-   "title": "СКР возбудил дело о теракте по факту ночной атаки БПЛА на Москву и Подмосковье",
-   "url": "https://www.interfax.ru/moscow/1117169",
+   "title": "Ограничения на прем и выпуск воздушных судов введены в трех аэропортах ЯНАО",
+   "url": "https://www.interfax.ru/russia/1117209",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -614,12 +914,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "SKR, Moskova ve yakınlarına yapılan gece drone saldırısı nedeniyle terör davası açtı",
+   "title_tr": "YANAO'daki üç havaalanında uçak kalkış ve iniş kısıtlamaları getirildi",
    "summary_scope": false
   },
   {
-   "title": "Над территорией Рязанской области сбили 32 дрона",
-   "url": "https://www.interfax.ru/russia/1117168",
+   "title": "Явка на выборах в Госдуму превысила 50%",
+   "url": "https://www.interfax.ru/russia/1117208",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -627,12 +927,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Ryazan bölgesi üzerinde 32 drone düşürüldü",
+   "title_tr": "Duuma seçimlerindeki katılım %50'yi aştı",
    "summary_scope": false
   },
   {
-   "title": "В Воронежской области уничтожены 43 БПЛА",
-   "url": "https://www.interfax.ru/russia/1117167",
+   "title": "Прокуратура Москвы предостерегает о недопустимости нарушений избирательного законодательства",
+   "url": "https://www.interfax.ru/moscow/1117207",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -640,12 +940,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Voronezh bölgesinde 43 drone imha edildi",
+   "title_tr": "Moskova Başsavcılığı seçim kanunlarının ihlal edilmesini uyarıyor",
    "summary_scope": false
   },
   {
-   "title": "Россиянин Царукян нокаутировал бразильца Руффи на турнире UFC 331",
-   "url": "https://www.sport-interfax.ru/1117166",
+   "title": "В Германии проходят выборы в парламент Берлина и Мекленбурга-Передней Померании",
+   "url": "https://www.interfax.ru/world/1117206",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -653,12 +953,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rusyalı Tsarukyan, UFC 331 turnuvasında Brezilyalı Ruffy'yi nakavt etti",
+   "title_tr": "Almanya'da Berlin ve Mecklenburg-Batı Pomerania'nın parlamento seçimleri yapılıyor",
    "summary_scope": false
   },
   {
-   "title": "За ночь над российскими регионами сбиты свыше 1,1 тысячи беспилотников ВСУ",
-   "url": "https://www.interfax.ru/russia/1117165",
+   "title": "Лихачев заявил об усилении обстрелов Энергодара перед выборами",
+   "url": "https://www.interfax.ru/russia/1117205",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -666,12 +966,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Geceleri Rusya bölgeleri üzerinde 1.100'den fazla Ukrayna dronu düşürüldü",
+   "title_tr": "Likhachev Energodar'a yapılan bombardımanların seçimler öncesinde yoğunlaştığını açıkladı",
    "summary_scope": false
   },
   {
-   "title": "Пожар в торговых павильонах под Анапой локализован",
-   "url": "https://www.interfax.ru/russia/1117164",
+   "title": "КНДР запустила еще одну ракету в восточном направлении",
+   "url": "https://www.interfax.ru/world/1117204",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -679,12 +979,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Anapa yakınlarında ticari pavilyonlardaki yangın kontrol altına alındı",
+   "title_tr": "Kuzey Kore doğu yönüne bir roket daha fırlattı",
    "summary_scope": false
   },
   {
-   "title": "Более 210 БПЛА уничтожены над Брянской областью",
-   "url": "https://www.interfax.ru/russia/1117163",
+   "title": "Мосгоризбирком фиксирует попытки некоторых москвичей проголосовать повторно на выборах",
+   "url": "https://www.interfax.ru/moscow/1117203",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -692,12 +992,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Bryansk bölgesi üzerinde 210'dan fazla drone imha edildi",
+   "title_tr": "Moskova Seçim Komitesi bazı Moskovalıların seçimlerde tekrar oy verme girişimlerini kaydediyor",
    "summary_scope": false
   },
   {
-   "title": "Аэропорты московского авиаузла возобновили работу",
-   "url": "https://www.interfax.ru/russia/1117162",
+   "title": "Китайская ракета вывела на орбиту девять космических аппаратов",
+   "url": "https://www.interfax.ru/world/1117202",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -705,12 +1005,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Moskova hava merkezi havalimanları faaliyete döndü",
+   "title_tr": "Çin roketi dokuz uzay aracını yörüngeye çıkardı",
    "summary_scope": false
   },
   {
-   "title": "Торговые павильоны горят на площади 1,5 тыс. кв. м под Анапой",
-   "url": "https://www.interfax.ru/russia/1117161",
+   "title": "РФ по итогам 8 месяцев вошла в топ-3 поставщиков свинины в Китай",
+   "url": "https://www.interfax.ru/business/1117201",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -718,12 +1018,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Anapa yakınlarında 1.500 metrekarelik ticari pavilyonlar yanıyor",
+   "title_tr": "Rusya 8 aylık sonuçlara göre Çin'e domuz eti tedarikçileri arasında ilk üçe girdi",
    "summary_scope": false
   },
   {
-   "title": "ВС РФ поразили под Киевом склад компании Fire Point",
-   "url": "https://www.interfax.ru/russia/1117160",
+   "title": "Китай за восемь месяцев увеличил закупки пшеницы в России в семь раз",
+   "url": "https://www.interfax.ru/business/1117200",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -731,12 +1031,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rus Silahlı Kuvvetleri, Kyiv yakınlarında Fire Point şirketi deposunu vurdu",
+   "title_tr": "Çin sekiz ayda Rusya'dan buğday alımını yedi kat artırdı",
    "summary_scope": false
   },
   {
-   "title": "Минобороны РФ сообщило об ударе по танкеру в порту Черноморск",
-   "url": "https://www.interfax.ru/russia/1117159",
+   "title": "Поставки мяса птицы из Китая в РФ в августе впервые превысили российский экспорт в эту страну",
+   "url": "https://www.interfax.ru/business/1117199",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -744,12 +1044,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rus Savunma Bakanlığı, Çernomorsk limanında tankerle yapılan vuruşu bildirdi",
+   "title_tr": "Ağustos'ta Çin'den Rusya'ya kanatlı hayvan eti ithalatı ilk kez Rusya'nın bu ülkeye olan ihracatını aştı",
    "summary_scope": false
   },
   {
-   "title": "ВС РФ ударили по судну, доставившему военные грузы в порт Одессы",
-   "url": "https://www.interfax.ru/russia/1117158",
+   "title": "ЦИК зафиксировала вброс бюллетеней членами УИК в Марий Эл",
+   "url": "https://www.interfax.ru/russia/1117198",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -757,12 +1057,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Rus Silahlı Kuvvetleri, Odessa limanına askeri kargo taşıyan gemiye vurdu",
+   "title_tr": "Merkezi Seçim Komitesi Mari El'de seçim komitesi üyeleri tarafından oy pusulalarının atılmasını kaydetti",
    "summary_scope": false
   },
   {
-   "title": "Над Калужской областью ликвидировано 17 БПЛА, пострадавших нет",
-   "url": "https://www.interfax.ru/russia/1117157",
+   "title": "Два радара ВСУ уничтожены \"Геранями\" в Одесской и Днепропетровской областях",
+   "url": "https://www.interfax.ru/russia/1117197",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -770,12 +1070,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Kaluga bölgesi üzerinde 17 drone tahrif edildi, yaralı yok",
+   "title_tr": "Odesa ve Dnipropetrovsk bölgelerinde iki Ukrayna radar istasyonu \"Geran\" tarafından imha edildi",
    "summary_scope": false
   },
   {
-   "title": "Что случилось этой ночью: воскресенье, 20 сентября",
-   "url": "https://www.interfax.ru/world/1117153",
+   "title": "Правительство КЧР ушло в отставку после избрания нового главы республики",
+   "url": "https://www.interfax.ru/russia/1117196",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -783,12 +1083,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Bu gece ne oldu: Pazar, 20 Eylül",
+   "title_tr": "Karacay-Çerkez Cumhuriyet Hükümeti yeni başkanın seçilmesinden sonra istifa etti",
    "summary_scope": false
   },
   {
-   "title": "Минобороны сообщило об ударе по объектам радиоэлектронной промышленности в Киеве",
-   "url": "https://www.interfax.ru/russia/1117156",
+   "title": "Два человека стали жертвами медведя в Томской области",
+   "url": "https://www.interfax.ru/russia/1117195",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -796,12 +1096,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "title_tr": "Savunma Bakanlığı, Kyiv'de radyo-elektronik endüstri tesislerine yapılan vuruşu bildirdi",
+   "title_tr": "Tomsk Bölgesi'nde iki kişi ayı tarafından öldürüldü",
    "summary_scope": false
   },
   {
-   "title": "Мэр Москвы сообщил об уничтожении \"на всех рубежах\" с 19 сентября более 1600 БПЛА",
-   "url": "https://www.interfax.ru/russia/1117155",
+   "title": "ВСУ ударили по избирательному участку в школе в Запорожской области",
+   "url": "https://www.interfax.ru/russia/1117194",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -809,11 +1109,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Ukrayna Silahlı Kuvvetleri Zaporojya Bölgesi'nde bir okuldaki seçim merkezine saldırdı",
    "summary_scope": false
   },
   {
-   "title": "В районе Капотни временно изменены трассы маршрутов шести автобусов",
-   "url": "https://www.interfax.ru/russia/1117154",
+   "title": "Минобороны РФ заявило об ударе по автомобильному мосту в Одесской области",
+   "url": "https://www.interfax.ru/russia/1117193",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -821,11 +1122,12 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Rusya Savunma Bakanlığı Odesa Bölgesi'nde bir karayolu köprüsüne saldırı olduğunu açıkladı",
    "summary_scope": false
   },
   {
-   "title": "БПЛА попали в три многоквартирных дома в подмосковных Котельниках",
-   "url": "https://www.interfax.ru/russia/1117152",
+   "title": "Аэропорты Сочи и Геленджика вновь обслуживают рейсы",
+   "url": "https://www.interfax.ru/russia/1117192",
    "source": "Interfax",
    "country": "RU",
    "lang": "ru",
@@ -833,6 +1135,202 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Sochi ve Gelendzhik havaalanları yeniden uçuşlara hizmet vermeye başladı",
+   "summary_scope": false
+  },
+  {
+   "title": "Oil, Alliances, And Ultimatums: Is It Time To End The Indo‑American Bromance?",
+   "url": "https://www.indiandefensenews.in/2026/09/oil-alliances-and-ultimatums-is-it-time.html",
+   "source": "Indian Defence News",
+   "country": "IN",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Petrol, İttifaklar ve Ültimatumlar: Indo-Amerikan Dostluğuna Son Vermenin Zamanı mı?",
+   "summary_scope": false
+  },
+  {
+   "title": "IAF Has Reportedly Acquired Bunker Busters To Target Pakistan’s Strategic Defence And NG‑ADC2C",
+   "url": "https://www.indiandefensenews.in/2026/09/iaf-has-reportedly-acquired-bunker.html",
+   "source": "Indian Defence News",
+   "country": "IN",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "IAF'nin Pakistan'ın Stratejik Savunmasını ve NG-ADC2C'yi Hedeflemek İçin Bunker Killer Satın Aldığı Bildirildi",
+   "summary_scope": false
+  },
+  {
+   "title": "Zorawar Light Tank Faces Two‑Year Delay As Army Seeks Stronger Armour",
+   "url": "https://www.indiandefensenews.in/2026/09/zorawar-light-tank-faces-twoyear-delay.html",
+   "source": "Indian Defence News",
+   "country": "IN",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Zorawar Hafif Tankı Ordu Daha Güçlü Zırh Aradığı için İki Yıllık Gecikmesiyle Karşı Karşıya",
+   "summary_scope": false
+  },
+  {
+   "title": "Kolkata Set For Kusha ADS Deployment Amid Bangladesh's Mecca Pact Dynamics",
+   "url": "https://www.indiandefensenews.in/2026/09/kolkata-set-for-kusha-ads-deployment.html",
+   "source": "Indian Defence News",
+   "country": "IN",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Kolkata, Bangladeş'in Mekke Anlaşması Dinamikleri Ortasında Kusha ADS Konuşlandırılması İçin Hazırlanıyor",
+   "summary_scope": false
+  },
+  {
+   "title": "India–Pakistan Conflict At Sea: What’s Really Happening?",
+   "url": "https://www.indiandefensenews.in/2026/09/indiapakistan-conflict-at-sea-whats.html",
+   "source": "Indian Defence News",
+   "country": "IN",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Hindistan-Pakistan Deniz Çatışması: Gerçekte Ne Oluyor?",
+   "summary_scope": false
+  },
+  {
+   "title": "Ikran Aerospace’s Sirin-A1 Weapon-Integrated Combat UAV Demonstrated To The Army",
+   "url": "https://www.indiandefensenews.in/2026/09/ikran-aerospaces-sirin-a1-weapon.html",
+   "source": "Indian Defence News",
+   "country": "IN",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "C-UAS ve Hava Savunma",
+   "also": [],
+   "title_tr": "Ikran Aerospace'in Sirin-A1 Silah Entegre Savaş İHA'sı Orduya Gösterildi",
+   "summary_scope": false
+  },
+  {
+   "title": "From BrahMos To Su-57: Can Russia And India Build A Technology-Led Defence Partnership?",
+   "url": "https://www.indiandefensenews.in/2026/09/from-brahmos-to-su-57-can-russia-and.html",
+   "source": "Indian Defence News",
+   "country": "IN",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "BrahMos'tan Su-57'ye: Rusya ve Hindistan Teknoloji Liderliğinde Savunma Ortaklığı Kurabilir mi?",
+   "summary_scope": false
+  },
+  {
+   "title": "India-Russia Defence Cooperation Boosted As Army Chief Seth Concludes Moscow And St Petersburg Visit",
+   "url": "https://www.indiandefensenews.in/2026/09/india-russia-defence-cooperation_0842873403.html",
+   "source": "Indian Defence News",
+   "country": "IN",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Ordu Şefi Seth, Moskova ve Sankt Peterburg Ziyaretini Tamamladığı için Hindistan-Rusya Savunma İşbirliği Güçlendirildi",
+   "summary_scope": false
+  },
+  {
+   "title": "US Drone Maker Powerus Signs Confidential Deal With Pakistan Army Amid Trump Family Investment Links",
+   "url": "https://www.indiandefensenews.in/2026/09/us-drone-maker-powerus-signs.html",
+   "source": "Indian Defence News",
+   "country": "IN",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "C-UAS ve Hava Savunma",
+   "also": [],
+   "title_tr": "ABD İHA Üreticisi Powerus, Trump Ailesi Yatırım Bağlantıları Ortasında Pakistan Ordusu ile Gizli Anlaşma İmzaladı",
+   "summary_scope": false
+  },
+  {
+   "title": "Sukhoi Su-57 Pixel Camouflage Redefines Stealth Against American Grey Doctrine",
+   "url": "https://www.indiandefensenews.in/2026/09/sukhoi-su-57-pixel-camouflage-redefines.html",
+   "source": "Indian Defence News",
+   "country": "IN",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Sukhoi Su-57 Piksel Kamuflajı Amerikan Gri Doktrinesi Karşısında Gizliliği Yeniden Tanımlıyor",
+   "summary_scope": false
+  },
+  {
+   "title": "Houthis Threaten Pakistan With Ballistic Missile Strikes On Karachi Over Saudi Troop Deployment",
+   "url": "https://www.indiandefensenews.in/2026/09/houthis-threaten-pakistan-with.html",
+   "source": "Indian Defence News",
+   "country": "IN",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Hutiler, Suudi Asker Konuşlandırması Nedeniyle Pakistan'ı Karaçi'ye Balistik Füze Saldırılarıyla Tehdit Ediyor",
+   "summary_scope": false
+  },
+  {
+   "title": "Indian Army Enhances Technical Preparedness Along The LAC",
+   "url": "https://www.indiandefensenews.in/2026/09/indian-army-enhances-technical.html",
+   "source": "Indian Defence News",
+   "country": "IN",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Hindistan Ordusu LAC Boyunca Teknik Hazırlığı Geliştiriyor",
+   "summary_scope": false
+  },
+  {
+   "title": "Ajit Doval Recalls Career-Defining Crisis When Agents Were Captured By China",
+   "url": "https://www.indiandefensenews.in/2026/09/ajit-doval-recalls-career-defining.html",
+   "source": "Indian Defence News",
+   "country": "IN",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Ajit Doval, Ajanların Çin Tarafından Esir Alındığı Kariyer Tanımlayan Krizi Anlatıyor",
+   "summary_scope": false
+  },
+  {
+   "title": "18th BRICS Summit: India Deserves Credit For Consensus Declaration",
+   "url": "https://www.indiandefensenews.in/2026/09/18th-brics-summit-india-deserves-credit.html",
+   "source": "Indian Defence News",
+   "country": "IN",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "18. BRICS Zirvesi: Hindistan Mutabakat Bildirisi İçin Takdir Edilmeli",
+   "summary_scope": false
+  },
+  {
+   "title": "Bomb Blasts And Bus Arson Rock Dhaka",
+   "url": "https://www.indiandefensenews.in/2026/09/bomb-blasts-and-bus-arson-rock-dhaka.html",
+   "source": "Indian Defence News",
+   "country": "IN",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Bomba Patlamaları ve Otobüs Yangınları Dakka'yı Sarsıyor",
    "summary_scope": false
   },
   {
@@ -845,6 +1343,7 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "30 Yıl KSK: Elit Birim Yeni Tehditlere Nasıl Hazırlanıyor",
    "summary_scope": false
   },
   {
@@ -857,6 +1356,7 @@
    "published": "2026-09-20",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
+   "title_tr": "DJI Neo 3 Kutusu Dokuz Ürünü Listeledi. Neo 2'nin Transceiver'ı Değil",
    "summary_scope": true,
    "summary_tr": "Sızıntı yapan Igor Bogdanov'un paylaştığı DJI Neo 3 Fly More Combo kutu fotoğrafında dokuz parça listeleniyor ve Neo 2'de bulunan Dijital Verici modülü bu listede yer almıyor; Neo 2 kutusu 13 parça içeriyordu. Kutuda ayrıca Çin'de 1 Mayıs 2026'dan beri zorunlu olan GB 46761-2025 ve GB 46750-2025 standartlarına atıf yapılıyor."
   },
@@ -870,6 +1370,7 @@
    "published": "2026-09-20",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
+   "title_tr": "Amazon, FAA İncelemesine Karşı Çıkan Eyalette Portland Drone Hub Planlıyor",
    "summary_scope": true,
    "summary_tr": "Amazon, Portland'daki 1001 N. Schmeer Road adresindeki tesisinde 2027 başında hizmete girmesi planlanan bir Prime Air drone teslimat merkezi için şehre ön başvuru yaptı; bu, Oregon'da ve Pasifik Kuzeybatısı'nda müşterilere hizmet verecek ilk Prime Air merkezi olacak. Oregon Başsavcısı dahil 17 eyalet başsavcısı Ocak ayında FAA'nın ulusal drone teslimat çevresel incelemesini yetersiz bulmuştu ancak FAA bu incelemeyi Temmuz'da onaylamıştı."
   },
@@ -883,6 +1384,7 @@
    "published": "2026-09-20",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
+   "title_tr": "DJI Avata 360 3 Ayın Sonunda: 360 Uçuşun En İyi ve Kötü Yönleri",
    "summary_scope": true,
    "summary_tr": "Pilot Institute, DJI'nin ilk 360 derece drone modeli Avata 360'ı üç aylık test sürecinin ardından değerlendirdi; 360 derece görüntülerin kurgu aşamasında ekstra zaman gerektirdiğini ancak çekim sonrası açı ve kamera hareketini tamamen değiştirme esnekliği sağladığını belirtti. İnceleme, ücretsiz DJI Studio yazılımının histogram eksikliği gibi sınırlamalarına da değindi."
   },
@@ -896,8 +1398,22 @@
    "published": "2026-09-20",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
+   "title_tr": "Ukrayna'nın SBU'su İlk Jet Shahed Vurulufunu Kameraya Aldı, İnterceptor Adını Açıklamıyor",
    "summary_scope": true,
    "summary_tr": "Ukrayna'nın SBU'su, 19 Eylül 2026'da yayınlanan görüntülerde jet motorlu bir Rus Shahed/Geran-5 dronunu (yaklaşık 600 km/sa hızla) vuran yeni bir engelleyici drone kullandığını duyurdu; Zelensky 67 şirketin bu alanda çalıştığını ve iki şirketin muharebe testlerini geçtiğini söyledi, ancak drone ve maliyeti hakkında detay verilmedi. Aynı dönemde ABD Dışişleri Bakanlığı, Ukrayna'ya 2,68 milyar dolarlık hava savunma paketi (füze ve radarlar) satışını onayladı ancak bu pakette engelleyici drone bulunmuyor."
+  },
+  {
+   "title": "Raytheon Australia DSelivers Capabilities to Meet Future Electromagnetic Spectrum Operation’s Needs",
+   "url": "http://defense-studies.blogspot.com/2026/09/raytheon-australia-dselivers.html",
+   "source": "Defense Studies",
+   "country": "ID",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Rakip Duyuruları",
+   "also": [],
+   "title_tr": "Raytheon Australia, Gelecekteki Elektromanyetik Spektrum Operasyonlarının İhtiyaçlarını Karşılayan Yetenekler Sunuyor",
+   "summary_scope": true
   },
   {
    "title": "Global Military Products Unveils Scorpion Medium 120mm Mobile Mortar System on Army’s Infantry Squad Vehicle",
@@ -909,6 +1425,7 @@
    "published": "2026-09-20",
    "category": "Topçu ve Mühimmat",
    "also": [],
+   "title_tr": "Global Military Products, Scorpion Orta 120mm Mobil Havan Sistemi'ni Piyade Müfreze Aracında Gösteriyor",
    "summary_scope": true
   },
   {
@@ -921,6 +1438,124 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Malezya Delegasyonu Ex-USCGC Valiant'ı İnceledi, APMM'ye Bağışlanacak",
+   "summary_scope": false
+  },
+  {
+   "title": "Will airmen trust AI? The Air Force’s future plans depend on it",
+   "url": "https://www.defenseone.com/technology/2026/09/will-airmen-trust-ai-air-forces-future-plans-depend-it/416098/",
+   "source": "Defense One",
+   "country": "US",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Havacılar Yapay Zekaya Güvenecek Mi? Hava Kuvvetleri'nin Gelecek Planları Buna Bağlı",
+   "summary_scope": false
+  },
+  {
+   "title": "Pułki rangersów w ukraińskich siłach specjalnych",
+   "url": "https://defence24.pl/wojna-na-ukrainie-raport-specjalny-defence24/pulki-rangersow-w-ukrainskich-silach-specjalnych",
+   "source": "Defence24 (PL)",
+   "country": "PL",
+   "lang": "pl",
+   "tier": "A",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Ukrayna Özel Kuvvetlerinde Ranger Alayları",
+   "summary_scope": false
+  },
+  {
+   "title": "Abrams, K9A1 i Rosomak. „Żelazna Dywizja” pokazała jak się zmienia",
+   "url": "https://defence24.pl/sily-zbrojne/abrams-k9a1-i-rosomak-zelazna-dywizja-pokazala-jak-sie-zmienia",
+   "source": "Defence24 (PL)",
+   "country": "PL",
+   "lang": "pl",
+   "tier": "A",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Abrams, K9A1 ve Rosomak. 'Demir Tümen' Değişimin Nasıl Olduğunu Gösterdi",
+   "summary_scope": false
+  },
+  {
+   "title": "Czeskie pancerne nowości w Kielcach. Nowa generacja Tatry Force debiutuje na MSPO",
+   "url": "https://defence24.pl/przemysl/czeskie-pancerne-nowosci-w-kielcach-nowa-generacja-tatry-force-debiutuje-na-mspo",
+   "source": "Defence24 (PL)",
+   "country": "PL",
+   "lang": "pl",
+   "tier": "A",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Kielce'de Çek Zırhlı Yenilikleri. Tatry Force'un Yeni Nesli MSPO'da Debüt Yapıyor",
+   "summary_scope": false
+  },
+  {
+   "title": "NATO: Sojusz jest gotowy zareagować na rosyjską eskalację",
+   "url": "https://defence24.pl/geopolityka/nato-sojusz-jest-gotowy-zareagowac-na-rosyjska-eskalacje",
+   "source": "Defence24 (PL)",
+   "country": "PL",
+   "lang": "pl",
+   "tier": "A",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "NATO: İttifak Rus Eskalasyonuna Tepki Vermeye Hazır",
+   "summary_scope": false
+  },
+  {
+   "title": "Sojusz Rzymu i Aten. Dwie włoskie fregaty wzmocnią grecką flotę",
+   "url": "https://defence24.pl/sily-zbrojne/sojusz-rzymu-i-aten-dwie-wloskie-fregaty-wzmocnia-grecka-flote",
+   "source": "Defence24 (PL)",
+   "country": "PL",
+   "lang": "pl",
+   "tier": "A",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Roma ve Atina İttifakı. İki İtalyan Fregata Yunan Flotasını Güçlendirecek",
+   "summary_scope": false
+  },
+  {
+   "title": "Francuscy politycy potępiają działania Rosji. Ostrzegają przed eskalacją",
+   "url": "https://defence24.pl/geopolityka/francuscy-politycy-potepiaja-dzialania-rosji-ostrzegaja-przed-eskalacja",
+   "source": "Defence24 (PL)",
+   "country": "PL",
+   "lang": "pl",
+   "tier": "A",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Fransız Politikacılar Rusya'nın Eylemlerini Kınıyor. Eskalasyon Konusunda Uyarıda Bulunuyor",
+   "summary_scope": false
+  },
+  {
+   "title": "Polska jako zaplecze wojny. Od portu do wschodniej flanki (część II)",
+   "url": "https://defence24.pl/polityka-obronna/polska-jako-zaplecze-wojny-od-portu-do-wschodniej-flanki-czesc-ii",
+   "source": "Defence24 (PL)",
+   "country": "PL",
+   "lang": "pl",
+   "tier": "A",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Polonya Savaşın Hinterlandi Olarak. Limandan Doğu Flankanına (Bölüm II)",
+   "summary_scope": false
+  },
+  {
+   "title": "Sabotaż, drony, a dalej Przesmyk Suwalski. Czy Polska jest gotowa?",
+   "url": "https://defence24.pl/geopolityka/sabotaz-drony-a-dalej-przesmyk-suwalski-czy-polska-jest-gotowa",
+   "source": "Defence24 (PL)",
+   "country": "PL",
+   "lang": "pl",
+   "tier": "A",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Sabotaj, Dronlar ve Sonra Suwalski Boğazı. Polonya Hazır Mı?",
    "summary_scope": false
   },
   {
@@ -933,6 +1568,7 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Alman General NATO Askeri Komitesi'ni Yönetecek",
    "summary_scope": false
   },
   {
@@ -945,6 +1581,7 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Ukrayna Dronları Moskova'yı Vuruyor",
    "summary_scope": false
   },
   {
@@ -957,6 +1594,7 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Polonyalılar Elite Marines'den Ne Öğrenecek? Önemli Anlaşma İmzalandı",
    "summary_scope": false
   },
   {
@@ -969,6 +1607,7 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Hazır Ürünler ve Ölçek. Drone Pazarında Yeni Polonya Oyuncusu",
    "summary_scope": false
   },
   {
@@ -981,6 +1620,33 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "PrSM Füzelerinin Yeni Versiyonu İçin 1 Milyardan Fazla Dolar. 500 km'ye Kadar Menzil",
+   "summary_scope": false
+  },
+  {
+   "title": "Iraqi oil via Türkiye: Export security and transit dependence",
+   "url": "https://defence24.com/geopolitics/iraqi-oil-via-turkiye-export-security-and-transit-dependence",
+   "source": "Defence24 (EN)",
+   "country": "PL",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Iraklı Petrol Türkiye Üzerinden: İhracat Güvenliği ve Geçiş Bağımlılığı",
+   "summary_scope": false
+  },
+  {
+   "title": "The Carpathian Eight begins. Poland at the centre of logistics and defence projects",
+   "url": "https://defence24.com/geopolitics/the-carpathian-eight-begins-poland-at-the-centre-of-logistics-and-defence-projects",
+   "source": "Defence24 (EN)",
+   "country": "PL",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Karpat Sekizlisi Başlıyor. Polonya Lojistik ve Savunma Projelerinin Merkezinde",
    "summary_scope": false
   },
   {
@@ -993,6 +1659,7 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "OSCE Hala Rusya'yla Konuşuyor. Fark Eder Mi?",
    "summary_scope": false
   },
   {
@@ -1005,6 +1672,7 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "'Kill Marks' J-10CE Pakistan Cetus Hindistan MiG-29UPG Kaybına Yönelik Araştırma",
    "summary_scope": false
   },
   {
@@ -1017,7 +1685,22 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Almanya'nın İlk F-35A, NATO Nükleer Önlemeyi Değiştirecek",
    "summary_scope": false
+  },
+  {
+   "title": "Raytheon Australia completes NASAMS program for Australian Army, with RTX accelerating air-defense production to meet global demand",
+   "url": "https://defence-industry.eu/raytheon-australia-completes-nasams-program-for-australian-army-with-rtx-accelerating-air-defense-production-to-meet-global-demand/",
+   "source": "Defence Industry Europe",
+   "country": "EU",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-20",
+   "category": "C-UAS ve Hava Savunma",
+   "also": [],
+   "title_tr": "Raytheon Australia, Avustralya Ordusu İçin NASAMS Programını Tamamladı, RTX Global Talabı Karşılamak İçin Hava Savunması Üretimini Hızlandırıyor",
+   "summary_scope": true,
+   "summary_tr": "Raytheon Australia, Avustralya Ordusu için NASAMS hava savunma sisteminin teslimat ve entegrasyonunu tamamlayarak personel eğitimini bitirdi; sistem yerli CEA Technologies radarları ile Kongsberg ve Raytheon teknolojilerini birleştiriyor. RTX, küresel talep artışı nedeniyle NASAMS üretimini hızlandırmak için yatırım yapıyor."
   },
   {
    "title": "Britain invests £7.5 billion in AI-enabled military targeting network, with secret cloud due in 2026 to link sensors and weapons",
@@ -1029,6 +1712,99 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Britanya, Yapay Zeka Etkin Askeri Hedefleme Ağına 7,5 Milyar Pound Yatırım Yapıyor. 2026'da Sensörleri ve Silahları Bağlamak İçin Gizli Bulut Planlı",
+   "summary_scope": false
+  },
+  {
+   "title": "Ukraine’s frontline medics bring robot rescue lessons to Sweden",
+   "url": "https://defence-blog.com/ukraines-frontline-medics-bring-robot-rescue-lessons-to-sweden/",
+   "source": "Defence Blog",
+   "country": "UA",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Ukrayna'nın Ön Cephede Tıp Görevlileri Robot Kurtarma Derslerini İsveç'e Getiriyor",
+   "summary_scope": false
+  },
+  {
+   "title": "Five companies lead scoring in $1 billion drone program",
+   "url": "https://defence-blog.com/five-companies-lead-scoring-in-1-billion-drone-program/",
+   "source": "Defence Blog",
+   "country": "UA",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-20",
+   "category": "C-UAS ve Hava Savunma",
+   "also": [],
+   "title_tr": "Beş Şirket 1 Milyar Dolarlık Drone Programında Liderliği Sağlıyor",
+   "summary_scope": true,
+   "summary_tr": "ABD'nin 1 milyar dolarlık Drone Dominance Programı kapsamındaki Gauntlet II testinin yakın muharebe kategorisinde Neros, ORQA US, XTEND Reality, Vector ve ModalAI en yüksek puanları aldı. Vector 5.000'e kadar drone sistemi siparişi aldığını, XTEND ise 120 STRIKER sistemi teslim ettiğini açıkladı; program toplamda 60.000 birimlik tedarik öngörüyor."
+  },
+  {
+   "title": "U.S. Space Force wants satellites that can hunt objects in orbit",
+   "url": "https://defence-blog.com/u-s-space-force-wants-satellites-that-can-hunt-objects-in-orbit/",
+   "source": "Defence Blog",
+   "country": "UA",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "ABD Uzay Kuvvetleri, Yörüngede Nesneleri Avlayabilen Uyduları İstiyor",
+   "summary_scope": false
+  },
+  {
+   "title": "F-16 fleet is getting a new mission computer, Air Force says",
+   "url": "https://defence-blog.com/f-16-fleet-is-getting-a-new-mission-computer-air-force-says/",
+   "source": "Defence Blog",
+   "country": "UA",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "F-16 Filosu Yeni Görev Bilgisayarı Alıyor, Hava Kuvvetleri Söylüyor",
+   "summary_scope": false
+  },
+  {
+   "title": "U.S. Navy wants a carrier-based unmanned fighter for $30 million",
+   "url": "https://defence-blog.com/u-s-navy-wants-a-carrier-based-unmanned-fighter-for-30-million/",
+   "source": "Defence Blog",
+   "country": "UA",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "ABD Donanması, 30 Milyon Dolara Taşıyıcı Bazlı İnsansız Savaşçı İstiyor",
+   "summary_scope": false
+  },
+  {
+   "title": "U.S. Space agency plans global network of missile warning ground sites",
+   "url": "https://defence-blog.com/u-s-space-agency-plans-global-network-of-missile-warning-ground-sites/",
+   "source": "Defence Blog",
+   "country": "UA",
+   "lang": "en",
+   "tier": "A",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "ABD Uzay Ajansı, Füze Uyarısı Yer İstasyonlarının Küresel Ağını Planlıyor",
+   "summary_scope": false
+  },
+  {
+   "title": "North Korea fires ballistic missile into East Sea: Seoul",
+   "url": "https://www.dawn.com/news/2031349/north-korea-fires-ballistic-missile-into-east-sea-seoul",
+   "source": "Dawn",
+   "country": "PK",
+   "lang": "en",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Kuzey Kore, Doğu Denizi'ne Balistik Füze Fırlattı: Seul",
    "summary_scope": false
   },
   {
@@ -1041,10 +1817,38 @@
    "published": "2026-09-20",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Türkiye, Suudi Arabistan'ın Askeri İhtiyaçlarını Karşılamaya Hazır Olduğunu Söyledi",
    "summary_scope": false
   },
   {
-   "title": "Mass Ukrainian drone attack on Moscow kills two, Russia says",
+   "title": "Guerra e politica: le opinioni degli italiani",
+   "url": "https://www.analisidifesa.it/2026/09/guerra-e-politica-le-opinioni-degli-italiani/",
+   "source": "Analisi Difesa",
+   "country": "IT",
+   "lang": "it",
+   "tier": "B",
+   "published": "2026-09-20",
+   "category": "Topçu ve Mühimmat",
+   "also": [],
+   "title_tr": "Savaş ve Politika: İtalyanların Görüşleri",
+   "summary_scope": true,
+   "summary_tr": "İtalya'da yapılan ankete göre halkın %55,4'ü Ukrayna'ya askeri yardıma karşı, sadece %14,8'i artırılmasını istiyor; iktidar partisi seçmenlerinin yarısının da karşı çıkması bu konuda Vannacci'ye oy kaymasını beslediği belirtiliyor."
+  },
+  {
+   "title": "Turkish FM says ready to meet Saudi defence needs – what does that mean?",
+   "url": "https://www.aljazeera.com/news/2026/9/20/turkish-fm-says-ready-to-meet-saudi-defence-needs-what-does-that-mean?traffic_source=rss",
+   "source": "Al Jazeera",
+   "country": "QA",
+   "lang": "en",
+   "tier": "C",
+   "published": "2026-09-20",
+   "category": "Genel Savunma Gündemi",
+   "also": [],
+   "title_tr": "Türk FM, Suudi Savunma İhtiyaçlarını Karşılamaya Hazır Olduğunu Söyledi – Bu Ne Demek?",
+   "summary_scope": false
+  },
+  {
+   "title": "Two killed in Ukrainian drone attack on Moscow, says Russia",
    "url": "https://www.aljazeera.com/news/2026/9/20/mass-ukrainian-drone-attack-on-moscow-kills-two-russia-says?traffic_source=rss",
    "source": "Al Jazeera",
    "country": "QA",
@@ -1053,6 +1857,7 @@
    "published": "2026-09-20",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
+   "title_tr": "Moskova'ya Yapılan Ukrayna Drone Saldırısında İki Kişi Öldü, Rusya Söylüyor",
    "summary_scope": false
   },
   {
@@ -1065,6 +1870,7 @@
    "published": "2026-09-20",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
+   "title_tr": "Jammertest: Uydu Müdahalesine Karşı Koymak İçin Arktik Egzersizi",
    "summary_scope": false
   },
   {
@@ -1077,6 +1883,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Nükleer İşgücü Sektörler Genelinde Yüz Bin'i Aştı",
    "summary_scope": false
   },
   {
@@ -1089,6 +1896,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "İspanyol F-18'ler Romanya Üzerinde 15 Kez Acil Havalandı",
    "summary_scope": false
   },
   {
@@ -1101,6 +1909,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "İngiltere, Uçuş Eğitimi İçin NATO Uçuş Okullarını İncelemiş",
    "summary_scope": false
   },
   {
@@ -1113,6 +1922,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Britanya, Fransa ve Avustralya ile Nükleer Bağları Güçlendiriyor",
    "summary_scope": false
   },
   {
@@ -1125,6 +1935,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Doksan'ların Başından Beri İlk Yeni İngiliz Savaş Başlığı İlerleme Kaydetti",
    "summary_scope": false
   },
   {
@@ -1137,6 +1948,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Avrupa Ticari Roketi Norveç'ten Yörüngeye Ulaştı",
    "summary_scope": false
   },
   {
@@ -1149,6 +1961,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Askeri Yedek Erleri İçin Öğrenci Kredisi Yardımı 'Değerli Olabilir'",
    "summary_scope": false
   },
   {
@@ -1161,31 +1974,8 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Yeni Commons Komitesi Nükleer Harcamalarını İnceleyecek",
    "summary_scope": false
-  },
-  {
-   "title": "Navy yet to settle on guns for support ships",
-   "url": "https://ukdefencejournal.org.uk/navy-yet-to-settle-on-guns-for-support-ships/",
-   "source": "UK Defence Journal",
-   "country": "GB",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "summary_scope": false
-  },
-  {
-   "title": "Azerbaijan's Central Bank opens tender for SQL training course",
-   "url": "https://www.trend.az/azerbaijan/4225702.html",
-   "source": "Trend.az",
-   "country": "AZ",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "İhale ve Sözleşmeler",
-   "also": [],
-   "summary_scope": true
   },
   {
    "title": "US F-35 fighter en route to Finland stranded in Azores due to malfunction — Yle",
@@ -1197,6 +1987,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "ABD F-35 Savaşçısı Finlandiya'ya Gidiş Yolunda Azorlar'da Arızadan Dolayı Sıkışıp Kaldı — Yle",
    "summary_scope": false
   },
   {
@@ -1209,6 +2000,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Slovakya Ordusu Çatışma Arayanlar İçin Rusya ile Savaşmaya Gitmeyecek — Başbakan",
    "summary_scope": false
   },
   {
@@ -1221,6 +2013,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Rus Parlamento Seçimi Katılımı %44.58'e Ulaştı — Seçim Otoritesi",
    "summary_scope": false
   },
   {
@@ -1233,6 +2026,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Şili'nin Eski Başkanı Bachelet, BM Liderliği İçin Kampanyasından Çekildi",
    "summary_scope": false
   },
   {
@@ -1245,6 +2039,7 @@
    "published": "2026-09-19",
    "category": "Topçu ve Mühimmat",
    "also": [],
+   "title_tr": "Kyiv Birlikleri Geçen Gün DPR'ı 30 Kez Bombaladı, 18 Yaralı",
    "summary_scope": true,
    "summary_tr": "DPR yetkilileri, Ukrayna ordusunun son bir günde bölgeyi 30 kez topa tuttuğunu, saldırılarda üçü çocuk olmak üzere 18 sivilin yaralandığını açıkladı. Saldırılarda üç konut binası, tren ve toplu taşıma araçları ile dört sivil altyapı tesisi hasar gördü."
   },
@@ -1258,6 +2053,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Rus Çevrimiçi Oy Sistemine Yapılan Saldırılar Yapay Zeka ve Darknet İçeriyor — Resmi",
    "summary_scope": false
   },
   {
@@ -1270,6 +2066,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Rus Parlamento Seçimi Katılımı %44.5'i Aştı — Seçim Otoritesi",
    "summary_scope": false
   },
   {
@@ -1282,6 +2079,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Suudi Arabistan, Riyad'a Yapılan Husi Füze Saldırısını Püskürtüyor — Koalisyon",
    "summary_scope": false
   },
   {
@@ -1294,6 +2092,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "ABD, İran'ın Minab şehrindeki okul saldırısı hazırlıklarında yapay zeka kullandı — Bloomberg",
    "summary_scope": false
   },
   {
@@ -1306,6 +2105,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "ABD'de dizel yakıt fiyatları galon başına rekor $6,49'a ulaştı — Amerikan Otomobil Derneği",
    "summary_scope": false
   },
   {
@@ -1318,6 +2118,7 @@
    "published": "2026-09-19",
    "category": "Politika ve Regülasyon",
    "also": [],
+   "title_tr": "Çin, Rusya ve İran'a karşı yaptırımları sıkılaştıran yeni ABD yasasını eleştirdi",
    "summary_scope": true,
    "summary_tr": "ABD Başkanı Donald Trump'ın 18 Eylül'de Rusya ve İran'a yönelik yaptırımları genişleten yasayı imzalamasının ardından Çin, Ticaret Bakanlığı sözcüsü aracılığıyla BM onayı ve uluslararası hukuk dayanağı olmayan tek taraflı yaptırımlara karşı olduğunu açıkladı. Çin, ulusal egemenliğini ve Çinli şirketlerin haklarını korumak için gerekli tüm önlemleri alma hakkını saklı tuttuğunu belirtti."
   },
@@ -1331,6 +2132,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Moskova, Letonya ve Estonya'nın oy vermek isteyen Rusları tehdit etmeye çalıştığını söyledi",
    "summary_scope": false
   },
   {
@@ -1343,6 +2145,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "TASS: İran, ABD Tahran'ı samimiyetinden ikna ederse müzakerelere geri dönmeye hazır",
    "summary_scope": false
   },
   {
@@ -1355,6 +2158,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "ABD-İran görüşmeleri çıkmaza girdi — Türkiye Dışişleri Bakanı",
    "summary_scope": false
   },
   {
@@ -1367,6 +2171,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Dmitriev, Avrupa'nın tarihinin en büyük enerji krizinde olduğunu söyledi",
    "summary_scope": false
   },
   {
@@ -1379,6 +2184,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Zaporozhye Bölgesi'nde saat 17:00 GMT itibariyle katılım %72,88",
    "summary_scope": false
   },
   {
@@ -1391,6 +2197,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "İnsansız hava araçlarının uçtuğu bölgelerdeki seçim komisyonları 'terör pisliğine' direniyor — Dışişleri Bakanlığı",
    "summary_scope": false
   },
   {
@@ -1403,6 +2210,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Moskova'da elektronik oy sistemi üzerine büyük çaplı siber saldırılar kaydedildi ve engellendi",
    "summary_scope": false
   },
   {
@@ -1415,6 +2223,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Güney Yemen'deki çatışmalarda son 24 saatte en az 48 kişi öldü — AFP",
    "summary_scope": false
   },
   {
@@ -1427,6 +2236,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Husiler, Riyad ve Yenbu'deki hedeflere füze saldırıları düzenlediklerini iddia etti",
    "summary_scope": false
   },
   {
@@ -1439,6 +2249,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Trump yönetimi İran'la savaşın devam ettiğine inanmıyor — Sözcü Johnson",
    "summary_scope": false
   },
   {
@@ -1451,6 +2262,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "İran, savaşı bitirme koşullarını ABD'ye iletti — Güvenlik Konseyi Sekreteri",
    "summary_scope": false
   },
   {
@@ -1463,6 +2275,7 @@
    "published": "2026-09-19",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
+   "title_tr": "DPR'de artan insansız hava araçları faaliyeti nedeniyle 20 Eylül'de oy kullanma saatleri kısaltılacak",
    "summary_scope": false
   },
   {
@@ -1475,6 +2288,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Anthropic, Google, OpenAI, SpaceXAI yapay zeka gelişimini yavaşlatma girişimi nedeniyle dava edildi",
    "summary_scope": false
   },
   {
@@ -1487,6 +2301,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Zaporozhye Bölgesi'nde iki günlük oy verme ihlal olmadan geçti",
    "summary_scope": false
   },
   {
@@ -1499,6 +2314,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Rusya, Rusçuluk ve neo-Nazizm iddiasında bulunanlara diyalog başlatmayacağını söyledi — Zakharova",
    "summary_scope": false
   },
   {
@@ -1511,6 +2327,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Rus seçimlerinin adilliği kuşku götürmez — Mali gözlemci",
    "summary_scope": false
   },
   {
@@ -1523,6 +2340,7 @@
    "published": "2026-09-19",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
+   "title_tr": "Almanya, insansız hava aracı kazasıyla Rusya'yı suçlayarak krizi yapay olarak şiddetlendiriyor — GFCN uzmanları",
    "summary_scope": false
   },
   {
@@ -1535,6 +2353,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Güney Afrika'daki oy kullanıcılarının coğrafi kapsama alanı genişledi — Rus büyükelçi",
    "summary_scope": false
   },
   {
@@ -1547,6 +2366,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Merkez Seçim Komisyonu Uzak Doğu'da sabotajı seçimleri bozmaya yönelik girişim olarak görüyor",
    "summary_scope": false
   },
   {
@@ -1559,114 +2379,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "summary_scope": false
-  },
-  {
-   "title": "Russian troops strike logistics centers, energy sites used by Ukrainian army in past day",
-   "url": "https://tass.com/defense/2190067",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "summary_scope": false
-  },
-  {
-   "title": "Over 4.6 mln people cast votes early in Russian election — CEC chief Pamfilova",
-   "url": "https://tass.com/politics/2190063",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "summary_scope": false
-  },
-  {
-   "title": "Fourteen polling stations in LPR operate using backup power supplies — CEC",
-   "url": "https://tass.com/politics/2190061",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "summary_scope": false
-  },
-  {
-   "title": "Russian air defenses intercept 936 Ukrainian UAVs, seven smart bombs over past day",
-   "url": "https://tass.com/defense/2190059",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "C-UAS ve Hava Savunma",
-   "also": [],
-   "summary_scope": false
-  },
-  {
-   "title": "Kiev loses over 1,340 troops along engagement line in past day — Russia’s top brass",
-   "url": "https://tass.com/defense/2190057",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "summary_scope": false
-  },
-  {
-   "title": "Russian Interior Ministry receives 367 reports on alleged incidents at voting in past day",
-   "url": "https://tass.com/politics/2190055",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "summary_scope": false
-  },
-  {
-   "title": "Moscow election system comes under powerful attacks during voting — official",
-   "url": "https://tass.com/politics/2190037",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "summary_scope": false
-  },
-  {
-   "title": "Russia’s voting procedure is ‘quite intense,’ says CEC chief Pamfilova",
-   "url": "https://tass.com/politics/2190039",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "summary_scope": false
-  },
-  {
-   "title": "Hacker attacks cause technical glitch on first day of voting in Moscow",
-   "url": "https://tass.com/politics/2190035",
-   "source": "TASS",
-   "country": "RU",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
+   "title_tr": "Devlet Duması seçim oy katılımı Moskova saati 14:00 itibariyle %32,58'i aştı — MYK",
    "summary_scope": false
   },
   {
@@ -1679,6 +2392,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "MSPO'da Bronco ve Terrex: ST Engineering Avrupa'yı hedefledi",
    "summary_scope": false
   },
   {
@@ -1691,6 +2405,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Analistler, Washington'daki Xi-Trump zirvesi öncesi Çin'in güçlü konumda olacağını tahmin ediyor",
    "summary_scope": false
   },
   {
@@ -1703,6 +2418,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Çin 'stratejik' olduğunu söylediğinde gerçekten ne demek istiyor",
    "summary_scope": false
   },
   {
@@ -1715,6 +2431,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Çin'in efsanevi İmparatoriçe Valisi Huayang bir havaalanının yakınına mı gömüldü? Bir çalışma evet diyor",
    "summary_scope": false
   },
   {
@@ -1727,6 +2444,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Somali korsanlarının artışı, Çin'in uzun süredir devam eden Aden Körfezi görevini sınıyor",
    "summary_scope": false
   },
   {
@@ -1739,6 +2457,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "ABD'nin uzay silahları hamlesi 'tabuyu kırdı', yeni bir silahlanma yarışını ateşleyebilir — Pekin forumu",
    "summary_scope": false
   },
   {
@@ -1751,6 +2470,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Çin öncülüğündeki çalışma, 500 milyon yıl önce Büyük Gondvana'nın Dünya'nın kabuğunun %80'i olduğunu ortaya çıkardı",
    "summary_scope": false
   },
   {
@@ -1763,6 +2483,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Yapay Zeka: Yapay zekanın seyrini değiştiren 10 gün",
    "summary_scope": false
   },
   {
@@ -1775,6 +2496,7 @@
    "published": "2026-09-19",
    "category": "İhale ve Sözleşmeler",
    "also": [],
+   "title_tr": "Trump'ın Grönland anlaşması Xi zirvesi ve ara seçimlerde kaldıracı artırmayı hedeflediği iddia ediliyor: analistler",
    "summary_scope": true,
    "summary_tr": "ABD Başkanı Donald Trump, Grönland üzerinde Danimarka Krallığı ile yaptığı anlaşma sonucunda süresiz güvenlik kontrolü elde ettiğini açıkladı; analistler bu adımın, Çin Devlet Başkanı Xi Jinping ile yapılacak zirve öncesinde ABD'nin pazarlık gücünü artırmayı amaçladığını belirtiyor."
   },
@@ -1788,6 +2510,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Afrika, Çin'in güç projeksiyonu için 'test alanı' mı haline geliyor?",
    "summary_scope": false
   },
   {
@@ -1839,6 +2562,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Karakuluvvet, Jaguar Zırhlı Keşif ve Muharebe Aracı'nın son versiyonunu aldı",
    "summary_scope": false
   },
   {
@@ -1851,6 +2575,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Letonya, İsveç Archer sistemleri yerine Çek Morana kendinden hareketli obüsleri satın alacak",
    "summary_scope": false
   },
   {
@@ -1863,6 +2588,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Amerikan F-35 savaş uçağının hassas bileşenleri Hong Kong'a kaçırıldı",
    "summary_scope": false
   },
   {
@@ -1875,6 +2601,7 @@
    "published": "2026-09-19",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
+   "title_tr": "F127: ABD Teknolojisine Aşırı Güvenilmesi Artık Uygun Değil",
    "summary_scope": true,
    "summary_tr": "Alman savunma medyası hartpunkt'ta yayımlanan analiz, Almanya'nın F127 hava savunma fırkateynleri için ABD'nin Aegis sistemi, SPY-6 radarı ve balistik füze savunma teknolojisine yoğun bağımlılığının ulusal egemenlik ve tedarik güvenliği açısından risk oluşturduğunu belirtiyor. Örnek olarak İsviçre'nin Patriot sipariş teslimatlarının ABD tarafından ertelenmesi ve İran savaşında ABD'nin füze stoklarının azalması gösteriliyor."
   },
@@ -1888,6 +2615,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Veteran Bakanlığı, BM Katılımcı Ülkeler İçin Minnet Ziyafeti Düzenledi",
    "summary_scope": false
   },
   {
@@ -1900,6 +2628,7 @@
    "published": "2026-09-19",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
+   "title_tr": "Pantsir-S1M: İnsansız Hava Araçları Sürülerine Karşı Hindistan'ın Önerilen Kalkanı",
    "summary_scope": false
   },
   {
@@ -1912,6 +2641,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "HAL, TEJAS MK-2 Gövdesini Tamamladı, Mart 2027 İlk Çalıştırmasını Hedefledi",
    "summary_scope": false
   },
   {
@@ -1924,6 +2654,7 @@
    "published": "2026-09-19",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
+   "title_tr": "Hindistan'ın Akash Hava Savunma Füzesi İhracatları Tacikistan ve Türkmenistan'a Giriş Yaptı",
    "summary_scope": false
   },
   {
@@ -1936,6 +2667,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Pakistan Askeri Sözcüsü, Hindistan'ın Ateş Gücü Üstünlüğünü Kabul Etti",
    "summary_scope": false
   },
   {
@@ -1948,6 +2680,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Ödünç Alınan Güç: Dış Motorlara Bağımlılık Neden Ulusal Güvenliği Tehlikeye Atar",
    "summary_scope": false
   },
   {
@@ -1960,6 +2693,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Özelleştirme Değil—Dönüşüm: ISRO Araştırma Merkezi Olarak Yeniden Başlayacak",
    "summary_scope": false
   },
   {
@@ -1972,6 +2706,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Hindistan Donanmasının MARCOS Özel Kuvvetleri Sindoor Operasyonlarında Belirleyici Rol Oynadı",
    "summary_scope": false
   },
   {
@@ -1984,6 +2719,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "2022 Planı Çizdi: Politika Üretim Tesisini Karşıladığında: Hindistan'ın Çip Dönemi 2026'da Geliyor",
    "summary_scope": false
   },
   {
@@ -1996,6 +2732,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Savunma Bakanı Savunma Projelerindeki Gecikmelerden Uyarı Verir, HAL'den Kesin Zaman Çizelgeleri İstedi",
    "summary_scope": false
   },
   {
@@ -2008,196 +2745,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "summary_scope": false
-  },
-  {
-   "title": "Applied Materials Commits ₹4.17 Lakh Crore To India’s Semiconductor Future",
-   "url": "https://www.indiandefensenews.in/2026/09/applied-materials-commits-417-lakh.html",
-   "source": "Indian Defence News",
-   "country": "IN",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "Tedarik Zinciri",
-   "also": [],
-   "summary_scope": true
-  },
-  {
-   "title": "India’s Micro-Turbojet Engine Drive Secures ₹43 Crore Funding Boost",
-   "url": "https://www.indiandefensenews.in/2026/09/indias-micro-turbojet-engine-drive.html",
-   "source": "Indian Defence News",
-   "country": "IN",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "summary_scope": false
-  },
-  {
-   "title": "Pakistan’s Expanding Terror Map Meets India’s Adaptive Counter-Strike",
-   "url": "https://www.indiandefensenews.in/2026/09/pakistans-expanding-terror-map-meets.html",
-   "source": "Indian Defence News",
-   "country": "IN",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "summary_scope": false
-  },
-  {
-   "title": "Indian Coast Guard Bids Farewell To ICGS Savitribai Phule In Sunset Ceremony At Karwar Port",
-   "url": "https://www.indiandefensenews.in/2026/09/indian-coast-guard-bids-farewell-to.html",
-   "source": "Indian Defence News",
-   "country": "IN",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "summary_scope": false
-  },
-  {
-   "title": "Drone Strike Damages Cooling Tower At Russia’s Kursk Nuclear Plant",
-   "url": "https://www.indiandefensenews.in/2026/09/drone-strike-damages-cooling-tower-at.html",
-   "source": "Indian Defence News",
-   "country": "IN",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "C-UAS ve Hava Savunma",
-   "also": [],
-   "summary_scope": false
-  },
-  {
-   "title": "TEJAS Twin-Seater Achieves Final Operational Clearance (FOC) As HAL Hands Over Trainers And Dhruv-NG Helicopters",
-   "url": "https://www.indiandefensenews.in/2026/09/tejas-twin-seater-achieves-final.html",
-   "source": "Indian Defence News",
-   "country": "IN",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "TEJAS İki Kişilik Uçak Son Operasyonel Onayı (FOC) Alır, HAL Eğitim Uçaklarını ve Dhruv-NG Helikopterlerini Teslim Eder",
-   "summary_scope": false
-  },
-  {
-   "title": "Trump Signs Russia Sanctions Law, India And China Face Tariff Threats",
-   "url": "https://www.indiandefensenews.in/2026/09/trump-signs-russia-sanctions-law-india.html",
-   "source": "Indian Defence News",
-   "country": "IN",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "İhale ve Sözleşmeler",
-   "also": [],
-   "title_tr": "Trump Rusya Yaptırımlar Kanunu'nu İmzaladı, Hindistan ve Çin Tarife Tehditleriyle Karşı Karşıya",
-   "summary_scope": true
-  },
-  {
-   "title": "Putin’s ‘Beast’ Tanks Set For India As Army Chief’s Moscow Visit Opens New Defence Chapter",
-   "url": "https://www.indiandefensenews.in/2026/09/putins-beast-tanks-set-for-india-as.html",
-   "source": "Indian Defence News",
-   "country": "IN",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Putin'in 'Beast' Tankları Hindistan İçin Hazırlanıyor; Ordu Şefi'nin Moskova Ziyareti Yeni Savunma Bölümünü Açıyor",
-   "summary_scope": false
-  },
-  {
-   "title": "HAL Expresses Readiness For Su-57 Production in India",
-   "url": "https://www.indiandefensenews.in/2026/09/hal-expresses-readiness-for-su-57.html",
-   "source": "Indian Defence News",
-   "country": "IN",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "HAL, Hindistan'da Su-57 Üretimi İçin Hazırlık Beyan Etti",
-   "summary_scope": false
-  },
-  {
-   "title": "Final TEJAS MK-1 Delivery Highlights Urgent Need For MK-1A Induction",
-   "url": "https://www.indiandefensenews.in/2026/09/final-tejas-mk-1-delivery-highlights.html",
-   "source": "Indian Defence News",
-   "country": "IN",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Son TEJAS MK-1 Teslimatı MK-1A Alımının Acil İhtiyacını Vurguladı",
-   "summary_scope": false
-  },
-  {
-   "title": "'HAL Can't Fly Solo': Why India’s Aerospace Future Belongs To The Private Sector",
-   "url": "https://www.indiandefensenews.in/2026/09/hal-cant-fly-solo-why-indias-aerospace.html",
-   "source": "Indian Defence News",
-   "country": "IN",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "'HAL Tek Başına Uçamaz': Hindistan'ın Havacılık Geleceğinin Neden Özel Sektöre Ait Olduğu",
-   "summary_scope": false
-  },
-  {
-   "title": "BEL Inks Export Deal With Elbit Systems For DIRCM Sub-Assemblies",
-   "url": "https://www.indiandefensenews.in/2026/09/bel-inks-export-deal-with-elbit-systems.html",
-   "source": "Indian Defence News",
-   "country": "IN",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "İhale ve Sözleşmeler",
-   "also": [],
-   "title_tr": "BEL, Elbit Systems İle DIRCM Alt-Montajları İçin İhracat Anlaşması İmzaladı",
-   "summary_scope": true
-  },
-  {
-   "title": "India’s Chip Strategy Balances Sovereign Strengths With Global Partnerships",
-   "url": "https://www.indiandefensenews.in/2026/09/indias-chip-strategy-balances-sovereign.html",
-   "source": "Indian Defence News",
-   "country": "IN",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Hindistan'ın Çip Stratejisi Egemenlik Gücünü Küresel Ortaklıklarla Dengeliyor",
-   "summary_scope": false
-  },
-  {
-   "title": "BARC Engages Reliance, Adani, NTPC And L&T In ₹9,000 Crore Small Modular Reactor Venture",
-   "url": "https://www.indiandefensenews.in/2026/09/barc-engages-reliance-adani-ntpc-and-l.html",
-   "source": "Indian Defence News",
-   "country": "IN",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "BARC, Reliance, Adani, NTPC ve L&T'yi ₹9.000 Crore Küçük Modüler Reaktör Girişimine Dahil Ediyor",
-   "summary_scope": false
-  },
-  {
-   "title": "Start-Up Kerael Robotics Unveils 'Black-Bird' High-Speed Combat-Interceptor Drone",
-   "url": "https://www.indiandefensenews.in/2026/09/start-up-kerael-robotics-unveils-black.html",
-   "source": "Indian Defence News",
-   "country": "IN",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-19",
-   "category": "C-UAS ve Hava Savunma",
-   "also": [],
-   "title_tr": "Girişim Kerael Robotics 'Black-Bird' Yüksek Hızlı Savaş İnterceptor Drone'unu Tanıttı",
+   "title_tr": "Hindistan, 25-26 Eylül için Bengal Körfezi 600 Km Füze Testi NOTAM'ı Yayınladı",
    "summary_scope": false
   },
   {
@@ -2210,6 +2758,7 @@
    "published": "2026-09-19",
    "category": "Topçu ve Mühimmat",
    "also": [],
+   "title_tr": "'F-35 işleri değiştirecek' – İlk Alman F-35A'nın Tanıtımı",
    "summary_scope": true
   },
   {
@@ -2222,6 +2771,7 @@
    "published": "2026-09-19",
    "category": "Rakip Duyuruları",
    "also": [],
+   "title_tr": "Rheinmetall UK'de Askeri Ağır Ekipman İçin Titreşim Test Cihazı",
    "summary_scope": true
   },
   {
@@ -2234,6 +2784,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Tedarik Sıkıntısı Bir Silah Olarak",
    "summary_scope": false
   },
   {
@@ -2287,6 +2838,7 @@
    "also": [
     "Defense Arabia"
    ],
+   "title_tr": "Malezya'nın Yeni Korveti, Ortak Operasyonel Görüntüyü Paylaşacak",
    "summary_scope": true,
    "summary_tr": "Malezya Kraliyet Donanması için Türkiye'nin İstanbul Tersanesi'nde inşa edilen LMS Batch 2 programının üçüncü ve son korveti TUNKU OSMAN JEWA, 9 Ağustos 2026'da suya indirilerek programın tüm gemilerinin denize indirilme aşamasını tamamladı. Haziran 2024'te imzalanan hükümetler arası anlaşma kapsamındaki üç korvetin tamamı, HAVELSAN'ın ADVENT Muharebe Yönetim Sistemi ile donatılacak ve şimdi sistem entegrasyonu ile test aşamasına geçilecek."
   },
@@ -2302,6 +2854,7 @@
    "also": [
     "Defense Arabia"
    ],
+   "title_tr": "ASELSAN, Canlı Deneylerde Entegre EW ve İstihbarat Yeteneklerini Gösterdi",
    "summary_scope": true,
    "summary_tr": "ASELSAN, 19 Eylül 2026'da Konya'da 15'ten fazla uluslararası heyetin katıldığı canlı tatbikatta Bayraktar TB2 İHA'sına entegre ANTIDOT 2EA 200, ANTIDOT 2ES 100 ve FULMAR 200 sistemleriyle elektronik harp ve ISR yeteneklerini birlikte gösterdi."
   },
@@ -2315,6 +2868,7 @@
    "published": "2026-09-19",
    "category": "Deniz ve İnsansız Sistemler",
    "also": [],
+   "title_tr": "Naval Group ve Nibe Limited, Hindistan Gemi İnşaatı İçin Stratejik MoU İmzaladı",
    "summary_scope": true,
    "summary_tr": "Fransız Naval Group ile Hindistanlı Nibe Group, 18 Eylül 2026'da su altı dronları, mayın karşı önlem gemileri, denizaltı sistemleri ve deniz silah fırlatma sistemleri gibi alanlarda iş birliğini öngören bir Mutabakat Muhtırası imzaladı. Anlaşma, Hindistan'ın Atmanirbhar Bharat girişimi kapsamında donanma alanında kendi kendine yeterliliğini güçlendirmeyi ve iki ülke arasındaki stratejik ortaklığı pekiştirmeyi hedefliyor."
   },
@@ -2328,6 +2882,7 @@
    "published": "2026-09-19",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
+   "title_tr": "Neros Pentagon Gauntlet II'ye Giriyor, Skycutter 4. ye Düştü",
    "summary_scope": true,
    "summary_tr": "Pentagon'un Gauntlet II yarışmasında Neros Technologies, close quarters battle kategorisinde 88,1 puanla birinci, deep strike kategorisinde 69,8 puanla üçüncü olarak iki ayrı liderlik tablosunda da yer alan tek şirket oldu; Gauntlet I'i 99,3 puanla kazanan Skycutter ise deep strike'ta dördüncüye geriledi ve close quarters'ta sıralamaya giremedi. Program, on şirketten toplam yaklaşık 60.000 drone (yaklaşık 300 milyon dolarlık sipariş) alacak."
   },
@@ -2341,6 +2896,7 @@
    "published": "2026-09-19",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
+   "title_tr": "Boston Polis İnsansız Hava Aracı, DFR Pilotu Başlangıcından Altı Gün Sonra Park Halindeki Arabayı Hasara Uğrattı",
    "summary_scope": false
   },
   {
@@ -2353,6 +2909,7 @@
    "published": "2026-09-19",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
+   "title_tr": "İngiltere Üsleri Bir Yılda 340 İnsansız Hava Aracı Olayını Kaydetti, MoD Sorumlu Tanımadı",
    "summary_scope": false
   },
   {
@@ -2365,44 +2922,8 @@
    "published": "2026-09-19",
    "category": "C-UAS ve Hava Savunma",
    "also": [],
+   "title_tr": "NASA Kennedy İnsansız Hava Aracı Davası: Çinli Turist Suçu İtiraf Etti, Ceza Yüzüne Mahkum",
    "summary_scope": false
-  },
-  {
-   "title": "Türk savunma sanayiinde çeşitli görevlerde bulunan Yusuf Çalık vefat etti",
-   "url": "https://defensehere.com/tr/yusuf-calik-vefat-etti/",
-   "source": "DefenseHere",
-   "country": "TR",
-   "lang": "tr",
-   "tier": "A",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "summary_scope": false
-  },
-  {
-   "title": "MÜSİAD EXPO 2026’da “TURAÇ” da var",
-   "url": "https://defensehere.com/tr/musiad-expo-2026da-turac-da-var/",
-   "source": "DefenseHere",
-   "country": "TR",
-   "lang": "tr",
-   "tier": "A",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "summary_scope": false
-  },
-  {
-   "title": "ASELSAN’ın yeni deniz silahı: SMASH 300",
-   "url": "https://defensehere.com/tr/aselsanin-yeni-deniz-silah-sistemi-smash-300/",
-   "source": "DefenseHere",
-   "country": "TR",
-   "lang": "tr",
-   "tier": "A",
-   "published": "2026-09-19",
-   "category": "Rakip Duyuruları",
-   "also": [],
-   "summary_scope": true,
-   "summary_tr": "ASELSAN, su üstü tehditlere ve mini/mikro İHA'lara karşı kullanılmak üzere yapay zekâ destekli hedef tespit algoritmalarına sahip 25 mm Uzaktan Komutalı Stabilize Deniz Silah Sistemi SMASH 300'ü tanıttı. Sistem, ATOM Akıllı Mühimmat ile entegre çalışacak ve AURA Drone Radarı ile gemideki diğer sensörlerle bağlantı kurabilecek."
   },
   {
    "title": "KSAL Sebut PT. PAL dan Fincantieri akan Memodernisasi Kapal Induk",
@@ -2414,6 +2935,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "KSAL, PT. PAL ve Fincantieri'nin Uçak Gemisini Modernize Edeceğini Söyledi",
    "summary_scope": false
   },
   {
@@ -2452,6 +2974,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Polonya, Kanada'da TNT Üretebilir. Hükümet Düzeyinde Görüşmeler",
    "summary_scope": false
   },
   {
@@ -2464,6 +2987,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Rusya'da seçimler sona eriyor – hangi partiler aday gösteriyor ve kim muhtemelen kazanacak?",
    "summary_scope": false
   },
   {
@@ -2476,6 +3000,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Beyaz Rusya, Polonya ve Litvanya sınırında askeri tatbikatları tamamladı",
    "summary_scope": false
   },
   {
@@ -2488,6 +3013,7 @@
    "published": "2026-09-19",
    "category": "Genel Savunma Gündemi",
    "also": [],
+   "title_tr": "Rusya savaş eşiğinin altında. Bu ne kadar sürecek?",
    "summary_scope": false
   },
   {
@@ -2845,20 +3371,6 @@
    "summary_scope": false
   },
   {
-   "title": "U.S. Department of State clears possible $2.68 billion air defense package for Ukraine with European funding and U.S. financing support",
-   "url": "https://defence-industry.eu/u-s-department-of-state-clears-possible-2-68-billion-air-defense-package-for-ukraine-with-european-funding-and-u-s-financing-support/",
-   "source": "Defence Industry Europe",
-   "country": "EU",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-19",
-   "category": "C-UAS ve Hava Savunma",
-   "also": [],
-   "title_tr": "ABD Dışişleri Bakanlığı, Ukrayna için 2,68 milyar dolar hava savunma paketini onaylıyor",
-   "summary_scope": true,
-   "summary_tr": "ABD Dışişleri Bakanlığı, Ukrayna'ya S-300 Clone ve GAM-67 füzeleri, lazer güdümlü roket sistemleri, ITEL 1.5 fırlatıcıları ve RPS 202 karşı-drone radarlarını kapsayan 2,68 milyar dolarlık olası Yabancı Askeri Satış (FMS) paketini onayladı. Alım, Avrupa katkıları ve önceki yönetim döneminde tahsis edilen ABD Yabancı Askeri Finansmanı ile karşılanacak ve bakanlığa göre bölgedeki askeri dengeyi değiştirmeyecek."
-  },
-  {
    "title": "U.S. Army orders new infrared sensors for its Avenger",
    "url": "https://defence-blog.com/u-s-army-orders-new-infrared-sensors-for-its-avenger/",
    "source": "Defence Blog",
@@ -2912,89 +3424,6 @@
    "summary_scope": false
   },
   {
-   "title": "Lockheed gets $76.6M for next-gen of Trident II nuclear missile",
-   "url": "https://defence-blog.com/lockheed-gets-76-6m-for-next-gen-of-trident-ii-nuclear-missile/",
-   "source": "Defence Blog",
-   "country": "UA",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-19",
-   "category": "Rakip Duyuruları",
-   "also": [],
-   "title_tr": "Lockheed, Trident II nükleer füzesinin yeni nesli için 76,6 milyon dolar alıyor",
-   "summary_scope": true,
-   "summary_tr": "ABD Donanması, Lockheed Martin'e Trident II D5LE2 nükleer füzesinin geliştirme çalışmaları için 76,6 milyon dolarlık ek sözleşme verdi. Füzenin, gelecekteki Columbia ve Dreadnought sınıfı denizaltılarda kullanılarak yaklaşık 2084'e kadar hizmette kalması hedefleniyor."
-  },
-  {
-   "title": "Lockheed’s F-35 support deal grows by $871 million",
-   "url": "https://defence-blog.com/lockheeds-f-35-support-deal-grows-by-871-million/",
-   "source": "Defence Blog",
-   "country": "UA",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-19",
-   "category": "İhale ve Sözleşmeler",
-   "also": [],
-   "title_tr": "Lockheed'in F-35 destek anlaşması 871 milyon dolar arttı",
-   "summary_scope": true,
-   "summary_tr": "ABD Donanması, Lockheed Martin'e yeni F-35 operasyon üslerinin ekipman ihtiyaçları için mevcut sözleşmeye 871,2 milyon dolarlık ek kaynak sağladı; bu tutar Haziran 2026'daki 2,29 milyar dolarlık ana sözleşmeye eklendi. Küresel F-35 filosu Mart 2026 itibarıyla 1.325'i aşan uçak sayısına ulaşırken sözleşme Şubat 2031'e kadar sürecek."
-  },
-  {
-   "title": "Russia reportedly buries its drone factory underground",
-   "url": "https://defence-blog.com/russia-reportedly-buries-its-drone-factory-underground/",
-   "source": "Defence Blog",
-   "country": "UA",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-19",
-   "category": "C-UAS ve Hava Savunma",
-   "also": [],
-   "title_tr": "Rusya'nın drone fabrikasını yeraltına gömmesi bildiriliyor",
-   "summary_scope": true,
-   "summary_tr": "Ukraynalı açık kaynak istihbarat analisti Dnipro Osint, Rusya'nın Tataristan'daki Alabuga sanayi bölgesinde Shahed/Geran dronları için yaklaşık 42.000 metrekarelik yeraltı üretim alanı inşa ettiğini iddia etti; bu adımın Ukrayna'nın tesise yönelik önceki saldırılarının ardından geldiği belirtildi. Uydu görüntüleri ayrıca sahada 340 hektarlık genişleme, yeni üretim binaları ve saldırıları zorlaştırmaya yönelik kule savunma sistemleri olduğunu gösteriyor."
-  },
-  {
-   "title": "New U.S. Navy destroyer honors a D-Day Coast Guard hero",
-   "url": "https://defence-blog.com/new-u-s-navy-destroyer-honors-a-d-day-coast-guard-hero/",
-   "source": "Defence Blog",
-   "country": "UA",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Yeni ABD Donanması destroyer, D-Day Sahil Güvenlik kahramanını onurlandırıyor",
-   "summary_scope": false
-  },
-  {
-   "title": "Turkish drone pods team up to jam, image enemy radar",
-   "url": "https://defence-blog.com/turkish-drone-pods-team-up-to-jam-image-enemy-radar/",
-   "source": "Defence Blog",
-   "country": "UA",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-19",
-   "category": "C-UAS ve Hava Savunma",
-   "also": [],
-   "title_tr": "Türk drone podları, düşman radarını bozmak ve görüntülemek için güçlerini birleştiriyor",
-   "summary_scope": true,
-   "summary_tr": "ASELSAN, Konya'da düzenlenen ve 15'ten fazla uluslararası heyetin izlediği tatbikatta ANTIDOT 2ES 100, ANTIDOT 2EA 200 ve FULMAR 200 pod sistemlerini Bayraktar TB2 insansız hava araçlarında birlikte kullanarak düşman radarını tespit etme, karıştırma ve görüntüleme sürecini tek seferde gösterdi. Şirket, bu entegrasyonun gündüz-gece her hava koşulunda keşif görevlerine ve hava savunma sistemlerinin etkisiz hale getirilmesine yönelik bir ilk adım olduğunu belirtti."
-  },
-  {
-   "title": "Leonardo DRS to power South Korea’s newest destroyer",
-   "url": "https://defence-blog.com/leonardo-drs-to-power-south-koreas-newest-destroyer/",
-   "source": "Defence Blog",
-   "country": "UA",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-19",
-   "category": "Rakip Duyuruları",
-   "also": [],
-   "title_tr": "Leonardo DRS, Güney Kore'nin yeni destroyer'ını güçlendirecek",
-   "summary_scope": true,
-   "summary_tr": "Leonardo DRS, Güney Kore Donanması'nın ilk tam elektrikli tahrikli savaş gemisi olacak KDDX destroyer programı için elektrikli tahrik sistemi tedarik edecek. Hanwha Ocean liderliğindeki, yaklaşık 5,7 milyar dolarlık altı gemilik programda ilk geminin 2032'ye kadar teslim edilmesi planlanıyor."
-  },
-  {
    "title": "L’Ucraina scopre altri “buchi di bilancio” e ordina altre armi negli USA. Paga l’Europa.",
    "url": "https://www.analisidifesa.it/2026/09/lucraina-scopre-altri-buchi-di-bilancio-e-ordina-altre-armi-negli-usa-paga-leuropa/",
    "source": "Analisi Difesa",
@@ -3037,167 +3466,6 @@
    "summary_tr": "ABD Dışişleri Bakanlığı, 17 Eylül'de Suudi Arabistan'a 48 adet F-35A uçağı ve ilgili ekipmanların 24,3 milyar dolarlık satışını onayladı. Anlaşmanın ana yüklenicileri Lockheed Martin ve Pratt & Whitney olacak."
   },
   {
-   "title": "Suudi Arabistan, Husilerin Riyad’a attığı balistik füzenin imha edildiğini açıkladı",
-   "url": "https://www.aa.com.tr/tr/live-blog/suudi-arabistan-husilerin-riyad-a-attigi-balistik-fuzenin-imha-edildigini-acikladi/6413",
-   "source": "Anadolu Ajansı — güncel",
-   "country": "TR",
-   "lang": "tr",
-   "tier": "C",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Suudi Arabistan, Husilerin Riyad'a attığı balistik füzenin imha edildiğini açıkladı",
-   "summary_scope": false
-  },
-  {
-   "title": "Saudi-led coalition says defences intercept Houthi missile fired at Riyadh",
-   "url": "https://www.aljazeera.com/news/2026/9/19/saudi-led-coalition-says-defences-intercept-houthi-missile-fired-at-riyadh?traffic_source=rss",
-   "source": "Al Jazeera",
-   "country": "QA",
-   "lang": "en",
-   "tier": "C",
-   "published": "2026-09-19",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Suudi liderliğindeki koalisyon, Riyad'a atılan Husilerinin füzesini savunmaların engellediğini söylüyor",
-   "summary_scope": false
-  },
-  {
-   "title": "Hensoldt introduces Automated Spectrum Management System",
-   "url": "https://defenceweb.co.za/industry/industry-industry/hensoldt-introduces-automated-spectrum-management-system/",
-   "source": "defenceWeb",
-   "country": "ZA",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Hensoldt Otomatik Spektrum Yönetim Sistemini Tanıtıyor",
-   "summary_scope": false
-  },
-  {
-   "title": "Milkor and Safran sign MoU on optronics and navigation integration for UAVs",
-   "url": "https://defenceweb.co.za/aerospace/aerospace-aerospace/milkor-and-safran-sign-mou-on-optronics-and-navigation-integration-for-uavs/",
-   "source": "defenceWeb",
-   "country": "ZA",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Milkor ve Safran, İHA'lar İçin Optronik ve Navigasyon Entegrasyonunda MoU İmzaladı",
-   "summary_scope": false
-  },
-  {
-   "title": "Paramount unveils Mbada light protected mobility vehicle",
-   "url": "https://defenceweb.co.za/land/land-land/paramount-unveils-mbada-light-protected-mobility-vehicle/",
-   "source": "defenceWeb",
-   "country": "ZA",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Paramount, Mbada Hafif Korumalı Hareketlilik Aracını Tanıtıyor",
-   "summary_scope": false
-  },
-  {
-   "title": "ExecuJet MRO Services highlights SAAF support at AAD 2026",
-   "url": "https://defenceweb.co.za/aerospace/aerospace-aerospace/execujet-mro-services-highlights-saaf-support-at-aad-2026/",
-   "source": "defenceWeb",
-   "country": "ZA",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "ExecuJet MRO Services, AAD 2026'de SAAF Desteğini Vurguluyor",
-   "summary_scope": false
-  },
-  {
-   "title": "Airbus celebrates 50 years of building Africa’s aerospace capabilities",
-   "url": "https://defenceweb.co.za/aerospace/aerospace-aerospace/airbus-celebrates-50-years-of-building-africas-aerospace-capabilities/",
-   "source": "defenceWeb",
-   "country": "ZA",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Airbus, Afrika'nın Havacılık Yeteneklerini İnşa Etmenin 50. Yılını Kutluyor",
-   "summary_scope": false
-  },
-  {
-   "title": "Indra launches DRIZZLE C-UAS interceptor with “mother drone” airborne launch platform",
-   "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/indra-launches-drizzle-c-uas-interceptor-with-mother-drone-airborne-launch-platform/",
-   "source": "Unmanned Airspace",
-   "country": "GB",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "C-UAS ve Hava Savunma",
-   "also": [],
-   "title_tr": "Indra, 'Ana İHA' Uçak Fırlatma Platformuyla DRIZZLE C-UAS İnterceptörünü Fırlatıyor",
-   "summary_scope": true,
-   "summary_tr": "İspanyol şirket Indra, İspanya'daki UNVEX fuarında DRIZZLE adlı, saatte 400 km'den hızlı ve yaklaşık 80 km menzilli bir insansız hava savunma müdahale drone'unu tanıttı; bir \"ana drone\" desteğiyle bu menzil 130 km'ye çıkabiliyor. Sistem, sürü halinde uçarak küçük interceptor'ları hedefe salabilen ve tek kullanımlık olarak tasarlanan bir ana drone ile birlikte geliştirildi."
-  },
-  {
-   "title": "SkyDrive, Verty partner to develop AAM flight ops, ATM and vertiports in South Korea",
-   "url": "https://www.unmannedairspace.info/uncategorized/skydrive-verty-partner-to-develop-aam-flight-ops-atm-and-vertiports-in-south-korea/",
-   "source": "Unmanned Airspace",
-   "country": "GB",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "C-UAS ve Hava Savunma",
-   "also": [],
-   "title_tr": "SkyDrive, Verty ile Güney Kore'de AAM Uçuş Operasyonları, ATM ve Vertiportlarını Geliştirmek İçin Ortaklık Yapıyor",
-   "summary_scope": true,
-   "summary_tr": "Japon SkyDrive ile Güney Koreli Verty, Güney Kore'de eVTOL uçuş operasyonları, hava trafik yönetimi ve vertiport altyapısı geliştirmek için iş birliği anlaşması imzaladı; 2028'e kadar ticari faaliyete geçmeyi hedefliyorlar. Ortaklık kapsamında Jeju Adası'nda turistik uçuşlar ve Goyang dahil Seul metropol bölgesinde şehirler arası hatlar planlanırken, Verty Güney Kore'nin eVTOL için Hava Operatörü Sertifikası (AOC) alan ilk operatörü olmayı hedefliyor."
-  },
-  {
-   "title": "Northrop Grumman announces progress in air defence/C-UAS proximity round accuracy",
-   "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/northrop-grumman-announces-progress-in-air-defence-c-uas-proximity-round-accuracy/",
-   "source": "Unmanned Airspace",
-   "country": "GB",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "C-UAS ve Hava Savunma",
-   "also": [],
-   "title_tr": "Northrop Grumman, Hava Savunması/C-UAS Yakınlık Mermisi Doğruluğunda İlerleme Duyuruyor",
-   "summary_scope": true,
-   "summary_tr": "Northrop Grumman, Raid Hunter adlı topa dayalı hava savunma sistemi için geliştirdiği güdümlü, yakınlık sigortalı 50mm mermiyle XM913 Chain Gun'dan aeroballistik test gerçekleştirdiğini ve neredeyse her atışta yüksek doğrulukta veri elde ettiğini duyurdu. Şirket, bu merminin çok sayılı hava tehdidi içeren karma saldırıları etkisiz hale getirmeyi ve kısa menzilli hava savunmasındaki boşlukları kapatmayı amaçladığını belirtti."
-  },
-  {
-   "title": "JIATF-401 awards more than USD25 million for US Southern Command C-UAS capabilities",
-   "url": "https://www.unmannedairspace.info/counter-uas-systems-and-policies/jiatf-401-awards-more-than-usd25-million-for-us-southern-command-c-uas-capabilities/",
-   "source": "Unmanned Airspace",
-   "country": "GB",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "C-UAS ve Hava Savunma",
-   "also": [],
-   "title_tr": "JIATF-401, US Güney Komuta C-UAS Yetenekleri İçin 25 Milyon USD'den Fazlası Ödüllendiriyor",
-   "summary_scope": false,
-   "summary_tr": "ABD Savunma Bakanlığı, USSOUTHCOM operasyonlarını desteklemek amacıyla JIATF-401 aracılığıyla insansız hava aracı karşıtı (C-UAS) yeteneklerin genişletilmesi için 25 milyon USD'nin üzerinde sözleşme verdi; interceptor ve elektronik harp sistemlerini kapsayan bu ihaleler, ihtiyaç belirlenmesinden operasyonel kullanıma bir aydan kısa sürede geçilmesini sağladı. JIATF-401 direktörü Tuğgeneral Matt Ross, hızlandırılmış tedarik yollarının kullanıldığını belirtti."
-  },
-  {
-   "title": "The human-factors gap in detect-and-avoid procedures – what happens after detection?",
-   "url": "https://www.unmannedairspace.info/uncategorized/the-human-factors-gap-in-detect-and-avoid-procedures-what-happens-after-detection/",
-   "source": "Unmanned Airspace",
-   "country": "GB",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "C-UAS ve Hava Savunma",
-   "also": [],
-   "title_tr": "Algıla ve Kaçın Prosedürlerindeki İnsan Faktörü Açığı – Algılamadan Sonra Ne Olur?",
-   "summary_scope": false,
-   "summary_tr": "Yazar Manuel Ignacio Pérez Pan, görüş yazısında BVLOS operasyonlarında doğru bir çatışma-önleme (detect-and-avoid) uyarısının bile uzaktan pilotun zamanında ve doğru tepki verememesi halinde güvensiz bir karşılaşmayı önlemeyebileceğini, bu insan faktörü boşluğunun Kasım 2024'te yayımlanan EUROCAE ED-271A standardı ile ICAO'nun Ek 2, Ek 19 ve ilgili kılavuz dokümanlarında ele alındığını belirtiyor. Yazıya göre test raporlarında 'tepki süresi' kavramı net tanımlanmadan kullanılıyor ve pilotun uyarıyı onaylaması ile fiili manevrayı tamamlaması arasındaki fark gözetilmeden yapılan değerlendirmeler eksik sonuçlar verebiliyor."
-  },
-  {
    "title": "Bunker Talk: Let’s Talk About All The Things We Did And Didn’t Cover This Week",
    "url": "https://www.twz.com/news-features/bunker-talk-lets-talk-about-all-the-things-we-did-and-didnt-cover-this-week-207",
    "source": "The War Zone",
@@ -3234,7 +3502,7 @@
    "category": "C-UAS ve Hava Savunma",
    "also": [],
    "title_tr": "Orta Doğu Muharebe Konuşlandırmasını Yöneten Denizci Albay Kendi İnsansız Teknelerini İstiyor",
-   "summary_scope": false,
+   "summary_scope": true,
    "summary_tr": "Orta Doğu'da muharebe konuşlanmasına önderlik eden 31. MEU Komutanı Albay Chris P. Niedziocha, gelecekteki konuşlanmalarda kendi insansız yüzey araçlarına (USV) ihtiyaç duyduklarını, özellikle çekişmeli plaj çıkarma bölgelerini keşfetmek için bu araçları kullanmak istediklerini belirtti; bu görev şu an ağırlıklı olarak Donanma tarafından yürütülüyor. ABD, Operation Epic Fury sırasında USV'leri ilk kez muharebede tek yönlü saldırı silahı olarak İran hedeflerine karşı kullanmış, Deniz Piyadeleri de geçtiğimiz ay Camp Pendleton'da mayın karşı önlem amaçlı bir USV sistemini test etmişti."
   },
   {
@@ -3262,7 +3530,7 @@
    "category": "C-UAS ve Hava Savunma",
    "also": [],
    "title_tr": "Gizli RQ-170 Sentinel İHA Escadrilesi Hakkında Yeni Ayrıntılar Yeni Ödülle Paylaşılıyor",
-   "summary_scope": false,
+   "summary_scope": true,
    "summary_tr": "ABD Hava Kuvvetleri'nin gizli RQ-170 Sentinel İHA'sını işleten iki filodan biri olan 30. Keşif Filosu (Blackbirds), 2025 performansıyla General Atomics'in yıllık İnsansız Hava Aracı Filosu ödülünü kazandı; filo o yıl üç ayrı sorumluluk bölgesinde 87 İstihbarat-Keşif-Gözetleme görevi icra etti ve 7,2 milyon dolarlık hava taşımacılığıyla 250 ton personel ve malzeme naklettiği açıklandı. En az bir RQ-170'in Ocak 2026'da Venezuela lideri Nicolas Maduro'nun yakalanması operasyonuna katıldığı belirtiliyor."
   },
   {
@@ -3331,19 +3599,6 @@
    "summary_scope": false
   },
   {
-   "title": "After 37 years, Sena Medal gallantry awardees get AC train travel benefit",
-   "url": "https://theprint.in/defence/after-37-years-sena-medal-gallantry-awardees-get-ac-train-travel-benefit/3046361/",
-   "source": "The Print — Defence",
-   "country": "IN",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "37 Yıl Sonra Sena Medal Şecaatlı Ödül Alanları AC Tren Seyahati Yararından Faydalanıyor",
-   "summary_scope": false
-  },
-  {
    "title": "Silver Wotan 2026: Bundeswehr trainiert auf Insel Gotland",
    "url": "https://soldat-und-technik.de/2026/09/neu/50035/silver-wotan-2026-gotland/",
    "source": "Soldat und Technik",
@@ -3354,46 +3609,6 @@
    "category": "Genel Savunma Gündemi",
    "also": [],
    "title_tr": "Silver Wotan 2026: Bundeswehr Gotland Adasında eğitim yapıyor",
-   "summary_scope": false
-  },
-  {
-   "title": "MSPO: polnische PGZ stellt schweren Schützenpanzer Ratel vor",
-   "url": "https://soldat-und-technik.de/2026/09/mobilitaet/50030/mspo-polnische-pgz/",
-   "source": "Soldat und Technik",
-   "country": "DE",
-   "lang": "de",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "MSPO: Polonya PGZ ağır zırhlı personel taşıyıcı Ratel'i tanıttı",
-   "summary_scope": false
-  },
-  {
-   "title": "18 Ülke İzledi: ASELSAN’dan ANTIDOT ve FULMAR Podlarıyla Demo",
-   "url": "https://www.savunmasanayist.com/18-ulke-izledi-aselsandan-antidot-ve-fulmar-podlariyla-demo/",
-   "source": "SavunmaSanayiST",
-   "country": "TR",
-   "lang": "tr",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Rakip Duyuruları",
-   "also": [],
-   "title_tr": "18 Ülke İzledi: ASELSAN'dan ANTIDOT ve FULMAR Podlarıyla Demo",
-   "summary_scope": true,
-   "summary_tr": "ASELSAN'ın ANTIDOT elektronik destek/harp podları ve FULMAR 200 sentetik açıklıklı radar podu, BAYKAR üretimi Bayraktar TB2 İHA'lara entegre edilerek Konya'da 18 ülkeden savunma heyetinin izlediği uluslararası demoda test edildi. Demoda ANTIDOT hedef radarını tespit edip elektronik taarruz gerçekleştirirken FULMAR 200 hedefin yüksek çözünürlüklü SAR görüntüsünü oluşturdu; ANTIDOT ilk kez gerçek radar sistemlerine karşı denendi ve iki sistemin birlikte çalışabilirliği gösterildi."
-  },
-  {
-   "title": "İtalyan Eurofighter Suudi Arabistan’da Vuruldu",
-   "url": "https://www.savunmasanayist.com/italyan-eurofighter-suudi-arabistanda-vuruldu/",
-   "source": "SavunmaSanayiST",
-   "country": "TR",
-   "lang": "tr",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "İtalyan Eurofighter Suudi Arabistan'da Vuruldu",
    "summary_scope": false
   },
   {
@@ -3504,97 +3719,6 @@
    "summary_tr": "Tayvanlı siyaset bilimci Chang Ya-chung, Pekin'deki Xiangshan Forumu'nda, yeniden birleşme sonrası siyasi düzenlemeler konuşulmadan önce Pekin ile Taipei arasında düşmanlıkları sona erdiren resmi bir barış anlaşması imzalanması gerektiğini savundu. Chang, Hong Kong ve Makao'ya uygulanan \"tek ülke, iki sistem\" formülünün Tayvan toplumunda karşılık bulmadığını söyledi."
   },
   {
-   "title": "Could China’s sixth-generation fighter carry a laser to defend against incoming missiles?",
-   "url": "https://www.scmp.com/news/china/military/article/3368015/could-chinas-sixth-generation-fighter-carry-laser-defend-against-incoming-missiles?utm_source=rss_feed",
-   "source": "SCMP (Çin)",
-   "country": "HK",
-   "lang": "en",
-   "tier": "C",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Çin'in altıncı nesil savaş uçağı gelen füzelere karşı savunma için lazer taşıyabilir mi",
-   "summary_scope": false
-  },
-  {
-   "title": "US hands over 64 smuggled artefacts to China in diplomatic push before summit",
-   "url": "https://www.scmp.com/news/china/diplomacy/article/3368033/us-hands-over-64-smuggled-artefacts-china-diplomatic-push-leaders-meeting?utm_source=rss_feed",
-   "source": "SCMP (Çin)",
-   "country": "HK",
-   "lang": "en",
-   "tier": "C",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "ABD zirveden önce diplomatik çabayla 64 kaçak eseri Çin'e teslim etti",
-   "summary_scope": false
-  },
-  {
-   "title": "Collision near Sabina Shoal sparks fresh escalation between China and the Philippines",
-   "url": "https://www.scmp.com/news/china/diplomacy/article/3368023/collision-near-sabina-shoal-sparks-fresh-escalation-between-china-and-philippines?utm_source=rss_feed",
-   "source": "SCMP (Çin)",
-   "country": "HK",
-   "lang": "en",
-   "tier": "C",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Sabina Şelfi yakınında çarpışma Çin ve Filipinler arasında taze bir tırmanışa neden oldu",
-   "summary_scope": false
-  },
-  {
-   "title": "Could mystery Shanghai vessel be a mothership for China’s underwater drones?",
-   "url": "https://www.scmp.com/news/china/military/article/3368012/could-mystery-shanghai-vessel-be-mothership-chinas-underwater-drones?utm_source=rss_feed",
-   "source": "SCMP (Çin)",
-   "country": "HK",
-   "lang": "en",
-   "tier": "C",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Gizemli Şangay gemisi Çin'in sualtı dronları için anagemisi olabilir mi",
-   "summary_scope": false
-  },
-  {
-   "title": "Xi-Trump summit, China AI at Brics, Asian Games",
-   "url": "https://www.scmp.com/plus/news/china/diplomacy/article/3368001/xi-trump-summit-china-ai-brics-asian-games?utm_source=rss_feed",
-   "source": "SCMP (Çin)",
-   "country": "HK",
-   "lang": "en",
-   "tier": "C",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Xi-Trump zirvesi, BRICS'te Çin yapay zekası, Asya Oyunları",
-   "summary_scope": false
-  },
-  {
-   "title": "North Korea’s nuclear tests awaken fault lines pointing to huge volcano at China border",
-   "url": "https://www.scmp.com/news/china/science/article/3367982/north-koreas-nuclear-tests-awaken-fault-lines-pointing-huge-volcano-china-border?utm_source=rss_feed",
-   "source": "SCMP (Çin)",
-   "country": "HK",
-   "lang": "en",
-   "tier": "C",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Kuzey Kore'nin nükleer testleri Çin sınırındaki devasa volkanı gösteren fay hatlarını uyandırdı",
-   "summary_scope": false
-  },
-  {
-   "title": "Chinese paint cuts wall temperature by 25 degrees Celsius in summer test: report",
-   "url": "https://www.scmp.com/news/china/science/article/3367812/chinese-paint-cuts-wall-temperature-25-degrees-celsius-summer-test-report?utm_source=rss_feed",
-   "source": "SCMP (Çin)",
-   "country": "HK",
-   "lang": "en",
-   "tier": "C",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Çin boyası yaz testinde duvar sıcaklığını 25 derece Celsius düşürüyor: rapor",
-   "summary_scope": false
-  },
-  {
    "title": "Un avion de combat italien Eurofighter F2000 a été touché lors d’une attaque des rebelles houthistes en Arabie saoudite",
    "url": "https://www.opex360.com/2026/09/18/un-avion-de-combat-italien-eurofighter-f2000-a-ete-touche-lors-dune-attaque-des-rebelles-houthistes-en-arabie-saoudite/",
    "source": "Opex360",
@@ -3635,19 +3759,6 @@
    "summary_tr": "Thales, 17 Eylül'de NATO ve müttefik ülkeler için Palantir'in ABD merkezli Maven Smart System NATO (MSS NATO) sistemine rakip olarak yapay zeka destekli 'HexaForce' komuta yazılımını tanıttı; Fransa'nın Artemis.IA projesinden türeyen ve NATO CWIX 2026 tatbikatında test edilen sistem, dijital egemenlik ve NATO FMN standartlarıyla uyumluluk kaygılarına yanıt olarak geliştirildi."
   },
   {
-   "title": "Les États-Unis proposent 48 chasseurs-bombardiers F-35A à l’Arabie saoudite… à un prix dissuasif",
-   "url": "https://www.opex360.com/2026/09/18/les-etats-unis-proposent-48-chasseurs-bombardiers-f-35a-a-larabie-saoudite-a-un-prix-dissuasif/",
-   "source": "Opex360",
-   "country": "FR",
-   "lang": "fr",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "ABD Suudi Arabistan'a 48 F-35A savaş bombacısı sunuyor... caydırıcı fiyatla",
-   "summary_scope": false
-  },
-  {
    "title": "TKMS ATLAS UK secures Royal Navy NGCM torpedo defence contract",
    "url": "https://www.naval-technology.com/news/tkms-atlas-uk-ngcm-torpedo-defence/",
    "source": "Naval Technology",
@@ -3662,20 +3773,6 @@
    "summary_tr": "TKMS ATLAS UK, İngiltere Savunma Bakanlığı'nın Kraliyet Donanması denizaltıları için torpido karşı tedbir sistemlerini yenileyecek Next Generation Countermeasure (NGCM) programı ihalesini kazandı; sözleşme Ekim 2025-Ekim 2032 arasını kapsıyor ve yaklaşık 35 milyon sterlin (47 milyon dolar) değerinde olduğu tahmin ediliyor. Şirket, Babcock International ile iş birliği yapacak ve programın İngiltere'de yaklaşık 80 iş istihdam etmesi bekleniyor."
   },
   {
-   "title": "Why cyber-secure systems are becoming critical to naval procurement",
-   "url": "https://www.naval-technology.com/sponsored/why-cyber-secure-systems-are-becoming-critical-to-naval-procurement-2/",
-   "source": "Naval Technology",
-   "country": "GB",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "Deniz ve İnsansız Sistemler",
-   "also": [],
-   "title_tr": "Siber güvenli sistemler denizcilik alımlarında neden kritik hale geliyor",
-   "summary_scope": true,
-   "summary_tr": "CYTUR verilerine göre 2025'te denizcilik sektörüne yönelik siber saldırılar 2024'teki 408'den 828'e çıkarak %103 arttı; saldırılar artık veri hırsızlığından çok gemi, liman ve açık deniz varlıklarını yöneten operasyonel teknoloji (navigasyon, otomasyon, DP) sistemlerini hedef alıyor. GPS/GNSS sahtekarlığı MSC Antonia'nın Mayıs 2025'te Cidde açıklarında karaya oturmasına yol açtı ve IACS bu nedenle E26/E27 gibi siber dayanıklılık düzenlemelerini güncelliyor."
-  },
-  {
    "title": "NAVANTIA Celebrates Naming of BAM-IS Submarine Rescue Vessel",
    "url": "https://www.navalnews.com/naval-news/2026/09/navantia-celebrates-naming-of-bam-is-submarine-rescue-vessel/",
    "source": "Naval News",
@@ -3688,20 +3785,6 @@
    "title_tr": "NAVANTIA BAM-IS Denizaltı Kurtarma Gemisinin Adlandırılmasını Kutluyor",
    "summary_scope": true,
    "summary_tr": "Navantia, 18 Eylül 2026'da İspanyol Donanması'nın yeni Su Altı Müdahale Deniz Harekat Gemisi (BAM-IS) A-21 Poseidón'un isimlendirme törenini Puerto Real tersanesinde gerçekleştirdi. Neptuno'nun halefi olan gemi, S-80 denizaltı filosuna kurtarma ve destek sağlayacak, NATO'nun NSRS ve ABD'nin SRDRS sistemleri için ana gemi (MOSHIP) sertifikası alan ilk İspanyol donanma gemisi oldu."
-  },
-  {
-   "title": "Future USS Baltimore to Serve as U.S. Navy’s Elite Seabed Warfare Submarine",
-   "url": "https://www.navalnews.com/naval-news/2026/09/uss-baltimore-seabed-warfare-submarine/",
-   "source": "Naval News",
-   "country": "FR",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Deniz ve İnsansız Sistemler",
-   "also": [],
-   "title_tr": "Gelecek USS Baltimore ABD Donanması'nın Elite Deniz Tabanı Savaşı Denizaltısı olacak",
-   "summary_scope": true,
-   "summary_tr": "ABD Donanması ve General Dynamics, gelecekteki USS Baltimore (SSN 812) denizaltısını, USS Jimmy Carter'ın görevlerini devralacak özel harekat ve deniz tabanı harbi (Subsea and Seabed Warfare) kabiliyetine sahip bir Virginia sınıfı denizaltıya dönüştürüyor. Program, iş ilanları ve 2025'ten bu yana yayınlanan bütçe belgeleriyle doğrulandı."
   },
   {
    "title": "Naval Group and Nibe Limited sign strategic MoU",
@@ -3728,61 +3811,6 @@
    "also": [],
    "title_tr": "IRYDA+ X1 MSPO 2026'de",
    "summary_scope": true
-  },
-  {
-   "title": "Otokar and Leonardo successfully complete integration and live firing tests of TULPAR with HITFACT MkII 120 mm turret",
-   "url": "https://www.edrmagazine.eu/otokar-and-leonardo-successfully-complete-integration-and-live-firing-tests-of-tulpar-with-hitfact-mkii-120-mm-turret",
-   "source": "EDR Magazine",
-   "country": "IT",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Rakip Duyuruları",
-   "also": [],
-   "title_tr": "Otokar ve Leonardo, TULPAR'ın HITFACT MkII 120 mm kule ile entegrasyonu ve canlı ateş testlerini başarıyla tamamladı",
-   "summary_scope": true,
-   "summary_tr": "Otokar ile Leonardo, TULPAR orta sınıf tank platformu ile Leonardo'nun HITFACT MkII 120 mm kuleli entegrasyonunu ve canlı atış testlerini başarıyla tamamladı. Test kampanyası, ana muharebe tankı seviyesindeki ateş gücünün TULPAR'ın hareket kabiliyeti ve modüler mimarisiyle birleştirilebildiğini doğruladı."
-  },
-  {
-   "title": "Rheinmetall breaks ground to expand Quebec facility, cementing sovereign land autonomy expertise in Canada",
-   "url": "https://www.edrmagazine.eu/rheinmetall-breaks-ground-to-expand-quebec-facility-cementing-sovereign-land-autonomy-expertise-in-canada",
-   "source": "EDR Magazine",
-   "country": "IT",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Rakip Duyuruları",
-   "also": [],
-   "title_tr": "Rheinmetall, Kanada'da Quebec tesisini genişletmek için temeli attı, egemen kara özerkliği uzmanlığını sağlamlaştırdı",
-   "summary_scope": true,
-   "summary_tr": "Rheinmetall Canada, 40. yılında Quebec'teki Saint-Jean-sur-Richelieu tesisini genişletmek için temel atma töreni düzenledi; üretim alanını 4.830 m², depolama kapasitesini ise 2.230 m² artıracak. Şirket 2024'ten bu yana Kanada'da 150 milyon Kanada dolarından fazla yatırım yaptı ve 40 yılda Kanada Silahlı Kuvvetleri'ne 20'den fazla program teslim etti."
-  },
-  {
-   "title": "► EDGE and Hanwha strengthen strategic cooperation on integrated air defence",
-   "url": "https://www.edrmagazine.eu/%e2%96%ba-edge-and-hanwha-strengthen-strategic-cooperation-on-integrated-air-defence",
-   "source": "EDR Magazine",
-   "country": "IT",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "C-UAS ve Hava Savunma",
-   "also": [],
-   "title_tr": "EDGE ve Hanwha, entegre hava savunmasında stratejik işbirliğini güçlendirdi",
-   "summary_scope": false,
-   "summary_tr": "EDGE Group ve Hanwha, 16 Eylül 2026'da Abu Dabi'de imzaladıkları bir Term Sheet ile BAE'nin entegre hava savunma ihtiyaçları kapsamında Güney Kore yapımı L-SAM, ilave M-SAM kabiliyetleri ve Chunmoo çok namlulu roketatar sistemi üzerinde stratejik iş birliğini güçlendirdi. Taraflar, hükümet onaylarına bağlı olarak BAE'de ortak girişim kurulması, yerel üretim ve teknoloji transferi seçeneklerini değerlendirmeye devam edecek."
-  },
-  {
-   "title": "Paramount unveils Mbada: a new generation of light protected armoured mobility at AAD 2026",
-   "url": "https://www.edrmagazine.eu/paramount-unveils-mbada-a-new-generation-of-light-protected-armoured-mobility-at-aad-2026",
-   "source": "EDR Magazine",
-   "country": "IT",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Paramount, AAD 2026'da Mbada'yı tanıttı: hafif korumalı zırhlı mobiliteyin yeni nesli",
-   "summary_scope": false
   },
   {
    "title": "NATO-Backed Drone Picked Its Own Target And Dropped A Bomb",
@@ -3881,109 +3909,6 @@
    "summary_tr": "Pentagon'un İHA programı kapsamındaki ikinci 'Gauntlet' yarışması Fort Carson, Colorado'da yapıldı; 19 şirketten 23 platform 1.858 sorti uçtu ve Savunma Bakanlığı bu havuzdan yaklaşık 60.000 drone satın almayı planlıyor, 2027'ye kadar toplam 200.000'den fazla İHA hedefleniyor."
   },
   {
-   "title": "MSB’den “Birliğin Gücü-2026 Tatbikatı”na ilişkin paylaşım",
-   "url": "https://defensehere.com/tr/msbden-birligin-gucu-2026-tatbikati/",
-   "source": "DefenseHere",
-   "country": "TR",
-   "lang": "tr",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "MSB'den \"Birliğin Gücü-2026 Tatbikatı\"na ilişkin paylaşım",
-   "summary_scope": false
-  },
-  {
-   "title": "İspanyol Donanmasının yeni gemisine A-21 Poseidón adı verildi",
-   "url": "https://defensehere.com/tr/ispanyol-donanmasinin-yeni-gemisine-a-21-poseidon-adi-verildi/",
-   "source": "DefenseHere",
-   "country": "TR",
-   "lang": "tr",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "summary_scope": false
-  },
-  {
-   "title": "KNDS, Hindistan’ın yeni hafif taarruz helikopterleri için 126 taret tedarik edecek",
-   "url": "https://defensehere.com/tr/knds-hindistanin-yeni-hafif-taarruz-helikopterleri-icin-126-taret-tedarik-edecek/",
-   "source": "DefenseHere",
-   "country": "TR",
-   "lang": "tr",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "İhale ve Sözleşmeler",
-   "also": [],
-   "title_tr": "KNDS, Hindistan'ın yeni hafif taarruz helikopterleri için 126 taret tedarik edecek",
-   "summary_scope": true,
-   "summary_tr": "KNDS, Hindistan Silahlı Kuvvetlerinin hafif taarruz helikopterleri için 126 adet yeni üretim 20 mm THL20 taret tedarik edecek. Bu anlaşma, KNDS ile Hindistan arasında 2006'da başlayan ve daha önce ALH helikopterleri için 136 adet THL20 tedarikini de kapsayan iş birliğinin devamı niteliğinde."
-  },
-  {
-   "title": "MÜSİAD EXPO 2026, 23–26 Eylül’de İstanbul Fuar Merkezi’nde",
-   "url": "https://defensehere.com/tr/musiad-expo-2026-23-26-eylulde/",
-   "source": "DefenseHere",
-   "country": "TR",
-   "lang": "tr",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "MÜSİAD EXPO 2026, 23–26 Eylül'de İstanbul Fuar Merkezi'nde",
-   "summary_scope": false
-  },
-  {
-   "title": "BAE Systems ile Avustralya arasında Mk 45 deniz topları için yeni anlaşma",
-   "url": "https://defensehere.com/tr/bae-systems-ile-avustralya-arasinda-mk-45-deniz-toplari-icin-yeni-anlasma/",
-   "source": "DefenseHere",
-   "country": "TR",
-   "lang": "tr",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Rakip Duyuruları",
-   "also": [],
-   "summary_scope": true,
-   "summary_tr": "BAE Systems Australia, Avustralya'nın Hobart sınıfı muhripleri ve Anzac sınıfı fırkateynlerindeki Mk 45 deniz toplarının bakımı için 32 milyon dolarlık beş yıllık anlaşma imzaladı."
-  },
-  {
-   "title": "İstanbul Havalimanı’nın yeni pisti hizmete açıldı",
-   "url": "https://defensehere.com/tr/istanbul-havalimaninin-yeni-pisti-acildi/",
-   "source": "DefenseHere",
-   "country": "TR",
-   "lang": "tr",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "İstanbul Havalimanı'nın yeni pisti hizmete açıldı",
-   "summary_scope": false
-  },
-  {
-   "title": "Orta sınıf tank TULPAR, atış testini geçti",
-   "url": "https://defensehere.com/tr/orta-sinif-tank-tulpar-atis-testini-gecti/",
-   "source": "DefenseHere",
-   "country": "TR",
-   "lang": "tr",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "summary_scope": false
-  },
-  {
-   "title": "The 74th SEAEX THAMAL Joint Maritime Exercise between Thai and Malaysian Maritime Security Agencies",
-   "url": "http://defense-studies.blogspot.com/2026/09/the-74th-seaex-thamal-joint-maritime.html",
-   "source": "Defense Studies",
-   "country": "ID",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Tayland ve Malezya Deniz Güvenliği Kurumları Arasında 74. SEAEX THAMAL Ortak Denizcilik Egzersizi",
-   "summary_scope": false
-  },
-  {
    "title": "U.S. Approves Possible F-35 Sale to Saudi Arabia",
    "url": "https://dsm.forecastinternational.com/2026/09/18/u-s-approves-possible-f-35-sale-to-saudi-arabia/?utm_source=rss&utm_medium=rss&utm_campaign=u-s-approves-possible-f-35-sale-to-saudi-arabia&utm_source=rss&utm_medium=rss&utm_campaign=u-s-approves-possible-f-35-sale-to-saudi-arabia",
    "source": "Defense Security Monitor",
@@ -4007,7 +3932,8 @@
    "category": "C-UAS ve Hava Savunma",
    "also": [],
    "title_tr": "Cape Canaveral, Anti-İHA Savunmasını Güçlendiriyor, Uzay Kuvvetleri Söyledi",
-   "summary_scope": false
+   "summary_scope": true,
+   "summary_tr": "Uzay Kuvvetleri, geçen yıl 109 roket fırlatılan Cape Canaveral üssüne önümüzdeki haftalarda Ortak Kurumlar Arası Görev Gücü 401'den yeni küçük drone karşıtı savunma sistemleri kazandıracağını, üssün şu an küçük dronlara karşı yeterince korunmadığını açıkladı. Bu adım, Beyaz Saray'ın yıllık 1.000 fırlatma hedefi doğrultusunda uzay üslerinin güvenliğini artırma çabalarının bir parçası."
   },
   {
    "title": "Pete Hegseth is rebuilding the military's ‘brass ceiling’",
@@ -4046,33 +3972,6 @@
    "category": "Genel Savunma Gündemi",
    "also": [],
    "title_tr": "ABD Hava Kuvvetlerinin 14 Milyar Dolarlık Tedarik Açığı Var, Hizmet Yetkilileri Söyledi",
-   "summary_scope": false
-  },
-  {
-   "title": "Latvia chooses Czech howitzers over Swedish Archer offer",
-   "url": "https://www.defensenews.com/global/europe/2026/09/18/latvia-chooses-czech-howitzers-over-swedish-archer-offer/",
-   "source": "Defense News",
-   "country": "US",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Topçu ve Mühimmat",
-   "also": [],
-   "title_tr": "Letonya, İsveçli Archer Teklifini Reddederek Çek Obüslerini Seçti",
-   "summary_scope": true,
-   "summary_tr": "Letonya, İsveç'in BAE Systems Bofors firmasından 18 adet Archer obüsü alma yönündeki Haziran 2025 tarihli niyet mektubunu geride bırakarak, maliyet, teslimat süresi ve yerel savunma sanayii katılımı avantajları nedeniyle Çek üretici Excalibur Army'nin Morana 155 mm kundağı motorlu obüslerini seçti. Sözleşmenin değeri açıklanmazken, Letonya 2026'da GSYH'sinin %4,91'ini (2,16 milyar avro) savunmaya ayırıyor."
-  },
-  {
-   "title": "French Army wants to keep adversaries guessing on see-through battlefield",
-   "url": "https://www.defensenews.com/global/europe/2026/09/18/french-army-wants-to-keep-adversaries-guessing-on-see-through-battlefield/",
-   "source": "Defense News",
-   "country": "US",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Fransız Ordusu, Düşmanları Şeffaf Savaş Alanında Tahmin Etmekten Alıkoymak İstiyor",
    "summary_scope": false
   },
   {
@@ -4197,73 +4096,6 @@
    "title_tr": "Lockheed Martin, Almanya'nın İlk F-35A'sının Tanıtımını Kutlayarak Alman Hava Gücünün Yeni Döneminin Başlangıcını İşaretledi",
    "summary_scope": true,
    "summary_tr": "Lockheed Martin, Almanya'nın ilk F-35A uçağını üretim tesisinde düzenlenen törenle Alman hükûmetine teslim etti. Almanya toplam 35 adet F-35A alacak; ilk uçaklar bu yıl teslim edilecek ve tam operasyonel kabiliyete 2029'da ulaşılması hedefleniyor."
-  },
-  {
-   "title": "Otokar and Leonardo successfully complete integration and livefiring tests of TULPAR with HITFACT MkII 120 mm turret",
-   "url": "https://english.defensearabia.com/otokar-and-leonardo-successfully-complete-integration-and-livefiring-tests-of-tulpar-with-hitfact-mkii-120-mm-turret/",
-   "source": "Defense Arabia",
-   "country": "AE",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "Rakip Duyuruları",
-   "also": [],
-   "title_tr": "Otokar ve Leonardo, TULPAR'ın HITFACT MkII 120 mm kule ile entegrasyonu ve canlı ateş testlerini başarıyla tamamladı",
-   "summary_scope": true,
-   "summary_tr": "Otokar ve Leonardo, TULPAR orta tonaj tank platformu ile Leonardo'nun HITFACT MkII 120 mm taretinin entegrasyonunu ve canlı atış testlerini başarıyla tamamladı. Test kampanyası, silah sistemi, atış kontrol sistemi ve stabilizasyon performansının tüm hedeflenen kriterleri karşıladığını doğruladı."
-  },
-  {
-   "title": "IDV brings latest generation VIKING UGV to DVD 2026 in two advanced configurations",
-   "url": "https://english.defensearabia.com/idv-brings-latest-generation-viking-ugv-to-dvd-2026-in-two-advanced-configurations/",
-   "source": "Defense Arabia",
-   "country": "AE",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "IDV, en son nesil VIKING UGV'yi DVD 2026'ya iki gelişmiş konfigürasyonda getirdi",
-   "summary_scope": false
-  },
-  {
-   "title": "IDV selected for U.S. Army “Engineer Autonomous Breaching Capability” Initiative",
-   "url": "https://english.defensearabia.com/idv-selected-for-u-s-army-engineer-autonomous-breaching-capability-initiative/",
-   "source": "Defense Arabia",
-   "country": "AE",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "IDV, ABD Ordusu 'Mühendislik Otonom Breşaj Yeteneği' İnisiyatifi için Seçildi",
-   "summary_scope": false
-  },
-  {
-   "title": "GA-ASI Mojave First UAS To Complete Battlefield Short Field Ops",
-   "url": "https://english.defensearabia.com/ga-asi-mojave-first-uas-to-complete-battlefield-short-field-ops/",
-   "source": "Defense Arabia",
-   "country": "AE",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "C-UAS ve Hava Savunma",
-   "also": [],
-   "title_tr": "GA-ASI Mojave, Savaş Alanı Kısa Saha Operasyonlarını Tamamlayan İlk İHA",
-   "summary_scope": false
-  },
-  {
-   "title": "Raytheon Awarded Seven-Year Contract for Tomahawk Cruise Missiles",
-   "url": "https://english.defensearabia.com/raytheon-awarded-seven-year-contract-for-tomahawk-cruise-missiles/",
-   "source": "Defense Arabia",
-   "country": "AE",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "İhale ve Sözleşmeler",
-   "also": [],
-   "title_tr": "Raytheon, Tomahawk Kryuiz Füzeleri İçin Yedi Yıllık Sözleşme Aldı",
-   "summary_scope": true,
-   "summary_tr": "RTX bünyesindeki Raytheon, ABD Donanması için Tomahawk seyir füzesi üretimini hızlandırmak üzere 22,9 milyar dolarlık yedi yıllık bir sözleşme aldı; anlaşma yıllık üretimin 1.000'in üzerine çıkarılmasını hedefliyor. Şirket 2026'nın ilk yarısında 2025'in aynı dönemine göre üç kat daha fazla Tomahawk teslim etti."
   },
   {
    "title": "Pakistan i Turcja wyślą wojsko do Jemenu? „Pakt mekkański” chce rozprawić się z Huti",
@@ -4487,32 +4319,6 @@
    "summary_scope": false
   },
   {
-   "title": "Tusk na Ukrainie. Zełenski ogłosił start formatu C8 – Karpackiej Ósemki",
-   "url": "https://defence24.pl/wojna-na-ukrainie-raport-specjalny-defence24/tusk-na-ukrainie-zelenski-oglosil-start-formatu-c8-karpackiej-osemki",
-   "source": "Defence24 (PL)",
-   "country": "PL",
-   "lang": "pl",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Tusk Ukrayna'da. Zelenskyj C8 Formatının Başlangıcını Açıkladı - Karpat Sekizlisi",
-   "summary_scope": false
-  },
-  {
-   "title": "Firma z ponad 40-letnim doświadczeniem. Aereostaty od TCOM Unitronex zapewniają przewagę",
-   "url": "https://defence24.pl/firma-z-ponad-40-letnim-doswiadczeniem-aereostaty-od-tcom-unitronex-zapewniaja-przewage",
-   "source": "Defence24 (PL)",
-   "country": "PL",
-   "lang": "pl",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "40 Yıldan Fazla Deneyime Sahip Bir Şirket. TCOM Unitronex'ten Aerostatlar Avantaj Sağlıyor",
-   "summary_scope": false
-  },
-  {
    "title": "Expert commentary on the judgment of the Shanghai Maritime Court",
    "url": "https://defence24.com/other/expert-commentary-on-the-judgment-of-the-shanghai-maritime-court",
    "source": "Defence24 (EN)",
@@ -4552,71 +4358,6 @@
    "summary_scope": false
   },
   {
-   "title": "China enters into the fight for oil routes",
-   "url": "https://defence24.com/geopolitics/china-enters-into-the-fight-for-oil-routes",
-   "source": "Defence24 (EN)",
-   "country": "PL",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Çin, Petrol Rotaları İçin Mücadeleye Giriyor",
-   "summary_scope": false
-  },
-  {
-   "title": "€3.3 billion for Ukraine",
-   "url": "https://defence24.com/defence-policy/eur33-billion-for-ukraine",
-   "source": "Defence24 (EN)",
-   "country": "PL",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Ukrayna için 3,3 milyar €",
-   "summary_scope": false
-  },
-  {
-   "title": "Estonia prepares for Russian mobilisation",
-   "url": "https://defence24.com/defence-policy/estonia-prepares-for-russian-mobilisation",
-   "source": "Defence24 (EN)",
-   "country": "PL",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Estonya Rus mobilizasyonuna hazırlanıyor",
-   "summary_scope": false
-  },
-  {
-   "title": "East Front News #112: Estonia wants to join France's nuclear deterrence and Rafale training for Ukraine",
-   "url": "https://defence24.com/east-front-news/east-front-news-112-estonia-wants-to-join-frances-nuclear-deterrence-and-rafale-training-for-ukraine",
-   "source": "Defence24 (EN)",
-   "country": "PL",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "East Front News #112: Estonya Fransa'nın Nükleer Caydırıcılığına Katılmak ve Ukrayna için Rafale Eğitimi İstiyor",
-   "summary_scope": false
-  },
-  {
-   "title": "The Pentagon is considering pulling out a third of its troops in Europe",
-   "url": "https://defence24.com/geopolitics/the-pentagon-is-considering-pulling-out-a-third-of-its-troops-in-europe",
-   "source": "Defence24 (EN)",
-   "country": "PL",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Pentagon Avrupa'daki Askerlerinin Üçte Birini Çekmek Göz Önünde Tutuyor",
-   "summary_scope": false
-  },
-  {
    "title": "Peluru Berpandu Kruis Cheonryong Cetus Era Baharu Serangan Jarak Jauh Korea Selatan",
    "url": "https://defencesecurityasia.com/cheonryong-korea-selatan-ujian-peluru-berpandu-kruis-fa-50/",
    "source": "Defence Security Asia",
@@ -4638,19 +4379,6 @@
    "published": "2026-09-18",
    "category": "Genel Savunma Gündemi",
    "also": [],
-   "summary_scope": false
-  },
-  {
-   "title": "Eurofighter Itali Terkena Serangan Houthi, Pertahanan Teluk Kini Terdedah",
-   "url": "https://defencesecurityasia.com/houthi-serang-eurofighter-itali-arab-saudi-pertahanan-teluk/",
-   "source": "Defence Security Asia",
-   "country": "MY",
-   "lang": "ms",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "İtalyan Eurofighter Houthi Saldırısına Maruz Kaldı, Körfez Savunması Artık Açıkta",
    "summary_scope": false
   },
   {
@@ -4785,20 +4513,6 @@
    "summary_tr": "BAE Systems OneArc, ABD Ordusu'nun Force Development Innovation & Assessment (FDIA) girişimi kapsamında, Fort Hood, Teksas'taki bir müfreze muharebe aracına Gömülü Kolektif Eğitim (ECT) sistemini entegre etmek üzere sözleşme aldı; bu, ticari bir gömülü eğitim sisteminin bir ABD Ordusu muharebe platformuna ilk kez kurulması anlamına geliyor."
   },
   {
-   "title": "Leonardo Selected to Help Shape Europe’s Future Sovereign Earth Observation Capability",
-   "url": "https://www.armadainternational.com/2026/09/leonardo-selected-to-help-shape-europes-future-sovereign-earth-observation-capability/",
-   "source": "Armada International",
-   "country": "CH",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-18",
-   "category": "Rakip Duyuruları",
-   "also": [],
-   "title_tr": "Leonardo Avrupa'nın Gelecek Egemen Yer Gözlem Yeteneğini Şekillendirmeye Seçildi",
-   "summary_scope": true,
-   "summary_tr": "Leonardo, Avrupa Uzay Ajansı'ndan (ESA) AB'nin gelecekteki Dünya Gözlem Hükümet Hizmeti'nin (EOGS) mimarisini tanımlamak üzere tam finanse edilen bir sözleşme aldı; Telespazio, Thales Alenia Space ve e-Geos'un da yer aldığı, İtalya, Fransa, Almanya, İspanya, Lüksemburg, Portekiz ve Polonya'dan ortakların katıldığı konsorsiyum, güvenlik ve savunma alanında Avrupa'nın stratejik özerkliğini destekleyecek egemen bir uzay gözlem mimarisi önerecek."
-  },
-  {
    "title": "Tanto tuonò che piovve",
    "url": "https://www.analisidifesa.it/2026/09/tanto-tuono-che-piovve-2/",
    "source": "Analisi Difesa",
@@ -4840,34 +4554,6 @@
    "summary_tr": "Otokar ve Leonardo, TULPAR platformu ile HITFACT MkII 120 mm taretinin entegrasyon ve canlı atış testlerini statik ve dinamik koşullarda başarıyla tamamladı. HITFACT, 120 mm düz namlulu topuyla MBT seviyesinde ateş gücünü hafif/orta platformlara taşıyan dünyadaki tek sistem olma özelliğini taşıyor."
   },
   {
-   "title": "La portaerei Garibaldi (KRI Sriwijaya) arriva in Indonesia",
-   "url": "https://www.analisidifesa.it/2026/09/la-portaerei-garibaldi-kri-sriwijaya-arriva-oggi-in-indonesia/",
-   "source": "Analisi Difesa",
-   "country": "IT",
-   "lang": "it",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "Topçu ve Mühimmat",
-   "also": [],
-   "title_tr": "Garibaldi Uçak Gemisi (KRI Sriwijaya) Bugün Endonezya'ya Geliyor",
-   "summary_scope": true,
-   "summary_tr": "İtalyan donanmasının eski uçak gemisi Giuseppe Garibaldi, KRI Sriwijaya adıyla 18 Eylül'de Endonezya'ya ulaşarak ülkenin ilk uçak gemisi oldu; gemi 24 Ağustos'ta Taranto'dan yola çıkıp Süveyş Kanalı ve Malakka Boğazı üzerinden geldi ve edinim yaklaşık 450 milyon dolarlık dış kredi ile finanse edildi."
-  },
-  {
-   "title": "La corsa contro il tempo per rifornire l’Ucraina di difesa aeree",
-   "url": "https://www.analisidifesa.it/2026/09/la-corsa-contro-il-tempo-per-rifornire-lucraina-di-difesa-aeree/",
-   "source": "Analisi Difesa",
-   "country": "IT",
-   "lang": "it",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "Topçu ve Mühimmat",
-   "also": [],
-   "title_tr": "Ukrayna'ya Hava Savunması Tedarik Etmek İçin Zaman Yarışı",
-   "summary_scope": true,
-   "summary_tr": "AB, Ukrayna'ya 90 milyar euroluk kredinin 3,2 milyar euroluk diliminin Patriot füzesi alımında kullanılmasına izin verdi; Almanya PAC-2 füzeleri ve binlerce ek IRIS-T füzesi gönderirken, ABD'nin üretim kapasitesinin kendi ihtiyaçlarına ayrılması nedeniyle müttefiklerin Patriot stokları büyük ölçüde tükendi. Ukrayna ayda 280 Patriot'a ihtiyaç duyduğunu belirtirken, yıllık üretimin yaklaşık 650 adet olması tedarik açığını derinleştiriyor."
-  },
-  {
    "title": "US clears $24.3bn F-35 stealth fighter jets sale to Saudi Arabia",
    "url": "https://www.airforce-technology.com/news/us-f35-saudi-arabia/",
    "source": "Airforce Technology",
@@ -4878,19 +4564,6 @@
    "category": "Genel Savunma Gündemi",
    "also": [],
    "title_tr": "ABD Suudi Arabistan'a 24,3 Milyar $ F-35 Gizli Savaşçı Satışını Onaylıyor",
-   "summary_scope": false
-  },
-  {
-   "title": "Industry explores future space protection after UK Space Strategy",
-   "url": "https://www.airforce-technology.com/news/industry-explores-future-space-protection-after-uk-space-strategy/",
-   "source": "Airforce Technology",
-   "country": "GB",
-   "lang": "en",
-   "tier": "B",
-   "published": "2026-09-18",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "Endüstri UK Uzay Stratejisi'nin Ardından Gelecek Uzay Koruma Çözümlerini Araştırıyor",
    "summary_scope": false
   },
   {
@@ -5027,6 +4700,10 @@
  "failures": [
   {
    "source": "The Defense Post",
+   "error": "feed parsed but empty"
+  },
+  {
+   "source": "DefenseHere",
    "error": "feed parsed but empty"
   },
   {
