@@ -3,6 +3,7 @@
 // Two jobs:
 //   POST /subscribe    a reader's browser registers for notifications
 //   POST /notify       the publish workflow says a new report is out (needs the secret)
+//   POST /test         a device asks for a push to itself, and only to itself
 //
 // Pushes carry no payload. The service worker wakes up, reads the site's own
 // report list and builds the notification from it, so no report text ever
@@ -26,6 +27,7 @@ export default {
 
     if (path === "/subscribe") return cors(await subscribe(request, env), env);
     if (path === "/unsubscribe") return cors(await unsubscribe(request, env), env);
+    if (path === "/test") return cors(await test(request, env), env);
     if (path === "/notify") return notify(request, env);
     return cors(new Response("not found", { status: 404 }), env);
   },
@@ -68,6 +70,27 @@ async function unsubscribe(request, env) {
   if (!sub?.endpoint) return new Response("bad subscription", { status: 400 });
   await env.SUBS.delete(await keyFor(sub.endpoint));
   return new Response(null, { status: 204 });
+}
+
+// Aboneliğin çalıştığını yarını beklemeden görmenin tek dürüst yolu: gerçek
+// bir push. Sır gerekmiyor çünkü uç nokta adresinin kendisi zaten tahmin
+// edilemez bir yetki belgesi — onu bilen cihazın kendisidir, ve yalnızca
+// KV'de kayıtlı bir adrese gönderiyoruz. Yayın akışının /notify'ı herkese
+// gider; bu yalnızca isteyene.
+async function test(request, env) {
+  const sub = await request.json().catch(() => null);
+  if (!sub?.endpoint || !allowedEndpoint(sub.endpoint)) {
+    return new Response("bad subscription", { status: 400 });
+  }
+  const key = await keyFor(sub.endpoint);
+  if (!(await env.SUBS.get(key))) return new Response("not subscribed", { status: 404 });
+
+  const status = await push(sub.endpoint, env);
+  if (status === 404 || status === 410) {
+    await env.SUBS.delete(key);
+    return Response.json({ ok: false, status, removed: true });
+  }
+  return Response.json({ ok: status < 300, status });
 }
 
 async function notify(request, env) {

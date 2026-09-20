@@ -486,6 +486,21 @@ body:has(.endnav) .foot { margin-top: 0; }
   line-height: 1.5;
 }
 
+/* Zilin tek evi. Arama "bu sayfayı süzer", zil "cihazı ayarlar" — ikisi aynı
+   şeritte duramazdı. Footer üç sayfa tipinde de var: yeni krom yok, ve bir
+   ürün ayarı okunan güne değil cihaza aittir. */
+.foot-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 24px;
+}
+
+.foot-note { margin: 0; flex: 1 1 340px; }
+
+.foot .notify { flex: 0 0 auto; }
+
 .empty {
   padding: 28px 0;
   color: var(--muted);

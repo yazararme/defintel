@@ -266,8 +266,8 @@ PROMPTS = """<div class="promptbar" id="installbar" hidden role="region" aria-la
 <div class="promptbar" id="notifycard" hidden role="region" aria-label="Bildirim izni">
   <div class="wrap promptbar-inner">
     <p class="promptbar-text">
-      <strong>Yeni rapor çıkınca haber verelim mi?</strong>
-      <span>Her sabah rapor yayınlandığında tek bildirim; istediğinde kapatırsın.</span>
+      <strong data-role="head">Yeni rapor çıkınca haber verelim mi?</strong>
+      <span data-role="body">Her sabah rapor yayınlandığında tek bildirim; istediğinde kapatırsın.</span>
     </p>
     <span class="promptbar-actions">
       <button class="pbtn" type="button" data-action="enable">Aç</button>
@@ -278,9 +278,17 @@ PROMPTS = """<div class="promptbar" id="installbar" hidden role="region" aria-la
 """
 
 FOOT = """<footer class="foot">
-  <div class="wrap">
-    Yalnızca kamuya açık kaynaklara dayanır; doğrulanmamış iddialar raporda ayrıca işaretlenir.
-    MKE'nin resmî görüşünü yansıtmaz.
+  <div class="wrap foot-inner">
+    <p class="foot-note">Yalnızca kamuya açık kaynaklara dayanır; doğrulanmamış iddialar raporda ayrıca işaretlenir.
+      MKE'nin resmî görüşünü yansıtmaz.</p>
+    <button class="notify" type="button" id="notify" hidden aria-pressed="false">
+      <svg class="notify-bell" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true">
+        <path d="M8 1.6a3.6 3.6 0 0 0-3.6 3.6c0 2.5-.5 3.7-1.1 4.5-.3.4 0 1 .5 1h8.4c.5 0 .8-.6.5-1-.6-.8-1.1-2-1.1-4.5A3.6 3.6 0 0 0 8 1.6Z"
+              fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+        <path d="M6.6 12.2a1.5 1.5 0 0 0 2.8 0" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+      <span class="notify-label">Yeni rapor bildirimi al</span>
+    </button>
   </div>
 </footer>
 </body>
@@ -783,14 +791,6 @@ def build_index(reports, version, news_counts):
         + f"""<main class="wrap">
   <div class="controls">
     <input class="search" id="q" type="search" placeholder="Ara: konu ya da tarih…" autocomplete="off">
-    <button class="notify" type="button" id="notify" hidden aria-pressed="false">
-      <svg class="notify-bell" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true">
-        <path d="M8 1.6a3.6 3.6 0 0 0-3.6 3.6c0 2.5-.5 3.7-1.1 4.5-.3.4 0 1 .5 1h8.4c.5 0 .8-.6.5-1-.6-.8-1.1-2-1.1-4.5A3.6 3.6 0 0 0 8 1.6Z"
-              fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
-        <path d="M6.6 12.2a1.5 1.5 0 0 0 2.8 0" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-      </svg>
-      <span class="notify-label">Bildirimler</span>
-    </button>
   </div>
   {body}
 </main>

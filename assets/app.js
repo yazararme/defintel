@@ -208,6 +208,17 @@
 
   var card = document.getElementById("notifycard");
 
+  function cardSays(text, primary) {
+    if (!card) return;
+    card.querySelector('[data-role="head"]').textContent = text[0];
+    card.querySelector('[data-role="body"]').textContent = text[1];
+    card.querySelector('[data-action="enable"]').textContent = primary;
+    // "Şimdi değil" arıza hâlinde "Kapat" olur: ertelenecek bir teklif yok,
+    // kapatılacak bir arıza var.
+    card.querySelector('[data-action="later"]').textContent = "Kapat";
+    card.setAttribute("data-state", "failed");
+  }
+
   if (card && pushReady && installed() && Notification.permission === "default" && !snoozed("defintel:notify")) {
     navigator.serviceWorker.ready.then(function (reg) {
       return reg.pushManager.getSubscription();
@@ -219,12 +230,35 @@
         if (!action) return;
         if (action.getAttribute("data-action") === "later") {
           card.hidden = true;
-          return snooze("defintel:notify", 7);
+          // Erteleme yalnızca açık bir "Şimdi değil"de yazılır. Arızadan
+          // sonraki "Kapat" bir tercih değil, hatayı kapatmadır — yedi gün
+          // sessizlik yazmaz.
+          if (card.getAttribute("data-state") !== "failed") snooze("defintel:notify", 7);
+          return;
         }
+
+        var enable = card.querySelector('[data-action="enable"]');
+        enable.disabled = true;
         subscribe()
           .catch(function () { return "failed"; })
           .then(function (state) {
-            card.hidden = true;
+            enable.disabled = false;
+            // Sonuç, eylemin olduğu yerde bildirilir. Kart ekranın altında
+            // sabit duruyor; dokunma anında okuyucunun gözü orada, zil ise
+            // büyük olasılıkla görüş alanı dışında — görünmeyen bir kontrole
+            // boya basmak hiç basmamakla aynı şey.
+            if (state === "on") {
+              card.hidden = true;     // durum artık zilde görünür
+            } else {
+              cardSays(
+                state === "blocked"
+                  ? ["Bildirim izni verilmedi", "Cihaz ayarlarından izin verip tekrar deneyebilirsin."]
+                  : ["Bildirim açılamadı", "Bağlantı ya da sunucu sorunu olabilir; tekrar dene."],
+                "Tekrar dene"
+              );
+              // Arıza erteleme yazmaz: sunucu hatası için okuyucuyu yedi gün
+              // karanlığa göndermek onu cezalandırmak olur.
+            }
             paint(state);
           });
       });
@@ -240,7 +274,9 @@
     if (!btn) return;
     label.textContent = {
       on: "Bildirimler açık",
-      off: "Bildirimler",
+      // Kapalı etiket bir isim değil bir teklif: okuyucunun
+      // kazanacağı şeyi söyler, kontrolün adını değil.
+      off: "Yeni rapor bildirimi al",
       blocked: "Bildirimler kapalı",
       failed: "Bildirim kurulamadı",
       "failed-off": "Bildirim kapatılamadı",

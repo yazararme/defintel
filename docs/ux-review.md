@@ -1065,3 +1065,83 @@ bloğunu asla.*
 **Yapılmayacak:** `G#`'yi hedeften de kaldırmak (varış teyidi gider); gövde içi `G#` atıflarını etikete
 çevirmek (28+ karakterlik adlar cümle ortasında okunmuyor); ölçüyü tablette genişletmek; ALARMLAR satırını
 elle yazmaya devam etmek.
+
+---
+
+## Revizyon 7 — bildirim denetiminin yeri
+
+### R7.0 — İhlal edilen değişmez
+
+> **Hiçbir yüzey, sonucunu bildiremeyeceği bir eylemi tetikleyemez.**
+
+Kusur bunun ihlali: kart üç sayfada da "Aç" düğmesi gösteriyor, `paint()` ise `if (!btn) return` ile iki
+sayfada hiçbir şey yapmıyor. Aşağıdaki kararların hepsi bu tek cümleden türüyor ve kabul testi de bu olmalı.
+
+### R7.1 — İki ayrı iş, iki ayrı yer
+
+Bugün tek bir denetime iki farklı iş yükleniyor ve ikisi de aksıyor:
+
+| İş | Ne zaman | Nerede olmalı |
+|---|---|---|
+| **Geçici sonuç** — "az önce dokundun, oldu mu?" | Dokunuştan hemen sonra, saniyeler | **Eylemin olduğu yerde** = kartın kendisi |
+| **Kalıcı durum + kapatma** | Her zaman, nadiren bakılır | **Tek, sabit bir ev** = footer, üç sayfada da |
+
+Bugünkü tasarım geçici sonucu kalıcı denetime bastırmaya çalışıyor. Bu, denetim ekranda olsa bile yanlış:
+kart `position: fixed; bottom: 0` — okuyucunun gözü ekranın altında; zil nerede olursa olsun büyük olasılıkla
+görüş alanı dışında. **Görünmeyen bir kontrole boya basmak, hiç boya basmamakla aynı şeydir.** Q3'ün cevabı bu.
+
+### R7.2 — Q1: zil footer'a, üç sayfaya da
+
+- **Daybar olmaz.** Daybar'ın işi gün gezinmesi; 375px'te zaten ~286/339px dolu (ok 40 + tarih 86 + ok 40 +
+  karşı ürün çipi ~120). Rev 1'den beri uygulanan kural: *bir şeridin tek işi vardır.*
+- **Masthead olmaz.** Künye. Rev 2'de içi boşaltıldı.
+- **`.controls` olmaz** — ve bugün orada olması bir karışıklık: arama *bu sayfayı süzer*, zil *cihazı ayarlar*.
+  Aynı şeritte iki farklı kapsam. Zil çıkınca arama alanı satırı tek başına alır, şerit tek işli olur.
+- **Footer olur.** `.foot` zaten üç sayfa tipinde de var, yeni krom eklemiyor, ve zil bir *ürün ayarı* —
+  okuduğun güne değil cihaza ait. Ayarların yeri sayfa kromu değil, tek ve sabit bir yerdir.
+
+Footer "ölü metin bölgesi" itirazı, geçici sonuç kartta bildirildiği için düşüyor: zilin artık arıza anında
+görülmesi gerekmiyor. Kalıcı durumun sakin bir yerde durması doğrudur. Net kazanç, keşfedilebilirlikte de
+artı: 1 sayfa × kontrol şeridi yerine **3 sayfa × footer**.
+
+Yerleşim: `.foot > .wrap` flex olur; zil önce (eylem), sorumluluk reddi sonra (hüküm). 375px'te alt alta.
+Zil `.notify` sınıflarını korur, Rev 2'nin `.notify--on` ikon-only kuralı aynen geçerli. `endnav` (R1-P1-1)
+çizginin üstünde kalır; zil çizginin altında, görsel olarak footer'ın parçası.
+
+### R7.3 — Q2: kart kendi sonucunu kendi bildirir
+
+Sunulan iki yoldan ikisi de değil. Kartı bildirim yapamayan sayfalarda bastırmak yanlış: brifing günün asıl
+durağı ve sormak için en doğru an orası. Zili her sayfaya koymak gerekli ama yeterli değil (R7.1).
+
+> Kart, **başarısızlıkta kapanmaz**: kendi metnini değiştirir, birincil düğme `Tekrar dene` olur, ikincil
+> düğme `Kapat` kalır. **Başarıda kapanır** — durum artık zilde görünür, oyalanmaya gerek yok.
+
+Ve bir hak düzeltmesi: **arıza asla 7 günlük erteleme tetiklemez.** Bugün "Aç" → hata → kart kapanır →
+7 gün yok. Sunucu hatası için okuyucuyu cezalandırmak olur. Erteleme yalnızca açık `Şimdi değil`'de ve
+başarıda devreye girer.
+
+### R7.4 — Q4: keşfedilebilirlik eksikti, ama düşünülen yerden değil
+
+Zil *kazanım* kanalı değil; kazanımı kart yapıyor (ve yalnızca uygulama kuruluyken; kurulmamış okuyucuda
+push zaten çalışmıyor — iOS'ta kurulum şart). Zilin işi **durumu göstermek ve kapatmak.**
+
+Asıl boşluk şuydu: kartı bir kez `Şimdi değil` ile kapatan okuyucunun 7 günlük karanlığı var ve üç sayfanın
+ikisinde başka hiçbir yolu yok. Footer zili bunu üç sayfada da kapatıyor. Tek ek: kapalı durumdaki etiket bir
+*isim* değil bir *teklif* olsun — `Bildirimler` → **`Yeni rapor bildirimi al`**. Açık durumda Rev 2 kuralı
+(ikon-only) değişmez; `blocked` durumunda etiket ve açıklayıcı `title` korunur.
+
+### Uygulama listesi — Revizyon 7
+
+| # | Dosya | Değişiklik | Kabul testi |
+|---|---|---|---|
+| R7-P0-1 | `assets/app.js` → kart işleyicisi | Kart kendi sonucunu basar, `paint()`'e bağımlı değil. Başarı → kart gizlenir (+ `paint()` varsa çağrılır). Arıza → kart **açık kalır**, `.promptbar-text` "Bildirim açılamadı. Tekrar deneyelim mi?" olur, birincil düğme `Tekrar dene`, ikincil `Kapat`. Arızada `snooze()` **çağrılmaz**. | `/subscribe` 500 döndüğünde brifing sayfasında kart ekranda kalır ve arıza metnini gösterir; `localStorage["defintel:notify"]` yazılmaz; `Tekrar dene` yeniden abone olmayı dener. |
+| R7-P0-2 | `build.py` → `FOOT` | Zil markup'ı (`#notify` + svg + `.notify-label`) `FOOT` içine taşınır; `.foot > .wrap` → `.foot-inner`, zil önce, sorumluluk reddi sonra. Üç sayfa tipi de aynı `FOOT`'u kullandığı için tek değişiklik yeter. | Üç sayfa tipinde de `#notify` tam olarak bir kez bulunur; `haberler/…` ve `reports/…` sayfalarında bugün 0. |
+| R7-P0-3 | `build.py` → `build_index()` | Zil `.controls` satırından çıkarılır; satırda yalnızca arama kalır. | `index.html`'de `.controls` içinde `#notify` yok; arama alanı satırın tamamını kaplar ve 375px'te taşmaz. |
+| R7-P0-4 | `assets/app.css` | `.foot-inner { display:flex; gap:18px; align-items:baseline; flex-wrap:wrap; justify-content:space-between }`; zil `flex: 0 0 auto`, dokunma hedefi ≥44px; 375px'te sorumluluk reddinin üstünde kendi satırında. Rev 2'nin `.notify--on` kuralı **değişmez**. | 375px'te zilin `getBoundingClientRect().height >= 44`; abone durumda yalnızca ikon görünür (Rev 2 regresyonu). |
+| R7-P0-5 | `assets/app.js` → `paint()` | `if (!btn) return` guard'ı **kalır** (savunma amaçlı), ama artık hiçbir sonuç bildirimi ona bağlı değil. | Zil markup'ı elle silindiğinde kart yine de arızayı bildirir; JS hata vermez. |
+| R7-P1-1 | `assets/app.js` → `paint()` etiket sözlüğü | `off: "Bildirimler"` → `off: "Yeni rapor bildirimi al"`. `on`, `blocked`, arıza etiketleri değişmez. | Kapalı durumda footer teklifi okunur; açık durumda etiket görsel olarak gizli kalır (Rev 2). |
+| R7-P1-2 | `assets/app.js` | Arıza metni sunucu ile ağ hatasını ayırır: HTTP yanıtı geldiyse "Sunucu bildirimi kabul etmedi", ağ hatasıysa "Bağlantı kurulamadı". Aynı `Tekrar dene` akışı. | Çevrimdışıyken "Bağlantı kurulamadı" görünür; 500'de sunucu metni görünür. |
+
+**Yapılmayacak:** zili daybar'a ya da masthead'e koymak; kartı brifing/medya sayfalarında bastırmak; arızada
+erteleme yazmak; zili birden fazla yerde tutmak (Rev 4: tek şekil, tek anlam); arıza için ayrı bir modal
+ya da yeni sabit şerit eklemek.

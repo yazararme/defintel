@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;display=swap">
-<link rel="stylesheet" href="../assets/app.css?v=aa72d0ec">
+<link rel="stylesheet" href="../assets/app.css?v=8be7a47d">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png?v=62f37bc6">
 <link rel="icon" type="image/png" sizes="64x64" href="../assets/icons/favicon-64.png?v=a5e52d30">
 <link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/favicon-16.png?v=e3877a81">
@@ -195,8 +195,8 @@
 <div class="promptbar" id="notifycard" hidden role="region" aria-label="Bildirim izni">
   <div class="wrap promptbar-inner">
     <p class="promptbar-text">
-      <strong>Yeni rapor çıkınca haber verelim mi?</strong>
-      <span>Her sabah rapor yayınlandığında tek bildirim; istediğinde kapatırsın.</span>
+      <strong data-role="head">Yeni rapor çıkınca haber verelim mi?</strong>
+      <span data-role="body">Her sabah rapor yayınlandığında tek bildirim; istediğinde kapatırsın.</span>
     </p>
     <span class="promptbar-actions">
       <button class="pbtn" type="button" data-action="enable">Aç</button>
@@ -204,11 +204,19 @@
     </span>
   </div>
 </div>
-<script src="../assets/app.js?v=c236fc96" defer></script>
+<script src="../assets/app.js?v=3d12106b" defer></script>
 <footer class="foot">
-  <div class="wrap">
-    Yalnızca kamuya açık kaynaklara dayanır; doğrulanmamış iddialar raporda ayrıca işaretlenir.
-    MKE'nin resmî görüşünü yansıtmaz.
+  <div class="wrap foot-inner">
+    <p class="foot-note">Yalnızca kamuya açık kaynaklara dayanır; doğrulanmamış iddialar raporda ayrıca işaretlenir.
+      MKE'nin resmî görüşünü yansıtmaz.</p>
+    <button class="notify" type="button" id="notify" hidden aria-pressed="false">
+      <svg class="notify-bell" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true">
+        <path d="M8 1.6a3.6 3.6 0 0 0-3.6 3.6c0 2.5-.5 3.7-1.1 4.5-.3.4 0 1 .5 1h8.4c.5 0 .8-.6.5-1-.6-.8-1.1-2-1.1-4.5A3.6 3.6 0 0 0 8 1.6Z"
+              fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+        <path d="M6.6 12.2a1.5 1.5 0 0 0 2.8 0" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+      <span class="notify-label">Yeni rapor bildirimi al</span>
+    </button>
   </div>
 </footer>
 </body>
