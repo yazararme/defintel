@@ -1,5 +1,97 @@
 [
   {
+    "date": "2026-09-21",
+    "title": "ABD müfettiş raporu: Körfez'de Nisan–Haziran'da 6.000'i aşkın saldırı dronu önlendi; İngiltere üslerinde dron olayları 340'a çıktı, C-UAS'a 750 milyon £ ayrıldı",
+    "summary": "Yeni ihale açılmadı; günün ağırlığı C-UAS talebinin ölçeğini gösteren veriler. ABD Genel Müfettişliği, Körfez'de üç ayda 6.000'i aşkın tek yönlü saldırı dronu ve 1.500'ü aşkın balistik füzenin önlendiğini açıkladı. İngiltere askerî üslerinde yıllık dron olayı 340'a çıktı ve C-UAS için 750 milyon £ ayrıldı. Çekya dört SPYDER bataryasının ilk ikisini hizmete aldı; ASELSAN 25 mm'lik SMASH 300 deniz C-UAS sistemini tanıttı; Polonya Kanada'da TNT üretimini görüşüyor.",
+    "alarm": false,
+    "alarm_title": "",
+    "status": "izle",
+    "decision_by": "2026-10-09",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Barut ve Patlayıcı",
+      "Deniz Sistemleri",
+      "Körfez",
+      "Suudi Arabistan",
+      "Tedarik Zinciri",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Epic Fury: Körfez'de önlenen dron ve füzeler",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "İngiltere üslerinde dron olayları ve C-UAS bütçesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "Çekya SPYDER'i hizmete aldı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "ASELSAN SMASH 300",
+        "home": "rakip"
+      },
+      {
+        "id": "G5",
+        "label": "Polonya'nın Kanada'da TNT üretimi görüşmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "Türkiye'nin Suudi Arabistan'a askerî destek açıklaması",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "NATO Askerî Komitesi'nin sanayiye mesajı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "Vector: dron ve emniyet-kurma donanımı siparişi",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "Jet motorlu Shahed'e önleyici dronla ilk vuruş",
+        "home": "izleme"
+      },
+      {
+        "id": "G10",
+        "label": "USAF orta kalibreli namlulu hava savunma pazar araştırması",
+        "home": "izleme"
+      },
+      {
+        "id": "G11",
+        "label": "Malezya MERAD (RMK-13)",
+        "home": "izleme"
+      },
+      {
+        "id": "G12",
+        "label": "665 milyon $'lık C-UAS test siparişine itiraz",
+        "home": "izleme"
+      },
+      {
+        "id": "G13",
+        "label": "ABD Deniz Piyadeleri Drone Round",
+        "home": "izleme"
+      },
+      {
+        "id": "G14",
+        "label": "ABD Donanması uygun maliyetli önleyici",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-09-21.html"
+  },
+  {
     "date": "2026-09-20",
     "title": "ABD Deniz Piyadeleri 400 bin çok parçacıklı 5,56 mm anti-dron mermisi aldı ve 2027 için 1 milyon daha planlıyor; Pentagon 60 bin dronluk alımın ikinci eleme sonuçlarını açıkladı",
     "summary": "Yeni ihale açılmadı; günün ağırlığı hafif silah ve küçük dron tarafında. ABD Deniz Piyadeleri 400.000 adet 5,56 mm çok parçacıklı anti-dron mermisi aldı, 2027 mali yılında 1 milyon adet daha planlıyor. Pentagon'un Drone Dominance programında Gauntlet 2, 19 firma arasından yaklaşık 60.000 dronluk alımın kazananlarını belirledi. XM30'da organik C-UAS şartı Kongre gündemine taşındı; SGT STOUT obüs mevzilerini korumak için tatbikatta kullanıldı.",
