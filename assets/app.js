@@ -489,18 +489,32 @@
     .then(function (days) {
       var missed = days.filter(function (d) { return d.date > last && d.date < day; });
       if (!missed.length) return;
+
+      // Dokuz günlük boşluk sekiz satır; tatil dönüşü doksan satır bir duvar.
+      // En yeni yedi gün gösterilir, gerisi tek satıra iner — ama alarm günü
+      // tavanın dışında kalmaz: geciken bir alarm, kaçırılmış alarmdır.
+      var CAP = 7;
+      var shown = missed.slice(0, CAP);
+      var rest = missed.slice(CAP);
+      var lateAlarms = rest.filter(function (d) { return d.alarm; });
+      shown = shown.concat(lateAlarms);
+      var hidden = rest.length - lateAlarms.length;
       var bar = document.createElement("section");
       bar.className = "missed";
       bar.innerHTML =
         '<div class="wrap missed-inner">' +
         '<p class="missed-head"><span class="num">' + missed.length + '</span> gün kaçırdınız' +
         '<button class="missed-close" type="button" aria-label="Kapat">×</button></p>' +
-        missed.map(function (d) {
+        shown.map(function (d) {
           return '<a class="missed-row" href="' + up + d.url + '">' +
                  '<span class="missed-date num">' + trDay(d.date) + '</span>' +
                  (d.alarm ? '<span class="badge badge--alarm">Alarm</span>' : "") +
                  '<span class="missed-lead">' + esc(d.lead) + "</span></a>";
-        }).join("") + "</div>";
+        }).join("") +
+        (hidden > 0
+          ? '<a class="missed-more" href="' + up + 'arsiv.html">ve <span class="num">' +
+            hidden + "</span> gün daha → arşiv</a>"
+          : "") + "</div>";
       var after = document.querySelector(".daybar");
       if (after && after.parentNode) after.parentNode.insertBefore(bar, after.nextSibling);
       bar.addEventListener("click", function (e) {
@@ -594,7 +608,11 @@
               (r.k === "thread"
                 ? '<span class="found-kind">izleme dosyası</span>'
                 : '<span class="found-text">' + esc(r.s) + "</span>") + "</a>";
-          }).join("") + "</div>";
+          }).join("") +
+        (hidden > 0
+          ? '<a class="missed-more" href="' + up + 'arsiv.html">ve <span class="num">' +
+            hidden + "</span> gün daha → arşiv</a>"
+          : "") + "</div>";
       }).join("");
   }
 

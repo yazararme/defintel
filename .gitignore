@@ -3,3 +3,4 @@ __pycache__/
 
 # wrangler yerel önbelleği ve miniflare durumu — depoya ait değil
 .wrangler/
+_c.html

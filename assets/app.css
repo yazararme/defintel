@@ -11,8 +11,10 @@
   --rule:    #E3E0D9;
   --rule-2:  #CAC6BC;
   --brand:   #2F4C3B;   /* koyu asker yeşili: bağlantılar ve logo */
+  /* İki durum var, ikisi de kullanılıyor: sakin ve alarm. Üçüncü bir jeton
+     (--watch) tanımlıydı ve hiçbir yerde basılmıyordu — palet, üründe
+     olmayan bir durumu varmış gibi gösteriyordu. */
   --ok:      #3C6B4C;   /* temiz */
-  --watch:   #9A6C15;   /* izle  */
   --alarm:   #A32C20;   /* alarm */
   --alarm-tint: rgba(163, 44, 32, 0.045);
 
@@ -35,7 +37,6 @@
     --rule-2:  #3B4048;
     --brand:   #8FB89C;
     --ok:      #74A886;
-    --watch:   #D0A050;
     --alarm:   #E0796A;
     --alarm-tint: rgba(224, 121, 106, 0.07);
   }
@@ -107,6 +108,8 @@ a { color: var(--brand); text-underline-offset: 2px; }
   text-transform: uppercase;
 }
 
+.wordmark--here { cursor: default; }
+
 .tagline {
   color: var(--muted);
   letter-spacing: 0.06em;
@@ -114,7 +117,9 @@ a { color: var(--brand); text-underline-offset: 2px; }
 }
 
 @media (max-width: 559px) {
-  .tagline { display: none; }
+  .wordmark--here { cursor: default; }
+
+.tagline { display: none; }
 }
 
 /* ---------- daybar: okunan günün tek gezinme şeridi ---------- */
@@ -223,7 +228,9 @@ a { color: var(--brand); text-underline-offset: 2px; }
   letter-spacing: 0.06em;
   color: var(--muted);
 }
-.thread-row--closed .thread-name { color: var(--muted); }
+.thread-row--closed .thread-name,
+.thread-row--dormant .thread-name { color: var(--muted); }
+.thread-state--dormant { color: var(--muted); }
 
 /* İzleme kaleminin adı kendi dosyasına gider; satırın geri kalanı düz metin. */
 .thread-link { color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule-2); }
@@ -305,6 +312,19 @@ a { color: var(--brand); text-underline-offset: 2px; }
   text-decoration: none;
 }
 .missed-row:hover { color: var(--ink); }
+.missed-more {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 6px 0;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--brand);
+  text-decoration: none;
+}
+.missed-more:hover { text-decoration: underline; }
 .missed-date { flex: none; font-family: var(--mono); font-size: 11px; color: var(--muted); }
 .missed-lead { flex: 1 1 260px; font-size: 15px; line-height: 1.45; }
 
@@ -540,8 +560,9 @@ a { color: var(--brand); text-underline-offset: 2px; }
 .prose h2#ozet + ol li { margin-bottom: 10px; }
 .prose h2#ozet + ol li:last-child { margin-bottom: 0; }
 /* Alarm günü belgenin kendisinde de farklı görünmeli, yalnızca arşiv
-   rozetinde değil: özet kutusunun kenarı durumu taşır. Renk durumu gösterir
-   (Rev 1) ve alarmın durumu --watch değil --alarm. */
+   rozetinde değil: özet kutusunun kenarı durumu taşır. Zemin %4,5'lik bir
+   tint — gövde kontrastı 16,3:1'de kalıyor, yani sayfanın en çok okunan
+   öğesi tam da önemli olduğu gün okunaksızlaşmıyor. */
 .report--alarm .prose h2#ozet + ol {
   border-left-color: var(--alarm);
   background: var(--alarm-tint);
