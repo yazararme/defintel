@@ -1704,11 +1704,29 @@ def check_links():
     """
     import posixpath
     broken = []
+
+    def anchors(text):
+        """{id: gizli mi} — çapayı taşıyan etiketin kendisi hidden mı?
+
+        "Çapa var" ile "çapaya gidilebilir" ayrı şeyler: hidden bir öğenin
+        kutusu yok ve scrollIntoView sessizce hiçbir şey yapmıyor. Kaynaklar
+        çipi tam bu yüzden haftalarca ölüydü ve denetim temiz rapor veriyordu,
+        çünkü yalnız kimliğin varlığına bakıyordu.
+        """
+        found = {}
+        for m in re.finditer(r"<(\w+)\b([^>]*)>", text):
+            mid = re.search(r'\bid="([^"]+)"', m.group(2))
+            if not mid:
+                continue
+            bare = re.sub(r'="[^"]*"', "=", m.group(2))   # değerleri at
+            found[mid.group(1)] = bool(re.search(r"(?<![\w-])hidden(?![\w-])", bare))
+        return found
     for f in sorted(ROOT.rglob("*.html")):
         if ".git" in f.parts:
             continue
         text = f.read_text(encoding="utf-8", errors="replace")
-        page_ids = set(re.findall(r'\bid="([^"]+)"', text))
+        page_anchors = anchors(text)
+        page_ids = set(page_anchors)
         for href in re.findall(r'(?:href|src)="([^"]+)"', text):
             if href.startswith(("http://", "https://", "mailto:", "data:", "//")):
                 continue
@@ -1717,6 +1735,8 @@ def check_links():
             if not path:
                 if frag and frag not in page_ids:
                     broken.append((f, href, "çapa yok"))
+                elif frag and page_anchors.get(frag):
+                    broken.append((f, href, "çapa gizli"))
                 continue
             target = (ROOT / path.lstrip("/")) if path.startswith("/") else (
                 ROOT / posixpath.normpath(posixpath.join(f.parent.relative_to(ROOT).as_posix(), path)))
@@ -1725,9 +1745,11 @@ def check_links():
             if not target.exists():
                 broken.append((f, href, "dosya yok"))
             elif frag and target.suffix == ".html":
-                ids = set(re.findall(r'\bid="([^"]+)"', target.read_text(encoding="utf-8", errors="replace")))
-                if frag not in ids:
+                found = anchors(target.read_text(encoding="utf-8", errors="replace"))
+                if frag not in found:
                     broken.append((f, href, "çapa yok"))
+                elif found[frag]:
+                    broken.append((f, href, "çapa gizli"))
     if broken:
         print(f"  ✗ {len(broken)} kırık bağlantı:")
         for f, href, why in broken[:15]:
@@ -1735,9 +1757,11 @@ def check_links():
         if len(broken) > 15:
             print(f"      … ve {len(broken) - 15} tane daha")
     # Olmayan dosya build'in hatasıdır: her gün aynı şekilde çıkar, yayını
-    # durdurmak onu sabah fark ettirir. Olmayan çapa ajanın metninden de
-    # gelebilir; onun için günün raporunu hiç yayımlamamak, kırık bir iç
-    # bağlantıdan daha büyük zarar — yüksek sesle söylenir, durdurmaz.
+    # durdurmak onu sabah fark ettirir. Olmayan ya da gizli çapa ajanın
+    # metninden de gelebilir; onun için günün raporunu hiç yayımlamamak,
+    # kırık bir iç bağlantıdan daha büyük zarar — yüksek sesle söylenir,
+    # durdurmaz. (app.js gizli çapada görünen ataya çıkıyor, yani bu bir
+    # uyarı; JavaScript'siz tarayıcıda gerçek bir kırık.)
     return sum(1 for _f, _h, why in broken if why == "dosya yok")
 
 RIVALS_JSON = DATA / "rakipler.json"

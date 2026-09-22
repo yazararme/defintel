@@ -529,9 +529,13 @@ def fold_sources(text):
         head, body = m.group(1), m.group(2)
         count = len(re.findall(r'<li id="k\d+"', body))
         label = re.sub(r"<[^>]+>", "", head).strip()
-        return (f'<details class="refs" id="kaynaklar-fold"><summary class="kicker">{label}'
+        # Kimlik katlamanın kendisinde. Bir süre gizli bir <h2> üstünde
+        # duruyordu — şerit çipini ondan türetiyordu — ama gizli öğenin
+        # kutusu yok, scrollIntoView hiçbir şey yapmıyor ve çip ölü
+        # görünüyordu. EK'te zaten böyle: kimlik <details>'te.
+        return (f'<details class="refs" id="kaynaklar"><summary class="kicker">{label}'
                 f' <span class="kicker-count num">{count}</span></summary>'
-                f'{head.replace("<h2 ", "<h2 hidden ")}{body}</details>')
+                f'{body}</details>')
 
     return re.sub(r'(<h2 id="kaynaklar">.*?</h2>)(.*?)(?=<h2|<details class="appendix"|\Z)',
                   wrap, text, flags=re.S)
@@ -712,7 +716,13 @@ def nav(body_html):
     Bölümler sabit, az ve okuyucunun zaten bildiği şeyler; ne kaydırma ne
     gruplama gerekiyor, sığmazsa alt satıra geçer.
     """
-    ids = re.findall(r'<h2[^>]*id="([^"]+)"', body_html)
+    # Katlanan bölümün kimliği <details>'te duruyor (KAYNAKLAR, EK). Yalnız
+    # <h2> okununca o bölümlerin çipi hiç basılmıyordu: EK'i olan beş günün
+    # hiçbirinde EK çipi yoktu ve kimse fark etmedi, çünkü eksik bir çip
+    # bozuk görünmüyor — sadece yok.
+    ids = [m.group(2) for m in re.finditer(
+        r'<(h2|details)[^>]*\bid="([^"]+)"', body_html)
+        if m.group(1) == "h2" or m.group(2) in SECTION_ORDER]
     chips = [
         f'<a class="chip" href="#{i}">'
         f'{html.escape(SECTION_CHIP.get(i, i.replace("-", " ").title()))}</a>'
