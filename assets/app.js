@@ -444,27 +444,41 @@
     }
   }
 
+  /* Kaydırılabilir hedef: çapanın kendisi gizli olabilir.
+
+     KAYNAKLAR ve EK katlandıktan sonra bölüm başlığı <h2 hidden id="kaynaklar">
+     olarak duruyor — id orada kalıyor ki şerit çipini türetebilsin, ama hidden
+     bir öğenin kutusu yok ve scrollIntoView hiçbir şey yapmıyor. Çip basılıyor,
+     sayfa yerinde kalıyordu. Görünen en yakın ata (burada <details>) hedefin
+     durduğu yer. */
+  function scrollTarget(el) {
+    var t = el;
+    while (t && t !== document.body && !t.getClientRects().length) t = t.parentElement;
+    return t || el;
+  }
+
   function goTo(id, push) {
     var el = document.getElementById(id);
     if (!el) return;
     openAncestors(el);
     var before = window.scrollY;
+    var target = scrollTarget(el);
     // scroll-margin-top (CSS) keeps the sticky strip from covering the target
     try {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (err) {
-      el.scrollIntoView();
+      target.scrollIntoView();
     }
     // Smooth kaydırma bazı ortamlarda sessizce hiç çalışmıyor: çip tıklanıyor,
     // sayfa yerinde kalıyor. Kımıldamadıysa anında git — bir çipin hiçbir şey
     // yapmaması, animasyonsuz gitmesinden kötü.
     setTimeout(function () {
       if (Math.abs(window.scrollY - before) < 2 &&
-          Math.abs(el.getBoundingClientRect().top) > 80) {
-        el.scrollIntoView({ block: "start" });
+          Math.abs(target.getBoundingClientRect().top) > 80) {
+        target.scrollIntoView({ block: "start" });
       }
     }, 350);
-    flash(el);
+    flash(target);
     if (push && history.replaceState) history.replaceState(null, "", "#" + id);
   }
 
@@ -501,7 +515,7 @@
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(function () {
         var el = document.getElementById(id);
-        if (el) el.scrollIntoView({ block: "start" });
+        if (el) scrollTarget(el).scrollIntoView({ block: "start" });
       });
     }
   }

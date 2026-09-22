@@ -921,7 +921,7 @@ body:has(.endnav) .foot { margin-top: 0; }
    Yığının yüksekliği sayfaya ve genişliğe göre değişiyor, o yüzden tek değer
    yok: brifingin bölüm şeridi 700px altında yapışkanlıktan çıkıyor, kupür
    sayfasının kategori şeridi ise 920px altında ortaya çıkıyor. */
-.prose h2[id], .prose h3[id], .prose li[id], .appendix {
+.prose h2[id], .prose h3[id], .prose li[id], .appendix, .refs {
   scroll-margin-top: 122px;
 }
 .news .kicker { scroll-margin-top: 69px; }   /* yalnız daybar yapışkan */
@@ -1389,7 +1389,7 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
 
 @media (max-width: 700px) {
   /* Brifingin bölüm şeridi burada yapışkanlıktan çıkıyor: geriye daybar kalır. */
-  .prose h2[id], .prose h3[id], .prose li[id], .appendix {
+  .prose h2[id], .prose h3[id], .prose li[id], .appendix, .refs {
     scroll-margin-top: 69px;
   }
 }
