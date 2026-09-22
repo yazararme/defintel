@@ -960,6 +960,29 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
 
 /* katlanan kategoriler ve artık kovası */
 .more { margin: 0 0 8px; }
+
+/* Bekleyen başlıklar: referans, duyuru değil. Kapalı bir katlama duyuru
+   değil dizin girdisidir — okuma yolunu tıkamadan yerinde durur. */
+.watch { margin: 6px 0 0; }
+.watch > summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.watch > summary::-webkit-details-marker { display: none; }
+.watch > summary::after { content: "▸"; color: var(--rule-2); }
+.watch[open] > summary::after { content: "▾"; }
+.watch > summary:hover { color: var(--ink-2); }
+.watch > summary:focus-visible { outline: 1px solid var(--brand); outline-offset: 3px; }
+.watch ul { margin-top: 4px; }
 .more > summary,
 .general > summary {
   cursor: pointer;

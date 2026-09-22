@@ -531,6 +531,87 @@ def default_visible(items, day, cited):
     return out
 
 
+def watch_key(text):
+    """İzleme kalemini günler arası eşleştiren kaba anahtar.
+
+    Kalemin kuyruğu ("— bekliyor. …") her gün değişebiliyor; kimliği baştaki
+    adı. Kimlik numarası konumsal olduğu için anahtarın parçası olamaz.
+    """
+    head = re.split(r"—|\(", text)[0]
+    head = re.sub(r"^\W*G\d+\s*·?\s*", "", head.strip())
+    head = re.sub(r"[^\w\s]", " ", head.lower())
+    return " ".join(head.split())[:45]
+
+
+def watch_items(body):
+    """İZLEME LİSTESİ maddeleri: {anahtar: ham satır}."""
+    block = re.search(r"##\s*İZLEME LİSTESİ\s*\n(.*?)(?=\n##|\Z)", body, re.S)
+    if not block:
+        return {}
+    items = {}
+    for line in block.group(1).split("\n"):
+        if not line.strip().startswith("-"):
+            continue
+        text = re.sub(r"\s+", " ", line).strip("- ").strip()
+        key = watch_key(text)
+        if key:
+            items[key] = text
+    return items
+
+
+def watch_history(sources):
+    """Her gün için {anahtar: kaç gündür kesintisiz listede} ve o gün düşen adlar.
+
+    Yaş ajandan sorulmuyor, kendi geçmiş raporlarından sayılıyor: ajan bir
+    kalemi kaç gündür taşıdığını bilmiyor, build biliyor.
+    """
+    ages, dropped = {}, {}
+    prev_ages, prev_items = {}, {}
+    for iso, _meta, body in sources:
+        today = watch_items(body)
+        cur, matched = {}, set()
+        for key in today:
+            old = watch_match(key, prev_items)
+            if old:
+                matched.add(old)
+            cur[key] = prev_ages.get(old, 0) + 1 if old else 1
+        ages[iso] = cur
+        # Düşüş de bir olaydır: sessizce kaybolan kalem hiç olmamış gibi olur.
+        dropped[iso] = [watch_label(v) for k, v in prev_items.items() if k not in matched]
+        prev_ages, prev_items = cur, today
+    return ages, dropped
+
+
+def watch_match(key, previous):
+    """Dünün hangi kalemi bu? Ajan ifadeyi her gün biraz değiştiriyor.
+
+    Tam eşitlik ararsak "…ayrı hedef sınıfı" ile "…şartnamelerde ayrı hedef
+    sınıfı" iki ayrı kalem sayılıyor: biri düşmüş biri yeni doğmuş görünüyor
+    ve ikisi de yalan. Kelime örtüşmesi bu kaymaya dayanıyor.
+    """
+    if key in previous:
+        return key
+    words = set(key.split())
+    if not words:
+        return None
+    best, score = None, 0.0
+    for old in previous:
+        ow = set(old.split())
+        if not ow:
+            continue
+        overlap = len(words & ow) / max(len(words), len(ow))
+        if overlap > score:
+            best, score = old, overlap
+    return best if score >= 0.6 else None
+
+
+def watch_label(text):
+    """Ham satırdan görünen adı çıkar: kimlik, durum ve açıklama olmadan."""
+    head = re.split(r"—", text)[0]
+    head = re.sub(r"^\W*G\d+\s*·?\s*", "", head.strip())
+    return re.sub(r"[*_`]", "", head).strip(" .")
+
+
 def load_news():
     """One file per day, written by scripts/collect_news.py."""
     days = {}

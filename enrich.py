@@ -278,6 +278,56 @@ def link_citations(text, dev_ids, has_alarms=True, dev_labels=None):
     return "".join(out)
 
 
+def fold_watchlist(text):
+    """İZLEME LİSTESİ: kımıldayan okuma yolunda, kımıldamayan katlamada.
+
+    Bölümün iki işi var ve yalnızca biri günlük: "izlediğin bir iplik kımıldadı"
+    günlüktür, "hâlâ açık olan her şey" referanstır — referans danışılır,
+    ezbere okunmaz. 29 satırın 3'ü üründü; okuyucudan değişeni bulmak için
+    hafızanın tamamını okuması isteniyordu.
+
+    Katlamada "bekliyor" da yazılmaz: oradaki her kalem tanımı gereği bekliyor,
+    durumu satır satır tekrarlamak normal bir hâli N kez duyurmak olur. Yapı
+    durumu zaten kodluyor.
+    """
+    def section(m):
+        head, body = m.group(1), m.group(2)
+        items = re.findall(r"<li\b.*?</li>", body, re.S)
+        if not items:
+            return m.group(0)
+        moved, waiting = [], []
+        for li in items:
+            plain = re.sub(r"<[^>]+>", " ", li)
+            (waiting if re.search(r"\bbekliyor\b", plain, re.I) else moved).append(li)
+        if not waiting:
+            return m.group(0)
+
+        rest = re.sub(r"<(?:p|ul|ol)\b.*?</(?:p|ul|ol)>", "", body, flags=re.S).strip()
+        out = [head]
+        if moved:
+            out.append("<ul>" + "".join(moved) + "</ul>")
+        out.append(
+            f'<details class="watch"><summary>Bekleyen başlıklar '
+            f'<span class="num">{len(waiting)}</span></summary><ul>'
+            + "".join(strip_waiting(li) for li in waiting)
+            + "</ul></details>"
+        )
+        return "".join(out) + rest
+
+    return re.sub(r'(<h2[^>]*>İZLEME LİSTESİ</h2>)(.*?)(?=<h2|\Z)', section, text, flags=re.S)
+
+
+def strip_waiting(li):
+    """Katlanan satırdan yalnızca durum kelimesini at.
+
+    Katlamadaki her kalem tanımı gereği bekliyor; durumu satır satır
+    tekrarlamak normal bir hâli N kez duyurmaktır. Ama yalnızca o kelime:
+    "hangi kalibreler anıldı" gibi cümleleri regexle silmeye kalkmak,
+    ajanın yazdığı gerçek bilgiyi kör bir kuralla çöpe atmak olurdu.
+    """
+    return re.sub(r"\s*—\s*(?:<em>)?\s*bekliyor\.?\s*(?:</em>)?", " ", li, flags=re.I)
+
+
 def fold_appendix(text):
     """EK: Katılımcı listeleri — collapsed, with the count taken from its first (n)."""
     m = re.search(r'<h2 id="ek">(.*?)</h2>', text, re.S)
@@ -376,7 +426,7 @@ def enrich(text, developments, alarm=False):
     text = add_summary_links(text, dev_ids)
     text = add_table_badges(text, dev_ids)
     text = link_citations(text, dev_ids, 'id="alarmlar"' in text, dev_labels)
-    return fold_appendix(rename_headers(text))
+    return fold_appendix(fold_watchlist(rename_headers(text)))
 
 
 def nav(developments):
