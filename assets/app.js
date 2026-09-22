@@ -714,33 +714,40 @@
 /* Oyuncular sayfasında segment süzgeci.
 
    Kupür sayfasındaki kategori şeridiyle aynı fikir: liste uzun, okuyucu
-   çoğu zaman tek bir segmentle ilgileniyor. Grup başlıklarının sayısı da
-   süzülüyor — süzülmüş bir listenin üstünde süzülmemiş bir sayı durursa
-   sayı neyi saydığını söylememiş olur. */
+   çoğu zaman tek bir segmentle ilgileniyor. Üstteki üç sayı da süzülüyor —
+   "Hafif silah" seçiliyken "Bugün 5" yazmak, ekranda olmayan bir kümeyi
+   saymak olurdu. Sayı neyi saydığını söylemiyorsa yanlış sayıdır. */
 (function () {
   "use strict";
 
   var strip = document.querySelector(".pchips");
+  var tally = document.getElementById("ptally");
   if (!strip) return;
   var chips = Array.prototype.slice.call(strip.querySelectorAll(".pchip"));
   var rows = Array.prototype.slice.call(document.querySelectorAll(".player-row"));
+  var cells = {};
+  if (tally) {
+    Array.prototype.slice.call(tally.querySelectorAll("[data-tally]"))
+      .forEach(function (el) { cells[el.getAttribute("data-tally")] = el; });
+  }
 
   function apply(seg) {
-    rows.forEach(function (row) {
+    var live = rows.filter(function (row) {
       var segs = (row.getAttribute("data-seg") || "").split(/\s+/);
       row.hidden = !!seg && segs.indexOf(seg) === -1;
+      return !row.hidden;
     });
-    // Başlık sayısı, o grupta görünen satır sayısı.
-    Array.prototype.slice.call(document.querySelectorAll(".rival-head"))
-      .forEach(function (head) {
-        var list = head.nextElementSibling;
-        while (list && list.tagName !== "UL") list = list.nextElementSibling;
-        if (!list) return;
-        var live = Array.prototype.slice.call(list.querySelectorAll(".player-row"))
-          .filter(function (r) { return !r.hidden; }).length;
-        var badge = head.querySelector(".group-count");
-        if (badge) badge.textContent = live;
-      });
+    if (cells.all) cells.all.textContent = live.length;
+    if (cells.today) {
+      cells.today.textContent = live.filter(function (r) {
+        return r.getAttribute("data-today") === "1";
+      }).length;
+    }
+    if (cells.seen) {
+      cells.seen.textContent = live.filter(function (r) {
+        return r.getAttribute("data-seen") === "1";
+      }).length;
+    }
     chips.forEach(function (c) {
       c.classList.toggle("pchip--on", (c.getAttribute("data-seg") || "") === seg);
     });

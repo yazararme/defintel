@@ -961,20 +961,18 @@ def thread_page(th, latest):
     )
 
 
-PLAYER_GROUPS = [
-    ("rakip", "Uluslararası rakipler", ""),
-    ("yerli-rakip", "Yerli rakipler", ""),
-    ("emsal", "Türk sanayi emsalleri", "Kıyaslama için izleniyor; rakip sayılmıyor."),
-]
-
-
 def players_page(hist):
     """/oyuncular.html — kim, hangi segmentte, en son ne zaman, kaç kez.
 
-    Eski hâli 64 çıplak addı: ne tarih, ne segment, ne bağlantı. "5 / 64"
-    beşinin kımıldadığını söylüyordu ama hangi beşi olduğunu değil — yani
-    okuyucunun yapabileceği hiçbir şey yoktu. Satır artık dört şey taşıyor
-    ve dördü de türetilmiş: ad, segmentler, son görülme, 30 günlük sayı.
+    Tek liste, sıklığa göre. Bir süre üç başlık altında duruyordu —
+    "Uluslararası rakipler", "Yerli rakipler", "Türk sanayi emsalleri" — ama
+    Rev 18'de ray başlığı tam da bu yüzden kaldırılmıştı: ürünün kimin rakip
+    olduğuna karar verme yetkisi yok. Başlığı raydan kaldırıp sayfada üç
+    tane bırakmak, aynı beyanı daha yüksek sesle yapmaktı.
+
+    Sıra artık ilişkiyi değil olguyu yansıtıyor: bu ay kimin adı kaç kez
+    geçti. Türk ve yabancı iç içe, çünkü okuyucunun sorusu "kim aktif",
+    "kim bizden" değil.
 
     Görülmemiş şirketin jetonu yok. Boşluk bir eksiklik değil, ifadenin
     kendisi: "bu ada bakıyoruz ve bu ayda hiç geçmedi".
@@ -1000,7 +998,8 @@ def players_page(hist):
         cnt = f'<span class="pcount num">{n} kez</span>' if n else ""
         return (
             f'<li class="player-row{"" if son else " player-row--quiet"}"'
-            f' data-seg="{" ".join(segs)}">'
+            f' data-seg="{" ".join(segs)}"'
+            f' data-today="{1 if gap == 0 else 0}" data-seen="{1 if n else 0}">'
             f'<a class="pname" href="/arsiv.html?q={urlparse.quote(rival["name"])}">'
             f'{html.escape(rival["name"])}</a>'
             f'<span class="ptags">{tags}</span>{age}{cnt}</li>'
@@ -1009,22 +1008,11 @@ def players_page(hist):
     def sort_key(rival):
         e = hist.get(rival["id"], {})
         son = e.get("son") or ""
-        return (0 if son else 1,
+        return (-(e.get("sayi_30g") or 0),
                 -_dt.date.fromisoformat(son).toordinal() if son else 0,
-                -(e.get("sayi_30g") or 0), order[rival["id"]])
+                order[rival["id"]])
 
-    blocks = []
-    for role, title, note in PLAYER_GROUPS:
-        members = sorted((r for r in config if r.get("role", "rakip") == role), key=sort_key)
-        if not members:
-            continue
-        blocks.append(
-            f'<h2 class="rival-head" data-group="{role}">{title} '
-            f'<span class="num group-count">{len(members)}</span></h2>'
-            + (f'<p class="thread-meta">{note}</p>' if note else "")
-            + f'<ul class="player-list">{"".join(row(r) for r in members)}</ul>'
-        )
-
+    rows = "".join(row(r) for r in sorted(config, key=sort_key))
     chips = "".join(
         f'<button class="chip pchip" type="button" data-seg="{k}">'
         f'{html.escape(v)}</button>' for k, v in labels.items())
@@ -1036,13 +1024,14 @@ def players_page(hist):
         + f"""<main class="wrap thread">
   <p class="kicker">Referans</p>
   <h1 class="report-title">Oyuncular</h1>
-  <p class="thread-meta num">Bugün <strong>{seen_today}</strong> ·
-    son {WINDOW_DAYS} günde <strong>{seen_30}</strong> ·
-    izlenen <strong>{len(config)}</strong></p>
+  <p class="thread-meta num" id="ptally">Bugün
+    <strong data-tally="today">{seen_today}</strong> ·
+    son {WINDOW_DAYS} günde <strong data-tally="seen">{seen_30}</strong> ·
+    izlenen <strong data-tally="all">{len(config)}</strong></p>
   <nav class="devnav pchips" aria-label="Segment">
     <button class="chip pchip pchip--on" type="button" data-seg="">Tümü</button>{chips}
   </nav>
-  {"".join(blocks)}
+  <ul class="player-list">{rows}</ul>
   <nav class="endnav" aria-label="Devam"><span class="wrap endnav-inner">
     <a class="endnav-go" href="/">Bugünün brifingi →</a>
     <a class="endnav-go" href="/arsiv.html">Tüm raporlar</a>
