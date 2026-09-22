@@ -421,6 +421,31 @@ def drop_mke_agenda(text):
     return re.sub(r'<h2[^>]*>\s*MKE\s+GÜNDEM[İI].*?</h2>.*?(?=<h2|\Z)', "", text, flags=re.S)
 
 
+SCAN_NOTE = "Bu rapor dar kapsamla hazırlandı; günün başlık taraması yapılamadı."
+
+
+def move_scan_note(text):
+    """Tepedeki "aday listesi üretilmedi" notunu kaldır, kaynakların sonuna tek satır koy.
+
+    Kapsamın dar olduğu gerçeği kalıyor — okuyucu 500 değil 30 başlıktan
+    süzülmüş bir raporu okuduğunu bilmeli. Giden şey operatör jargonu ve
+    alarmların üstündeki yeri.
+
+    Bu bir kez kaynak dosyalarda elle düzeltilmişti; ertesi sabah Drive'dan
+    gelen çekim üzerine yazdı. Yayınlanmış kaydı elle düzeltmek yanlış katman:
+    kayıt ajanın yazdığı şeydir, sunum build'in işi.
+    """
+    note = re.compile(r"<(blockquote|p)>\s*(?:<p>)?\s*Aday listesi üretilmedi.*?</\1>", re.S)
+    if not note.search(text):
+        return text
+    text = note.sub("", text, count=1)
+    line = f'<p class="scan-note">{SCAN_NOTE}</p>'
+    # EK varsa ondan önce; yoksa belgenin sonuna.
+    if '<h2 id="ek">' in text:
+        return text.replace('<h2 id="ek">', line + '<h2 id="ek">', 1)
+    return text + line
+
+
 def rename_headers(text):
     for old, new in HEADER_RENAMES.items():
         text = text.replace(f"<th>{old}</th>", f"<th>{new}</th>")
@@ -446,7 +471,7 @@ def enrich(text, developments, alarm=False):
     text = add_summary_links(text, dev_ids)
     text = add_table_badges(text, dev_ids)
     text = link_citations(text, dev_ids, 'id="alarmlar"' in text, dev_labels)
-    return fold_appendix(fold_watchlist(rename_headers(text)))
+    return fold_appendix(fold_watchlist(move_scan_note(rename_headers(text))))
 
 
 def nav(body_html):
