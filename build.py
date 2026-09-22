@@ -174,15 +174,20 @@ def head(title, depth=0, canonical="", day=""):
 """
 
 
-def masthead(up="", home=False):
+def masthead(home=False):
     """Künye. Kökteyken logo bağlantı değil: zaten oradasın.
 
     Kök bugünün brifingi, yani logo oraya götürüyor — ama kök sayfadayken
     tıklayınca hiçbir şey olmuyordu ve bu, bozuk bir bağlantı gibi okunuyor.
     Götüremeyeceği bir yer vaat etmeyen tek doğru şekil: düz metin.
+
+    Bağlantı olduğu her yerde aynı: "/". Göreli adres her dizinde yeniden
+    hesaplanıyordu ve derinliği yanlış geçen tek çağrı sessizce kırık bir
+    logo üretiyordu — sayfanın geri kalanı çalıştığı için de fark edilmiyor.
+    Site kök alan adında duruyor, o yüzden hesaplanacak bir şey yok.
     """
     mark = (f'<span class="wordmark wordmark--here">{SITE_NAME}</span>' if home
-            else f'<a class="wordmark" href="{up}index.html">{SITE_NAME}</a>')
+            else f'<a class="wordmark" href="/">{SITE_NAME}</a>')
     return f"""<header class="masthead">
   <div class="wrap masthead-inner">
     {mark}
@@ -420,7 +425,7 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
 
     return (
         head(f"{title} — {SITE_NAME}", depth=depth, canonical=canonical, day=iso)
-        + masthead(up=up, home=depth == 0)
+        + masthead(home=depth == 0)
         + daybar("report", iso, prev_day, next_day, cross_day, up=up)
         + f"""<main class="wrap report{' report--alarm' if meta.get('alarm') else ''}">
   <div class="report-grid">
@@ -816,7 +821,7 @@ def thread_page(th, latest):
           "bir hareket olmadı.</li>")
     return (
         head(f'{th["name"]} — izleme — {SITE_NAME}', depth=1)
-        + masthead(up="../")
+        + masthead()
         + f"""<main class="wrap thread">
   <p class="kicker">İzleme dosyası</p>
   <h1 class="report-title">{html.escape(th["name"])}</h1>
@@ -861,7 +866,7 @@ def thread_index(threads, latest):
     open_n = counts["open"]
     return (
         head(f"İzleme dosyaları — {SITE_NAME}", depth=1)
-        + masthead(up="../")
+        + masthead()
         + f"""<main class="wrap thread">
   <h1 class="report-title">İzleme dosyaları</h1>
   <p class="thread-meta"><span class="num">{counts["open"]}</span> açık ·
@@ -1091,7 +1096,7 @@ def build_news_page(day, data, prev_day, next_day, has_report, cited):
     )
     return (
         head(f"Medya takibi · {tr_date(day)} — {SITE_NAME}", depth=1)
-        + masthead(up="../")
+        + masthead()
         + daybar("news", day, prev_day, next_day, day if has_report else None, up="../")
         + f"""<main class="wrap news">
   <div class="news-head">
