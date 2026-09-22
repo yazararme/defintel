@@ -120,7 +120,7 @@ def label_table_cells(table_html):
     return table_html[: body.start()] + labelled + table_html[body.end():]
 
 
-def render_body(md_text, developments=()):
+def render_body(md_text, developments=(), alarm=False):
     # A bullet list that starts right under a bold lead-in ("**Taşınanlar:**")
     # would otherwise stay inside that paragraph; give it the blank line it needs.
     md_text = re.sub(
@@ -130,7 +130,7 @@ def render_body(md_text, developments=()):
     )
     md = markdown.Markdown(extensions=["tables", "fenced_code", "attr_list", "sane_lists"])
     out = md.convert(md_text)
-    out = enrich.enrich(out, developments)
+    out = enrich.enrich(out, developments, alarm)
     out = re.sub(r"<table>.*?</table>", lambda m: label_table_cells(m.group(0)), out, flags=re.S)
     out = out.replace("<table>", '<div class="table-wrap"><table>')
     out = out.replace("</table>", "</table></div>")
@@ -830,7 +830,7 @@ def main():
     reports = []
     for i, (iso, meta, body) in enumerate(sources):
         developments = meta.get("developments") or []
-        body_html = render_body(body, developments)
+        body_html = render_body(body, developments, bool(meta.get("alarm")))
         page = build_report(
             meta, body_html, iso,
             sources[i - 1][0] if i else None,

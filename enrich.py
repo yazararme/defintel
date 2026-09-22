@@ -262,6 +262,42 @@ HEADER_RENAMES = {
 }
 
 
+# "Alarm yok", "Alarm bulunmuyor", "**Alarm yok.**" — hepsi aynı boş kanal.
+ALARM_EMPTY = re.compile(r"^\s*alarm\s+(?:yok|bulunmuyor)", re.I)
+
+
+def drop_empty_alarms(text, alarm):
+    """alarm: false ise boş ALARMLAR bloğunu kaldır — isteme değil, alana bakarak.
+
+    Bunu prompta bırakmak kararı olasılıklı yapardı: ajan her sabah yeniden
+    hatırlamak zorunda kalırdı. alarm alanı zaten makine okunur, karar da
+    burada deterministik olarak veriliyor — HEADER_RENAMES'te olduğu gibi.
+
+    Blok dolu görünüyorsa dokunulmuyor: ajan alarm alanını yanlış işaretlemişse
+    doğru davranış metni sessizce silmek değil, göstermektir.
+    """
+    if alarm:
+        return text
+
+    dropped = [False]
+
+    def cut(m):
+        body = re.sub(r"<[^>]+>", " ", m.group(2)).strip()
+        if not ALARM_EMPTY.match(body):
+            return m.group(0)
+        dropped[0] = True
+        return ""
+
+    text = re.sub(r'(<h2 id="alarmlar">.*?</h2>)(.*?)(?=<h2|\Z)', cut, text, flags=re.S)
+    if dropped[0]:
+        # Bölüm gidince "Yanıt süresi için bkz. ALARMLAR." hedefi olmayan bir
+        # cümleye dönüşüyor. Bağlantısız bırakmak yetmez: okuyucuyu olmayan bir
+        # yere yolluyor. Cümlenin tamamı kalkar — taşıdığı olgu zaten dokuz
+        # gündür donmuş olan son tarihti.
+        text = re.sub(r"\s*[^.<>]*\bbkz\.\s*ALARMLAR\s*\.?", "", text)
+    return text
+
+
 def rename_headers(text):
     for old, new in HEADER_RENAMES.items():
         text = text.replace(f"<th>{old}</th>", f"<th>{new}</th>")
@@ -269,9 +305,13 @@ def rename_headers(text):
     return text
 
 
-def enrich(text, developments):
+def enrich(text, developments, alarm=False):
     dev_ids = {str(d.get("id", "")).lower() for d in developments if d.get("id")}
     text = add_heading_anchors(text)
+    # Çapalar kurulduktan hemen sonra: silinen blokla birlikte ona giden
+    # atıflar da kendiliğinden bağlantısız kalıyor (link_citations bunu
+    # metinde id var mı diye okuyor).
+    text = drop_empty_alarms(text, alarm)
     text = add_item_anchors(text)
     text = add_source_anchors(text)
     text = add_table_badges(text, dev_ids)
