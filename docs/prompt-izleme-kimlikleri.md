@@ -7,9 +7,11 @@ adla yazılıp iki ayrı iplik sayfasına bölünmesini durdurmak.
 ---
 
 **İzleme kalemlerinin kalıcı kimliği.** Raporu yazmaya başlamadan önce
-`https://defintel.shadovi.com/data/threads.json` adresini oku: bu, hâlâ açık olan
+`https://defintel.shadovi.com/data/threads.json` adresini oku: bu, kapanmamış
 izleme dosyalarının `{id, name, son_hareket}` listesidir ve her gece yeniden
-üretilir. Bugünkü İZLEME LİSTESİ'ne aldığın bir kalem bu listede varsa —
+üretilir. Son günlerde hareket görmemiş dosyalar da listede — bir kalem yeniden
+kımıldadığında eski kimliğiyle devam etsin diye. Bugünkü İZLEME LİSTESİ'ne
+aldığın bir kalem bu listede varsa —
 ifadeyi değiştirmiş olsan bile — **onun `id`'sini aynen kullan**; yeni kimlik
 uydurma. Listede yoksa yeni bir kimlik türet: küçük harf, yalnız a-z 0-9 ve
 tire, Türkçe harfler sadeleştirilmiş, en çok 48 karakter
