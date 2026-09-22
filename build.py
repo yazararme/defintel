@@ -38,6 +38,7 @@ NEWS_DATA = DATA / "news"
 
 SITE_NAME = "DEFINTEL"
 SITE_TAGLINE = "Savunma pazarı · günlük bülten"
+SITE_URL = "https://defintel.shadovi.com"
 # Push service (Cloudflare Worker). Empty string hides the notification button.
 PUSH_ENDPOINT = "https://defintel-push.yazararme-c30.workers.dev"
 VAPID_PUBLIC_KEY = "BLOHxsm23_gz-DmV0E9xyB3RVQTkCwv06uPv_pme7VApr61x_gnNGGPkTnEI3mNekR7lzZGxNL9hATzaaOYsEZo"
@@ -143,14 +144,14 @@ def asset(name):
     return f"assets/{name}?v={digest}"
 
 
-def head(title, depth=0):
+def head(title, depth=0, canonical=""):
     up = "../" * depth
     return f"""<!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="noindex, nofollow">{f'<link rel="canonical" href="{canonical}">' if canonical else ""}
 <title>{html.escape(title)}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -202,7 +203,7 @@ def daybar(kind, day, prev, nxt, cross_day, up=""):
     return f"""<nav class="daybar" aria-label="Gün gezinmesi">
   <div class="wrap daybar-inner">
     {arrow(prev, "‹", "Önceki gün")}
-    <a class="daybar-date num" href="{up}index.html">{tr_daybar(day)}</a>
+    <a class="daybar-date num" href="{up}arsiv.html">{tr_daybar(day)}</a>
     {arrow(nxt, "›", "Sonraki gün")}
     {cross if cross_day else missing}
   </div>
@@ -233,7 +234,7 @@ def endnav(kind, day, prev, cross_day, cross_count=None, up=""):
     else:
         links.append(f'<a class="endnav-go" href="{up}reports/{cross_day}.html">Bu günün brifingi →</a>')
 
-    links.append(f'<a class="endnav-go" href="{up}index.html">Tüm raporlar</a>')
+    links.append(f'<a class="endnav-go" href="{up}arsiv.html">Tüm raporlar</a>')
     return f"""<nav class="endnav" aria-label="Sayfa sonu">
   <div class="wrap endnav-inner">{"".join(links)}</div>
 </nav>
@@ -287,9 +288,87 @@ FOOT = """<footer class="foot">
 """
 
 
+HEADLINE_WARNINGS = []
+PUBLISHED = DATA / "published.json"
+
+
+def publish_times():
+    """{gün: 'HH:MM'} — ilk yayın anı, bir kez yazılır bir daha değişmez.
+
+    Saat build anından alınıyor ama kalıcı: yoksa her yeniden kurulum dokuz
+    günlük arşive bugünün saatini basardı, yani okuyucuya yalan söylerdi.
+    """
+    try:
+        return json.loads(PUBLISHED.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def stamp_publish(times, isos):
+    """Saati olmayan güne şimdiki saati yaz; olanı asla değiştirme."""
+    import datetime as _dt
+    from zoneinfo import ZoneInfo
+    now = _dt.datetime.now(ZoneInfo("Europe/Istanbul")).strftime("%H:%M")
+    changed = False
+    for iso in isos:
+        if iso not in times:
+            times[iso] = now
+            changed = True
+    if changed:
+        PUBLISHED.write_text(json.dumps(times, ensure_ascii=False, indent=1, sort_keys=True) + "\n",
+                             encoding="utf-8")
+    return times
+
+
+def summary_line(body):
+    """YÖNETİCİ ÖZETİ'nin ilk maddesi — bildirimin gövdesi.
+
+    Manşet sekmede ve arşiv kartında zaten var; bildirimde tekrar etmek yerine
+    günün en önemli tek cümlesini taşımak daha çok şey söylüyor.
+    """
+    block = re.search(r"##\s*YÖNETİCİ ÖZETİ\s*\n(.*?)(?=\n##|\Z)", body, re.S)
+    if not block:
+        return ""
+    for line in block.group(1).split("\n"):
+        text = re.sub(r"^\s*(?:\d+[.)]|[-*])\s*", "", line).strip()
+        if not text:
+            continue
+        text = re.sub(r"^\*\*?G\d+\*\*?\s*[—-]\s*", "", text)
+        text = re.sub(r"^G\d+\s*[—-]\s*", "", text)
+        text = re.sub(r"[*_`\[\]]|\(bkz\.[^)]*\)", "", text).strip()
+        return text[:119].rstrip() + "…" if len(text) > 120 else text
+    return ""
+
+
+def guard_headline(title, iso=""):
+    """Tek gelişme, en çok 14 kelime — istemin sözüne değil yapıya bakarak.
+
+    Ajan "A; B" biçiminde iki gelişmeyi tek manşete sıkıştırıyordu: arşiv
+    kartında da, tarayıcı sekmesinde de, bildirimde de okunamayan bir dize
+    çıkıyordu. Kural promptta da var ama garanti burada: noktalı virgül
+    varsa ilkinden öncesi alınır.
+    """
+    text = " ".join(str(title or "").split())
+    if ";" in text:
+        warn = f"{iso}: manşette ';' vardı, ilk gelişme alındı"
+        if warn not in HEADLINE_WARNINGS:
+            HEADLINE_WARNINGS.append(warn)
+        text = text.split(";", 1)[0].strip().rstrip(",")
+    words = text.split()
+    if len(words) > 14:
+        warn = f"{iso}: manşet {len(words)} kelime (üst sınır 14)"
+        if warn not in HEADLINE_WARNINGS:
+            HEADLINE_WARNINGS.append(warn)
+    return text
+
+
 def build_report(meta, body_html, iso, prev_day=None, next_day=None,
-                 news_counts=None, mke_count=0):
-    title = meta.get("title") or f"{tr_date(iso)} raporu"
+                 news_counts=None, mke_count=0, published="", scan=None, depth=1):
+    title = guard_headline(meta.get("title"), iso) or f"{tr_date(iso)} raporu"
+    up = "../" * depth
+    # Kök sayfa bugünün brifingi; aynı belge iki adreste durduğu için
+    # kanonik olan tarihli olanıdır.
+    canonical = f"{SITE_URL}/reports/{iso}.html" if depth == 0 else ""
 
     banner = (
         f'<p class="alarmbar">{html.escape(str(meta.get("alarm_title") or "Alarm"))}</p>'
@@ -300,8 +379,21 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
     # clippings, so the rail only repeats what the reader just read.
     rail = [
         '<div class="rail-block rail-block--date"><span class="rail-label">Tarih</span>'
-        f'<span class="rail-value num">{tr_date(iso, weekday=True)}</span></div>'
+        f'<span class="rail-value num">{tr_date(iso, weekday=True)}</span>'
+        # Alışkanlık saate tutunur: her sabah aynı saatte orada olduğunu
+        # söylemeyen bir yayın, okuyucuya ne zaman bakacağını öğretemez.
+        + (f'<span class="rail-sub num">{published}\'de yayımlandı</span>' if published else "")
+        + '</div>'
     ]
+    # Emek kanıtı: raporun arkasında kaç kaynak ve kaç başlık durduğu.
+    # Veri yoksa basılmaz — bilinmiyor sıfır değildir.
+    if scan:
+        rail.append(
+            '<div class="rail-block"><span class="rail-label">Tarama</span>'
+            f'<span class="rail-value"><a href="{up}haberler/{iso}.html">'
+            f'<span class="num">{scan[0]}</span> kaynak · '
+            f'<span class="num">{scan[1]}</span> başlık →</a></span></div>'
+        )
     # Tarama üstverisi — bölüm değil. Taşıdığı şey tek bir sayı ve anlamı
     # "sana da baktık, ama konumuz bu değil": bir tamlık işareti. Sıfırda
     # hiçbir şey basılmaz, çünkü sıfırın gidecek yeri yoktur — kategori boşsa
@@ -309,7 +401,7 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
     if mke_count:
         rail.append(
             '<div class="rail-block"><span class="rail-label">MKE gündemi</span>'
-            f'<span class="rail-value"><a href="../haberler/{iso}.html#{cat_id("MKE")}">'
+            f'<span class="rail-value"><a href="{up}haberler/{iso}.html#{cat_id("MKE")}">'
             f'<span class="num">{mke_count}</span> başlık →</a></span></div>'
         )
 
@@ -317,9 +409,9 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
     cross_day = iso if iso in news_counts else None
 
     return (
-        head(f"{title} — {SITE_NAME}", depth=1)
-        + masthead(up="../")
-        + daybar("report", iso, prev_day, next_day, cross_day, up="../")
+        head(f"{title} — {SITE_NAME}", depth=depth, canonical=canonical)
+        + masthead(up=up)
+        + daybar("report", iso, prev_day, next_day, cross_day, up=up)
         + f"""<main class="wrap report">
   <div class="report-grid">
     <aside class="rail{' rail--rich' if len(rail) > 1 else ''}">{''.join(rail)}</aside>
@@ -334,9 +426,9 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
   </div>
 </main>
 """
-        + endnav("report", iso, prev_day, cross_day, news_counts.get(iso), up="../")
+        + endnav("report", iso, prev_day, cross_day, news_counts.get(iso), up=up)
         + PROMPTS
-        + f'<script src="../{asset("app.js")}" defer></script>\n'
+        + f'<script src="{up}{asset("app.js")}" defer></script>\n'
         + FOOT
     )
 
@@ -816,7 +908,7 @@ def build_news_page(day, data, prev_day, next_day, has_report, cited):
 """
         + endnav("news", day, prev_day, day if has_report else None, up="../")
         + PROMPTS
-        + f'<script src="../{asset("app.js")}" defer></script>\n'
+        + f'<script src="{up}{asset("app.js")}" defer></script>\n'
         + FOOT
     )
 
@@ -910,6 +1002,13 @@ def main():
     news_counts = {day: data.get("unique_items", 0) for day, data in news.items()}
     # Sayılabilen şeyi build sayar: ajan aday listesinden bir sayıyı elle
     # kopyalıyordu ve yanlış saysa kimse çapraz kontrol etmezdi.
+    # Emek kanıtı: o günün taraması kaç kaynak okudu, kaç başlık buldu.
+    scan_counts = {
+        day: (data.get("scanned_sources", 0) - data.get("failed_sources", 0),
+              data.get("unique_items", 0))
+        for day, data in news.items()
+        if data.get("unique_items")
+    }
     mke_counts = {
         day: sum(1 for i in data.get("items", []) if i.get("category") == "MKE")
         for day, data in news.items()
@@ -925,6 +1024,8 @@ def main():
             continue
         sources.append((path.stem, meta, body))
 
+    published = stamp_publish(publish_times(), [iso for iso, _m, _b in sources])
+
     reports = []
     for i, (iso, meta, body) in enumerate(sources):
         developments = meta.get("developments") or []
@@ -935,6 +1036,8 @@ def main():
             sources[i + 1][0] if i + 1 < len(sources) else None,
             news_counts,
             mke_counts.get(iso, 0),
+            published.get(iso, ""),
+            scan_counts.get(iso),
         )
         # Atıf kanonik kalmalı: [K#] yayıncının kendi sayfasını gösterir, vekili
         # değil. Okuma yolu ayrı bir çipte durur — o yüzden koruma "KAYNAKLAR
@@ -947,8 +1050,9 @@ def main():
         reports.append(
             {
                 "date": iso,
-                "title": meta.get("title", ""),
+                "title": guard_headline(meta.get("title"), iso),
                 "summary": meta.get("summary", ""),
+                "lead": summary_line(body),
                 "alarm": bool(meta.get("alarm")),
                 "alarm_title": meta.get("alarm_title", ""),
                 "tags": [str(t) for t in meta.get("tags", [])],
@@ -986,18 +1090,32 @@ def main():
                 f" · {hits} brifing atıflı)"
             )
 
-    (ROOT / "index.html").write_text(
+    (ROOT / "arsiv.html").write_text(
         build_index(reports, version, news_counts), encoding="utf-8"
     )
+    # Kök = bugünün brifingi. Kurulu uygulamayı açan okuyucu bir dizinle değil
+    # o günün raporuyla karşılaşır; arşiv bir tık ötede durur.
+    if sources:
+        iso, meta, body = sources[-1]
+        body_html = render_body(body, meta.get("developments") or [],
+                                bool(meta.get("alarm")), iso)
+        (ROOT / "index.html").write_text(
+            build_report(meta, body_html, iso,
+                         sources[-2][0] if len(sources) > 1 else None, None,
+                         news_counts, mke_counts.get(iso, 0),
+                         published.get(iso, ""), scan_counts.get(iso), depth=0),
+            encoding="utf-8")
     (ROOT / ".nojekyll").touch()
 
+    for w in HEADLINE_WARNINGS:
+        print(f'  ! {w}')
     # Sessizce birikmesin: tarihi okunamayan kaynak, yaş jetonu alamıyor.
     if enrich.UNPARSED_DATES:
         print(f"  ! {len(enrich.UNPARSED_DATES)} kaynakta tarih okunamadı "
               f"(DD.MM.YYYY bekleniyor)")
         for entry in enrich.UNPARSED_DATES[:4]:
             print(f"      {entry}")
-    print(f"  · index.html  ({len(reports)} rapor)")
+    print(f"  · arsiv.html  ({len(reports)} rapor)  ·  index.html = {sources[-1][0] if sources else '—'}")
     print("  · data/reports.json")
 
 

@@ -84,6 +84,20 @@
     }
   }
 
+  function visitCount() {
+    // Bildirim daveti ikinci ziyarette çıkar: ilk gelen okuyucu ürünün ne
+    // olduğunu henüz bilmiyor, ikinci gelen geri dönmeyi seçmiş demektir.
+    try {
+      var n = Number(localStorage.getItem("defintel:visits") || 0) + 1;
+      localStorage.setItem("defintel:visits", String(n));
+      return n;
+    } catch (e) {
+      return 1;
+    }
+  }
+
+  var VISITS = visitCount();
+
   function installed() {
     return (
       (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) ||
@@ -219,7 +233,12 @@
     card.setAttribute("data-state", "failed");
   }
 
-  if (card && pushReady && installed() && Notification.permission === "default" && !snoozed("defintel:notify")) {
+  // iOS'ta Notification API yalnızca ana ekrana eklenmiş uygulamada var, o
+  // yüzden orada kurulum şart kalıyor. Android ve masaüstünde tarayıcı
+  // sekmesi yeterli: kurulum basamağını beklemek hunideki en büyük kayıptı.
+  var cardEligible = pushReady && (installed() || !isIOS()) && VISITS >= 2;
+
+  if (card && cardEligible && Notification.permission === "default" && !snoozed("defintel:notify")) {
     navigator.serviceWorker.ready.then(function (reg) {
       return reg.pushManager.getSubscription();
     }).then(function (sub) {
@@ -338,9 +357,19 @@
     setTimeout(function () { el.classList.remove("flash"); }, 2000);
   }
 
+  function openAncestors(el) {
+    // Hedef kapalı bir katlamanın içindeyse önce onu aç: kaynakça ve
+    // "bekleyen başlıklar" katlandıktan sonra [K3] ya da bir izleme adı
+    // hâlâ oraya götürmeli, yol kısalmamalı.
+    for (var p = el; p; p = p.parentElement) {
+      if (p.tagName === "DETAILS" && !p.open) p.open = true;
+    }
+  }
+
   function goTo(id, push) {
     var el = document.getElementById(id);
     if (!el) return;
+    openAncestors(el);
     var before = window.scrollY;
     // scroll-margin-top (CSS) keeps the sticky strip from covering the target
     try {
@@ -371,10 +400,22 @@
     });
   }
 
+  // Belge içi her çapa aynı yoldan gider: katlamayı aç, sonra kaydır.
+  // Tarayıcının kendi atlaması kapalı <details> içini bulamıyor.
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || a.closest(".devnav")) return;     // şerit kendi işleyicisinde
+    var id = a.getAttribute("href").slice(1);
+    if (!id || !document.getElementById(id)) return;
+    e.preventDefault();
+    goTo(id, true);
+  });
+
   // #g9 gibi katlı bir gruptaki çapayla açılırsa grubu aç ve hedefe git
   function fromHash() {
     var id = (location.hash || "").slice(1);
     if (!id || !document.getElementById(id)) return;
+    openAncestors(document.getElementById(id));
     setTimeout(function () { goTo(id, false); }, 60);
 
     // Web fonts land after the first paint and move everything down a little;

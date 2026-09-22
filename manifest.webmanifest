@@ -2,7 +2,7 @@
   "name": "DEFINTEL — Savunma pazarı · günlük bülten",
   "short_name": "DEFINTEL",
   "lang": "tr",
-  "start_url": "./index.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#2F4C3B",

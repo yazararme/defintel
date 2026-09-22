@@ -2,7 +2,7 @@
 // Pages and the report index: network first, so a new day's report shows up
 // as soon as it is published; the cached copy is used only when offline.
 // Styles, scripts and icons: served from cache, refreshed in the background.
-const CACHE = "defintel-v33";
+const CACHE = "defintel-v34";
 
 self.addEventListener("install", () => self.skipWaiting());
 
@@ -39,11 +39,15 @@ self.addEventListener("push", (event) => {
         const list = await res.json();
         if (list.length) {
           const r = list[0];
-          title = r.alarm ? "⚠️ " + r.title : r.title;
-          body = new Intl.DateTimeFormat("tr-TR", { day: "numeric", month: "long" }).format(
-            new Date(r.date + "T00:00:00")
-          );
-          if (r.alarm && r.alarm_title) body += " · " + r.alarm_title;
+          // Başlık günü söyler, gövde günün en önemli tek cümlesini. Manşet
+          // sekmede ve arşiv kartında zaten var; bildirimde tekrar etmek
+          // yerine okuyucuya karar verdirecek cümleyi taşıyoruz.
+          const day = new Intl.DateTimeFormat("tr-TR", {
+            day: "numeric", month: "long", year: "numeric",
+          }).format(new Date(r.date + "T00:00:00"));
+          title = r.alarm ? "⚠️ Alarm · " + day : day;
+          body = (r.lead || r.summary || r.title || "").slice(0, 120);
+          if (r.alarm && r.alarm_title) body = r.alarm_title + " — " + body;
           url = "./" + r.path;
         }
       } catch {

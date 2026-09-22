@@ -432,6 +432,26 @@ def strip_waiting(li):
     return re.sub(r"\s*—\s*(?:<em>)?\s*bekliyor\.?\s*(?:</em>)?", " ", li, flags=re.I)
 
 
+def fold_sources(text):
+    """KAYNAKLAR'ı katla: referans danışılır, okuma yolunu tıkamaz.
+
+    On altı girdi, her biri tarih, yaş ve iki kapı taşıyor — belgenin en uzun
+    ve en az okunan bölümü. [K#] atfı yine oraya götürüyor; kapalı bir katlama
+    hedefi içeriyorsa açılıyor (app.js), yani yol kısalmıyor, yalnızca
+    okuma çizgisi temizleniyor.
+    """
+    def wrap(m):
+        head, body = m.group(1), m.group(2)
+        count = len(re.findall(r'<li id="k\d+"', body))
+        label = re.sub(r"<[^>]+>", "", head).strip()
+        return (f'<details class="refs" id="kaynaklar-fold"><summary class="kicker">{label}'
+                f' <span class="kicker-count num">{count}</span></summary>'
+                f'{head.replace("<h2 ", "<h2 hidden ")}{body}</details>')
+
+    return re.sub(r'(<h2 id="kaynaklar">.*?</h2>)(.*?)(?=<h2|<details class="appendix"|\Z)',
+                  wrap, text, flags=re.S)
+
+
 def fold_appendix(text):
     """EK: Katılımcı listeleri — collapsed, with the count taken from its first (n)."""
     m = re.search(r'<h2 id="ek">(.*?)</h2>', text, re.S)
@@ -505,6 +525,29 @@ def drop_mke_agenda(text):
     return re.sub(r'<h2[^>]*>\s*MKE\s+GÜNDEM[İI].*?</h2>.*?(?=<h2|\Z)', "", text, flags=re.S)
 
 
+# Okuma sırası: karar önce, gerekçe sonra. Yönetici özeti ne olduğunu söyler,
+# Fırsatlar/Riskler ne anlama geldiğini; gelişmelerin tam anlatımı ikisinin
+# ardından gelir. Ajan hâlâ kendi sırasıyla yazıyor, sıra burada kuruluyor.
+SECTION_ORDER = ["alarmlar", "ozet", "firsatlar", "riskler", "gelismeler",
+                 "rakip-hareketleri", "izleme-listesi", "kaynaklar", "ek"]
+
+
+def reorder_sections(text):
+    """Bölümleri okuma sırasına diz; listede olmayan bölüm yerinde kalır."""
+    parts = re.split(r'(?=<h2 id="[^"]+">)', text)
+    if len(parts) < 3:
+        return text
+    lead, blocks = parts[0], parts[1:]
+    keyed = []
+    for b in blocks:
+        m = re.match(r'<h2 id="([^"]+)">', b)
+        sid = m.group(1) if m else ""
+        keyed.append((SECTION_ORDER.index(sid) if sid in SECTION_ORDER else 99, sid, b))
+    # Sıralama kararlı: listede olmayanlar özgün sıralarını korur.
+    keyed.sort(key=lambda t: t[0])
+    return lead + "".join(b for _r, _s, b in keyed)
+
+
 def drop_unread_sources(text):
     """"Erişilemeyen kaynaklar" bloğunu düşür (Rev 14).
 
@@ -562,7 +605,8 @@ def enrich(text, developments, alarm=False, report_iso=""):
     text = link_citations(text, dev_ids, 'id="alarmlar"' in text, dev_labels)
     text = drop_self_links(text)
     text = drop_unread_sources(rename_headers(text))
-    return fold_appendix(fold_watchlist(drop_scan_note(text)))
+    text = reorder_sections(fold_watchlist(drop_scan_note(text)))
+    return fold_sources(fold_appendix(text))
 
 
 def nav(body_html):
@@ -576,7 +620,7 @@ def nav(body_html):
     Bölümler sabit, az ve okuyucunun zaten bildiği şeyler; ne kaydırma ne
     gruplama gerekiyor, sığmazsa alt satıra geçer.
     """
-    ids = re.findall(r'<h2 id="([^"]+)"', body_html)
+    ids = re.findall(r'<h2[^>]*id="([^"]+)"', body_html)
     chips = [
         f'<a class="chip" href="#{i}">'
         f'{html.escape(SECTION_CHIP.get(i, i.replace("-", " ").title()))}</a>'
