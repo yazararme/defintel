@@ -113,7 +113,7 @@ def build_proxy(url):
 
 
 def add_source_anchors(text):
-    """- [K1] …  ->  <li id="k1">, links live, background sources dimmed."""
+    """- [K1] …  ->  <li id="k1">, adres iki çipe dönüşür, arka plan soluklaşır."""
 
     def li(m):
         kid = "k" + m.group(1)
@@ -121,6 +121,8 @@ def add_source_anchors(text):
 
     text = re.sub(r"<li>\s*\[K(\d+)\]", li, text)
 
+    # Önce linkifikasyon, sonra çipler: ters sırada çipin kendi href'i bir kez
+    # daha linkifiye edilip <a href="<a href=...">'e dönüşüyor.
     def link(m):
         url = m.group(0).rstrip(".,;")
         tail = m.group(0)[len(url):]
@@ -130,44 +132,56 @@ def add_source_anchors(text):
         )
 
     text = URL.sub(link, text)
-    # Çip linkifikasyondan SONRA ekleniyor: önce eklenseydi kendi translate.goog
-    # adresi URL.sub tarafından ikinci kez linkifiye edilip bozulurdu.
-    text = add_source_tr(text)
+    text = source_links(text)
     return text.replace("(arka plan)", '<span class="background-tag">(arka plan)</span>')
 
 
-def add_source_tr(text):
-    """Kaynakça girdisinin sonuna "Türkçe oku" — atıf kanonik kalır, okuma yolu açılır.
+def source_links(text):
+    """Kaynakça girdisindeki çıplak adresi iki çiple değiştir.
 
-    Kupürde birincil vekil / ikincil özgün; kaynakçada birincil özgün / ikincil
-    vekil. Aynı şekil, ters öncelik — ters çevrilmiş olması "bu delildir, o
-    okumadır" ayrımının kendisi.
+    Ekrandaki 120 karakterlik adres kimseye bir şey söylemiyordu: okunmuyor,
+    hatırlanmıyor, yalnızca satırı taşırıyor. Kupürlerde çözüm çoktan bulunmuş
+    durumda — başlık, altında iki çip — kaynakça da aynı şekli alıyor.
 
-    Kaynakçada varsayım kötümserdir, kupürdekinin tersine: orada yanlış
-    iyimserin bedeli bir geri dokunuş, burada güven. Alan adı listesi yoksa
-    ya da adres engelliyse çip değil jeton basılır.
+    Sıra kupürün tersi: orada birincil vekil / ikincil özgün, burada birincil
+    özgün / ikincil vekil, çünkü kaynakça bir delil nesnesi. Ama ikisi de
+    aynı iki kapıyı gösteriyor.
     """
-    if not build_flags()[0]:
-        return text
+    proxy_on = build_flags()[0]
 
-    def chip(m):
-        li, url = m.group(1), m.group(2)
-        host = up.urlsplit(url).hostname or ""
-        # Çip yalnızca geçtiği ÖLÇÜLMÜŞ alan adına basılır. Kupürde bilinmeyen
-        # alan adı geçer sayılıyor; orada yanlış iyimserin bedeli bir geri
-        # dokunuş, burada güven. Yoklayıcı kaynakçanın alan adlarını da tarıyor,
-        # o yüzden bu katılık kimseyi haksız yere jetona düşürmüyor.
-        if build_flags()[1].get(host) is not True:
-            return f'{li}<span class="tr-blocked">çeviri engelli</span>'
-        proxied = html.escape(build_proxy(url), quote=True)
-        return (f'{li}<a class="tr-read" href="{proxied}" target="_blank" '
-                f'rel="noopener">Türkçe oku ↗</a>')
+    def entry(m, is_source):
+        url = m.group(2)
+        chips = []
+        if proxy_on and is_source:
+            host = up.urlsplit(url).hostname or ""
+            if build_flags()[1].get(host) is True:
+                chips.append(
+                    f'<a class="tr-read" href="{html.escape(build_proxy(url), quote=True)}"'
+                    f' target="_blank" rel="noopener">Türkçe oku ↗</a>'
+                )
+            else:
+                chips.append('<span class="tr-blocked">çeviri engelli</span>')
+        chips.append(
+            f'<a class="tr-read tr-read--plain" href="{html.escape(url, quote=True)}"'
+            f' target="_blank" rel="noopener">Özgün metin ↗</a>'
+        )
+        # Adresten önceki " — " ayracı da gider; başlık ve yayın kendi
+        # noktalamalarıyla zaten tamamlanıyor.
+        return f'<span class="source-go">{"".join(chips)}</span>'
 
-    # Girdinin en sonu: "ne — kim — ne zaman — nerede", okuma yardımı kayıt tamamlanınca.
-    return re.sub(
-        r'(<li id="k\d+" class="source">(?![^<]*Erişilemeyen).*?<a href="([^"]+)"[^>]*>[^<]*</a>)(?=\s*</li>)',
-        chip, text, flags=re.S,
-    )
+    # Hem [K#] girdileri hem de "Erişilemeyen kaynaklar" listesi: ikisi de
+    # kaynak satırı, ikisi de aynı uzun adres sorununu taşıyordu.
+    def li_block(m):
+        # Bir girdide birden çok kaynak olabiliyor (" · " ile ayrılmış); her
+        # adres kendi iki kapısını alır, yoksa ilki ekranda çıplak kalıyordu.
+        is_source = 'class="source"' in m.group(1)
+        return m.group(1) + re.sub(
+            r'(\s*[—-]?\s*)<a href="(https?://[^"]+)"[^>]*>[^<]*</a>',
+            lambda a: entry(a, is_source), m.group(2), flags=re.S,
+        ) + m.group(3)
+
+    return re.sub(r'(<li(?: id="k\d+" class="source")?>)((?:(?!</li>).)*)(</li>)',
+                  li_block, text, flags=re.S)
 
 
 def tr_upper_first(text):
