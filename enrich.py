@@ -136,6 +136,19 @@ def add_source_anchors(text):
     return text.replace("(arka plan)", '<span class="background-tag">(arka plan)</span>')
 
 
+def drop_self_links(text):
+    """Kaynak girdisinin başındaki [K1] kendine bağlantı olmasın.
+
+    Metin içindeki [K1] atfı okuyucuyu kaynağa götürür ve işe yarar; ama
+    kaynağın kendi satırındaki [K1], okuyucuyu zaten durduğu yere götüren
+    bir düğme — birkaç piksel kaydırıp bırakıyor.
+    """
+    return re.sub(
+        r'(<li id="(k\d+)" class="source">)<a class="xref" href="#\2">(\[K\d+\])</a>',
+        r"\1\3", text,
+    )
+
+
 def source_links(text):
     """Kaynakça girdisindeki çıplak adresi iki çiple değiştir.
 
@@ -151,7 +164,12 @@ def source_links(text):
 
     def entry(m, is_source):
         url = m.group(2)
-        chips = []
+        # Önce kayıt, sonra okuma yardımı: bu bir delil nesnesi, kanonik
+        # adres başta durur.
+        chips = [
+            f'<a class="tr-read tr-read--plain" href="{html.escape(url, quote=True)}"'
+            f' target="_blank" rel="noopener">Özgün metin ↗</a>'
+        ]
         if proxy_on and is_source:
             host = up.urlsplit(url).hostname or ""
             if build_flags()[1].get(host) is True:
@@ -161,10 +179,6 @@ def source_links(text):
                 )
             else:
                 chips.append('<span class="tr-blocked">çeviri engelli</span>')
-        chips.append(
-            f'<a class="tr-read tr-read--plain" href="{html.escape(url, quote=True)}"'
-            f' target="_blank" rel="noopener">Özgün metin ↗</a>'
-        )
         # Adresten önceki " — " ayracı da gider; başlık ve yayın kendi
         # noktalamalarıyla zaten tamamlanıyor.
         return f'<span class="source-go">{"".join(chips)}</span>'
@@ -485,6 +499,7 @@ def enrich(text, developments, alarm=False):
     text = add_summary_links(text, dev_ids)
     text = add_table_badges(text, dev_ids)
     text = link_citations(text, dev_ids, 'id="alarmlar"' in text, dev_labels)
+    text = drop_self_links(text)
     return fold_appendix(fold_watchlist(move_scan_note(rename_headers(text))))
 
 
