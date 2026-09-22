@@ -60,10 +60,10 @@ TR_MONTHS = [
 TR_DAYS = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"]
 TR_DAYS_SHORT = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"]
 
-# Reading state, kept in data/reports.json for downstream use; not shown on the page.
-#   alarm: true                  -> alarm
-#   a deadline still ahead of us -> izle
-#   neither                      -> temiz
+# Hiçbir yerde render edilmeyen alan bakımı yapılmaz. decision_by dokuz rapor
+# boyunca 2026-10-09'da dondu ve kimse fark etmedi; türevi status da her gün
+# "izle" diyordu, çünkü bayat tarih hep gelecekte kalıyor. İkisi de emekli —
+# gerekirse render yeriyle aynı gün geri gelir.
 
 
 def tr_date(iso, weekday=False):
@@ -85,15 +85,6 @@ def tr_daybar(iso):
     import datetime
     d = datetime.date.fromisoformat(str(iso))
     return f"{d.day} {TR_MONTHS[d.month - 1][:3]} · {TR_DAYS_SHORT[d.weekday()]}"
-
-
-def status_of(meta, iso):
-    if meta.get("alarm"):
-        return "alarm"
-    deadline = meta.get("decision_by")
-    if deadline and str(deadline) >= str(iso):
-        return "izle"
-    return "temiz"
 
 
 def split_frontmatter(text):
@@ -304,9 +295,6 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None, news_counts
         if meta.get("alarm")
         else ""
     )
-    # decision_by is explained inside the development it belongs to; a chip
-    # under the title only repeated a date with no context.
-
     # The day bar above already carries the date and the link to that day's
     # clippings, so the rail only repeats what the reader just read.
     rail = [
@@ -864,8 +852,6 @@ def main():
                 "summary": meta.get("summary", ""),
                 "alarm": bool(meta.get("alarm")),
                 "alarm_title": meta.get("alarm_title", ""),
-                "status": status_of(meta, iso),
-                "decision_by": str(meta["decision_by"]) if meta.get("decision_by") else None,
                 "tags": [str(t) for t in meta.get("tags", [])],
                 "developments": developments,
                 "path": f"reports/{iso}.html",

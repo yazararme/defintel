@@ -181,7 +181,7 @@ def add_table_badges(text, dev_ids):
     return re.sub(r"(<td[^>]*>)\s*(G\d+)\s*—\s*(.)", cell, text)
 
 
-def link_citations(text, dev_ids):
+def link_citations(text, dev_ids, has_alarms=True):
     """Link G# and [K#] mentions in running text only.
 
     Walks the markup instead of blind-replacing so that ids inside headings,
@@ -225,9 +225,12 @@ def link_citations(text, dev_ids):
             lambda m: f'<a class="xref" href="#ek">{m.group(1)}</a>',
             token,
         )
-        token = token.replace(
-            "bkz. ALARMLAR", '<a class="xref" href="#alarmlar">bkz. ALARMLAR</a>'
-        )
+        # Alarm yoksa bölüm hiç yazılmıyor; o zaman çapa da yok. Var olmayan
+        # bir yere giden bağlantı, bağlantı olmamasından kötüdür.
+        if has_alarms:
+            token = token.replace(
+                "bkz. ALARMLAR", '<a class="xref" href="#alarmlar">bkz. ALARMLAR</a>'
+            )
         out.append(token)
 
     return "".join(out)
@@ -272,7 +275,7 @@ def enrich(text, developments):
     text = add_item_anchors(text)
     text = add_source_anchors(text)
     text = add_table_badges(text, dev_ids)
-    text = link_citations(text, dev_ids)
+    text = link_citations(text, dev_ids, 'id="alarmlar"' in text)
     return fold_appendix(rename_headers(text))
 
 
