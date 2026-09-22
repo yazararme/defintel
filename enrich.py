@@ -505,52 +505,38 @@ def drop_mke_agenda(text):
     return re.sub(r'<h2[^>]*>\s*MKE\s+GÜNDEM[İI].*?</h2>.*?(?=<h2|\Z)', "", text, flags=re.S)
 
 
-SCAN_NOTE = "Bu rapor dar kapsamla hazırlandı; günün başlık taraması yapılamadı."
-
-
-def move_scan_note(text):
-    """Tepedeki "aday listesi üretilmedi" notunu kaldır, kaynakların sonuna tek satır koy.
-
-    Kapsamın dar olduğu gerçeği kalıyor — okuyucu 500 değil 30 başlıktan
-    süzülmüş bir raporu okuduğunu bilmeli. Giden şey operatör jargonu ve
-    alarmların üstündeki yeri.
-
-    Bu bir kez kaynak dosyalarda elle düzeltilmişti; ertesi sabah Drive'dan
-    gelen çekim üzerine yazdı. Yayınlanmış kaydı elle düzeltmek yanlış katman:
-    kayıt ajanın yazdığı şeydir, sunum build'in işi.
-    """
-    note = re.compile(r"<(blockquote|p)>\s*(?:<p>)?\s*Aday listesi üretilmedi.*?</\1>", re.S)
-    if not note.search(text):
-        return text
-    text = note.sub("", text, count=1)
-    line = f'<p class="scan-note">{SCAN_NOTE}</p>'
-    # EK varsa ondan önce; yoksa belgenin sonuna.
-    if '<h2 id="ek">' in text:
-        return text.replace('<h2 id="ek">', line + '<h2 id="ek">', 1)
-    return text + line
-
-
 def drop_unread_sources(text):
-    """"Erişilemeyen kaynaklar" bloğunu düşür.
+    """"Erişilemeyen kaynaklar" bloğunu düşür (Rev 14).
 
-    Üçüncü kez aynı kategori hatası: etiket kaynağın durumunu iddia ediyordu,
-    kaydettiği şey ajanın deneyimiydi. Ölçtük — "yönlendirme hatası" denen
-    sayfa 200 dönüyor ve 7.220 karakter makale veriyor; gerçekten kapalı olan
-    yalnızca üyelik duvarı olanıydı. Okuyucuya kapı verip üstüne "kilitli"
-    yazıyorduk.
-
-    Yeniden adlandırmak ("doğrulayamadığımız kaynaklar") doğru olurdu ama
-    yanlış soruyu çözerdi. Bu ürünün diğer yokluk işaretleri — "16 kaynak
-    yanıt vermedi", "özet alınamadı", "çeviri engelli" — okuyucunun GÖRDÜĞÜ
-    bir eksiği onarır. Bu blok hiçbir eksiği onarmıyor, açıkladığı şeyi
-    kendisi yaratıyor: o adreslerin varlığını okuyucu başka türlü hiç
-    bilmeyecekti. Ve rapordaki hiçbir iddia onlara dayanmıyor — ölçtüm,
-    metinde tek atıf yok. Rapora hiçbir şey katmamış bir kaynak, kaynak değil.
+    Etiket kaynağın durumunu iddia ediyordu, kaydettiği şey ajanın
+    deneyimiydi — ölçtük, "yönlendirme hatası" denen sayfa 200 dönüp 7.220
+    karakter makale veriyordu. Okuyucuya kapı verip üstüne "kilitli"
+    yazıyorduk. Ayrıca rapordaki hiçbir iddia onlara dayanmıyor.
     """
     return re.sub(
         r"<p>\s*<strong>\s*Erişilemeyen kaynaklar\s*</strong>\s*</p>\s*<ul>.*?</ul>",
         "", text, flags=re.S,
     )
+
+
+def place_scan_note(text, line):
+    """Ajanın kapsam notunu sil, türetilen ölçümü kaynakların sonuna koy.
+
+    Eski not ajanın beyanıydı ("havuz yoktu") ve operatör diliyle yazılmıştı:
+    okuyucu "günün başlık taraması"nın ne olduğunu bilmiyor. Yerine geçen
+    satır sebebi değil sonucu ölçüyor — ajan notu yazmayı unutsa da, yanlış
+    günde yazsa da sayı doğru kalır.
+    """
+    text = re.sub(
+        r"<(blockquote|p)>\s*(?:<p>)?\s*Aday listesi üretilmedi.*?</\1>", "", text,
+        count=1, flags=re.S,
+    )
+    if not line:
+        return text
+    note = f'<p class="scan-note">{html.escape(line)}</p>'
+    if '<h2 id="ek">' in text:
+        return text.replace('<h2 id="ek">', note + '<h2 id="ek">', 1)
+    return text + note
 
 
 def rename_headers(text):
@@ -560,7 +546,7 @@ def rename_headers(text):
     return text
 
 
-def enrich(text, developments, alarm=False, report_iso=""):
+def enrich(text, developments, alarm=False, report_iso="", scan=""):
     dev_ids = {str(d.get("id", "")).lower() for d in developments if d.get("id")}
     # Düzyazı atfının tek doğruluk kaynağı: frontmatter'daki kısa ad.
     dev_labels = {
@@ -580,7 +566,7 @@ def enrich(text, developments, alarm=False, report_iso=""):
     text = link_citations(text, dev_ids, 'id="alarmlar"' in text, dev_labels)
     text = drop_self_links(text)
     text = drop_unread_sources(rename_headers(text))
-    return fold_appendix(fold_watchlist(move_scan_note(text)))
+    return fold_appendix(fold_watchlist(place_scan_note(text, scan)))
 
 
 def nav(body_html):
