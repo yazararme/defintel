@@ -14,6 +14,7 @@ import argparse
 import datetime as dt
 import json
 import pathlib
+import re
 import sys
 import time
 import urllib.parse as up
@@ -80,6 +81,16 @@ def main():
         host = up.urlsplit(item["url"]).hostname or ""
         if host and item.get("lang") != "tr":
             sample.setdefault(host, item["url"])
+
+    # Brifingin kaynakçası da yoklanır: oradaki çip yalnızca alan adının
+    # geçtiği ÖLÇÜLDÜYSE basılıyor (delil yüzeyinde iyimser varsayım yok),
+    # ve o kaynaklar haber havuzundakilerle aynı olmak zorunda değil.
+    for md in sorted((ROOT / "source").glob("*.md")):
+        for raw in re.findall(r"https?://[^\s)\]]+", md.read_text(encoding="utf-8")):
+            url = raw.rstrip(".,;")
+            host = up.urlsplit(url).hostname or ""
+            if host:
+                sample.setdefault(host, url)
     todo = {h: u for h, u in sample.items() if args.recheck or h not in known}
     print(f"{len(sample)} alan adı · yoklanacak {len(todo)}")
 

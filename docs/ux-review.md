@@ -1145,3 +1145,104 @@ ikisinde başka hiçbir yolu yok. Footer zili bunu üç sayfada da kapatıyor. T
 **Yapılmayacak:** zili daybar'a ya da masthead'e koymak; kartı brifing/medya sayfalarında bastırmak; arızada
 erteleme yazmak; zili birden fazla yerde tutmak (Rev 4: tek şekil, tek anlam); arıza için ayrı bir modal
 ya da yeni sabit şerit eklemek.
+
+---
+
+## Revizyon 8 — kaynakçada çeviri
+
+### R8.0 — Müşteri haklı; Rev 5'te fazla hüküm verdim
+
+Rev 5'teki ilke doğruydu ama kapsamı yanlış çizdim. Gerekçem **`[K#]`'in nereyi gösterdiğine** dairdi:
+*delil kayıt kaynağını göstermek zorundadır.* Bundan "okuyucu kaynakçadan Türkçeye hiçbir yoldan ulaşamaz"
+sonucunu çıkarmak ayrı bir hüküm — ve ben onu incelemeden, sonucun kendiliğinden geldiğini varsayarak
+yazdım. Gelmiyor. **Atfın kanonik kalması ile okuyucuya okuma yolu verilmesi çelişmiyor.**
+
+Dahası bu, belgenin dört yerinde kurduğum kalıbın aynısı: *iki hedefi olan bir yüzey tek bağlantı olamaz;
+birincil bariz olandır, ikincil etiketli bir çiptir* — Rev 1 arşiv kartı, Rev 3 kupür satırı, Rev 5 katlama
+gövdesi. Rev 5'te bu kalıbı kupürlere uyguladım, kaynakçaya uygulamayı atladım.
+
+Simetri de bilgi taşıyor: **kupürde birincil vekil, ikincil özgün; kaynakçada birincil özgün, ikincil vekil.**
+Aynı şekil, ters öncelik — ve ters çevrilmiş olması tam olarak "bu delildir, o okumadır" ayrımını kodluyor.
+
+Pratik not: bugün sanksiyonlu bir yol olmadığı için okuyucu ya URL'i kendisi Translate'e yapıştırıyor ya da
+— daha kötüsü — özeti delil yerine koyuyor. Yolu adlandırmak davranışı tasarımın içinde tutar.
+
+> **Karar: `[K#]` özgün kaynağa gitmeye devam eder (Rev 5 aynen geçerli); kaynakça girdisinin sonuna
+> `Türkçe oku ↗` eklenir.** Gövde metninde hiçbir şey değişmez.
+
+### R8.1 — Q2: yer, etiket, koruma
+
+- **Yer:** girdinin **en sonu**, URL'den sonra. Girdi "ne — kim — ne zaman — nerede" diye okunur; okuma
+  yardımı kayıt tamamlandıktan sonra gelir. URL'den önce koymak atfı böler. Ayrı sütun olmaz — bu bir
+  düzyazı listesi, tablo değil.
+- **Etiket:** `Türkçe oku ↗`. Müşterinin kendi ifadesi ("türkçe oku opsiyonu") ve Rev 5'teki
+  `Özgün metin ↗` ile eşleşen çift oluşturuyor.
+- **Ağırlık:** çerçeveli `.entry-go` çipi **değil**. Kaynakça Rev 1 hiyerarşisinde Seviye 3'tür; 16 satıra
+  16 çerçeveli çip Seviye 2 mobilyası olur. Doğrusu `.clip-meta` kaydında sessiz bir bağlantı:
+  mono 10,5px, `--brand`, çerçevesiz.
+- **Dokunma hedefi:** girdinin **kendi satırında**, `margin-top: 4px`, `padding-block: 10px` ile ≥44px.
+  Kaynakça girdileri uzun URL yüzünden zaten çok satırlı; girdi başına bir kısa satır kabul edilebilir bedel.
+  ≥920px'te URL'den sonra satır içi durabilir.
+- **Koruma (build guard) daraltılır — ama konuma göre değil, yapıya göre.** "KAYNAKLAR listesinin dışında"
+  kırılgan bir kural. Doğrusu: **`translate.goog` yalnızca `a.tr-read` öğelerinin `href`'inde geçebilir.**
+  Uygulaması: `<a class="tr-read" …>…</a>` etiketlerini çıkar, kalan metinde `translate.goog` ara; bulursan
+  build'i durdur. Bu, yeniden düzenlemelere dayanır.
+- **Uygulama tuzağı:** `enrich.add_source_anchors` içindeki `URL.sub(link, …)` tüm metindeki URL'leri
+  bağlantıya çeviriyor. Çip, **linkifikasyondan sonra** eklenmeli; önce eklenirse kendi `translate.goog`
+  adresi ikinci kez linkifiye edilip bozulur.
+
+### R8.2 — Q3: yalnızca liste, gövdedeki `[K#]` değil
+
+Gövdedeki `[K7]` zaten yayıncıya değil `#k7`'ye gidiyor — o bir *işaretçi*, hedef değil. Her satır içi atfın
+yanına çip koymak ~40 çipi düzyazının içine serper ve okuma çizgisini yok eder. Okuyucunun yolu zaten doğru:
+`[K7]` → girdi → orada çip. **Tek rota, sonunda.** Gövde metnine dokunulmaz.
+
+### R8.3 — Q4: "Erişilemeyen kaynaklar"a çip konmaz
+
+İki gerekçe:
+
+1. **O bloğun işi boşluğu ilan etmek.** Ürünün yerleşik dili bu: `özet alınamadı`, `16 kaynak yanıt vermedi`,
+   `Medya takibi yok`. "Okuyamadık" diyen bir bloğun içine okuma yardımı koymak bloğun kendisiyle çelişir.
+2. **İçindekilerin çoğu makale bile değil.** Bugünkü dört girdinin üçü bölüm listesi ya da ana sayfa
+   (Army Recognition ordu haberleri, Defence Industry Europe, Defensehere); bir ana sayfaya "Türkçe oku"
+   demek anlamsız. Kalan biri gerçek engel (NATO AIRCOM 403).
+
+Not: bizim getiricimizin 403 alması vekilin de alacağı anlamına gelmiyor — farklı istemciler. Ama test
+etmediğimiz bir kapıyı açık göstermek, Rev 4'te (a) şıkkını ve Rev 5'i reddettiğim gerekçenin aynısıdır:
+**affordance yalan söylememeli.** Bir kaynak okunabilir hale gelirse yeri KAYNAKLAR'dır, boşluk listesi değil.
+
+### R8.4 — Kısmi kapsama: Rev 4 kuralı burada da geçerli, ama cevabı farklı
+
+Üç alan adı vekili reddediyor, yani bazı girdide çip olacak bazısında olmayacak. Rev 4'ün kuralı:
+*tekdüzelik blok içinde zorunludur; karışıklık ancak okuyucunun görebildiği bir şeyle ilişkiliyse okunur.*
+Burada ilişkili olduğu şey görünmüyor — yani ham haliyle Rev 4 hatasının tekrarı.
+
+Fark şu: Rev 4'te eksik olan şey **bizim üretmediğimiz** bir şeydi (özet, tahsis edilebilir). Burada eksik
+olan **üçüncü tarafın reddi** — ve bu ürünün üslubu reddi adlandırmaktır.
+
+> Engelli alan adlarındaki girdide çipin yerine aynı yuvada, aynı boyutta, `--muted` bir jeton durur:
+> **`çeviri engelli`.** Böylece her girdinin o yuvada bir şeyi olur; blok *şekil olarak* tekdüze kalır,
+> fark açıklanmış olur.
+
+Rev 4'ün "normal bir durumu 400 kez duyurma" itirazı burada geçmiyor: 16 girdinin 13'ünde çip var, 3'ünde
+açıklama — bu istisna işaretlemesidir, `özet alınamadı` ile aynı sınıf.
+
+Bağımlılık: çip R5-P0-5'teki sabit engelli liste ile çıkar; `data/translate-hosts.json` (R5-P1-1) gelince
+jeton otomatik doğru çalışır. Kaynakçada iyimser varsayım **kullanılmaz** — kupürde yanlış-iyimserin bedeli
+bir geri dokunuş, delil yüzeyinde ise güvendir.
+
+`TRANSLATE_PROXY = False` bu çipleri de kapatır; Rev 5 şart 2 tek anahtar olarak kalır.
+
+### Uygulama listesi — Revizyon 8
+
+| # | Dosya | Değişiklik | Kabul testi |
+|---|---|---|---|
+| R8-P0-1 | `enrich.py` → `add_source_anchors` | URL linkifikasyonundan **sonra**, her `li.source` girdisinin sonuna `<a class="tr-read" href="{tr_url(url)}" target="_blank" rel="noopener">Türkçe oku ↗</a>`. `[K#]` bağlantısı ve gövde metni değişmez. "Erişilemeyen kaynaklar" bloğundaki girdiler hariç. | `reports/2026-09-22.html` içinde `li.source` başına en fazla bir `a.tr-read`; her `[K#]` bağlantısı hâlâ özgün alan adına gider; `Erişilemeyen kaynaklar` altında hiç `tr-read` yok. |
+| R8-P0-2 | build guard | Konumsal kontrol yerine yapısal: `<a class="tr-read"[^>]*>.*?</a>` çıkarıldıktan sonra kalan metinde `translate.goog` varsa build durur. | Gövdeye elle bir `translate.goog` bağlantısı eklendiğinde build durur; `tr-read` çipleri build'i durdurmaz. |
+| R8-P0-3 | `enrich.py` + `TRANSLATE_BLOCK` (R5-P0-5) | Alan adı engelli listede ise çip yerine `<span class="tr-blocked">çeviri engelli</span>`. | Engelli alan adlı girdide jeton görünür, `tr-read` yok; 13/16 girdide çip, 3/16'da jeton. |
+| R8-P0-4 | `assets/app.css` | `.tr-read, .tr-blocked` → mono 10,5px, `0.05em`, `display:block; margin-top:4px; padding-block:10px`; `.tr-read { color: var(--brand) }`, `.tr-blocked { color: var(--muted) }`. `@media (min-width:920px)` ikisi de `display:inline-block; margin-left:10px; padding-block:6px`. | 375px'te `.tr-read` yüksekliği ≥44px ve kendi satırında; 1024px'te URL ile aynı satırda. |
+| R8-P1-1 | `enrich.py` | Engelli alan adı kaynağı R5-P1-1'deki `data/translate-hosts.json`'a geçer; sabit liste kaldırılır. Dosya yoksa **kötümser** davran (çip basma, jeton bas) — kupürdeki iyimser varsayımın tersi. | Dosya silindiğinde kaynakçada hiç `tr-read` çıkmaz ve build hatasız koşar; dosya varken 13/16 çip çıkar. |
+
+**Yapılmayacak:** `[K#]` hedefini vekile çevirmek (Rev 5 aynen geçerli); gövdedeki satır içi `[K#]`
+atıflarına çip koymak; "Erişilemeyen kaynaklar"a çip koymak; kaynakçada çerçeveli `.entry-go` çipi
+kullanmak; kaynakçada bilinmeyen alan adı için iyimser varsayım.

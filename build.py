@@ -849,10 +849,12 @@ def main():
             sources[i + 1][0] if i + 1 < len(sources) else None,
             news_counts,
         )
-        # Kaynakça delildir: nerede yazdığını göstermek zorunda. Vekil yalnızca
-        # kupürlerin; brifingde görünürse birileri onu yanlış yere taşımıştır.
-        if "translate.goog" in page:
-            sys.exit(f"{iso}: brifingde çeviri vekili bağlantısı var")
+        # Atıf kanonik kalmalı: [K#] yayıncının kendi sayfasını gösterir, vekili
+        # değil. Okuma yolu ayrı bir çipte durur — o yüzden koruma "KAYNAKLAR
+        # dışında" gibi konuma göre değil yapıya göre daraltılıyor: vekil adresi
+        # yalnızca a.tr-read içinde geçebilir. Yeniden düzenlemelere dayanır.
+        if "translate.goog" in re.sub(r'<a class="tr-read".*?</a>', "", page, flags=re.S):
+            sys.exit(f"{iso}: brifingde izinsiz çeviri vekili bağlantısı var")
         (OUT / f"{iso}.html").write_text(page, encoding="utf-8")
 
         reports.append(

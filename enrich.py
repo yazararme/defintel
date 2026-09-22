@@ -16,7 +16,9 @@ step is a no-op and they keep rendering as they always did.
 """
 
 import html
+import json
 import re
+import urllib.parse as up
 
 COPY = (
     '<button class="copylink" type="button" data-anchor="{aid}"'
@@ -69,6 +71,26 @@ def add_item_anchors(text):
     return re.sub(r"<li>\s*<strong>((?:G\d+))(\s*·[^<]*)</strong>", li, text)
 
 
+def _build():
+    """Geç içe aktarma: build zaten enrich'i alıyor, tepede olsa döngü olurdu."""
+    import build
+    return build
+
+
+def build_flags():
+    """(vekil açık mı, {alan adı: geçiyor mu}) — dosya yoksa boş sözlük."""
+    b = _build()
+    try:
+        known = json.loads(b.TRANSLATE_HOSTS.read_text(encoding="utf-8"))
+    except Exception:
+        known = {}
+    return b.TRANSLATE_PROXY, known
+
+
+def build_proxy(url):
+    return _build().proxy_url(url)
+
+
 def add_source_anchors(text):
     """- [K1] …  ->  <li id="k1">, links live, background sources dimmed."""
 
@@ -87,7 +109,58 @@ def add_source_anchors(text):
         )
 
     text = URL.sub(link, text)
+    # Çip linkifikasyondan SONRA ekleniyor: önce eklenseydi kendi translate.goog
+    # adresi URL.sub tarafından ikinci kez linkifiye edilip bozulurdu.
+    text = add_source_tr(text)
     return text.replace("(arka plan)", '<span class="background-tag">(arka plan)</span>')
+
+
+def add_source_tr(text):
+    """Kaynakça girdisinin sonuna "Türkçe oku" — atıf kanonik kalır, okuma yolu açılır.
+
+    Kupürde birincil vekil / ikincil özgün; kaynakçada birincil özgün / ikincil
+    vekil. Aynı şekil, ters öncelik — ters çevrilmiş olması "bu delildir, o
+    okumadır" ayrımının kendisi.
+
+    Kaynakçada varsayım kötümserdir, kupürdekinin tersine: orada yanlış
+    iyimserin bedeli bir geri dokunuş, burada güven. Alan adı listesi yoksa
+    ya da adres engelliyse çip değil jeton basılır.
+    """
+    if not build_flags()[0]:
+        return text
+
+    def chip(m):
+        li, url = m.group(1), m.group(2)
+        host = up.urlsplit(url).hostname or ""
+        # Çip yalnızca geçtiği ÖLÇÜLMÜŞ alan adına basılır. Kupürde bilinmeyen
+        # alan adı geçer sayılıyor; orada yanlış iyimserin bedeli bir geri
+        # dokunuş, burada güven. Yoklayıcı kaynakçanın alan adlarını da tarıyor,
+        # o yüzden bu katılık kimseyi haksız yere jetona düşürmüyor.
+        if build_flags()[1].get(host) is not True:
+            return f'{li}<span class="tr-blocked">çeviri engelli</span>'
+        proxied = html.escape(build_proxy(url), quote=True)
+        return (f'{li}<a class="tr-read" href="{proxied}" target="_blank" '
+                f'rel="noopener">Türkçe oku ↗</a>')
+
+    # Girdinin en sonu: "ne — kim — ne zaman — nerede", okuma yardımı kayıt tamamlanınca.
+    return re.sub(
+        r'(<li id="k\d+" class="source">(?![^<]*Erişilemeyen).*?<a href="([^"]+)"[^>]*>[^<]*</a>)(?=\s*</li>)',
+        chip, text, flags=re.S,
+    )
+
+
+def tr_upper_first(text):
+    """Cümlenin ilk harfini büyüt — Türkçe kurallarıyla.
+
+    Python'un capitalize()/upper()'ı 'i'yi 'I' yapar; Türkçede 'İ' olmalı.
+    Zaten büyükse ya da harf değilse (rakam, tırnak) metin olduğu gibi kalır.
+    """
+    if not text:
+        return text
+    first = text[0]
+    if not first.isalpha() or first.isupper():
+        return text
+    return ("İ" if first == "i" else first.upper()) + text[1:]
 
 
 def add_table_badges(text, dev_ids):
@@ -97,11 +170,15 @@ def add_table_badges(text, dev_ids):
         gid = m.group(2)
         if gid.lower() not in dev_ids:
             return m.group(0)
+        # Tire rozete dönüşünce ardındaki sözcük satır başına geçiyor; ajan
+        # onu tireden sonra geldiği için küçük harfle yazmıştı ve tabloda
+        # "G3 seferî birlik için…" diye küçük harfle başlayan satırlar çıkıyordu.
         return (
             f'{m.group(1)}<a class="gbadge" href="#{gid.lower()}">{gid}</a> '
+            + tr_upper_first(m.group(3))
         )
 
-    return re.sub(r"(<td[^>]*>)\s*(G\d+)\s*—\s*", cell, text)
+    return re.sub(r"(<td[^>]*>)\s*(G\d+)\s*—\s*(.)", cell, text)
 
 
 def link_citations(text, dev_ids):

@@ -7,7 +7,7 @@ Reads   : data/news/YYYY-MM-DD.json
 Writes  : the same file, adding "title_tr" to each item
 Cache   : data/news/translations.json keyed by URL, so a headline is only ever
           translated once — reruns and repeated stories cost nothing.
-Usage   : python3 scripts/translate_news.py [--date YYYY-MM-DD] [--batch 60]
+Usage   : python3 scripts/translate_news.py [--date …] [--batch 60] [--refresh]
 """
 
 import argparse
@@ -21,7 +21,7 @@ import tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 # Pinned so a CLI default change can't silently alter output quality.
-MODEL = "haiku"
+MODEL = "sonnet"
 NEWS_DIR = ROOT / "data" / "news"
 CACHE = NEWS_DIR / "translations.json"
 # Bunun altında bölmek anlamsız: hata artık uzunluk değil, o başlığın kendisidir.
@@ -32,7 +32,22 @@ PROMPT = """Aşağıdaki savunma sanayii haber başlıklarını Türkçeye çevi
 Kurallar:
 - Özel isimler, şirket ve program adları, platform adları ve kısaltmalar olduğu gibi kalır: C-UAS, SHORAD, MADIS, HIMARS, NATO, Rheinmetall, Skyranger, Patriot gibi.
 - Kalibre, para birimi ve sayılar korunur (30mm, 155 mm, $450 milyon).
+- Aşağıdaki terimler savunma sanayiinde yerleşik karşılıklarıyla çevrilir; kelime
+  kelime çevirme, İngilizcesini de olduğu gibi bırakma:
+    Marines / Marine Corps = Deniz Piyadeleri (U.S. Marines = ABD Deniz Piyadeleri)
+    Navy = Deniz Kuvvetleri  ·  Army = Kara Kuvvetleri  ·  Air Force = Hava Kuvvetleri
+    Coast Guard = Sahil Güvenlik  ·  squadron = filo  ·  wing = kanat  ·  brigade = tugay
+    howitzer = obüs  ·  towed = çekili  ·  self-propelled = kundağı motorlu
+    loitering munition = dolanan mühimmat  ·  warhead = harp başlığı
+    proximity fuze = yakınlık fünyesi  ·  airburst = havada infilak
+    solicitation = ihale ilanı  ·  procurement = tedarik  ·  award = sözleşme
+    counter-drone / counter-UAS = karşı-dron (C-UAS kısaltması aynen kalır)
+    interceptor = önleyici  ·  propellant = sevk barutu  ·  small arms = hafif silah
+  Ama bir terim ürün adının parçasıysa (Marine One gibi) çevrilmez, aynen kalır.
 - Başlık dili kullan: kısa, haber başlığı tonunda, nokta koyma.
+- Büyük/küçük harf düzeni sabittir: her kelimenin ilk harfi büyük, yalnızca kısa
+  bağlaç ve edatlar küçük kalır (ve, ile, için, de, da, mi, ki). Önbellekte 1300
+  başlık bu düzende duruyor; tek bir sayfada iki düzen karışık görünür.
 - Başlık zaten Türkçeyse aynen geri ver.
 - Çeviremediğin bir başlık olursa özgün hâlini geri ver; boş bırakma, açıklama yazma.
 
@@ -140,6 +155,9 @@ def main():
     ap.add_argument("--date", default=dt.datetime.now(dt.timezone.utc).date().isoformat())
     ap.add_argument("--batch", type=int, default=60)
     ap.add_argument("--limit", type=int, help="yalnızca ilk N başlığı çevir (deneme)")
+    ap.add_argument("--refresh", action="store_true",
+                    help="o günün başlıklarını önbelleğe bakmadan yeniden çevir "
+                         "(istem değiştiğinde eski çeviriler kendiliğinden düzelmez)")
     args = ap.parse_args()
 
     day_file = NEWS_DIR / f"{args.date}.json"
@@ -150,7 +168,7 @@ def main():
     cache = load(CACHE, {})
     items = day.get("items", [])
 
-    pending = [i for i in items if i["url"] not in cache]
+    pending = items if args.refresh else [i for i in items if i["url"] not in cache]
     print(f"{len(items)} başlık · önbellekte {len(items) - len(pending)} · çevrilecek {len(pending)}")
     if args.limit and args.limit > 0:
         pending = pending[: args.limit]

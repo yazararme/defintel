@@ -761,6 +761,37 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
 .prose li.source a { word-break: break-word; overflow-wrap: anywhere; }
 .background-tag { color: var(--muted); }
 
+/* Kaynakçadaki okuma yolu. Kaynakça Rev 1 hiyerarşisinde Seviye 3: 16 satıra
+   16 çerçeveli çip Seviye 2 mobilyası olurdu. Sessiz bağlantı, mono kayıt —
+   ve kendi satırında, dokunma hedefi 44px'in altına düşmesin diye. */
+.tr-read,
+.tr-blocked {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-block: 10px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.tr-read { color: var(--brand); text-decoration: none; }
+.tr-read:hover { text-decoration: underline; }
+/* Yokluk gizlenmiyor: üçüncü tarafın reddi adlandırılıyor, kapı açık gösterilmiyor. */
+.tr-blocked { color: var(--muted); }
+
+/* Dar ekranda kendi satırında (URL zaten uzun ve sarılıyor), geniş ekranda
+   kaydın sonunda satır içi. */
+.source .tr-read,
+.source .tr-blocked { display: flex; }
+
+@media (min-width: 920px) {
+  .source .tr-read,
+  .source .tr-blocked { display: inline-flex; margin-left: 10px; }
+}
+
 .appendix {
   margin: 34px 0 0;
   border-top: 1px solid var(--rule);
