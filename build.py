@@ -19,7 +19,7 @@ import json
 import pathlib
 import re
 import sys
-import urllib.parse as up
+import urllib.parse as urlparse   # `up` değil: şablonlardaki yol değişkeni de `up`
 
 import enrich
 
@@ -121,7 +121,7 @@ def label_table_cells(table_html):
     return table_html[: body.start()] + labelled + table_html[body.end():]
 
 
-def render_body(md_text, developments=(), alarm=False, report_iso="", slugs=None, up="../"):
+def render_body(md_text, developments=(), alarm=False, report_iso="", slugs=None):
     # A bullet list that starts right under a bold lead-in ("**Taşınanlar:**")
     # would otherwise stay inside that paragraph; give it the blank line it needs.
     md_text = re.sub(
@@ -132,7 +132,6 @@ def render_body(md_text, developments=(), alarm=False, report_iso="", slugs=None
     md = markdown.Markdown(extensions=["tables", "fenced_code", "attr_list", "sane_lists"])
     out = md.convert(md_text)
     out = enrich.enrich(out, developments, alarm, report_iso, slugs)
-    out = out.replace("{UP}", up)
     out = re.sub(r"<table>.*?</table>", lambda m: label_table_cells(m.group(0)), out, flags=re.S)
     out = out.replace("<table>", '<div class="table-wrap"><table>')
     out = out.replace("</table>", "</table></div>")
@@ -140,13 +139,26 @@ def render_body(md_text, developments=(), alarm=False, report_iso="", slugs=None
 
 
 def asset(name):
-    """assets/x?v=hash — a changed file gets a new URL, so no stale cache."""
+    """/assets/x?v=hash — a changed file gets a new URL, so no stale cache."""
     digest = hashlib.sha256((ROOT / "assets" / name).read_bytes()).hexdigest()[:8]
-    return f"assets/{name}?v={digest}"
+    return f"/assets/{name}?v={digest}"
 
 
-def head(title, depth=0, canonical="", day=""):
-    up = "../" * depth
+DAY_DIR = {"report": "reports", "news": "haberler"}
+
+
+def day_url(kind, day, anchor=""):
+    """Bir günün sayfası — hangi dizinden bakılırsa bakılsın aynı adres.
+
+    Eskiden kardeş dosya adı yazılıyordu ("2026-09-21.html"): /reports/ içinde
+    doğru, kökte 404. Sayfanın nerede durduğunu bilmek zorunda olan her bağlantı
+    er geç yanlış yerde üretiliyor; site kök alan adında olduğu için buna gerek
+    de yok.
+    """
+    return f"/{DAY_DIR[kind]}/{day}.html{anchor}"
+
+
+def head(title, canonical="", day=""):
     day_attr = f' data-day="{day}"' if day else ""
     return f"""<!DOCTYPE html>
 <html lang="tr">
@@ -158,17 +170,17 @@ def head(title, depth=0, canonical="", day=""):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;display=swap">
-<link rel="stylesheet" href="{up}{asset("app.css")}">
-<link rel="icon" type="image/png" sizes="32x32" href="{up}{asset("icons/favicon-32.png")}">
-<link rel="icon" type="image/png" sizes="64x64" href="{up}{asset("icons/favicon-64.png")}">
-<link rel="icon" type="image/png" sizes="16x16" href="{up}{asset("icons/favicon-16.png")}">
-<link rel="apple-touch-icon" sizes="180x180" href="{up}{asset("icons/apple-touch-icon.png")}">
-<link rel="manifest" href="{up}manifest.webmanifest">
+<link rel="stylesheet" href="{asset("app.css")}">
+<link rel="icon" type="image/png" sizes="32x32" href="{asset("icons/favicon-32.png")}">
+<link rel="icon" type="image/png" sizes="64x64" href="{asset("icons/favicon-64.png")}">
+<link rel="icon" type="image/png" sizes="16x16" href="{asset("icons/favicon-16.png")}">
+<link rel="apple-touch-icon" sizes="180x180" href="{asset("icons/apple-touch-icon.png")}">
+<link rel="manifest" href="/manifest.webmanifest">
 <meta name="theme-color" content="#17171A">
 <meta name="apple-mobile-web-app-title" content="{SITE_NAME}">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("{up}sw.js");</script>
+<script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js");</script>
 </head>
 <body data-push="{PUSH_ENDPOINT}" data-vapid="{VAPID_PUBLIC_KEY}"{day_attr}>
 """
@@ -197,28 +209,31 @@ def masthead(home=False):
 """
 
 
-def daybar(kind, day, prev, nxt, cross_day, up=""):
+def daybar(kind, day, prev, nxt, cross_day):
     """Okunan günün tek gezinme şeridi: ürün içinde ‹/›, ortada arşiv, sağda karşı ürün.
 
     Karşı ürün her zaman aynı güne gider; o gün için karşı sayfa yoksa bağlantı
     tıklanamaz hale gelir ama kaldırılmaz — yokluğu da bilgidir.
     """
+    other = "news" if kind == "report" else "report"
+
     def arrow(target, glyph, label):
         if target:
-            return f'<a class="daybar-arrow" href="{target}.html" aria-label="{label}">{glyph}</a>'
+            return (f'<a class="daybar-arrow" href="{day_url(kind, target)}" '
+                    f'aria-label="{label}">{glyph}</a>')
         return f'<span class="daybar-arrow" aria-disabled="true" aria-label="{label}">{glyph}</span>'
 
     if kind == "report":
-        cross = f'<a class="daybar-link" href="{up}haberler/{cross_day}.html">MEDYA TAKİBİ →</a>'
+        cross = f'<a class="daybar-link" href="{day_url(other, cross_day)}">MEDYA TAKİBİ →</a>'
         missing = '<span class="daybar-link daybar-link--off">Medya takibi yok</span>'
     else:
-        cross = f'<a class="daybar-link" href="{up}reports/{cross_day}.html">← BRİFİNG</a>'
+        cross = f'<a class="daybar-link" href="{day_url(other, cross_day)}">← BRİFİNG</a>'
         missing = '<span class="daybar-link daybar-link--off">Brifing yok</span>'
 
     return f"""<nav class="daybar" aria-label="Gün gezinmesi">
   <div class="wrap daybar-inner">
     {arrow(prev, "‹", "Önceki gün")}
-    <a class="daybar-date num" href="{up}arsiv.html">{tr_daybar(day)}</a>
+    <a class="daybar-date num" href="/arsiv.html">{tr_daybar(day)}</a>
     {arrow(nxt, "›", "Sonraki gün")}
     {cross if cross_day else missing}
   </div>
@@ -226,7 +241,7 @@ def daybar(kind, day, prev, nxt, cross_day, up=""):
 """
 
 
-def endnav(kind, day, prev, cross_day, cross_count=None, up=""):
+def endnav(kind, day, prev, cross_day, cross_count=None):
     """Sayfa sonundaki çıkış yolu.
 
     `daybar` okumaya başlamadan önceki niyeti karşılıyor; okuyucu asıl niyetini
@@ -235,21 +250,23 @@ def endnav(kind, day, prev, cross_day, cross_count=None, up=""):
     """
     same = "brifingi" if kind == "report" else "medya takibi"
     other = "medya takibi" if kind == "report" else "brifing"
+    other_kind = "news" if kind == "report" else "report"
     links = []
     if prev:
-        links.append(f'<a class="endnav-go" href="{prev}.html">← {tr_date(prev)} {same}</a>')
+        links.append(f'<a class="endnav-go" href="{day_url(kind, prev)}">'
+                     f"← {tr_date(prev)} {same}</a>")
 
     if not cross_day:
         links.append(f'<span class="endnav-go endnav-go--off">Bu gün için {other} yok</span>')
     elif kind == "report":
         links.append(
-            f'<a class="endnav-go" href="{up}haberler/{cross_day}.html">'
+            f'<a class="endnav-go" href="{day_url(other_kind, cross_day)}">'
             f"Bu günün medya takibi · {cross_count} başlık →</a>"
         )
     else:
-        links.append(f'<a class="endnav-go" href="{up}reports/{cross_day}.html">Bu günün brifingi →</a>')
+        links.append(f'<a class="endnav-go" href="{day_url(other_kind, cross_day)}">Bu günün brifingi →</a>')
 
-    links.append(f'<a class="endnav-go" href="{up}arsiv.html">Tüm raporlar</a>')
+    links.append('<a class="endnav-go" href="/arsiv.html">Tüm raporlar</a>')
     return f"""<nav class="endnav" aria-label="Sayfa sonu">
   <div class="wrap endnav-inner">{"".join(links)}</div>
 </nav>
@@ -397,7 +414,8 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
         f'<span class="rail-value num">{tr_date(iso, weekday=True)}</span>'
         # Alışkanlık saate tutunur: her sabah aynı saatte orada olduğunu
         # söylemeyen bir yayın, okuyucuya ne zaman bakacağını öğretemez.
-        + (f'<span class="rail-sub num">{published}\'de yayımlandı</span>' if published else "")
+        + (f'<span class="rail-sub num">{time_with_suffix(published)} yayımlandı</span>'
+           if published else "")
         + '</div>'
     ]
     # Emek kanıtı: raporun arkasında kaç kaynak ve kaç başlık durduğu.
@@ -405,7 +423,7 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
     if scan:
         rail.append(
             '<div class="rail-block"><span class="rail-label">Tarama</span>'
-            f'<span class="rail-value"><a href="{up}haberler/{iso}.html">'
+            f'<span class="rail-value"><a href="{day_url("news", iso)}">'
             f'<span class="num">{scan[0]}</span> kaynak · '
             f'<span class="num">{scan[1]}</span> başlık →</a></span></div>'
         )
@@ -416,7 +434,7 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
     if mke_count:
         rail.append(
             '<div class="rail-block"><span class="rail-label">MKE gündemi</span>'
-            f'<span class="rail-value"><a href="{up}haberler/{iso}.html#{cat_id("MKE")}">'
+            f'<span class="rail-value"><a href="{day_url("news", iso, "#" + cat_id("MKE"))}">'
             f'<span class="num">{mke_count}</span> başlık →</a></span></div>'
         )
 
@@ -424,9 +442,9 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
     cross_day = iso if iso in news_counts else None
 
     return (
-        head(f"{title} — {SITE_NAME}", depth=depth, canonical=canonical, day=iso)
+        head(f"{title} — {SITE_NAME}", canonical=canonical, day=iso)
         + masthead(home=depth == 0)
-        + daybar("report", iso, prev_day, next_day, cross_day, up=up)
+        + daybar("report", iso, prev_day, next_day, cross_day)
         + f"""<main class="wrap report{' report--alarm' if meta.get('alarm') else ''}">
   <div class="report-grid">
     <aside class="rail{' rail--rich' if len(rail) > 1 else ''}">{''.join(rail)}</aside>
@@ -441,9 +459,9 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
   </div>
 </main>
 """
-        + endnav("report", iso, prev_day, cross_day, news_counts.get(iso), up=up)
+        + endnav("report", iso, prev_day, cross_day, news_counts.get(iso))
         + PROMPTS
-        + f'<script src="{up}{asset("app.js")}" defer></script>\n'
+        + f'<script src="{asset("app.js")}" defer></script>\n'
         + FOOT
     )
 
@@ -502,15 +520,15 @@ def blocked_hosts():
 
 def proxy_url(url):
     """Adresin koşulsuz vekil hâli: konak noktaları -, tireler --. Yoklayıcı da kullanır."""
-    parts = up.urlsplit(url)
+    parts = urlparse.urlsplit(url)
     host = parts.hostname or ""
     if not host or parts.scheme not in ("http", "https"):
         return url
     mangled = host.replace("-", "--").replace(".", "-") + ".translate.goog"
-    query = up.parse_qsl(parts.query) + [
+    query = urlparse.parse_qsl(parts.query) + [
         ("_x_tr_sl", "auto"), ("_x_tr_tl", "tr"), ("_x_tr_hl", "tr"),
     ]
-    return up.urlunsplit(("https", mangled, parts.path, up.urlencode(query), parts.fragment))
+    return urlparse.urlunsplit(("https", mangled, parts.path, urlparse.urlencode(query), parts.fragment))
 
 
 def tr_url(url, lang=""):
@@ -521,7 +539,7 @@ def tr_url(url, lang=""):
     söylemek zorunda. Türkçe yayınlar da vekile girmez: çevrilecek bir şey yok,
     kazanç sıfır, bedeli (Google'a giden bir dokunuş daha) sıfır değil.
     """
-    host = up.urlsplit(url).hostname or ""
+    host = urlparse.urlsplit(url).hostname or ""
     if not TRANSLATE_PROXY or lang == "tr" or host in blocked_hosts():
         return url
     return proxy_url(url)
@@ -693,6 +711,8 @@ def build_threads(sources):
     threads, taken, prev, day_map = {}, {}, {}, {}
     for iso, meta, body in sources:
         today = watch_items(body)
+        labels = {str(d.get("id")): str(d.get("label") or "")
+                  for d in (meta.get("developments") or []) if isinstance(d, dict)}
         # Ajanın verdiği kalıcı kimlikler: varsa bulanık eşleşmenin önüne geçer.
         declared = {}
         for w in (meta.get("watch") or []):
@@ -717,12 +737,23 @@ def build_threads(sources):
             th["name"] = watch_label(raw) or th["name"]
             th["last"] = iso
             th["state"], th["closed"] = "open", None
-            if "ilerledi" in raw:
-                # Kimlikler Rev 11'den beri ekranda yok; iplik satırında da olmaz.
-                line = re.sub(r"[*_`]", "", raw)
-                line = re.sub(r"\s*\((?:bkz\.\s*)?G\d+\)", "", line)
-                line = re.sub(r"\s+", " ", line).strip(" .")
-                th["entries"].append({"day": iso, "line": line})
+            # Açılış günü sıfırıncı kayıt: "15 Eylül'de açıldı" deyip o günü
+            # listelememek, iddia edilen ama gösterilmeyen bir tarih bırakıyordu.
+            if not th["entries"]:
+                th["entries"].append({
+                    "day": iso, "title": watch_opening(raw),
+                    "anchor": "#izleme-listesi" if "İZLEME LİSTESİ" in body else "",
+                    "opening": True,
+                })
+                continue
+            # Kımıldatan şey ipliğin kendi adı değil, o günkü gelişmedir.
+            ref = re.search(r"\bG(\d+)\b", raw)
+            if ref:
+                gid = f"G{ref.group(1)}"
+                th["entries"].append({
+                    "day": iso, "title": labels.get(gid) or watch_opening(raw),
+                    "anchor": f"#g{ref.group(1)}", "opening": False,
+                })
         # Kapanma yalnızca açık bildirimle olur: ajanın o gün yazmayı unutması
         # ipliğin bittiği anlamına gelmez. Listeden düşen kalem "uykuda"
         # sayılır — bildiğimiz tek şey görünmediği, bittiği değil.
@@ -772,6 +803,43 @@ def watch_label(text):
     return re.sub(r"[*_`]", "", head).strip(" .")
 
 
+# Ek, saatin okunuşundaki son sayıya uyar — yazılışına değil. "06:16" için
+# belirleyici olan 16 değil, "on altı"nın son sözcüğü "altı"dır.
+TIME_SUFFIX = {0: "da", 1: "de", 2: "de", 3: "te", 4: "te", 5: "te",
+               6: "da", 7: "de", 8: "de", 9: "da",
+               10: "da", 20: "de", 30: "da", 40: "ta", 50: "de"}
+
+
+def time_with_suffix(hhmm):
+    """06:16'da, 08:31'de, 06:00'da, 17:05'te.
+
+    Dakika sıfırsa saat okunur: "altı sıfır sıfır" değil "altıda". Sabit bir
+    'de eki her dördüncü gün yanlış çıkıyordu; ürünün her gün gösterdiği tek
+    Türkçe cümlenin bozuk olması, geri kalanın da özensiz olduğunu söyler.
+    """
+    try:
+        hour, minute = int(hhmm[:2]), int(hhmm[3:5])
+    except (ValueError, IndexError):
+        return f"{hhmm}'de"
+    spoken = minute or hour
+    last = spoken % 10 or spoken
+    return f"{hhmm}'{TIME_SUFFIX.get(last, 'de')}"
+
+
+def watch_opening(text):
+    """Açılış kaydının satırı: ajanın o gün yazdığı izleme cümlesi.
+
+    Ad değil satır: iplik sayfasının birinci kaydı "ne izlemeye başladık"
+    sorusunu yanıtlıyor ve bunun cevabı başlığın tekrarı değil, o günkü
+    gerekçe. Kimlikler Rev 11'den beri ekranda yok; burada da olmaz.
+    """
+    line = re.sub(r"[*_`]", "", text)
+    line = re.sub(r"^\W*G\d+\s*·?\s*", "", line.strip())
+    line = re.sub(r"\s*\((?:bkz\.\s*)?G\d+\)", "", line)
+    line = re.sub(r"\s*\[K\d+\]", "", line)
+    return re.sub(r"\s+", " ", line).strip(" .")
+
+
 THREAD_OUT = ROOT / "izleme"
 THREADS_JSON = DATA / "threads.json"
 THREAD_ALIASES = DATA / "thread-aliases.json"
@@ -802,6 +870,8 @@ def thread_page(th, latest):
     import datetime as _dt
     opened = tr_date(th["opened"])
     moved = th["entries"]
+    # Açılış bir hareket değil: sayı, açıldıktan sonra kaç kez kımıldadığı.
+    moves = sum(1 for e in moved if not e.get("opening"))
     gap = (_dt.date.fromisoformat(latest) - _dt.date.fromisoformat(th["last"])).days
     state = th.get("state", "open")
     if state == "closed":
@@ -813,30 +883,59 @@ def thread_page(th, latest):
     else:
         status = f'<span class="thread-state">Açık · son hareket {age_words(gap)}</span>'
     rows = "".join(
-        f'<li class="thread-entry"><a href="../reports/{e["day"]}.html">'
+        f'<li class="thread-entry{" thread-entry--open" if e.get("opening") else ""}">'
+        f'<a href="{day_url("report", e["day"], e["anchor"])}">'
         f'<span class="thread-day num">{tr_date(e["day"])}</span>'
-        f'<span class="thread-line">{html.escape(e["line"])}</span></a></li>'
+        f'<span class="thread-line">{html.escape(e["title"])}</span>'
+        + ('<span class="thread-tag">açıldı</span>' if e.get("opening") else "")
+        + "</a></li>"
         for e in reversed(moved)
     ) or ('<li class="thread-entry thread-entry--none">Açıldığından beri kayda geçen '
           "bir hareket olmadı.</li>")
     return (
-        head(f'{th["name"]} — izleme — {SITE_NAME}', depth=1)
+        head(f'{th["name"]} — izleme — {SITE_NAME}')
         + masthead()
         + f"""<main class="wrap thread">
   <p class="kicker">İzleme dosyası</p>
   <h1 class="report-title">{html.escape(th["name"])}</h1>
   <p class="thread-meta"><span class="num">{opened}</span> tarihinde açıldı · {status}
-    · <span class="num">{len(moved)}</span> hareket</p>
+    · <span class="num">{moves}</span> hareket</p>
   <ol class="thread-list">{rows}</ol>
   <nav class="endnav" aria-label="Devam">
     <span class="wrap endnav-inner">
-      <a class="endnav-go" href="index.html">Tüm izleme dosyaları</a>
-      <a class="endnav-go" href="../arsiv.html">Tüm raporlar</a>
+      <a class="endnav-go" href="/izleme/index.html">Tüm izleme dosyaları</a>
+      <a class="endnav-go" href="/arsiv.html">Tüm raporlar</a>
     </span>
   </nav>
 </main>
 """
-        + f'<script src="../{asset("app.js")}" defer></script>\n'
+        + f'<script src="{asset("app.js")}" defer></script>\n'
+        + FOOT
+    )
+
+
+def thread_redirect(old, th):
+    """Birleştirilen ipliğin eski adresi: yeni sayfaya götürür, sessizce değil.
+
+    GitHub Pages 301 veremiyor, o yüzden yönlendirme sayfanın içinde. Kendi
+    kendine gitmeden önce ne olduğunu da yazıyor: adresi paylaşmış birinin
+    bağlantısının neden başka bir başlık açtığını bilmeye hakkı var.
+    """
+    target = f'/izleme/{th["slug"]}.html'
+    return (
+        head(f'{th["name"]} — izleme — {SITE_NAME}')
+        .replace("</head>", f'<meta http-equiv="refresh" content="0; url={target}">\n</head>')
+        + masthead()
+        + f"""<main class="wrap thread">
+  <p class="kicker">İzleme dosyası taşındı</p>
+  <h1 class="report-title">{html.escape(th["name"])}</h1>
+  <p class="thread-meta">Bu dosya aynı konunun diğer kayıtlarıyla birleştirildi.
+    Yönlendirilmiyorsanız: <a href="{target}">{html.escape(th["name"])}</a></p>
+  <nav class="endnav" aria-label="Devam"><span class="wrap endnav-inner">
+    <a class="endnav-go" href="/izleme/index.html">Tüm izleme dosyaları</a>
+  </span></nav>
+</main>
+"""
         + FOOT
     )
 
@@ -857,15 +956,15 @@ def thread_index(threads, latest):
                else age_words(gap))
         rows.append(
             f'<li class="thread-row thread-row--{state}">'
-            f'<a href="{th["slug"]}.html"><span class="thread-name">{html.escape(th["name"])}</span>'
+            f'<a href="/izleme/{th["slug"]}.html"><span class="thread-name">{html.escape(th["name"])}</span>'
             f'<span class="thread-age num">{age}</span>'
-            f'<span class="thread-count num">{len(th["entries"])} hareket</span></a></li>'
+            f'<span class="thread-count num">{sum(1 for e in th["entries"] if not e.get("opening"))} hareket</span></a></li>'
         )
     counts = {k: sum(1 for t in threads.values() if t.get("state", "open") == k)
               for k in ("open", "dormant", "closed")}
     open_n = counts["open"]
     return (
-        head(f"İzleme dosyaları — {SITE_NAME}", depth=1)
+        head(f"İzleme dosyaları — {SITE_NAME}")
         + masthead()
         + f"""<main class="wrap thread">
   <h1 class="report-title">İzleme dosyaları</h1>
@@ -874,11 +973,11 @@ def thread_index(threads, latest):
     <span class="num">{counts["closed"]}</span> kapanmış</p>
   <ul class="thread-index">{''.join(rows)}</ul>
   <nav class="endnav" aria-label="Devam"><span class="wrap endnav-inner">
-    <a class="endnav-go" href="../arsiv.html">Tüm raporlar</a>
+    <a class="endnav-go" href="/arsiv.html">Tüm raporlar</a>
   </span></nav>
 </main>
 """
-        + f'<script src="../{asset("app.js")}" defer></script>\n'
+        + f'<script src="{asset("app.js")}" defer></script>\n'
         + FOOT
     )
 
@@ -1095,9 +1194,9 @@ def build_news_page(day, data, prev_day, next_day, has_report, cited):
         + (" · başlıklar Türkçe çeviriyle açılır" if TRANSLATE_PROXY else "")
     )
     return (
-        head(f"Medya takibi · {tr_date(day)} — {SITE_NAME}", depth=1)
+        head(f"Medya takibi · {tr_date(day)} — {SITE_NAME}")
         + masthead()
-        + daybar("news", day, prev_day, next_day, day if has_report else None, up="../")
+        + daybar("news", day, prev_day, next_day, day if has_report else None)
         + f"""<main class="wrap news">
   <div class="news-head">
     <h1 class="report-title">Medya takibi · {tr_date(day)}</h1>
@@ -1118,9 +1217,9 @@ def build_news_page(day, data, prev_day, next_day, has_report, cited):
   </div>
 </main>
 """
-        + endnav("news", day, prev_day, day if has_report else None, up="../")
+        + endnav("news", day, prev_day, day if has_report else None)
         + PROMPTS
-        + f'<script src="{up}{asset("app.js")}" defer></script>\n'
+        + f'<script src="{asset("app.js")}" defer></script>\n'
         + FOOT
     )
 
@@ -1244,7 +1343,7 @@ def main():
     for i, (iso, meta, body) in enumerate(sources):
         developments = meta.get("developments") or []
         body_html = render_body(body, developments, bool(meta.get("alarm")), iso,
-                                day_slugs.get(iso), up="../")
+                                day_slugs.get(iso))
         page = build_report(
             meta, body_html, iso,
             sources[i - 1][0] if i else None,
@@ -1314,7 +1413,7 @@ def main():
         iso, meta, body = sources[-1]
         body_html = render_body(body, meta.get("developments") or [],
                                 bool(meta.get("alarm")), iso,
-                                day_slugs.get(iso), up="")
+                                day_slugs.get(iso))
         (ROOT / "index.html").write_text(
             build_report(meta, body_html, iso,
                          sources[-2][0] if len(sources) > 1 else None, None,
@@ -1330,6 +1429,16 @@ def main():
                 thread_page(th, latest), encoding="utf-8")
         (THREAD_OUT / "index.html").write_text(
             thread_index(threads, latest), encoding="utf-8")
+        # Birleştirilen ipliklerin eski adresleri ölü kalmasın: geçen haftadan
+        # açık duran bir sekme, "hiçbir yerden bağlantı verilmiyor"un dışında
+        # kalan yer. Yönlendirme sayfası da bir cevaptır.
+        stubs = 0
+        for old, new in thread_aliases().items():
+            if old in threads or new not in threads:
+                continue
+            (THREAD_OUT / f"{old}.html").write_text(
+                thread_redirect(old, threads[new]), encoding="utf-8")
+            stubs += 1
         # Ajanın okuyacağı açık iplik listesi. Yapıştırılan metin ikinci gün
         # bayatlar; dosya her kurulumda tazelenir.
         THREADS_JSON.write_text(json.dumps(
@@ -1339,7 +1448,8 @@ def main():
             ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
         st = {k: sum(1 for t in threads.values() if t.get("state", "open") == k)
               for k in ("open", "dormant", "closed")}
-        print(f"  · izleme/ ({len(threads)} dosya · {st['open']} açık · "
+        print(f"  · izleme/ ({len(threads)} dosya + {stubs} yönlendirme · "
+              f"{st['open']} açık · "
               f"{st['dormant']} uykuda · {st['closed']} kapalı)")
 
     # Okuyucu gün atlar; ürün bugüne kadar bunu sessizlikle cezalandırıyordu.
@@ -1365,6 +1475,55 @@ def main():
             print(f"      {entry}")
     print(f"  · arsiv.html  ({len(reports)} rapor)  ·  index.html = {sources[-1][0] if sources else '—'}")
     print("  · data/reports.json")
+    if check_links():
+        sys.exit(1)
+
+
+def check_links():
+    """Üretilen her bağlantı gerçekten var mı? Yoksa yayın durur.
+
+    Kırık bir bağlantı sayfanın geri kalanı çalıştığı için fark edilmiyor:
+    kök sayfanın "önceki gün" oku haftalarca 404 verdi ve build her gün
+    "tamam" dedi. Bir şeyi üretiyorsak doğrulayabiliriz de; doğrulamayan
+    build, ürettiğini bilmiyor demektir.
+    """
+    import posixpath
+    broken = []
+    for f in sorted(ROOT.rglob("*.html")):
+        if ".git" in f.parts:
+            continue
+        text = f.read_text(encoding="utf-8", errors="replace")
+        page_ids = set(re.findall(r'\bid="([^"]+)"', text))
+        for href in re.findall(r'(?:href|src)="([^"]+)"', text):
+            if href.startswith(("http://", "https://", "mailto:", "data:", "//")):
+                continue
+            path, _, frag = href.partition("#")
+            path = path.split("?")[0]
+            if not path:
+                if frag and frag not in page_ids:
+                    broken.append((f, href, "çapa yok"))
+                continue
+            target = (ROOT / path.lstrip("/")) if path.startswith("/") else (
+                ROOT / posixpath.normpath(posixpath.join(f.parent.relative_to(ROOT).as_posix(), path)))
+            if target.is_dir():
+                target = target / "index.html"
+            if not target.exists():
+                broken.append((f, href, "dosya yok"))
+            elif frag and target.suffix == ".html":
+                ids = set(re.findall(r'\bid="([^"]+)"', target.read_text(encoding="utf-8", errors="replace")))
+                if frag not in ids:
+                    broken.append((f, href, "çapa yok"))
+    if broken:
+        print(f"  ✗ {len(broken)} kırık bağlantı:")
+        for f, href, why in broken[:15]:
+            print(f"      {f.relative_to(ROOT)} → {href}  ({why})")
+        if len(broken) > 15:
+            print(f"      … ve {len(broken) - 15} tane daha")
+    # Olmayan dosya build'in hatasıdır: her gün aynı şekilde çıkar, yayını
+    # durdurmak onu sabah fark ettirir. Olmayan çapa ajanın metninden de
+    # gelebilir; onun için günün raporunu hiç yayımlamamak, kırık bir iç
+    # bağlantıdan daha büyük zarar — yüksek sesle söylenir, durdurmaz.
+    return sum(1 for _f, _h, why in broken if why == "dosya yok")
 
 
 if __name__ == "__main__":

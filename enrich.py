@@ -403,17 +403,20 @@ def link_watch_items(text, slugs):
         # adı satırın başında düz metin olarak duruyor.
         anchored = re.sub(
             r'(<strong class="ganchor">)([^<]+)(</strong>)',
-            lambda a: f'{a.group(1)}<a class="thread-link" href="{{UP}}izleme/{slug}.html">'
+            lambda a: f'{a.group(1)}<a class="thread-link" href="/izleme/{slug}.html">'
                       f'{a.group(2)}</a>{a.group(3)}',
             body, count=1)
         if anchored != body:
             return head + anchored
-        name = re.match(r"\s*([^<—]+?)\s*(?=—|<|$)", body)
+        # Ad, durum işaretinden önce biter. Sınır olarak yalnız "—" ve "<"
+        # alınınca, işaretsiz yazılmış satırda ad açılış parantezini de
+        # yutuyordu: "… yanıt süresi (" diye bir iplik adı bağlanıyordu.
+        name = re.match(r"\s*([^<—(]+?)\s*(?=—|<|\(|$)", body)
         if not name or not name.group(1).strip():
             return m.group(0)
         return (head + body.replace(
             name.group(1),
-            f'<a class="thread-link" href="{{UP}}izleme/{slug}.html">{name.group(1)}</a>', 1))
+            f'<a class="thread-link" href="/izleme/{slug}.html">{name.group(1)}</a>', 1))
 
     def section(m):
         return m.group(1) + re.sub(r"(<li\b[^>]*>)((?:(?!</li>).)*)", li, m.group(2), flags=re.S)
@@ -442,9 +445,18 @@ def fold_watchlist(text):
         moved, waiting = [], []
         for li in items:
             plain = re.sub(r"<[^>]+>", " ", li)
-            (waiting if re.search(r"\bbekliyor\b", plain, re.I) else moved).append(li)
+            # Bugünün bir gelişmesine bağlanan kalem kımıldamıştır — ajan
+            # "ilerledi" yazsın ya da yazmasın. Kelimeyi aramak, olayı değil
+            # olayın anlatılış biçimini ölçüyordu.
+            if re.search(r'href="#g\d+"', li):
+                moved.append(li)
+            elif re.search(r"\bbekliyor\b", plain, re.I):
+                waiting.append(li)
+            else:
+                moved.append(li)
         if not waiting:
             return m.group(0)
+        moved = [reading_path_shape(li) for li in moved]
 
         rest = re.sub(r"<(?:p|ul|ol)\b.*?</(?:p|ul|ol)>", "", body, flags=re.S).strip()
         out = [head]
@@ -459,6 +471,26 @@ def fold_watchlist(text):
         return "".join(out) + rest
 
     return re.sub(r'(<h2[^>]*>İZLEME LİSTESİ</h2>)(.*?)(?=<h2|\Z)', section, text, flags=re.S)
+
+
+def reading_path_shape(li):
+    """Okuma yolundaki her satır aynı biçimde okunsun: ad — ilerledi (gelişme).
+
+    Ajan kalemlerin çoğunu bu kalıpla yazıyor ama hepsini değil; kalıpsız
+    yazılan satır aynı listede farklı bir şeymiş gibi duruyordu. Eklenen tek
+    kelime "ilerledi" ve o da iddia değil, yapının söylediği şey: satır bugün
+    yayımlanan bir gelişmeye bağlanıyor. Durumunu kendi yazmış satıra
+    dokunulmuyor — ajanın sözünü build'in sözüyle değiştirmek başka bir iş.
+    """
+    plain = re.sub(r"<[^>]+>", " ", li)
+    if re.search(r"\bilerledi\b|\bbekliyor\b", plain, re.I):
+        return li
+    # "… ad (<a href="#g3">gelişme</a>)." → "… ad — *ilerledi* (<a …>)."
+    fixed, n = re.subn(r'\s*\((\s*<a [^>]*href="#g\d+"[^>]*>.*?</a>\s*)\)',
+                       r" — <em>ilerledi (\1).</em>", li, count=1, flags=re.S)
+    if not n:
+        return li
+    return re.sub(r"\.\s*</em>\s*\.", ".</em>", fixed)
 
 
 def strip_waiting(li):
