@@ -186,23 +186,23 @@ def head(title, canonical="", day=""):
 """
 
 
-def masthead(home=False):
-    """Künye. Kökteyken logo bağlantı değil: zaten oradasın.
+def masthead():
+    """Künye. Logo her sayfada aynı bağlantı: "/".
 
-    Kök bugünün brifingi, yani logo oraya götürüyor — ama kök sayfadayken
-    tıklayınca hiçbir şey olmuyordu ve bu, bozuk bir bağlantı gibi okunuyor.
-    Götüremeyeceği bir yer vaat etmeyen tek doğru şekil: düz metin.
+    Kökte bir ara düz metne çevrilmişti — "zaten oradasın" diye. Yanlıştı:
+    tarayıcı çerçevesi olmayan kurulu uygulamada künyeye dokunmak okuyucunun
+    tek sıfırlama hareketi; başa sarar ve günün baskısını yeniden alır.
+    Kendine bağlantı hiçbir şeye mal olmuyor, yokluğu ise hareketin işlemediği
+    tek sayfayı yaratıyordu.
 
-    Bağlantı olduğu her yerde aynı: "/". Göreli adres her dizinde yeniden
+    Adres her yerde birebir aynı. Göreli adres her dizinde yeniden
     hesaplanıyordu ve derinliği yanlış geçen tek çağrı sessizce kırık bir
     logo üretiyordu — sayfanın geri kalanı çalıştığı için de fark edilmiyor.
     Site kök alan adında duruyor, o yüzden hesaplanacak bir şey yok.
     """
-    mark = (f'<span class="wordmark wordmark--here">{SITE_NAME}</span>' if home
-            else f'<a class="wordmark" href="/">{SITE_NAME}</a>')
     return f"""<header class="masthead">
   <div class="wrap masthead-inner">
-    {mark}
+    <a class="wordmark" href="/">{SITE_NAME}</a>
     <span class="tagline">{SITE_TAGLINE}</span>
   </div>
 </header>
@@ -443,7 +443,7 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
 
     return (
         head(f"{title} — {SITE_NAME}", canonical=canonical, day=iso)
-        + masthead(home=depth == 0)
+        + masthead()
         + daybar("report", iso, prev_day, next_day, cross_day)
         + f"""<main class="wrap report{' report--alarm' if meta.get('alarm') else ''}">
   <div class="report-grid">
@@ -835,7 +835,11 @@ def display_name(name):
     kesiliyor; slug'lar olduğu gibi kalıyor, çünkü adres kararlılığı
     düzgün görünmekten önce gelir.
     """
-    return re.sub(r"\s*\((?:bkz\.\s*)?G\d+(?:\s*,\s*G\d+)*\)\s*$", "", name).strip(" .")
+    name = re.sub(r"\s*\((?:bkz\.\s*)?G\d+(?:\s*,\s*G\d+)*\)\s*$", "", name)
+    # "(21.09.2026 raporu)" de aynı kusur: ipliğin işini adın içinde yapan bir
+    # geri atıf. O tarih artık iplik sayfasında açılış kaydı olarak duruyor.
+    name = re.sub(r"\s*\(\d{2}\.\d{2}\.\d{4}\s+raporu\)\s*$", "", name)
+    return name.strip(" .")
 
 
 def watch_opening(text):
