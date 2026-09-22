@@ -1145,7 +1145,7 @@ def load_news():
     return days
 
 
-def clip_html(item, day, cited):
+def clip_html(item, day, cited, sec=""):
     """Özetli satır açılır bir öğe, özetsiz satır tek bağlantı.
 
     Özet, İngilizce makaleyi *açmamak* için var; o yüzden özetli satırın birincil
@@ -1184,7 +1184,7 @@ def clip_html(item, day, cited):
 
     if not summary:
         return (
-            f'<li class="clip" data-search="{haystack}">'
+            f'<li class="clip" data-sec="{sec}" data-search="{haystack}">'
             f'<a href="{url}" target="_blank" rel="noopener">{row}</a></li>'
         )
 
@@ -1194,7 +1194,7 @@ def clip_html(item, day, cited):
         if item.get("title_tr") else ""
     )
     return (
-        f'<li><details class="clip" data-search="{haystack}">'
+        f'<li data-sec="{sec}"><details class="clip" data-search="{haystack}">'
         f"<summary>{row}</summary>"
         f'<div class="clip-body">{orig}'
         f'<p class="clip-summary">{html.escape(summary)}</p>'
@@ -1208,10 +1208,10 @@ def clip_html(item, day, cited):
     )
 
 
-def clip_list(rows, day, cited):
+def clip_list(rows, day, cited, sec=""):
     return (
         '<ul class="clips">'
-        + "".join(clip_html(r[2], day, cited) for r in rows)
+        + "".join(clip_html(r[2], day, cited, sec) for r in rows)
         + "</ul>"
     )
 
@@ -1224,13 +1224,14 @@ def news_section(name, rows, day, cited):
     )
     shown = category_head(rows)
     rest = rows[len(shown):]
+    sec = cat_id(name)
     if not rest:
-        return head_html + clip_list(shown, day, cited)
+        return head_html + clip_list(shown, day, cited, sec)
     return (
         head_html
-        + clip_list(shown, day, cited)
+        + clip_list(shown, day, cited, sec)
         + f'<details class="more"><summary>+{len(rest)} daha</summary>'
-        + clip_list(rest, day, cited)
+        + clip_list(rest, day, cited, sec)
         + "</details>"
     )
 
@@ -1256,9 +1257,9 @@ def general_section(rows, day, cited):
         f'<summary class="kicker" id="{cat_id(GENERAL)}">{html.escape(GENERAL)}'
         f' <span class="kicker-count num">{len(rows)}</span></summary>'
         f'<h3 class="subkicker">Taramaya değer <span class="kicker-count num">{len(worth)}</span></h3>'
-        + clip_list(worth, day, cited)
+        + clip_list(worth, day, cited, cat_id(GENERAL))
         + f'<details class="more"><summary>Tam döküm ({len(rest)})</summary>'
-        + clip_list(rest, day, cited)
+        + clip_list(rest, day, cited, cat_id(GENERAL))
         + "</details></details>"
     )
 
@@ -1277,7 +1278,7 @@ def turkish_section(rows, day, cited):
     return (
         f'<h2 class="kicker" id="{TURK_ID}">{html.escape(TURK_CAT)}'
         f' <span class="kicker-count num">{len(rows)}</span></h2>'
-        + clip_list(rows, day, cited)
+        + clip_list(rows, day, cited, TURK_ID)
     )
 
 
@@ -1297,7 +1298,7 @@ def build_news_page(day, data, prev_day, next_day, has_report, cited):
         # Öne çıkanlar da kapalı başlar. Sayfa bir tarama yüzeyi: önce 12 başlık
         # görünür, özet isteyen açar. Açık başlayan blok ekranın ilk görüntüsünü
         # üç satıra düşürüyordu.
-        + clip_list(top, day, cited)
+        + clip_list(top, day, cited, "one-cikanlar")
         + "</section>"
     ]
     for name, rows in present:

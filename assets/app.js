@@ -35,6 +35,60 @@
     });
 
     if (none) none.hidden = shown !== 0;
+    retally(!!term);
+  }
+
+  /* Süzme açıkken bölüm sayıları ve gezinme sayıları da süzülmüş olanı
+     göstermeli. Eskiden "C-UAS ve Hava Savunma 25" yazıp altında hiçbir
+     satır olmuyordu: sayı sayfanın süzülmemiş hâlini anlatıyor, bağlantı
+     da boş bir başlığa gidiyordu. Bir sayı neyi saydığını söylemiyorsa
+     yanlış sayıdır. */
+  var secs = {};
+  rows.forEach(function (el) {
+    // Özetli satırda data-sec saran <li>'de, özetsizde satırın kendisinde.
+    var host = el.hasAttribute("data-sec") ? el : el.closest("[data-sec]");
+    var id = host && host.getAttribute("data-sec");
+    if (id) (secs[id] = secs[id] || []).push(el);
+  });
+  var navs = Array.prototype.slice.call(
+    document.querySelectorAll(".news-rail-row, .catbar .chip"));
+  var counters = {};
+  Object.keys(secs).forEach(function (id) {
+    var head = document.getElementById(id);
+    counters[id] = {
+      head: head,
+      badge: head && head.querySelector(".kicker-count"),
+      navs: navs.filter(function (a) { return a.getAttribute("href") === "#" + id; })
+    };
+    if (counters[id].badge) counters[id].rest = counters[id].badge.textContent;
+  });
+
+  /* Başlığın gövdesi: bölüm bir kapsayıcı değil, h2 + kardeşleri. */
+  function sectionParts(head) {
+    if (!head) return [];
+    if (head.tagName === "SECTION") return [head];
+    if (head.tagName === "SUMMARY") return [head.parentElement];
+    var out = [head];
+    for (var el = head.nextElementSibling; el; el = el.nextElementSibling) {
+      if (el.tagName === "H2" || el.tagName === "SECTION") break;
+      out.push(el);
+    }
+    return out;
+  }
+
+  function retally(active) {
+    Object.keys(counters).forEach(function (id) {
+      var c = counters[id];
+      var live = secs[id].filter(function (el) { return !el.hidden; }).length;
+      if (c.badge) c.badge.textContent = active ? live : c.rest;
+      var empty = active && live === 0;
+      sectionParts(c.head).forEach(function (el) { el.hidden = empty; });
+      c.navs.forEach(function (a) {
+        a.hidden = empty;
+        var n = a.querySelector(".num, .chip-count");
+        if (n) n.textContent = active ? live : c.rest;
+      });
+    });
   }
 
   if (q) {
