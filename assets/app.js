@@ -44,6 +44,26 @@
     });
   }
 
+  // Brifingden gelen bağlantı ?q=Baykar taşıyor: kutuyu doldur, süz ve ilk
+  // eşleşmeye git. Aynı süzme kodu — ayrı bir "vurgulama" mekanizması kurmak
+  // iki ayrı doğruluk kaynağı yaratırdı.
+  if (q) {
+    var want = "";
+    try { want = new URLSearchParams(location.search).get("q") || ""; }
+    catch (err) { want = ""; }
+    if (want) {
+      q.value = want;
+      apply();
+      var first = rows.filter(function (el) { return !el.hidden; })[0];
+      if (first) {
+        // Katlamalar apply() içinde zaten açıldı; yerleşmesini bekle.
+        setTimeout(function () {
+          first.scrollIntoView({ block: "center" });
+        }, 60);
+      }
+    }
+  }
+
   // "/" focuses search, the way every reader expects
   document.addEventListener("keydown", function (e) {
     if (e.key === "/" && document.activeElement !== q && q) {

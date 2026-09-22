@@ -1278,7 +1278,7 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
 /* Referans listesi: ad başına bir satır, açıklama yok. Sayfanın tek işi
    "hangileri" sorusuna cevap vermek; sıralama yapılandırmadaki sıra. */
 .rival-head {
-  margin: 34px 0 0;
+  margin: 34px 0 6px;
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: 0.08em;
@@ -1298,3 +1298,11 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
 /* "→ bugün:" bağlantı değil, iki bağlantı arasındaki bağlaç. */
 .watch-arrow { color: var(--muted); }
 .watch-move { line-height: 1.5; }
+
+/* Çapraz kategorideki satır, hangi şirket için listelendiğini kendi taşır. */
+.clip-tr {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--brand);
+}

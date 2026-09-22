@@ -395,7 +395,7 @@ def guard_headline(title, iso=""):
 
 
 def build_report(meta, body_html, iso, prev_day=None, next_day=None,
-                 news_counts=None, mke_count=0, published="", scan=None, rivals=(), depth=1):
+                 news_counts=None, mke_count=0, published="", scan=None, rivals=(), turkish=(), has_news=False, depth=1):
     title = guard_headline(meta.get("title"), iso) or f"{tr_date(iso)} raporu"
     up = "../" * depth
     # Kök sayfa bugünün brifingi; aynı belge iki adreste durduğu için
@@ -444,17 +444,43 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
     # tam listesi bir referans sayfasında durur, günlük belgede değil.
     # Yapılandırma yoksa satır hiç basılmaz: bilinmiyor ≠ sıfır.
     if rivals:
-        # Yerli emsaller eşleştiriliyor ama şeritte görünmüyor. "Rakip" başlığı
-        # altında Aselsan'ı MKE yönetimine göstermek, ürünün yetkisi olmayan
-        # siyasi bir beyan; görüldükten sonra geri almak hiç göstermemekten
-        # pahalı. Saklamanın maliyeti yok — eşleşme çalışmaya devam ediyor,
-        # istendiği gün bu filtre kalkar ve geçmiş kayıpsız açılır.
-        shown = [(name, anchor) for name, anchor, dom in rivals if not dom]
+        # Yalnız "rakip" rolü bu şeritte. Türk şirketleri eşleştiriliyor ama
+        # buraya girmiyor: "Rakip" başlığı altında Aselsan'ı MKE yönetimine
+        # göstermek ürünün yetkisi olmayan bir beyan. Kendi satırları var.
+        shown = [(name, anchor) for name, anchor, role in rivals if role == "rakip"]
         movers = [(name, anchor) for name, anchor in shown if anchor]
         parts = [f'<a href="{anchor}">{html.escape(name)}</a>' for name, anchor in movers]
         line = '<span class="rival-sep"> · </span>'.join(parts)
         if line:
             line += '<span class="rival-sep"> · </span>'
+    # Türk sanayii: rakip değil, aynı ekosistem. Ayrı satır, çünkü "Aselsan
+    # bugün ne yaptı" ile "Rheinmetall bugün ne yaptı" okuyucu için aynı soru
+    # değil ve ikisini tek başlık altında toplamak birinciyi rakip ilan eder.
+    if turkish:
+        shown_tr = [(name, nid) for name, nid, hit in turkish if hit]
+        if has_news:
+            parts_tr = [
+                f'<a href="{day_url("news", iso)}?q={urlparse.quote(name)}">'
+                f'{html.escape(name)}</a>' for name, _nid in shown_tr
+            ]
+        else:
+            # O gün medya takibi yoksa bağlantı verecek yer de yok; ad düz
+            # metin kalır — var olmayan bir sayfaya kapı açmaktansa.
+            parts_tr = [html.escape(name) for name, _nid in shown_tr]
+        line_tr = '<span class="rival-sep"> · </span>'.join(parts_tr)
+        if line_tr:
+            line_tr += '<span class="rival-sep"> · </span>'
+        count_tr = (f'<span class="num">{len(shown_tr)}</span> / '
+                    f'<span class="num">{len(turkish)}</span>')
+        count_html = (
+            f'<a class="rival-count" href="{day_url("news", iso, "#" + TURK_ID)}">'
+            f'{count_tr} →</a>' if has_news
+            else f'<span class="rival-count">{count_tr}</span>'
+        )
+        rail.append(
+            '<div class="rail-block"><span class="rail-label">Türk sanayii</span>'
+            f'<span class="rail-value rail-rivals">{line_tr}{count_html}</span></div>'
+        )
         rail.append(
             '<div class="rail-block"><span class="rail-label">Rakip gündemi</span>'
             f'<span class="rail-value rail-rivals">{line}'
@@ -965,23 +991,29 @@ def rivals_page():
     config = rivals_config()
     if not config:
         return ""
-    world = [r for r in config if not r.get("domestic")]
-    local = [r for r in config if r.get("domestic")]
+    groups = [
+        ("rakip", "Uluslararası rakipler", ""),
+        ("yerli-rakip", "Yerli rakipler (aynı segment)", ""),
+        ("emsal", "Türk sanayi emsalleri",
+         "Kıyaslama için izleniyorlar; rakip sayılmıyorlar. Günlük brifingde "
+         "<span class=\"num\">Türk sanayii</span> satırında görünürler."),
+    ]
+    counted = [r for r in config if r.get("role", "rakip") == "rakip"]
+    blocks = []
+    for role, title, note in groups:
+        members = [r for r in config if r.get("role", "rakip") == role]
+        if not members:
+            continue
+        rows = "".join(f'<li class="rival-row">{html.escape(r["name"])}</li>'
+                       for r in members)
+        blocks.append(
+            f'<h2 class="rival-head">{title} '
+            f'<span class="num">{len(members)}</span></h2>'
+            + (f'<p class="thread-meta">{note}</p>' if note else "")
+            + f'<ul class="rival-list">{rows}</ul>'
+        )
+    body_blocks = "".join(blocks)
 
-    def rows(group):
-        return "".join(f'<li class="rival-row">{html.escape(r["name"])}</li>'
-                       for r in group)
-
-    # Yerli emsaller izleniyor ama günlük şeritte görünmüyor; listede ayrı
-    # başlık altında duruyorlar, çünkü "izliyoruz" ile "rakip sayıyoruz"
-    # aynı şey değil ve ikincisi verilmemiş bir karar.
-    names = rows(world)
-    local_block = (
-        f'<h2 class="rival-head">Yerli emsaller</h2>'
-        f'<p class="thread-meta">İzleniyor, günlük <span class="num">Rakip gündemi</span>'
-        f' şeridinde gösterilmiyor ve sayıma girmiyor.</p>'
-        f'<ul class="rival-list">{rows(local)}</ul>'
-    ) if local else ""
     return (
         head(f"İzlenen rakipler — {SITE_NAME}")
         + masthead()
@@ -989,10 +1021,10 @@ def rivals_page():
   <p class="kicker">Referans</p>
   <h1 class="report-title">İzlenen rakipler</h1>
   <p class="thread-meta">Günlük brifingdeki <span class="num">Rakip gündemi</span>
-    satırı bu listeyi o günün gelişmeleriyle eşleştirir.
-    <span class="num">{len(world)}</span> ad sayıma giriyor.</p>
-  <ul class="rival-list">{names}</ul>
-  {local_block}
+    ve <span class="num">Türk sanayii</span> satırları bu listeyi o günün
+    gelişmeleri ve başlıklarıyla eşleştirir.
+    <span class="num">{len(counted)}</span> ad rakip sayımına giriyor.</p>
+  {body_blocks}
   <nav class="endnav" aria-label="Devam"><span class="wrap endnav-inner">
     <a class="endnav-go" href="/">Bugünün brifingi →</a>
     <a class="endnav-go" href="/arsiv.html">Tüm raporlar</a>
@@ -1143,6 +1175,10 @@ def clip_html(item, day, cited):
         meta.append(tr_date(item["published"]))
     if item.get("also"):
         meta.append(f'+{len(item["also"])}')
+    # Çapraz kategoride listelenen satır neden orada olduğunu kendi üstünde
+    # söylüyor; okuyucu başlığa bakıp şirketi aramak zorunda kalmıyor.
+    for tag in item.get("tr_tags") or []:
+        meta.append(f'<span class="clip-tr">{html.escape(tag)}</span>')
     # Kapsam içindeyken özet gelmemişse söylenir; kapsam dışındaki 400+ satıra
     # konmaz, olmayan bir arızayı duyurmak olurdu. Bu sitede yokluk gizlenmez.
     if item.get("summary_scope") is True and not item.get("summary_tr"):
@@ -1242,9 +1278,32 @@ def general_section(rows, day, cited):
     )
 
 
+TURK_CAT = "Türk savunma sanayii"
+TURK_ID = "kat-turk"
+
+
+def turkish_section(rows, day, cited):
+    """Çapraz kategori: Türk sanayiine dair başlıklar, kendi kategorilerinde de kalır.
+
+    Öne çıkanlar gibi: satır iki yerde birden durabilir. Bu kesit bir konu
+    değil bir mercek — "bugün Türk sanayiinden ne çıktı" sorusu, kategorilerin
+    hiçbirinin tek başına cevaplayamadığı bir soru.
+    """
+    return (
+        f'<h2 class="kicker" id="{TURK_ID}">{html.escape(TURK_CAT)}'
+        f' <span class="kicker-count num">{len(rows)}</span></h2>'
+        + clip_list(rows, day, cited)
+    )
+
+
 def build_news_page(day, data, prev_day, next_day, has_report, cited):
     items = data.get("items", [])
+    # Etiketleme düzenden önce: clip_html satırın etiketini okuyor.
+    tag_turkish_headlines(items)
     top, present = news_layout(items, day, cited)
+    ranked_all = [r for _n, rows in present for r in rows]
+    turk_rows = sorted((r for r in ranked_all if r[2].get("tr_tags")),
+                       key=lambda r: (-r[0], r[1]))
 
     body = [
         '<section class="highlights" id="one-cikanlar">'
@@ -1259,10 +1318,19 @@ def build_news_page(day, data, prev_day, next_day, has_report, cited):
     for name, rows in present:
         body.append(general_section(rows, day, cited) if name == GENERAL
                     else news_section(name, rows, day, cited))
+        if name == "MKE" and turk_rows:
+            body.append(turkish_section(turk_rows, day, cited))
+    if turk_rows and not any(n == "MKE" for n, _r in present):
+        body.insert(1, turkish_section(turk_rows, day, cited))
 
     # aynı liste iki biçimde: dar ekranda yapışkan çip şeridi, geniş ekranda rail
     jumps = [("one-cikanlar", "Öne çıkanlar", len(top))]
-    jumps += [(cat_id(name), news_label(name), len(rows)) for name, rows in present]
+    for name, rows in present:
+        jumps.append((cat_id(name), news_label(name), len(rows)))
+        if name == "MKE" and turk_rows:
+            jumps.append((TURK_ID, TURK_CAT, len(turk_rows)))
+    if turk_rows and not any(n == "MKE" for n, _r in present):
+        jumps.insert(1, (TURK_ID, TURK_CAT, len(turk_rows)))
     chips = "".join(
         f'<a class="chip" href="#{anchor}">{html.escape(label)}'
         f' <span class="chip-count num">{count}</span></a>'
@@ -1451,6 +1519,8 @@ def main():
             published.get(iso, ""),
             scan_counts.get(iso),
             rival_hits(body, developments),
+            turkish_line(body, news.get(iso, {}).get("items", [])),
+            iso in news,
         )
         # Atıf kanonik kalmalı: [K#] yayıncının kendi sayfasını gösterir, vekili
         # değil. Okuma yolu ayrı bir çipte durur — o yüzden koruma "KAYNAKLAR
@@ -1518,7 +1588,9 @@ def main():
                          sources[-2][0] if len(sources) > 1 else None, None,
                          news_counts, mke_counts.get(iso, 0),
                          published.get(iso, ""), scan_counts.get(iso),
-                         rival_hits(body, meta.get("developments") or []), depth=0),
+                         rival_hits(body, meta.get("developments") or []),
+                         turkish_line(body, news.get(iso, {}).get("items", [])),
+                         iso in news, depth=0),
             encoding="utf-8")
     page = rivals_page()
     if page:
@@ -1654,27 +1726,42 @@ def tr_fold(text):
 SHORT_NAME = 4
 
 
-def rival_hits(body, developments):
-    """[(ad, çapa|"", yerli mi)] — hangi rakip bugün hangi gelişmede geçiyor.
+def _word(pattern):
+    return re.compile(r"(?<!\w)" + re.escape(pattern) + r"(?!\w)")
 
-    Önce gelişme başlıklarında, sonra gövdelerinde aranıyor: başlıkta geçen
-    ad o gelişmenin konusu, gövdede geçen ad ise anılan taraf. Aynı rakip
-    birden çok gelişmede geçiyorsa g kimliği en küçük olanına bağlanır.
 
-    Dört karakter ve altındaki her eşleşme dizisi — kanonik ad ya da takma
-    ad, ayrımı yok — yalnızca başlıkta ve büyük/küçük harfe duyarlı aranır.
-    "MIL", "FN", "CSG", "PGZ" gibi diziler Türkçe gövde metninde tesadüfen
-    geçiyor ve sözcük sınırı bunu durdurmuyor. Geri çağırma kaybı yok
-    denecek kadar az: KNDS'den söz eden bir gövde neredeyse her zaman bir
-    yerde Nexter ya da KMW da diyor, onlar gövdede eşleşmeye devam ediyor.
+@functools.lru_cache(maxsize=None)
+def rival_patterns(rid):
+    """(uzun desenler, kısa desenler) — bir rakibin eşleşme kalıpları.
 
-    Yerli adlar da normal şekilde eşleştiriliyor ama şeride girmiyor; karar
-    render tarafında, burada değil. Böylece "Türk emsalleri de görelim"
-    dendiği gün geçmiş kayıpsız açılıyor.
+    Dört karakter ve altındaki her dizi — kanonik ad ya da takma ad, ayrımı
+    yok — yalnız başlıkta ve harf duyarlı aranır. "MIL", "FN", "STM", "TAI"
+    gibi diziler Türkçe gövde metninde tesadüfen geçiyor ve sözcük sınırı
+    bunu durdurmuyor; başlık kısa ve özenle yazılmış, tesadüf çok daha zor.
     """
-    config = rivals_config()
-    if not config:
-        return []
+    rival = next((r for r in rivals_config() if r["id"] == rid), None)
+    if not rival:
+        return (), ()
+    strings = [rival["name"]] + [a for a in (rival.get("aliases") or []) if a.strip()]
+    return (tuple(_word(tr_fold(n)) for n in strings if len(n) > SHORT_NAME),
+            tuple(_word(n) for n in strings if len(n) <= SHORT_NAME))
+
+
+def rival_in_title(rid, title):
+    loose, short = rival_patterns(rid)
+    folded = tr_fold(title)
+    return any(p.search(folded) for p in loose) or any(p.search(title) for p in short)
+
+
+def rival_in_body(rid, body):
+    """Gövdede yalnız uzun diziler aranır — kısa olanlar başlığa ait."""
+    loose, _short = rival_patterns(rid)
+    folded = tr_fold(body)
+    return any(p.search(folded) for p in loose)
+
+
+def development_blocks(body):
+    """[(sıra, çapa, başlık, gövde)] — raporun anlatı birimleri."""
     blocks = []
     # Sınır önemli: sonraki ## gelmezse son gelişmenin gövdesi dosyanın
     # sonuna kadar uzuyor ve alakasız metni de yutuyor.
@@ -1686,28 +1773,85 @@ def rival_hits(body, developments):
                          body, flags=re.M):
         blocks.append((int(m.group(1)[1:]), m.group(1).lower(), m.group(2), m.group(3)))
     blocks.sort()
+    return blocks
 
-    def word(pattern):
-        return re.compile(r"(?<!\w)" + re.escape(pattern) + r"(?!\w)")
 
+def rival_hits(body, developments=()):
+    """[(ad, çapa|"", rol)] — hangi rakip bugün hangi gelişmede geçiyor.
+
+    Önce gelişme başlıklarında, sonra gövdelerinde aranıyor: başlıkta geçen
+    ad o gelişmenin konusu, gövdede geçen ad ise anılan taraf. Aynı rakip
+    birden çok gelişmede geçiyorsa g kimliği en küçük olanına bağlanır.
+
+    Roller burada ayrılmıyor, yalnız taşınıyor: hangi rolün nereye çıktığı
+    render kararı. Böylece "Türk emsallerini de rakip sayalım" dendiği gün
+    eşleşme geçmişi kayıpsız duruyor.
+    """
+    blocks = development_blocks(body)
     out = []
-    for rival in config:
-        strings = [rival["name"]] + [a for a in (rival.get("aliases") or []) if a.strip()]
-        loose = [word(tr_fold(n)) for n in strings if len(n) > SHORT_NAME]
-        short = [word(n) for n in strings if len(n) <= SHORT_NAME]
+    for rival in rivals_config():
         anchor = ""
-        for b in blocks:                      # önce başlıklar
-            if (any(p.search(tr_fold(b[2])) for p in loose)
-                    or any(p.search(b[2]) for p in short)):
+        for b in blocks:
+            if rival_in_title(rival["id"], b[2]):
                 anchor = f"#{b[1]}"
                 break
-        if not anchor:                        # sonra gövdeler, yalnız uzun diziler
+        if not anchor:
             for b in blocks:
-                if any(p.search(tr_fold(b[3])) for p in loose):
+                if rival_in_body(rival["id"], b[3]):
                     anchor = f"#{b[1]}"
                     break
-        out.append((rival["name"], anchor, bool(rival.get("domestic"))))
+        out.append((rival["name"], anchor, rival.get("role", "rakip")))
     return out
+
+
+TURKISH_ROLES = ("yerli-rakip", "emsal")
+
+
+def tag_turkish_headlines(items):
+    """Günün başlıklarını Türk sanayii adlarıyla etiketle; eşleşen adları döndür.
+
+    Başlık taraması brifingden ayrı bir kanal: rapor yalnız o günün dokuz
+    gelişmesini anlatıyor, medya takibinde 400+ satır var ve Türk sanayiine
+    dair haberin çoğu oraya düşüyor. İki geçiş de aynı kurala tabi.
+
+    Eşleşme başlıkta aranıyor — hem özgün hem çeviri — çünkü satırın kendisi
+    bir başlık; gövde yok.
+    """
+    turkish = [r for r in rivals_config() if r.get("role") in TURKISH_ROLES]
+    if not turkish:
+        return []
+    hit_names = []
+    for rival in turkish:
+        found = False
+        for item in items:
+            for title in (item.get("title") or "", item.get("title_tr") or ""):
+                if title and rival_in_title(rival["id"], title):
+                    # Satır kendi etiketini taşır: sayfada kaynaktan sonra
+                    # hangi şirket için listelendiği yazıyor.
+                    tags = item.setdefault("tr_tags", [])
+                    if rival["name"] not in tags:
+                        tags.append(rival["name"])
+                    found = True
+                    break
+        if found:
+            hit_names.append(rival["name"])
+    return hit_names
+
+
+def turkish_line(body, items):
+    """[(ad, kimlik, vurdu mu)] — Türk sanayii satırı, iki geçiş birleşik.
+
+    Gelişmelerde geçen ad da, günün başlıklarında geçen ad da aynı satıra
+    çıkıyor: okuyucu için ikisi de "bugün adı geçti" demek.
+    """
+    config = [r for r in rivals_config() if r.get("role") in TURKISH_ROLES]
+    if not config:
+        return []
+    from_dev = {name for name, anchor, role in rival_hits(body)
+                if anchor and role in TURKISH_ROLES}
+    from_news = set(tag_turkish_headlines(items))
+    return [(r["name"], r["id"], r["name"] in from_dev or r["name"] in from_news)
+            for r in config]
 
 
 

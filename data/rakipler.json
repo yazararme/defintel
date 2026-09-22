@@ -1,69 +1,681 @@
 {
-  "_schema": "id: stable slug. name: canonical display name, also matched. aliases: extra match strings. Any match string of <=4 characters - name or alias - matches development titles only, case-sensitive; longer ones match titles then bodies, case-insensitively. Product names are aliases only where unambiguous: SMASH and Bushmaster were removed because a second vendor sells the same name. segments: informational. domestic: true for Turkish peers - matched as normal but not rendered in the daily strip and not counted in n/N; listed separately on /rakipler.html. Flip that in build.py rival strip if the client asks to see Turkish peers.",
-  "_segments": {
-    "muhimmat": "Large-calibre ammunition, fuzes, energetics and propellants",
-    "hava_savunma": "Medium calibre, SHORAD and C-UAS (TOLGA, ILGAZ, 35 mm)",
-    "topcu": "Artillery, tank and naval gun systems (Boran, Firtina/Yavuz, Gurhan, Denizhan)",
-    "hafif_silah": "Small arms and small-arms ammunition",
-    "roket_bomba": "Artillery rockets, 2.75 in rockets, aircraft bombs"
+ "_schema": "id: stable slug. name: canonical display name, also matched. aliases: extra match strings. Any match string of <=4 characters - name or alias - matches titles/headlines only, case-sensitive; longer ones also match bodies, case-insensitively. Product names are aliases only where unambiguous: SMASH and Bushmaster were removed because a second vendor sells the same name. role: 'rakip' = international rival, counted in the Rakip gündemi strip; 'yerli-rakip' = Turkish company competing in an MKE segment; 'emsal' = Turkish industry peer, benchmarked not rivalled. The last two feed the Türk sanayii line and are never shown under a heading that calls them rivals. segments: informational.",
+ "_segments": {
+  "muhimmat": "Large-calibre ammunition, fuzes, energetics and propellants",
+  "hava_savunma": "Medium calibre, SHORAD and C-UAS (TOLGA, ILGAZ, 35 mm)",
+  "topcu": "Artillery, tank and naval gun systems (Boran, Firtina/Yavuz, Gurhan, Denizhan)",
+  "hafif_silah": "Small arms and small-arms ammunition",
+  "roket_bomba": "Artillery rockets, 2.75 in rockets, aircraft bombs"
+ },
+ "rakipler": [
+  {
+   "id": "rheinmetall",
+   "name": "Rheinmetall",
+   "aliases": [
+    "Expal",
+    "Nitrochemie",
+    "Oerlikon",
+    "Skyranger",
+    "Skynex"
+   ],
+   "segments": [
+    "muhimmat",
+    "hava_savunma",
+    "topcu"
+   ],
+   "role": "rakip"
   },
-  "rakipler": [
-    { "id": "rheinmetall", "name": "Rheinmetall", "aliases": ["Expal", "Nitrochemie", "Oerlikon", "Skyranger", "Skynex"], "segments": ["muhimmat", "hava_savunma", "topcu"] },
-    { "id": "nammo", "name": "Nammo", "aliases": ["Lapua"], "segments": ["muhimmat", "hafif_silah", "roket_bomba"] },
-    { "id": "knds", "name": "KNDS", "aliases": ["Nexter", "Krauss-Maffei", "KMW"], "segments": ["muhimmat", "topcu"] },
-    { "id": "bae-systems", "name": "BAE Systems", "aliases": ["BAE"], "segments": ["muhimmat", "topcu"] },
-    { "id": "elbit", "name": "Elbit", "aliases": ["IMI Systems"], "segments": ["muhimmat", "topcu", "roket_bomba"] },
-    { "id": "hanwha", "name": "Hanwha", "aliases": [], "segments": ["muhimmat", "topcu", "hava_savunma"] },
-    { "id": "poongsan", "name": "Poongsan", "aliases": [], "segments": ["muhimmat", "hafif_silah"] },
-    { "id": "eurenco", "name": "Eurenco", "aliases": [], "segments": ["muhimmat"] },
-    { "id": "chemring", "name": "Chemring", "aliases": [], "segments": ["muhimmat"] },
-    { "id": "gd-ots", "name": "General Dynamics OTS", "aliases": ["General Dynamics Ordnance", "GD-OTS"], "segments": ["muhimmat", "roket_bomba"] },
-    { "id": "csg", "name": "CSG", "aliases": ["Czechoslovak Group", "MSM Group", "Excalibur Army"], "segments": ["muhimmat", "topcu"] },
-    { "id": "pgz", "name": "PGZ", "aliases": ["Polska Grupa Zbrojeniowa", "Mesko", "Dezamet", "Nitro-Chem", "Huta Stalowa Wola", "HSW"], "segments": ["muhimmat", "topcu"] },
-    { "id": "munitions-india", "name": "Munitions India", "aliases": ["Ordnance Factory", "OFB", "MIL"], "segments": ["muhimmat"] },
-    { "id": "solar-industries", "name": "Solar Industries", "aliases": ["Economic Explosives"], "segments": ["muhimmat"] },
-    { "id": "yugoimport", "name": "Yugoimport", "aliases": ["Krušik", "Krusik"], "segments": ["muhimmat", "topcu", "roket_bomba"] },
-    { "id": "arsenal-bulgaria", "name": "Arsenal Bulgaria", "aliases": ["Arsenal AD", "Arsenal JSCo"], "segments": ["muhimmat", "hafif_silah"] },
-    { "id": "vmz-sopot", "name": "VMZ Sopot", "aliases": ["VMZ"], "segments": ["muhimmat", "roket_bomba"] },
-    { "id": "norinco", "name": "NORINCO", "aliases": [], "segments": ["muhimmat", "topcu", "roket_bomba", "hava_savunma"] },
-    { "id": "pof", "name": "Pakistan Ordnance Factories", "aliases": ["POF"], "segments": ["muhimmat", "hafif_silah"] },
-    { "id": "diehl", "name": "Diehl", "aliases": ["Diehl Defence"], "segments": ["muhimmat", "hava_savunma"] },
-    { "id": "junghans", "name": "Junghans", "aliases": [], "segments": ["muhimmat"] },
-
-    { "id": "leonardo", "name": "Leonardo", "aliases": [], "segments": ["hava_savunma", "topcu"] },
-    { "id": "kongsberg", "name": "Kongsberg", "aliases": [], "segments": ["hava_savunma"] },
-    { "id": "northrop-grumman", "name": "Northrop Grumman", "aliases": [], "segments": ["hava_savunma"] },
-    { "id": "saab", "name": "Saab", "aliases": [], "segments": ["hava_savunma"] },
-    { "id": "mbda", "name": "MBDA", "aliases": ["Sky Warden"], "segments": ["hava_savunma"] },
-    { "id": "thales", "name": "Thales", "aliases": [], "segments": ["hava_savunma", "roket_bomba"] },
-    { "id": "rafael", "name": "Rafael", "aliases": ["Drone Dome"], "segments": ["hava_savunma", "roket_bomba"] },
-    { "id": "iai", "name": "Israel Aerospace Industries", "aliases": ["IAI"], "segments": ["hava_savunma"] },
-    { "id": "hensoldt", "name": "Hensoldt", "aliases": [], "segments": ["hava_savunma"] },
-    { "id": "anduril", "name": "Anduril", "aliases": [], "segments": ["hava_savunma"] },
-    { "id": "epirus", "name": "Epirus", "aliases": [], "segments": ["hava_savunma"] },
-    { "id": "smart-shooter", "name": "Smart Shooter", "aliases": [], "segments": ["hava_savunma"] },
-    { "id": "weibel", "name": "Weibel", "aliases": [], "segments": ["hava_savunma"] },
-
-    { "id": "bharat-forge", "name": "Bharat Forge", "aliases": ["Kalyani"], "segments": ["topcu"] },
-    { "id": "tata", "name": "Tata Advanced Systems", "aliases": ["TASL"], "segments": ["topcu"] },
-    { "id": "denel", "name": "Denel", "aliases": [], "segments": ["topcu", "muhimmat"] },
-
-    { "id": "fn-herstal", "name": "FN Herstal", "aliases": ["FN"], "segments": ["hafif_silah"] },
-    { "id": "heckler-koch", "name": "Heckler & Koch", "aliases": ["Heckler und Koch", "H&K"], "segments": ["hafif_silah"] },
-    { "id": "cz", "name": "Colt CZ", "aliases": ["Česká zbrojovka", "Ceska zbrojovka", "CZUB"], "segments": ["hafif_silah"] },
-    { "id": "beretta", "name": "Beretta", "aliases": [], "segments": ["hafif_silah"] },
-    { "id": "sig-sauer", "name": "SIG Sauer", "aliases": [], "segments": ["hafif_silah"] },
-    { "id": "iwi", "name": "Israel Weapon Industries", "aliases": ["IWI"], "segments": ["hafif_silah"] },
-    { "id": "cbc-global", "name": "CBC Global", "aliases": ["Sellier & Bellot", "Magtech", "CBC"], "segments": ["hafif_silah"] },
-    { "id": "prvi-partizan", "name": "Prvi Partizan", "aliases": ["PPU"], "segments": ["hafif_silah"] },
-    { "id": "olin", "name": "Olin", "aliases": ["Winchester Ammunition"], "segments": ["hafif_silah"] },
-    { "id": "fiocchi", "name": "Fiocchi", "aliases": [], "segments": ["hafif_silah"] },
-
-    { "id": "aselsan", "name": "Aselsan", "aliases": ["KORKUT", "Gökberk"], "segments": ["hava_savunma"], "domestic": true },
-    { "id": "roketsan", "name": "Roketsan", "aliases": [], "segments": ["roket_bomba"], "domestic": true },
-    { "id": "repkon", "name": "Repkon", "aliases": [], "segments": ["muhimmat"], "domestic": true },
-    { "id": "sarsilmaz", "name": "Sarsılmaz", "aliases": ["Sarsilmaz"], "segments": ["hafif_silah"], "domestic": true },
-    { "id": "canik", "name": "Canik", "aliases": ["Samsun Yurt Savunma"], "segments": ["hafif_silah"], "domestic": true },
-    { "id": "kalekalip", "name": "Kalekalıp", "aliases": ["Kalekalip"], "segments": ["hafif_silah"], "domestic": true }
-  ]
+  {
+   "id": "nammo",
+   "name": "Nammo",
+   "aliases": [
+    "Lapua"
+   ],
+   "segments": [
+    "muhimmat",
+    "hafif_silah",
+    "roket_bomba"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "knds",
+   "name": "KNDS",
+   "aliases": [
+    "Nexter",
+    "Krauss-Maffei",
+    "KMW"
+   ],
+   "segments": [
+    "muhimmat",
+    "topcu"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "bae-systems",
+   "name": "BAE Systems",
+   "aliases": [
+    "BAE"
+   ],
+   "segments": [
+    "muhimmat",
+    "topcu"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "elbit",
+   "name": "Elbit",
+   "aliases": [
+    "IMI Systems"
+   ],
+   "segments": [
+    "muhimmat",
+    "topcu",
+    "roket_bomba"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "hanwha",
+   "name": "Hanwha",
+   "aliases": [],
+   "segments": [
+    "muhimmat",
+    "topcu",
+    "hava_savunma"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "poongsan",
+   "name": "Poongsan",
+   "aliases": [],
+   "segments": [
+    "muhimmat",
+    "hafif_silah"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "eurenco",
+   "name": "Eurenco",
+   "aliases": [],
+   "segments": [
+    "muhimmat"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "chemring",
+   "name": "Chemring",
+   "aliases": [],
+   "segments": [
+    "muhimmat"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "gd-ots",
+   "name": "General Dynamics OTS",
+   "aliases": [
+    "General Dynamics Ordnance",
+    "GD-OTS"
+   ],
+   "segments": [
+    "muhimmat",
+    "roket_bomba"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "csg",
+   "name": "CSG",
+   "aliases": [
+    "Czechoslovak Group",
+    "MSM Group",
+    "Excalibur Army"
+   ],
+   "segments": [
+    "muhimmat",
+    "topcu"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "pgz",
+   "name": "PGZ",
+   "aliases": [
+    "Polska Grupa Zbrojeniowa",
+    "Mesko",
+    "Dezamet",
+    "Nitro-Chem",
+    "Huta Stalowa Wola",
+    "HSW"
+   ],
+   "segments": [
+    "muhimmat",
+    "topcu"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "munitions-india",
+   "name": "Munitions India",
+   "aliases": [
+    "Ordnance Factory",
+    "OFB",
+    "MIL"
+   ],
+   "segments": [
+    "muhimmat"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "solar-industries",
+   "name": "Solar Industries",
+   "aliases": [
+    "Economic Explosives"
+   ],
+   "segments": [
+    "muhimmat"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "yugoimport",
+   "name": "Yugoimport",
+   "aliases": [
+    "Krušik",
+    "Krusik"
+   ],
+   "segments": [
+    "muhimmat",
+    "topcu",
+    "roket_bomba"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "arsenal-bulgaria",
+   "name": "Arsenal Bulgaria",
+   "aliases": [
+    "Arsenal AD",
+    "Arsenal JSCo"
+   ],
+   "segments": [
+    "muhimmat",
+    "hafif_silah"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "vmz-sopot",
+   "name": "VMZ Sopot",
+   "aliases": [
+    "VMZ"
+   ],
+   "segments": [
+    "muhimmat",
+    "roket_bomba"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "norinco",
+   "name": "NORINCO",
+   "aliases": [],
+   "segments": [
+    "muhimmat",
+    "topcu",
+    "roket_bomba",
+    "hava_savunma"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "pof",
+   "name": "Pakistan Ordnance Factories",
+   "aliases": [
+    "POF"
+   ],
+   "segments": [
+    "muhimmat",
+    "hafif_silah"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "diehl",
+   "name": "Diehl",
+   "aliases": [
+    "Diehl Defence"
+   ],
+   "segments": [
+    "muhimmat",
+    "hava_savunma"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "junghans",
+   "name": "Junghans",
+   "aliases": [],
+   "segments": [
+    "muhimmat"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "leonardo",
+   "name": "Leonardo",
+   "aliases": [],
+   "segments": [
+    "hava_savunma",
+    "topcu"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "kongsberg",
+   "name": "Kongsberg",
+   "aliases": [],
+   "segments": [
+    "hava_savunma"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "northrop-grumman",
+   "name": "Northrop Grumman",
+   "aliases": [],
+   "segments": [
+    "hava_savunma"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "saab",
+   "name": "Saab",
+   "aliases": [],
+   "segments": [
+    "hava_savunma"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "mbda",
+   "name": "MBDA",
+   "aliases": [
+    "Sky Warden"
+   ],
+   "segments": [
+    "hava_savunma"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "thales",
+   "name": "Thales",
+   "aliases": [],
+   "segments": [
+    "hava_savunma",
+    "roket_bomba"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "rafael",
+   "name": "Rafael",
+   "aliases": [
+    "Drone Dome"
+   ],
+   "segments": [
+    "hava_savunma",
+    "roket_bomba"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "iai",
+   "name": "Israel Aerospace Industries",
+   "aliases": [
+    "IAI"
+   ],
+   "segments": [
+    "hava_savunma"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "hensoldt",
+   "name": "Hensoldt",
+   "aliases": [],
+   "segments": [
+    "hava_savunma"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "anduril",
+   "name": "Anduril",
+   "aliases": [],
+   "segments": [
+    "hava_savunma"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "epirus",
+   "name": "Epirus",
+   "aliases": [],
+   "segments": [
+    "hava_savunma"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "smart-shooter",
+   "name": "Smart Shooter",
+   "aliases": [],
+   "segments": [
+    "hava_savunma"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "weibel",
+   "name": "Weibel",
+   "aliases": [],
+   "segments": [
+    "hava_savunma"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "bharat-forge",
+   "name": "Bharat Forge",
+   "aliases": [
+    "Kalyani"
+   ],
+   "segments": [
+    "topcu"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "tata",
+   "name": "Tata Advanced Systems",
+   "aliases": [
+    "TASL"
+   ],
+   "segments": [
+    "topcu"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "denel",
+   "name": "Denel",
+   "aliases": [],
+   "segments": [
+    "topcu",
+    "muhimmat"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "fn-herstal",
+   "name": "FN Herstal",
+   "aliases": [
+    "FN"
+   ],
+   "segments": [
+    "hafif_silah"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "heckler-koch",
+   "name": "Heckler & Koch",
+   "aliases": [
+    "Heckler und Koch",
+    "H&K"
+   ],
+   "segments": [
+    "hafif_silah"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "cz",
+   "name": "Colt CZ",
+   "aliases": [
+    "Česká zbrojovka",
+    "Ceska zbrojovka",
+    "CZUB"
+   ],
+   "segments": [
+    "hafif_silah"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "beretta",
+   "name": "Beretta",
+   "aliases": [],
+   "segments": [
+    "hafif_silah"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "sig-sauer",
+   "name": "SIG Sauer",
+   "aliases": [],
+   "segments": [
+    "hafif_silah"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "iwi",
+   "name": "Israel Weapon Industries",
+   "aliases": [
+    "IWI"
+   ],
+   "segments": [
+    "hafif_silah"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "cbc-global",
+   "name": "CBC Global",
+   "aliases": [
+    "Sellier & Bellot",
+    "Magtech",
+    "CBC"
+   ],
+   "segments": [
+    "hafif_silah"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "prvi-partizan",
+   "name": "Prvi Partizan",
+   "aliases": [
+    "PPU"
+   ],
+   "segments": [
+    "hafif_silah"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "olin",
+   "name": "Olin",
+   "aliases": [
+    "Winchester Ammunition"
+   ],
+   "segments": [
+    "hafif_silah"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "fiocchi",
+   "name": "Fiocchi",
+   "aliases": [],
+   "segments": [
+    "hafif_silah"
+   ],
+   "role": "rakip"
+  },
+  {
+   "id": "aselsan",
+   "name": "Aselsan",
+   "aliases": [
+    "KORKUT",
+    "Gökberk"
+   ],
+   "segments": [
+    "hava_savunma"
+   ],
+   "role": "yerli-rakip"
+  },
+  {
+   "id": "roketsan",
+   "name": "Roketsan",
+   "aliases": [],
+   "segments": [
+    "roket_bomba"
+   ],
+   "role": "yerli-rakip"
+  },
+  {
+   "id": "repkon",
+   "name": "Repkon",
+   "aliases": [],
+   "segments": [
+    "muhimmat"
+   ],
+   "role": "yerli-rakip"
+  },
+  {
+   "id": "sarsilmaz",
+   "name": "Sarsılmaz",
+   "aliases": [
+    "Sarsilmaz"
+   ],
+   "segments": [
+    "hafif_silah"
+   ],
+   "role": "yerli-rakip"
+  },
+  {
+   "id": "canik",
+   "name": "Canik",
+   "aliases": [
+    "Samsun Yurt Savunma"
+   ],
+   "segments": [
+    "hafif_silah"
+   ],
+   "role": "yerli-rakip"
+  },
+  {
+   "id": "kalekalip",
+   "name": "Kalekalıp",
+   "aliases": [
+    "Kalekalip"
+   ],
+   "segments": [
+    "hafif_silah"
+   ],
+   "role": "yerli-rakip"
+  },
+  {
+   "id": "tubitak-sage",
+   "name": "TÜBİTAK SAGE",
+   "aliases": [
+    "SAGE"
+   ],
+   "segments": [
+    "roket_bomba"
+   ],
+   "role": "yerli-rakip"
+  },
+  {
+   "id": "baykar",
+   "name": "Baykar",
+   "aliases": [
+    "Bayraktar"
+   ],
+   "role": "emsal"
+  },
+  {
+   "id": "tusas",
+   "name": "TUSAŞ",
+   "aliases": [
+    "TAI",
+    "Turkish Aerospace",
+    "TUSAS"
+   ],
+   "role": "emsal"
+  },
+  {
+   "id": "havelsan",
+   "name": "Havelsan",
+   "aliases": [],
+   "role": "emsal"
+  },
+  {
+   "id": "stm",
+   "name": "STM",
+   "aliases": [
+    "Savunma Teknolojileri Mühendislik"
+   ],
+   "role": "emsal"
+  },
+  {
+   "id": "asfat",
+   "name": "ASFAT",
+   "aliases": [],
+   "role": "emsal"
+  },
+  {
+   "id": "fnss",
+   "name": "FNSS",
+   "aliases": [],
+   "role": "emsal"
+  },
+  {
+   "id": "otokar",
+   "name": "Otokar",
+   "aliases": [],
+   "role": "emsal"
+  },
+  {
+   "id": "bmc",
+   "name": "BMC",
+   "aliases": [],
+   "role": "emsal"
+  },
+  {
+   "id": "nurol-makina",
+   "name": "Nurol Makina",
+   "aliases": [],
+   "role": "emsal"
+  },
+  {
+   "id": "meteksan",
+   "name": "Meteksan",
+   "aliases": [],
+   "role": "emsal"
+  }
+ ]
 }
