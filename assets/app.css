@@ -243,6 +243,14 @@ a { color: var(--brand); text-underline-offset: 2px; }
 
 /* ---------- section kickers ---------- */
 
+/* Şeridin kendi alt çizgisi zaten bir sınır; ilk bölüm bir kez daha çizgi
+   çizip 48px boşluk bırakınca arada boş bir bölüm varmış gibi görünüyordu. */
+.prose > h2:first-child {
+  margin-top: 16px;
+  padding-top: 0;
+  border-top: 0;
+}
+
 /* Seviye 2 — sınırı çizgi kurar, büyüklük değil: mono + üst çizgi, asla --muted. */
 .kicker,
 .prose h2 {
@@ -717,19 +725,27 @@ body:has(.endnav) .foot { margin-top: 0; }
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  min-height: 44px;
-  padding: 8px 14px;
+  min-height: 40px;
+  padding: 7px 14px;
   font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.05em;
-  color: var(--ink-2);
-  background: var(--paper-2);
-  border: 1px solid var(--rule);
-  border-radius: 2px;
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+  /* Bunlar bağlantı: rengi de bağlantı rengi olsun. Dolgu yerine ince kenar,
+     2px yerine 6px — kutu da değil hap da değil. */
+  color: var(--brand);
+  background: transparent;
+  /* Gri kenar + yeşil yazı iki ayrı nesne gibi okunuyordu; kenar da markanın
+     soluk hâli olunca çip tek parça. Eski tarayıcı color-mix'i bilmezse
+     üstteki gri kenarda kalır. */
+  border: 1px solid var(--rule-2);
+  border-color: color-mix(in srgb, var(--brand) 30%, transparent);
+  border-radius: 6px;
   text-decoration: none;
   cursor: pointer;
+  transition: background-color .12s ease, border-color .12s ease;
 }
-.chip:hover { border-color: var(--ink-2); color: var(--ink); }
+.chip:hover { border-color: var(--brand); background: var(--paper-2); }
+.chip:active { background: var(--rule); }
 .chip:focus-visible { outline: 1px solid var(--brand); outline-offset: 2px; }
 .chip-count { color: var(--muted); }
 
