@@ -519,24 +519,20 @@ def drop_unread_sources(text):
     )
 
 
-def place_scan_note(text, line):
-    """Ajanın kapsam notunu sil, türetilen ölçümü kaynakların sonuna koy.
+def drop_scan_note(text):
+    """Ajanın kapsam notunu sil.
 
-    Eski not ajanın beyanıydı ("havuz yoktu") ve operatör diliyle yazılmıştı:
-    okuyucu "günün başlık taraması"nın ne olduğunu bilmiyor. Yerine geçen
-    satır sebebi değil sonucu ölçüyor — ajan notu yazmayı unutsa da, yanlış
-    günde yazsa da sayı doğru kalır.
+    "Aday listesi üretilmedi; günün başlık taraması yapılamadı" okuyucunun
+    varlığını bilmediği bir iç mekanizmayı adlandırıyordu. Yerine türetilmiş
+    bir ölçüm koymayı denedim ("13 kaynağın 3'ü medya takibinde de var") —
+    o da tutmadı: ürünü kuran kişi bile ne işe yaradığını çıkaramadı.
+    Okuyucunun eyleme dönüştüremediği bir ölçüm, ölçüm olduğu için
+    yayınlanmayı hak etmiyor.
     """
-    text = re.sub(
+    return re.sub(
         r"<(blockquote|p)>\s*(?:<p>)?\s*Aday listesi üretilmedi.*?</\1>", "", text,
         count=1, flags=re.S,
     )
-    if not line:
-        return text
-    note = f'<p class="scan-note">{html.escape(line)}</p>'
-    if '<h2 id="ek">' in text:
-        return text.replace('<h2 id="ek">', note + '<h2 id="ek">', 1)
-    return text + note
 
 
 def rename_headers(text):
@@ -546,7 +542,7 @@ def rename_headers(text):
     return text
 
 
-def enrich(text, developments, alarm=False, report_iso="", scan=""):
+def enrich(text, developments, alarm=False, report_iso=""):
     dev_ids = {str(d.get("id", "")).lower() for d in developments if d.get("id")}
     # Düzyazı atfının tek doğruluk kaynağı: frontmatter'daki kısa ad.
     dev_labels = {
@@ -566,7 +562,7 @@ def enrich(text, developments, alarm=False, report_iso="", scan=""):
     text = link_citations(text, dev_ids, 'id="alarmlar"' in text, dev_labels)
     text = drop_self_links(text)
     text = drop_unread_sources(rename_headers(text))
-    return fold_appendix(fold_watchlist(place_scan_note(text, scan)))
+    return fold_appendix(fold_watchlist(drop_scan_note(text)))
 
 
 def nav(body_html):

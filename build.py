@@ -120,7 +120,7 @@ def label_table_cells(table_html):
     return table_html[: body.start()] + labelled + table_html[body.end():]
 
 
-def render_body(md_text, developments=(), alarm=False, report_iso="", scan=""):
+def render_body(md_text, developments=(), alarm=False, report_iso=""):
     # A bullet list that starts right under a bold lead-in ("**Taşınanlar:**")
     # would otherwise stay inside that paragraph; give it the blank line it needs.
     md_text = re.sub(
@@ -130,7 +130,7 @@ def render_body(md_text, developments=(), alarm=False, report_iso="", scan=""):
     )
     md = markdown.Markdown(extensions=["tables", "fenced_code", "attr_list", "sane_lists"])
     out = md.convert(md_text)
-    out = enrich.enrich(out, developments, alarm, report_iso, scan)
+    out = enrich.enrich(out, developments, alarm, report_iso)
     out = re.sub(r"<table>.*?</table>", lambda m: label_table_cells(m.group(0)), out, flags=re.S)
     out = out.replace("<table>", '<div class="table-wrap"><table>')
     out = out.replace("</table>", "</table></div>")
@@ -531,44 +531,6 @@ def default_visible(items, day, cited):
     return out
 
 
-# Türkçede sayıya gelen iyelik eki, sayının OKUNUŞUNUN son parçasına uyar:
-# "on sekiz" -> 18'i, "on dokuz" -> 19'u. Bileşik sayıda son bileşen belirler.
-NUM_SUFFIX = {1: "i", 2: "si", 3: "ü", 4: "ü", 5: "i", 6: "sı", 7: "si", 8: "i",
-              9: "u", 10: "u", 20: "si", 30: "u", 40: "ı", 50: "si", 60: "ı",
-              70: "i", 80: "i", 90: "ı", 100: "ü"}
-
-
-def num_with_suffix(n):
-    """9 -> \"9'u\", 18 -> \"18'i\" — sayının okunuşuna göre."""
-    tail = n % 10 or (n % 100 or n)
-    return f"{n}'{NUM_SUFFIX.get(tail, 'i')}"
-
-
-def scan_line(cited, pool_urls, source_count):
-    """Brifingin kaynaklarının kaçı o günün medya takibinde de var.
-
-    Daybar "bir gün = iki yüzü olan tek dosya" diye ilan ediyor: brifing
-    analiz edilmiş yüz, medya takibi ham yüz. Havuz geç üretildiği günlerde
-    bu ilan yanlıştı — brifing o taramanın analiz edilmiş hâli değil, aynı
-    tarihi paylaşan bağımsız bir belgeydi. Satır o sözü düzeltiyor.
-
-    Her gün basılıyor, çünkü yalnızca kötüyken beliren bir sayı hiçbir şeyle
-    kıyaslanamaz: "neye göre dar?" sorusunun cevabı, normal günlerde de
-    basılmış olmasıdır. Taban çizgisini basmak yaratır.
-
-    "Seçilmedi" denmiyor, "de var" deniyor: ölçebildiğimiz tek şey adresin
-    iki yerde birden geçmesi — analistin onu havuzdan seçtiğini ölçemeyiz,
-    bağımsız bulmuş da olabilir.
-    """
-    if not pool_urls or not source_count:
-        return ""          # havuz yoksa sessiz: veri yokluğu sıfır değildir
-    hit = len(pool_urls & cited)
-    if not hit:
-        return f"{source_count} kaynağın hiçbiri o günün medya takibinde yok."
-    return (f"{source_count} kaynağın {num_with_suffix(hit)} "
-            "o günün medya takibinde de var.")
-
-
 def watch_key(text):
     """İzleme kalemini günler arası eşleştiren kaba anahtar.
 
@@ -963,29 +925,10 @@ def main():
             continue
         sources.append((path.stem, meta, body))
 
-    # Medya sayfası aynı kesişimi "Brifingde" olarak basıyor; sayısını tut.
-    news_cited_count = {
-        day: sum(1 for i in data.get("items", []) if norm_url(i["url"]) in cited_urls(day))
-        for day, data in news.items()
-    }
-
     reports = []
     for i, (iso, meta, body) in enumerate(sources):
         developments = meta.get("developments") or []
-        # Rev 5'in kesişimi, ters yönden okunuyor: medya sayfasındaki
-        # "Brifingde" işareti de aynı kümeden çıkıyor.
-        cited = cited_urls(iso)
-        pool = {norm_url(i["url"]) for i in news.get(iso, {}).get("items", [])}
-        n_src = len(set(re.findall(r"^-\s+\[K(\d+)\]", body, re.M)))
-        scan = scan_line(cited, pool, n_src)
-        # Bedava çapraz doğrulama: aynı kesişim medya sayfasında "Brifingde"
-        # işareti olarak da basılıyor; iki sayı eşit olmak zorunda. Uymazsa
-        # durdurmak yerine uyar — biri ötekini denetliyor.
-        if pool and len(pool & cited) != news_cited_count.get(iso, len(pool & cited)):
-            print(f"  ! {iso}: kaynak kesişimi {len(pool & cited)}, "
-                  f"medya sayfasındaki Brifingde işareti "
-                  f"{news_cited_count[iso]}")
-        body_html = render_body(body, developments, bool(meta.get("alarm")), iso, scan)
+        body_html = render_body(body, developments, bool(meta.get("alarm")), iso)
         page = build_report(
             meta, body_html, iso,
             sources[i - 1][0] if i else None,
