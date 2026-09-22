@@ -444,7 +444,13 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
     # tam listesi bir referans sayfasında durur, günlük belgede değil.
     # Yapılandırma yoksa satır hiç basılmaz: bilinmiyor ≠ sıfır.
     if rivals:
-        movers = [(name, anchor) for name, anchor in rivals if anchor]
+        # Yerli emsaller eşleştiriliyor ama şeritte görünmüyor. "Rakip" başlığı
+        # altında Aselsan'ı MKE yönetimine göstermek, ürünün yetkisi olmayan
+        # siyasi bir beyan; görüldükten sonra geri almak hiç göstermemekten
+        # pahalı. Saklamanın maliyeti yok — eşleşme çalışmaya devam ediyor,
+        # istendiği gün bu filtre kalkar ve geçmiş kayıpsız açılır.
+        shown = [(name, anchor) for name, anchor, dom in rivals if not dom]
+        movers = [(name, anchor) for name, anchor in shown if anchor]
         parts = [f'<a href="{anchor}">{html.escape(name)}</a>' for name, anchor in movers]
         line = '<span class="rival-sep"> · </span>'.join(parts)
         if line:
@@ -454,7 +460,7 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
             f'<span class="rail-value rail-rivals">{line}'
             f'<a class="rival-count" href="/rakipler.html">'
             f'<span class="num">{len(movers)}</span> / '
-            f'<span class="num">{len(rivals)}</span> →</a></span></div>'
+            f'<span class="num">{len(shown)}</span> →</a></span></div>'
         )
     news_counts = news_counts or {}
     cross_day = iso if iso in news_counts else None
@@ -959,9 +965,23 @@ def rivals_page():
     config = rivals_config()
     if not config:
         return ""
-    names = "".join(
-        f'<li class="rival-row">{html.escape(r["name"])}</li>' for r in config
-    )
+    world = [r for r in config if not r.get("domestic")]
+    local = [r for r in config if r.get("domestic")]
+
+    def rows(group):
+        return "".join(f'<li class="rival-row">{html.escape(r["name"])}</li>'
+                       for r in group)
+
+    # Yerli emsaller izleniyor ama günlük şeritte görünmüyor; listede ayrı
+    # başlık altında duruyorlar, çünkü "izliyoruz" ile "rakip sayıyoruz"
+    # aynı şey değil ve ikincisi verilmemiş bir karar.
+    names = rows(world)
+    local_block = (
+        f'<h2 class="rival-head">Yerli emsaller</h2>'
+        f'<p class="thread-meta">İzleniyor, günlük <span class="num">Rakip gündemi</span>'
+        f' şeridinde gösterilmiyor ve sayıma girmiyor.</p>'
+        f'<ul class="rival-list">{rows(local)}</ul>'
+    ) if local else ""
     return (
         head(f"İzlenen rakipler — {SITE_NAME}")
         + masthead()
@@ -970,8 +990,9 @@ def rivals_page():
   <h1 class="report-title">İzlenen rakipler</h1>
   <p class="thread-meta">Günlük brifingdeki <span class="num">Rakip gündemi</span>
     satırı bu listeyi o günün gelişmeleriyle eşleştirir.
-    <span class="num">{len(config)}</span> ad izleniyor.</p>
+    <span class="num">{len(world)}</span> ad sayıma giriyor.</p>
   <ul class="rival-list">{names}</ul>
+  {local_block}
   <nav class="endnav" aria-label="Devam"><span class="wrap endnav-inner">
     <a class="endnav-go" href="/">Bugünün brifingi →</a>
     <a class="endnav-go" href="/arsiv.html">Tüm raporlar</a>
@@ -1630,22 +1651,26 @@ def tr_fold(text):
     return text.translate(str.maketrans("İIı", "iii")).lower()
 
 
-SHORT_ALIAS = 4
+SHORT_NAME = 4
 
 
 def rival_hits(body, developments):
-    """[(ad, çapa|"")] — hangi rakip bugün hangi gelişmede geçiyor.
+    """[(ad, çapa|"", yerli mi)] — hangi rakip bugün hangi gelişmede geçiyor.
 
     Önce gelişme başlıklarında, sonra gövdelerinde aranıyor: başlıkta geçen
     ad o gelişmenin konusu, gövdede geçen ad ise anılan taraf. Aynı rakip
     birden çok gelişmede geçiyorsa g kimliği en küçük olanına bağlanır.
 
-    Kısa takma adlar ayrı kurala tabi: dört karakter ve altı yalnızca
-    başlıkta, büyük/küçük harfe duyarlı aranıyor. "MIL", "FN", "CZUB" gibi
-    diziler Türkçe gövde metninde tesadüfen geçiyor ve sözcük sınırı bunu
-    durdurmuyor — "MIL" ayrı bir sözcük olarak da bulunabilir. Başlık kısa,
-    özenle yazılmış ve bir markayı tesadüfen içermesi çok daha zor; büyük
-    harf duyarlılığı da kısaltmayı sıradan sözcükten ayırıyor.
+    Dört karakter ve altındaki her eşleşme dizisi — kanonik ad ya da takma
+    ad, ayrımı yok — yalnızca başlıkta ve büyük/küçük harfe duyarlı aranır.
+    "MIL", "FN", "CSG", "PGZ" gibi diziler Türkçe gövde metninde tesadüfen
+    geçiyor ve sözcük sınırı bunu durdurmuyor. Geri çağırma kaybı yok
+    denecek kadar az: KNDS'den söz eden bir gövde neredeyse her zaman bir
+    yerde Nexter ya da KMW da diyor, onlar gövdede eşleşmeye devam ediyor.
+
+    Yerli adlar da normal şekilde eşleştiriliyor ama şeride girmiyor; karar
+    render tarafında, burada değil. Böylece "Türk emsalleri de görelim"
+    dendiği gün geçmiş kayıpsız açılıyor.
     """
     config = rivals_config()
     if not config:
@@ -1655,13 +1680,11 @@ def rival_hits(body, developments):
     # sonuna kadar uzuyor ve alakasız metni de yutuyor.
     for m in re.finditer(r"^###\s*(G\d+)\s*·\s*([^\n]*)\n(.*?)(?=^#{2,3}\s|\Z)",
                          body, flags=re.S | re.M):
-        blocks.append((int(m.group(1)[1:]), m.group(1).lower(),
-                       m.group(2), m.group(3)))
+        blocks.append((int(m.group(1)[1:]), m.group(1).lower(), m.group(2), m.group(3)))
     # Rakip hareketleri maddeleri de birer gelişme (Rev 16).
     for m in re.finditer(r"^-\s*\*\*\s*(G\d+)\s*·\s*([^*]+?)\s*\*\*\s*—\s*([^\n]*)",
                          body, flags=re.M):
-        blocks.append((int(m.group(1)[1:]), m.group(1).lower(),
-                       m.group(2), m.group(3)))
+        blocks.append((int(m.group(1)[1:]), m.group(1).lower(), m.group(2), m.group(3)))
     blocks.sort()
 
     def word(pattern):
@@ -1669,25 +1692,21 @@ def rival_hits(body, developments):
 
     out = []
     for rival in config:
-        aliases = [a for a in (rival.get("aliases") or []) if a.strip()]
-        # Uzun diziler: harf durumuna bakmadan, başlıkta ve gövdede.
-        loose = [word(tr_fold(n)) for n in [rival["name"]] + aliases
-                 if len(n) > SHORT_ALIAS or n == rival["name"]]
-        # Kısa takma adlar: olduğu gibi, yalnız başlıkta.
-        strict = [word(a) for a in aliases if len(a) <= SHORT_ALIAS]
+        strings = [rival["name"]] + [a for a in (rival.get("aliases") or []) if a.strip()]
+        loose = [word(tr_fold(n)) for n in strings if len(n) > SHORT_NAME]
+        short = [word(n) for n in strings if len(n) <= SHORT_NAME]
         anchor = ""
-        for b in blocks:
-            title, body_text = b[2], b[3]
-            if (any(p.search(tr_fold(title)) for p in loose)
-                    or any(p.search(title) for p in strict)):
+        for b in blocks:                      # önce başlıklar
+            if (any(p.search(tr_fold(b[2])) for p in loose)
+                    or any(p.search(b[2]) for p in short)):
                 anchor = f"#{b[1]}"
                 break
-        if not anchor:
+        if not anchor:                        # sonra gövdeler, yalnız uzun diziler
             for b in blocks:
                 if any(p.search(tr_fold(b[3])) for p in loose):
                     anchor = f"#{b[1]}"
                     break
-        out.append((rival["name"], anchor))
+        out.append((rival["name"], anchor, bool(rival.get("domestic"))))
     return out
 
 

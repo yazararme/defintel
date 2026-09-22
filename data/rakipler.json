@@ -1,5 +1,5 @@
 {
-  "_schema": "id: stable slug. name: canonical display name, also matched. aliases: extra match strings; <=4 chars match titles only, case-sensitive. segments: informational. domestic: true for Turkish peers - render or exclude per editorial decision.",
+  "_schema": "id: stable slug. name: canonical display name, also matched. aliases: extra match strings. Any match string of <=4 characters - name or alias - matches development titles only, case-sensitive; longer ones match titles then bodies, case-insensitively. Product names are aliases only where unambiguous: SMASH and Bushmaster were removed because a second vendor sells the same name. segments: informational. domestic: true for Turkish peers - matched as normal but not rendered in the daily strip and not counted in n/N; listed separately on /rakipler.html. Flip that in build.py rival strip if the client asks to see Turkish peers.",
   "_segments": {
     "muhimmat": "Large-calibre ammunition, fuzes, energetics and propellants",
     "hava_savunma": "Medium calibre, SHORAD and C-UAS (TOLGA, ILGAZ, 35 mm)",
@@ -32,7 +32,7 @@
 
     { "id": "leonardo", "name": "Leonardo", "aliases": [], "segments": ["hava_savunma", "topcu"] },
     { "id": "kongsberg", "name": "Kongsberg", "aliases": [], "segments": ["hava_savunma"] },
-    { "id": "northrop-grumman", "name": "Northrop Grumman", "aliases": ["Bushmaster"], "segments": ["hava_savunma"] },
+    { "id": "northrop-grumman", "name": "Northrop Grumman", "aliases": [], "segments": ["hava_savunma"] },
     { "id": "saab", "name": "Saab", "aliases": [], "segments": ["hava_savunma"] },
     { "id": "mbda", "name": "MBDA", "aliases": ["Sky Warden"], "segments": ["hava_savunma"] },
     { "id": "thales", "name": "Thales", "aliases": [], "segments": ["hava_savunma", "roket_bomba"] },
