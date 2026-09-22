@@ -516,6 +516,10 @@ a { color: var(--brand); text-underline-offset: 2px; }
 .rail-block { display: flex; flex-direction: column; gap: 5px; }
 .rail-label { color: var(--muted); }
 .rail-value { font-family: var(--mono); font-size: 12px; color: var(--ink-2); }
+/* Saat, üstündeki tarihin alt satırı: aynı mono aileden, bir tık küçük ve
+   soluk. Kuralı hiç yoktu — gövdenin serifini miras alıp rayın tek serif
+   öğesi olarak duruyordu, üstelik 16px'te, etiketlerden büyük. */
+.rail-sub { font-family: var(--mono); font-size: 11px; color: var(--muted); }
 /* Rayın içindeki tek dokunulabilir şey; 16px'lik hedefe parmakla basılmıyor.
    gap şart: inline-flex, öğeler arasındaki boşluk karakterini yutuyor ve
    "1başlık" diye bitişik yazıyordu. */
@@ -1255,16 +1259,10 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
   white-space: nowrap;
 }
 
-/* Ray şeridi: adlar tek blokta akar, eşleşmeyen soluk kalır. */
-.rail-rivals {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2px 8px;
-  line-height: 1.5;
-}
-/* Raydaki 44px'lik dokunma hedefi kuralı tek bir bağlantı için konmuştu;
-   burada her ad ayrı bir bağlantı ve her biri 44px olunca şerit satır
-   satır dağılıyor. Bu şeritte adlar sözcük, düğme değil. */
+/* Ray şeridi: bugün kımıldayan rakipler ve kaç tanesinin izlendiği.
+   Kımıldamayan adları basmak listeyi 12 satıra çıkarıyordu ve her gün aynı
+   12 adı okumak hiçbir şey söylemiyor; kapsamı sayı taşıyor, adlar değil. */
+.rail-rivals { line-height: 1.5; }
 .rail-rivals a {
   display: inline;
   min-height: 0;
@@ -1273,7 +1271,20 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
   border-bottom: 1px solid var(--rule-2);
 }
 .rail-rivals a:hover { border-bottom-color: var(--brand); }
-.rival-off { color: var(--muted); }
+.rival-sep { color: var(--muted); }
+.rival-count { color: var(--muted); border-bottom-color: transparent; }
+.rival-count:hover { color: var(--brand); }
+
+/* Referans listesi: ad başına bir satır, açıklama yok. Sayfanın tek işi
+   "hangileri" sorusuna cevap vermek; sıralama yapılandırmadaki sıra. */
+.rival-list { list-style: none; margin: 18px 0 0; padding: 0; border-top: 1px solid var(--rule); }
+.rival-row {
+  padding: 11px 0;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink-2);
+}
 
 /* "→ bugün:" bağlantı değil, iki bağlantı arasındaki bağlaç. */
 .watch-arrow { color: var(--muted); }

@@ -437,22 +437,25 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
             f'<span class="rail-value"><a href="{day_url("news", iso, "#" + cat_id("MKE"))}">'
             f'<span class="num">{mke_count}</span> başlık →</a></span></div>'
         )
-    # Rakip şeridi: bölüm değil, bir ölçüm. Eskiden bu bilgi ajanın yazdığı
-    # bir cümleydi ("… cephesinde yeni duyuru tespit edilmedi") — bir yokluk
-    # iddiası, hiçbir şeyle doğrulanmayan. Şimdi liste sabit, eşleşme
-    # hesaplanıyor; adı geçmeyen soluk duruyor ve okuyucu neye bakıldığını
-    # görüyor. Yapılandırma yoksa hiç basılmaz: bilinmiyor ≠ sıfır.
+    # Rakip gündemi: bugün kımıldayanlar, sonra kaçının izlendiği.
+    # Eskiden adı geçmeyen 12 rakip de soluk basılıyordu — kapsamı göstersin
+    # diye. Ama her gün aynı 12 adı okumak hiçbir şey söylemiyor ve şerit
+    # rayın en uzun bloğu oluyordu. Kapsam bir sayıyla taşınabilir; adların
+    # tam listesi bir referans sayfasında durur, günlük belgede değil.
+    # Yapılandırma yoksa satır hiç basılmaz: bilinmiyor ≠ sıfır.
     if rivals:
-        names = "".join(
-            (f'<a href="{anchor}">{html.escape(name)}</a>' if anchor
-             else f'<span class="rival-off">{html.escape(name)}</span>')
-            for name, anchor in rivals
-        )
+        movers = [(name, anchor) for name, anchor in rivals if anchor]
+        parts = [f'<a href="{anchor}">{html.escape(name)}</a>' for name, anchor in movers]
+        line = '<span class="rival-sep"> · </span>'.join(parts)
+        if line:
+            line += '<span class="rival-sep"> · </span>'
         rail.append(
-            '<div class="rail-block"><span class="rail-label">Rakipler</span>'
-            f'<span class="rail-value rail-rivals">{names}</span></div>'
+            '<div class="rail-block"><span class="rail-label">Rakip gündemi</span>'
+            f'<span class="rail-value rail-rivals">{line}'
+            f'<a class="rival-count" href="/rakipler.html">'
+            f'<span class="num">{len(movers)}</span> / '
+            f'<span class="num">{len(rivals)}</span> →</a></span></div>'
         )
-
     news_counts = news_counts or {}
     cross_day = iso if iso in news_counts else None
 
@@ -941,6 +944,40 @@ def thread_page(th, latest):
 </main>
 """
         + f'<script src="{asset("app.js")}" defer></script>\n'
+        + FOOT
+    )
+
+
+def rivals_page():
+    """/rakipler.html — izlenen rakiplerin tam listesi.
+
+    Ray şeridi yalnız o gün kımıldayanları basıyor; "kaçı izleniyor"
+    sorusunun cevabı bir sayı, "hangileri" sorusununki ise bu sayfa. Günlük
+    belgeye 15 ad koymak, her gün okunacak bir şey gibi görünmesine yol
+    açıyordu — oysa liste ayda bir değişiyor. Referans danışılır.
+    """
+    config = rivals_config()
+    if not config:
+        return ""
+    names = "".join(
+        f'<li class="rival-row">{html.escape(r["name"])}</li>' for r in config
+    )
+    return (
+        head(f"İzlenen rakipler — {SITE_NAME}")
+        + masthead()
+        + f"""<main class="wrap thread">
+  <p class="kicker">Referans</p>
+  <h1 class="report-title">İzlenen rakipler</h1>
+  <p class="thread-meta">Günlük brifingdeki <span class="num">Rakip gündemi</span>
+    satırı bu listeyi o günün gelişmeleriyle eşleştirir.
+    <span class="num">{len(config)}</span> ad izleniyor.</p>
+  <ul class="rival-list">{names}</ul>
+  <nav class="endnav" aria-label="Devam"><span class="wrap endnav-inner">
+    <a class="endnav-go" href="/">Bugünün brifingi →</a>
+    <a class="endnav-go" href="/arsiv.html">Tüm raporlar</a>
+  </span></nav>
+</main>
+"""
         + FOOT
     )
 
@@ -1462,6 +1499,11 @@ def main():
                          published.get(iso, ""), scan_counts.get(iso),
                          rival_hits(body, meta.get("developments") or []), depth=0),
             encoding="utf-8")
+    page = rivals_page()
+    if page:
+        (ROOT / "rakipler.html").write_text(page, encoding="utf-8")
+        print(f"  · rakipler.html ({len(rivals_config())} ad)")
+
     # İzleme dosyaları: bir ipliğin geçmişi başka hiçbir yerde durmuyor.
     if threads and sources:
         THREAD_OUT.mkdir(exist_ok=True)
