@@ -36,9 +36,7 @@ TR_SLUG = str.maketrans("çğıöşüÇĞİÖŞÜâîû", "cgiosucgiosuaiu")
 SECTION_CHIP = {
     "alarmlar": "Alarmlar",
     "gelismeler": "Gelişmeler",
-    "firsatlar": "Fırsatlar",
-    "riskler": "Riskler",
-    "rakip-hareketleri": "Rakipler",
+    "portfoy": "Portföy",
     "izleme-listesi": "İzleme",
     "kaynaklar": "Kaynaklar",
     "ek": "EK",
@@ -463,7 +461,7 @@ def fold_watchlist(text):
         if moved:
             out.append("<ul>" + "".join(moved) + "</ul>")
         out.append(
-            f'<details class="watch"><summary>Bekleyen başlıklar '
+            f'<details class="watch"><summary>Açık konular · '
             f'<span class="num">{len(waiting)}</span></summary><ul>'
             + "".join(strip_waiting(li) for li in waiting)
             + "</ul></details>"
@@ -474,23 +472,38 @@ def fold_watchlist(text):
 
 
 def reading_path_shape(li):
-    """Okuma yolundaki her satır aynı biçimde okunsun: ad — ilerledi (gelişme).
+    """Okuma yolu satırı: <iplik> → bugün: <gelişme>. Gerisi düz cümle.
 
-    Ajan kalemlerin çoğunu bu kalıpla yazıyor ama hepsini değil; kalıpsız
-    yazılan satır aynı listede farklı bir şeymiş gibi duruyordu. Eklenen tek
-    kelime "ilerledi" ve o da iddia değil, yapının söylediği şey: satır bugün
-    yayımlanan bir gelişmeye bağlanıyor. Durumunu kendi yazmış satıra
-    dokunulmuyor — ajanın sözünü build'in sözüyle değiştirmek başka bir iş.
+    Eski biçim ajanın durum kelimesini ekrana taşıyordu ("— *ilerledi (…)*").
+    O kelime bir işaret, bilgi değil: satırın okuma yolunda olması zaten
+    kımıldadığını söylüyor ve kararı veren şey kelime değil, bugünün bir
+    gelişmesine giden bağlantı. Kelimeyi basmak, yapının söylediğini bir de
+    metinle tekrar etmek — üstelik ajan onu bazen "bekliyor" yazdığında
+    satır kendi konumuyla çelişiyordu.
+
+    Kalan serbest metin atılmıyor: ajanın oraya yazdığı cümle çoğu zaman
+    gelişmenin başlığında olmayan tek şey.
     """
-    plain = re.sub(r"<[^>]+>", " ", li)
-    if re.search(r"\bilerledi\b|\bbekliyor\b", plain, re.I):
+    name = re.match(r"\s*<li\b[^>]*>\s*(<a class=\"thread-link\".*?</a>|[^<—(]+)", li, re.S)
+    dev = re.search(r'<a class="xref" href="(#g\d+)"[^>]*>(.*?)</a>', li, re.S)
+    if not (name and dev):
         return li
-    # "… ad (<a href="#g3">gelişme</a>)." → "… ad — *ilerledi* (<a …>)."
-    fixed, n = re.subn(r'\s*\((\s*<a [^>]*href="#g\d+"[^>]*>.*?</a>\s*)\)',
-                       r" — <em>ilerledi (\1).</em>", li, count=1, flags=re.S)
-    if not n:
-        return li
-    return re.sub(r"\.\s*</em>\s*\.", ".</em>", fixed)
+    head = name.group(1).strip()
+    rest = li[name.end():]
+    # Gelişme bağlantısını ve onu saran parantezi/durum kalıbını çıkar.
+    rest = rest[:dev.start() - name.end()] + rest[dev.end() - name.end():]
+    rest = re.sub(r"</?em>", "", rest)
+    rest = re.sub(r"^\s*(?:\(\d{2}\.\d{2}\.\d{4}\s+raporu\))?\s*(?:—|–|-)?\s*", "", rest)
+    rest = re.sub(r"\b(?:ilerledi|bekliyor)\b\.?", "", rest, flags=re.I)
+    rest = re.sub(r"\(\s*\)|\(\s*\.\s*\)", "", rest)
+    rest = re.sub(r"</li>\s*$", "", rest)
+    rest = re.sub(r"\s+", " ", rest).strip(" .,;—–-")
+    # Ayırıcı gerekli: gelişmenin başlığıyla serbest cümle birbirine
+    # yapışınca tek bir uzun ad gibi okunuyor.
+    tail = f". {tr_upper_first(rest)}." if rest else ""
+    return (f'<li class="watch-move">{head}'
+            f'<span class="watch-arrow"> → bugün: </span>'
+            f'<a class="xref" href="{dev.group(1)}">{dev.group(2)}</a>{tail}</li>')
 
 
 def strip_waiting(li):
@@ -600,8 +613,8 @@ def drop_mke_agenda(text):
 # Okuma sırası: karar önce, gerekçe sonra. Yönetici özeti ne olduğunu söyler,
 # Fırsatlar/Riskler ne anlama geldiğini; gelişmelerin tam anlatımı ikisinin
 # ardından gelir. Ajan hâlâ kendi sırasıyla yazıyor, sıra burada kuruluyor.
-SECTION_ORDER = ["alarmlar", "ozet", "firsatlar", "riskler", "gelismeler",
-                 "rakip-hareketleri", "izleme-listesi", "kaynaklar", "ek"]
+SECTION_ORDER = ["alarmlar", "ozet", "portfoy", "gelismeler",
+                 "izleme-listesi", "kaynaklar", "ek"]
 
 
 def reorder_sections(text):
@@ -664,6 +677,9 @@ def enrich(text, developments, alarm=False, report_iso="", slugs=None):
         str(d["id"]).lower(): str(d.get("label", "")).strip()
         for d in developments if d.get("id") and str(d.get("label", "")).strip()
     }
+    # Rakip maddeleri gelişmeye dönüşmeden çapa kurulmaz: h3 olarak doğup
+    # sonra kimliklerini alıyorlar.
+    text = fold_rivals(text)
     text = add_heading_anchors(text)
     # Çapalar kurulduktan hemen sonra: silinen blokla birlikte ona giden
     # atıflar da kendiliğinden bağlantısız kalıyor (link_citations bunu
@@ -673,6 +689,9 @@ def enrich(text, developments, alarm=False, report_iso="", slugs=None):
     text = add_item_anchors(text)
     text = add_source_anchors(text, report_iso)
     text = add_summary_links(text, dev_ids)
+    # Birleşme rozetlerden önce: rozet ilk hücredeki "G1 — " önekini yiyor,
+    # sıralama ise o öneki okuyor.
+    text = merge_portfolio(text)
     text = add_table_badges(text, dev_ids)
     text = link_citations(text, dev_ids, 'id="alarmlar"' in text, dev_labels)
     text = drop_self_links(text)
@@ -703,3 +722,121 @@ def nav(body_html):
         return ""
     return ('<nav class="devnav" id="devnav" aria-label="Bölümler">'
             + "".join(chips) + "</nav>")
+
+
+# ---------- Rev 16: tek anlatı evi, hesaplanmış rakip şeridi ----------
+
+def fold_rivals(text):
+    """RAKİP HAREKETLERİ'ni GELİŞMELER'in içine al.
+
+    22 Eylül'de tek bir gelişme beş yerde anlatılıyordu: özet satırı,
+    Fırsatlar satırı, Riskler satırı, Rakip hareketleri maddesi ve
+    Gelişmeler bloğu. Rakip maddeleri g1–g2'yi tutuyordu, yani özetin ilk
+    iki satırı gelişmelerin olmadığı bir bölüme işaret ediyordu. Bir
+    gelişmenin bir anlatı evi olur; rakip olması onu ayrı bir tür yapmıyor,
+    sadece kimin yaptığını söylüyor.
+
+    Başlıksız kapanış maddesi ("… tespit edilmedi") düşer: o cümle bir
+    gözlem değil, bir yoklukla ilgili iddiaydı ve artık raydaki şerit
+    aynı şeyi sayarak söylüyor.
+    """
+    sec = re.search(r"<h2>\s*RAKİP HAREKETLER[İI]\s*</h2>(.*?)(?=<h2|\Z)", text, flags=re.S)
+    if not sec:
+        return text
+    blocks = []
+    for li in re.findall(r"<li>(.*?)</li>", sec.group(1), flags=re.S):
+        m = re.match(r"\s*<strong>\s*(G\d+)\s*·\s*([^<]+?)\s*</strong>\s*(?:—|–|-)?\s*(.*)",
+                     li, flags=re.S)
+        if not m:
+            continue                      # başlıksız kapanış maddesi: düşer
+        blocks.append((int(m.group(1)[1:]),
+                       f"<h3>{m.group(1)} · {m.group(2).strip()}</h3>\n"
+                       f"<p>{m.group(3).strip()}</p>"))
+    text = text[:sec.start()] + text[sec.end():]
+    if not blocks:
+        return text
+
+    def into_developments(m):
+        return m.group(0).rstrip() + "\n" + "\n".join(b for _n, b in blocks)
+
+    text, n = re.subn(r"<h2>\s*GELİŞMELER\s*</h2>", into_developments, text, count=1)
+    if not n:                             # GELİŞMELER yoksa bölümü geri koy
+        return text + "\n".join(b for _n, b in blocks)
+    return sort_developments(text)
+
+
+def sort_developments(text):
+    """GELİŞMELER içindeki blokları g kimliğine göre diz.
+
+    Özet g1'den başlıyor; gövdenin g3'ten başlaması okuyucuyu ilk satırda
+    olmayan bir yere gönderiyordu.
+    """
+    sec = re.search(r"(<h2>\s*GELİŞMELER\s*</h2>)(.*?)(?=<h2|\Z)", text, flags=re.S)
+    if not sec:
+        return text
+    body = sec.group(2)
+    parts = re.split(r"(?=<h3>\s*G\d+\s*·)", body)
+    lead = parts[0] if parts and not re.match(r"\s*<h3>\s*G\d+", parts[0]) else ""
+    blocks = parts[1:] if lead else parts
+    if len(blocks) < 2:
+        return text
+    def gid(b):
+        m = re.match(r"\s*<h3>\s*G(\d+)", b)
+        return int(m.group(1)) if m else 10**6
+    return (text[:sec.start(2)] + lead + "".join(sorted(blocks, key=gid))
+            + text[sec.end(2):])
+
+
+IMPACT_TAG = '<span class="impact impact--{kind}">{label}</span>'
+
+
+def merge_portfolio(text):
+    """FIRSATLAR + RİSKLER → tek tablo: PORTFÖYE ETKİSİ.
+
+    İki tablo aynı soruyu soruyordu — "bu gelişme portföy için ne demek" —
+    ve aynı gelişme ikisinde birden görününce okuyucu iki ayrı yerde iki
+    ayrı satır okuyup ilişkiyi kendi kuruyordu. Tek tabloda fırsat ve risk
+    satırları yan yana duruyor; bir gelişmenin iki yönü olması onun iki
+    gelişme olduğu anlamına gelmiyor.
+
+    "Etki" renk değil metin: renk bir durum işareti ve bu üründe yalnız
+    alarmın durumu var. Fırsatı yeşile boyamak, her gün yeşil gören bir
+    okuyucuya hiçbir şey söylemez.
+    """
+    def grab(anchor, kind, label):
+        m = re.search(rf'<h2 id="{anchor}">.*?</h2>\s*(<table>.*?</table>)', text, flags=re.S)
+        if not m:
+            return None, []
+        rows = re.findall(r"<tr>\s*(<td.*?)</tr>", m.group(1), flags=re.S)
+        tag = IMPACT_TAG.format(kind=kind, label=label)
+        out = []
+        for r in rows:
+            cells = re.findall(r"<td[^>]*>.*?</td>", r, flags=re.S)
+            if len(cells) < 3:
+                continue
+            gid = re.search(r"<td[^>]*>\s*G(\d+)", cells[0])
+            out.append((int(gid.group(1)) if gid else 10**6,
+                        f"<tr>{cells[0]}<td>{tag}</td>{cells[1]}{cells[2]}</tr>"))
+        return m, out
+
+    m_f, rows_f = grab("firsatlar", "firsat", "FIRSAT")
+    m_r, rows_r = grab("riskler", "risk", "RİSK")
+    if not (rows_f or rows_r):
+        return text
+    # Kararlı sıralama: aynı gelişmede önce fırsat, sonra risk.
+    rows = sorted(rows_f + rows_r, key=lambda t: t[0])
+    table = (
+        '<h2 id="portfoy">PORTFÖYE ETKİSİ</h2>\n<table>\n<thead>\n<tr>'
+        "<th>Gelişme</th><th>Etki</th><th>Ne ifade ediyor</th>"
+        "<th>İzlenecek gösterge</th></tr>\n</thead>\n<tbody>\n"
+        + "\n".join(r for _g, r in rows) + "\n</tbody>\n</table>"
+    )
+    # Eski iki bölümü tümüyle sil, birleşiği ilkinin durduğu yere koy.
+    spans = [s for s in (re.search(rf'<h2 id="{a}">.*?(?=<h2|\Z)', text, flags=re.S)
+                         for a in ("firsatlar", "riskler")) if s]
+    spans.sort(key=lambda s: s.start())
+    here = spans[0].start()
+    out = text
+    for s in reversed(spans):                 # sondan başa: ofsetler kaymasın
+        out = out[:s.start()] + out[s.end():]
+    return out[:here] + table + "\n" + out[here:]

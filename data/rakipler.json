@@ -1,0 +1,21 @@
+{
+ "_": "İzlenen rakipler. Ray şeridi bu listeyi gün gün gelişmelerle eşleştirir: adı geçen ada bağlantı, geçmeyene soluk metin. Liste buradaki sırayla basılır, o yüzden sıra rastgele değil — önce MKE'nin doğrudan karşılaştığı mühimmat ve namlulu sistem üreticileri, sonra C-UAS tarafı. Ad eşleşmesi düz metin üzerinden yapılıyor: aliases, ajanın kullandığı yazımları taşır (kısaltma, yerel yazım, birlikte anıldığı marka). Listeye yeni bir rakip eklemek şeridi uzatır; çıkarmak, o rakibin yokluğunun artık haber olmadığı anlamına gelir.",
+
+ "rakipler": [
+  {"id": "rheinmetall",  "name": "Rheinmetall",   "aliases": ["Rheinmetall Denel", "Skyranger"]},
+  {"id": "hanwha",       "name": "Hanwha",        "aliases": ["Hanwha Defense", "Hanwha Aerospace", "Hanwha Defense USA"]},
+  {"id": "leonardo",     "name": "Leonardo",      "aliases": ["Leonardo DRS", "X-GUN"]},
+  {"id": "kongsberg",    "name": "Kongsberg",     "aliases": ["Kongsberg Defence", "PROTECTOR"]},
+  {"id": "knds",         "name": "KNDS",          "aliases": ["Nexter", "KMW", "Krauss-Maffei"]},
+  {"id": "bae",          "name": "BAE Systems",   "aliases": ["BAE"]},
+  {"id": "saab",         "name": "Saab",          "aliases": []},
+  {"id": "nammo",        "name": "Nammo",         "aliases": []},
+  {"id": "mbda",         "name": "MBDA",          "aliases": []},
+  {"id": "elbit",        "name": "Elbit",         "aliases": ["Elbit Systems", "IMI"]},
+  {"id": "norinco",      "name": "NORINCO",       "aliases": ["Norinco"]},
+  {"id": "aselsan",      "name": "Aselsan",       "aliases": ["ASELSAN"]},
+  {"id": "roketsan",     "name": "Roketsan",      "aliases": ["ROKETSAN"]},
+  {"id": "anduril",      "name": "Anduril",       "aliases": ["Anduril Industries"]},
+  {"id": "epirus",       "name": "Epirus",        "aliases": ["Leonidas"]}
+ ]
+}

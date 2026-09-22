@@ -395,7 +395,7 @@ def guard_headline(title, iso=""):
 
 
 def build_report(meta, body_html, iso, prev_day=None, next_day=None,
-                 news_counts=None, mke_count=0, published="", scan=None, depth=1):
+                 news_counts=None, mke_count=0, published="", scan=None, rivals=(), depth=1):
     title = guard_headline(meta.get("title"), iso) or f"{tr_date(iso)} raporu"
     up = "../" * depth
     # Kök sayfa bugünün brifingi; aynı belge iki adreste durduğu için
@@ -436,6 +436,21 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
             '<div class="rail-block"><span class="rail-label">MKE gündemi</span>'
             f'<span class="rail-value"><a href="{day_url("news", iso, "#" + cat_id("MKE"))}">'
             f'<span class="num">{mke_count}</span> başlık →</a></span></div>'
+        )
+    # Rakip şeridi: bölüm değil, bir ölçüm. Eskiden bu bilgi ajanın yazdığı
+    # bir cümleydi ("… cephesinde yeni duyuru tespit edilmedi") — bir yokluk
+    # iddiası, hiçbir şeyle doğrulanmayan. Şimdi liste sabit, eşleşme
+    # hesaplanıyor; adı geçmeyen soluk duruyor ve okuyucu neye bakıldığını
+    # görüyor. Yapılandırma yoksa hiç basılmaz: bilinmiyor ≠ sıfır.
+    if rivals:
+        names = "".join(
+            (f'<a href="{anchor}">{html.escape(name)}</a>' if anchor
+             else f'<span class="rival-off">{html.escape(name)}</span>')
+            for name, anchor in rivals
+        )
+        rail.append(
+            '<div class="rail-block"><span class="rail-label">Rakipler</span>'
+            f'<span class="rail-value rail-rivals">{names}</span></div>'
         )
 
     news_counts = news_counts or {}
@@ -1377,6 +1392,7 @@ def main():
             mke_counts.get(iso, 0),
             published.get(iso, ""),
             scan_counts.get(iso),
+            rival_hits(body, developments),
         )
         # Atıf kanonik kalmalı: [K#] yayıncının kendi sayfasını gösterir, vekili
         # değil. Okuma yolu ayrı bir çipte durur — o yüzden koruma "KAYNAKLAR
@@ -1443,7 +1459,8 @@ def main():
             build_report(meta, body_html, iso,
                          sources[-2][0] if len(sources) > 1 else None, None,
                          news_counts, mke_counts.get(iso, 0),
-                         published.get(iso, ""), scan_counts.get(iso), depth=0),
+                         published.get(iso, ""), scan_counts.get(iso),
+                         rival_hits(body, meta.get("developments") or []), depth=0),
             encoding="utf-8")
     # İzleme dosyaları: bir ipliğin geçmişi başka hiçbir yerde durmuyor.
     if threads and sources:
@@ -1549,6 +1566,72 @@ def check_links():
     # gelebilir; onun için günün raporunu hiç yayımlamamak, kırık bir iç
     # bağlantıdan daha büyük zarar — yüksek sesle söylenir, durdurmaz.
     return sum(1 for _f, _h, why in broken if why == "dosya yok")
+
+RIVALS_JSON = DATA / "rakipler.json"
+
+
+def rivals_config():
+    """İzlenen rakipler — dosya yoksa boş: bilinmiyor, sıfır değil."""
+    try:
+        data = json.loads(RIVALS_JSON.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+    return [r for r in data.get("rakipler", []) if r.get("name")]
+
+
+def tr_fold(text):
+    """Eşleştirme için Türkçe-duyarlı küçültme: İ/I/ı hepsi i'ye iner.
+
+    str.lower() "NORINCO"yu "norinco" yaparken "NORİNCO"yu başka bir şeye
+    çeviriyor; iki taraf da aynı fonksiyondan geçmezse marka adı eşleşmiyor.
+    """
+    return text.translate(str.maketrans("İIı", "iii")).lower()
+
+
+def rival_hits(body, developments):
+    """[(ad, çapa|"")] — hangi rakip bugün hangi gelişmede geçiyor.
+
+    Önce gelişme başlıklarında, sonra gövdelerinde aranıyor: başlıkta geçen
+    ad o gelişmenin konusu, gövdede geçen ad ise anılan taraf. Aynı rakip
+    birden çok gelişmede geçiyorsa g kimliği en küçük olanına bağlanır.
+
+    Adı geçmeyen rakip listeden düşmüyor, soluk yazılıyor: "bugün hiçbiri"
+    ile "bakmadık" aynı şey değil ve ürünün söylediği şey birincisi.
+    """
+    config = rivals_config()
+    if not config:
+        return []
+    blocks = []
+    # Sınır önemli: sonraki ## gelmezse son gelişmenin gövdesi dosyanın
+    # sonuna kadar uzuyor ve düşen kapanış cümlesindeki rakip listesini de
+    # yutuyordu — her rakip son gelişmeye bağlanıyordu.
+    for m in re.finditer(r"^###\s*(G\d+)\s*·\s*([^\n]*)\n(.*?)(?=^#{2,3}\s|\Z)",
+                         body, flags=re.S | re.M):
+        blocks.append((int(m.group(1)[1:]), m.group(1).lower(),
+                       tr_fold(m.group(2)), tr_fold(m.group(3))))
+    # Rakip hareketleri maddeleri de birer gelişme (Rev 16).
+    for m in re.finditer(r"^-\s*\*\*\s*(G\d+)\s*·\s*([^*]+?)\s*\*\*\s*—\s*([^\n]*)",
+                         body, flags=re.M):
+        blocks.append((int(m.group(1)[1:]), m.group(1).lower(),
+                       tr_fold(m.group(2)), tr_fold(m.group(3))))
+    blocks.sort()
+    out = []
+    for rival in config:
+        names = [rival["name"]] + list(rival.get("aliases") or [])
+        # Sözcük sınırı şart: düz alt dize araması "IMI"yi "üretimi"nin
+        # içinde bulup Elbit'i alakasız bir gelişmeye bağlıyordu.
+        pats = [re.compile(r"(?<!\w)" + re.escape(tr_fold(n)) + r"(?!\w)")
+                for n in names if n.strip()]
+        anchor = ""
+        for field in (2, 3):                      # önce başlık, sonra gövde
+            for b in blocks:
+                if any(p.search(b[field]) for p in pats):
+                    anchor = f"#{b[1]}"
+                    break
+            if anchor:
+                break
+        out.append((rival["name"], anchor))
+    return out
 
 
 if __name__ == "__main__":

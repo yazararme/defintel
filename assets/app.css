@@ -753,8 +753,12 @@ body:has(.endnav) .foot { margin-top: 0; }
      Üç hücrenin üstündeki üç etiket, satır başına üç kez tekrar ediyordu —
      yapı zaten hangisinin ne olduğunu söylüyor. */
   .prose td::before { content: none; }
+  /* Etki çipi kartın ilk satırı: okuyucu satırı okumadan önce hangi yönde
+     olduğunu bilsin. DOM'da ikinci sütun, ekranda başta. */
+  .prose tbody tr { display: flex; flex-direction: column; }
+  .prose tbody td:nth-child(2) { order: -1; padding-bottom: 6px; }
   .prose tbody td:first-child { font-weight: 600; font-size: 17px; line-height: 1.35; }
-  .prose tbody td:nth-child(2) { color: var(--ink-2); }
+  .prose tbody td:nth-child(3) { color: var(--ink-2); }
   .prose tbody td:last-child { color: var(--muted); font-size: 15px; }
   .prose td:empty { display: none; }
 }
@@ -1235,3 +1239,42 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
   line-height: 1.45;
   color: var(--ink-2);
 }
+
+
+/* ---------- Rev 16: etki çipi, rakip şeridi, izleme oku ---------- */
+
+/* Renk değil metin: renk bir durum işareti ve bu üründe durumu olan tek şey
+   alarm. Fırsatı yeşile boyamak, her gün yeşil gören okuyucuya bir şey
+   söylemez — üstelik risk/fırsat bir değerlendirme, bir uyarı değil. */
+.impact {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+/* Ray şeridi: adlar tek blokta akar, eşleşmeyen soluk kalır. */
+.rail-rivals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 8px;
+  line-height: 1.5;
+}
+/* Raydaki 44px'lik dokunma hedefi kuralı tek bir bağlantı için konmuştu;
+   burada her ad ayrı bir bağlantı ve her biri 44px olunca şerit satır
+   satır dağılıyor. Bu şeritte adlar sözcük, düğme değil. */
+.rail-rivals a {
+  display: inline;
+  min-height: 0;
+  color: var(--brand);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-2);
+}
+.rail-rivals a:hover { border-bottom-color: var(--brand); }
+.rival-off { color: var(--muted); }
+
+/* "→ bugün:" bağlantı değil, iki bağlantı arasındaki bağlaç. */
+.watch-arrow { color: var(--muted); }
+.watch-move { line-height: 1.5; }
