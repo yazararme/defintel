@@ -1630,6 +1630,9 @@ def tr_fold(text):
     return text.translate(str.maketrans("İIı", "iii")).lower()
 
 
+SHORT_ALIAS = 4
+
+
 def rival_hits(body, developments):
     """[(ad, çapa|"")] — hangi rakip bugün hangi gelişmede geçiyor.
 
@@ -1637,43 +1640,56 @@ def rival_hits(body, developments):
     ad o gelişmenin konusu, gövdede geçen ad ise anılan taraf. Aynı rakip
     birden çok gelişmede geçiyorsa g kimliği en küçük olanına bağlanır.
 
-    Adı geçmeyen rakip listeden düşmüyor, soluk yazılıyor: "bugün hiçbiri"
-    ile "bakmadık" aynı şey değil ve ürünün söylediği şey birincisi.
+    Kısa takma adlar ayrı kurala tabi: dört karakter ve altı yalnızca
+    başlıkta, büyük/küçük harfe duyarlı aranıyor. "MIL", "FN", "CZUB" gibi
+    diziler Türkçe gövde metninde tesadüfen geçiyor ve sözcük sınırı bunu
+    durdurmuyor — "MIL" ayrı bir sözcük olarak da bulunabilir. Başlık kısa,
+    özenle yazılmış ve bir markayı tesadüfen içermesi çok daha zor; büyük
+    harf duyarlılığı da kısaltmayı sıradan sözcükten ayırıyor.
     """
     config = rivals_config()
     if not config:
         return []
     blocks = []
     # Sınır önemli: sonraki ## gelmezse son gelişmenin gövdesi dosyanın
-    # sonuna kadar uzuyor ve düşen kapanış cümlesindeki rakip listesini de
-    # yutuyordu — her rakip son gelişmeye bağlanıyordu.
+    # sonuna kadar uzuyor ve alakasız metni de yutuyor.
     for m in re.finditer(r"^###\s*(G\d+)\s*·\s*([^\n]*)\n(.*?)(?=^#{2,3}\s|\Z)",
                          body, flags=re.S | re.M):
         blocks.append((int(m.group(1)[1:]), m.group(1).lower(),
-                       tr_fold(m.group(2)), tr_fold(m.group(3))))
+                       m.group(2), m.group(3)))
     # Rakip hareketleri maddeleri de birer gelişme (Rev 16).
     for m in re.finditer(r"^-\s*\*\*\s*(G\d+)\s*·\s*([^*]+?)\s*\*\*\s*—\s*([^\n]*)",
                          body, flags=re.M):
         blocks.append((int(m.group(1)[1:]), m.group(1).lower(),
-                       tr_fold(m.group(2)), tr_fold(m.group(3))))
+                       m.group(2), m.group(3)))
     blocks.sort()
+
+    def word(pattern):
+        return re.compile(r"(?<!\w)" + re.escape(pattern) + r"(?!\w)")
+
     out = []
     for rival in config:
-        names = [rival["name"]] + list(rival.get("aliases") or [])
-        # Sözcük sınırı şart: düz alt dize araması "IMI"yi "üretimi"nin
-        # içinde bulup Elbit'i alakasız bir gelişmeye bağlıyordu.
-        pats = [re.compile(r"(?<!\w)" + re.escape(tr_fold(n)) + r"(?!\w)")
-                for n in names if n.strip()]
+        aliases = [a for a in (rival.get("aliases") or []) if a.strip()]
+        # Uzun diziler: harf durumuna bakmadan, başlıkta ve gövdede.
+        loose = [word(tr_fold(n)) for n in [rival["name"]] + aliases
+                 if len(n) > SHORT_ALIAS or n == rival["name"]]
+        # Kısa takma adlar: olduğu gibi, yalnız başlıkta.
+        strict = [word(a) for a in aliases if len(a) <= SHORT_ALIAS]
         anchor = ""
-        for field in (2, 3):                      # önce başlık, sonra gövde
+        for b in blocks:
+            title, body_text = b[2], b[3]
+            if (any(p.search(tr_fold(title)) for p in loose)
+                    or any(p.search(title) for p in strict)):
+                anchor = f"#{b[1]}"
+                break
+        if not anchor:
             for b in blocks:
-                if any(p.search(b[field]) for p in pats):
+                if any(p.search(tr_fold(b[3])) for p in loose):
                     anchor = f"#{b[1]}"
                     break
-            if anchor:
-                break
         out.append((rival["name"], anchor))
     return out
+
 
 
 if __name__ == "__main__":
