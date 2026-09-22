@@ -341,42 +341,28 @@
   function goTo(id, push) {
     var el = document.getElementById(id);
     if (!el) return;
+    var before = window.scrollY;
     // scroll-margin-top (CSS) keeps the sticky strip from covering the target
     try {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (err) {
       el.scrollIntoView();
     }
+    // Smooth kaydırma bazı ortamlarda sessizce hiç çalışmıyor: çip tıklanıyor,
+    // sayfa yerinde kalıyor. Kımıldamadıysa anında git — bir çipin hiçbir şey
+    // yapmaması, animasyonsuz gitmesinden kötü.
+    setTimeout(function () {
+      if (Math.abs(window.scrollY - before) < 2 &&
+          Math.abs(el.getBoundingClientRect().top) > 80) {
+        el.scrollIntoView({ block: "start" });
+      }
+    }, 350);
     flash(el);
     if (push && history.replaceState) history.replaceState(null, "", "#" + id);
   }
 
-  function openGroup(key) {
-    if (!nav) return;
-    var btn = nav.querySelector('.chip--group[data-group="' + key + '"]');
-    var set = nav.querySelector('.chip-set[data-group="' + key + '"]');
-    if (!btn || !set) return;
-    set.hidden = false;
-    btn.setAttribute("aria-expanded", "true");
-  }
-
   if (nav) {
     nav.addEventListener("click", function (e) {
-      var group = e.target.closest(".chip--group");
-      if (group) {
-        var key = group.getAttribute("data-group");
-        var set = nav.querySelector('.chip-set[data-group="' + key + '"]');
-        var open = group.getAttribute("aria-expanded") === "true";
-        set.hidden = open;
-        group.setAttribute("aria-expanded", open ? "false" : "true");
-        if (!open) {
-          // the set itself is display:contents, so measure its first chip
-          var track = nav.querySelector(".devnav-track");
-          var first = set.querySelector("a.chip");
-          if (track && first) track.scrollLeft = first.offsetLeft - 12;
-        }
-        return;
-      }
       var chip = e.target.closest("a.chip");
       if (chip) {
         e.preventDefault();
@@ -389,11 +375,6 @@
   function fromHash() {
     var id = (location.hash || "").slice(1);
     if (!id || !document.getElementById(id)) return;
-    if (nav) {
-      var chip = nav.querySelector('a.chip[href="#' + id + '"]');
-      var set = chip && chip.closest(".chip-set");
-      if (set) openGroup(set.getAttribute("data-group"));
-    }
     setTimeout(function () { goTo(id, false); }, 60);
 
     // Web fonts land after the first paint and move everything down a little;

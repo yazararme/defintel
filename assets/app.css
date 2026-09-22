@@ -559,6 +559,11 @@ body:has(.endnav) .foot { margin-top: 0; }
 
 @media (max-width: 700px) {
   body { font-size: 17px; }
+
+  /* Altı çip dar ekranda iki sıra oluyor: yapışkan kalsa daybar'la birlikte
+     ekranın ~147px'ini kalıcı yerdi. Bölüm şeridi bir atlama menüsü, gün
+     çubuğu gibi sürekli lazım değil — belgeyle birlikte yukarı kaysın. */
+  .devnav:not(.catbar) { position: static; }
   .wrap { padding: 0 18px; }
 
   .entry { grid-template-columns: minmax(0, 1fr); gap: 10px; }
@@ -684,17 +689,17 @@ body:has(.endnav) .foot { margin-top: 0; }
   border-bottom: 1px solid var(--rule);
 }
 
-.devnav-inner, .devnav { display: flex; align-items: center; gap: 8px; }
-
-.devnav-groups {
-  flex: none;
+/* Brifingde altı sabit bölüm; kaydırmaya gerek yok, sığmazsa alt satıra geçer.
+   Kaydırmalı şerit, görünmeyen çiplerin varlığını da gizliyordu. */
+.devnav-inner, .devnav {
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
-  padding-left: 10px;
-  background: var(--paper);
-  box-shadow: -14px 0 14px -4px var(--paper);
 }
 
+/* Medya sayfasının kategori şeridi hâlâ kaydırıyor: orada çipler sabit değil,
+   o günün kategorileri kadar ve sayıları da taşıyorlar. */
 .devnav-track {
   flex: 1 1 auto;
   min-width: 0;
@@ -705,14 +710,15 @@ body:has(.endnav) .foot { margin-top: 0; }
   white-space: nowrap;
 }
 .devnav-track::-webkit-scrollbar { display: none; }
+.devnav-track .chip { flex: none; }
 
 .chip {
   flex: none;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  min-height: 38px;
-  padding: 8px 12px;
+  min-height: 44px;
+  padding: 8px 14px;
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.05em;
@@ -724,8 +730,7 @@ body:has(.endnav) .foot { margin-top: 0; }
   cursor: pointer;
 }
 .chip:hover { border-color: var(--ink-2); color: var(--ink); }
-.chip--group { color: var(--muted); background: none; }
-.chip-set { display: contents; }
+.chip:focus-visible { outline: 1px solid var(--brand); outline-offset: 2px; }
 .chip-count { color: var(--muted); }
 
 /* ---------- çapalar, atıflar, rozetler ---------- */

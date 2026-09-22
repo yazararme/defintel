@@ -326,7 +326,7 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
     <article class="column">
       {banner}
       <h1 class="report-title">{html.escape(title)}</h1>
-      {enrich.nav(meta.get("developments") or [])}
+      {enrich.nav(body_html)}
       <div class="prose">
 {body_html}
       </div>

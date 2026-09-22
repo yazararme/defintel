@@ -28,6 +28,25 @@ URL = re.compile(r"https?://[^\s<>\"]+")
 SKIP_TAGS = {"a", "code", "pre", "button", "h3"}
 
 
+TR_SLUG = str.maketrans("çğıöşüÇĞİÖŞÜâîû", "cgiosucgiosuaiu")
+
+# Şeritteki ad, başlığın kendisi değil kısası: "RAKİP HAREKETLERİ" bir çipte
+# satırı yiyor. Listede olmayan bölüm başlığından türetilir.
+SECTION_CHIP = {
+    "alarmlar": "Alarmlar",
+    "gelismeler": "Gelişmeler",
+    "firsatlar": "Fırsatlar",
+    "riskler": "Riskler",
+    "rakip-hareketleri": "Rakipler",
+    "izleme-listesi": "İzleme",
+    "kaynaklar": "Kaynaklar",
+    "ek": "EK",
+}
+# Özet zaten belgenin başında ve ilk okunan şey; kendine giden bir çip,
+# okuyucuyu bulunduğu yere götüren bir düğmedir.
+CHIP_SKIP = {"ozet"}
+
+
 def section_id(heading_text):
     t = heading_text.upper()
     if t.startswith("EK"):
@@ -36,7 +55,8 @@ def section_id(heading_text):
         return "alarmlar"
     if "ÖZET" in t:
         return "ozet"
-    return None
+    slug = re.sub(r"[^a-z0-9]+", "-", heading_text.translate(TR_SLUG).lower()).strip("-")
+    return slug or None
 
 
 def add_heading_anchors(text):
@@ -429,51 +449,24 @@ def enrich(text, developments, alarm=False):
     return fold_appendix(fold_watchlist(rename_headers(text)))
 
 
-def nav(developments):
-    """The sticky chip strip: main developments open, other groups collapsed."""
-    if not developments:
+def nav(body_html):
+    """Başlığın altındaki şerit: belgenin bölümleri.
+
+    Eskiden tek tek gelişmeleri listeliyordu; 14 çip bir şeride sığmayınca
+    kaydırmalı bir raya ve "Rakipler +4" gibi açılır gruplara dönüşmüştü. O
+    hâlde şerit belgenin haritası değil ikinci bir içindekiler listesiydi:
+    okuyucu hangi gelişmenin nerede olduğunu bilmeden çipe basıyordu.
+
+    Bölümler sabit, az ve okuyucunun zaten bildiği şeyler; ne kaydırma ne
+    gruplama gerekiyor, sığmazsa alt satıra geçer.
+    """
+    ids = re.findall(r'<h2 id="([^"]+)"', body_html)
+    chips = [
+        f'<a class="chip" href="#{i}">'
+        f'{html.escape(SECTION_CHIP.get(i, i.replace("-", " ").title()))}</a>'
+        for i in ids if i not in CHIP_SKIP
+    ]
+    if len(chips) < 2:
         return ""
-
-    groups = {"gelismeler": [], "rakip": [], "izleme": []}
-    for d in developments:
-        gid = str(d.get("id", "")).strip()
-        if not gid:
-            continue
-        home = str(d.get("home", "gelismeler")).strip().lower()
-        if home not in groups:
-            home = "gelismeler"
-        label = str(d.get("label", "")).strip()
-        if len(label) > 28:
-            label = label[:27].rstrip() + "…"
-        groups[home].append((gid, label))
-
-    def chip(gid, label):
-        # Çipte de numara yok: şeridin işi gelişmeleri adlarıyla göstermek.
-        # Etiketsiz bir gelişme hedefsiz değil, yalnızca adsız — kimliği basmak
-        # yerine sırasını söylemek okuyucuya daha çok şey veriyor.
-        text = label or f"Gelişme {gid[1:]}"
-        return f'<a class="chip" href="#{gid.lower()}">{html.escape(text)}</a>'
-
-    parts = [chip(*c) for c in groups["gelismeler"]]
-    toggles = []
-    for key, title in (("rakip", "Rakipler"), ("izleme", "İzleme")):
-        if not groups[key]:
-            continue
-        # the toggle stays pinned on the right; its chips open inside the track
-        toggles.append(
-            f'<button class="chip chip--group" type="button" data-group="{key}"'
-            f' aria-expanded="false">{title} +{len(groups[key])}</button>'
-        )
-        parts.append(
-            f'<span class="chip-set" data-group="{key}" hidden>'
-            + "".join(chip(*c) for c in groups[key])
-            + "</span>"
-        )
-
-    if not parts and not toggles:
-        return ""
-    pinned = f'<div class="devnav-groups">{"".join(toggles)}</div>' if toggles else ""
-    return (
-        '<nav class="devnav" id="devnav" aria-label="Gelişmeler">'
-        '<div class="devnav-track">' + "".join(parts) + "</div>" + pinned + "</nav>"
-    )
+    return ('<nav class="devnav" id="devnav" aria-label="Bölümler">'
+            + "".join(chips) + "</nav>")
