@@ -1,2 +1,5 @@
 __pycache__/
 *.pyc
+
+# wrangler yerel önbelleği ve miniflare durumu — depoya ait değil
+.wrangler/
