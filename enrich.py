@@ -530,6 +530,29 @@ def move_scan_note(text):
     return text + line
 
 
+def drop_unread_sources(text):
+    """"Erişilemeyen kaynaklar" bloğunu düşür.
+
+    Üçüncü kez aynı kategori hatası: etiket kaynağın durumunu iddia ediyordu,
+    kaydettiği şey ajanın deneyimiydi. Ölçtük — "yönlendirme hatası" denen
+    sayfa 200 dönüyor ve 7.220 karakter makale veriyor; gerçekten kapalı olan
+    yalnızca üyelik duvarı olanıydı. Okuyucuya kapı verip üstüne "kilitli"
+    yazıyorduk.
+
+    Yeniden adlandırmak ("doğrulayamadığımız kaynaklar") doğru olurdu ama
+    yanlış soruyu çözerdi. Bu ürünün diğer yokluk işaretleri — "16 kaynak
+    yanıt vermedi", "özet alınamadı", "çeviri engelli" — okuyucunun GÖRDÜĞÜ
+    bir eksiği onarır. Bu blok hiçbir eksiği onarmıyor, açıkladığı şeyi
+    kendisi yaratıyor: o adreslerin varlığını okuyucu başka türlü hiç
+    bilmeyecekti. Ve rapordaki hiçbir iddia onlara dayanmıyor — ölçtüm,
+    metinde tek atıf yok. Rapora hiçbir şey katmamış bir kaynak, kaynak değil.
+    """
+    return re.sub(
+        r"<p>\s*<strong>\s*Erişilemeyen kaynaklar\s*</strong>\s*</p>\s*<ul>.*?</ul>",
+        "", text, flags=re.S,
+    )
+
+
 def rename_headers(text):
     for old, new in HEADER_RENAMES.items():
         text = text.replace(f"<th>{old}</th>", f"<th>{new}</th>")
@@ -556,7 +579,8 @@ def enrich(text, developments, alarm=False, report_iso=""):
     text = add_table_badges(text, dev_ids)
     text = link_citations(text, dev_ids, 'id="alarmlar"' in text, dev_labels)
     text = drop_self_links(text)
-    return fold_appendix(fold_watchlist(move_scan_note(rename_headers(text))))
+    text = drop_unread_sources(rename_headers(text))
+    return fold_appendix(fold_watchlist(move_scan_note(text)))
 
 
 def nav(body_html):
