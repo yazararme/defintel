@@ -117,9 +117,7 @@ a { color: var(--brand); text-underline-offset: 2px; }
 }
 
 @media (max-width: 559px) {
-  .wordmark--here { cursor: default; }
-
-.tagline { display: none; }
+  .tagline { display: none; }
 }
 
 /* ---------- daybar: okunan günün tek gezinme şeridi ---------- */
