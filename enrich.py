@@ -382,6 +382,46 @@ def link_citations(text, dev_ids, has_alarms=True, dev_labels=None):
     return "".join(out)
 
 
+def link_watch_items(text, slugs):
+    """İzleme kalemlerinin adını kendi dosyasına bağla.
+
+    Ad hem okuma yolunda hem katlamada geçiyor; ikisi de aynı yere gider.
+    Eşleşme bulunamazsa satır düz metin kalır — var olmayan bir sayfaya
+    bağlantı, bağlantı olmamasından kötü.
+    """
+    if not slugs:
+        return text
+    b = _build()
+
+    def li(m):
+        head, body = m.group(1), m.group(2)
+        plain = re.sub(r"<[^>]+>", " ", body)
+        slug = slugs.get(b.watch_key(plain))
+        if not slug:
+            return m.group(0)
+        # Kendi kimliği olan kalem <strong class="ganchor"> taşıyor; olmayanın
+        # adı satırın başında düz metin olarak duruyor.
+        anchored = re.sub(
+            r'(<strong class="ganchor">)([^<]+)(</strong>)',
+            lambda a: f'{a.group(1)}<a class="thread-link" href="{{UP}}izleme/{slug}.html">'
+                      f'{a.group(2)}</a>{a.group(3)}',
+            body, count=1)
+        if anchored != body:
+            return head + anchored
+        name = re.match(r"\s*([^<—]+?)\s*(?=—|<|$)", body)
+        if not name or not name.group(1).strip():
+            return m.group(0)
+        return (head + body.replace(
+            name.group(1),
+            f'<a class="thread-link" href="{{UP}}izleme/{slug}.html">{name.group(1)}</a>', 1))
+
+    def section(m):
+        return m.group(1) + re.sub(r"(<li\b[^>]*>)((?:(?!</li>).)*)", li, m.group(2), flags=re.S)
+
+    return re.sub(r'(<h2[^>]*id="izleme-listesi">.*?</h2>)(.*?)(?=<h2|\Z)',
+                  section, text, flags=re.S)
+
+
 def fold_watchlist(text):
     """İZLEME LİSTESİ: kımıldayan okuma yolunda, kımıldamayan katlamada.
 
@@ -585,7 +625,7 @@ def rename_headers(text):
     return text
 
 
-def enrich(text, developments, alarm=False, report_iso=""):
+def enrich(text, developments, alarm=False, report_iso="", slugs=None):
     dev_ids = {str(d.get("id", "")).lower() for d in developments if d.get("id")}
     # Düzyazı atfının tek doğruluk kaynağı: frontmatter'daki kısa ad.
     dev_labels = {
@@ -605,6 +645,7 @@ def enrich(text, developments, alarm=False, report_iso=""):
     text = link_citations(text, dev_ids, 'id="alarmlar"' in text, dev_labels)
     text = drop_self_links(text)
     text = drop_unread_sources(rename_headers(text))
+    text = link_watch_items(text, slugs)
     text = reorder_sections(fold_watchlist(drop_scan_note(text)))
     return fold_sources(fold_appendix(text))
 

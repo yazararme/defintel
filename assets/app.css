@@ -178,6 +178,136 @@ a { color: var(--brand); text-underline-offset: 2px; }
 .daybar-link:hover { border-color: var(--brand); }
 .daybar-link--off { color: var(--muted); border-color: transparent; }
 
+/* ---------- izleme dosyaları ---------- */
+
+.thread { max-width: 72ch; }
+.thread .report-title { margin-top: 4px; }
+.thread-meta { color: var(--muted); font-size: 14.5px; margin: 6px 0 22px; }
+.thread-state { color: var(--ok); }
+.thread-state--closed { color: var(--muted); }
+
+.thread-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.thread-entry { border-bottom: 1px solid var(--rule); }
+.thread-entry a {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 16px;
+  padding: 13px 0;
+  min-height: 44px;
+  color: var(--ink-2);
+  text-decoration: none;
+}
+.thread-entry a:hover { color: var(--ink); }
+.thread-day { flex: 0 0 132px; font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+.thread-line { flex: 1 1 260px; line-height: 1.5; }
+.thread-entry--none { padding: 14px 0; color: var(--muted); }
+
+.thread-index { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.thread-row { border-bottom: 1px solid var(--rule); }
+.thread-row a {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 14px;
+  min-height: 44px;
+  padding: 11px 0;
+  color: var(--ink);
+  text-decoration: none;
+}
+.thread-row a:hover .thread-name { text-decoration: underline; }
+.thread-name { flex: 1 1 320px; }
+.thread-age, .thread-count {
+  flex: none;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.thread-row--closed .thread-name { color: var(--muted); }
+
+/* İzleme kaleminin adı kendi dosyasına gider; satırın geri kalanı düz metin. */
+.thread-link { color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule-2); }
+.thread-link:hover { border-bottom-color: var(--brand); color: var(--brand); }
+
+.found { margin: 8px 0 0; }
+.found-head {
+  margin: 0 0 6px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.found-none { color: var(--muted); padding: 18px 0; }
+.found-day { border-top: 1px solid var(--rule); padding: 10px 0 4px; }
+.found-date {
+  margin: 0 0 4px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.found-row {
+  display: block;
+  min-height: 44px;
+  padding: 7px 0;
+  color: var(--ink-2);
+  text-decoration: none;
+}
+.found-row:hover { color: var(--ink); }
+.found-title { display: block; font-size: 17px; line-height: 1.35; color: var(--ink); }
+.found-text, .found-kind {
+  display: block;
+  margin-top: 2px;
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+.found-kind { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em; }
+
+.missed {
+  background: var(--paper-2);
+  border-bottom: 1px solid var(--rule);
+}
+.missed-inner { padding-block: 10px 12px; }
+.missed-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 4px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.missed-close {
+  margin-left: auto;
+  min-width: 44px;
+  min-height: 44px;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.missed-close:hover { color: var(--ink); }
+.missed-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  min-height: 44px;
+  padding: 6px 0;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-2);
+  text-decoration: none;
+}
+.missed-row:hover { color: var(--ink); }
+.missed-date { flex: none; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.missed-lead { flex: 1 1 260px; font-size: 15px; line-height: 1.45; }
+
 /* ---------- controls ---------- */
 
 .controls {
@@ -409,6 +539,13 @@ a { color: var(--brand); text-underline-offset: 2px; }
 }
 .prose h2#ozet + ol li { margin-bottom: 10px; }
 .prose h2#ozet + ol li:last-child { margin-bottom: 0; }
+/* Alarm günü belgenin kendisinde de farklı görünmeli, yalnızca arşiv
+   rozetinde değil: özet kutusunun kenarı durumu taşır. Renk durumu gösterir
+   (Rev 1) ve alarmın durumu --watch değil --alarm. */
+.report--alarm .prose h2#ozet + ol {
+  border-left-color: var(--alarm);
+  background: var(--alarm-tint);
+}
 
 .prose h3 {
   margin: 28px 0 8px;
@@ -594,13 +731,13 @@ body:has(.endnav) .foot { margin-top: 0; }
     border: 0;
   }
   .prose td:last-child { padding-bottom: 0; }
-  .prose td::before {
-    content: attr(data-label);
-    display: block;
-    margin-bottom: 3px;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-  }
+  /* Satır bir kart: ad kalın ilk satır, anlam gövde, gösterge soluk son satır.
+     Üç hücrenin üstündeki üç etiket, satır başına üç kez tekrar ediyordu —
+     yapı zaten hangisinin ne olduğunu söylüyor. */
+  .prose td::before { content: none; }
+  .prose tbody td:first-child { font-weight: 600; font-size: 17px; line-height: 1.35; }
+  .prose tbody td:nth-child(2) { color: var(--ink-2); }
+  .prose tbody td:last-child { color: var(--muted); font-size: 15px; }
   .prose td:empty { display: none; }
 }
 

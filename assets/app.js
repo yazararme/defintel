@@ -461,3 +461,159 @@
     }
   });
 })();
+
+
+/* Kaçırdıklarınız: okuyucu gün atladığında ürün susuyordu.
+
+   Atlanan her gün kendi tek cümlesiyle geri veriliyor — manşetle değil,
+   çünkü manşet neyin olduğunu söyler, özetin ilk maddesi neden önemli
+   olduğunu. İlk ziyarette hiç çıkmaz: kaçırılmış bir şey yok. */
+(function () {
+  "use strict";
+
+  var day = document.body.getAttribute("data-day");
+  if (!day) return;
+
+  var KEY = "defintel:last";
+  var last;
+  try { last = localStorage.getItem(KEY); } catch (e) { return; }
+  try { localStorage.setItem(KEY, day); } catch (e) { /* özel sekme */ }
+
+  if (!last || last >= day) return;          // ilk ziyaret ya da geri gidiş
+
+  var base = document.querySelector('link[rel="stylesheet"][href*="app.css"]');
+  var up = base && base.getAttribute("href").indexOf("../") === 0 ? "../" : "";
+
+  fetch(up + "data/index.json", { cache: "no-store" })
+    .then(function (r) { return r.json(); })
+    .then(function (days) {
+      var missed = days.filter(function (d) { return d.date > last && d.date < day; });
+      if (!missed.length) return;
+      var bar = document.createElement("section");
+      bar.className = "missed";
+      bar.innerHTML =
+        '<div class="wrap missed-inner">' +
+        '<p class="missed-head"><span class="num">' + missed.length + '</span> gün kaçırdınız' +
+        '<button class="missed-close" type="button" aria-label="Kapat">×</button></p>' +
+        missed.map(function (d) {
+          return '<a class="missed-row" href="' + up + d.url + '">' +
+                 '<span class="missed-date num">' + trDay(d.date) + '</span>' +
+                 (d.alarm ? '<span class="badge badge--alarm">Alarm</span>' : "") +
+                 '<span class="missed-lead">' + esc(d.lead) + "</span></a>";
+        }).join("") + "</div>";
+      var after = document.querySelector(".daybar");
+      if (after && after.parentNode) after.parentNode.insertBefore(bar, after.nextSibling);
+      bar.addEventListener("click", function (e) {
+        if (e.target.closest(".missed-close")) { e.preventDefault(); bar.remove(); }
+      });
+    })
+    .catch(function () { /* dizin yoksa şerit de yok */ });
+
+  function esc(t) {
+    var d = document.createElement("div");
+    d.textContent = t || "";
+    return d.innerHTML;
+  }
+
+  function trDay(iso) {
+    var months = ["Oca", "Şub", "Mar", "Nis", "May", "Haz",
+                  "Tem", "Ağu", "Eyl", "Eki", "Kas", "Ara"];
+    var p = iso.split("-");
+    return Number(p[2]) + " " + months[Number(p[1]) - 1];
+  }
+})();
+
+
+/* Arşivde içerik araması.
+
+   Arşiv bugüne kadar yalnızca kart başlıklarını süzüyordu — yani günün
+   manşetini. "Weibel" aramak, o adın geçtiği günü bulmuyordu; oysa ürünün
+   değerinin çoğu manşette değil, o günün sekiz gelişmesinde duruyor. */
+(function () {
+  "use strict";
+
+  var feed = document.querySelector(".feed");
+  var box = document.getElementById("q");
+  if (!feed || !box) return;                  // yalnızca arşivde
+
+  var index = null, loading = null, panel = null;
+
+  function load() {
+    if (index) return Promise.resolve(index);
+    if (!loading) {
+      loading = fetch("data/search.json", { cache: "no-store" })
+        .then(function (r) { return r.json(); })
+        .then(function (rows) { index = rows; return rows; })
+        .catch(function () { index = []; return index; });
+    }
+    return loading;
+  }
+
+  function norm(s) {
+    return (s || "").toLocaleLowerCase("tr").replace(/ı/g, "i").replace(/İ/g, "i");
+  }
+
+  function trDate(iso) {
+    var m = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran",
+             "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+    var p = iso.split("-");
+    return Number(p[2]) + " " + m[Number(p[1]) - 1] + " " + p[0];
+  }
+
+  function esc(t) {
+    var d = document.createElement("div");
+    d.textContent = t || "";
+    return d.innerHTML;
+  }
+
+  function render(rows, term) {
+    if (!panel) {
+      panel = document.createElement("section");
+      panel.className = "found";
+      feed.parentNode.insertBefore(panel, feed);
+    }
+    if (!rows.length) {
+      panel.innerHTML = '<p class="found-none">“' + esc(term) + '” için kayıt yok.</p>';
+      return;
+    }
+    // Gün gün grupla: arşivde bir şeyi aramak, onu hangi günün taşıdığını aramaktır.
+    var byDay = {}, order = [];
+    rows.forEach(function (r) {
+      if (!byDay[r.d]) { byDay[r.d] = []; order.push(r.d); }
+      byDay[r.d].push(r);
+    });
+    order.sort().reverse();
+    panel.innerHTML =
+      '<p class="found-head"><span class="num">' + rows.length + "</span> kayıt · " +
+      '<span class="num">' + order.length + "</span> gün</p>" +
+      order.map(function (d) {
+        return '<div class="found-day"><p class="found-date num">' + trDate(d) + "</p>" +
+          byDay[d].map(function (r) {
+            return '<a class="found-row" href="' + r.u + '">' +
+              '<span class="found-title">' + esc(r.t) + "</span>" +
+              (r.k === "thread"
+                ? '<span class="found-kind">izleme dosyası</span>'
+                : '<span class="found-text">' + esc(r.s) + "</span>") + "</a>";
+          }).join("") + "</div>";
+      }).join("");
+  }
+
+  function run() {
+    var term = norm(box.value.trim());
+    if (!term) {
+      if (panel) { panel.remove(); panel = null; }
+      feed.hidden = false;
+      return;
+    }
+    load().then(function (rows) {
+      if (norm(box.value.trim()) !== term) return;   // kullanıcı yazmaya devam etti
+      feed.hidden = true;
+      render(rows.filter(function (r) {
+        return norm(r.t).indexOf(term) !== -1 || norm(r.s).indexOf(term) !== -1;
+      }), box.value.trim());
+    });
+  }
+
+  box.addEventListener("input", run);
+  box.addEventListener("keydown", function (e) { if (e.key === "Escape") setTimeout(run, 0); });
+})();

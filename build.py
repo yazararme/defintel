@@ -121,7 +121,7 @@ def label_table_cells(table_html):
     return table_html[: body.start()] + labelled + table_html[body.end():]
 
 
-def render_body(md_text, developments=(), alarm=False, report_iso=""):
+def render_body(md_text, developments=(), alarm=False, report_iso="", slugs=None, up="../"):
     # A bullet list that starts right under a bold lead-in ("**Taşınanlar:**")
     # would otherwise stay inside that paragraph; give it the blank line it needs.
     md_text = re.sub(
@@ -131,7 +131,8 @@ def render_body(md_text, developments=(), alarm=False, report_iso=""):
     )
     md = markdown.Markdown(extensions=["tables", "fenced_code", "attr_list", "sane_lists"])
     out = md.convert(md_text)
-    out = enrich.enrich(out, developments, alarm, report_iso)
+    out = enrich.enrich(out, developments, alarm, report_iso, slugs)
+    out = out.replace("{UP}", up)
     out = re.sub(r"<table>.*?</table>", lambda m: label_table_cells(m.group(0)), out, flags=re.S)
     out = out.replace("<table>", '<div class="table-wrap"><table>')
     out = out.replace("</table>", "</table></div>")
@@ -144,8 +145,9 @@ def asset(name):
     return f"assets/{name}?v={digest}"
 
 
-def head(title, depth=0, canonical=""):
+def head(title, depth=0, canonical="", day=""):
     up = "../" * depth
+    day_attr = f' data-day="{day}"' if day else ""
     return f"""<!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -168,7 +170,7 @@ def head(title, depth=0, canonical=""):
 <meta name="apple-mobile-web-app-capable" content="yes">
 <script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("{up}sw.js");</script>
 </head>
-<body data-push="{PUSH_ENDPOINT}" data-vapid="{VAPID_PUBLIC_KEY}">
+<body data-push="{PUSH_ENDPOINT}" data-vapid="{VAPID_PUBLIC_KEY}"{day_attr}>
 """
 
 
@@ -409,10 +411,10 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
     cross_day = iso if iso in news_counts else None
 
     return (
-        head(f"{title} — {SITE_NAME}", depth=depth, canonical=canonical)
+        head(f"{title} — {SITE_NAME}", depth=depth, canonical=canonical, day=iso)
         + masthead(up=up)
         + daybar("report", iso, prev_day, next_day, cross_day, up=up)
-        + f"""<main class="wrap report">
+        + f"""<main class="wrap report{' report--alarm' if meta.get('alarm') else ''}">
   <div class="report-grid">
     <aside class="rail{' rail--rich' if len(rail) > 1 else ''}">{''.join(rail)}</aside>
     <article class="column">
@@ -651,7 +653,57 @@ def watch_items(body):
     return items
 
 
-def watch_history(sources):
+def thread_slug(name, taken):
+    """Addan kalıcı kimlik: iplik sayfasının adresi bu.
+
+    Ajan watch: alanında kendi id'sini verdiğinde o kullanılıyor; vermediği
+    sürece ad üzerinden türetiliyor. İkisi de aynı yere çıkıyor, ama ajanınki
+    ifade değiştiğinde de sabit kalır — türetilen kalmaz.
+    """
+    base = re.sub(r"[^a-z0-9]+", "-", name.translate(TR_SLUG).lower()).strip("-")[:48]
+    base = base or "iplik"
+    slug, n = base, 2
+    while slug in taken and taken[slug] != name:
+        slug, n = f"{base}-{n}", n + 1
+    taken[slug] = name
+    return slug
+
+
+def build_threads(sources):
+    """Her izleme kalemini günler boyunca izle: ne zaman açıldı, ne zaman kımıldadı.
+
+    Bir ipliğin geçmişi başka hiçbir yerde yok — rapor onu her gün yeniden
+    yazıyor ama dünkü hâliyle yan yana koymuyor. Ürünün en güçlü bağlanma
+    kolu bu: "Malezya MERAD" sayfası, o dosyanın kendi zaman çizgisi.
+    """
+    threads, taken, prev, day_map = {}, {}, {}, {}
+    for iso, _meta, body in sources:
+        today = watch_items(body)
+        seen = {}
+        for key, raw in today.items():
+            old = watch_match(key, prev)
+            slug = prev[old][0] if old and old in prev else thread_slug(watch_label(raw), taken)
+            seen[key] = (slug, raw)
+            day_map.setdefault(iso, {})[key] = slug
+            th = threads.setdefault(slug, {
+                "slug": slug, "name": watch_label(raw), "opened": iso,
+                "entries": [], "last": iso, "closed": None,
+            })
+            th["name"] = watch_label(raw) or th["name"]
+            th["last"] = iso
+            th["closed"] = None
+            if "ilerledi" in raw:
+                # Kimlikler Rev 11'den beri ekranda yok; iplik satırında da olmaz.
+                line = re.sub(r"[*_`]", "", raw)
+                line = re.sub(r"\s*\((?:bkz\.\s*)?G\d+\)", "", line)
+                line = re.sub(r"\s+", " ", line).strip(" .")
+                th["entries"].append({"day": iso, "line": line})
+        # Bugün görünmeyen iplik kapanmıştır; sessizce kaybolmaz.
+        for key, (slug, _raw) in prev.items():
+            if key not in {watch_match(k, prev) for k in today} and threads[slug]["closed"] is None:
+                threads[slug]["closed"] = iso
+        prev = seen
+    return threads, day_map
     """Her gün için {anahtar: kaç gündür kesintisiz listede} ve o gün düşen adlar.
 
     Yaş ajandan sorulmuyor, kendi geçmiş raporlarından sayılıyor: ajan bir
@@ -702,6 +754,117 @@ def watch_label(text):
     head = re.split(r"—", text)[0]
     head = re.sub(r"^\W*G\d+\s*·?\s*", "", head.strip())
     return re.sub(r"[*_`]", "", head).strip(" .")
+
+
+THREAD_OUT = ROOT / "izleme"
+
+
+def age_words(days):
+    return "bugün" if days == 0 else "dün" if days == 1 else f"{days} gün önce"
+
+
+def thread_page(th, latest):
+    """Bir ipliğin kendi zaman çizgisi."""
+    import datetime as _dt
+    opened = tr_date(th["opened"])
+    moved = th["entries"]
+    gap = (_dt.date.fromisoformat(latest) - _dt.date.fromisoformat(th["last"])).days
+    status = (f'<span class="thread-state thread-state--closed">Kapandı · {tr_date(th["closed"])}</span>'
+              if th["closed"] else
+              f'<span class="thread-state">Açık · son hareket {age_words(gap)}</span>')
+    rows = "".join(
+        f'<li class="thread-entry"><a href="../reports/{e["day"]}.html">'
+        f'<span class="thread-day num">{tr_date(e["day"])}</span>'
+        f'<span class="thread-line">{html.escape(e["line"])}</span></a></li>'
+        for e in reversed(moved)
+    ) or ('<li class="thread-entry thread-entry--none">Açıldığından beri kayda geçen '
+          "bir hareket olmadı.</li>")
+    return (
+        head(f'{th["name"]} — izleme — {SITE_NAME}', depth=1)
+        + masthead(up="../")
+        + f"""<main class="wrap thread">
+  <p class="kicker">İzleme dosyası</p>
+  <h1 class="report-title">{html.escape(th["name"])}</h1>
+  <p class="thread-meta"><span class="num">{opened}</span> tarihinde açıldı · {status}
+    · <span class="num">{len(moved)}</span> hareket</p>
+  <ol class="thread-list">{rows}</ol>
+  <nav class="endnav" aria-label="Devam">
+    <span class="wrap endnav-inner">
+      <a class="endnav-go" href="index.html">Tüm izleme dosyaları</a>
+      <a class="endnav-go" href="../arsiv.html">Tüm raporlar</a>
+    </span>
+  </nav>
+</main>
+"""
+        + f'<script src="../{asset("app.js")}" defer></script>\n'
+        + FOOT
+    )
+
+
+def thread_index(threads, latest):
+    import datetime as _dt
+    def key(t):
+        return (t["closed"] is not None, "9999" if t["closed"] else "", -_dt.date.fromisoformat(t["last"]).toordinal())
+    rows = []
+    for th in sorted(threads.values(), key=key):
+        gap = (_dt.date.fromisoformat(latest) - _dt.date.fromisoformat(th["last"])).days
+        rows.append(
+            f'<li class="thread-row{" thread-row--closed" if th["closed"] else ""}">'
+            f'<a href="{th["slug"]}.html"><span class="thread-name">{html.escape(th["name"])}</span>'
+            f'<span class="thread-age num">'
+            f'{"kapandı " + tr_date(th["closed"]) if th["closed"] else age_words(gap)}</span>'
+            f'<span class="thread-count num">{len(th["entries"])} hareket</span></a></li>'
+        )
+    open_n = sum(1 for t in threads.values() if not t["closed"])
+    return (
+        head(f"İzleme dosyaları — {SITE_NAME}", depth=1)
+        + masthead(up="../")
+        + f"""<main class="wrap thread">
+  <h1 class="report-title">İzleme dosyaları</h1>
+  <p class="thread-meta"><span class="num">{open_n}</span> açık ·
+    <span class="num">{len(threads) - open_n}</span> kapanmış</p>
+  <ul class="thread-index">{''.join(rows)}</ul>
+  <nav class="endnav" aria-label="Devam"><span class="wrap endnav-inner">
+    <a class="endnav-go" href="../arsiv.html">Tüm raporlar</a>
+  </span></nav>
+</main>
+"""
+        + f'<script src="../{asset("app.js")}" defer></script>\n'
+        + FOOT
+    )
+
+
+def search_rows(sources, threads):
+    """Arşiv aramasının dizini: gelişme başına bir satır, iplik başına bir satır.
+
+    Arşiv bugüne kadar yalnızca kart başlıklarını süzüyordu — yani günün
+    manşetini. "Weibel" aramak, o adın geçtiği günü bulmuyordu. Dizin gelişme
+    düzeyinde: sekiz gelişme/gün ile yıllarca 1 MB'ın altında kalıyor.
+    """
+    rows = []
+    for iso, meta, body in sources:
+        labels = {str(d.get("id", "")).lower(): str(d.get("label", "")).strip()
+                  for d in (meta.get("developments") or []) if d.get("id")}
+        # Gelişmenin tam anlatımı: "### G1 · ad" başlığının altındaki ilk cümle.
+        for gid, label, para in re.findall(
+                r"###\s*(G\d+)\s*·\s*([^\n]+)\n+([^\n]+)", body):
+            text = re.sub(r"[*_`\[\]]|\(bkz\.[^)]*\)", "", para).strip()
+            first = re.split(r"(?<=[.!?])\s", text)[0]
+            rows.append({"d": iso, "t": label.strip(), "s": first[:180],
+                         "u": f"reports/{iso}.html#{gid.lower()}"})
+        # Ev'i başka bölüm olan gelişmeler: madde satırından ad + ilk cümle.
+        for gid, label, rest in re.findall(
+                r"-\s*\*\*(G\d+)\s*·\s*([^*]+)\*\*\s*—\s*([^\n]+)", body):
+            if gid.lower() in {r["u"].split("#")[-1] for r in rows if r["d"] == iso}:
+                continue
+            text = re.sub(r"[*_`\[\]]|\(bkz\.[^)]*\)", "", rest).strip()
+            rows.append({"d": iso, "t": label.strip(),
+                         "s": re.split(r"(?<=[.!?])\s", text)[0][:180],
+                         "u": f"reports/{iso}.html#{gid.lower()}"})
+    for th in threads.values():
+        rows.append({"d": th["last"], "t": th["name"], "s": "İzleme dosyası",
+                     "u": f'izleme/{th["slug"]}.html', "k": "thread"})
+    return rows
 
 
 def load_news():
@@ -1025,11 +1188,14 @@ def main():
         sources.append((path.stem, meta, body))
 
     published = stamp_publish(publish_times(), [iso for iso, _m, _b in sources])
+    # Gün -> {kalem anahtarı: iplik slug'ı}: satırdaki ad kendi dosyasına bağlanır.
+    threads, day_slugs = build_threads(sources)
 
     reports = []
     for i, (iso, meta, body) in enumerate(sources):
         developments = meta.get("developments") or []
-        body_html = render_body(body, developments, bool(meta.get("alarm")), iso)
+        body_html = render_body(body, developments, bool(meta.get("alarm")), iso,
+                                day_slugs.get(iso), up="../")
         page = build_report(
             meta, body_html, iso,
             sources[i - 1][0] if i else None,
@@ -1098,13 +1264,37 @@ def main():
     if sources:
         iso, meta, body = sources[-1]
         body_html = render_body(body, meta.get("developments") or [],
-                                bool(meta.get("alarm")), iso)
+                                bool(meta.get("alarm")), iso,
+                                day_slugs.get(iso), up="")
         (ROOT / "index.html").write_text(
             build_report(meta, body_html, iso,
                          sources[-2][0] if len(sources) > 1 else None, None,
                          news_counts, mke_counts.get(iso, 0),
                          published.get(iso, ""), scan_counts.get(iso), depth=0),
             encoding="utf-8")
+    # İzleme dosyaları: bir ipliğin geçmişi başka hiçbir yerde durmuyor.
+    if threads and sources:
+        THREAD_OUT.mkdir(exist_ok=True)
+        latest = sources[-1][0]
+        for th in threads.values():
+            (THREAD_OUT / f'{th["slug"]}.html').write_text(
+                thread_page(th, latest), encoding="utf-8")
+        (THREAD_OUT / "index.html").write_text(
+            thread_index(threads, latest), encoding="utf-8")
+        open_n = sum(1 for t in threads.values() if not t["closed"])
+        print(f"  · izleme/ ({len(threads)} dosya · {open_n} açık)")
+
+    # Okuyucu gün atlar; ürün bugüne kadar bunu sessizlikle cezalandırıyordu.
+    # Atlanan günler kendi tek cümleleriyle geri veriliyor.
+    (DATA / "index.json").write_text(
+        json.dumps([
+            {"date": r["date"], "title": r["title"], "alarm": r["alarm"],
+             "lead": r.get("lead", "") or r.get("summary", ""), "url": r["path"]}
+            for r in reports
+        ], ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    (DATA / "search.json").write_text(
+        json.dumps(search_rows(sources, threads), ensure_ascii=False,
+                   separators=(",", ":")) + "\n", encoding="utf-8")
     (ROOT / ".nojekyll").touch()
 
     for w in HEADLINE_WARNINGS:
