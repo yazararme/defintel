@@ -419,74 +419,55 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
         + '</div>'
     ]
     # Emek kanıtı: raporun arkasında kaç kaynak ve kaç başlık durduğu.
-    # Veri yoksa basılmaz — bilinmiyor sıfır değildir.
+    # Veri yoksa basılmaz — bilinmiyor sıfır değildir. MKE sayısı buraya
+    # katlandı: kendi başına bir blok olacak kadar ayrı bir şey değil,
+    # taramanın içinden çıkan bir alt küme.
     if scan:
+        mke_part = (
+            '<span class="rival-sep"> · </span>'
+            f'<span class="nb"><a href="{day_url("news", iso, "#" + cat_id("MKE"))}">'
+            f'MKE <span class="num">{mke_count}</span> →</a></span>'
+        ) if mke_count else ""
+        tail = "" if mke_count else " →"
         rail.append(
             '<div class="rail-block"><span class="rail-label">Tarama</span>'
-            f'<span class="rail-value"><a href="{day_url("news", iso)}">'
-            f'<span class="num">{scan[0]}</span> kaynak · '
-            f'<span class="num">{scan[1]}</span> başlık →</a></span></div>'
+            f'<span class="rail-value rail-flow">'
+            f'<span class="nb"><a href="{day_url("news", iso)}">'
+            f'<span class="num">{scan[0]}</span> kaynak</a></span>'
+            '<span class="rival-sep"> · </span>'
+            f'<span class="nb"><a href="{day_url("news", iso)}">'
+            f'<span class="num">{scan[1]}</span> başlık{tail}</a></span>'
+            f'{mke_part}</span></div>'
         )
-    # Tarama üstverisi — bölüm değil. Taşıdığı şey tek bir sayı ve anlamı
-    # "sana da baktık, ama konumuz bu değil": bir tamlık işareti. Sıfırda
-    # hiçbir şey basılmaz, çünkü sıfırın gidecek yeri yoktur — kategori boşsa
-    # #kat-mke çapası da yoktur ve "0 başlık" tıklanamaz bir etiket olurdu.
-    if mke_count:
-        rail.append(
-            '<div class="rail-block"><span class="rail-label">MKE gündemi</span>'
-            f'<span class="rail-value"><a href="{day_url("news", iso, "#" + cat_id("MKE"))}">'
-            f'<span class="num">{mke_count}</span> başlık →</a></span></div>'
-        )
-    # Rakip gündemi: bugün kımıldayanlar, sonra kaçının izlendiği.
-    # Eskiden adı geçmeyen 12 rakip de soluk basılıyordu — kapsamı göstersin
-    # diye. Ama her gün aynı 12 adı okumak hiçbir şey söylemiyor ve şerit
-    # rayın en uzun bloğu oluyordu. Kapsam bir sayıyla taşınabilir; adların
-    # tam listesi bir referans sayfasında durur, günlük belgede değil.
-    # Yapılandırma yoksa satır hiç basılmaz: bilinmiyor ≠ sıfır.
-    if rivals:
-        # Yalnız "rakip" rolü bu şeritte. Türk şirketleri eşleştiriliyor ama
-        # buraya girmiyor: "Rakip" başlığı altında Aselsan'ı MKE yönetimine
-        # göstermek ürünün yetkisi olmayan bir beyan. Kendi satırları var.
-        shown = [(name, anchor) for name, anchor, role in rivals if role == "rakip"]
-        movers = [(name, anchor) for name, anchor in shown if anchor]
-        parts = [f'<a href="{anchor}">{html.escape(name)}</a>' for name, anchor in movers]
-        line = '<span class="rival-sep"> · </span>'.join(parts)
-        if line:
-            line += '<span class="rival-sep"> · </span>'
-    # Türk sanayii: rakip değil, aynı ekosistem. Ayrı satır, çünkü "Aselsan
-    # bugün ne yaptı" ile "Rheinmetall bugün ne yaptı" okuyucu için aynı soru
-    # değil ve ikisini tek başlık altında toplamak birinciyi rakip ilan eder.
-    if turkish:
-        shown_tr = [(name, nid) for name, nid, hit in turkish if hit]
-        if has_news:
-            parts_tr = [
+    # Oyuncular: bugün adı geçen herkes, tek blokta. Dört blok raya sığmıyordu
+    # ve üçü aynı soruyu farklı başlıklarla soruyordu. Rol hâlâ duruyor —
+    # sırada ve bağlantının nereye gittiğinde — ama başlık artık kimseyi
+    # bir şey ilan etmiyor; "oyuncu" bir sınıflandırma değil, bir gözlem.
+    if rivals or turkish:
+        units = []
+        for name, anchor, role in rivals:
+            if anchor and role == "rakip":
+                units.append(f'<a href="{anchor}">{html.escape(name)}</a>')
+        for name, _nid, hit in turkish:
+            if not hit:
+                continue
+            units.append(
                 f'<a href="{day_url("news", iso)}?q={urlparse.quote(name)}">'
-                f'{html.escape(name)}</a>' for name, _nid in shown_tr
-            ]
+                f'{html.escape(name)}</a>' if has_news else html.escape(name)
+            )
+        arrow = '<a class="rival-count" href="/rakipler.html">→</a>'
+        if units:
+            # Ok son adla aynı kırılmaz birimde: tek başına satır başına
+            # düşen bir ok, neye ait olduğunu söylemeyen bir işaret olur.
+            body = "".join(
+                f'<span class="nb">{u}</span><span class="rival-sep"> · </span>'
+                for u in units[:-1]
+            ) + f'<span class="nb">{units[-1]}&nbsp;{arrow}</span>'
         else:
-            # O gün medya takibi yoksa bağlantı verecek yer de yok; ad düz
-            # metin kalır — var olmayan bir sayfaya kapı açmaktansa.
-            parts_tr = [html.escape(name) for name, _nid in shown_tr]
-        line_tr = '<span class="rival-sep"> · </span>'.join(parts_tr)
-        if line_tr:
-            line_tr += '<span class="rival-sep"> · </span>'
-        count_tr = (f'<span class="num">{len(shown_tr)}</span> / '
-                    f'<span class="num">{len(turkish)}</span>')
-        count_html = (
-            f'<a class="rival-count" href="{day_url("news", iso, "#" + TURK_ID)}">'
-            f'{count_tr} →</a>' if has_news
-            else f'<span class="rival-count">{count_tr}</span>'
-        )
+            body = f'<span class="nb">— {arrow}</span>'
         rail.append(
-            '<div class="rail-block"><span class="rail-label">Türk sanayii</span>'
-            f'<span class="rail-value rail-rivals">{line_tr}{count_html}</span></div>'
-        )
-        rail.append(
-            '<div class="rail-block"><span class="rail-label">Rakip gündemi</span>'
-            f'<span class="rail-value rail-rivals">{line}'
-            f'<a class="rival-count" href="/rakipler.html">'
-            f'<span class="num">{len(movers)}</span> / '
-            f'<span class="num">{len(shown)}</span> →</a></span></div>'
+            '<div class="rail-block"><span class="rail-label">Oyuncular</span>'
+            f'<span class="rail-value rail-flow">{body}</span></div>'
         )
     news_counts = news_counts or {}
     cross_day = iso if iso in news_counts else None
@@ -980,7 +961,7 @@ def thread_page(th, latest):
     )
 
 
-def rivals_page():
+def rivals_page(today_hits=None):
     """/rakipler.html — izlenen rakiplerin tam listesi.
 
     Ray şeridi yalnız o gün kımıldayanları basıyor; "kaçı izleniyor"
@@ -998,7 +979,12 @@ def rivals_page():
          "Kıyaslama için izleniyorlar; rakip sayılmıyorlar. Günlük brifingde "
          "<span class=\"num\">Türk sanayii</span> satırında görünürler."),
     ]
-    counted = [r for r in config if r.get("role", "rakip") == "rakip"]
+    # Sayı günlük belgeden buraya taşındı: rayda her gün "4 / 47" okumak
+    # kapsamı değil kapsamın değişmediğini duyuruyordu. Burada bir kez, ve
+    # bu sayfa zaten "kime bakıyoruz" sorusunun cevabı.
+    today_line = (f'<strong>Bugün adı geçen: <span class="num">{today_hits}</span> / '
+                  f'<span class="num">{len(config)}</span></strong> · '
+                  if today_hits is not None else "")
     blocks = []
     for role, title, note in groups:
         members = [r for r in config if r.get("role", "rakip") == role]
@@ -1020,10 +1006,9 @@ def rivals_page():
         + f"""<main class="wrap thread">
   <p class="kicker">Referans</p>
   <h1 class="report-title">İzlenen rakipler</h1>
-  <p class="thread-meta">Günlük brifingdeki <span class="num">Rakip gündemi</span>
-    ve <span class="num">Türk sanayii</span> satırları bu listeyi o günün
-    gelişmeleri ve başlıklarıyla eşleştirir.
-    <span class="num">{len(counted)}</span> ad rakip sayımına giriyor.</p>
+  <p class="thread-meta">{today_line}Günlük brifingdeki
+    <span class="num">Oyuncular</span> satırı bu listeyi o günün gelişmeleri
+    ve başlıklarıyla eşleştirir; adı geçmeyen şirket satıra girmez.</p>
   {body_blocks}
   <nav class="endnav" aria-label="Devam"><span class="wrap endnav-inner">
     <a class="endnav-go" href="/">Bugünün brifingi →</a>
@@ -1592,7 +1577,16 @@ def main():
                          turkish_line(body, news.get(iso, {}).get("items", [])),
                          iso in news, depth=0),
             encoding="utf-8")
-    page = rivals_page()
+    # Bugünün eşleşmesi: iki geçişin birleşimi, son rapor günü üzerinden.
+    today_hits = None
+    if sources:
+        _iso, _meta, _body = sources[-1]
+        _items = news.get(_iso, {}).get("items", [])
+        today_hits = (
+            sum(1 for _n, a, role in rival_hits(_body) if a and role == "rakip")
+            + sum(1 for _n, _i, hit in turkish_line(_body, _items) if hit)
+        )
+    page = rivals_page(today_hits)
     if page:
         (ROOT / "rakipler.html").write_text(page, encoding="utf-8")
         print(f"  · rakipler.html ({len(rivals_config())} ad)")

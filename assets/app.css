@@ -1259,18 +1259,19 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
   white-space: nowrap;
 }
 
-/* Ray şeridi: bugün kımıldayan rakipler ve kaç tanesinin izlendiği.
-   Kımıldamayan adları basmak listeyi 12 satıra çıkarıyordu ve her gün aynı
-   12 adı okumak hiçbir şey söylemiyor; kapsamı sayı taşıyor, adlar değil. */
-.rail-rivals { line-height: 1.5; }
-.rail-rivals a {
+/* Ray şeridi: bugün adı geçenler. Satır sonu yalnız ayıraçta olur —
+   "Nurol Makina" ikiye bölünürse iki şirket gibi okunur, tek başına satır
+   başına düşen bir ok da neye ait olduğunu söylemez. */
+.rail-flow { line-height: 1.6; }
+.nb { white-space: nowrap; }
+.rail-flow a {
   display: inline;
   min-height: 0;
   color: var(--brand);
   text-decoration: none;
   border-bottom: 1px solid var(--rule-2);
 }
-.rail-rivals a:hover { border-bottom-color: var(--brand); }
+.rail-flow a:hover { border-bottom-color: var(--brand); }
 .rival-sep { color: var(--muted); }
 .rival-count { color: var(--muted); border-bottom-color: transparent; }
 .rival-count:hover { color: var(--brand); }
