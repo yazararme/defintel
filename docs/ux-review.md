@@ -1246,3 +1246,645 @@ bir geri dokunuş, delil yüzeyinde ise güvendir.
 **Yapılmayacak:** `[K#]` hedefini vekile çevirmek (Rev 5 aynen geçerli); gövdedeki satır içi `[K#]`
 atıflarına çip koymak; "Erişilemeyen kaynaklar"a çip koymak; kaynakçada çerçeveli `.entry-go` çipi
 kullanmak; kaynakçada bilinmeyen alan adı için iyimser varsayım.
+
+---
+
+## Revizyon 9 — alarm bölümü
+
+### R9.0 — Doğrulama
+
+Dokuz kaynak dosyanın hepsinde `decision_by: 2026-10-09`; `bkz. ALARMLAR` geri atfı rapor başına 1-2 kez
+(toplam 12); 20, 21 ve 22 Eylül'ün ALARMLAR bloğu karakteri karakterine aynı. Ölçüm doğru.
+
+### R9.1 — Q1: bölüm gider, ama "koşullu" olur — ve bu Rev 4 ile çelişmez
+
+Sizin haklı olarak kurduğunuz Rev 4 itirazı burada geçmiyor, çünkü **Rev 4 kuralı eşzamanlı karşılaştırma
+içindir.** Aynı ekranda yan yana duran satırların şekli aynı olmalıdır; okuyucu üç farklı durumu *aynı anda*
+görüp yüklemi bulamayınca "bozuk" der. Günden güne değişen bir bölüm eşzamanlı değildir: okuyucu bir sabah
+bir rapor okur, kıyas yapmaz — ve **ortaya çıkan şey kendi sebebini taşır.** Alarm günü belirip sessiz günde
+kaybolan blok rastgele değil, *koşulludur*; koşul da görünen şeyin kendisidir.
+
+Asıl gerekçe ise daha sert: **%100 çalan bir kanal sıfır bilgi taşır.** Her sabah "Alarm yok" yazmak,
+okuyucuya belgenin en üstünü atlamayı öğretir — ki gerçek alarmın görüneceği yer tam orasıdır. Bölüm bugün
+kendi gelecekteki sinyal değerini tüketiyor. Bir sabah beklenmedik şekilde orada bir şey belirmesi, o günün
+farklı olduğunun kendisi olur; **aşinalığın bozulması sinyalin ta kendisidir.**
+
+> **Karar: sessiz günde ALARMLAR bölümü hiç yazılmaz; rapor doğrudan YÖNETİCİ ÖZETİ ile başlar.**
+> Alarm günü bölüm geri gelir ve `.alarmbar` ile birlikte çalışır.
+
+Sessiz günün açılışı Rev 1'de Seviye 1'e yükseltilen YÖNETİCİ ÖZETİ'dir (`--paper-2` zemin, 3px `--brand`
+sol kenar) — zaten bir açılış bloğu gibi davranıyor, sadece önündeki boş duyuru kalkıyor.
+
+### R9.2 — Q2: son tarihler belgenin başından İZLEME LİSTESİ'ne iner
+
+Rev 1'de "son tarih çipi yerini hak etmiyor" derken gerekçem *bir son tarih ancak neyin dolduğunu ve kimin
+sahibi olduğunu gösterdiğinde eyleme dönüşür* idi. Aynı olgu yeni kostümle geri geldi.
+
+**Rev 6'daki R6.3/R6-P1-1 kararımı geri çekiyorum.** Orada satırın etiketlenirse değerli olacağını varsaymıştım;
+dokuz günlük veri altta yatan olgunun **durağan** olduğunu söylüyor. Her sabah aynı olan şey haber değil,
+referanstır — ve referans günlük belgenin başında durmaz.
+
+> **Son tarih, ilgili İZLEME LİSTESİ kaleminin kendi satırında yazılır. Belgenin başında son tarih listesi
+> yapılmaz.** İZLEME LİSTESİ zaten duran olguların bölümü; son tarih bir izleme kaleminin *özelliğidir*,
+> kendi başına bir manşet değil.
+
+Sarkan atıf sorunu kendiliğinden çözülüyor: Rev 6 zaten geri atfı yasaklamıştı (*"bir atıf, kendisini işaret
+eden bölüme geri işaret edemez"*). `bkz. ALARMLAR` cümlelerinin kalkması o kuralın nihayet uygulanmasıdır.
+Arşiv bozulmaz: eski raporlar kendi kaynaklarından üretiliyor, kendi ALARMLAR bölümleri ve `#alarmlar`
+çapaları yerinde kalır.
+
+### R9.3 — Q3: alarm sinyali kalır — katılıyorum, gerekçesi şu
+
+Alarmın işi **okumayan okuyucuya ulaşmaktır.** Belgenin içindeki bir paragraf yalnızca belgeyi zaten açmış
+kişiye ulaşır; o kişi `.alarmbar`'ı nasılsa görecek. Bildirim öneki ve arşiv rozeti ise belgenin *dışında* ve
+*öncesinde* çalışır. Yani asıl alarm sistemi 2-3-4'tür; 1 numara `.alarmbar`'ın kopyasıdır.
+
+Rozet ayrıca arşivi okunur bir tarihe çeviriyor: dokuz satırda bir kırmızı. Bu ancak sessiz günler görsel
+olarak **sessiz** kalırsa işe yarar — Rev 1'in son tarih rozetini kaldırması bunun ön koşuluydu, şimdi
+tamamlanıyor.
+
+**Korunur:** `.alarmbar`, `badge--alarm`, `sw.js`'teki `⚠️` öneki ve `alarm_title`.
+**Kalkar:** yalnızca sessiz günün ALARMLAR bölümü.
+
+### R9.4 — Q4: `decision_by` emekliye ayrılır (ve `status` da)
+
+Alan dokuz rapordur aynı; hiçbir yerde render edilmiyor; tek tüketicisi `status_of()` → `reports.json`'daki
+`status`, o da render edilmiyor. Üstelik bayat bir tarih hep gelecekte kaldığı için `status` her gün "izle"
+diyor — yani alan yanlış veri üretiyor.
+
+> **Kural: hiçbir yerde render edilmeyen bir alan bakımı yapılmaz.** Dondurulmuş olmasının sebebi bu, ve
+> "düzeltelim" kararının tutmayacağının da göstergesi. Gerekirse ileride **render yeriyle aynı gün** geri eklenir.
+
+`decision_by` olmadan `status_of()` yalnızca alarm/temiz döner — yani `alarm` alanının tekrarı. İkisi de
+emekli: `decision_by`, `status_of()`, `status`. Güvenlik kontrolü: `sw.js` push işleyicisi `reports.json`'dan
+yalnızca `title`, `date`, `path`, `alarm`, `alarm_title` okuyor; ikisini de okumuyor.
+
+### R9.5 — Instructions paneline yapıştırılacak metin
+
+```
+ALARMLAR bölümünü yalnızca gerçek bir alarm varsa yaz. Alarm yoksa bölümü hiç açma;
+rapor doğrudan YÖNETİCİ ÖZETİ ile başlasın. "Alarm yok" cümlesini, alarmın ne olacağını
+anlatan açıklama paragrafını ve belgenin başındaki son tarih listesini yazma.
+
+Alarm varsa: frontmatter'da alarm: true ve alarm_title: "<tek cümle>" ver; ALARMLAR
+bölümünde yalnızca olayın açıklamasını yaz, alarm_title'ı tekrarlama.
+
+Dış son tarihler belgenin başında değil, ilgili İZLEME LİSTESİ kaleminin kendi satırında
+durur. Hiçbir bölüm "bkz. ALARMLAR" demez; atıflar tek yönlüdür.
+```
+
+### Uygulama listesi — Revizyon 9
+
+| # | Dosya | Değişiklik | Kabul testi |
+|---|---|---|---|
+| R9-P0-1 | rapor promptu (Instructions) | R9.5'teki metin. Sessiz günde ALARMLAR yok, son tarih listesi yok, `bkz. ALARMLAR` yok. | Yeni sessiz günün raporunda `id="alarmlar"` ve `Alarm yok` dizgileri geçmez; `<main>` içindeki ilk `h2` YÖNETİCİ ÖZETİ'dir. |
+| R9-P0-2 | rapor promptu | Son tarih, ilgili İZLEME LİSTESİ kaleminin satırına yazılır. | Yeni raporda `9 Ekim` yalnızca İZLEME LİSTESİ içinde geçer, belgenin ilk 500 karakterinde geçmez. |
+| R9-P0-3 | `build.py` | `decision_by`, `status_of()` ve `reports.json`'daki `status` kaldırılır. `alarm`, `alarm_title` **kalır**. | `data/reports.json` içinde `status` ve `decision_by` anahtarları yok; bildirim akışı (kurulu uygulamada test push) hâlâ `⚠️` önekini ve `alarm_title`'ı basar. |
+| R9-P0-4 | `build.py` / `enrich.py` | `.alarmbar`, `badge--alarm`, `section_id("ALARM")` ve `sw.js` alarm dalı **değişmez** — bu bir regresyon maddesidir. | 14 Eylül raporu hâlâ `.alarmbar` basar; arşivde 14 Eylül satırı hâlâ `badge--alarm` taşır. |
+| R9-P1-1 | `enrich.py` → `link_citations` | `bkz. ALARMLAR` yalnızca belgede `id="alarmlar"` varsa bağlantıya çevrilir; yoksa düz metin kalır. | ALARMLAR'sız bir raporda metne elle `bkz. ALARMLAR` yazıldığında ölü `href="#alarmlar"` üretilmez. |
+| R9-P1-2 | `docs/ux-review.md` (bu belge) | **R6-P1-1 (`developments[].due` + üretilen son tarih satırı) geri çekildi** — R9.2 ile yürürlükten kalktı. Uygulanmadıysa uygulanmaz. | Uygulama kuyruğunda R6-P1-1 kapalı olarak işaretlenir. |
+| R9-P1-3 | rapor promptu | Alarm gününde ALARMLAR bölümünün ilk cümlesi `alarm_title`'ı tekrarlamaz (`.alarmbar` zaten basıyor). | Bir sonraki alarm gününde `.alarmbar` metni bölümün ilk cümlesiyle aynı değildir. |
+
+**Yapılmayacak:** alarm kavramını tümden kaldırmak; `.alarmbar`/rozet/bildirim önekine dokunmak; sessiz günde
+"bugün sakin" türü yerine geçen bir cümle yazmak (aynı sıfır-bilgi kanalı, yeni isimle); son tarihleri
+tamamen silmek (İZLEME LİSTESİ'nde yaşarlar); `decision_by`'ı render yeri olmadan "düzeltmeye" çalışmak.
+
+---
+
+## Revizyon 10 — MKE gündemi satırı
+
+### R10.0 — Doğrulama
+
+`source/2026-09-22.md` dokuz günün tek MKE GÜNDEMİ bölümünü taşıyor; metin `bkz. medya takibi` — düz metin,
+bağlantı yok. Hedef ise var ve çalışıyor: `cat_id("MKE")` → `haberler/2026-09-22.html#kat-mke`.
+Brifing raylında (`.rail`) bugün tek bir blok var (`Tarih`), yani rayda yer boş.
+
+### R10.1 — Q1: bölüm olarak ölür, ray bilgisi olarak yaşar
+
+Bölüm iki testten biriyle düşüyor, diğerini geçiyor — ikisini de söylemek gerekiyor:
+
+- **Rev 9 testini geçiyor.** Kanal dokuz günün sekizinde *hiç konuşmadı*, bir gün konuştu. Her sabah aynı şeyi
+  söyleyen bir kanal değil; koşullu ve konuştuğunda bilgi taşıyor. Yani "Alarm yok" ile aynı sınıfta değil.
+- **Rev 1 hiyerarşi testinde düşüyor.** Bugün `.kicker` ile Seviye 2'de duruyor: GELİŞMELER, FIRSATLAR,
+  RİSKLER ile **aynı ağırlıkta bir bölüm sınırı**. Taşıdığı şey tek bir sayı. Seviye 2 yapı içindir;
+  bu bir *tarama üstverisi* — sınıfı, medya sayfasındaki `50 kaynak okundu · 528 başlık` satırıyla aynı.
+
+İşi de üstveri işi: içerik kuralı raporun MKE'nin **dışındaki** pazarı anlattığını söylüyor, dolayısıyla bu
+satırın anlamı "sana da baktık, ama konumuz bu değil" — bir **tamlık işareti**, içerik değil.
+
+> **Karar: bölüm kaldırılır, yerini brifing raylında (`.rail`) tek bir blok alır.** Ray zaten gün üstverisinin
+> yeri ve bugün tek bloklu; ≥920px'te sol sütunda, altında yatay şeride dönüyor — yani telefonda da ilk
+> ekranda, küçük ve okumayı bölmeden.
+
+Daybar'a konmaz (tek işi gezinme, 375px'te zaten ~286/339px dolu). Belge sonuna konmaz (görülmesi gereken
+bir şey).
+
+### R10.2 — Q2: sayı cümle, şey bağlantı
+
+`bkz. medya takibi` iki kez yanlış: (a) `bkz.` bir **delil** sözcüğü — Rev 8'de bu ürünün delil dili ile okuma
+dilini ayırdığını tespit ettik, bu bir okuma davetidir; (b) bir **ürünü** adlandırıyor ("medya takibi"),
+okuyucunun istediği **şeyi** değil — Rev 6'da `G10` için verilen hükmün aynısı: *etiket şeyi taşır, iç adı değil.*
+
+```
+MKE GÜNDEMİ            ← .rail-label · mono 11,5px · --muted
+1 başlık →             ← .rail-value > a · --brand · hedef …/haberler/D.html#kat-mke
+```
+
+Mevcut `.rail-block` = `rail-label` + `rail-value` şeklinin aynısı; yeni CSS gerekmiyor, yalnızca değer bir
+bağlantı oluyor.
+
+Bir dürüstlük ayrıntısı: bugünkü cümle "1 başlık **yayımlandı**" diyor — bu dünya hakkında bir iddia; bizim
+bildiğimiz şey taramamızın 1 başlık *bulduğu*. Etiket + sayı biçimi iddiayı tamamen ortadan kaldırıyor ve
+ürünün üslubuna (`özet alınamadı`, `16 kaynak yanıt vermedi`) uyuyor.
+
+### R10.3 — Q3: build üretir, ajan değil — ve prompt sadeleşir
+
+Katılıyorum, ve gerekçe sizin söylediğinizden bir adım daha güçlü:
+
+1. Ajan bir sayıyı elle kopyalıyor; yanlış sayıyı kimse çapraz kontrol etmez. **Sessizce yanlış, yoktan kötüdür.**
+2. Bağlantıyı ajan güvenilir üretemez: medya sayfasının URL'ini ve çapanın var olduğunu bilmesi gerekir.
+   Build ikisini de biliyor (`news_counts` zaten `build_report`'a geçiyor, `cat_id()` zaten var).
+3. Rev 9'da `alarm` için aynı hamle aynı sabah yapıldı. Ortaya çıkan kural:
+
+> **Ajanın ürettiği şey yargıdır; sayılabilen şeyi build sayar. Ajan bir sayıyı elle kopyalıyorsa o satır
+> yanlış yerdedir.**
+
+Promptta MKE GÜNDEMİ talimatı **tamamen** kalkar. Üstelik içerik kuralındaki parantez de kalkar —
+*"(MKE GÜNDEMİ bölümündeki yorumsuz sayım bu kuralın dışındadır.)"* — çünkü artık ajanın çıktısında böyle bir
+bölüm yok. Kural istisnasız hale geliyor: **rapor MKE'nin kendi haberlerini taşımaz, nokta.**
+
+**Sıfırda ne basılır: hiçbir şey — ama sebebi "sıfır sıkıcı" değil.**
+Sıfırın **gidecek yeri yoktur**: kategori boşsa `#kat-mke` çapası da yoktur, dolayısıyla "0 başlık" tıklanamaz
+bir etiket olur — yani düzeltmeye çalıştığımız kusurun aynısı. Sessizlik doğru.
+
+Ve bir ayrım: **veri yokluğu ≠ sıfır.** O gün için haber JSON'u yoksa (14-16 Eylül gibi) sayı *bilinmiyordur*,
+sıfır değildir. İkisi de hiçbir şey basmaz, ama uygulayıcı bunları aynı dal saymasın; ileride "taranmadı"
+demek istenirse ayrı bir satırdır.
+
+### R10.4 — Q4: ölçek satırın şeklini değiştirmez
+
+Türkçede sayıdan sonra ad çoğullanmaz — `1 başlık`, `20 başlık` aynı biçim. Dilbilgisi dalı gerekmiyor.
+
+Görsel ağırlık da değişmez: eşik yok, renk değişimi yok, terfi yok. Gerekçe içerik kuralının kendisi —
+**öne çıkarma editoryal bir yargıdır**, ve bu ürünün duran kararı MKE'nin kendi haberleri hakkında editoryal
+yargı vermemektir. Ağırlığı büyüyen bir sayaç, başlık taşımadan o yargıyı vermeye başlar (20 başlık iyi mi
+kötü mü, sayı söyleyemez). Müşteri ileride "20 bir şey ifade etmeli" derse doğru kol sayacı bağırtmak değil,
+içerik kuralını gevşetmektir.
+
+### Uygulama listesi — Revizyon 10
+
+| # | Dosya | Değişiklik | Kabul testi |
+|---|---|---|---|
+| R10-P0-1 | rapor promptu (Instructions) | MKE GÜNDEMİ talimatı tamamen kaldırılır. İçerik kuralındaki `(MKE GÜNDEMİ bölümündeki yorumsuz sayım bu kuralın dışındadır.)` parantezi de silinir. | Yeni günün kaynağında `MKE GÜNDEMİ` dizgisi geçmez. |
+| R10-P0-2 | `build.py` → `build_report()` rayı | Günün haber verisinden MKE kategorisi sayısı alınır; `> 0` ise ray bloğu basılır: `<span class="rail-label">MKE gündemi</span><span class="rail-value"><a href="../haberler/{day}.html#{cat_id("MKE")}">{n} başlık →</a></span>`. Sayı 0 ya da o gün için haber verisi yoksa blok **hiç basılmaz**. | 22 Eylül raporunda ray bloğu `1 başlık →` gösterir ve `../haberler/2026-09-22.html#kat-mke` adresine gider; 14-21 Eylül raporlarında blok yoktur. |
+| R10-P0-3 | `build.py` → `load_news()` / `build_report()` imzası | `news_counts` (gün → toplam) yanında kategori sayısı da taşınır (ör. `news_cats[day]["MKE"]`); `load_news()` zaten tam JSON'u yüklüyor, ek okuma yok. | `python3 build.py` ek ağ/IO yapmadan koşar; kategori sayısı `data/news/2026-09-22.json`'daki değerle birebir eşleşir. |
+| R10-P0-4 | çapa güvencesi | Ray bloğu yalnızca kategori render edildiğinde basıldığı için `#kat-mke` **garantili** vardır; bu bir değişmez olarak not edilir. | Ray bloğu basılan her günde medya sayfasında `id="kat-mke"` bulunur (ölü çapa üretilemez). |
+| R10-P1-1 | `build.py` → ray | Ray artık iki bloklu; `Tarih` bloğu (tam tarih + gün adı) korunur — daybar kısa biçimi (`22 Eyl · Pzt`) taşıdığı için tümüyle tekrar değil. Blok sırası: `Tarih`, sonra `MKE gündemi`. | ≥920px'te iki blok alt alta, ≤919px'te yatay şeritte yan yana; taşma yok. |
+
+**Yapılmayacak:** MKE başlıklarını brifinge içerik olarak taşımak (duran içerik kuralı); sayıyı ajana
+saydırmak; sıfırda "0 başlık" basmak; sayacı daybar'a ya da Seviye 2 bölüm başlığına koymak; sayının görsel
+ağırlığını büyüklüğe göre değiştirmek.
+
+---
+
+## Revizyon 11 — G# kimlik sistemi
+
+### R11.0 — Müşteri haklı, ve Rev 6 aynı duvarın ilk çatlağıydı
+
+Ölçümünüzdeki tek belirleyici sayı şu: **27 kendini-açıklayan kullanım / 8 çıplak atıf.**
+
+27 kullanımda numara, ne olduğunu zaten söyleyen kelimelerin yanında duruyor (`G3 · Hanwha…`,
+`G1 — hedef hız zarfı yukarı kayıyor`). Orada numaranın taşıdığı şey **anlam değil, bağlantı**. 8 kullanımda
+ise numara tek yük — ve bu, Rev 6'da ALARMLAR satırı için zaten mahkûm ettiğim durumun aynısı.
+
+Rev 6'da *"`G#` bir gün içinde meşru bir kısa tutamaktır, ama hiçbir satırın tek yükü olamaz"* demiştim ve
+kuralı tek bir satıra uygulamıştım. Tutarlı biçimde tüm belgeye uygulandığında sonuç şu: çıplak atıflar
+kelimeye dönüşünce numara **hiçbir yerde okunmak zorunda kalmıyor** — yalnızca çapa olmak için var olması
+yetiyor. Rev 6'nın tablosu bu noktada yürürlükten kalkıyor; o tablo, atıfların çıplak kalacağı varsayımına
+dayanıyordu.
+
+> **Karar: `G#` tesisat olarak yaşar, okuyucu sözlüğü olarak kalkar.** Kimlik yalnızca `id` ve `href`'te
+> bulunur; ekranda hiçbir yerde görünmez.
+
+### R11.1 — Yüzey yüzey ne olur
+
+| Yüzey | Bugün | Karar |
+|---|---|---|
+| `id="g3"` çapası | görünmez | **Kalır** — `enrich.py`'nin tüm türetmeleri buna dayanıyor |
+| Çip şeridi | `G1 · etiket` | **Numara düşer**, yalnızca etiket. 28 karakterlik çip bütçesine ~5 karakter kazandırır |
+| Gelişme başlığı | `### G3 · Hanwha…` | **Numara düşer.** Rev 6'daki "varış teyidi" gerekçesi, atıflar kelime taşıyınca ortadan kalkıyor: tıkladığın kelimeyle vardığın başlık aynı sözcükler. `flash()` animasyonu zaten varışı işaretliyor |
+| Tablo rozeti `.gbadge` | `G1 — açıklama` | **Rozet kalkar**, hücrenin kendi açıklayıcı metni bağlantı olur. `.gbadge` CSS'i ölür |
+| Düzyazı atfı | `(G10)`, `bkz. G2` | **Etikete dönüşür**: `(Malezya MERAD)`, `bkz. DVD 2026'da araç üstü kısa menzil yığılması` |
+| `copylink` | `#g11` URL'i | **Kalır** — paylaşım için tam adres; kimlik zaten görünmüyor |
+
+### R11.2 — Q2: numaralandırma sırası sorusu **ortadan kalkıyor**
+
+Numara görünmezse "her yere dağılmış" diye bir şey olmaz; şikâyetin tamamı numaraları *görmekten* geliyordu.
+Dolayısıyla "önem mi öngörülebilirlik mi" ikilemine girmeye gerek yok — **ikisini de seçmiyoruz, soruyu
+kaldırıyoruz.**
+
+Yan kazanç: yazım kuralı (*"numaralandırma sırası önemi gösterir, evi değil"*) **aynen kalır** ve artık tam
+olarak ait olduğu yerde durur — ajanın iç konvansiyonu olarak. Promptta numaralandırmaya dair tek kelime
+değişmez.
+
+### R11.3 — Q3: "yalnızca atıf varsa kimlik üret" — bu soru da kalkıyor
+
+G8, G9, G11, G13, G14 hiçbir yerden atıf almıyor ama **hepsi çip şeridinin hedefi**; yani çapaları kullanılıyor,
+kullanan şey düzyazı değil çip. Kimlik görünmez olduğunda üretilmesinin maliyeti de sıfır. **Her gelişme
+kimlik alır, değişiklik yok.** "Sadece referans alanlara ver" fikri, yalnızca kimlikler görünürken var olan
+bir sorunu çözüyordu.
+
+### R11.4 — Q4: kural, tek cümle
+
+> **Hiçbir atıf yalnızca bir kimlikten ibaret olamaz. Atıf işaret ettiği şeyin adını taşır; kimlik yalnızca
+> `href`'te yaşar.**
+
+Uzunluk itirazı: `(bkz. Malezya MERAD)` `(G11)`'den uzun. Raporda 8 çıplak atıf var; 3.000 kelimelik bir
+belgeye ~120 karakter ekler — ihmal edilebilir. Karşılığında bir sıçrama ortadan kalkıyor: **kendini çözen
+bir atıf, çoğu zaman takip etmek zorunda kalmadığın bir atıftır.** Asıl kazanç bu.
+
+### R11.5 — Prompt değişmiyor; dönüşüm `enrich.py`'de
+
+Ajan bugünkü konvansiyonlarını aynen sürdürür (`### G3 · etiket`, `- **G3 · Firma** —`, `G1 — ` hücre
+öneki, düzyazıda `G11`), çünkü `enrich.py` anlamlandırmasını bunlardan türetiyor. Değişen tek şey **render**:
+işaretleyici yazımda kalır, çıktıda silinir.
+
+Düzyazı atfı için tek doğruluk kaynağı `developments[].label`: `enrich` `G11`'i etiketiyle değiştirir ve
+`#g11`'e bağlar. **Etiket `developments[]`'te yoksa atıf düz metne indirilir, çıplak `G11` asla basılmaz** —
+aksi halde bir hata sessizce okuyucunun karşısına çıkar. Bu, Rev 10'daki kuralın aynısı: *sayılabilen /
+türetilebilen şeyi build yapar.*
+
+### Uygulama listesi — Revizyon 11
+
+| # | Dosya | Değişiklik | Kabul testi |
+|---|---|---|---|
+| R11-P0-1 | `enrich.py` → `add_heading_anchors` | `<h3 id="g3">` içeriği yalnızca etiket olur; `G3 · ` öneki render'dan çıkar. **R6-P0-1'i yürürlükten kaldırır** (orada id'yi geri koymuştuk; artık ikisi de basılmıyor). | `reports/…` içinde `<h3 id="g3">Hanwha…` geçer, `>G3 · ` geçmez; hiçbir başlık " · " ile başlamaz. |
+| R11-P0-2 | `enrich.py` → `add_item_anchors` | Aynı kural `li` yolunda: `<li id="g10"><strong class="ganchor">ABD Ordusu 50 mm…` — ne `G10` ne öksüz " · ". | `grep -c '"ganchor">G'` = 0 **ve** `grep -c '"ganchor"> ·'` = 0. |
+| R11-P0-3 | `enrich.py` → `link_citations` | `\bG\d+\b` eşleşmesi `developments[]`'teki etiketle değiştirilir ve `#g{n}`'e bağlanır. Id `developments[]`'te yoksa bağlantı **kurulmaz** ve metin düz bırakılır (çıplak id basılmaz). | 22 Eylül raporunda `(G10)`, `bkz. G2` gibi dizgiler hiç geçmez; her `a.xref` metni bir etikettir; belgede hiçbir yerde `>G\d+<` deseni yok. |
+| R11-P0-4 | `enrich.py` → `add_table_badges` | Rozet üretimi kaldırılır; hücrenin `G1 — ` öneki silinip kalan açıklayıcı metin `#g1`'e bağlanır. | FIRSATLAR/RİSKLER ilk hücrelerinde `.gbadge` yok; hücre metni tıklanır ve doğru çapaya gider. |
+| R11-P0-5 | `enrich.py` → `nav()` | Çip metni `f"{gid} · {label}"` → `label` (etiket boşsa `gid`'e düşer). 28 karakter kırpması etikete uygulanır. | Çip şeridinde hiçbir çip `G` ile başlamaz; etiketler eskisinden ~5 karakter daha fazla görünür. |
+| R11-P0-6 | `assets/app.css` | `.gbadge` ve `.prose a.gbadge` kuralları silinir. `.xref` **kalır** (artık etiket taşıyor, `white-space: nowrap` kaldırılır — çok kelimeli etiket sarmalı). | `grep -c gbadge assets/app.css` = 0; uzun etiketli bir `.xref` 375px'te satır sonunda sarar, taşmaz. |
+| R11-P1-1 | rapor promptu | **Değişmez** — bu bir doğrulama maddesi. Numaralandırma kuralı ve `G#` yazım konvansiyonları aynen kalır. | Prompt diff'i boş; yeni gün eski konvansiyonla yazılır ve doğru render olur. |
+| R11-P1-2 | `build.py` → `copylink` `title` | Rev 6-P1-2 ile birleşir: kopyalanan bağlantının güne özgü olduğu notu. | Kopyala düğmesinin `title`'ı gün-özgüllüğünü söyler. |
+
+**Yapılmayacak:** `developments[]`'i ya da `id` alanını kaldırmak (tüm türetme buna dayanıyor);
+numaralandırma sırasını değiştirmek (soru kalktı); yalnızca atıf alan gelişmelere kimlik vermek;
+düzyazıda çıplak `G#` bırakmak; `copylink`'i kaldırmak.
+
+---
+
+## Revizyon 12 — izleme listesi
+
+### R12.0 — Tanı: hafıza her sabah ezbere okunuyor
+
+Bugünkü 29 satırın **3'ü ürün** (ilerledi), 24'ü "bekliyor". Dokuz günde 7 → 29, çıkış yolu yok, bir kalem
+dokuz gündür kelimesi kelimesine aynı. Bu Rev 9 bulgusunun on katı hacimde tekrarı — ama teşhis biraz farklı
+ve fark çözümü belirliyor:
+
+> **Bu bölümün iki işi var ve yalnızca biri günlük.** Günlük olan: *"izlediğin bir iplik kımıldadı."*
+> Günlük olmayan: *"hâlâ açık olan her şey."* İkincisi bir **referans**tır — Rev 9'daki kural aynen geçerli:
+> *her sabah aynı olan şey haber değil, referanstır.* Referans **danışılır, ezbere okunmaz.**
+
+Bugün okuyucudan, değişen 3 satırı bulmak için 29 satırlık hafızayı baştan okuması isteniyor. Ters kurulmuş.
+
+### R12.1 — Q1/Q3: okuma yolunda yalnızca hareket; bekleyenler katlamada
+
+```
+İZLEME LİSTESİ
+
+HAREKET EDENLER                     ← .subkicker (mevcut CSS) · yalnızca varsa
+  XM30'da organik C-UAS şartı — ilerledi (…). [K7]
+  Kore menşeli katmanlı hava savunma teklifleri — ilerledi (…). [K9]
+
+BUGÜN EKLENENLER                    ← yalnızca varsa · build türetir
+  155 mm obüs alımlarında yerli sanayi katılımı eşiği
+
+▸ Bekleyen başlıklar (24)           ← <details>, kapalı
+    Rheinmetall'in Skyranger üretim ölçeği · 8 gün
+    Tungsten ve enerjetik malzeme tedarik zinciri · 9 gün
+    …
+```
+
+Bugünkü okuma yolu: **29 satır → 3 satır.** Hiçbir şey silinmiyor, 24'ü bir dokunuş ötede.
+
+**"bekliyor" kelimesi tamamen kalkar.** Katlamanın içindeki her kalem zaten tanımı gereği bekliyor; her satıra
+durum yazmak Rev 4'teki *"normal bir durumu N kez duyurma"* hatasıdır. Yapı durumu kodluyor, kelimeye gerek yok.
+Aynı gerekçeyle "kamuya açık bir şey yok" türü açıklama cümleleri de düşer — o, aynı bilginin palto giymiş hâli.
+
+Katlama nerede yaşar: **brifingin içinde, bölümün kendi yerinde.** Kendi sayfası ~25 satır için aşırı
+mühendislik; yalnızca frontmatter'da tutmak görünmez çürümedir. `<details>` deseni zaten üründe var
+(`.appendix`, Rev 3 kupür katlamaları).
+
+Hareket ve ekleme yoksa bölüm tek bir kapalı satıra iner. Bu Rev 9'u ihlal etmez: kapalı bir katlama **duyuru
+değil, dizin girdisidir.**
+
+### R12.2 — Q4: iki nesne ayrılmaz, çünkü görünürlük ekseni onları zaten ayırıyor
+
+Tespitiniz doğru: `home: izleme` taşıyan **gelişmeler** (kaynaklı, çapalı, çipli) ile çıplak **izleme
+soruları** farklı nesneler. Ama yeni bir yapısal ayrım gerekmiyor:
+
+> **Yerleşimi nesne türü değil, hareket belirler.** Bugün kımıldayan kalem — ki kımıldadığı için kaynağı ve
+> çapası vardır — okuma yolunda; kımıldamayan kalem katlamada, yalnızca adıyla.
+
+Gidiş-dönüş temiz: katlamadaki bir ad hareket ettiği gün kaynağıyla birlikte yukarı çıkar, ertesi gün yine
+ada iner. Yeni frontmatter alanı, yeni bölüm, yeni kural yok.
+
+### R12.3 — Q2: çıkış kuralı — saat değil, yargı; ama yargı **zorlanır**
+
+Açık bir soru, üzerinden zaman geçti diye açık olmaktan çıkmaz; tungsten dokuzuncu günde de gerçek bir izleme
+kalemi. Bu yüzden "N gün sonra sil" yanlış — meşru bir ipliği silmek olur.
+
+Doğrusu: **yaş, kalemin varlığını değil görünürlük sınıfını belirler** (R12.1 bunu zaten yapıyor), ve çıkış
+kararı periyodik olarak **verilmeye zorlanır**:
+
+> **14 gün hareketsiz kalan kalem için ajan ya kalemi listeden düşürür ya da hâlâ neden açık olduğunu tek
+> bir yan cümleyle yazar.** Bu cümle günde bir tekrarlanan bir şey değil; iki haftada bir yazılan yeni bir
+> bilgidir. Böylece sessiz birikim, açık bir karara dönüşür.
+
+Tarihin geçmesi ölçüt olarak kullanılmaz — Rev 9'da son tarih alanı emekli edildi, tespit edilemez; olmayan
+bir sinyali varmış gibi kullanmayız.
+
+Düşen kalem **sessizce kaybolmaz**: build o günün listesini bir öncekiyle karşılaştırıp tek satır basar —
+`Listeden düşenler: <ad>`. Düşüş de bir olaydır.
+
+### R12.4 — Q5: budama sahipliği — ajan yargıyı, build muhasebeyi
+
+Bugün ajan her sabah kendi önceki raporunu okuyup 24 satırı elle kopyalıyor; listenin uzunluğu bu yüzden
+kendi kendini besliyor. Rev 10 kuralı burada birebir uygulanır: **ajanın ürettiği şey yargıdır; sayılabilen
+şeyi build sayar.**
+
+Bunun için frontmatter'a adlardan ibaret bir dizi: `watch: ["Tungsten ve enerjetik malzeme tedarik zinciri", …]`.
+`build.py` bunu `reports.json`'daki bir önceki günle karşılaştırıp **türetir**:
+
+| Türetilen | Nasıl | Ajanın elinden alınan iş |
+|---|---|---|
+| **Yaş** (`· 9 gün`) | adın ilk göründüğü gün | — (bugün hiç yok) |
+| **Bugün eklenenler** | bugünde var, dünde yok | elle "Bugün eklenenler" başlığı tutmak |
+| **Listeden düşenler** | dünde var, bugünde yok | — (bugün hiç bildirilmiyor) |
+| **Katlama sayacı** (24) | `len(watch) - hareket edenler` | elle sayım |
+| **14 gün uyarısı** | yaş ≥ 14 | ajanın hafızasından hatırlaması |
+
+Ajana kalan: hangi ipliğin izlenmeye değdiği, neyin ilerlediği ve ilerlemenin ne anlama geldiği. Yani yargı.
+Ayrıca "Taşınanlar / Bugün eklenenler" defter tutma işi promptan tamamen kalkar — ajan için net sadeleşme.
+
+`developments[]` ve `home: izleme` **değişmez**; çip şeridinin "İzleme" grubu aynen çalışır (Rev 11'den sonra
+zaten ada dayanıyor).
+
+### Uygulama listesi — Revizyon 12
+
+| # | Dosya | Değişiklik | Kabul testi |
+|---|---|---|---|
+| R12-P0-1 | rapor promptu | İZLEME LİSTESİ yalnızca **hareket edenleri** düzyazıyla yazar. "bekliyor" kelimesi, "kamuya açık bilgi yok" açıklamaları ve "Taşınanlar / Bugün eklenenler" başlıkları kaldırılır. Bekleyen kalemlerin adları frontmatter'daki `watch:` dizisine yazılır. | Yeni raporun gövdesinde `bekliyor` dizgisi geçmez; İZLEME LİSTESİ gövdesi yalnızca ilerleyen kalemleri içerir. |
+| R12-P0-2 | `build.py` | `watch:` dizisinden katlama üretilir: `<details><summary>Bekleyen başlıklar (N)</summary>` + ad listesi. Ad başına `· {n} gün` (yaş, `reports.json` geçmişinden). | 22 Eylül raporunda katlama kapalı gelir, `(24)` yazar, açılınca 24 ad + yaş görünür; tungsten kalemi `· 9 gün` taşır. |
+| R12-P0-3 | `build.py` | Önceki günle diff: bugün yeni olanlar `BUGÜN EKLENENLER` altında görünür (`.subkicker`); dünde olup bugün olmayanlar `Listeden düşenler: <ad>` satırı olarak basılır. İkisi de boşsa başlık hiç basılmaz. | Bir adı `watch:`'ten elle sildiğimde rapor `Listeden düşenler` satırı basar; yeni ad eklediğimde `BUGÜN EKLENENLER` altında çıkar. |
+| R12-P0-4 | `build.py` → `reports.json` | `watch` dizisi `reports.json`'a yazılır (yaş ve diff'in kaynağı). | `data/reports.json` her rapor için `watch` taşır; alan yoksa (eski raporlar) build hatasız koşar ve yaş hesabı o günden başlar. |
+| R12-P0-5 | `assets/app.css` | Yeni CSS yok: `.subkicker` ve mevcut `<details>` kuralları kullanılır; katlama `.more` ile aynı görsel kayıtta. | `grep -c "izleme" assets/app.css` = 0; katlama `.more` ile aynı görünür. |
+| R12-P1-1 | rapor promptu | 14 gün kuralı: yaş ≥ 14 olan kalem için ajan ya `watch:`'ten düşürür ya da o gün tek yan cümleyle neden hâlâ açık olduğunu yazar (bu cümle okuma yolunda görünür, katlamada değil). | 14. günü geçen bir kalem ya listeden düşer ya da gövdede tek cümlelik gerekçe alır; ertesi gün cümle tekrarlanmaz. |
+| R12-P1-2 | `build.py` | Yaş ≥ 14 olan kalemler katlamada yaşa göre azalan sırada en üstte toplanır ki budama kararı görünür olsun. | Katlama açıldığında en eski kalemler ilk sırada. |
+
+**Yapılmayacak:** bekleyen kalemleri silmek (açık soru açıktır); N gün sonra otomatik düşürmek; "bekliyor"u
+katlama içinde de yazmak; izleme listesine ayrı sayfa açmak; `developments[]`/`home: izleme` şemasını
+değiştirmek; geçmiş son tarihleri çıkış ölçütü olarak kullanmak (alan Rev 9'da emekli edildi).
+
+---
+
+## Revizyon 13 — kaynak tarihi
+
+### R13.0 — Bir dizgi, iki iş
+
+Tarih iki ayrı soruya birden cevap vermeye çalışıyor ve ikincisinde başarısız:
+
+| Soru | Kim soruyor | Bugün cevabı |
+|---|---|---|
+| **Kayıt ne?** "Soldier Systems Daily, 08.09.2026" | Alıntılayan, arşivleyen | Tarih **doğru cevap** — alıntılanabilir, kalıcı |
+| **Bu delil güncel mi?** | Her sabah okuyan | Tarih **aritmetik sonrası** cevap veriyor; raporun tarihi de sol kenarda, yanında değil |
+
+Belgenin her yerinde uyguladığım kural burada da geçerli: **iki iş varsa tek şeye ikisini birden yaptırma.**
+Bu yüzden "tarihi göreli yaşla değiştir" seçeneği yanlış — kaydı yok eder. Doğru hamle: **tarih kayıt olarak
+aynen kalır, güncellik için ayrı ve türetilmiş bir jeton eklenir.**
+
+### R13.1 — Q1/Q2: tek jeton, her girdide, aritmetiksiz
+
+```
+[K1] Drone Round C-UAS mühimmatı … — Soldier Systems Daily, 08.09.2026 · 12 gün önce
+     ÖZGÜN METİN ↗   TÜRKÇE OKU ↗
+```
+
+- Jeton: `bugün` / `dün` / `{n} gün önce`. Türkçede sayıdan sonra ad çoğullanmaz, tek biçim yeter.
+- **Her girdide basılır**, yaş ne olursa olsun. Dağılımınıza göre 40 girdi ≤1 gün; onlara da `dün` yazmak
+  Rev 4'ün tekdüzelik kuralını bedavaya sağlıyor — blok içinde bazı satırda dolu bazısında boş bir yuva
+  bırakmıyoruz. Ayrıca `dün` bir güvence: aritmetik yapmadan "bu taze" der.
+- **Eşik yok, seviye yok.** `3 gün önce` ile `108 gün önce` ikisi de sıfır çabayla okunuyor; üzerine
+  kategorik bir kelime koymak gereksiz. "30 günde bir etiket" kuralının kaba olmasının sebebi eşik seçmekti;
+  doğru cevap eşiği kaldırmak.
+- **Renk yok.** `--muted`, mono 10,5px, `.clip-meta` / `.tr-read` kaydında — Rev 1: *renk durumu gösterir,
+  ölçüm göstermez.* Eskilik bir durum değil, bir ölçüdür.
+- Ürünün kendi tanımı da bunu destekliyor: toplama penceresi `window_hours: 48`. Yani "dün" pencere içi,
+  gerisi dışı — ama bunu kelimeyle ilan etmeye gerek yok, sayı zaten söylüyor.
+
+### R13.2 — Q3: build hesaplar — onaylıyorum
+
+Bugün ajan aritmetiği elle ve tutarsız yapıyor: 13 girdi etiketli, en yenisi 16 günlük; **7 günden eski 20
+girdi etiketsiz.** Bu, Rev 9 (alarm), Rev 10 (MKE sayısı) ve Rev 12 (izleme yaşı) ile aynı sınıf iş.
+
+> **Ajanın ürettiği şey yargıdır; çıkarılabilen şeyi build çıkarır.**
+
+Uygulama notu — tek gerçek risk: tarih bugün serbest metin (`— Soldier Systems Daily, 08.09.2026`) ve bazı
+girdiler `2026, gün belirtilmemiş` diyor. Kural: **`DD.MM.YYYY` ayrıştırılabiliyorsa jeton basılır;
+ayrıştırılamıyorsa hiçbir şey basılmaz.** Yanlış jeton basmaktansa boş bırakmak — Rev 4'ten beri geçerli
+ilke: *affordance ve işaret yalan söylemez.* Prompt değişmiyor.
+
+"Erişilemeyen kaynaklar" bloğu jeton almaz; Rev 8'de çip almadığı gibi — o blok bir boşluk ilanıdır.
+
+### R13.3 — Q4: `(arka plan)` emekli
+
+İfade **rol** iddiası taşıyor ("bu bir bulgu değil, bağlam") ama **yaş** kuralıyla uygulanıyor. Dokuz gündür
+iki farklı şeyi aynı etikette taşıyor ve ölçüm bunu doğruluyor: yaş kuralına uymuyor, rol kararı da
+verilmiyor — yani aslında hiçbir zaman rol sinyali üretilmedi, kılık değiştirmiş yaştı.
+
+Yaş işi türetmeye geçtiğine göre geriye yalnızca hiç yapılmamış rol işi kalıyor. **Kaldırılır.** Rol ayrımı
+ileride gerçekten istenirse, kurtarılmış bir etiketle değil, bilinçli uygulanan ayrı bir işaretle yapılır —
+ve o gün render yeriyle birlikte gelir (Rev 9'daki `decision_by` dersi).
+
+### Uygulama listesi — Revizyon 13
+
+| # | Dosya | Değişiklik | Kabul testi |
+|---|---|---|---|
+| R13-P0-1 | `enrich.py` → `add_source_anchors` | Her `li.source` girdisinde `DD.MM.YYYY` ayrıştırılır; rapor tarihiyle farkı `<span class="source-age">bugün \| dün \| {n} gün önce</span>` olarak tarihten hemen sonra basılır. Ayrıştırılamıyorsa hiçbir şey basılmaz. | 20 Eylül raporunda K1 `· 12 gün önce`, aynı gün yayımlanan bir kaynak `· bugün` taşır; `gün belirtilmemiş` girdisinde jeton yok. |
+| R13-P0-2 | `enrich.py` | `(arka plan)` → `<span class="background-tag">` dönüşümü kaldırılır; ifade kaynak metninden de çıkar. | Yeni raporda `arka plan` dizgisi geçmez; `grep -c background-tag` = 0. |
+| R13-P0-3 | rapor promptu | `(arka plan)` etiketleme talimatı ve "30 günden eski kaynağı işaretle" kuralı kaldırılır. Tarih yazım biçimi `DD.MM.YYYY` olarak sabitlenir; tarih bilinmiyorsa alan boş bırakılır (uydurma gün yazılmaz). | Yeni raporun kaynakçasında her tarih `DD.MM.YYYY` ya da yok; `(arka plan)` geçmez. |
+| R13-P0-4 | `assets/app.css` | `.source-age { font-family: var(--mono); font-size: 10.5px; letter-spacing: .05em; color: var(--muted) }`. `.background-tag` kuralı silinir. | Jeton `.tr-read` ile aynı görsel kayıtta; hiçbir renk vurgusu yok; 375px'te tarihle aynı satırda kalır, taşmaz. |
+| R13-P1-1 | `enrich.py` | Ayrıştırılamayan tarihler build çıktısında sayılır ve `python3 build.py` satırında raporlanır (`· 2 kaynak tarihi okunamadı`) ki sessizce birikmesin. | Bilerek bozuk bir tarih yazıldığında build uyarıyı basar ama durmaz. |
+| R13-P1-2 | rapor promptu | Kaynak tarihi raporun tarihinden **sonra** olamaz; olursa ajan tarihi düzeltir. | Gelecek tarihli bir kaynak yazıldığında jeton negatif gün üretmez (build böyle bir durumda jeton basmaz). |
+
+**Yapılmayacak:** tam tarihi göreli yaşla değiştirmek (kayıt yok olur); yaş için eşik/seviye tanımlamak;
+jetona renk vermek (`--watch` dahil); jetonu yalnızca eski kaynaklara basmak (Rev 4 tekdüzeliği);
+`(arka plan)`'ı "rol" anlamıyla kurtarmaya çalışmak; ajandan tarih aritmetiği istemeye devam etmek.
+
+---
+
+## Revizyon 14 — erişilemeyen kaynaklar
+
+### R14.0 — Üçüncü kez aynı kategori hatası
+
+Başlık **kaynağın** özelliği gibi yazılmış ("erişilemeyen"), oysa kayıt **ajanın** sonucu ("okuyamadım").
+Ölçüm bunu kanıtlıyor: Breaking Defense girdisi 200 döndü ve 7.220 karakterlik tam metin geldi — sayfa açık,
+ajan Europe Edition yönlendirmesinde pes etmiş. Müşteri bunu fetch etmeden gördü.
+
+Bu belgede aynı hatayı üçüncü kez buluyorum:
+
+| Rev | Etiket | İddia ettiği | Gerçekte kaydettiği |
+|---|---|---|---|
+| 6 | `G10` | okuyucunun sözlüğü | iç numaralandırma |
+| 13 | `(arka plan)` | kaynağın rolü | kaynağın yaşı |
+| **14** | `Erişilemeyen` | kaynağın durumu | **ajanın deneyimi** |
+
+> **Ajanın iç durumu, dünya hakkında bir olgu kılığında okuyucunun belgesine sızmaya devam ediyor.**
+> Her seferinde maliyeti aynı: okuyucu yanlış bir şeye inanıyor ve yanlışlığı ancak kendisi keşfediyor.
+
+Burada maliyet daha somut: girdide ÖZGÜN METİN ↗ çipi var. **Okuyucuya bir kapı verip üstüne "kilitli"
+yazıyoruz** — ve bugün ikisinden biri açık.
+
+### R14.1 — Q1/Q2: yeniden adlandırılmaz, bölüm kalkar
+
+"Doğrulayamadığımız kaynaklar" doğru olurdu ama yanlış soruyu çözer. İki test:
+
+**Test 1 — görünür bir boşluğu onarıyor mu?** Ürünün yokluk bildiren üç işareti de bir *onarım*:
+`16 kaynak yanıt vermedi` (528 sayısını sınırlar), `özet alınamadı` (eksik chevron'u açıklar),
+`çeviri engelli` (eksik çipi açıklar). Üçünde de okuyucu bir eksik **görüyor**, jeton sebebini söylüyor.
+Bu bölüm hiçbir eksiği onarmıyor: **açıkladığı şeyi kendisi yaratıyor.** O iki URL'nin var olduğunu okuyucu
+başka türlü hiç bilmeyecekti.
+
+**Test 2 — güveni sınırlıyor mu?** `16 kaynak yanıt vermedi` *taramayı* sınırlar. Bu bölüm *brifingi*
+sınırlar mı? Sınırlayamaz — analist okuyamadığına göre raporda hiçbir iddia onlara dayanmıyor.
+**Rapora hiçbir şey katmamış bir kaynak, kaynak değildir;** kaynakça belgenin dayandığı delili listeler.
+
+> **Karar: bölüm kaldırılır.** Yeniden adlandırmak, yapısı gereği delil olmayan girdileri taşıyan bir bölümü
+> korumak olurdu.
+
+Meşru tek kullanım kayboluyor mu? Hayır, **daha iyi bir evi var.** "Okuyamadım ama önemli olabilir" bir
+*bilinen bilinmeyendir* — yani açık bir sorudur, bir atıf değil. Rev 12 buna iki revizyon önce ev yaptı:
+`watch:` dizisi. Önemliyse izleme kalemi olur; değilse zaten operatör notudur.
+
+### R14.2 — Q3: gerekçe dizgisi de gider (ve genel kural)
+
+"Yönlendirme hatası"nın gerçek anlamı "yönlendirdi, ben vazgeçtim" çıktı. Kural:
+
+> **Ajanın kendi başarısızlığına dair öz-raporu okuyucunun belgesine basılmaz.** Doğrulanamaz; yanlış
+> olduğunda yanlışlığı yalnızca okuyucu keşfeder.
+
+### R14.3 — Q4: build'de yoklama yapılmaz
+
+Üç gerekçe, sırayla:
+
+1. **Silinen bir bölümü doğrulamak için yoklayıcı yazmak** klasik tuzak — sorun kalkınca ölçüm de gereksiz.
+2. **Bizim getiricimiz okuyucunun tarayıcısı değil.** Bugünün kanıtı iki yönlü çalışıyor: sizin fetch'iniz
+   200 + 7.220 karakter aldı, ajan aynı sayfada pes etti; tersine `failed_sources`'taki 403'ler çoğu zaman
+   "botu engelliyor" demek, "insanı engelliyor" değil. Yani build-zamanı yoklama **doğru cevabı değil, başka
+   bir yanlış cevabı** üretir. Rev 8'de vekil için verdiğim hükmün aynısı, bu kez tarayıcıya uygulanmış.
+3. `build.py` bugün **hiç ağa çıkmıyor** (Rev 8'de yoklama bilerek toplayıcıda bırakıldı). Sıfır okuyucu
+   değeri için buraya ağ sokmak gerçek bir mimari bedel.
+
+Cevap sizin ifadenizle aynı: **daha az güven, daha az söz.**
+
+Ayrım net kalsın — bu hüküm "arızaları bildirmeyi bırak" demek **değil**:
+
+> **Ölçtüğümüz ve okuyucunun gördüğü bir boşluğu sınırlayan eksiklik yazılır; ajanın deneyimi yazılmaz.**
+
+`16 kaynak yanıt vermedi`, `özet alınamadı`, `çeviri engelli` — üçü de ölçüm, üçü de kalıyor.
+
+### R14.4 — Yan kazanç: atıf sözleşmesi güçleniyor
+
+Bugün kaynakça, analistin hiç okumadığı girdiler taşıyabiliyor. Bu değişiklikten sonra **KAYNAKLAR'daki her
+girdi analistin gerçekten okuduğu bir şeydir.** Rev 8'deki "atıf delildir" ilkesiyle tam örtüşüyor.
+
+### Uygulama listesi — Revizyon 14
+
+| # | Dosya | Değişiklik | Kabul testi |
+|---|---|---|---|
+| R14-P0-1 | rapor promptu | "Erişilemeyen kaynaklar" talimatı tamamen kaldırılır. Yerine: **okumadığın kaynağı atıf yapma.** İpucu önemliyse başka bir kaynak bul ya da frontmatter'daki `watch:` dizisine izleme kalemi olarak yaz. | Yeni raporda `Erişilemeyen kaynaklar` başlığı geçmez; KAYNAKLAR'daki her `[K#]` gövdede en az bir kez atıf alır. |
+| R14-P0-2 | rapor promptu | Gerekçe dizgileri (`yönlendirme hatası`, `üyelik duvarı`, `onay bekliyor` vb.) hiçbir yerde yazılmaz. | Yeni raporda bu dizgiler geçmez. |
+| R14-P0-3 | `enrich.py` | Rev 8 (çeviri çipi hariç tutma) ve Rev 13 (yaş jetonu hariç tutma) koşulları **korunur** — yeni raporlar için ölü kod olur ama arşivdeki dokuz rapor bugünkü gibi render olmaya devam eder. | 14-22 Eylül raporları yeniden üretildiğinde "Erişilemeyen kaynaklar" girdileri bugünkü görünümünü korur (çeviri çipi yok, yaş jetonu yok). |
+| R14-P0-4 | `build.py` | **Ağ eklenmez.** Bu bir "yapılmayacak" maddesi ve regresyon testidir. | `build.py` içinde `requests`/`urllib` çağrısı yok. |
+| R14-P1-1 | medya sayfası | `16 kaynak yanıt vermedi` ve `failed_sources` listesi (R2-P2-3) **değişmez** — bunlar ölçüm, öz-rapor değil. | Medya sayfası istatistik satırı bugünkü gibi çalışır. |
+| R14-P1-2 | rapor promptu | Doğrulanamayan ama önemli iddia için tek yol: `watch:` kalemi, adı "…doğrulanamadı" biçiminde. | Böyle bir kalem eklendiğinde Rev 12 katlamasında adıyla ve yaşıyla görünür. |
+
+**Yapılmayacak:** bölümü yeniden adlandırıp korumak; gerekçe dizgilerini "daha doğru" yazmaya çalışmak;
+build'e ağ yoklaması eklemek; okuyucuya kilitli dediğimiz bir kapıya çip vermek; ölçülmüş eksiklik
+bildirimlerini (`16 kaynak yanıt vermedi`, `özet alınamadı`, `çeviri engelli`) bu hükümle birlikte kaldırmak.
+
+---
+
+## Revizyon 15 — kapsam notu
+
+### R15.0 — Rev 14 testini geçiyor, ama sizin savunduğunuz gerekçeyle değil
+
+Testin ikinci şartı: *okuyucunun gördüğü bir boşluğu sınırlıyor mu?* Siz "göremiyor" dediniz — bir adım eksik.
+**Boşluk görünür, çünkü ben onu görünür yaptım.** Rev 1 IA'sı daybar'la şunu ilan ediyor:
+*bir gün = iki yüzü olan tek dosya; brifing analiz edilmiş yüz, medya takibi ham yüz.* Okuyucu 18 Eylül'ün
+medya sayfasını açıp "542 başlık" görebiliyor ve daybar ona bu iki sayfanın aynı günün iki yüzü olduğunu
+söylüyor.
+
+İşaretli günlerde **bu ilan yanlış**: brifing o taramanın analiz edilmiş hâli değil, aynı tarihi paylaşan
+bağımsız bir belge.
+
+> **Satır yaşar — ama "kapsam dardı" dediği için değil, daybar'ın verdiği bir sözü düzelttiği için.**
+
+Bu aynı zamanda gerekçeyi keskinleştiriyor: mesele soyut bir güven sınırı değil, ürünün kendi yapısal
+iddiasının o gün tutmaması.
+
+### R15.1 — Q2/Q3/Q4: eşik yok, sıfat yok — ölçüm basılır, her gün
+
+Rev 13'te yaş için verdiğim hüküm burada birebir uygulanır: **eşik seçmek yerine ölçümün kendisini bas.**
+"Dar kapsam" bir sıfat ve müşterinin sorusu tam da buydu — *neye göre dar?*
+
+```
+18 kaynağın 9'u o günün medya takibinde de var.        ← normal gün
+14 kaynağın hiçbiri o günün medya takibinde yok.        ← işaretli gün
+```
+
+- **Her gün basılır.** Kritik gerekçe: **yalnızca kötüyken beliren bir sayı hiçbir şeyle kıyaslanamaz.**
+  Müşterinin "neye göre?" sorusunun cevabı, normal günlerde de basılmış olmasıdır — taban çizgisini basmak
+  yaratır. 0, 2, 3, 7, 9 dizisinde sıfır ancak diğerleri yazıldığı için sıçrar.
+- Rev 9'u ihlal etmez: sabit değil, değişen bir ölçüm. Rev 4'ü de ihlal etmez: hiçbir günde başka günde olan
+  bir yuva eksik değil.
+- **"Seçilmedi" denmez, "de var" denir.** Ölçebildiğimiz tek şey URL'in iki yerde birden geçmesi; analistin
+  onu havuzdan *seçtiğini* ölçemeyiz — bağımsız olarak bulmuş da olabilir. Önerdiğiniz
+  *"medya takibinden seçilmedi"* ifadesi ölçemediğimiz bir nedensellik iddia ediyor; Rev 14'ün hatasının
+  daha ince bir biçimi olurdu.
+- `medya takibi` ifadesi o günün sayfasına bağlanır (Rev 10: *sayı cümle, şey bağlantı*).
+- **Havuz yoksa satır hiç basılmaz.** O gün için haber JSON'u yoksa (14-16 Eylül) örtüşme *bilinmiyordur*,
+  sıfır değildir — Rev 10'daki `veri yokluğu ≠ sıfır` ayrımı.
+
+Yer: **KAYNAKLAR'ın sonunda, bugünkü `.scan-note` konumunda.** Ray düşünüldü ve elendi: ray *güne* dair
+olguları taşır (Rev 10), bu ise *bu belgenin kaynaklarına* dair bir olgu — tarif ettiği listenin altında
+durması doğru, ve yöneticinin 4 dakikasının dışında kalıyor.
+
+### R15.2 — Tetik: öz-rapor değil, türetme
+
+Mevcut tetik ajanın "havuz yoktu" beyanı — Rev 14'te tam olarak bunu yasakladım. Türetme zaten elimizde:
+**Rev 5'in `cited` kümesi bu kesişimi bugün de hesaplıyor**, yalnızca ters yönden okunuyor (medya
+sayfasındaki `Brifingde` işareti). Yeni mantık yok, ağ yok, yeni alan yok.
+
+Doğal çapraz doğrulama: **`haberler/D.html` üzerindeki `Brifingde` işareti sayısı, bu satırdaki paya eşit
+olmak zorunda.** İki özellik birbirini denetliyor.
+
+Operasyonel sebep (toplayıcı beş saat geç çalıştı) okuyucunun belgesine girmez; o, hattın kendi kaydına
+aittir. Türetilen sayı **sebebi değil sonucu** ölçtüğü için daha iyi: ajan notu yazmayı unutsa da, ya da
+uygulanmayan bir günde yazsa da sayı doğru kalır.
+
+### Uygulama listesi — Revizyon 15
+
+| # | Dosya | Değişiklik | Kabul testi |
+|---|---|---|---|
+| R15-P0-1 | rapor promptu | "Bu rapor dar kapsamla hazırlandı; günün başlık taraması yapılamadı." talimatı ve dizgisi tamamen kaldırılır. Ajan kapsam hakkında hiçbir beyan yazmaz. | Yeni raporda `dar kapsam` ve `başlık taraması` dizgileri geçmez. |
+| R15-P0-2 | `build.py` | Rapor gövdesindeki `[K#]` URL'leri `norm_url` ile o günün havuzuyla kesiştirilir; `.scan-note` içeriği türetilir: `{toplam} kaynağın {n}'i o günün <a href="../haberler/{day}.html">medya takibinde</a> de var.` — `n == 0` ise `{toplam} kaynağın hiçbiri o günün <a>medya takibinde</a> yok.` | 22 Eylül raporu `18 kaynağın 9'u…`, 18 Eylül raporu `14 kaynağın hiçbiri…` basar; sayılar ölçümünüzle birebir eşleşir. |
+| R15-P0-3 | `build.py` | O gün için `data/news/{day}.json` yoksa `.scan-note` **hiç basılmaz** (bilinmiyor ≠ sıfır). | 14-16 Eylül raporlarında `.scan-note` yok. |
+| R15-P0-4 | çapraz doğrulama | Pay, aynı günün `haberler/{day}.html` sayfasındaki `Brifingde` işareti sayısına eşit olmalı; build bu eşitliği kontrol edip uymazsa uyarı basar. | 22 Eylül'de medya sayfasındaki `Brifingde` sayısı 9; eşitsizlik bilerek bozulduğunda build uyarıyı basar ama durmaz. |
+| R15-P1-1 | `assets/app.css` | `.scan-note` kuralı **değişmez** — Seviye 3, `--muted`, çizginin altında. Yalnızca içeriği türetilmiş oluyor. | Satır bugünkü görsel ağırlığını korur; 375px'te taşmaz. |
+| R15-P1-2 | hat kaydı (prompt dışı) | Toplayıcının geç çalışması gibi operasyonel durumlar yalnızca hattın kendi log'unda kalır; okuyucunun belgesine girmez. | Yeni raporlarda operasyonel hiçbir beyan yok. |
+
+**Yapılmayacak:** "dar kapsam" gibi tabansız bir sıfat kullanmak; eşik tanımlayıp satırı yalnızca kötü
+günlerde basmak (taban çizgisi yok olur); "medya takibinden seçilmedi" gibi ölçemediğimiz bir nedensellik
+iddia etmek; havuzun olmadığı günde sıfır yazmak; satırı raya ya da belgenin başına taşımak; tetiği ajanın
+beyanına bırakmak.
