@@ -914,10 +914,17 @@ body:has(.endnav) .foot { margin-top: 0; }
 
 /* ---------- çapalar, atıflar, rozetler ---------- */
 
-/* iki yapışkan şeridin (48 + 40) altında kalmasınlar */
-.prose h2[id], .prose h3[id], .prose li[id], .appendix, .news .kicker {
-  scroll-margin-top: 100px;
+/* Yapışkan yığın 102px: daybar 49 + çip şeridi 53. Eski değer 100'dü ve
+   başlık yığının 1px *altında*, sıfır nefes payıyla duruyordu — çipe basınca
+   bölüm adı şeride yapışık çıkıyordu. Hedef: yığının 20px altı.
+
+   Yığının yüksekliği sayfaya ve genişliğe göre değişiyor, o yüzden tek değer
+   yok: brifingin bölüm şeridi 700px altında yapışkanlıktan çıkıyor, kupür
+   sayfasının kategori şeridi ise 920px altında ortaya çıkıyor. */
+.prose h2[id], .prose h3[id], .prose li[id], .appendix {
+  scroll-margin-top: 122px;
 }
+.news .kicker { scroll-margin-top: 69px; }   /* yalnız daybar yapışkan */
 
 .copylink {
   margin-left: 8px;
@@ -1369,3 +1376,24 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
   .player-row { gap: 4px 10px; }
   .pname { flex: 1 0 100%; }
 }
+
+
+/* ---------- yapışkan yığın: kırılma noktalarına göre çapa payı ---------- */
+/* Bu blok dosyanın sonunda duruyor: yukarıdaki temel kurallardan sonra
+   gelmezse onlar tarafından eziliyor. */
+
+@media (max-width: 920px) {
+  /* Kategori şeridi burada beliriyor ve yapışkan: yığın 102px olur. */
+  .news .kicker { scroll-margin-top: 122px; }
+}
+
+@media (max-width: 700px) {
+  /* Brifingin bölüm şeridi burada yapışkanlıktan çıkıyor: geriye daybar kalır. */
+  .prose h2[id], .prose h3[id], .prose li[id], .appendix {
+    scroll-margin-top: 69px;
+  }
+}
+
+/* Oyuncular sayfasında daybar yok; şerit .devnav'dan gelen top: 48px ile
+   tepeden 48px aşağıda duruyor ve satırlar o boşluğun arkasından akıyordu. */
+.pchips { top: 0; }
