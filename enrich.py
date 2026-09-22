@@ -298,6 +298,17 @@ def drop_empty_alarms(text, alarm):
     return text
 
 
+def drop_mke_agenda(text):
+    """MKE GÜNDEMİ bölümünü gövdeden düşür — sayı artık rayda, build üretiyor.
+
+    Ajanın ürettiği şey yargıdır; sayılabilen şeyi build sayar. Bu bölümün tek
+    içeriği aday listesinden elle kopyalanan bir sayıydı: yanlış kopyalasa kimse
+    çapraz kontrol etmezdi ve bağlantıyı da güvenilir üretemiyordu. İstem de
+    sadeleşiyor, ama gövdeden düşmesi isteme bağlı kalmıyor.
+    """
+    return re.sub(r'<h2[^>]*>\s*MKE\s+GÜNDEM[İI].*?</h2>.*?(?=<h2|\Z)', "", text, flags=re.S)
+
+
 def rename_headers(text):
     for old, new in HEADER_RENAMES.items():
         text = text.replace(f"<th>{old}</th>", f"<th>{new}</th>")
@@ -312,6 +323,7 @@ def enrich(text, developments, alarm=False):
     # atıflar da kendiliğinden bağlantısız kalıyor (link_citations bunu
     # metinde id var mı diye okuyor).
     text = drop_empty_alarms(text, alarm)
+    text = drop_mke_agenda(text)
     text = add_item_anchors(text)
     text = add_source_anchors(text)
     text = add_table_badges(text, dev_ids)

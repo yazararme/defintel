@@ -361,6 +361,15 @@ a { color: var(--brand); text-underline-offset: 2px; }
 .rail-block { display: flex; flex-direction: column; gap: 5px; }
 .rail-label { color: var(--muted); }
 .rail-value { font-family: var(--mono); font-size: 12px; color: var(--ink-2); }
+/* Rayın içindeki tek dokunulabilir şey; 16px'lik hedefe parmakla basılmıyor. */
+.rail-value a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--brand);
+  text-decoration: none;
+}
+.rail-value a:hover { text-decoration: underline; }
 
 .report-title {
   margin: 0;
@@ -518,7 +527,21 @@ body:has(.endnav) .foot { margin-top: 0; }
     justify-content: center;
     gap: 22px;
   }
-  .rail { display: none; }   /* gün çubuğu aynı bilgiyi taşıyor */
+  /* Ray yalnızca tarihi taşıdığında gizleniyordu — daybar aynısını söylüyor.
+     Daybar'da olmayan bir bilgi taşıdığında (MKE gündemi) yatay şeride dönüp
+     görünür kalır; tarih bloğu yine düşer, çünkü o hâlâ tekrar. */
+  .rail { display: none; }
+  .rail--rich {
+    display: flex;
+    position: static;
+    top: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    border-top: 0;
+    padding-top: 0;
+  }
+  .rail--rich .rail-block--date { display: none; }
   .rail--unused {
     position: static;
     flex-direction: row;
@@ -758,7 +781,10 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
 /* ---------- kaynaklar ve ek ---------- */
 
 .prose li.source { font-size: 15.5px; line-height: 1.45; }
-.prose li.source a { word-break: break-word; overflow-wrap: anywhere; }
+/* li.source yalnızca [K#] girdilerine veriliyor; "Erişilemeyen kaynaklar"
+   listesindeki çıplak adresler kuralın dışında kalıyor ve telefonda sayfayı
+   yana kaydırıyordu. Kırılma listedeki her bağlantı için geçerli. */
+.prose li a { word-break: break-word; overflow-wrap: anywhere; }
 .background-tag { color: var(--muted); }
 
 /* Kaynakçadaki okuma yolu. Kaynakça Rev 1 hiyerarşisinde Seviye 3: 16 satıra

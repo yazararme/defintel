@@ -287,7 +287,8 @@ FOOT = """<footer class="foot">
 """
 
 
-def build_report(meta, body_html, iso, prev_day=None, next_day=None, news_counts=None):
+def build_report(meta, body_html, iso, prev_day=None, next_day=None,
+                 news_counts=None, mke_count=0):
     title = meta.get("title") or f"{tr_date(iso)} raporu"
 
     banner = (
@@ -298,9 +299,19 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None, news_counts
     # The day bar above already carries the date and the link to that day's
     # clippings, so the rail only repeats what the reader just read.
     rail = [
-        '<div class="rail-block"><span class="rail-label">Tarih</span>'
+        '<div class="rail-block rail-block--date"><span class="rail-label">Tarih</span>'
         f'<span class="rail-value num">{tr_date(iso, weekday=True)}</span></div>'
     ]
+    # Tarama üstverisi — bölüm değil. Taşıdığı şey tek bir sayı ve anlamı
+    # "sana da baktık, ama konumuz bu değil": bir tamlık işareti. Sıfırda
+    # hiçbir şey basılmaz, çünkü sıfırın gidecek yeri yoktur — kategori boşsa
+    # #kat-mke çapası da yoktur ve "0 başlık" tıklanamaz bir etiket olurdu.
+    if mke_count:
+        rail.append(
+            '<div class="rail-block"><span class="rail-label">MKE gündemi</span>'
+            f'<span class="rail-value"><a href="../haberler/{iso}.html#{cat_id("MKE")}">'
+            f'<span class="num">{mke_count}</span> başlık →</a></span></div>'
+        )
 
     news_counts = news_counts or {}
     cross_day = iso if iso in news_counts else None
@@ -311,7 +322,7 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None, news_counts
         + daybar("report", iso, prev_day, next_day, cross_day, up="../")
         + f"""<main class="wrap report">
   <div class="report-grid">
-    <aside class="rail">{''.join(rail)}</aside>
+    <aside class="rail{' rail--rich' if len(rail) > 1 else ''}">{''.join(rail)}</aside>
     <article class="column">
       {banner}
       <h1 class="report-title">{html.escape(title)}</h1>
@@ -816,6 +827,12 @@ def main():
     news_days = sorted(news)
     # kupür çipi o günün başlık sayısını taşıyor: dokunmak için somut bir sebep
     news_counts = {day: data.get("unique_items", 0) for day, data in news.items()}
+    # Sayılabilen şeyi build sayar: ajan aday listesinden bir sayıyı elle
+    # kopyalıyordu ve yanlış saysa kimse çapraz kontrol etmezdi.
+    mke_counts = {
+        day: sum(1 for i in data.get("items", []) if i.get("category") == "MKE")
+        for day, data in news.items()
+    }
 
     # daybar komşuları için önce hangi günlerin gerçekten rapor verdiğini bil
     sources = []
@@ -836,6 +853,7 @@ def main():
             sources[i - 1][0] if i else None,
             sources[i + 1][0] if i + 1 < len(sources) else None,
             news_counts,
+            mke_counts.get(iso, 0),
         )
         # Atıf kanonik kalmalı: [K#] yayıncının kendi sayfasını gösterir, vekili
         # değil. Okuma yolu ayrı bir çipte durur — o yüzden koruma "KAYNAKLAR
