@@ -731,10 +731,10 @@ def build_threads(sources):
             seen[key] = (slug, raw)
             day_map.setdefault(iso, {})[key] = slug
             th = threads.setdefault(slug, {
-                "slug": slug, "name": watch_label(raw), "opened": iso,
+                "slug": slug, "name": display_name(watch_label(raw)), "opened": iso,
                 "entries": [], "last": iso, "closed": None, "state": "open",
             })
-            th["name"] = watch_label(raw) or th["name"]
+            th["name"] = display_name(watch_label(raw)) or th["name"]
             th["last"] = iso
             th["state"], th["closed"] = "open", None
             # Açılış günü sıfırıncı kayıt: "15 Eylül'de açıldı" deyip o günü
@@ -824,6 +824,18 @@ def time_with_suffix(hhmm):
     spoken = minute or hour
     last = spoken % 10 or spoken
     return f"{hhmm}'{TIME_SUFFIX.get(last, 'de')}"
+
+
+def display_name(name):
+    """Ekrana çıkan iplik adı: ajanın o güne ait kimliği adın parçası değil.
+
+    "…yanıt süresi (G3)" gibi adlar, G# kimlikleri Rev 11'de ekrandan
+    kaldırıldığı hâlde iplik başlığında yaşamaya devam ediyordu: kimlik
+    konumsal, ad kalıcı — biri diğerinin içinde duramaz. Yalnız görünende
+    kesiliyor; slug'lar olduğu gibi kalıyor, çünkü adres kararlılığı
+    düzgün görünmekten önce gelir.
+    """
+    return re.sub(r"\s*\((?:bkz\.\s*)?G\d+(?:\s*,\s*G\d+)*\)\s*$", "", name).strip(" .")
 
 
 def watch_opening(text):
@@ -944,21 +956,30 @@ def thread_index(threads, latest):
     import datetime as _dt
     rank = {"open": 0, "dormant": 1, "closed": 2}
 
+    def moves(t):
+        return sum(1 for e in t["entries"] if not e.get("opening"))
+
+    # Aynı gün kımıldamış onlarca iplik keyfî sırada duruyordu: eşitlik
+    # bozulmayınca sıra, listenin bir şey söylemediği yer oluyor.
     def key(t):
         return (rank.get(t.get("state", "open"), 0),
-                -_dt.date.fromisoformat(t["last"]).toordinal())
+                -_dt.date.fromisoformat(t["last"]).toordinal(),
+                -moves(t), t["name"].lower())
     rows = []
     for th in sorted(threads.values(), key=key):
         gap = (_dt.date.fromisoformat(latest) - _dt.date.fromisoformat(th["last"])).days
         state = th.get("state", "open")
+        # "bugün"ü 29 satıra basmak, listedeki her şeyin zaten öyle olduğu bir
+        # hâli 29 kez duyurmaktır. Yaş jetonu ancak bugün değilse bir şey söyler.
         age = ("kapandı " + tr_date(th["closed"]) if state == "closed"
                else "son kayıt " + tr_date(th["last"]) if state == "dormant"
-               else age_words(gap))
+               else "" if gap == 0 else age_words(gap))
+        # Boş jeton boş kalmıyor: flex aralığı yine de 14px yer tutuyor.
         rows.append(
             f'<li class="thread-row thread-row--{state}">'
             f'<a href="/izleme/{th["slug"]}.html"><span class="thread-name">{html.escape(th["name"])}</span>'
-            f'<span class="thread-age num">{age}</span>'
-            f'<span class="thread-count num">{sum(1 for e in th["entries"] if not e.get("opening"))} hareket</span></a></li>'
+            + (f'<span class="thread-age num">{age}</span>' if age else "")
+            + f'<span class="thread-count num">{moves(th)} hareket</span></a></li>'
         )
     counts = {k: sum(1 for t in threads.values() if t.get("state", "open") == k)
               for k in ("open", "dormant", "closed")}

@@ -136,12 +136,12 @@
  },
  {
   "id": "usaf-sefer-c-uas-paketinde-kinetik-kalemin-tanim",
-  "name": "USAF seferî C-UAS paketinde kinetik kalemin tanımı ve yanıt süresi (G3)",
+  "name": "USAF seferî C-UAS paketinde kinetik kalemin tanımı ve yanıt süresi",
   "son_hareket": "2026-09-22"
  },
  {
   "id": "etiyopya-topcu-aliminin-resm-surece-donusmesi-g4",
-  "name": "Etiyopya topçu alımının resmî sürece dönüşmesi (G4)",
+  "name": "Etiyopya topçu alımının resmî sürece dönüşmesi",
   "son_hareket": "2026-09-22"
  },
  {
@@ -161,12 +161,12 @@
  },
  {
   "id": "anduril-ve-leidos-un-iki-kanalda-birden-bulunmas",
-  "name": "Anduril ve Leidos'un iki kanalda birden bulunmasının kategori tanımına ve alt yüklenici zincirine etkisi (G1)",
+  "name": "Anduril ve Leidos'un iki kanalda birden bulunmasının kategori tanımına ve alt yüklenici zincirine etkisi",
   "son_hareket": "2026-09-18"
  },
  {
   "id": "drone-round-un-mevcut-kucuk-kalibre-cercevesinde",
-  "name": "Drone Round'un mevcut küçük kalibre çerçevesinden mi ayrı bir ihaleden mi çıkacağı (G2, G8)",
+  "name": "Drone Round'un mevcut küçük kalibre çerçevesinden mi ayrı bir ihaleden mi çıkacağı",
   "son_hareket": "2026-09-18"
  },
  {
@@ -181,22 +181,22 @@
  },
  {
   "id": "25-eylul-de-tamamlanmasinin-ardindan-hangi-kabil",
-  "name": "25 Eylül'de tamamlanmasının ardından hangi kabiliyet kategorilerinin C-UAS Marketplace'e alındığı (G1)",
+  "name": "25 Eylül'de tamamlanmasının ardından hangi kabiliyet kategorilerinin C-UAS Marketplace'e alındığı",
   "son_hareket": "2026-09-16"
  },
  {
   "id": "boluk-ve-mevzi-seviyesi-c-uas-in-baska-ordu-sart",
-  "name": "Bölük ve mevzi seviyesi C-UAS'ın başka ordu şartnamelerinde ayrı kalem haline gelip gelmediği (G3)",
+  "name": "Bölük ve mevzi seviyesi C-UAS'ın başka ordu şartnamelerinde ayrı kalem haline gelip gelmediği",
   "son_hareket": "2026-09-16"
  },
  {
   "id": "firlatici-namlulu-sistem-ve-lazer-katmanlarinin-",
-  "name": "Fırlatıcı, namlulu sistem ve lazer katmanlarının hangi sırayla ve hangi bütçeyle resmî ihaleye döndüğü (G2)",
+  "name": "Fırlatıcı, namlulu sistem ve lazer katmanlarının hangi sırayla ve hangi bütçeyle resmî ihaleye döndüğü",
   "son_hareket": "2026-09-15"
  },
  {
   "id": "dogu-avrupa-hava-savunma-ve-topcu-rekabeti-g2",
-  "name": "Doğu Avrupa hava savunma ve topçu rekabeti (G2)",
+  "name": "Doğu Avrupa hava savunma ve topçu rekabeti",
   "son_hareket": "2026-09-14"
  }
 ]

@@ -38,6 +38,19 @@ yalnız bugün hareket olmadığı anlamına gelir. Site bu farkı zaten göster
 (kapanan dosya "kapandı", düşen dosya "listede görünmüyor" olur), o yüzden emin
 olmadığın hiçbir kalemi `closed` işaretleme — unutmakla bitirmek aynı şey değil.
 
+**Durum kelimesi bağlantıyla çelişmesin.** Bir izleme kalemi bugünün
+gelişmelerinden birine atıf veriyorsa (`(G3)` gibi), o kalem *bekliyor* değildir:
+`— *ilerledi (G3).*` yaz. "Bekliyor", yalnız bugün hiçbir gelişmeye
+bağlanmayan kalemler içindir. Kararın hâlâ beklendiğini söylemek istiyorsan
+bunu cümlenin içinde söyle ("ilerledi — ihale kararı hâlâ açıklanmadı"), durum
+kelimesini değiştirerek değil: site o kelimeye bakarak kalemi okuma yoluna mı
+yoksa katlamaya mı koyacağına karar veriyor.
+
+**Kimlik adın parçası değil.** İzleme kaleminin adı kalıcıdır, `G3` ise o güne
+ait konumsal bir etikettir; ikisini birleştirme. `**USAF seferî C-UAS paketinde
+kinetik kalemin tanımı (G3)**` değil, `**USAF seferî C-UAS paketinde kinetik
+kalemin tanımı** — *ilerledi (G3).*`
+
 ---
 
 ## Neden böyle
