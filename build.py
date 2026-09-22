@@ -120,7 +120,7 @@ def label_table_cells(table_html):
     return table_html[: body.start()] + labelled + table_html[body.end():]
 
 
-def render_body(md_text, developments=(), alarm=False):
+def render_body(md_text, developments=(), alarm=False, report_iso=""):
     # A bullet list that starts right under a bold lead-in ("**Taşınanlar:**")
     # would otherwise stay inside that paragraph; give it the blank line it needs.
     md_text = re.sub(
@@ -130,7 +130,7 @@ def render_body(md_text, developments=(), alarm=False):
     )
     md = markdown.Markdown(extensions=["tables", "fenced_code", "attr_list", "sane_lists"])
     out = md.convert(md_text)
-    out = enrich.enrich(out, developments, alarm)
+    out = enrich.enrich(out, developments, alarm, report_iso)
     out = re.sub(r"<table>.*?</table>", lambda m: label_table_cells(m.group(0)), out, flags=re.S)
     out = out.replace("<table>", '<div class="table-wrap"><table>')
     out = out.replace("</table>", "</table></div>")
@@ -928,7 +928,7 @@ def main():
     reports = []
     for i, (iso, meta, body) in enumerate(sources):
         developments = meta.get("developments") or []
-        body_html = render_body(body, developments, bool(meta.get("alarm")))
+        body_html = render_body(body, developments, bool(meta.get("alarm")), iso)
         page = build_report(
             meta, body_html, iso,
             sources[i - 1][0] if i else None,
@@ -991,6 +991,12 @@ def main():
     )
     (ROOT / ".nojekyll").touch()
 
+    # Sessizce birikmesin: tarihi okunamayan kaynak, yaş jetonu alamıyor.
+    if enrich.UNPARSED_DATES:
+        print(f"  ! {len(enrich.UNPARSED_DATES)} kaynakta tarih okunamadı "
+              f"(DD.MM.YYYY bekleniyor)")
+        for entry in enrich.UNPARSED_DATES[:4]:
+            print(f"      {entry}")
     print(f"  · index.html  ({len(reports)} rapor)")
     print("  · data/reports.json")
 

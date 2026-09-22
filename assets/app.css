@@ -797,7 +797,18 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
    listesindeki çıplak adresler kuralın dışında kalıyor ve telefonda sayfayı
    yana kaydırıyordu. Kırılma listedeki her bağlantı için geçerli. */
 .prose li a { word-break: break-word; overflow-wrap: anywhere; }
-.background-tag { color: var(--muted); }
+/* Yaş bir ölçü, bir durum değil: renk yok (Rev 1 — renk durumu gösterir,
+   ölçüm göstermez). Eşik de yok; "3 gün önce" ile "108 gün önce" ikisi de
+   sıfır çabayla okunuyor. */
+.source-age {
+  display: inline-block;
+  margin-left: 8px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  white-space: nowrap;
+}
 
 /* Kapsam notu: içerik değil, kayda dair bir not. Raporun sonunda, sessiz. */
 .scan-note {

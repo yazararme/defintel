@@ -15,6 +15,7 @@ Reports written before this convention simply have nothing to match, so every
 step is a no-op and they keep rendering as they always did.
 """
 
+import datetime as dt
 import html
 import json
 import re
@@ -112,7 +113,7 @@ def build_proxy(url):
     return _build().proxy_url(url)
 
 
-def add_source_anchors(text):
+def add_source_anchors(text, report_iso=""):
     """- [K1] …  ->  <li id="k1">, adres iki çipe dönüşür, arka plan soluklaşır."""
 
     def li(m):
@@ -132,8 +133,53 @@ def add_source_anchors(text):
         )
 
     text = URL.sub(link, text)
-    text = source_links(text)
-    return text.replace("(arka plan)", '<span class="background-tag">(arka plan)</span>')
+    text = source_links(text, report_iso)
+    # "(arka plan)" rol iddiası taşıyordu ("bu bulgu değil bağlam") ama yaş
+    # kuralıyla uygulanıyordu; ölçüm ikisinin de yapılmadığını gösterdi. Yaş
+    # artık türetiliyor, geriye hiç yapılmamış bir iş kalıyor.
+    return text.replace(" (arka plan)", "").replace("(arka plan)", "")
+
+
+UNPARSED_DATES = []
+
+
+def age_token(src_date, report_iso):
+    """'bugün' / 'dün' / '{n} gün önce' — kayıt değil ölçü.
+
+    Tarih kaydın kendisi ve kalıyor; ama okuyucu hiçbir zaman "bu hangi
+    tarihte yayımlandı" diye sormuyor, "bu delil güncel mi" diye soruyor —
+    ve tarih o soruya ancak raporun kendi tarihinden çıkarma yaptıktan sonra
+    cevap veriyor. İki iş varsa tek şeye ikisini birden yaptırmıyoruz.
+
+    Eşik yok: "3 gün önce" ile "108 gün önce" ikisi de sıfır çabayla okunuyor,
+    üstüne kategorik bir kelime koymak gereksiz.
+    """
+    try:
+        report = dt.date.fromisoformat(report_iso)
+    except (TypeError, ValueError):
+        return ""
+    days = (report - src_date).days
+    if days < 0:
+        return ""          # gelecek tarihli kaynak: sayı uydurmaktansa sus
+    if days == 0:
+        return "bugün"
+    if days == 1:
+        return "dün"
+    return f"{days} gün önce"
+
+
+def source_age(entry_text, report_iso):
+    """Girdideki DD.MM.YYYY'yi bul. Ayrıştırılamıyorsa hiçbir şey basılmaz."""
+    m = re.search(r"\b(\d{2})\.(\d{2})\.(\d{4})\b", entry_text)
+    if not m:
+        UNPARSED_DATES.append(entry_text[:60])
+        return ""
+    try:
+        src = dt.date(int(m.group(3)), int(m.group(2)), int(m.group(1)))
+    except ValueError:
+        UNPARSED_DATES.append(entry_text[:60])
+        return ""
+    return age_token(src, report_iso)
 
 
 def drop_self_links(text):
@@ -149,7 +195,7 @@ def drop_self_links(text):
     )
 
 
-def source_links(text):
+def source_links(text, report_iso=""):
     """Kaynakça girdisindeki çıplak adresi iki çiple değiştir.
 
     Ekrandaki 120 karakterlik adres kimseye bir şey söylemiyordu: okunmuyor,
@@ -189,10 +235,20 @@ def source_links(text):
         # Bir girdide birden çok kaynak olabiliyor (" · " ile ayrılmış); her
         # adres kendi iki kapısını alır, yoksa ilki ekranda çıplak kalıyordu.
         is_source = 'class="source"' in m.group(1)
-        return m.group(1) + re.sub(
+        body = re.sub(
             r'(\s*[—-]?\s*)<a href="(https?://[^"]+)"[^>]*>[^<]*</a>',
             lambda a: entry(a, is_source), m.group(2), flags=re.S,
-        ) + m.group(3)
+        )
+        # Yaş yalnızca gerçek kaynak girdilerinde: "Erişilemeyen kaynaklar"
+        # bloğu bir boşluk ilanı, oraya ölçü koymak bloğun işini bulandırır.
+        if is_source and report_iso:
+            age = source_age(re.sub(r"<[^>]+>", " ", m.group(2)), report_iso)
+            if age:
+                body = body.replace(
+                    '<span class="source-go">',
+                    f'<span class="source-age">{age}</span><span class="source-go">', 1,
+                )
+        return m.group(1) + body + m.group(3)
 
     return re.sub(r'(<li(?: id="k\d+" class="source")?>)((?:(?!</li>).)*)(</li>)',
                   li_block, text, flags=re.S)
@@ -481,7 +537,7 @@ def rename_headers(text):
     return text
 
 
-def enrich(text, developments, alarm=False):
+def enrich(text, developments, alarm=False, report_iso=""):
     dev_ids = {str(d.get("id", "")).lower() for d in developments if d.get("id")}
     # Düzyazı atfının tek doğruluk kaynağı: frontmatter'daki kısa ad.
     dev_labels = {
@@ -495,7 +551,7 @@ def enrich(text, developments, alarm=False):
     text = drop_empty_alarms(text, alarm)
     text = drop_mke_agenda(text)
     text = add_item_anchors(text)
-    text = add_source_anchors(text)
+    text = add_source_anchors(text, report_iso)
     text = add_summary_links(text, dev_ids)
     text = add_table_badges(text, dev_ids)
     text = link_citations(text, dev_ids, 'id="alarmlar"' in text, dev_labels)
