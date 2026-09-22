@@ -988,7 +988,9 @@ def players_page(hist):
     def row(rival):
         e = hist.get(rival["id"], {})
         segs = e.get("segmentler") or []
-        tags = "".join(
+        # Ayıraçsız etiketler tek bir dizeye yapışıyordu: "Mühimmat Topçu Hava
+        # savunma" üç segment değil bir cümle gibi okunuyor.
+        tags = '<span class="ptag-sep">·</span>'.join(
             f'<span class="ptag">{html.escape(labels.get(sg, sg))}</span>' for sg in segs)
         son, n = e.get("son") or "", e.get("sayi_30g") or 0
         gap = ((_dt.date.fromisoformat(today) - _dt.date.fromisoformat(son)).days
