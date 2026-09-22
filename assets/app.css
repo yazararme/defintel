@@ -1307,3 +1307,60 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
   letter-spacing: 0.06em;
   color: var(--brand);
 }
+
+
+/* ---------- Oyuncular referans sayfası ---------- */
+
+.pchips { margin: 20px 0 6px; }
+.pchip {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  background: transparent;
+}
+.pchip--on { color: var(--paper); background: var(--brand); border-color: var(--brand); }
+
+.player-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.player-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 12px;
+  min-height: 44px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.pname {
+  flex: 0 1 auto;
+  font-size: 15px;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-2);
+}
+.pname:hover { color: var(--brand); border-bottom-color: var(--brand); }
+/* Etiketler adın hemen yanında ve esneyen boşluk onların ardında: yaş ile
+   sayı hep sağda hizalı kalsın, satır uzunluğu ne olursa olsun. */
+.ptags { flex: 1 1 auto; display: flex; flex-wrap: wrap; gap: 6px; }
+.ptag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.page, .pcount {
+  flex: none;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+/* Hiç görülmemiş ad: jetonu yok. Boşluk eksiklik değil, ifadenin kendisi. */
+.player-row--quiet .pname { color: var(--muted); }
+
+@media (max-width: 699px) {
+  /* Etiketler adın altına iner; ad tek başına ilk satır. */
+  .player-row { gap: 4px 10px; }
+  .pname { flex: 1 0 100%; }
+}

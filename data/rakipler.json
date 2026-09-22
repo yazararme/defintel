@@ -7,6 +7,13 @@
   "hafif_silah": "Small arms and small-arms ammunition",
   "roket_bomba": "Artillery rockets, 2.75 in rockets, aircraft bombs"
  },
+ "_segment_labels": {
+  "muhimmat": "Mühimmat",
+  "hava_savunma": "Hava savunma",
+  "topcu": "Topçu",
+  "hafif_silah": "Hafif silah",
+  "roket_bomba": "Roket/bomba"
+ },
  "rakipler": [
   {
    "id": "rheinmetall",

@@ -455,7 +455,7 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
                 f'<a href="{day_url("news", iso)}?q={urlparse.quote(name)}">'
                 f'{html.escape(name)}</a>' if has_news else html.escape(name)
             )
-        arrow = '<a class="rival-count" href="/rakipler.html">→</a>'
+        arrow = '<a class="rival-count" href="/oyuncular.html">→</a>'
         if units:
             # Ok son adla aynı kırılmaz birimde: tek başına satır başına
             # düşen bir ok, neye ait olduğunu söylemeyen bir işaret olur.
@@ -961,59 +961,110 @@ def thread_page(th, latest):
     )
 
 
-def rivals_page(today_hits=None):
-    """/rakipler.html — izlenen rakiplerin tam listesi.
+PLAYER_GROUPS = [
+    ("rakip", "Uluslararası rakipler", ""),
+    ("yerli-rakip", "Yerli rakipler", ""),
+    ("emsal", "Türk sanayi emsalleri", "Kıyaslama için izleniyor; rakip sayılmıyor."),
+]
 
-    Ray şeridi yalnız o gün kımıldayanları basıyor; "kaçı izleniyor"
-    sorusunun cevabı bir sayı, "hangileri" sorusununki ise bu sayfa. Günlük
-    belgeye 15 ad koymak, her gün okunacak bir şey gibi görünmesine yol
-    açıyordu — oysa liste ayda bir değişiyor. Referans danışılır.
+
+def players_page(hist):
+    """/oyuncular.html — kim, hangi segmentte, en son ne zaman, kaç kez.
+
+    Eski hâli 64 çıplak addı: ne tarih, ne segment, ne bağlantı. "5 / 64"
+    beşinin kımıldadığını söylüyordu ama hangi beşi olduğunu değil — yani
+    okuyucunun yapabileceği hiçbir şey yoktu. Satır artık dört şey taşıyor
+    ve dördü de türetilmiş: ad, segmentler, son görülme, 30 günlük sayı.
+
+    Görülmemiş şirketin jetonu yok. Boşluk bir eksiklik değil, ifadenin
+    kendisi: "bu ada bakıyoruz ve bu ayda hiç geçmedi".
     """
+    import datetime as _dt
     config = rivals_config()
     if not config:
         return ""
-    groups = [
-        ("rakip", "Uluslararası rakipler", ""),
-        ("yerli-rakip", "Yerli rakipler (aynı segment)", ""),
-        ("emsal", "Türk sanayi emsalleri",
-         "Kıyaslama için izleniyorlar; rakip sayılmıyorlar. Günlük brifingde "
-         "<span class=\"num\">Türk sanayii</span> satırında görünürler."),
-    ]
-    # Sayı günlük belgeden buraya taşındı: rayda her gün "4 / 47" okumak
-    # kapsamı değil kapsamın değişmediğini duyuruyordu. Burada bir kez, ve
-    # bu sayfa zaten "kime bakıyoruz" sorusunun cevabı.
-    today_line = (f'<strong>Bugün adı geçen: <span class="num">{today_hits}</span> / '
-                  f'<span class="num">{len(config)}</span></strong> · '
-                  if today_hits is not None else "")
+    labels = segment_labels()
+    order = {r["id"]: i for i, r in enumerate(config)}
+    today = max((e.get("son") or "" for e in hist.values()), default="")
+
+    def row(rival):
+        e = hist.get(rival["id"], {})
+        segs = e.get("segmentler") or []
+        tags = "".join(
+            f'<span class="ptag">{html.escape(labels.get(sg, sg))}</span>' for sg in segs)
+        son, n = e.get("son") or "", e.get("sayi_30g") or 0
+        gap = ((_dt.date.fromisoformat(today) - _dt.date.fromisoformat(son)).days
+               if son and today else None)
+        age = (f'<span class="page num">{age_words(gap)}</span>'
+               if gap is not None else "")
+        cnt = f'<span class="pcount num">{n} kez</span>' if n else ""
+        return (
+            f'<li class="player-row{"" if son else " player-row--quiet"}"'
+            f' data-seg="{" ".join(segs)}">'
+            f'<a class="pname" href="/arsiv.html?q={urlparse.quote(rival["name"])}">'
+            f'{html.escape(rival["name"])}</a>'
+            f'<span class="ptags">{tags}</span>{age}{cnt}</li>'
+        )
+
+    def sort_key(rival):
+        e = hist.get(rival["id"], {})
+        son = e.get("son") or ""
+        return (0 if son else 1,
+                -_dt.date.fromisoformat(son).toordinal() if son else 0,
+                -(e.get("sayi_30g") or 0), order[rival["id"]])
+
     blocks = []
-    for role, title, note in groups:
-        members = [r for r in config if r.get("role", "rakip") == role]
+    for role, title, note in PLAYER_GROUPS:
+        members = sorted((r for r in config if r.get("role", "rakip") == role), key=sort_key)
         if not members:
             continue
-        rows = "".join(f'<li class="rival-row">{html.escape(r["name"])}</li>'
-                       for r in members)
         blocks.append(
-            f'<h2 class="rival-head">{title} '
-            f'<span class="num">{len(members)}</span></h2>'
+            f'<h2 class="rival-head" data-group="{role}">{title} '
+            f'<span class="num group-count">{len(members)}</span></h2>'
             + (f'<p class="thread-meta">{note}</p>' if note else "")
-            + f'<ul class="rival-list">{rows}</ul>'
+            + f'<ul class="player-list">{"".join(row(r) for r in members)}</ul>'
         )
-    body_blocks = "".join(blocks)
 
+    chips = "".join(
+        f'<button class="chip pchip" type="button" data-seg="{k}">'
+        f'{html.escape(v)}</button>' for k, v in labels.items())
+    seen_today = sum(1 for e in hist.values() if e.get("son") and e["son"] == today)
+    seen_30 = sum(1 for e in hist.values() if e.get("sayi_30g"))
     return (
-        head(f"İzlenen rakipler — {SITE_NAME}")
+        head(f"Oyuncular — {SITE_NAME}")
         + masthead()
         + f"""<main class="wrap thread">
   <p class="kicker">Referans</p>
-  <h1 class="report-title">İzlenen rakipler</h1>
-  <p class="thread-meta">{today_line}Günlük brifingdeki
-    <span class="num">Oyuncular</span> satırı bu listeyi o günün gelişmeleri
-    ve başlıklarıyla eşleştirir; adı geçmeyen şirket satıra girmez.</p>
-  {body_blocks}
+  <h1 class="report-title">Oyuncular</h1>
+  <p class="thread-meta num">Bugün <strong>{seen_today}</strong> ·
+    son {WINDOW_DAYS} günde <strong>{seen_30}</strong> ·
+    izlenen <strong>{len(config)}</strong></p>
+  <nav class="devnav pchips" aria-label="Segment">
+    <button class="chip pchip pchip--on" type="button" data-seg="">Tümü</button>{chips}
+  </nav>
+  {"".join(blocks)}
   <nav class="endnav" aria-label="Devam"><span class="wrap endnav-inner">
     <a class="endnav-go" href="/">Bugünün brifingi →</a>
     <a class="endnav-go" href="/arsiv.html">Tüm raporlar</a>
   </span></nav>
+</main>
+"""
+        + f'<script src="{asset("app.js")}" defer></script>\n'
+        + FOOT
+    )
+
+
+def redirect_page(title, target, note):
+    """Taşınan adres: yönlendirir, ama sessizce değil."""
+    return (
+        head(f"{title} — {SITE_NAME}")
+        .replace("</head>", f'<meta http-equiv="refresh" content="0; url={target}">\n</head>')
+        + masthead()
+        + f"""<main class="wrap thread">
+  <p class="kicker">Taşındı</p>
+  <h1 class="report-title">{html.escape(title)}</h1>
+  <p class="thread-meta">{note} Yönlendirilmiyorsanız:
+    <a href="{target}">{target}</a></p>
 </main>
 """
         + FOOT
@@ -1578,19 +1629,20 @@ def main():
                          turkish_line(body, news.get(iso, {}).get("items", [])),
                          iso in news, depth=0),
             encoding="utf-8")
-    # Bugünün eşleşmesi: iki geçişin birleşimi, son rapor günü üzerinden.
-    today_hits = None
-    if sources:
-        _iso, _meta, _body = sources[-1]
-        _items = news.get(_iso, {}).get("items", [])
-        today_hits = (
-            sum(1 for _n, a, role in rival_hits(_body) if a and role == "rakip")
-            + sum(1 for _n, _i, hit in turkish_line(_body, _items) if hit)
-        )
-    page = rivals_page(today_hits)
-    if page:
-        (ROOT / "rakipler.html").write_text(page, encoding="utf-8")
-        print(f"  · rakipler.html ({len(rivals_config())} ad)")
+    # Oyuncular: rayın "bugün kim" sorusunun yanındaki "ne zamandan beri" sayfası.
+    hist = player_history(sources, news)
+    if hist:
+        PLAYERS_JSON.write_text(
+            json.dumps(hist, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+        (ROOT / "oyuncular.html").write_text(players_page(hist), encoding="utf-8")
+        # Eski adres ölü kalmasın: rayda haftalardır bu bağlantı duruyordu.
+        (ROOT / "rakipler.html").write_text(
+            redirect_page("Oyuncular", "/oyuncular.html",
+                          "Bu sayfa /oyuncular.html adresine taşındı: liste artık "
+                          "yalnız adları değil, hangi segmentte ve en son ne zaman "
+                          "adı geçtiğini de taşıyor."),
+            encoding="utf-8")
+        print(f"  · oyuncular.html ({len(hist)} ad) · rakipler.html → yönlendirme")
 
     # İzleme dosyaları: bir ipliğin geçmişi başka hiçbir yerde durmuyor.
     if threads and sources:
@@ -1797,6 +1849,64 @@ def rival_hits(body, developments=()):
                     break
         out.append((rival["name"], anchor, rival.get("role", "rakip")))
     return out
+
+
+PLAYERS_JSON = DATA / "oyuncular.json"
+WINDOW_DAYS = 30
+
+
+def segment_labels():
+    try:
+        return json.loads(RIVALS_JSON.read_text(encoding="utf-8")).get("_segment_labels", {})
+    except Exception:
+        return {}
+
+
+def player_history(sources, news):
+    """id -> {rol, segmentler, gunler[], son, sayi_30g} — iki geçişin birleşik kaydı.
+
+    Yeni eşleştirme yok: aynı iki geçiş, bu kez gün gün toplanıyor. Rayda
+    "bugün kimin adı geçti" sorusunun cevabı var; burada "ne zamandan beri,
+    kaç kez" sorusununki. İkincisi olmadan roster bir liste, birincisi
+    olmadan da sayfa bir arşiv — ikisi birlikte bir referans.
+    """
+    import datetime as _dt
+    config = rivals_config()
+    if not config or not sources:
+        return {}
+    by_name = {r["name"]: r for r in config}
+    hist = {r["id"]: {"rol": r.get("role", "rakip"),
+                      "segmentler": r.get("segments") or [],
+                      "gunler": []} for r in config}
+
+    def record(name, iso, url, strong):
+        rival = by_name.get(name)
+        if not rival:
+            return
+        days = hist[rival["id"]]["gunler"]
+        for d in days:
+            if d["g"] == iso:
+                if strong:          # gelişme çapası kupür adresinin önüne geçer
+                    d["u"] = url
+                return
+        days.append({"g": iso, "u": url})
+
+    for iso, _meta, body in sources:
+        items = news.get(iso, {}).get("items", [])
+        for name, anchor, _role in rival_hits(body):
+            if anchor:
+                record(name, iso, f"/reports/{iso}.html{anchor}", True)
+        for name in tag_turkish_headlines(items):
+            record(name, iso, f"/haberler/{iso}.html?q={urlparse.quote(name)}", False)
+
+    latest = _dt.date.fromisoformat(sources[-1][0])
+    for entry in hist.values():
+        entry["gunler"].sort(key=lambda d: d["g"], reverse=True)
+        entry["son"] = entry["gunler"][0]["g"] if entry["gunler"] else ""
+        entry["sayi_30g"] = sum(
+            1 for d in entry["gunler"]
+            if (latest - _dt.date.fromisoformat(d["g"])).days < WINDOW_DAYS)
+    return hist
 
 
 TURKISH_ROLES = ("yerli-rakip", "emsal")

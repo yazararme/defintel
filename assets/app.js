@@ -98,23 +98,27 @@
     });
   }
 
-  // Brifingden gelen bağlantı ?q=Baykar taşıyor: kutuyu doldur, süz ve ilk
-  // eşleşmeye git. Aynı süzme kodu — ayrı bir "vurgulama" mekanizması kurmak
-  // iki ayrı doğruluk kaynağı yaratırdı.
+  // Brifingden gelen bağlantı ?q=Baykar taşıyor, Oyuncular sayfasından
+  // ?q=Hanwha. Kutuyu doldur ve "input" olayını yay: aynı olaya hem bu
+  // süzgeç hem arşivin içerik araması bağlı. Kendi kendine apply() çağırmak
+  // arşivde çalışmazdı — o arama ayrı bir dinleyicide duruyor.
+  //
+  // setTimeout gerekli: bu blok kendi IIFE'si içinde hemen koşuyor, arşiv
+  // araması dosyanın altında ve dinleyicisini henüz kurmamış oluyor.
   if (q) {
     var want = "";
     try { want = new URLSearchParams(location.search).get("q") || ""; }
     catch (err) { want = ""; }
     if (want) {
-      q.value = want;
-      apply();
-      var first = rows.filter(function (el) { return !el.hidden; })[0];
-      if (first) {
-        // Katlamalar apply() içinde zaten açıldı; yerleşmesini bekle.
-        setTimeout(function () {
-          first.scrollIntoView({ block: "center" });
-        }, 60);
-      }
+      setTimeout(function () {
+        q.value = want;
+        q.dispatchEvent(new Event("input", { bubbles: true }));
+        // Kupür sayfasında ilk eşleşmeye git; arşivde sonuç paneli akışın
+        // yerine geçiyor, kaydıracak bir şey yok.
+        if (!document.querySelector(".clips")) return;
+        var first = rows.filter(function (el) { return !el.hidden; })[0];
+        if (first) setTimeout(function () { first.scrollIntoView({ block: "center" }); }, 60);
+      }, 0);
     }
   }
 
@@ -682,11 +686,7 @@
               (r.k === "thread"
                 ? '<span class="found-kind">izleme dosyası</span>'
                 : '<span class="found-text">' + esc(r.s) + "</span>") + "</a>";
-          }).join("") +
-        (hidden > 0
-          ? '<a class="missed-more" href="' + up + 'arsiv.html">ve <span class="num">' +
-            hidden + "</span> gün daha → arşiv</a>"
-          : "") + "</div>";
+          }).join("") + "</div>";
       }).join("");
   }
 
@@ -708,4 +708,47 @@
 
   box.addEventListener("input", run);
   box.addEventListener("keydown", function (e) { if (e.key === "Escape") setTimeout(run, 0); });
+})();
+
+
+/* Oyuncular sayfasında segment süzgeci.
+
+   Kupür sayfasındaki kategori şeridiyle aynı fikir: liste uzun, okuyucu
+   çoğu zaman tek bir segmentle ilgileniyor. Grup başlıklarının sayısı da
+   süzülüyor — süzülmüş bir listenin üstünde süzülmemiş bir sayı durursa
+   sayı neyi saydığını söylememiş olur. */
+(function () {
+  "use strict";
+
+  var strip = document.querySelector(".pchips");
+  if (!strip) return;
+  var chips = Array.prototype.slice.call(strip.querySelectorAll(".pchip"));
+  var rows = Array.prototype.slice.call(document.querySelectorAll(".player-row"));
+
+  function apply(seg) {
+    rows.forEach(function (row) {
+      var segs = (row.getAttribute("data-seg") || "").split(/\s+/);
+      row.hidden = !!seg && segs.indexOf(seg) === -1;
+    });
+    // Başlık sayısı, o grupta görünen satır sayısı.
+    Array.prototype.slice.call(document.querySelectorAll(".rival-head"))
+      .forEach(function (head) {
+        var list = head.nextElementSibling;
+        while (list && list.tagName !== "UL") list = list.nextElementSibling;
+        if (!list) return;
+        var live = Array.prototype.slice.call(list.querySelectorAll(".player-row"))
+          .filter(function (r) { return !r.hidden; }).length;
+        var badge = head.querySelector(".group-count");
+        if (badge) badge.textContent = live;
+      });
+    chips.forEach(function (c) {
+      c.classList.toggle("pchip--on", (c.getAttribute("data-seg") || "") === seg);
+    });
+  }
+
+  chips.forEach(function (c) {
+    c.addEventListener("click", function () {
+      apply(c.getAttribute("data-seg") || "");
+    });
+  });
 })();
