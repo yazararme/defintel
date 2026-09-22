@@ -361,10 +361,13 @@ a { color: var(--brand); text-underline-offset: 2px; }
 .rail-block { display: flex; flex-direction: column; gap: 5px; }
 .rail-label { color: var(--muted); }
 .rail-value { font-family: var(--mono); font-size: 12px; color: var(--ink-2); }
-/* Rayın içindeki tek dokunulabilir şey; 16px'lik hedefe parmakla basılmıyor. */
+/* Rayın içindeki tek dokunulabilir şey; 16px'lik hedefe parmakla basılmıyor.
+   gap şart: inline-flex, öğeler arasındaki boşluk karakterini yutuyor ve
+   "1başlık" diye bitişik yazıyordu. */
 .rail-value a {
   display: inline-flex;
   align-items: center;
+  gap: 0.32em;
   min-height: 44px;
   color: var(--brand);
   text-decoration: none;
@@ -755,22 +758,10 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
   color: var(--brand);
   text-decoration: none;
   border-bottom: 1px solid var(--rule-2);
-  white-space: nowrap;
+  /* nowrap, atıf "G5" kadar kısayken doğruydu; artık çok kelimeli bir ad
+     taşıyor ve sarmalı gerekiyor, yoksa dar ekranda satırı taşırır. */
 }
 .xref:hover { border-bottom-color: var(--brand); }
-
-.prose a.gbadge,
-.gbadge {
-  display: inline-block;
-  padding: 1px 6px;
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.05em;
-  color: var(--paper);
-  background: var(--brand);
-  border-radius: 3px;
-  text-decoration: none;
-}
 
 .flash { animation: flash 2s ease-out; }
 @keyframes flash {

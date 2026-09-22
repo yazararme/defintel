@@ -43,10 +43,12 @@ def add_heading_anchors(text):
     """### G1 · etiket  ->  <h3 id="g1"> + copy button, plus ids for EK/ALARMLAR."""
 
     def h3(m):
-        gid = m.group(2).lower()
-        return f'<h3 id="{gid}">{m.group(1)}{COPY.format(aid=gid)}</h3>'
+        gid = m.group(1).lower()
+        # Numara yazımda kalır, çıktıda silinir: kimlik yalnızca id ve href'te
+        # yaşar. Ekranda okunması gereken şey gelişmenin adı.
+        return f'<h3 id="{gid}">{m.group(2).strip()}{COPY.format(aid=gid)}</h3>'
 
-    text = re.sub(r"<h3>((G(\d+))\s*·[^<]*)</h3>", h3, text)
+    text = re.sub(r"<h3>(G\d+)\s*·\s*([^<]*)</h3>", h3, text)
 
     def h2(m):
         sid = section_id(re.sub(r"<[^>]+>", "", m.group(1)))
@@ -61,14 +63,13 @@ def add_item_anchors(text):
     def li(m):
         gid = m.group(1).lower()
         return (
-            # group(1) ("G12") düşerse geriye öksüz bir " · " kalıyordu ve
-            # çapaya atlayan okuyucu vardığını doğrulayamıyordu. add_heading_anchors
-            # aynı işi baştan beri doğru yapıyor; iki yol artık tutarlı.
-            f'<li id="{gid}"><strong class="ganchor">{m.group(1)}{m.group(2)}</strong>'
+            # Rev 11: ne numara ne de ondan artakalan " · " basılır. Varış
+            # teyidi artık gelişmenin adının kendisi — R6-P0-1 yürürlükten kalktı.
+            f'<li id="{gid}"><strong class="ganchor">{m.group(2).strip()}</strong>'
             f"{COPY.format(aid=gid)}"
         )
 
-    return re.sub(r"<li>\s*<strong>((?:G\d+))(\s*·[^<]*)</strong>", li, text)
+    return re.sub(r"<li>\s*<strong>(G\d+)\s*·\s*([^<]*)</strong>", li, text)
 
 
 def _build():
@@ -163,30 +164,66 @@ def tr_upper_first(text):
     return ("İ" if first == "i" else first.upper()) + text[1:]
 
 
+def link_cut(gid, body):
+    """Metni bağlantıya çevir ama içindeki başka bir atfın öncesinde kes.
+
+    Atıf bağlantının içinde kalırsa link_citations onu atlar (bağ içinde bağ
+    kurmaz) ve ekranda çıplak numara olarak durur.
+    """
+    cut = re.search(r"\s*\(?bkz\.|\s*\(?\bG\d+\b", body)
+    head, tail = (body[: cut.start()], body[cut.start():]) if cut else (body, "")
+    return f'<a class="xref" href="#{gid}">{head}</a>{tail}'
+
+
+def add_summary_links(text, dev_ids):
+    """YÖNETİCİ ÖZETİ maddesi: "G1 — cümle" -> cümlenin kendisi bağlantı olur.
+
+    Buradaki G# bir atıf değil, maddenin kendi kimliğiydi. Etiketle değiştirmek
+    "Ad — aynı şeyi söyleyen cümle" gibi bir tekrar üretiyordu; öneki tamamen
+    düşürüp cümleyi bağlantı yapmak hem tekrarı kaldırıyor hem de gelişmeye
+    giden yolu koruyor.
+    """
+
+    def item(m):
+        gid = m.group(1).lower()
+        body = m.group(2).strip()
+        if gid not in dev_ids:
+            return f"<li>{body}"
+        return f"<li>{link_cut(gid, body)}"
+
+    return re.sub(r"<li>\s*(G\d+)\s*—\s*([^<]*)", item, text)
+
+
 def add_table_badges(text, dev_ids):
-    """A leading "G1 — " in the first cell becomes a small badge linking to #g1."""
+    """İlk hücredeki "G1 — " öneki düşer; hücrenin kendi metni bağlantı olur.
+
+    Rozet, okunması gereken bir numara basıyordu. Hücrenin metni zaten
+    gelişmeyi adıyla söylüyor — bağlantıyı ona vermek hem çıplak kimliği
+    kaldırıyor hem de dokunma hedefini büyütüyor.
+    """
 
     def cell(m):
-        gid = m.group(2)
-        if gid.lower() not in dev_ids:
-            return m.group(0)
-        # Tire rozete dönüşünce ardındaki sözcük satır başına geçiyor; ajan
-        # onu tireden sonra geldiği için küçük harfle yazmıştı ve tabloda
-        # "G3 seferî birlik için…" diye küçük harfle başlayan satırlar çıkıyordu.
-        return (
-            f'{m.group(1)}<a class="gbadge" href="#{gid.lower()}">{gid}</a> '
-            + tr_upper_first(m.group(3))
-        )
+        gid = m.group(2).lower()
+        # Tire kalkınca ardındaki sözcük satır başına geçiyor; ajan onu
+        # tireden sonra geldiği için küçük harfle yazmıştı.
+        cell = tr_upper_first(m.group(3).strip())
+        if gid not in dev_ids:
+            return f"{m.group(1)}{cell}"
+        # Hücre içinde başka bir gelişmeye atıf olabilir; bağlantı oraya kadar
+        # kesilir. Yoksa atıf bağlantının içinde kalır, link_citations onu
+        # atlar (bağ içinde bağ kurmaz) ve ekranda çıplak numara olarak durur.
+        return f"{m.group(1)}{link_cut(gid, cell)}"
 
-    return re.sub(r"(<td[^>]*>)\s*(G\d+)\s*—\s*(.)", cell, text)
+    return re.sub(r"(<td[^>]*>)\s*(G\d+)\s*—\s*([^<]*)", cell, text)
 
 
-def link_citations(text, dev_ids, has_alarms=True):
+def link_citations(text, dev_ids, has_alarms=True, dev_labels=None):
     """Link G# and [K#] mentions in running text only.
 
     Walks the markup instead of blind-replacing so that ids inside headings,
     anchors, badges and code are left alone.
     """
+    dev_labels = dev_labels or {}
     out = []
     depth = {t: 0 for t in SKIP_TAGS}
     skip_anchor_label = False
@@ -210,9 +247,14 @@ def link_citations(text, dev_ids, has_alarms=True):
 
         def g(m):
             gid = m.group(0).lower()
-            if gid not in dev_ids:
+            # Hiçbir atıf yalnızca bir kimlikten ibaret olamaz: atıf işaret
+            # ettiği şeyin adını taşır. "(G5)" okuyucunun çözemediği bir
+            # jetondu; "(Ukrayna önleyici dron denemeleri)" kendini çözüyor
+            # ve çoğu zaman takip etmek zorunda kalmadığın bir atıf oluyor.
+            label = dev_labels.get(gid)
+            if not label:
                 return m.group(0)
-            return f'<a class="xref" href="#{gid}">{m.group(0)}</a>'
+            return f'<a class="xref" href="#{gid}">{html.escape(label)}</a>'
 
         token = re.sub(r"\bG\d+\b", g, token)
         token = re.sub(
@@ -318,6 +360,11 @@ def rename_headers(text):
 
 def enrich(text, developments, alarm=False):
     dev_ids = {str(d.get("id", "")).lower() for d in developments if d.get("id")}
+    # Düzyazı atfının tek doğruluk kaynağı: frontmatter'daki kısa ad.
+    dev_labels = {
+        str(d["id"]).lower(): str(d.get("label", "")).strip()
+        for d in developments if d.get("id") and str(d.get("label", "")).strip()
+    }
     text = add_heading_anchors(text)
     # Çapalar kurulduktan hemen sonra: silinen blokla birlikte ona giden
     # atıflar da kendiliğinden bağlantısız kalıyor (link_citations bunu
@@ -326,8 +373,9 @@ def enrich(text, developments, alarm=False):
     text = drop_mke_agenda(text)
     text = add_item_anchors(text)
     text = add_source_anchors(text)
+    text = add_summary_links(text, dev_ids)
     text = add_table_badges(text, dev_ids)
-    text = link_citations(text, dev_ids, 'id="alarmlar"' in text)
+    text = link_citations(text, dev_ids, 'id="alarmlar"' in text, dev_labels)
     return fold_appendix(rename_headers(text))
 
 
@@ -350,7 +398,10 @@ def nav(developments):
         groups[home].append((gid, label))
 
     def chip(gid, label):
-        text = f"{gid} · {label}" if label else gid
+        # Çipte de numara yok: şeridin işi gelişmeleri adlarıyla göstermek.
+        # Etiketsiz bir gelişme hedefsiz değil, yalnızca adsız — kimliği basmak
+        # yerine sırasını söylemek okuyucuya daha çok şey veriyor.
+        text = label or f"Gelişme {gid[1:]}"
         return f'<a class="chip" href="#{gid.lower()}">{html.escape(text)}</a>'
 
     parts = [chip(*c) for c in groups["gelismeler"]]
