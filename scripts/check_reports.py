@@ -43,6 +43,18 @@ maddesinin alt kenarı ≤812px (özet 4 maddeden kısaysa son maddesi). Uymazsa
 `uyari.ekle("İLK-EKRAN", …)` ve çıkış 1. `--boz` (ya da ILK_EKRAN_BOZ=1) tarayıcıya giden
 app.css'te `/* İLK-EKRAN:ray */` satırını yolda değiştirip rayı yeniden özetin üstüne
 taşır — diske ve depoya hiçbir şey yazılmaz; işaret bulunmazsa gün kırmızı olur.
+
+    python3 scripts/check_reports.py --kanit-boslugu [--out DIR] [--base URL] [--gun G] [--bos-kesisim]
+
+KANIT-BOŞLUĞU kanıtı (Rev 28): brifingi (varsayılan: son rapor) 375×812 ve 1440×900'de tam
+sayfa, rayın kendisini ayrıca, ve günün Kaynaklar sayfasını 375'te çeker
+(`kanit-boslugu-<gün>-…png`; BOS_KESISIM açıkken adlar `-bos-kesisim` ile biter). Beklenen
+hâl sayfadan değil kayıttan hesaplanır: data/news/<gün>.json failures[].source ∩ rakipler.json
+`kaynak`. `--bos-kesisim` (ya da BOS_KESISIM=1) build.py'nin aynı düzenlemesini beklentiye
+uygular — oyuncu kaynakları yanıt vermiş sayılır, öteki başarısız kaynaklar kalır. Denetim:
+Tarama bloğu var; kesişim doluysa bloğun içinde tek `.rail-not` ve cümlede her ad, boşsa hiç
+`.rail-not` yok ve Kaynaklar sayfasında soluk (başarısız) satır ≥1 (gün gerçekten taranmış,
+arızası var, ama hiçbiri oyuncu kaynağı değil). (A) özetine tablo; uymazsa çıkış 1.
 """
 import http.server
 import os
@@ -575,7 +587,166 @@ def ilk_ekran(base=None, gunler=None, boz=False, out=None):
     return 0
 
 
+# ── KANIT-BOŞLUĞU (Rev 28) ───────────────────────────────────────────────────
+
+KB_JS = """() => {
+    const t = [...document.querySelectorAll('.rail-label')].find(e => e.textContent.trim() === 'Tarama');
+    const blok = t ? t.parentElement : null;
+    const n = [...document.querySelectorAll('.rail-not')];
+    return {
+      tarama: blok ? ('Tarama ' + ((blok.querySelector('.rail-value') || {}).innerText || '')).replace(/\\s+/g, ' ').trim() : null,
+      adet: n.length,
+      metin: n.map(e => e.innerText.trim()),
+      blokta: n.length ? !!(blok && blok.contains(n[0])) : null,
+      soluk: document.querySelectorAll('.srow--off').length,
+      tasma: document.documentElement.scrollWidth > window.innerWidth,
+    };
+}"""
+
+
+def _kb_beklenen(gun, bos_kesisim):
+    """(yol listesi: [oyuncu kaynağı], kalan başarısız kaynak sayısı) — kayıttan."""
+    import json
+    yol = ROOT / "data" / "news" / f"{gun}.json"
+    if not yol.exists():
+        return None, 0
+    veri = json.loads(yol.read_text(encoding="utf-8"))
+    kaynaklar = {r["kaynak"] for r in json.loads((ROOT / "data" / "rakipler.json").read_text(encoding="utf-8"))["rakipler"]
+                 if r.get("kaynak")}
+    failed = [f.get("source") for f in veri.get("failures") or [] if f.get("source")]
+    if bos_kesisim:
+        failed = [f for f in failed if f not in kaynaklar]
+    return sorted(set(failed) & kaynaklar), len(failed)
+
+
+async def _kb_kos(base, gun, ek, out):
+    from playwright.async_api import async_playwright
+    async with async_playwright() as p:
+        try:
+            browser = await p.chromium.launch()
+        except Exception:   # paketli chromium yok (yerel Mac): sistem Chrome'u
+            browser = await p.chromium.launch(channel="chrome")
+        sonuc = []
+        try:
+            for yol, ad, (w, h) in ((f"/reports/{gun}.html", "brifing", (375, 812)),
+                                    (f"/reports/{gun}.html", "brifing", (1440, 900)),
+                                    (f"/haberler/{gun}-kaynaklar.html", "kaynaklar", (375, 812))):
+                ctx = await browser.new_context(viewport={"width": w, "height": h},
+                                                service_workers="block", locale="tr-TR")
+                page = await ctx.new_page()
+                resimler = []
+                try:
+                    r = await page.goto(base + yol, wait_until="load")
+                    await page.evaluate("document.fonts ? document.fonts.ready.then(() => 1) : 1")
+                    await page.wait_for_timeout(200)
+                    b = await page.evaluate(KB_JS)
+                    b["durum"] = r.status if r else None
+                    if out:
+                        onek = f"kanit-boslugu-{gun}" + ("-kaynaklar" if ad == "kaynaklar" else "") + f"-{w}"
+                        resim = out / f"{onek}{ek}.png"
+                        await page.screenshot(path=str(resim), full_page=True)
+                        resimler.append(resim)
+                        ray = page.locator(".report-grid > .rail")
+                        if ad == "brifing" and await ray.count():
+                            resim = out / f"kanit-boslugu-{gun}-ray-{w}{ek}.png"
+                            await ray.first.screenshot(path=str(resim))
+                            resimler.append(resim)
+                    sonuc.append((ad, w, b, resimler))
+                except Exception as e:   # noqa: BLE001 — açılamadıysa da kırmızı
+                    sonuc.append((ad, w, {"hata": str(e).splitlines()[0][:160]}, resimler))
+                finally:
+                    await ctx.close()
+        finally:
+            await browser.close()
+        return sonuc
+
+
+def kanit_boslugu(base=None, gun=None, bos_kesisim=False, out=None):
+    """KANIT-BOŞLUĞU (S) kanıtı: brifing 375/1440 + ray + Kaynaklar; hâl kayda uymalı."""
+    import asyncio
+    gun = gun or _son_rapor()
+    if not gun:
+        print("KANIT-BOŞLUĞU: reports/ altında rapor yok")
+        return 1
+    beklenen, kalan_hata = _kb_beklenen(gun, bos_kesisim)
+    out = pathlib.Path(out) if out else None
+    if out:
+        out.mkdir(parents=True, exist_ok=True)
+    ek = "-bos-kesisim" if bos_kesisim else ""
+    srv = None
+    if not base:
+        srv, base = _sun()
+    try:
+        sonuc = asyncio.run(_kb_kos(base.rstrip("/"), gun, ek, out))
+    finally:
+        if srv:
+            srv.shutdown()
+    ozet = [f"### KANIT-BOŞLUĞU — {gun} brifingi ve Kaynaklar (Rev 28)", ""]
+    if bos_kesisim:
+        ozet += ["> ⚠️ **bos_kesisim** — bu derlemede oyuncu kaynakları yanıt vermiş sayıldı (yalnız bellekte;"
+                 " data/news değişmedi). Kesişim hesaplandı ve boş; satır basılmamalı.", ""]
+    if beklenen is None:
+        ozet += [f"🔴 {gun}: medya takibi yok — kesişim hesaplanamaz", ""]
+        kalan = [("—", "medya takibi yok")]
+    else:
+        ozet += [f"Kayıt: {kalan_hata} başarısız kaynak · oyuncu kaynaklarıyla kesişim: "
+                 f"{', '.join(beklenen) if beklenen else '∅ (boş)'} → satır {'1' if beklenen else 'yok'}", "",
+                 "| sayfa | genişlik | Tarama bloğu | satır | denetim | görüntü |", "|---|---|---|---|---|---|"]
+        kalan = []
+        for ad, w, b, resimler in sonuc:
+            sorun = []
+            if "hata" in b:
+                sorun.append(f"açılamadı: {b['hata']}")
+            elif b.get("durum") != 200:
+                sorun.append(f"HTTP {b.get('durum')}")
+            elif ad == "brifing":
+                if not b["tarama"]:
+                    sorun.append("Tarama bloğu yok")
+                if beklenen:
+                    if b["adet"] != 1 or not b["blokta"] or not all(k in b["metin"][0] for k in beklenen):
+                        sorun.append(f"satır beklenen 1 (Tarama bloğunda, {', '.join(beklenen)}), bulunan {b['adet']}")
+                elif b["adet"]:
+                    sorun.append(f"kesişim boş ama {b['adet']} satır var")
+            else:
+                if not beklenen and b["soluk"] < 1:
+                    sorun.append("soluk (başarısız) satır yok — boş kesişim arızasız bir gün değil")
+            if "hata" not in b and b.get("tasma"):
+                sorun.append("yatay taşma")
+            if sorun:
+                kalan.append((f"{ad} {w}", "; ".join(sorun)))
+            satir = ("—" if ad != "brifing" or "hata" in b else
+                     (f"“{b['metin'][0]}”" if b["adet"] else "yok"))
+            tarama = b.get("tarama") if ad == "brifing" else f"{b.get('soluk', '—')} soluk satır"
+            ozet.append(f"| {ad} | {w}px | {tarama or '—'} | {satir} | "
+                        f"{'🟢' if not sorun else '🔴 ' + '; '.join(sorun).replace('|', '/')} | "
+                        f"{', '.join(r.name for r in resimler) or '—'} |")
+        ozet.append("")
+    ozet += [f"**{'🟢 KANIT-BOŞLUĞU: sayfa kayda uyuyor' if not kalan else f'🔴 KANIT-BOŞLUĞU: {len(kalan)} denetim kaldı'}**", ""]
+    metin = "\n".join(ozet) + "\n"
+    print(metin)
+    yol = os.environ.get("GITHUB_STEP_SUMMARY")
+    if yol:
+        with open(yol, "a", encoding="utf-8") as fh:
+            fh.write(metin)
+    return 1 if kalan else 0
+
+
 def main(argv):
+    if "--kanit-boslugu" in argv:
+        import argparse
+        ap = argparse.ArgumentParser()
+        ap.add_argument("--kanit-boslugu", action="store_true")
+        ap.add_argument("--out")
+        ap.add_argument("--base")
+        ap.add_argument("--gun", help="YYYY-MM-DD (varsayılan: reports/ altındaki son rapor)")
+        ap.add_argument("--bos-kesisim", action="store_true",
+                        default=(os.environ.get("BOS_KESISIM") or "").strip().lower()
+                        not in ("", "0", "none", "false"))
+        a = ap.parse_args(argv)
+        env_gun = (os.environ.get("BOS_KESISIM") or "").strip()
+        if not a.gun and a.bos_kesisim and re.fullmatch(r"\d{4}-\d{2}-\d{2}", env_gun):
+            a.gun = env_gun   # build.py'nin düzenlediği gün
+        return kanit_boslugu(a.base, a.gun, a.bos_kesisim, a.out)
     if "--ilk-ekran" in argv:
         import argparse
         ap = argparse.ArgumentParser()

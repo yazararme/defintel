@@ -21,6 +21,11 @@ Turkish-locale check of the latest media page (Öne çıkanlar shows "UNMANNED A
 DAILY" with dotless I, "ANADOLU AJANSI" unchanged, no foreign source name rendered with İ anywhere
 in .clip-meta) and of its Kaynaklar page; then a NOKTALI_BOZ=1 build (the alert fires with
 examples, the browser shows "UNMANNED AİRSPACE") and a normal rebuild.
+Rev 28 (attempt 2): KANIT-BOŞLUĞU empty intersection — `check_reports.py --kanit-boslugu` is
+green on the normal build (line present, matches the record), then a BOS_KESISIM=1 build (player
+feeds counted as answered in memory only): the latest day logs "kesişim boş (…)", no alert, no
+.rail-not on its report or /, the previous day keeps its line, data/news/<day>.json is unchanged,
+and `--kanit-boslugu` is green in that state too; then a normal rebuild.
 Rev 24: İLK-EKRAN — every built report carries one data-kart="İzlenecek" cell per table row;
 `check_reports.py --ilk-ekran` on the latest report is green (edges printed), and with
 ILK_EKRAN_BOZ=1 (rail order undone in the browser only) it is red and emits the İLK-EKRAN alert;
@@ -886,6 +891,58 @@ def r28_checks(build_stdout, py, fails):
     if kotu:
         fails.append("KANIT-BOŞLUĞU 375px")
 
+def r28_bos_kesisim_checks(py, fails):
+    """Rev 28 (deneme 2): bos_kesisim — kesişimi boş günün kanıtı; önce normal, sonra düzenli derleme."""
+    import hashlib
+    env = {k: v for k, v in os.environ.items() if k not in ("BOS_KESISIM", "RUNNER_TEMP", "GITHUB_STEP_SUMMARY")}
+    iso = sorted((ROOT / "source").glob("????-??-??.md"))[-1].stem
+    veri = ROOT / "data" / "news" / f"{iso}.json"
+    once = hashlib.sha256(veri.read_bytes()).hexdigest() if veri.exists() else None
+    if py:
+        kb = subprocess.run([py, "scripts/check_reports.py", "--kanit-boslugu", "--base", BASE],
+                            cwd=ROOT, capture_output=True, text=True, env=env)
+        son = [l for l in kb.stdout.splitlines() if "KANIT-BOŞLUĞU:" in l or l.startswith("Kayıt:")]
+        print(f"{'ok  ' if kb.returncode == 0 else 'FAIL'} KANIT-BOŞLUĞU --kanit-boslugu normal hâl · "
+              f"{' · '.join(x.strip('* ') for x in son) or kb.stderr[-300:]}")
+        if kb.returncode:
+            fails.append("KANIT-BOŞLUĞU --kanit-boslugu normal")
+    bz = subprocess.run([sys.executable, "build.py"], cwd=ROOT, capture_output=True, text=True,
+                        env={**env, "BOS_KESISIM": "1"})
+    try:
+        satirlar = [l.strip() for l in bz.stdout.splitlines()]
+        isaret = [l for l in satirlar if l.startswith("⚠ BOS_KESISIM")]
+        ana = [l for l in satirlar if l.startswith(f"· KANIT-BOŞLUĞU {iso}:")]
+        uy = [l for l in satirlar if l.startswith("! KANIT-BOŞLUĞU ·")]
+        say = {f: (ROOT / f).read_text(encoding="utf-8").count('class="rail-not"')
+               for f in (f"reports/{iso}.html", "index.html")}
+        onceki = sorted((ROOT / "reports").glob("????-??-??.html"))
+        onceki = [f for f in onceki if f.stem < iso][-1:]
+        onceki_say = onceki[0].read_text(encoding="utf-8").count('class="rail-not"') if onceki else None
+        sonra = hashlib.sha256(veri.read_bytes()).hexdigest() if veri.exists() else None
+        ok = (bz.returncode == 0 and bool(isaret) and bool(ana) and "kesişim boş (" in ana[0]
+              and "BOS_KESISIM, bilerek" in ana[0] and not uy and not any(say.values())
+              and onceki_say in (None, 1) and once == sonra)
+        print(f"{'ok  ' if ok else 'FAIL'} KANIT-BOŞLUĞU düzenli derleme (BOS_KESISIM=1) · "
+              f"{ana[0].lstrip('· ')[:150] if ana else 'satır yok'} · uyarı {len(uy)} · satır {say} · "
+              f"önceki gün ({onceki[0].stem if onceki else '—'}) satır {onceki_say} · veri dosyası değişmedi {once == sonra}")
+        if not ok:
+            fails.append("KANIT-BOŞLUĞU düzenli derleme")
+        if py:
+            kb = subprocess.run([py, "scripts/check_reports.py", "--kanit-boslugu", "--base", BASE],
+                                cwd=ROOT, capture_output=True, text=True, env={**env, "BOS_KESISIM": "1"})
+            son = [l for l in kb.stdout.splitlines() if "KANIT-BOŞLUĞU:" in l or l.startswith("Kayıt:")]
+            print(f"{'ok  ' if kb.returncode == 0 else 'FAIL'} KANIT-BOŞLUĞU --kanit-boslugu düzenli hâl · "
+                  f"{' · '.join(x.strip('* ') for x in son) or kb.stderr[-300:]}")
+            if kb.returncode:
+                fails.append("KANIT-BOŞLUĞU --kanit-boslugu düzenli")
+    finally:
+        back = subprocess.run([sys.executable, "build.py"], cwd=ROOT, capture_output=True, text=True, env=env)
+        geri = (ROOT / "reports" / f"{iso}.html").read_text(encoding="utf-8").count('class="rail-not"')
+        if back.returncode or "BOS_KESISIM" in back.stdout or (iso == "2026-09-23" and geri != 1):
+            print("FAIL KANIT-BOŞLUĞU: normal derlemeye dönüş")
+            fails.append("rebuild (BOS_KESISIM)")
+
+
 # Rev 29: tarayıcıda L1-DOLGU / ÇİZGİ-KONTRAST — hesaplanan stil, açık ve koyu, 375 ve 1440.
 R29_JS = r"""
 import sys, json
@@ -1269,6 +1326,7 @@ def main():
 
     # Rev 28: KANIT-BOŞLUĞU
     r28_checks(build.stdout, py, fails)
+    r28_bos_kesisim_checks(py, fails)
 
     # Rev 27: İPLİK-DURUM · iplik sayfası (durum satırı, ?g= daybar, satırlar)
     r27_checks(build.stdout, py, fails)

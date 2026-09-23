@@ -46,6 +46,16 @@ on:
         description: 'İLK-EKRAN: rayı bu çalıştırmanın tarayıcısında özetin üstüne geri al (commit yok)'
         type: boolean
         default: false
+      bos_kesisim:
+        # Rev 28 — KANIT-BOŞLUĞU "kesişim boşsa satır yok" kanıtı. Veriyi değiştirmez:
+        # BOS_KESISIM=1 yalnız bu derlemenin belleğinde son brifing gününün failures
+        # listesinden oyuncu kaynaklarını (Elbit, Northrop…) çıkarır; öteki başarısız
+        # kaynaklar kalır, kesişim hesaplanır ve boş çıkar. Brifing 375/1440 ve Kaynaklar
+        # görüntüleri artifact'e yüklenir, uyarılar "[TEST] " önekli issue'ya gider,
+        # commit/push atılmaz.
+        description: 'KANIT-BOŞLUĞU: son günde oyuncu kaynaklarını bu derlemede yanıt vermiş say (commit yok)'
+        type: boolean
+        default: false
 permissions:
   contents: write
   issues: write
@@ -57,9 +67,10 @@ jobs:
       KAPSAM_BOZ: ${{ inputs.kapsam_boz || 'none' }}
       NOKTALI_BOZ: ${{ inputs.noktali_boz == true && '1' || '0' }}
       ILK_EKRAN_BOZ: ${{ inputs.ilk_ekran_boz == true && '1' || '0' }}
+      BOS_KESISIM: ${{ inputs.bos_kesisim == true && '1' || '0' }}
       # Yalnız bilerek bozulan (ya da uyari_test işaretli) çalıştırma test önekiyle (ve main dışında da) issue açar;
       # normal çalıştırmalarda boş → Rev 30 davranışı: issue yalnız main'de.
-      UYARI_TEST_ONEK: ${{ ((inputs.boz && inputs.boz != 'none') || (inputs.kapsam_boz && inputs.kapsam_boz != 'none') || inputs.uyari_test == true || inputs.noktali_boz == true || inputs.ilk_ekran_boz == true) && '[TEST] ' || '' }}
+      UYARI_TEST_ONEK: ${{ ((inputs.boz && inputs.boz != 'none') || (inputs.kapsam_boz && inputs.kapsam_boz != 'none') || inputs.uyari_test == true || inputs.noktali_boz == true || inputs.ilk_ekran_boz == true || inputs.bos_kesisim == true) && '[TEST] ' || '' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -168,10 +179,42 @@ jobs:
             fi
           } >> "$GITHUB_STEP_SUMMARY"
 
-      # Bilerek bozulan KAPSAM-SAYI / NOKTALI-İ / İLK-EKRAN çalıştırması yayına gitmez:
+      # Rev 28 — KANIT-BOŞLUĞU (S) kanıtı: son brifing 375 ve 1440 (tam sayfa + ray) ve günün
+      # Kaynaklar sayfası; sayfanın satırı kayıttaki kesişime uymalı. Her çalıştırmada; bos_kesisim
+      # seçiliyse bu, kesişimi boş hâlin görüntüsüdür (adlar -bos-kesisim ile biter).
+      - name: KANIT-BOŞLUĞU görüntüleri
+        id: kb
+        if: always() && steps.pw.outcome == 'success'
+        continue-on-error: true   # kanıt adımı: build'i durdurmaz, (A) tablosunda 🔴 olur
+        run: python3 scripts/check_reports.py --kanit-boslugu --out "$RUNNER_TEMP/kanit-boslugu"
+      - name: KANIT-BOŞLUĞU görüntüleri (artifact)
+        id: kbart
+        if: always() && steps.kb.outcome != 'skipped'
+        uses: actions/upload-artifact@v4
+        with:
+          name: kanit-boslugu-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/kanit-boslugu/*.png
+          if-no-files-found: warn
+          retention-days: 30
+      - name: KANIT-BOŞLUĞU görüntüleri (özet bağlantısı)
+        if: always() && steps.kb.outcome != 'skipped'
+        env:
+          ART_URL: ${{ steps.kbart.outputs.artifact-url }}
+        run: |
+          {
+            echo "#### KANIT-BOŞLUĞU görüntüleri"
+            echo
+            if [ -n "$ART_URL" ]; then
+              echo "Son brifing 375/1440 (tam sayfa + ray) ve Kaynaklar 375 (BOS_KESISIM=$BOS_KESISIM): [artifact'i indir]($ART_URL)"
+            else
+              echo "🔴 görüntü artifact'i yüklenemedi."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # Bilerek bozulan KAPSAM-SAYI / NOKTALI-İ / İLK-EKRAN / bos_kesisim çalıştırması yayına gitmez:
       # sayısız ya da sarmasız sayfa yalnız kanıttır (İLK-EKRAN'da site bozulmaz, ama
       # kanıt çalıştırması dala commit atmaz).
-      - if: env.KAPSAM_BOZ == 'none' && env.NOKTALI_BOZ != '1' && env.ILK_EKRAN_BOZ != '1'
+      - if: env.KAPSAM_BOZ == 'none' && env.NOKTALI_BOZ != '1' && env.ILK_EKRAN_BOZ != '1' && env.BOS_KESISIM != '1'
         run: |
           git config user.name "defintel-bot"
           git config user.email "actions@github.com"

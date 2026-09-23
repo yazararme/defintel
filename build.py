@@ -1899,6 +1899,8 @@ def main():
     SRC.mkdir(exist_ok=True)
 
     news = load_news()
+    # Rev 28 (deneme 2): bos_kesisim kanıtı — yalnız bu derlemenin belleğinde, veri dosyasına dokunmaz.
+    bos_kesisim_duzenle(news, sorted(p.stem for p in SRC.glob("????-??-??.md")))
     news_days = sorted(news)
     kaynak_ulkeleri(news)   # Rev 33: src_name() kaynağın ülkesini buradan bilir
     # kupür çipi o günün başlık sayısını taşıyor: dokunmak için somut bir sebep
@@ -3390,6 +3392,9 @@ def kanit_boslugu_kurali(iso, data):
         durum = "satır: " + kanit_cumlesi(adlar)
     else:
         durum = f"kesişim boş ({len((data or {}).get('failures') or [])} başarısız kaynak, hiçbiri oyuncu kaynağı değil) — satır yok"
+    if BOS_KESISIM_DURUM and BOS_KESISIM_DURUM[0] == iso:
+        durum += (f" (BOS_KESISIM, bilerek: {', '.join(BOS_KESISIM_DURUM[1]) or '—'} bu derlemede"
+                  " yanıt vermiş sayıldı; veri dosyası değişmedi)")
     print(f"  · KANIT-BOŞLUĞU {iso}: {durum}")
     for k, ad, _rid, hata in kb:
         print(f"      {k} ({ad}): {hata or 'hata metni yok'}")
@@ -3409,6 +3414,65 @@ def kanit_boslugu_kurali(iso, data):
                    + " · ".join(f"{k} ({hata or 'hata metni yok'})" for k, _ad, _rid, hata in kb)
                    + " — okuyucuya satır basıldı, kaynağı onar")
     return adlar
+
+
+
+# Rev 28 (deneme 2) — kesişimi boş günün kanıtı (build.yml `bos_kesisim`, yerelde BOS_KESISIM).
+# Gerçek veride taranan her gün Elbit ve Northrop'un kaynağı düşmüş; "kesişim boşsa satır yok"
+# yarısı hiçbir sayfada görünmüyordu. BOS_KESISIM açıkken yalnız bu derlemenin belleğinde, seçilen
+# günün failures listesinden oyuncu kaynakları çıkarılır (o kaynaklar yanıt vermiş sayılır; öteki
+# başarısız kaynaklar kalır). Kesişim gerçekten hesaplanır ve boş çıkar; data/news'e hiçbir şey
+# yazılmaz. CI'da bu çalıştırma commit atmaz, uyarıları "[TEST] " önekli issue'ya gider.
+BOS_KESISIM_DURUM = None   # (gün, [çıkarılan kaynaklar]) — yalnız BOS_KESISIM açıkken
+
+
+def bos_kesisim():
+    """BOS_KESISIM: boş/0/none → kapalı; 1 → son brifing günü; YYYY-MM-DD → o gün."""
+    import os
+    raw = (os.environ.get("BOS_KESISIM") or "").strip().lower()
+    if raw in ("", "0", "none", "false"):
+        return None
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", raw):
+        return raw
+    return "son"
+
+
+def bos_kesisim_duzenle(news, report_days):
+    """Seçilen günün kaydını bellekte düzenler; → (gün, [çıkarılan]) ya da None."""
+    global BOS_KESISIM_DURUM
+    import os
+    secim = bos_kesisim()
+    if not secim:
+        return None
+    if secim == "son":
+        adaylar = [d for d in report_days if d in news]
+        gun = adaylar[-1] if adaylar else None
+    else:
+        gun = secim if secim in news else None
+    if not gun:
+        sys.exit(f"BOS_KESISIM={os.environ.get('BOS_KESISIM')}: medya takibi olan brifing günü yok")
+    veri = dict(news[gun])
+    oyuncu = oyuncu_kaynaklari()
+    fails = list(veri.get("failures") or [])
+    cik = sorted({f.get("source") for f in fails if f.get("source") in oyuncu}, key=tr_fold)
+    kalan = [f for f in fails if f.get("source") not in oyuncu]
+    veri["failures"] = kalan
+    veri["failed_sources"] = max(0, int(veri.get("failed_sources") or 0) - (len(fails) - len(kalan)))
+    news[gun] = veri
+    BOS_KESISIM_DURUM = (gun, cik)
+    msg = (f"BOS_KESISIM (bilerek, yalnız bu derleme): {gun} — oyuncu kaynakları yanıt vermiş sayıldı: "
+           f"{', '.join(cik) or '—'} · kalan {len(kalan)} başarısız kaynak "
+           f"({', '.join(f.get('source') or '?' for f in kalan[:4])}{'…' if len(kalan) > 4 else ''}) · "
+           "data/news değişmedi")
+    print(f"  ⚠ {msg}")
+    summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary:
+        try:
+            with open(summary, "a", encoding="utf-8") as fh:
+                fh.write(f"> ⚠️ **bos_kesisim** — {msg}. Bu çalıştırma commit atmaz.\n\n")
+        except OSError as exc:
+            print(f"  ! BOS_KESISIM: özet yazılamadı: {exc}")
+    return BOS_KESISIM_DURUM
 
 
 if __name__ == "__main__":

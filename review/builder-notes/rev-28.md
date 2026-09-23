@@ -101,3 +101,33 @@ Tarama row. At 1440 it is 66px (3 lines) in the left rail.
   `failed_sources` is a count. The named list is `failures[].source`, and that is what the build
   intersects. AeroVironment's own feed also fails daily, but AeroVironment is not one of the 64
   tracked players, so it has no line.
+
+---
+
+# Attempt 2: the empty-intersection half, made reproducible
+
+Verdict `rev-28-deneme1.md` failed R28-P0-2 because no page on the site showed a day that had a sweep and an empty intersection, and therefore no line. On the real data every sweep day has Elbit and Northrop failing, and stored data is not faked. This attempt follows the `kapsam_boz` / `noktali_boz` / `ilk_ekran_boz` pattern. Nothing is committed and no workflow was triggered.
+
+| File | Change |
+|---|---|
+| `build.py` | New `BOS_KESISIM` env switch (`1` → the latest briefing day with a sweep; `YYYY-MM-DD` → that day), with `bos_kesisim()` / `bos_kesisim_duzenle()` at the end of the file and one call right after `load_news()` in `main()`. The switch works **only in this build's memory**: it removes the player-`kaynak` entries from that day's `failures` and lowers `failed_sources` to match, so those feeds count as answered. The other failed sources stay (14 on 23 Sep), which means the day is still a swept day with failures. After that, the real `kanit_boslugu()` path computes the intersection, finds it empty and prints no line. The build log shows `⚠ BOS_KESISIM (bilerek, yalnız bu derleme) …`, and (A) gets a ⚠️ note. The KANIT-BOŞLUĞU rule line ends with `(BOS_KESISIM, bilerek: Elbit Systems, Northrop Grumman bu derlemede yanıt vermiş sayıldı; veri dosyası değişmedi)`. `data/news/*.json` is never written, and smoke checks this with a sha256. With the switch off, the output is unchanged. |
+| `scripts/check_reports.py` | New `--kanit-boslugu [--out DIR] [--base URL] [--gun G] [--bos-kesisim]`. The default is the latest report, and `--bos-kesisim` defaults from `BOS_KESISIM`. The expected state comes from the record (`data/news/<gün>.json` failures ∩ `rakipler.json` `kaynak`), with the same arrangement applied when the switch is on. The check shoots the briefing at 375×812 and 1440×900 (full page plus an element shot of the rail) and the day's Kaynaklar page at 375. It then asserts: the Tarama block exists; a non-empty intersection gives exactly one `.rail-not` inside the Tarama block that names every source; an empty intersection gives no `.rail-not`, and Kaynaklar still has ≥1 faded failed row; there is no horizontal overflow. It writes a table to (A) and exits 1 on a mismatch. Filenames are `kanit-boslugu-<gün>[-kaynaklar|-ray]-<w>[-bos-kesisim].png`. |
+| `.github/workflows/build.yml` | New dispatch input **`bos_kesisim`** (boolean, default false). It sets `BOS_KESISIM=1`, is ORed into `UYARI_TEST_ONEK: "[TEST] "`, and skips commit/push (`&& env.BOS_KESISIM != '1'`). New steps, placed after İLK-EKRAN and before commit: `KANIT-BOŞLUĞU görüntüleri` (runs on every build, `continue-on-error`), the artifact `kanit-boslugu-<run>-<attempt>`, and the artifact link in (A). A normal run therefore produces the positive-state shots, and a `bos_kesisim=true` run produces the empty-intersection shots. `boz`, `kapsam_boz`, `uyari_test`, `noktali_boz` and `ilk_ekran_boz` are unchanged. All workflow YAML files parse. |
+| `review/tools/smoke.py` | `r28_bos_kesisim_checks`: `--kanit-boslugu` is green on the normal build. Then a `BOS_KESISIM=1` build must log "kesişim boş (14 …) … BOS_KESISIM, bilerek", raise 0 KANIT-BOŞLUĞU alerts, put 0 `.rail-not` on `reports/2026-09-23.html` and `/`, keep 1 on 22 Sep, and leave the data file hash unchanged. `--kanit-boslugu` is green in that state too. Finally the normal build is restored. |
+
+## Local evidence (`review/shots/rev-28/after-bos-kesisim/`, system Chrome, light)
+
+The same page at the same widths, in two states, with the rail crop being the direct comparison:
+
+- Normal: `kanit-boslugu-2026-09-23-ray-375.png` / `-ray-1440.png` show "TARAMA 50 kaynak · 536 başlık →" with the line "Elbit Systems ve Northrop Grumman'ın kendi duyuruları bugün okunamadı." under it. Full pages are `-375.png` / `-1440.png`, and Kaynaklar is `-kaynaklar-375.png` with 16 faded rows.
+- Arranged (`BOS_KESISIM=1`): `…-ray-375-bos-kesisim.png` / `…-ray-1440-bos-kesisim.png` show "TARAMA 52 kaynak · 536 başlık →" and then OYUNCULAR directly, with no line. Full pages are `…-375-bos-kesisim.png` / `…-1440-bos-kesisim.png`. `…-kaynaklar-375-bos-kesisim.png` still has 14 faded failed rows, so the day was swept and had failures, and the line is missing only because none of the failures is a player's source. The Elbit and Northrop rows keep their "oyuncu:" labels.
+
+## Tests (attempt 2, local)
+
+- `python3 build.py` (normal and `BOS_KESISIM=1`): exit 0. The tree is left in the normal build, and 23 Sep has its line.
+- `check_reports.py`: all ok. `--dort-durum` 🟢 4/4, `--oyuncular` 🟢, `--ilk-ekran` 🟢 280/773, `--kanit-boslugu` 🟢 in both states.
+- `test_uyari.py` 33/33 · `test_collect.py` 21/21 · `test_silme_yok.py` 22/22 · `review/tools/smoke.py` **SMOKE OK**, including the new lines.
+
+## Pending (outside my limits)
+
+A push, then a dispatch of `build.yml` on `rev21-33` with `bos_kesisim=true`, gives the CI (S) artifact of the empty state plus the (A) table. A normal run gives the positive-state artifact.

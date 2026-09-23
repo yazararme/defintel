@@ -29,6 +29,7 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 | 22 | PASS (deneme 2; d1 FAIL P1-2 "1 / 536") | 2 | 29a9667, d9565c1 | yok |
 | 21 | PASS (deneme 2; d1 FAIL P0-2 kanıt eksikti) | 2 | 00d908c, 5c1134b | yok |
 | 23 | PASS | 1 | 4ca4ef5 | P0-2: prompt yapıştırma + sonraki 3 rapor (human-checks.md) |
+| 28 | d1 FAIL (P0-2: boş kesişimli taranmış gün kanıtı yok); d2 sürüyor | 1→2 | be22179 (d1) | yok |
 | 29 | PASS | 1 | 21c7394 | yok |
 | 27 | PASS | 1 | b381359 | yok |
 | 25 | FAIL (yalnız P0-1 (S) yarısı doğrulanamaz; diğer 6 ölçüt PASS) — bkz. not | 1 | d054ccd | P0-1 (S): canlı ilk toplamadan sonra Trend.az araması |
