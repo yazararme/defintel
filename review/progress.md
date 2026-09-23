@@ -26,7 +26,7 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 | Rev | Karar | Deneme | Commit | Bekleyen insan kontrolü |
 |---|---|---|---|---|
 | 30 | PASS (issue kanalı) | 1 (+1 iptal edilen push sürümü) | aa9a4c3 | yok |
-| 22 | deneme 1 FAIL (P1-2: roketsan "1 / 536", plan "2 / 536"); deneme 2 sürüyor | 1→2 | 29a9667 (d1) | yok |
+| 22 | PASS (deneme 2; d1 FAIL P1-2 "1 / 536") | 2 | 29a9667, d9565c1 | yok |
 
 ## Notlar / anlaşmazlıklar
 
@@ -45,6 +45,7 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 
 - design-reviewer.md (P)'yi PENDING-HUMAN sayıyor; Rev 30 sonrası (P) → (I) değişimini her inceleme istemine yazıyorum. Tanım dosyasını değiştirmedim (kullanıcının dosyası).
 - Rev 22 d1 kanıtı: yeşil run 35867515608, bozuk (boz=fetch) run 35867655946 → issue #5'e DÖRT-DURUM satırı (issue yeniden açıldı).
+- Rev 22 inceleyici notları: "2 / 536" bir başlığı iki kez sayıyor (Açık 2); yeşil özet görüntüsü d1 run'ından (d2 artifact'leri ayrı). Taze tarayıcıda 375px'te "Yeni rapor çıkınca haber verelim mi?" bandı ~150px kaplıyor; shoot.py `service_workers="block"` kullandığı için çekimlerde yok. Bant Rev 22'den önce de vardı (app.js ziyaret sayacı); plan Rev 29 sıra 26 (P2) ile ilgili.
 
 ## Açık (orkestratörün eklediği)
 
