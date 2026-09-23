@@ -114,7 +114,7 @@ def pw_python():
     return None
 
 
-# Rev 22 R22-P1-2: ?oyuncu=<kimlik> ile kapsam satırı "{görünen} / {toplam} başlık" olur,
+# Rev 22 R22-P1-2 + K1: ?oyuncu=<kimlik> ile kapsam satırı "{görünen benzersiz} / {toplam} başlık" olur,
 # süzgeç kalkınca "{toplam} başlık"a döner. Kimlik sayfadaki ilk data-oyuncu'dan.
 KAPSAM_JS = r"""
 import re, sys
@@ -122,13 +122,17 @@ from playwright.sync_api import sync_playwright
 url = sys.argv[1]
 html = open(sys.argv[2], encoding="utf-8").read()
 who = re.search(r'data-oyuncu="([^" ]+)', html).group(1)
+# Görünen benzersiz başlık: satırın ilk bağlantısı başlığın kimliği (K1).
+TEKIL = ("new Set(Array.from(document.querySelectorAll('[data-search]')).filter(e => !e.hidden)"
+         ".map(e => { const a = e.querySelector('a[href]'); return a ? a.getAttribute('href')"
+         " : e.getAttribute('data-search'); })).size")
 with sync_playwright() as p:
     try: b = p.chromium.launch()
     except Exception: b = p.chromium.launch(channel="chrome")
     pg = b.new_context(service_workers="block").new_page()
     pg.goto(url + "?oyuncu=" + who); pg.wait_for_timeout(600)
     on = pg.inner_text(".news-stat > .num")
-    gorunen = pg.evaluate("Array.from(document.querySelectorAll('[data-search]')).filter(e => !e.hidden).length")
+    gorunen = pg.evaluate(TEKIL)
     roket = None
     if 'roketsan' in html:
         pg.goto(url + "?oyuncu=roketsan"); pg.wait_for_timeout(600)
@@ -136,13 +140,22 @@ with sync_playwright() as p:
         pg.goto(url + "?oyuncu=" + who); pg.wait_for_timeout(600)
     pg.click(".pill-x"); pg.wait_for_timeout(200)
     off = pg.inner_text(".news-stat > .num")
+    # K1: süzgeçsiz sayfada neredeyse bütün satırları eşleyen arama — pay yine paydayı aşmaz.
+    pg.fill("#q", "a"); pg.wait_for_timeout(300)
+    genis = pg.inner_text(".news-stat > .num")
+    genis_tekil = pg.evaluate(TEKIL)
     b.close()
 ok = re.fullmatch(r"\d+ / \d+", on) and re.fullmatch(r"\d+", off) and on.endswith("/ " + off)
-# Pay = görünen satır sayısı (Rev 22 attempt 2); roketsan kabulü "2 / {toplam}".
+# Pay = görünen benzersiz başlık (K1, Rev 22 deneme 2'nin satır sayısı yerine);
+# roketsan kabulü "1 / {toplam}"; pay hiçbir süzgeçte paydayı aşmaz.
 ok = ok and on.split(" / ")[0] == str(gorunen)
+ok = ok and genis.split(" / ")[0] == str(genis_tekil)
+for s_ in (on, genis) + ((roket,) if roket else ()):
+    ok = ok and bool(re.fullmatch(r"\d+ / \d+", s_)) and int(s_.split(" / ")[0]) <= int(off)
 if roket is not None:
-    ok = ok and roket == "2 / " + off
-print(f"{who}: '{on} başlık' (görünen satır {gorunen}) → × → '{off} başlık'"
+    ok = ok and roket == "1 / " + off
+print(f"{who}: '{on} başlık' (görünen benzersiz {gorunen}) → × → '{off} başlık'"
+      + f" · 'a' araması: '{genis} başlık' (pay ≤ payda)"
       + (f" · roketsan: '{roket} başlık'" if roket is not None else ""))
 sys.exit(0 if ok else 1)
 """

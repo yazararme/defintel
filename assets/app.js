@@ -112,17 +112,28 @@ function loadPlayers() {
 
   /* Kapsam satırı süzgeçle yeniden sayılır (Rev 22, Rev 18b'nin yasası):
      süzgeç açıkken "536 başlık" süzülmemiş sayfayı anlatır, altındaki liste
-     başka bir şeyi. Pay "görünen": okurun listede gördüğü satırlar — bölüm
-     sayılarının toplamı. Aynı başlık iki bölümde duruyorsa (ör. İhale ve
-     Türk sanayii kesiti) iki kez görünür ve iki kez sayılır; pay ile
-     bölüm sayıları birbirini tutar (Rev 22 kabulü: ?oyuncu=roketsan →
-     "2 / 536"). Payda değişmez: günün tekil başlık sayısı. */
+     başka bir şeyi. Pay **benzersiz başlık** (K1, 23 Eylül): payda zaten
+     günün tekil başlık sayısı, pay da aynı birimle sayılır. Aynı başlık iki
+     bölümde iki satır olarak durabilir (ör. İhale ve Türk sanayii kesiti);
+     satır saymak onu iki kez sayıyor, bütün satırları eşleyen bir süzgeçte
+     payı paydanın üstüne çıkarıyordu ("551 / 536"). Başlığın kimliği
+     satırın ilk bağlantısı — iki kopyada aynı kalemden, aynı adrese üretilir.
+     Kabul: ?oyuncu=roketsan → "1 / 536". */
   var stat = document.querySelector(".news-stat > .num");
   var statRest = stat ? stat.textContent : "";
+  function headlineKey(el) {
+    var a = el.querySelector("a[href]");
+    return a ? a.getAttribute("href") : el.getAttribute("data-search");
+  }
   function rescope(active) {
     if (!stat) return;
     if (!active) { stat.textContent = statRest; return; }
-    var n = rows.filter(function (el) { return !el.hidden; }).length;
+    var seen = {}, n = 0;
+    rows.forEach(function (el) {
+      if (el.hidden) return;
+      var k = headlineKey(el);
+      if (!seen[k]) { seen[k] = true; n++; }
+    });
     stat.textContent = n + " / " + statRest;
   }
 
