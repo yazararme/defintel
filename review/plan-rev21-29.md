@@ -858,8 +858,9 @@ istenen şey bu.
 
 ## Açık — müşterinin kararı gerekiyor
 
-1. **Tutulan savunma dışı başlıklar çevrilsin mi?** (R25.1) Nakit maliyeti ~0 $; bedeli
-   abonelik kotasından günde 4–6 ek çağrı. Çevrilmezlerse özgün dilinde aranabilir kalırlar.
+1. ~~**Tutulan savunma dışı başlıklar çevrilsin mi?**~~ **Karar (müşteri, 23 Eylül): evet,
+   yalnızca başlık çevrilir, özet yok.** (R25.1) Nakit maliyeti ~0 $; bedeli abonelik
+   kotasından günde 4–6 ek çağrı.
 2. **Aselsan–Roketsan: çerçeve sorusu.** Ajan kalemi görseydi brifinge alır mıydı? Bu,
    DECISIONS'taki Türk emsal çerçeve sorusu ve MKE'ye gider. Rev 31 yalnızca ajanın kalemi
    görmesini güvenceye alıyor.
