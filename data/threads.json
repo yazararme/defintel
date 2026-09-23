@@ -2,91 +2,176 @@
  {
   "id": "usaf-orta-kalibreli-namlulu-hava-savunma-pazar-a",
   "name": "USAF orta kalibreli namlulu hava savunma pazar araştırması",
-  "son_hareket": "2026-09-22"
+  "son_hareket": "2026-09-23"
  },
  {
   "id": "malezya-merad-rmk-13",
   "name": "Malezya MERAD (RMK-13)",
-  "son_hareket": "2026-09-22"
+  "son_hareket": "2026-09-23"
  },
  {
   "id": "tungsten-ve-enerjetik-malzeme-tedarik-zinciri-g4",
   "name": "Tungsten ve enerjetik malzeme tedarik zinciri",
-  "son_hareket": "2026-09-22"
+  "son_hareket": "2026-09-23"
  },
  {
   "id": "dhs-c-uas-track-one-yeniden-degerlendirmesi",
   "name": "DHS C-UAS Track One tedarikçi havuzunda yabancı menşe alt sistem kuralları",
-  "son_hareket": "2026-09-22"
+  "son_hareket": "2026-09-23"
  },
  {
   "id": "abd-deniz-piyadeleri-drone-round",
   "name": "ABD Deniz Piyadeleri Drone Round",
-  "son_hareket": "2026-09-22"
+  "son_hareket": "2026-09-23"
  },
  {
   "id": "avrupa-ve-abd-de-nitroseluloz-ve-sevk-barutu-dar",
   "name": "Avrupa ve ABD'de nitroselüloz ve sevk barutu darboğazı",
-  "son_hareket": "2026-09-22"
+  "son_hareket": "2026-09-23"
  },
  {
   "id": "rheinmetall-in-skyranger-uretim-olcegi",
   "name": "Rheinmetall'in Skyranger üretim ölçeği",
-  "son_hareket": "2026-09-22"
+  "son_hareket": "2026-09-23"
  },
  {
   "id": "ab-ukrayna-dron-ittifaki-nin-calisma-kurallari-v",
   "name": "AB-Ukrayna Dron İttifakı'nın çalışma kuralları ve AB dışı katılım koşulları",
-  "son_hareket": "2026-09-22"
+  "son_hareket": "2026-09-23"
  },
  {
   "id": "kore-menseli-katmanli-hava-savunma-tekliflerinin",
   "name": "Kore menşeli katmanlı hava savunma tekliflerinin sözleşmeye dönüşmesi",
-  "son_hareket": "2026-09-22"
+  "son_hareket": "2026-09-23"
  },
  {
   "id": "xm30-da-organik-c-uas-sarti-18-09-2026-raporu",
   "name": "XM30'da organik C-UAS şartı",
-  "son_hareket": "2026-09-22"
- },
- {
-  "id": "baltik-ve-polonya-da-dron-ihlallerine-verilen-te",
-  "name": "Baltık ve Polonya'da dron ihlallerine verilen tedarik karşılığının biçimi",
-  "son_hareket": "2026-09-22"
+  "son_hareket": "2026-09-23"
  },
  {
   "id": "falcon-peak-26-2-16-09-2026-raporu",
   "name": "Falcon Peak 26.2",
-  "son_hareket": "2026-09-22"
+  "son_hareket": "2026-09-23"
  },
  {
   "id": "kuresel-c-uas-harcamasinin-namlulu-ve-muhimmat-t",
   "name": "Küresel C-UAS harcamasının namlulu ve mühimmat tabanlı katmana düşen payı",
-  "son_hareket": "2026-09-22"
+  "son_hareket": "2026-09-23"
  },
  {
   "id": "genel-transfer-lisanslarinin-ucuncu-ulke-menseli",
   "name": "AB genel transfer lisanslarının üçüncü ülke menşeli bileşenleri kapsaması",
-  "son_hareket": "2026-09-22"
+  "son_hareket": "2026-09-23"
  },
  {
   "id": "lazer-ve-namlulu-katmanin-angajman-maliyeti-kars",
   "name": "Lazer ve namlulu katmanın angajman maliyeti karşılaştırmasının şartnamelere yazılması",
-  "son_hareket": "2026-09-22"
+  "son_hareket": "2026-09-23"
  },
  {
   "id": "kucuk-kalibre-muhimmatin-2031-e-kadar-tek-tedari",
   "name": "Küçük kalibre mühimmatın 2031'e kadar tek tedarikçiye bağlanması ve Drone Round'un bu çerçeveyle ilişkisi",
-  "son_hareket": "2026-09-22"
+  "son_hareket": "2026-09-23"
  },
  {
   "id": "jiatf-401-yonlendirilmis-enerji-pilot-programi",
   "name": "JIATF-401 yönlendirilmiş enerji pilot programı",
-  "son_hareket": "2026-09-22"
+  "son_hareket": "2026-09-23"
  },
  {
   "id": "155-mm-obus-alimlarinda-yerli-sanayi-katiliminin",
   "name": "155 mm obüs alımlarında yerli sanayi katılımının sayısal eşik olarak tanımlanması",
+  "son_hareket": "2026-09-23"
+ },
+ {
+  "id": "korfez-de-yerli-uretim-ayakli-hava-savunma-paket",
+  "name": "Körfez'de yerli üretim ayaklı hava savunma paketlerinin kısa menzil ve C-UAS kalemine genişlemesi",
+  "son_hareket": "2026-09-23"
+ },
+ {
+  "id": "665-milyon-lik-c-uas-test-siparisine-itiraz",
+  "name": "665 milyon $'lık C-UAS test siparişine itiraz",
+  "son_hareket": "2026-09-23"
+ },
+ {
+  "id": "abd-donanmasi-uygun-maliyetli-onleyici",
+  "name": "ABD Donanması uygun maliyetli önleyici",
+  "son_hareket": "2026-09-23"
+ },
+ {
+  "id": "gauntlet-2-5-bombardiman-dronu-kriterleri-ve-mut",
+  "name": "Gauntlet 2.5 \"bombardıman\" dronu kriterleri ve müttefiklerde benzer açık eleme programları",
+  "son_hareket": "2026-09-23"
+ },
+ {
+  "id": "topcu-alimlarinda-eslik-eden-kisa-menzil-koruma-",
+  "name": "Topçu alımlarında eşlik eden kısa menzil koruma kaleminin şartnameye girmesi",
+  "son_hareket": "2026-09-23"
+ },
+ {
+  "id": "ingiltere-nin-750-milyon-luk-c-uas-butcesinin-ih",
+  "name": "İngiltere'nin 750 milyon £'luk C-UAS bütçesinin ihale kalemlerine bölünmesi",
+  "son_hareket": "2026-09-23"
+ },
+ {
+  "id": "cekya-spyder-genislemesinde-c-uas-kaleminin-tani",
+  "name": "Çekya SPYDER genişlemesinde C-UAS kaleminin tanımı",
+  "son_hareket": "2026-09-23"
+ },
+ {
+  "id": "usaf-sefer-c-uas-paketinde-kinetik-kalemin-tanim",
+  "name": "USAF seferî C-UAS paketinde kinetik kalemin tanımı ve yanıt süresi",
+  "son_hareket": "2026-09-23"
+ },
+ {
+  "id": "etiyopya-topcu-aliminin-resm-surece-donusmesi-g4",
+  "name": "Etiyopya topçu alımının resmî sürece dönüşmesi",
+  "son_hareket": "2026-09-23"
+ },
+ {
+  "id": "baltik-ta-dron-ihlallerine-ve-topcu-yenilemesine",
+  "name": "Baltık'ta dron ihlallerine ve topçu yenilemesine verilen tedarik karşılığının biçimi",
+  "son_hareket": "2026-09-23"
+ },
+ {
+  "id": "jet-motorlu-dronlara-karsi-ucuz-onleyicinin-seri",
+  "name": "Jet motorlu dronlara karşı ucuz önleyicinin seri üretime girmesi ve birim maliyeti",
+  "son_hareket": "2026-09-23"
+ },
+ {
+  "id": "ermenistan-in-divyastra-mk-1-secimi",
+  "name": "Ermenistan'ın Divyastra MK-1 seçimi",
+  "son_hareket": "2026-09-23"
+ },
+ {
+  "id": "ukrayna-da-gudumsuz-155-mm-tercihi",
+  "name": "Ukrayna'da güdümsüz 155 mm tercihi",
+  "son_hareket": "2026-09-23"
+ },
+ {
+  "id": "nadir-toprak-elementlerinde-ticaret-gerilimi",
+  "name": "Nadir toprak elementlerinde ticaret gerilimi",
+  "son_hareket": "2026-09-23"
+ },
+ {
+  "id": "c-uas-sartnamelerinde-gps-siz-calisma-maddesinin",
+  "name": "C-UAS şartnamelerinde GPS'siz çalışma maddesinin zorunlu kriter hâline gelmesi",
+  "son_hareket": "2026-09-23"
+ },
+ {
+  "id": "irak-in-c-uas-ve-hava-savunma-alimlarini-resm-ih",
+  "name": "Irak'ın C-UAS ve hava savunma alımlarını resmî ihaleye dönüştürmesi",
+  "son_hareket": "2026-09-23"
+ },
+ {
+  "id": "deniz-topu-ihracatinda-alici-ulkede-uretim-ayagi",
+  "name": "Deniz topu ihracatında alıcı ülkede üretim ayağı sunmanın kriter hâline gelmesi",
+  "son_hareket": "2026-09-23"
+ },
+ {
+  "id": "baltik-ve-polonya-da-dron-ihlallerine-verilen-te",
+  "name": "Baltık ve Polonya'da dron ihlallerine verilen tedarik karşılığının biçimi",
   "son_hareket": "2026-09-22"
  },
  {
@@ -95,53 +180,8 @@
   "son_hareket": "2026-09-22"
  },
  {
-  "id": "korfez-de-yerli-uretim-ayakli-hava-savunma-paket",
-  "name": "Körfez'de yerli üretim ayaklı hava savunma paketlerinin kısa menzil ve C-UAS kalemine genişlemesi",
-  "son_hareket": "2026-09-22"
- },
- {
-  "id": "665-milyon-lik-c-uas-test-siparisine-itiraz",
-  "name": "665 milyon $'lık C-UAS test siparişine itiraz",
-  "son_hareket": "2026-09-22"
- },
- {
-  "id": "abd-donanmasi-uygun-maliyetli-onleyici",
-  "name": "ABD Donanması uygun maliyetli önleyici",
-  "son_hareket": "2026-09-22"
- },
- {
-  "id": "gauntlet-2-5-bombardiman-dronu-kriterleri-ve-mut",
-  "name": "Gauntlet 2.5 \"bombardıman\" dronu kriterleri ve müttefiklerde benzer açık eleme programları",
-  "son_hareket": "2026-09-22"
- },
- {
-  "id": "topcu-alimlarinda-eslik-eden-kisa-menzil-koruma-",
-  "name": "Topçu alımlarında eşlik eden kısa menzil koruma kaleminin şartnameye girmesi",
-  "son_hareket": "2026-09-22"
- },
- {
   "id": "jet-motorlu-shahed-e-onleyici-dronla-ilk-vurus",
   "name": "Jet motorlu Shahed'e önleyici dronla vuruş",
-  "son_hareket": "2026-09-22"
- },
- {
-  "id": "ingiltere-nin-750-milyon-luk-c-uas-butcesinin-ih",
-  "name": "İngiltere'nin 750 milyon £'luk C-UAS bütçesinin ihale kalemlerine bölünmesi",
-  "son_hareket": "2026-09-22"
- },
- {
-  "id": "cekya-spyder-genislemesinde-c-uas-kaleminin-tani",
-  "name": "Çekya SPYDER genişlemesinde C-UAS kaleminin tanımı",
-  "son_hareket": "2026-09-22"
- },
- {
-  "id": "usaf-sefer-c-uas-paketinde-kinetik-kalemin-tanim",
-  "name": "USAF seferî C-UAS paketinde kinetik kalemin tanımı ve yanıt süresi",
-  "son_hareket": "2026-09-22"
- },
- {
-  "id": "etiyopya-topcu-aliminin-resm-surece-donusmesi-g4",
-  "name": "Etiyopya topçu alımının resmî sürece dönüşmesi",
   "son_hareket": "2026-09-22"
  },
  {
