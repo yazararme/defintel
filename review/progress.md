@@ -114,4 +114,7 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 | K5 | PASS (d2 kodu; 3. inceleme — d1 FAIL alarm günü, d2 incelemesi kesik kanıt yüzünden FAIL). Orkestratör K5-2 ölçütünü yayımlanmış metin değişemediği için "yapısal neden kalktı + sınırla geçer" olarak yeniden yazdı. Prompt sınırları: başlık ≤65, alarm başlığı ≤70, madde ≤110. Tersine dönüş: DECISIONS 10 (Rev 9 → K5). 17 Eyl CI'da 3px payla geçiyor | 3 | aeedc4f, 6f3da19, d417af0 |
 
 - **K4 bekliyor:** müşteriye soruldu — 92 kalem brifingden ÖNCE (05:19) toplanmış, 33ü aday listesindeydi; "BRİFİNGDEN SONRA" yanlış olur. Seçenekler: A etiketsiz, B doğru başka etiket, C yine de BRİFİNGDEN SONRA.
-- **Devam noktası:** K5 d2 → K6 (brief hazır) → K4 (yanıt gelirse) → merge-day-prompt.md → 4 sınama iş akışını sil → issue #5 kapat → human-checks.md yeniden yaz.
+| K6 | PASS (deneme 2; d1 FAIL: Elbit nedeni tahmindi, teslim notu yinelenen girdi yaratırdı). Northrop: Accept-Language başlığı (CI'dan doğrulandı). Elbit: /feed/ kaldırılmış → /news HTML ayrıştırıcısı (CI'dan 10 kayıt). Elbit Systems UK isteğe bağlı ek kaynak. İnceleyiciye bu değişiklikte builder notlarını okuma izni verildi (ölçütler notlarla ilgili) | 2 | 6ddf97f, 8545c50, ac112eb |
+
+- 24 Eyl: 5 sınama iş akışı silindi (uyari-test, gec-gelen-test, silme-yok-test, ceviri-dedektoru-test, k6-kaynak-test); smoke.py silinmiş dosyalara dayanmıyor. Issue #5 kapatıldı. merge-day-prompt.md yazıldı. human-checks.md üç bölüm olarak yeniden yazıldı.
+- **Açık:** yalnız K4 (müşteri seçimi A/B/C).

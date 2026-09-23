@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """K6 tanı: Elbit ve Northrop akışları CI'ın (GitHub runner) IP'sinden ne döndürüyor?
 
-    python3 scripts/k6_tani.py          # ağa çıkar; yalnız k6-kaynak-test.yml'in "tani" işi
+    python3 scripts/k6_tani.py          # ağa çıkar; elle tanı için (k6-kaynak-test.yml merge öncesi silindi)
 
 Her yoklama tek bir düz HTTP GET'tir, `collect_news.py`'nin istek biçimiyle
 (`request_headers()`: aynı User-Agent, `Accept: */*`, kaynağın `istek_basligi`'ı; aynı zaman aşımı;

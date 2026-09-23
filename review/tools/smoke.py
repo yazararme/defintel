@@ -1535,8 +1535,9 @@ def r26_checks(fails):
     print(f"{'ok  ' if ok else 'FAIL'} ÇEVİRİ-DEDEKTÖRÜ istem: cümle düzeni, Ö1, Ö2, Ö3")
     if not ok:
         fails.append("ÇEVİRİ-DEDEKTÖRÜ istem")
-    wf = (ROOT / ".github" / "workflows" / "ceviri-dedektoru-test.yml").read_text(encoding="utf-8")
-    ok = ("secrets." not in wf and "claude-code" not in wf and "--refresh" not in wf
+    wf_yol = ROOT / ".github" / "workflows" / "ceviri-dedektoru-test.yml"
+    wf = wf_yol.read_text(encoding="utf-8") if wf_yol.exists() else None  # merge öncesi silindi
+    ok = wf is None or ("secrets." not in wf and "claude-code" not in wf and "--refresh" not in wf
           and "--sahte-cevirmen" in wf and "UYARI_TEST_ONEK" in wf)
     print(f"{'ok  ' if ok else 'FAIL'} ceviri-dedektoru-test.yml: sır yok, Claude CLI yok, sahte çevirmen")
     if not ok:
@@ -1590,17 +1591,18 @@ def k6_checks(fails):
     if t.returncode:
         print(t.stdout[-2500:], t.stderr[-1500:])
         fails.append("test_k6.py")
-    wf = (ROOT / ".github" / "workflows" / "k6-kaynak-test.yml").read_text(encoding="utf-8")
-    ok = ("secrets." not in wf and "branches: [rev21-33]" in wf and "scripts/test_k6.py" in wf
+    wf_yol = ROOT / ".github" / "workflows" / "k6-kaynak-test.yml"
+    wf = wf_yol.read_text(encoding="utf-8") if wf_yol.exists() else None  # merge öncesi silindi
+    ok = wf is None or ("secrets." not in wf and "branches: [rev21-33]" in wf and "scripts/test_k6.py" in wf
           and "collect_news.py --" not in wf and "collect-news" not in wf)
     print(f"{'ok  ' if ok else 'FAIL'} k6-kaynak-test.yml: yalnız rev21-33, sır yok, gerçek toplama yok")
     if not ok:
         fails.append("k6-kaynak-test.yml")
     # K6 deneme 2: ağa çıkan tanı işi yalnız rev21-33'e push'ta; ağsız ayrıştırıcı işi yerinde
     import yaml
-    isler = (yaml.safe_load(wf) or {}).get("jobs") or {}
+    isler = (yaml.safe_load(wf) or {}).get("jobs") or {} if wf else {}
     tani = isler.get("tani") or {}
-    ok = ("ayristirici" in isler and "tani" in isler
+    ok = wf is None or ("ayristirici" in isler and "tani" in isler
           and tani.get("if") == "github.event_name == 'push' && github.ref == 'refs/heads/rev21-33'"
           and any("scripts/k6_tani.py" in (st.get("run") or "") for st in tani.get("steps") or []))
     print(f"{'ok  ' if ok else 'FAIL'} k6-kaynak-test.yml: tanı işi yalnız rev21-33 push, ağsız ayrıştırıcı işi duruyor")
