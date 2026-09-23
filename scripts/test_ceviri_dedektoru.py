@@ -5,7 +5,7 @@
     python3 scripts/test_ceviri_dedektoru.py sabit      # yalnız sabit test (collect-news (A) satırı)
     python3 scripts/test_ceviri_dedektoru.py hazirla DIR  # iş akışı için sahte gün + sahte çevirmen
 
-**Sabit test.** audit/content.md §2'nin 40 başlıklık örneği (audit/ceviri-ornegi.json, mevcut
+**Sabit test.** audit/content.md §2'nin 40 başlıklık örneği (scripts/fixtures/ceviri-ornegi-40.json, mevcut
 kusurlu çevirileriyle) üç sınamadan geçer. §2 16 kusurlu kalemin 12'sini adlandırıyor: metinde
 anılan 8 (KF-21, Care, Iran's military, wheeling auction, Commons, UK MoD/Rolls-Royce, 유해,
 Hormuz) ve "cümle düzenindeki 7 başlığın 7'si de kusurlu" (3'ü ortak). Kalan 4 kusurlu kalem
@@ -34,7 +34,7 @@ import tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "translate_news.py"
-ORNEK = ROOT / "audit" / "ceviri-ornegi.json"
+ORNEK = ROOT / "scripts" / "fixtures" / "ceviri-ornegi-40.json"  # §2 örneği; audit/ git dışı
 sys.path.insert(0, str(ROOT / "scripts"))
 import translate_news as T  # noqa: E402
 
