@@ -337,6 +337,11 @@ def main():
         "categories": {k: len(v) for k, v in sorted(by_category.items())},
         "items": unique,
         "failures": [{"source": n, "error": e} for n, e in failures],
+        # Taranan kaynakların tam listesi. Yanıt verip hiçbir başlık
+        # getirmeyen kaynağın adı başka hiçbir yerde yok: kupürlerden
+        # çıkarılamıyor, failures'ta da değil. Kaynak dökümü sayfası onsuz
+        # 66'nın 58'ini gösteriyordu ve eksiği fark edilmiyordu.
+        "sources": [s["ad"] for s in sources],
     }
 
     print(f"kaynak: {len(sources)} · okunamayan: {len(failures)}")

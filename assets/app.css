@@ -1452,3 +1452,23 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
 }
 .pill-x:hover { color: var(--brand); }
 .pill-x:focus-visible { outline: 1px solid var(--brand); outline-offset: 3px; }
+
+
+/* ---------- kaynak dökümü ---------- */
+
+.slist { list-style: none; margin: 18px 0 0; padding: 0; border-top: 1px solid var(--rule); }
+.srow {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  min-height: 44px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.slist .srow:last-child { border-bottom: 0; }
+.sname { flex: 1 1 auto; font-size: 15px; color: var(--ink-2); }
+.scount { flex: none; font-family: var(--mono); font-size: 10.5px;
+          letter-spacing: 0.06em; color: var(--muted); }
+/* Yanıt vermeyen kaynak listeden düşmüyor, soluk duruyor: neyi denediğimiz
+   de kapsamın parçası. */
+.srow--off .sname { color: var(--muted); }

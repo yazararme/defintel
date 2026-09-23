@@ -1319,6 +1319,67 @@ def general_section(rows, day, cited):
     )
 
 
+def source_rows(data):
+    """[(ad, başlık sayısı, yanıt verdi mi)] — o günün kaynak dökümü.
+
+    Adlar iki yerden geliyor: başlık üreten kaynaklar kupürlerin kendisinden,
+    yanıt vermeyenler `failures` listesinden. Yanıt verip hiçbir şey
+    getirmeyen kaynakların adı veride yok — kaynaklar.json Drive'da duruyor
+    ve toplayıcı roster'ı çıktıya yazmıyordu; collect_news artık yazıyor,
+    yani eski günler eksik kalır, yeni günler tam olur. Eksik olduğunda
+    sayfa sessizce yanlış olmasın diye fark build kaydında basılıyor.
+    """
+    items = data.get("items") or []
+    if not items and not data.get("failures"):
+        return []
+    counts = {}
+    for item in items:
+        name = item.get("source") or "—"
+        counts[name] = counts.get(name, 0) + 1
+    failed = [f.get("source") for f in (data.get("failures") or []) if f.get("source")]
+    roster = data.get("sources") or []
+    quiet = [n for n in roster if n not in counts and n not in failed]
+    rows = [(n, c, True) for n, c in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))]
+    rows += [(n, 0, True) for n in sorted(quiet)]
+    rows += [(n, 0, False) for n in sorted(failed)]
+    return rows
+
+
+def sources_page(day, data, has_report):
+    """/haberler/{gün}-kaynaklar.html — kapsamın kendisi."""
+    rows = source_rows(data)
+    if not rows:
+        return ""
+    body = "".join(
+        f'<li class="srow{"" if ok else " srow--off"}">'
+        f'<span class="sname">{html.escape(name)}</span>'
+        + (f'<span class="scount num">{n}</span>' if ok and n
+           else '<span class="scount num">—</span>' if ok
+           else '<span class="scount">yanıt vermedi</span>')
+        + "</li>"
+        for name, n, ok in rows
+    )
+    read = data.get("scanned_sources", 0) - data.get("failed_sources", 0)
+    return (
+        head(f"Kaynaklar · {tr_date(day)} — {SITE_NAME}")
+        + masthead()
+        + daybar("news", day, None, None, day if has_report else None)
+        + f"""<main class="wrap thread">
+  <p class="kicker">Kapsam</p>
+  <h1 class="report-title">Kaynaklar · {tr_date(day)}</h1>
+  <p class="thread-meta num"><strong>{read}</strong> kaynak okundu ·
+    <strong>{data.get("failed_sources", 0)}</strong> yanıt vermedi</p>
+  <ul class="slist">{body}</ul>
+  <nav class="endnav" aria-label="Devam"><span class="wrap endnav-inner">
+    <a class="endnav-go" href="{day_url("news", day)}">{tr_date(day)} medya takibi →</a>
+    <a class="endnav-go" href="/arsiv.html">Tüm raporlar</a>
+  </span></nav>
+</main>
+"""
+        + FOOT
+    )
+
+
 TURK_CAT = "Türk savunma sanayii"
 TURK_ID = "kat-turk"
 
@@ -1384,22 +1445,22 @@ def build_news_page(day, data, prev_day, next_day, has_report, cited):
         for anchor, label, count in jumps
     )
 
-    # "66 kaynak" okunan değil tanımlı kaynak sayısıydı; okunanı yaz, farkı da göster
+    # Kapsam satırı: ne taradık, ne kadar geriye baktık. Üç parça, üçü de
+    # okuyucunun sorusuna cevap veriyor. Bir süre altı parçaydı ve üçü
+    # üreticinin iç durumuydu — "80/89 özet", "16 kaynak yanıt vermedi",
+    # "başlıklar Türkçe çeviriyle açılır". İlk ikisi hattın sağlığı, okuyucu
+    # onlarla hiçbir şey yapamaz; üçüncüsü zaten dokununca görülen bir şeyi
+    # önceden duyuruyordu. İkisi de build kaydında duruyor, sayfada değil.
     defined = data.get("scanned_sources", 0)
     unread = data.get("failed_sources", 0)
     read = defined - unread
-    # kapsam yazılmamış eski günlerde (scope 0) jeton hiç basılmaz
-    scope = [i for i in items if i.get("summary_scope") is True]
-    covered = sum(1 for i in scope if i.get("summary_tr"))
-    stat = (
-        f'{read} kaynak okundu · {data.get("unique_items", 0)} başlık'
-        f' · son {data.get("window_hours", 48)} saat'
-        + (f' · {covered}/{len(scope)} özet' if scope else "")
-        + (f' · {unread} kaynak yanıt vermedi' if unread else "")
-        # Google çubuğu ancak dokunuştan sonra beliriyor; beyan bir kez burada
-        # duruyor, 500 satırın her birinde bir jeton olarak değil.
-        + (" · başlıklar Türkçe çeviriyle açılır" if TRANSLATE_PROXY else "")
-    )
+    count = f'<span class="num">{data.get("unique_items", 0)}</span> başlık'
+    # Kaynak sayısı bir kapı: hangi kaynaklar olduğunu görmek isteyen görsün.
+    src = f'<span class="num">{read}</span> kaynak'
+    if source_rows(data):
+        src = f'<a href="{day_url("news", day)[:-5]}-kaynaklar.html">{src}</a>'
+    stat = f'{count} · {src} · son <span class="num">{data.get("window_hours", 48)}</span> saat'
+
     return (
         head(f"Medya takibi · {tr_date(day)} — {SITE_NAME}")
         + masthead()
@@ -1407,7 +1468,7 @@ def build_news_page(day, data, prev_day, next_day, has_report, cited):
         + f"""<main class="wrap news">
   <div class="news-head">
     <h1 class="report-title">Medya takibi · {tr_date(day)}</h1>
-    <p class="news-stat num">{stat}</p>
+    <p class="news-stat">{stat}</p>
   </div>
   <div class="controls">
     <input class="search" id="q" type="search" placeholder="Ara: başlık, kaynak ya da özet…" autocomplete="off">
@@ -1609,7 +1670,24 @@ def main():
                 day in report_days, cited,
             )
             (NEWS_OUT / f"{day}.html").write_text(page, encoding="utf-8")
+            src_page = sources_page(day, news[day], day in report_days)
+            if src_page:
+                (NEWS_OUT / f"{day}-kaynaklar.html").write_text(src_page, encoding="utf-8")
+                # Kaynak listesi eksikse sessizce yanlış olmasın: roster
+                # Drive'da, toplayıcı yazmadığı günlerde adsız kalanlar var.
+                named = len(source_rows(news[day]))
+                scanned = news[day].get("scanned_sources", 0)
+                if named < scanned:
+                    print(f"  ! {day}: kaynak sayfasında {named}/{scanned} ad "
+                          f"({scanned - named} kaynak yanıt verdi ama başlık getirmedi, adı veride yok)")
             hits = sum(1 for it in news[day].get("items", []) if norm_url(it.get("url")) in cited)
+            scope = [it for it in news[day].get("items", []) if it.get("summary_scope") is True]
+            covered = sum(1 for it in scope if it.get("summary_tr"))
+            if scope or news[day].get("failed_sources"):
+                # Sayfadan kalkan iki sayı buraya taşındı: hattın sağlığı
+                # okuyucunun belgesinde değil, hattın kendi kaydında durur.
+                print(f"      özet {covered}/{len(scope)} · "
+                      f"{news[day].get('failed_sources', 0)} kaynak yanıt vermedi")
             print(
                 f'  · haberler/{day}.html ({news[day].get("unique_items", 0)} başlık'
                 f" · {hits} brifing atıflı)"
