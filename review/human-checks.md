@@ -27,3 +27,16 @@ Bir oturuşta yapılacak liste. Her maddede: nerede, ne yapılacak, ne görülme
 
 6. **Dal main'e alındıktan sonraki ilk sabah, telefon ya da tarayıcı:** o günün medya takibi sayfası → arama kutusuna `Trend` yaz.
    *Görmen gereken:* Trend.az'dan savunmayla ilgisiz en az bir başlık (ör. ekonomi/pamuk), Genel'in tam dökümünde, Türkçe başlıkla.
+
+## Rev 26 — çeviri (R26-P1-3 ve canlı geçiş)
+
+7. **Google Drive → `defintel` klasörü → `kaynaklar.json`:** "Defense Studies" kaynağının `dil` değerini `"id"` yap, kaydet.
+   *Görmen gereken:* dosyada o satırda `"dil": "id"`.
+8. **Dal main'e alındıktan sonraki ilk sabah, GitHub Mobile / Issues:** o günün `DEFINTEL uyarıları · <tarih>` issue'su.
+   *Görmen gereken:* **ÇEVİRİ-DEDEKTÖRÜ** satırı ya hiç yok ya da "özgün bırakılan" sayısı küçük. Büyükse (ör. 30) model yeni cümle düzeni promptuna uymuyor demektir — bana söyle.
+
+## main'e almadan önce (bir kez)
+
+9. **Karar ver:** `review/progress.md` › "Açık" bölümündeki maddeler (özellikle 7: canlı pencere yeniden çevrilsin mi).
+10. **Sınama iş akışları:** `.github/workflows/uyari-test.yml`, `gec-gelen-test.yml`, `silme-yok-test.yml`, `ceviri-dedektoru-test.yml` yalnız `rev21-33` dalında tetiklenir; main'e alınmadan silinsin mi, kalsın mı — bana söyle, ben silerim.
+11. **Test issue'su:** https://github.com/yazararme/defintel/issues/5 (`[TEST]` önekli) — kapatabilirsin.

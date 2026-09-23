@@ -29,6 +29,7 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 | 22 | PASS (deneme 2; d1 FAIL P1-2 "1 / 536") | 2 | 29a9667, d9565c1 | yok |
 | 21 | PASS (deneme 2; d1 FAIL P0-2 kanıt eksikti) | 2 | 00d908c, 5c1134b | yok |
 | 23 | PASS | 1 | 4ca4ef5 | P0-2: prompt yapıştırma + sonraki 3 rapor (human-checks.md) |
+| 26 | PASS (kapsam içi: sabit test + uyarı; model çağrısı gerektirenler atlandı) | 1 | e26454c, efdedea | P1-3 Drive dil düzeltmesi; ilk canlı çeviri |
 | 28 | PASS (deneme 2; d1 FAIL P0-2 boş kesişim kanıtı yoktu) | 2 | be22179, ab7cf08 | yok |
 | 29 | PASS | 1 | 21c7394 | yok |
 | 27 | PASS | 1 | b381359 | yok |
@@ -80,7 +81,8 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 - Rev 27: P2-1 slug/yönlendirme ve SLUG kuralı atlandı (P2). Kurucu notu: günün gelişmesi de olan izleme maddeleri kendini her gün atıflıyor, her atıf hareket sayılıyor (ör. Malezya MERAD 9 hareket) — önceden vardı. İnceleyici: XM30'da durum satırı 23 Eylül satırının notunu aynen tekrarlıyor.
 - Rev 29: P2/P3 (F-07, F-13, yazı belirteçleri, F-11) ve TİP-BELİRTECİ atlandı. Kurucu kapsam dışı iki şey yaptı: Öne çıkanlar (`.highlights`) sol kenarı da kalktı (L1-DOLGU aksi hâlde her derlemede ateşlerdi); ≤600px'te kurulum çubuğu açıkken footer alt boşluğu 168px. `--alarm-tint` zemin sayılmadı (durum rengi). İnceleyici: 375'te bildirim kartının alt çizgisi ilk endnav düğmesine 1px. Tersine dönüş Rev 0 → R29.4 DECISIONS (9) ve review loguna yazıldı (82578ab).
 - Rev 28 kanıtı: normal build 35910521447, bos_kesisim build 35910757525 (Elbit+Northrop yalnız o çalıştırmada yanıt vermiş sayıldı; veri değişmedi).
-- **Devam noktası:** sıradaki Rev 26 (brief hazır; model çağrısı gerektiren maddeler atlanır — Açık 7).
+- Rev 26: sabit test audit/'e (gitignore) bağlıydı, CI'da kırıldı; fixture `scripts/fixtures/ceviri-ornegi-40.json` ile düzeltildi (efdedea). Kanıt: ceviri-dedektoru-test run 35913238627.
+- **Durum (23 Eylül akşamı): 13 revizyonun hepsi işlendi.** Dal `rev21-33` origin'de; main'e alınmadı, deploy yok.
 
 ## Açık (orkestratörün eklediği)
 
@@ -92,3 +94,4 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 6. **İLK-EKRAN neredeyse her gün ateşliyor (Rev 24).** 375×812'de son 10 günün 7'sinde kural kırmızı: dört satırlık başlık, uzun özet maddeleri, alarm günleri (Rev 9 gereği ALARMLAR özetin üstünde, hiç geçemez). 23 Eylül h2'de 6px payla geçiyor. Rev 9: her gün ateşleyen kanal sıfır bilgi taşır. Alarm günleri kuraldan muaf mı olsun, eşik mi gevşesin, yoksa başlık/madde uzunluğu mu sınırlansın? Ayrıca planın `h2#yonetici-ozeti`'si sayfada `h2#ozet`.
 7. **Rev 26: canlı pencerenin yeniden çevrilmesi.** Cümle düzeni, Ö1/Ö2 ve sözlük yalnız yeni çevirilerde görünür. R26-P0-1, P1-1, P1-2 ve P0-2'nin ikinci yarısı `translate_news.py`'nin `claude -p` ile gerçek çağrılarını (abonelik kotası; 23 Eylül için ~9 parti) ve yayımlanan `data/news/*.json`'ın yeniden yazılmasını gerektiriyor. Bu turda izin yoktu, atlandı. İzin verilirse: hangi günler (yalnız 23? 17–23?) ve yerelde mi, `collect-news` dispatch'iyle mi?
 8. **KANIT-BOŞLUĞU her gün ateşliyor (Rev 28).** Elbit'in akışı boş, Northrop'unki 403 — 17–23 Eylül'ün 7 tarama gününün 7'sinde brifingde "…kendi duyuruları bugün okunamadı" satırı ve operatör uyarısı var (Rev 9 deseni). Satır doğru, ama iki akış onarılana kadar sabit. Akışlar onarılsın mı (kaynaklar.json, Drive), yoksa sürekli arızalı kaynak için satır bastırılsın mı?
+9. **Rev 26 geçiş riski.** Cümle düzeni dedektörü eski (her kelimesi büyük) çevirilerin çoğunu yakalıyor: sahte günde 40'ın 30'u, 31 başlık özgün bırakıldı. main'e alındıktan sonra model yeni promptta cümle düzenine uymazsa çok sayıda başlık İngilizce/özgün kalır ve her gün ÇEVİRİ-DEDEKTÖRÜ uyarısı gelir. İlk canlı çevirinin sonucuna bakılmalı (human-checks).
