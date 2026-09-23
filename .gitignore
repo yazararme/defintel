@@ -7,3 +7,6 @@ _c.html
 
 # UX denetimi çıktıları — siteyle yayımlanmaz
 audit/
+
+# Rev 21–33 inceleme ekran görüntüleri — yerel, commit edilmez (set başına ~20 MB)
+review/shots/

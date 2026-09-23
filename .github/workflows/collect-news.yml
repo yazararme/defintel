@@ -19,6 +19,7 @@ on:
         default: true
 permissions:
   contents: write
+  issues: write
 concurrency: publish
 jobs:
   collect:
@@ -65,3 +66,10 @@ jobs:
           git commit -m "news: $(date -u +%F) candidates"
           git pull --rebase --autostash origin main
           git push
+
+      # Rev 30 — operatör uyarıları: günün tek issue'su (yalnız main). Son adım, her koşulda.
+      - name: Operatör uyarıları
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 scripts/uyari.py

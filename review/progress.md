@@ -1,0 +1,42 @@
+# Rev 21–33 — orkestratör ilerleme kaydı
+
+Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main'den, `322e66c` üstüne).
+
+## Kurulum (2026-09-23)
+
+- `.claude/agents/design-reviewer.md` var. Oturum repo dışında başladığı için alt ajan tipi
+  kayıtlı değil. İnceleyici, bu dosyanın metni aynen talimat olarak verilen general-purpose
+  alt ajanla çalıştırılıyor (model: opus).
+- Ekran görüntüsü: `review/tools/shoot.py`, venv `~/.local/share/defintel-shotenv`
+  (playwright + sistem Chrome). Varsayılan 8 sayfa × 2 boyut × 2 tema × (ilk ekran + tam sayfa).
+  `review/shots/` .gitignore'da (set başına ~20 MB), commit edilmez.
+- Site: repo kökünden `python3 -m http.server 8000 --bind 127.0.0.1`.
+- Brifingler: `review/briefs/rev-N.md` = planın o revizyon bölümü, yalnızca P0/P1.
+- **Push kontrolü (SETUP 3), 2026-09-23:** Pages yalnızca `main`'den yayımlıyor (legacy,
+  branch main /). `build.yml` her dalda push'ta koşar (yalnız `source/**`, `build.py`,
+  `assets/**`), build + aynı dala bot commit'i; yayın yok, okuyucu push'u yok.
+  collect-news / pull-drive / missing-report yalnızca cron + dispatch. → Şu an dal push'u
+  güvenli. **Rev 30'dan sonra yeniden kontrol:** iş akışları `/alert` çağırırsa push
+  operatöre bildirim gönderebilir.
+- Ortak kararlar: tutulan savunma dışı başlıklar çevrilir (yalnız başlık) → Açık 1 kapandı.
+  DÖRT-DURUM ve SİLME-YOK operatör kanalına da gönderir. Kapsam P0+P1; P2, P3, Yapılmayacak atlanır.
+
+## Revizyonlar
+
+| Rev | Karar | Deneme | Commit | Bekleyen insan kontrolü |
+|---|---|---|---|---|
+| 30 | YENİDEN — push kanalı iptal (müşteri, 23 Eyl), issue kanalı kuruluyor | 2 | — | — |
+
+## Notlar / anlaşmazlıklar
+
+- **23 Eyl — Rev 30 değişti (müşteri):** push kanalı yerine günlük GitHub issue'su, `GITHUB_TOKEN`, atanan `yazararme`; worker.js değişmez, yeni sır yok; (P) → issue ekran görüntüsü (I). Review loguna yazıldı (`~/Documents/Projects/defintel-ux/design-review-log-TR.md`, "Revizyon 30 — değişti"). Eski push kodu çalışma ağacından atıldı; notları `review/builder-notes/rev-30-push-kanali-iptal.md`. İnsan kapısı kalktı; Rev 22'den itibaren durmadan devam.
+- Bildirim sınaması: kendi hesapla açılan #1, #2 bildirim üretmedi (GitHub kendi eylemini bildirmez); bot açtığı #3 üretti ama telefonda GitHub Mobile "Assigned" push kapalıydı; açıldıktan sonra #4 telefona ulaştı. Hepsi kapatıldı.
+- `rev21-33` dalı origin'e push edildi (409cd84, yalnız tek seferlik sınama iş akışı). SETUP 3 kontrolü: Pages yalnız main; build.yml path'lerine dokunulmadı.
+
+- Rev 30: (A) kanıtı için geçici `rev30-ci` dalı push'u ve inceleyici alt ajanı otomatik mod izin sınıflandırıcısınca reddedildi. Hiçbir şey commit/push edilmedi. P1-1 (A) → PENDING-HUMAN.
+- Rev 30: iPhone kaydı için 5 dokunuş (altbilgi notu) eklendi; `#operator=` Android'de de çalışır.
+- Rev 30 kuralı yok: 18 kuralın hiçbiri henüz kodda değil; P0-2 ve P0-3 ancak ilk kural (Rev 22) gelince telefonda denenebilir.
+
+## Açık (orkestratörün eklediği)
+
+1. ~~(push kanalı için)~~ Kanal issue'ya döndü; müşteri issue'nun herkese açık olduğunu bilerek seçti — kapandı. Eski metin: Repo herkese açık → (A) Actions özet sayfası da herkese açık ve uyarı metnini listeliyor. Plan bildirime dokununca bu sayfayı açtırıyor, ama "uyarı metni herkese açık dosyaya yazılmaz" diyor. Özete yalnızca kural adı + sayı mı yazılsın?

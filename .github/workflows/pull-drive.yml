@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+  issues: write
 concurrency: publish
 jobs:
   pull:
@@ -75,3 +76,10 @@ jobs:
             -H "Authorization: Bearer $NOTIFY_SECRET")
           echo "notify: $code $(cat /tmp/notify.out)"
           [ "$code" = "200" ]
+
+      # Rev 30 — operatör uyarıları: günün tek issue'su (yalnız main). Son adım, her koşulda.
+      - name: Operatör uyarıları
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 scripts/uyari.py
