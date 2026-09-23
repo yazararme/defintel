@@ -11,6 +11,11 @@ KAPSAM_BOZ=thales build for the <64 state, then a normal rebuild), need a Playwr
 Rev 23: ETİKET-BAŞLIK · KUR · H1-TEKRAR — the build's alert lines for the day's report,
 static label/heading equality on the latest report, rule controls on synthetic input, and a
 1440px click-through from the watch list's "→ bugün:" link to its heading (Playwright).
+Rev 31: GEÇ-GELEN — scripts/test_collect.py (offline twice-collect), the build's token-count
+line, a 375px check that the AA row on /haberler/2026-09-23.html?oyuncu=roketsan carries
+"BRİFİNGDEN SONRA" in --muted (never with BRİFİNGDE), and, when the local-only
+data/news/2026-09-24-aday.md exists, that its first section is "Dünkü brifingden sonra gelenler"
+and holds the AA row.
 Later revisions extend CHECKS / PAGES. Exit 1 on any failure.
 """
 import os
@@ -130,6 +135,81 @@ sys.exit(0 if ok else 1)
 """
 
 
+# Rev 31 R31-P0-2 (S): 375px, ?oyuncu=roketsan — AA satırı "BRİFİNGDEN SONRA", renksiz (--muted),
+# BRİFİNGDE ile aynı satırda asla; atıflı bir satırın BRİFİNGDE jetonu hâlâ renkli.
+GEC_JS = r"""
+import sys
+from playwright.sync_api import sync_playwright
+url = sys.argv[1]
+JS = '''() => {
+  const vis = Array.from(document.querySelectorAll('[data-search]')).filter(e => !e.hidden && e.offsetParent !== null);
+  const aa = vis.find(e => e.textContent.includes('Anadolu Ajans'));
+  const late = aa && aa.querySelector('.clip-late');
+  const meta = aa && aa.querySelector('.clip-meta');
+  const cited = document.querySelector('.clip-cited');
+  const both = Array.from(document.querySelectorAll('.clip-meta'))
+    .filter(m => m.querySelector('.clip-late') && m.querySelector('.clip-cited')).length;
+  return {aa: !!aa, text: late ? late.innerText : null,
+          late_color: late ? getComputedStyle(late).color : null,
+          meta_color: meta ? getComputedStyle(meta).color : null,
+          cited_color: cited ? getComputedStyle(cited).color : null,
+          both: both, total: document.querySelectorAll('.clip-late').length};
+}'''
+with sync_playwright() as p:
+    try: b = p.chromium.launch()
+    except Exception: b = p.chromium.launch(channel="chrome")
+    pg = b.new_context(service_workers="block", viewport={"width": 375, "height": 812}).new_page()
+    pg.goto(url + "?oyuncu=roketsan"); pg.wait_for_timeout(600)
+    r = pg.evaluate(JS)
+    b.close()
+ok = (r["aa"] and r["text"] == "BRİFİNGDEN SONRA" and r["late_color"] == r["meta_color"]
+      and r["cited_color"] != r["late_color"] and r["both"] == 0)
+print(f"375px ?oyuncu=roketsan: AA satırı '{r['text']}' · renk {r['late_color']} (meta {r['meta_color']},"
+      f" BRİFİNGDE {r['cited_color']}) · ikisi aynı satırda {r['both']} · sayfada jeton {r['total']}")
+sys.exit(0 if ok else 1)
+"""
+
+
+def r31_checks(build_stdout, py, fails):
+    """Rev 31: GEÇ-GELEN — ağsız toplama testi, build satırı, jeton (375px), yerel aday dosyası."""
+    t = subprocess.run([sys.executable, "scripts/test_collect.py"], cwd=ROOT, capture_output=True, text=True)
+    son = t.stdout.strip().splitlines()[-1] if t.stdout.strip() else t.stderr[-300:]
+    print(f"{'ok  ' if t.returncode == 0 else 'FAIL'} scripts/test_collect.py · {son}")
+    if t.returncode:
+        print(t.stdout[-2500:], t.stderr[-1500:])
+        fails.append("test_collect.py")
+    satir = [l.strip() for l in build_stdout.splitlines() if "GEÇ-GELEN: BRİFİNGDEN SONRA jetonlu satır" in l]
+    ok = bool(satir) and "2026-09-23: 89" in satir[0]
+    print(f"{'ok  ' if ok else 'FAIL'} GEÇ-GELEN build satırı · {satir[0].lstrip('· ') if satir else 'satır yok'}")
+    if not ok:
+        fails.append("GEÇ-GELEN build satırı")
+    if py and (ROOT / "haberler" / "2026-09-23.html").exists():
+        g = subprocess.run([py, "-c", GEC_JS, f"{BASE}/haberler/2026-09-23.html"],
+                           cwd=ROOT, capture_output=True, text=True)
+        print(f"{'ok  ' if g.returncode == 0 else 'FAIL'} BRİFİNGDEN SONRA jetonu · {g.stdout.strip() or g.stderr[-300:]}")
+        if g.returncode:
+            fails.append("BRİFİNGDEN SONRA jetonu")
+    aday = ROOT / "data" / "news" / "2026-09-24-aday.md"
+    if not aday.exists():
+        print("ok   (D) 2026-09-24-aday.md yok (yalnız yerel kanıt; commit edilmez) — atlandı")
+        return
+    try:
+        with urllib.request.urlopen(f"{BASE}/data/news/2026-09-24-aday.md", timeout=10) as r:
+            metin = r.read().decode("utf-8")
+    except Exception as exc:
+        metin = ""
+        print(f"       {exc}")
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import collect_news as CN
+    ilk = next((l for l in metin.splitlines() if l.startswith("## ")), "")
+    ok = ilk.startswith("## Dünkü brifingden sonra gelenler (") and any(
+        "aselsan-ile-roketsan" in u for u in CN.first_section_urls(metin))
+    print(f"{'ok  ' if ok else 'FAIL'} (D) /data/news/2026-09-24-aday.md · ilk bölüm '{ilk}' · AA satırı "
+          f"{'içinde' if ok else 'yok'}")
+    if not ok:
+        fails.append("(D) aday ilk bölüm")
+
+
 def r23_checks(build_stdout, fails):
     """Rev 23: kuralların uyarı satırları, etiket = başlık, kural kontrolleri."""
     sys.path.insert(0, str(ROOT))
@@ -230,6 +310,9 @@ def main():
             print(f"{'ok  ' if et.returncode == 0 else 'FAIL'} ETİKET-BAŞLIK tıklama · {et.stdout.strip() or et.stderr[-300:]}")
             if et.returncode:
                 fails.append("ETİKET-BAŞLIK tıklama")
+
+    # Rev 31: GEÇ-GELEN
+    r31_checks(build.stdout, py, fails)
 
     # Rev 21: KAPSAM-SAYI — alias testi 64/64 (normal build'in çıktısından)
     m = [l for l in build.stdout.splitlines() if "KAPSAM-SAYI: alias testi" in l]

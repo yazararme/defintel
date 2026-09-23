@@ -1,0 +1,69 @@
+name: gec-gelen-test
+# Rev 31 kanıt iş akışı: collect_news.py AĞSIZ (--fixture), kayıtlı başlıklarla. Sabah hattı
+# çalıştırılmaz: ağ, Drive, Claude/çeviri yok; data/news'e yazılmaz (çıktı $RUNNER_TEMP'te).
+# İki ardışık iş:
+#   1) iki-toplama : yerel test, sonra aynı gün (24 Eylül) iki toplama — 05:19 ve 11:04 yedeği.
+#                    (A) ikinci toplama: "yeni: 1 · değişmedi: 5 · damga değişti: 0", uyarı yok.
+#   2) damga-bozuk : aynı iki toplama, ikincisi damgayı bilerek değiştirir (--sinama-damga-boz)
+#                    → GEÇ-GELEN → "[TEST] " önekli günün issue'sunda satır (I).
+# Yalnız rev21-33 dalında koşar; main'e alınmadan önce silinebilir. Sır yok (GITHUB_TOKEN).
+on:
+  push:
+    branches: [rev21-33]
+    paths: ['scripts/collect_news.py', 'scripts/test_collect.py', '.github/workflows/gec-gelen-test.yml']
+  workflow_dispatch:
+permissions:
+  issues: write
+  contents: read
+concurrency: gec-gelen-test
+env:
+  UYARI_TEST_ONEK: "[TEST] "
+  GITHUB_TOKEN: ${{ github.token }}
+jobs:
+  iki-toplama:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Yerel test (ağsız, 21 kontrol)
+        run: python3 scripts/test_collect.py
+      - name: Sınama dosyaları
+        run: python3 scripts/test_collect.py hazirla "$RUNNER_TEMP/gg"
+      - name: Toplama 1 — 24 Eylül 05:19 (günün ilki)
+        run: >
+          python3 scripts/collect_news.py --fixture "$RUNNER_TEMP/gg/sabah.json"
+          --out "$RUNNER_TEMP/gg/out" --date 2026-09-24 --now 2026-09-24T05:19:00+03:00
+          --published "$RUNNER_TEMP/gg/published.json"
+      - name: Toplama 2 — aynı gün 11:04 yedeği (bir kalem düştü, bir kalem yeni)
+        run: >
+          python3 scripts/collect_news.py --fixture "$RUNNER_TEMP/gg/ogle.json"
+          --out "$RUNNER_TEMP/gg/out" --date 2026-09-24 --now 2026-09-24T11:04:00+03:00
+          --published "$RUNNER_TEMP/gg/published.json"
+      - name: Aday dosyasının ilk bölümü
+        run: |
+          { echo "### 2026-09-24-aday.md — ilk bölüm"; echo
+            awk '/^## /{f=1} f&&/^$/{exit} f' "$RUNNER_TEMP/gg/out/2026-09-24-aday.md"; echo; } \
+            | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Operatör uyarıları
+        if: always()
+        run: python3 scripts/uyari.py
+
+  damga-bozuk:
+    needs: iki-toplama
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sınama dosyaları
+        run: python3 scripts/test_collect.py hazirla "$RUNNER_TEMP/gg"
+      - name: Toplama 1 — 24 Eylül 05:19
+        run: >
+          python3 scripts/collect_news.py --fixture "$RUNNER_TEMP/gg/sabah.json"
+          --out "$RUNNER_TEMP/gg/out" --date 2026-09-24 --now 2026-09-24T05:19:00+03:00
+          --published "$RUNNER_TEMP/gg/published.json"
+      - name: Toplama 2 — 11:04, damga BİLEREK değiştirilir
+        run: >
+          python3 scripts/collect_news.py --fixture "$RUNNER_TEMP/gg/ogle.json"
+          --out "$RUNNER_TEMP/gg/out" --date 2026-09-24 --now 2026-09-24T11:04:00+03:00
+          --published "$RUNNER_TEMP/gg/published.json" --sinama-damga-boz
+      - name: Operatör uyarıları
+        if: always()
+        run: python3 scripts/uyari.py

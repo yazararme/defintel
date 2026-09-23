@@ -1280,6 +1280,33 @@ def load_news():
     return days
 
 
+# Rev 31: {gün: o günün brifinginin yayın anı}. main() medya sayfalarından önce doldurur;
+# brifingi olmayan günde anahtar yok, jeton da yok.
+BRIEF_AT = {}
+
+
+def brief_moment(day, hhmm):
+    """published.json'daki 'HH:MM' (Europe/Istanbul) → saat dilimli an; okunamazsa None."""
+    import datetime as _dt
+    from zoneinfo import ZoneInfo
+    m = re.fullmatch(r"(\d{1,2}):(\d{2})", hhmm or "")
+    if not m:
+        return None
+    return _dt.datetime.fromisoformat(day).replace(
+        hour=int(m[1]), minute=int(m[2]), tzinfo=ZoneInfo("Europe/Istanbul"))
+
+
+def brifingden_sonra(item, day):
+    """Kalemin ilk_goruldu damgası o günün brifinginden sonra mı? Damgasız: hayır."""
+    import datetime as _dt
+    brief = BRIEF_AT.get(day)
+    try:
+        seen = _dt.datetime.fromisoformat(item.get("ilk_goruldu") or "")
+    except ValueError:
+        return False
+    return bool(brief and seen.tzinfo and seen > brief)
+
+
 def clip_html(item, day, cited, sec=""):
     """Özetli satır açılır bir öğe, özetsiz satır tek bağlantı.
 
@@ -1291,6 +1318,9 @@ def clip_html(item, day, cited, sec=""):
     meta = [html.escape(item.get("source", ""))]
     if norm_url(item.get("url")) in cited:
         meta.append('<span class="clip-cited">Brifingde</span>')
+    elif brifingden_sonra(item, day):
+        # Rev 31: aynı yuva, renksiz — brifing bu kalemi hiç görmedi. BRİFİNGDE ile birbirini dışlar.
+        meta.append('<span class="clip-late">Brifingden sonra</span>')
     if item.get("published") and item["published"] != day:
         meta.append(tr_date(item["published"]))
     if item.get("also"):
@@ -1743,8 +1773,15 @@ def main():
     if news_days:
         NEWS_OUT.mkdir(exist_ok=True)
         report_days = {r["date"] for r in reports}
+        for day in news_days:
+            at = brief_moment(day, published.get(day)) if day in report_days else None
+            if at:
+                BRIEF_AT[day] = at
+        late_rows = {}
         for i, day in enumerate(news_days):
             cited = cited_urls(day)
+            late_rows[day] = sum(1 for it in news[day].get("items", [])
+                                 if norm_url(it.get("url")) not in cited and brifingden_sonra(it, day))
             page = build_news_page(
                 day, news[day],
                 news_days[i - 1] if i else None,
@@ -1772,8 +1809,10 @@ def main():
                       f"{news[day].get('failed_sources', 0)} kaynak yanıt vermedi")
             print(
                 f'  · haberler/{day}.html ({news[day].get("unique_items", 0)} başlık'
-                f" · {hits} brifing atıflı)"
+                f" · {hits} brifing atıflı"
+                + (f" · {late_rows[day]} brifingden sonra" if late_rows[day] else "") + ")"
             )
+        gec_gelen_ozeti(news_days[-2:], late_rows)
 
     (ROOT / "arsiv.html").write_text(
         build_index(reports, version, news_counts), encoding="utf-8"
@@ -2462,6 +2501,24 @@ def h1_tekrar(h1, body, esik=0.6):
             out.append(f"özet {n} · örtüşme {oran:.2f}".replace(".", ",")
                        + f" · H1 “{h1}” ↔ “{metin[:90]}{'…' if len(metin) > 90 else ''}”")
     return out
+
+
+def gec_gelen_ozeti(days, late_rows):
+    """Rev 31 GEÇ-GELEN: son iki medya sayfasının BRİFİNGDEN SONRA jetonlu satır sayısı → (A)."""
+    import os
+    parts = [f"{d}: {late_rows.get(d, 0)}"
+             + ("" if d in BRIEF_AT else " (brifing yok)") for d in days]
+    print(f"  · GEÇ-GELEN: BRİFİNGDEN SONRA jetonlu satır · {' · '.join(parts)}")
+    summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary:
+        try:
+            with open(summary, "a", encoding="utf-8") as fh:
+                fh.write("### GEÇ-GELEN — medya takibi (Rev 31)\n\n"
+                         + "".join(f"- {d}: BRİFİNGDEN SONRA jetonlu satır **{late_rows.get(d, 0)}**"
+                                   + (f" (brifing {BRIEF_AT[d]:%H:%M})" if d in BRIEF_AT else " (brifing yok)")
+                                   + "\n" for d in days) + "\n")
+        except OSError as exc:
+            print(f"  ! GEÇ-GELEN: özet yazılamadı: {exc}")
 
 
 def r23_kurallari(iso, meta, body, body_html, news):

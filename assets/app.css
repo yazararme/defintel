@@ -1165,6 +1165,10 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
 /* kapsam içindeki arıza; meta diliyle aynı ağırlıkta söylenir, vurgulanmaz */
 .clip-nosum { color: var(--muted); }
 
+/* Rev 31: brifingin yayınından sonra ilk görülen kalem — BRİFİNGDE'nin yuvası, ama renksiz:
+   bir ölçü, durum değil (tek renkli meta jetonu BRİFİNGDE olarak kalır) */
+.clip-late { color: var(--muted); }
+
 /* katlanan kategoriler ve artık kovası */
 .more { margin: 0 0 8px; }
 
