@@ -110,3 +110,4 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 | K | Karar | Deneme | Commit |
 |---|---|---|---|
 | K1 | PASS | 1 | 56501f2 |
+| K2 | PASS (deneme 2; d1 FAIL: ray adları metinde yoktu — alias; alt-64 kanıtı eskiydi). Yan etki: raylardan başlık taramasından gelen Türk oyuncular düştü (17–22 Eyl); 23 Eyl rayında Rheinmetall yok (yalnız basılmayan G9 girişinde geçiyordu) | 2 | 727d21c, 449f883 |
