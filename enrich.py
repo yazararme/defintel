@@ -58,14 +58,24 @@ def section_id(heading_text):
     return slug or None
 
 
-def add_heading_anchors(text):
-    """### G1 · etiket  ->  <h3 id="g1"> + copy button, plus ids for EK/ALARMLAR."""
+def add_heading_anchors(text, dev_labels=None):
+    """### G1 · etiket  ->  <h3 id="g1"> + copy button, plus ids for EK/ALARMLAR.
+
+    Rev 23: başlık her zaman frontmatter'daki `label`. Ajanın "### G9 ·" ya da
+    "**G9 · …**" sonrasına kalın yazdığı giriş kelimeleri (ör. "American
+    Rheinmetall") ekrana basılmaz — izleme listesindeki "→ bugün: Lynx XM30
+    prototip teslimi" bağlantısı başka bir ada iniyordu. Aynı olgu, tek ad.
+    Etiketi olmayan gelişmede ajanın metni kalır (ETİKET-BAŞLIK uyarır).
+    """
+    dev_labels = dev_labels or {}
 
     def h3(m):
         gid = m.group(1).lower()
         # Numara yazımda kalır, çıktıda silinir: kimlik yalnızca id ve href'te
         # yaşar. Ekranda okunması gereken şey gelişmenin adı.
-        return f'<h3 id="{gid}">{m.group(2).strip()}{COPY.format(aid=gid)}</h3>'
+        label = dev_labels.get(gid)
+        title = html.escape(label, quote=False) if label else m.group(2).strip()
+        return f'<h3 id="{gid}">{title}{COPY.format(aid=gid)}</h3>'
 
     text = re.sub(r"<h3>(G\d+)\s*·\s*([^<]*)</h3>", h3, text)
 
@@ -684,7 +694,7 @@ def enrich(text, developments, alarm=False, report_iso="", slugs=None):
     # Rakip maddeleri gelişmeye dönüşmeden çapa kurulmaz: h3 olarak doğup
     # sonra kimliklerini alıyorlar.
     text = fold_rivals(text)
-    text = add_heading_anchors(text)
+    text = add_heading_anchors(text, dev_labels)
     # Çapalar kurulduktan hemen sonra: silinen blokla birlikte ona giden
     # atıflar da kendiliğinden bağlantısız kalıyor (link_citations bunu
     # metinde id var mı diye okuyor).

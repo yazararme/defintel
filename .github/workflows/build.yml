@@ -1,7 +1,7 @@
 name: build
 on:
   push:
-    paths: ['source/**', 'build.py', 'assets/**', 'scripts/check_reports.py', 'data/rakipler.json']
+    paths: ['source/**', 'build.py', 'enrich.py', 'assets/**', 'scripts/check_reports.py', 'data/rakipler.json']
   workflow_dispatch:
     inputs:
       boz:
@@ -21,6 +21,14 @@ on:
         type: choice
         options: [none, thales, iai, csg]
         default: none
+      uyari_test:
+        # Rev 23 — genel uyarı kanıtı. Kodu bozmaz: yalnız UYARI_TEST_ONEK: "[TEST] " açar,
+        # böylece dal üzerindeki normal derlemenin gerçek uyarıları (ör. 23 Eylül'ün KUR ve
+        # H1-TEKRAR'ı) main dışında da "[TEST] DEFINTEL uyarıları · <gün>" issue'suna düşer.
+        # Build normal koşar (commit adımı dahil, KAPSAM_BOZ=none olduğu sürece).
+        description: 'Uyarıları [TEST] önekli issue''ya yaz (normal build, bozma yok)'
+        type: boolean
+        default: false
 permissions:
   contents: write
   issues: write
@@ -30,9 +38,9 @@ jobs:
     env:
       DORT_DURUM_BOZ: ${{ inputs.boz || 'none' }}
       KAPSAM_BOZ: ${{ inputs.kapsam_boz || 'none' }}
-      # Yalnız bilerek bozulan çalıştırma test önekiyle (ve main dışında da) issue açar;
+      # Yalnız bilerek bozulan (ya da uyari_test işaretli) çalıştırma test önekiyle (ve main dışında da) issue açar;
       # normal çalıştırmalarda boş → Rev 30 davranışı: issue yalnız main'de.
-      UYARI_TEST_ONEK: ${{ ((inputs.boz && inputs.boz != 'none') || (inputs.kapsam_boz && inputs.kapsam_boz != 'none')) && '[TEST] ' || '' }}
+      UYARI_TEST_ONEK: ${{ ((inputs.boz && inputs.boz != 'none') || (inputs.kapsam_boz && inputs.kapsam_boz != 'none') || inputs.uyari_test == true) && '[TEST] ' || '' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

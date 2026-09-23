@@ -1785,6 +1785,8 @@ def main():
         body_html = render_body(body, meta.get("developments") or [],
                                 bool(meta.get("alarm")), iso,
                                 day_slugs.get(iso))
+        # Rev 23: ETİKET-BAŞLIK · KUR · H1-TEKRAR — yalnız günün raporu, uyarı verir, durdurmaz.
+        r23_kurallari(iso, meta, body, body_html, news)
         (ROOT / "index.html").write_text(
             build_report(meta, body_html, iso,
                          sources[-2][0] if len(sources) > 1 else None, None,
@@ -2269,6 +2271,212 @@ def turkish_line(body, items):
     return [(r["name"], r["id"], r["name"] in from_dev or r["name"] in from_news)
             for r in config]
 
+
+
+# ---------- Rev 23: bir olgu, bir ad, bir değer ----------
+#
+# Üç kural da yalnız günün raporunda (en yeni kaynak) uyarı verir: her derleme
+# bütün arşivi yeniden kurar ve eski günlerin aynı uyarısı her sabah issue'ya
+# düşseydi kanal %100 ateşleyen, sıfır bilgili bir kanal olurdu. Uyarı Rev 30
+# kanalına gider, derlemeyi durdurmaz: rapor insan incelemesi olmadan yayımlanıyor
+# ve durdurmak, yöneticiye o sabah hiç rapor gitmemesi demek.
+
+def _duz(fragment):
+    """HTML parçası → görünen düz metin (kopyala düğmesi hariç)."""
+    fragment = re.sub(r"<button\b.*?</button>", "", fragment, flags=re.S)
+    return " ".join(html.unescape(re.sub(r"<[^>]+>", "", fragment)).split())
+
+
+def etiket_baslik(body_html, developments):
+    """ETİKET-BAŞLIK: her gelişme başlığı kendi label'ı; her '→ bugün:' bağlantısı
+    indiği başlığın metni. Döner: [uyarı metni]."""
+    labels = {str(d.get("id", "")).lower(): " ".join(str(d.get("label", "")).split())
+              for d in developments if d.get("id")}
+    out = []
+    heads = {m.group(1): _duz(m.group(2)) for m in
+             re.finditer(r'<h3 id="(g\d+)"[^>]*>(.*?)</h3>', body_html, re.S)}
+    for gid, text in heads.items():
+        label = labels.get(gid)
+        if not label:
+            out.append(f"{gid.upper()} başlığı “{text}” — frontmatter'da label yok")
+        elif text != label:
+            out.append(f"{gid.upper()} başlığı “{text}” ≠ label “{label}”")
+    # İnilen yer h3 ya da izleme kaleminin kalın adı (li#gN > strong.ganchor).
+    landing = dict(heads)
+    for m in re.finditer(r'<li id="(g\d+)"[^>]*><strong class="ganchor">(.*?)</strong>',
+                         body_html, re.S):
+        landing.setdefault(m.group(1), _duz(m.group(2)))
+    for m in re.finditer(r'<li class="watch-move">.*?<span class="watch-arrow"> → bugün: </span>'
+                         r'<a class="xref" href="#(g\d+)"[^>]*>(.*?)</a>', body_html, re.S):
+        gid, text = m.group(1), _duz(m.group(2))
+        if gid in landing and landing[gid] != text:
+            out.append(f"→ bugün: “{text}” ≠ indiği başlık “{landing[gid]}” ({gid.upper()})")
+    return out
+
+
+# Para birimi: yazım biçimleri → tek kod. Build ağa çıkmaz; kur çevirmez, yalnız
+# ajanın yazdığı değerin kaynağın medya özetinde geçip geçmediğine bakar.
+_PARA = {
+    "$": "USD", "dolar": "USD", "usd": "USD", "abd doları": "USD",
+    "€": "EUR", "avro": "EUR", "euro": "EUR", "eur": "EUR",
+    "£": "GBP", "sterlin": "GBP", "gbp": "GBP",
+    "₺": "TRY", "tl": "TRY", "try": "TRY",
+    "nok": "NOK", "norveç kronu": "NOK", "sek": "SEK", "isveç kronu": "SEK",
+    "dkk": "DKK", "danimarka kronu": "DKK", "kron": "KRON",
+    "pln": "PLN", "zloti": "PLN", "krw": "KRW", "won": "KRW", "jpy": "JPY", "yen": "JPY",
+    "inr": "INR", "rupi": "INR", "aud": "AUD", "cad": "CAD", "chf": "CHF", "frank": "CHF",
+    "rub": "RUB", "ruble": "RUB", "cny": "CNY", "yuan": "CNY",
+}
+# Uzun adlar Türkçe ek alabilir ("dolarlık"); kısa/çok anlamlılar ("yen" ~ "yeni") ekli geçmez.
+_CUR = (r"(?:\$|€|£|₺|(?<![a-zçğıöşü])(?:abd doları|norveç kronu|isveç kronu|danimarka kronu|dolar|avro|euro|sterlin|zloti|ruble|yuan)"
+        r"|(?<![a-zçğıöşü])(?:kron|won|yen|rupi|frank)(?![a-zçğıöşü])"
+        r"|\b(?:USD|EUR|GBP|TRY|TL|NOK|SEK|DKK|PLN|KRW|JPY|INR|AUD|CAD|CHF|RUB|CNY)\b)")
+_NUM = r"\d+(?:[.,]\d+)*"
+_MAG = r"(?:bin|milyon|milyar|trilyon)"
+_AMT = rf"(?:{_CUR}\s?{_NUM}(?:\s{_MAG})?|{_NUM}(?:\s{_MAG})?\s?{_CUR})"
+_AMT_RE = re.compile(_AMT, re.I)
+_KUR_RE = re.compile(rf"({_AMT})(?:'[a-zçğıöşü]+)?\s*\(\s*(?:yaklaşık\s+|~\s*)?({_AMT})\s*\)", re.I)
+_CARPAN = {"bin": 1e3, "milyon": 1e6, "milyar": 1e9, "trilyon": 1e12}
+
+
+def _tutar(text):
+    """'1,5 milyar $' → (1.5e9, 'USD'); okunamazsa None."""
+    cur = re.search(_CUR, text, re.I)
+    num = re.search(_NUM, text)
+    if not cur or not num:
+        return None
+    n = num.group(0)
+    if "," in n:                                   # Türkçe: 1.500,5
+        n = n.replace(".", "").replace(",", ".")
+    elif re.fullmatch(r"\d{1,3}(?:\.\d{3})+", n):  # 1.500 binlik
+        n = n.replace(".", "")
+    try:
+        val = float(n)
+    except ValueError:
+        return None
+    mag = re.search(_MAG, text, re.I)
+    val *= _CARPAN[mag.group(0).lower()] if mag else 1
+    return val, _PARA.get(cur.group(0).lower(), cur.group(0).upper())
+
+
+def _ayni(a, b):
+    return a and b and a[1] == b[1] and abs(a[0] - b[0]) <= 0.005 * max(a[0], b[0])
+
+
+def _ozet_index(news):
+    """norm_url → medya özeti (summary_tr), bütün günlerden."""
+    idx = {}
+    for data in news.values():
+        for it in data.get("items", []):
+            if it.get("summary_tr"):
+                idx.setdefault(norm_url(it.get("url")), it["summary_tr"])
+    try:
+        extra = json.loads((NEWS_DATA / "summaries.json").read_text(encoding="utf-8"))
+        for u, s in extra.items():
+            if isinstance(s, str):
+                idx.setdefault(norm_url(u), s)
+    except Exception:
+        pass
+    return idx
+
+
+def kur_denetimi(body, developments, ozetler):
+    """KUR: gövdede 'TUTAR (başka para birimiyle TUTAR)' varsa, iki değer de aynı
+    [K#]'in medya özetinde geçmeli. Ayrıca atıflı özetlerden biri aynı olguya
+    aynı para biriminde başka bir değer veriyorsa (kaynaklar çelişiyor, sayfa
+    tek değer basıyor) uyarılır. Döner: [uyarı metni]."""
+    kaynak_url = {}
+    for m in re.finditer(r"(?m)^\s*[-*]\s*\[K(\d+)\](.*)$", body):
+        urls = re.findall(r"https?://[^\s<>\")]+", m.group(2))
+        if urls:
+            kaynak_url[m.group(1)] = norm_url(urls[-1].rstrip(".,;"))
+    gelisme_k = {b[1]: set(re.findall(r"\[K(\d+)\]", b[3])) for b in development_blocks(body)}
+    labels = {str(d.get("id", "")).lower(): str(d.get("label", "")) for d in developments}
+    govde = re.split(r"(?m)^##\s*KAYNAKLAR.*$", body)[0]
+    out = []
+    for blok in (b for b in govde.split("\n") if b.strip()):
+        ks = set(re.findall(r"\[K(\d+)\]", blok))
+        gids = [g.lower() for g in re.findall(r"\bG\d+\b", blok)]
+        for g in gids:
+            ks |= gelisme_k.get(g, set())
+        for m in _KUR_RE.finditer(blok):
+            v1, v2 = _tutar(m.group(1)), _tutar(m.group(2))
+            if not v1 or not v2 or v1[1] == v2[1]:
+                continue
+            ozet = {k: ozetler.get(kaynak_url.get(k, ""), "") for k in sorted(ks, key=int)}
+            tutarlar = {k: [(a.group(0), _tutar(a.group(0))) for a in _AMT_RE.finditer(s)]
+                        for k, s in ozet.items()}
+            destek = [k for k, ts in tutarlar.items()
+                      if any(_ayni(t, v1) for _r, t in ts) and any(_ayni(t, v2) for _r, t in ts)]
+            # Aynı olgunun başka değeri: aynı para birimi, aynı ölçek (×0,5–×2), farklı sayı.
+            baska = [(k, r) for k, ts in tutarlar.items() for r, t in ts
+                     if t and t[1] == v1[1] and 0.5 <= t[0] / v1[0] <= 2 and not _ayni(t, v1)]
+            if destek and not baska:
+                continue
+            ad = re.match(r"\s*(?:'[a-zçğıöşü]+\s+)?((?:[A-ZÇĞİÖŞÜ0-9][A-ZÇĞİÖŞÜ0-9-]+\s*){1,4})",
+                          blok[m.end():])
+            ad = ad.group(1).strip() if ad else (labels.get(gids[0], "") if gids else "")
+            ad = ad or " ".join(blok[:m.start()].split()[-4:])
+            atif = "".join(f"[K{k}]" for k in sorted(ks, key=int)) or "atıf yok"
+            if baska:
+                k, r = baska[0]
+                ek = (f"atıflı özetler çelişiyor; {m.group(1)}'i destekleyen: "
+                      + (", ".join(f"[K{d}]" for d in destek) or "yok"))
+                out.append(f"{ad} {m.group(1)} ↔ özet {r} [K{k}] · gövde “{m.group(0)}” · {ek}")
+            else:
+                out.append(f"{ad} {m.group(1)} ↔ özet — · gövde “{m.group(0)}” · iki değer de "
+                           f"aynı özette geçmiyor ({atif})")
+    return out
+
+
+_DURAK = {"ve", "ile", "bir", "bu", "şu", "için", "da", "de", "ki", "mi", "olarak", "the",
+          "of", "and", "a", "an", "in", "on", "to", "ya", "veya", "ise", "gibi", "daha"}
+
+
+def _sozcukler(text):
+    text = tr_fold(re.sub(r"\bG\d+\b|\[K\d+\]|[*_`]", " ", text))
+    text = re.sub(r"['’][a-zçğıöşü]+", "", text)      # Archer'ı → archer
+    return {w for w in re.findall(r"[\wçğıöşü]+", text) if w not in _DURAK and (len(w) > 1 or w.isdigit())}
+
+
+def h1_tekrar(h1, body, esik=0.6):
+    """H1-TEKRAR: H1 ile bir özet maddesinin sözcük örtüşmesi (ortak / kısa olanın
+    sözcük sayısı) ≥ eşik. Döner: [uyarı metni]."""
+    block = re.search(r"##\s*YÖNETİCİ ÖZETİ\s*\n(.*?)(?=\n##|\Z)", body, re.S)
+    if not block or not h1:
+        return []
+    a = _sozcukler(h1)
+    out = []
+    n = 0
+    for line in block.group(1).split("\n"):
+        madde = re.match(r"\s*(?:\d+[.)]|[-*])\s+(.*)", line)
+        if not madde:
+            continue
+        n += 1
+        b = _sozcukler(madde.group(1))
+        if not a or not b:
+            continue
+        oran = len(a & b) / min(len(a), len(b))
+        if oran >= esik:
+            metin = re.sub(r"^G\d+\s*[—-]\s*", "", madde.group(1).strip())
+            out.append(f"özet {n} · örtüşme {oran:.2f}".replace(".", ",")
+                       + f" · H1 “{h1}” ↔ “{metin[:90]}{'…' if len(metin) > 90 else ''}”")
+    return out
+
+
+def r23_kurallari(iso, meta, body, body_html, news):
+    """Günün raporu için ETİKET-BAŞLIK · KUR · H1-TEKRAR → Rev 30 kanalı."""
+    from scripts import uyari
+    developments = meta.get("developments") or []
+    bulgular = ([("ETİKET-BAŞLIK", u) for u in etiket_baslik(body_html, developments)]
+                + [("KUR", u) for u in kur_denetimi(body, developments, _ozet_index(news))]
+                + [("H1-TEKRAR", u) for u in h1_tekrar(guard_headline(meta.get("title"), iso), body)])
+    for kural, metin in bulgular:
+        uyari.ekle(kural, f"{iso} · {metin}")
+    print(f"  · R23 {iso}: ETİKET-BAŞLIK {sum(k == 'ETİKET-BAŞLIK' for k, _ in bulgular)}"
+          f" · KUR {sum(k == 'KUR' for k, _ in bulgular)}"
+          f" · H1-TEKRAR {sum(k == 'H1-TEKRAR' for k, _ in bulgular)}")
+    return bulgular
 
 
 if __name__ == "__main__":

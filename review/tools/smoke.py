@@ -8,10 +8,14 @@ the repo root) and that the key HTML files are non-empty. stdlib only; the Rev 2
 DÖRT-DURUM and scope-line checks, and the Rev 21 KAPSAM-SAYI checks (64/64 state, then a
 KAPSAM_BOZ=thales build for the <64 state, then a normal rebuild), need a Playwright python
 (DEFINTEL_PW_PYTHON or ~/.local/share/defintel-shotenv/bin/python).
+Rev 23: ETİKET-BAŞLIK · KUR · H1-TEKRAR — the build's alert lines for the day's report,
+static label/heading equality on the latest report, rule controls on synthetic input, and a
+1440px click-through from the watch list's "→ bugün:" link to its heading (Playwright).
 Later revisions extend CHECKS / PAGES. Exit 1 on any failure.
 """
 import os
 import pathlib
+import re
 import subprocess
 import sys
 import urllib.request
@@ -101,6 +105,80 @@ sys.exit(0 if ok else 1)
 """
 
 
+# Rev 23 R23-P0-1 (S): 1440px, izleme listesindeki "→ bugün:" bağlantısı indiği başlığa eşit.
+ETIKET_JS = r"""
+import sys
+from playwright.sync_api import sync_playwright
+url, gid = sys.argv[1], sys.argv[2]
+with sync_playwright() as p:
+    try: b = p.chromium.launch()
+    except Exception: b = p.chromium.launch(channel="chrome")
+    pg = b.new_context(service_workers="block", viewport={"width": 1440, "height": 900}).new_page()
+    pg.goto(url); pg.wait_for_timeout(400)
+    link = pg.locator(f'li.watch-move a.xref[href="#{gid}"]').first
+    metin = link.inner_text().strip()
+    link.click(); pg.wait_for_timeout(400)
+    baslik = pg.evaluate(f"(() => {{ const h = document.getElementById('{gid}'); const c = h.cloneNode(true);"
+                         f" c.querySelectorAll('button').forEach(x => x.remove()); return c.innerText.trim(); }})()")
+    gorunur = pg.evaluate(f"(() => {{ const r = document.getElementById('{gid}').getBoundingClientRect();"
+                          f" return r.top >= 0 && r.top < innerHeight; }})()")
+    hash_ = pg.evaluate("location.hash")
+    b.close()
+ok = metin == baslik and hash_ == "#" + gid and gorunur
+print(f"1440px: '→ bugün: {metin}' → {hash_} başlık '{baslik}' (görünür {gorunur})")
+sys.exit(0 if ok else 1)
+"""
+
+
+def r23_checks(build_stdout, fails):
+    """Rev 23: kuralların uyarı satırları, etiket = başlık, kural kontrolleri."""
+    sys.path.insert(0, str(ROOT))
+    import build as B
+    src = sorted((ROOT / "source").glob("????-??-??.md"))[-1]
+    iso = src.stem
+    meta, body = B.split_frontmatter(src.read_text(encoding="utf-8"))
+    devs = meta.get("developments") or []
+    satir = [l.strip() for l in build_stdout.splitlines() if l.strip().startswith(f"· R23 {iso}")]
+    kur = [l.strip() for l in build_stdout.splitlines() if l.strip().startswith("! KUR ·")]
+    h1 = [l.strip() for l in build_stdout.splitlines() if l.strip().startswith("! H1-TEKRAR ·")]
+    etk = [l.strip() for l in build_stdout.splitlines() if l.strip().startswith("! ETİKET-BAŞLIK ·")]
+    if iso == "2026-09-23":   # R23-P1-1 kabulü: bu günün iki uyarısı, etiket uyarısı yok
+        ok = (any("SAN CUAS 1,5 milyar $ ↔ özet 1,74" in l for l in kur)
+              and any(f"H1-TEKRAR · {iso} · özet 1 " in l for l in h1) and not etk)
+    else:
+        ok = bool(satir)
+    print(f"{'ok  ' if ok else 'FAIL'} R23 uyarıları · {satir[0] if satir else 'satır yok'}")
+    for l in kur + h1 + etk:
+        print(f"       {l[:170]}")
+    if not ok:
+        fails.append("R23 uyarıları")
+    # Etiket = başlık, yayımlanan sayfanın kendisinde (reports/<gün>.html ve index.html).
+    for page in (f"reports/{iso}.html", "index.html"):
+        text = (ROOT / page).read_text(encoding="utf-8")
+        bulgu = B.etiket_baslik(text, devs)
+        heads = len(re.findall(r'<h3 id="g\d+"', text))
+        ok = not bulgu and heads > 0
+        print(f"{'ok  ' if ok else 'FAIL'} ETİKET-BAŞLIK {page} · {heads} başlık = label"
+              + (f" · {bulgu[:2]}" if bulgu else ""))
+        if not ok:
+            fails.append(f"ETİKET-BAŞLIK {page}")
+    # Kural kontrolleri: tetiklemesi gereken tetikler, gerekmeyen susar.
+    kb = "### G1 · x\nA 2 milyar $'lık (20 milyar NOK) iş. [K1]\n## KAYNAKLAR\n- [K1] a — https://x.y/z\n"
+    iki = B.kur_denetimi(kb, [], {"https://x.y/z": "Anlaşma 20 milyar NOK (2 milyar dolarlık)."})
+    tek = B.kur_denetimi(kb, [], {"https://x.y/z": "Anlaşma 20 milyar NOK."})
+    celiski = B.kur_denetimi(kb.replace("[K1]\n##", "[K1][K2]\n##") + "- [K2] b — https://x.y/w\n", [],
+                             {"https://x.y/z": "20 milyar NOK (2 milyar dolar).", "https://x.y/w": "2,3 milyar dolarlık iş."})
+    h1_sus = B.h1_tekrar("Letonya Morana'yı seçti", "## YÖNETİCİ ÖZETİ\n\n1. G1 — Pentagon 17 firmayı seçti.\n")
+    h1_ot = B.h1_tekrar("Letonya Morana'yı seçti", "## YÖNETİCİ ÖZETİ\n\n1. G1 — Letonya, Morana obüsünü seçti.\n")
+    ok = not iki and len(tek) == 1 and len(celiski) == 1 and "özet 2,3 milyar dolar" in celiski[0] \
+        and not h1_sus and len(h1_ot) == 1 and h1_ot[0].startswith("özet 1 ")
+    print(f"{'ok  ' if ok else 'FAIL'} R23 kural kontrolleri · KUR (iki değer aynı özette → sus {not iki}, "
+          f"biri yok → {len(tek)}, özetler çelişiyor → {len(celiski)}) · H1-TEKRAR (sus {not h1_sus}, örtüşen → {len(h1_ot)})")
+    if not ok:
+        fails.append("R23 kural kontrolleri")
+    return iso, devs
+
+
 def main():
     fails = []
     build = subprocess.run([sys.executable, "build.py"], cwd=ROOT, capture_output=True, text=True)
@@ -108,6 +186,9 @@ def main():
     if build.returncode:
         print(build.stdout[-2000:], build.stderr[-2000:])
         fails.append("build.py")
+
+    # Rev 23: ETİKET-BAŞLIK · KUR · H1-TEKRAR
+    r23_iso, r23_devs = r23_checks(build.stdout, fails)
 
     # Rev 30: OPERATÖR-YALNIZ — uyari.py sahte GitHub API testi
     t = subprocess.run([sys.executable, "scripts/test_uyari.py"], cwd=ROOT, capture_output=True, text=True)
@@ -135,6 +216,20 @@ def main():
         print(f"{'ok  ' if ks.returncode == 0 else 'FAIL'} kapsam satırı süzgeçle · {ks.stdout.strip() or ks.stderr[-300:]}")
         if ks.returncode:
             fails.append("kapsam satırı")
+
+    # Rev 23 R23-P0-1: 1440px tıklama — izleme bağlantısı → başlık (23 Eylül'de G9)
+    if py:
+        gid = "g9" if r23_iso == "2026-09-23" else None
+        if not gid:
+            html_ = (ROOT / "reports" / f"{r23_iso}.html").read_text(encoding="utf-8")
+            m = re.search(r'<li class="watch-move">.*?href="#(g\d+)"', html_, re.S)
+            gid = m.group(1) if m else None
+        if gid:
+            et = subprocess.run([py, "-c", ETIKET_JS, f"{BASE}/reports/{r23_iso}.html", gid],
+                                cwd=ROOT, capture_output=True, text=True)
+            print(f"{'ok  ' if et.returncode == 0 else 'FAIL'} ETİKET-BAŞLIK tıklama · {et.stdout.strip() or et.stderr[-300:]}")
+            if et.returncode:
+                fails.append("ETİKET-BAŞLIK tıklama")
 
     # Rev 21: KAPSAM-SAYI — alias testi 64/64 (normal build'in çıktısından)
     m = [l for l in build.stdout.splitlines() if "KAPSAM-SAYI: alias testi" in l]
