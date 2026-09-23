@@ -1,0 +1,19 @@
+name: uyari-test
+# Rev 30 (issue yolu) — tek seferlik: bot hesabıyla atanmış bir issue açar,
+# GitHub Mobile bildirimini sınamak için. Yalnız rev21-33 dalında koşar. Sınamadan sonra silinir.
+on:
+  push:
+    branches: [rev21-33]
+    paths: ['.github/workflows/uyari-test.yml']
+permissions:
+  issues: write
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          gh issue create --repo "$GITHUB_REPOSITORY" --assignee yazararme
+          --title "DEFINTEL uyarıları · test (bot)"
+          --body "Bot testi: bu issue github-actions[bot] tarafından açıldı. Telefonuna GitHub Mobile bildirimi geldiyse kanal çalışıyor."
