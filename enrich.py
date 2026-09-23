@@ -390,16 +390,21 @@ def link_citations(text, dev_ids, has_alarms=True, dev_labels=None):
     return "".join(out)
 
 
-def link_watch_items(text, slugs):
+def link_watch_items(text, slugs, day=""):
     """İzleme kalemlerinin adını kendi dosyasına bağla.
 
     Ad hem okuma yolunda hem katlamada geçiyor; ikisi de aynı yere gider.
     Eşleşme bulunamazsa satır düz metin kalır — var olmayan bir sayfaya
     bağlantı, bağlantı olmamasından kötü.
+
+    R27-P0-2: bağlantı okunan günü taşır (`?g=YYYY-MM-DD`). İplik sayfası tek
+    bir statik dosya; hangi günden gelindiğini yalnızca adres söyleyebilir,
+    daybar'ı o güne app.js kurar (F-09: güne dönüş yoktu).
     """
     if not slugs:
         return text
     b = _build()
+    q = f"?g={day}" if re.fullmatch(r"\d{4}-\d{2}-\d{2}", day or "") else ""
 
     def li(m):
         head, body = m.group(1), m.group(2)
@@ -411,7 +416,7 @@ def link_watch_items(text, slugs):
         # adı satırın başında düz metin olarak duruyor.
         anchored = re.sub(
             r'(<strong class="ganchor">)([^<]+)(</strong>)',
-            lambda a: f'{a.group(1)}<a class="thread-link" href="/izleme/{slug}.html">'
+            lambda a: f'{a.group(1)}<a class="thread-link" href="/izleme/{slug}.html{q}">'
                       f'{a.group(2)}</a>{a.group(3)}',
             body, count=1)
         if anchored != body:
@@ -424,7 +429,7 @@ def link_watch_items(text, slugs):
             return m.group(0)
         return (head + body.replace(
             name.group(1),
-            f'<a class="thread-link" href="/izleme/{slug}.html">{name.group(1)}</a>', 1))
+            f'<a class="thread-link" href="/izleme/{slug}.html{q}">{name.group(1)}</a>', 1))
 
     def section(m):
         return m.group(1) + re.sub(r"(<li\b[^>]*>)((?:(?!</li>).)*)", li, m.group(2), flags=re.S)
@@ -710,7 +715,7 @@ def enrich(text, developments, alarm=False, report_iso="", slugs=None):
     text = link_citations(text, dev_ids, 'id="alarmlar"' in text, dev_labels)
     text = drop_self_links(text)
     text = drop_unread_sources(rename_headers(text))
-    text = link_watch_items(text, slugs)
+    text = link_watch_items(text, slugs, report_iso)
     text = reorder_sections(fold_watchlist(drop_scan_note(text)))
     return fold_sources(fold_appendix(text))
 

@@ -815,6 +815,9 @@ def build_threads(sources):
                 th["entries"].append({
                     "day": iso, "title": labels.get(gid) or watch_opening(raw),
                     "anchor": f"#g{ref.group(1)}", "opening": False,
+                    # R27-P0-1: o günün durum cümlesi — brifingde "→ bugün:"
+                    # satırının kuyruğu. Yoksa boş: uydurulmaz.
+                    "note": watch_status(raw),
                 })
         # Kapanma yalnızca açık bildirimle olur: ajanın o gün yazmayı unutması
         # ipliğin bittiği anlamına gelmez. Listeden düşen kalem "uykuda"
@@ -904,6 +907,39 @@ def display_name(name):
     return name.strip(" .")
 
 
+def watch_status(text):
+    """Kalemin o günkü durum cümlesi: addan ve durum işaretinden sonra kalan düz metin.
+
+    "XM30'da organik C-UAS şartı — *bekliyor.* Prototip teslim edildi, şart hâlâ
+    tanımlı değil (G9)." → "Prototip teslim edildi, şart hâlâ tanımlı değil."
+
+    Brifing bu cümleyi "→ bugün:" satırının sonunda basıyor (enrich.reading_path_shape);
+    iplik sayfası aynı kuralla aynı cümleyi türetir. Durum işareti ("bekliyor",
+    "ilerledi (G3)") bir işaret, cümle değil — atılır. Kimlikler (G#, K#) ve
+    "(18.09.2026 raporu)" geri atıfları da. Geriye bir şey kalmazsa boş döner.
+    """
+    parts = re.split(r"\s—\s|\s–\s", text, maxsplit=1)
+    if len(parts) < 2:
+        return ""
+    rest = parts[1].strip()
+    # Baştaki italik durum işareti: *bekliyor.* · *ilerledi (G3).* · _…_
+    rest = re.sub(r"^(\*{1,2}|_)[^*_]{0,60}?\1\s*", "", rest)
+    rest = re.sub(r"[*_`]", "", rest)
+    rest = re.sub(r"^\s*(?:ilerledi|bekliyor)\b\.?", "", rest, flags=re.I)
+    rest = re.sub(r"\s*\((?:bkz\.\s*)?G\d+(?:\s*,\s*G\d+)*\)", "", rest)
+    rest = re.sub(r"\s*\[K\d+\]", "", rest)
+    rest = re.sub(r"\s*\(\d{2}\.\d{2}\.\d{4}\s+raporu\)", "", rest)
+    rest = re.sub(r"\(\s*\)", "", rest)
+    # "…için bkz. ALARMLAR." brifingin bir bölümüne geri atıf: iplik sayfasında o
+    # bölüm yok ve Rev 6'dan beri bu cümleler kaldırılıyor. Cümlesiyle düşer.
+    rest = " ".join(c for c in re.split(r"(?<=[.;])(?<!bkz\.)\s+", rest)
+                    if not re.search(r"\bbkz\.\s*[A-ZÇĞİÖŞÜ]{3,}", c))
+    rest = re.sub(r"\s+", " ", rest).strip(" .,;—–-")
+    if not re.search(r"\w", rest):
+        return ""
+    return enrich.tr_upper_first(rest) + ("" if rest.endswith(("?", "!")) else ".")
+
+
 def watch_opening(text):
     """Açılış kaydının satırı: ajanın o gün yazdığı izleme cümlesi.
 
@@ -943,8 +979,40 @@ def age_words(days):
     return "bugün" if days == 0 else "dün" if days == 1 else f"{days} gün önce"
 
 
-def thread_page(th, latest):
-    """Bir ipliğin kendi zaman çizgisi."""
+def thread_daybar(latest, report_days=(), news_days=()):
+    """R27-P0-2: iplik sayfasının daybar'ı — gelinen günü gösterir.
+
+    İplik sayfası günden bağımsız tek bir dosya; brifingden gelen bağlantı
+    `?g=YYYY-MM-DD` taşır ve app.js şeridi o güne kurar (tarih, ‹/›, karşı ürün).
+    JavaScript'siz ya da `?g=` olmadan açılınca şerit en son brifing gününü
+    gösterir — sitenin "bugün"ü. ‹/› brifing günleri arasında gezer (Rev 0:
+    ürün içinde); karşı ürün her zaman aynı güne gider, yoksa tıklanamaz.
+    """
+    days = sorted(report_days) or [latest]
+    news = sorted(set(news_days))
+    i = days.index(latest) if latest in days else len(days) - 1
+    bar = daybar("report", days[i], days[i - 1] if i else None,
+                 days[i + 1] if i + 1 < len(days) else None,
+                 days[i] if days[i] in news else None)
+    return bar.replace(
+        '<nav class="daybar"',
+        f'<nav class="daybar" data-rapor="{" ".join(days)}" data-medya="{" ".join(news)}"', 1)
+
+
+def thread_status(th):
+    """R27-P0-1: son hareketin durum cümlesi ve günü — yoksa None.
+
+    Yalnız *son* hareket: daha eski bir hareketin cümlesini bugünkü durum diye
+    basmak, ipliğin o günden beri kımıldamadığını gizler. Açılış bir hareket değil.
+    """
+    moves = [e for e in th["entries"] if not e.get("opening")]
+    if not moves or not moves[-1].get("note"):
+        return None
+    return moves[-1]["note"], moves[-1]["day"]
+
+
+def thread_page(th, latest, report_days=(), news_days=()):
+    """Bir ipliğin kendi zaman çizgisi: ne oldu, şimdi ne durumda (Rev 27)."""
     import datetime as _dt
     opened = tr_date(th["opened"])
     moved = th["entries"]
@@ -960,23 +1028,41 @@ def thread_page(th, latest):
                   f' · son kayıt {tr_date(th["last"])}</span>')
     else:
         status = f'<span class="thread-state">Açık · son hareket {age_words(gap)}</span>'
-    rows = "".join(
-        f'<li class="thread-entry{" thread-entry--open" if e.get("opening") else ""}">'
-        f'<a href="{day_url("report", e["day"], e["anchor"])}">'
-        f'<span class="thread-day num">{tr_date(e["day"])}</span>'
-        f'<span class="thread-line">{html.escape(e["title"])}</span>'
-        + ('<span class="thread-tag">açıldı</span>' if e.get("opening") else "")
-        + "</a></li>"
-        for e in reversed(moved)
-    ) or ('<li class="thread-entry thread-entry--none">Açıldığından beri kayda geçen '
-          "bir hareket olmadı.</li>")
+    # İPLİK-DURUM'un kanıtı için bilerek kapatılabilir (IPLIK_BOZ=1).
+    now = None if iplik_boz() else thread_status(th)
+    now_html = ""
+    if now:
+        # Tarih cümlenin son kelimesiyle aynı satırda kalır: 375px'te tek başına
+        # "· 23 Eylül" diye bir satıra düşünce yetim bir ayraç okunuyordu.
+        bas, _, son = now[0].rpartition(" ")
+        now_html = (f'<p class="thread-status">{html.escape(bas + " " if bas else "")}'
+                    f'<span class="thread-status-end">{html.escape(son)} '
+                    f'<span class="thread-status-day num">· {tr_short(now[1])}</span></span></p>\n  ')
+
+    def row(e):
+        day = f'<span class="thread-day num">{tr_date(e["day"])}</span>'
+        if e.get("opening"):
+            # Açılış satırı ayrı çizilir: bir hareket değil, bağlantısı yok (R27-P1-1).
+            return ('<li class="thread-entry thread-entry--open">'
+                    f'{day}<span class="thread-text"><span class="thread-tag">açıldı</span>'
+                    f'<span class="thread-line">{html.escape(e["title"])}</span></span></li>')
+        note = (f'<span class="thread-note">{html.escape(e["note"])}</span>'
+                if e.get("note") else "")
+        return (f'<li class="thread-entry"><a href="{day_url("report", e["day"], e["anchor"])}">'
+                f'{day}<span class="thread-text"><span class="thread-line">'
+                f'{html.escape(e["title"])}</span>{note}</span></a></li>')
+
+    rows = "".join(row(e) for e in reversed(moved)) or (
+        '<li class="thread-entry thread-entry--none">Açıldığından beri kayda geçen '
+        "bir hareket olmadı.</li>")
     return (
         head(f'{th["name"]} — izleme — {SITE_NAME}')
         + masthead()
+        + thread_daybar(latest, report_days, news_days)
         + f"""<main class="wrap thread">
   <p class="kicker">İzleme dosyası</p>
   <h1 class="report-title">{html.escape(th["name"])}</h1>
-  <p class="thread-meta"><span class="num">{opened}</span> tarihinde açıldı · {status}
+  {now_html}<p class="thread-meta"><span class="num">{opened}</span> tarihinde açıldı · {status}
     · <span class="num">{moves}</span> hareket</p>
   <ol class="thread-list">{rows}</ol>
   <nav class="endnav" aria-label="Devam">
@@ -990,6 +1076,53 @@ def thread_page(th, latest):
         + f'<script src="{asset("app.js")}" defer></script>\n'
         + FOOT
     )
+
+
+def iplik_boz():
+    """IPLIK_BOZ=1: durum satırı yalnız bu derlemede basılmaz (İPLİK-DURUM kanıtı)."""
+    import os
+    return os.environ.get("IPLIK_BOZ", "").strip().lower() not in ("", "0", "none", "false")
+
+
+def iplik_durum_kurali(threads):
+    """İPLİK-DURUM (Rev 27): son hareketinde durum cümlesi olan ipliğin sayfasında
+    `.thread-status` yoksa Rev 30 kanalına uyarı. Derlenmiş HTML'e bakar — üretim
+    kodunun niyetine değil, yayımlanan sayfaya."""
+    import os
+    beklenen, eksik, var = [], [], 0
+    for th in threads.values():
+        yol = THREAD_OUT / f'{th["slug"]}.html'
+        try:
+            metin = yol.read_text(encoding="utf-8")
+        except OSError:
+            metin = ""
+        has = 'class="thread-status"' in metin
+        var += has
+        if thread_status(th):
+            beklenen.append(th["slug"])
+            if not has:
+                eksik.append(th["slug"])
+    boz = " (IPLIK_BOZ=1, bilerek)" if iplik_boz() else ""
+    print(f"  · İPLİK-DURUM: {len(eksik)} eksik{boz} · {len(threads)} iplik, "
+          f"{len(beklenen)} ipliğin son hareketinde durum cümlesi var, "
+          f"{var} sayfada .thread-status, {len(threads) - len(beklenen)} ipliğin yok")
+    summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary:
+        md = ["### İPLİK-DURUM — iplik sayfasında durum satırı (Rev 27)", "",
+              f"**{'🟢' if not eksik else '🔴'} İPLİK-DURUM: {len(eksik)} eksik**{boz} · "
+              f"{len(beklenen)}/{len(threads)} ipliğin son hareketinde durum cümlesi var", ""]
+        if eksik:
+            md += [f"- `izleme/{s}.html`" for s in eksik[:10]]
+        try:
+            with open(summary, "a", encoding="utf-8") as fh:
+                fh.write("\n".join(md) + "\n\n")
+        except OSError as exc:
+            print(f"  ! İPLİK-DURUM: özet yazılamadı: {exc}")
+    if eksik:
+        from scripts import uyari
+        uyari.ekle("İPLİK-DURUM", f"İPLİK-DURUM: {len(eksik)} iplik sayfasında durum satırı yok{boz} — "
+                                  f"ilk: {', '.join(eksik[:3])}")
+    return eksik
 
 
 TR_ALPHABET = "abcçdefgğhıijklmnoöpqrsştuüvwxyz"
@@ -1942,7 +2075,8 @@ def main():
         latest = sources[-1][0]
         for th in threads.values():
             (THREAD_OUT / f'{th["slug"]}.html').write_text(
-                thread_page(th, latest), encoding="utf-8")
+                thread_page(th, latest, [iso for iso, _m, _b in sources], news_counts),
+                encoding="utf-8")
         (THREAD_OUT / "index.html").write_text(
             thread_index(threads, latest), encoding="utf-8")
         # Birleştirilen ipliklerin eski adresleri ölü kalmasın: geçen haftadan
@@ -1967,6 +2101,8 @@ def main():
         print(f"  · izleme/ ({len(threads)} dosya + {stubs} yönlendirme · "
               f"{st['open']} açık · "
               f"{st['dormant']} uykuda · {st['closed']} kapalı)")
+        # Rev 27: İPLİK-DURUM — son hareketin durum cümlesi sayfaya ulaştı mı.
+        iplik_durum_kurali(threads)
 
     # Okuyucu gün atlar; ürün bugüne kadar bunu sessizlikle cezalandırıyordu.
     # Atlanan günler kendi tek cümleleriyle geri veriliyor.

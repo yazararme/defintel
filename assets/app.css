@@ -188,9 +188,16 @@ a { color: var(--brand); text-underline-offset: 2px; }
 .thread-state { color: var(--ok); }
 .thread-state--closed { color: var(--muted); }
 
+/* R27-P0-1: başlığın altında "şimdi ne durumda" — son hareketin cümlesi, günüyle.
+   İçerik taşıyor: ayrımı boyutla, renk ya da çizgiyle değil. */
+.thread-status { margin: 10px 0 4px; font-size: 18px; line-height: 1.45; color: var(--ink); }
+.thread-status-end { white-space: nowrap; }
+.thread-status-day { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+
 .thread-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
 .thread-entry { border-bottom: 1px solid var(--rule); }
-.thread-entry a {
+.thread-entry a,
+.thread-entry--open {
   display: flex;
   flex-wrap: wrap;
   gap: 2px 16px;
@@ -199,9 +206,29 @@ a { color: var(--brand); text-underline-offset: 2px; }
   color: var(--ink-2);
   text-decoration: none;
 }
-.thread-entry a:hover { color: var(--ink); }
 .thread-day { flex: 0 0 132px; font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
-.thread-line { flex: 1 1 260px; line-height: 1.5; }
+.thread-text { flex: 1 1 260px; line-height: 1.5; }
+.thread-line { display: block; }
+/* R27-P1-1: hareket satırı bağlantı gibi görünür — altı çizili ad. */
+.thread-entry a .thread-line {
+  text-decoration: underline;
+  text-decoration-color: var(--rule-2);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.thread-entry a:hover .thread-line { color: var(--brand); text-decoration-color: var(--brand); }
+.thread-note { display: block; margin-top: 2px; font-size: 15px; color: var(--muted); }
+/* Açılış satırı bir hareket değil: bağlantısı yok, jetonu var, altı çizili değil. */
+.thread-entry--open .thread-line { color: var(--muted); }
+.thread-tag {
+  display: block;
+  margin-bottom: 2px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
 .thread-entry--none { padding: 14px 0; color: var(--muted); }
 
 .thread-index { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }

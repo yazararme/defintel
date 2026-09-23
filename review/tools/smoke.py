@@ -49,6 +49,12 @@ and chips say "Oyuncu Duyuruları", "Rakip Duyuruları" appears nowhere (text, H
 bar after the rail click), C-UAS has no Tournai, Zipline or DroneXL row, İhale no Greenland row,
 the Hanwha munitions-investment row is under Oyuncu Duyuruları, and a Genel full-dump title is
 found by search.
+Rev 27: İPLİK-DURUM — the build's "İPLİK-DURUM: 0 eksik" line, watch_status() unit cases, a
+375×812 / 1440×900 pass: from /reports/2026-09-23.html the XM30 thread link opens with ?g=2026-09-23,
+the daybar reads "23 Eyl · Çar", the status line under the h1 reads "Prototip teslim edildi, şart hâlâ
+tanımlı değil. · 23 Eylül", 4 underlined link rows plus an unlinked, not-underlined "AÇILDI" opening
+row; a thread opened from 20 Sep shows "20 Eyl · Paz" with both arrows live; an unknown ?g= leaves the
+default day; then an IPLIK_BOZ=1 build (the alert fires) and a normal rebuild.
 Later revisions extend CHECKS / PAGES. Exit 1 on any failure.
 """
 import os
@@ -758,6 +764,108 @@ def r23_checks(build_stdout, fails):
     return iso, devs
 
 
+R27_EVAL = ("() => { const q = s => document.querySelector(s), st = q('.thread-status');"
+            " const ar = document.querySelectorAll('.daybar-arrow');"
+            " return {url: location.pathname + location.search, daybar: q('.daybar-date').innerText,"
+            " arrows: [...ar].map(a => a.tagName), status: st ? st.innerText : null,"
+            " under: st ? st.getBoundingClientRect().top >= q('h1').getBoundingClientRect().bottom : false,"
+            " rows: [...document.querySelectorAll('.thread-entry')].map(li => ({link: !!li.querySelector('a'),"
+            " ul: getComputedStyle(li.querySelector('.thread-line')).textDecorationLine,"
+            " tag: (li.querySelector('.thread-tag') || {}).innerText || ''})),"
+            " overflow: document.documentElement.scrollWidth > innerWidth}; }")
+
+R27_JS = r"""
+import json, sys
+from playwright.sync_api import sync_playwright
+B, EV = sys.argv[1], sys.argv[2]
+out = []
+with sync_playwright() as p:
+    br = p.chromium.launch(channel="chrome")
+    for w, h in ((375, 812), (1440, 900)):
+        pg = br.new_page(viewport={"width": w, "height": h}, locale="tr-TR")
+        for day, needle in (("2026-09-23", "xm30"), ("2026-09-20", None)):
+            pg.goto(f"{B}/reports/{day}.html")
+            a = pg.locator(f'a.thread-link[href*="{needle}"]' if needle else "li.watch-move a.thread-link").first
+            a.scroll_into_view_if_needed(); a.click(); pg.wait_for_load_state("load")
+            r = pg.evaluate(EV)
+            r["w"], r["from"] = w, day
+            out.append(r)
+        pg.goto(f"{B}/izleme/xm30-da-organik-c-uas-sarti-18-09-2026-raporu.html?g=1999-01-01")
+        out.append({"w": w, "bogus": pg.inner_text(".daybar-date")})
+    br.close()
+print(json.dumps(out, ensure_ascii=False))
+"""
+
+
+def r27_checks(build_stdout, py, fails):
+    """Rev 27: İPLİK-DURUM — build satırı, watch_status() birim, tarayıcı (375/1440), bozuk derleme."""
+    import json
+    sys.path.insert(0, str(ROOT))
+    import build as B
+    satir = [l.strip() for l in build_stdout.splitlines() if "· İPLİK-DURUM:" in l]
+    ok = bool(satir) and "İPLİK-DURUM: 0 eksik" in satir[0]
+    print(f"{'ok  ' if ok else 'FAIL'} İPLİK-DURUM build satırı · {satir[0].lstrip('· ') if satir else 'satır yok'}")
+    if not ok:
+        fails.append("İPLİK-DURUM build satırı")
+    birim = {
+        "XM30'da organik C-UAS şartı — *bekliyor.* Prototip teslim edildi, şart hâlâ tanımlı değil (G9).":
+            "Prototip teslim edildi, şart hâlâ tanımlı değil.",
+        "XM30'da organik C-UAS şartı — *ilerledi (G3).*": "",
+        "**G12 · 665 milyon** — *bekliyor.* GAO karar tarihi için bkz. ALARMLAR. [K15]": "",
+        "**X (18.09.2026 raporu)** — *bekliyor.* ihale açılmadı (G4).": "İhale açılmadı.",
+    }
+    yanlis = {k: B.watch_status(k) for k, v in birim.items() if B.watch_status(k) != v}
+    print(f"{'ok  ' if not yanlis else 'FAIL'} watch_status() birim durumları · {len(birim) - len(yanlis)}/{len(birim)}"
+          + (f" · yanlış: {yanlis}" if yanlis else ""))
+    if yanlis:
+        fails.append("watch_status birim")
+    if not py:
+        print("FAIL İPLİK-DURUM tarayıcı · Playwright'lı python yok")
+        fails.append("İPLİK-DURUM tarayıcı")
+    elif (ROOT / "reports" / "2026-09-23.html").exists():
+        r = subprocess.run([py, "-c", R27_JS, BASE, R27_EVAL], cwd=ROOT, capture_output=True, text=True)
+        if r.returncode:
+            print(f"FAIL İPLİK-DURUM tarayıcı · {r.stderr[-400:]}")
+            fails.append("İPLİK-DURUM tarayıcı")
+        else:
+            for x in json.loads(r.stdout):
+                if "bogus" in x:
+                    ok = x["bogus"] == "23 Eyl · Çar"
+                    print(f"{'ok  ' if ok else 'FAIL'} R27 {x['w']}px bilinmeyen ?g= · daybar “{x['bogus']}”")
+                elif x["from"] == "2026-09-23":
+                    links = [e for e in x["rows"] if e["link"]]
+                    opn = [e for e in x["rows"] if not e["link"]]
+                    ok = (x["url"].endswith("?g=2026-09-23") and x["daybar"] == "23 Eyl · Çar" and x["under"]
+                          and x["status"] == "Prototip teslim edildi, şart hâlâ tanımlı değil. · 23 Eylül"
+                          and len(links) == 4 and all(e["ul"] == "underline" for e in links)
+                          and len(opn) == 1 and opn[0]["tag"] == "AÇILDI" and opn[0]["ul"] == "none"
+                          and not x["overflow"])
+                    print(f"{'ok  ' if ok else 'FAIL'} R27 {x['w']}px XM30 · {x['url'].split('/')[-1]} · daybar "
+                          f"“{x['daybar']}” · durum “{x['status']}” · {len(links)} altı çizili bağlantı · "
+                          f"açılış {[e['tag'] for e in opn]} altı çizili değil: {all(e['ul'] == 'none' for e in opn)}")
+                else:
+                    ok = (x["url"].endswith("?g=2026-09-20") and x["daybar"] == "20 Eyl · Paz"
+                          and x["arrows"] == ["A", "A"] and not x["overflow"])
+                    print(f"{'ok  ' if ok else 'FAIL'} R27 {x['w']}px 20 Eylül'den iplik · {x['url'].split('/')[-1]} · "
+                          f"daybar “{x['daybar']}” · oklar {x['arrows']}")
+                if not ok:
+                    fails.append(f"R27 tarayıcı {x['w']}px")
+    boz = subprocess.run([sys.executable, "build.py"], cwd=ROOT, capture_output=True, text=True,
+                         env={**os.environ, "IPLIK_BOZ": "1"})
+    try:
+        uy = [l.strip() for l in boz.stdout.splitlines() if l.strip().startswith("! İPLİK-DURUM ·")]
+        ok = boz.returncode == 0 and bool(uy) and "(IPLIK_BOZ=1, bilerek)" in uy[0]
+        print(f"{'ok  ' if ok else 'FAIL'} İPLİK-DURUM bozuk derleme (IPLIK_BOZ=1) · {uy[0][:200] if uy else 'uyarı yok'}")
+        if not ok:
+            fails.append("İPLİK-DURUM bozuk derleme")
+    finally:
+        back = subprocess.run([sys.executable, "build.py"], cwd=ROOT, capture_output=True, text=True,
+                              env={k: v for k, v in os.environ.items() if k != "IPLIK_BOZ"})
+        if back.returncode or "İPLİK-DURUM: 0 eksik" not in back.stdout:
+            print("FAIL İPLİK-DURUM: normal derlemeye dönüş")
+            fails.append("rebuild (İPLİK-DURUM)")
+
+
 def main():
     fails = []
     build = subprocess.run([sys.executable, "build.py"], cwd=ROOT, capture_output=True, text=True)
@@ -821,6 +929,9 @@ def main():
 
     # Rev 32: TEKRAR-MANŞET
     r32_checks(build.stdout, py, fails)
+
+    # Rev 27: İPLİK-DURUM · iplik sayfası (durum satırı, ?g= daybar, satırlar)
+    r27_checks(build.stdout, py, fails)
 
     # Rev 24: İLK-EKRAN
     r24_checks(py, fails)

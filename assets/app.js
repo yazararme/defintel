@@ -968,3 +968,67 @@ function loadPlayers() {
     });
   });
 })();
+
+
+/* R27-P0-2: iplik sayfasının daybar'ı gelinen günü gösterir.
+
+   İplik sayfası günden bağımsız tek dosya; brifingdeki bağlantı ?g=YYYY-MM-DD
+   taşıyor. Build şeridi en son güne çizer ve brifing/medya günlerini
+   data-rapor / data-medya'ya yazar; burada yalnız o güne kurulur. Bilinmeyen
+   ?g= değeri şeridi olduğu gibi bırakır — var olmayan bir güne ok çizilmez. */
+(function () {
+  "use strict";
+
+  var bar = document.querySelector(".daybar[data-rapor]");
+  if (!bar) return;
+  var g = "";
+  try { g = new URLSearchParams(location.search).get("g") || ""; } catch (e) { return; }
+  var days = (bar.getAttribute("data-rapor") || "").split(" ").filter(Boolean);
+  var i = days.indexOf(g);
+  if (i < 0) return;
+  var news = (bar.getAttribute("data-medya") || "").split(" ");
+
+  var MONTHS = ["Oca", "Şub", "Mar", "Nis", "May", "Haz",
+                "Tem", "Ağu", "Eyl", "Eki", "Kas", "Ara"];
+  var WEEK = ["Paz", "Pzt", "Sal", "Çar", "Per", "Cum", "Cmt"];
+  function label(iso) {
+    var p = iso.split("-").map(Number);
+    var d = new Date(Date.UTC(p[0], p[1] - 1, p[2]));
+    return p[2] + " " + MONTHS[p[1] - 1] + " · " + WEEK[d.getUTCDay()];
+  }
+  function arrow(old, target, glyph, name) {
+    var el;
+    if (target) {
+      el = document.createElement("a");
+      el.href = "/reports/" + target + ".html";
+    } else {
+      el = document.createElement("span");
+      el.setAttribute("aria-disabled", "true");
+    }
+    el.className = "daybar-arrow";
+    el.setAttribute("aria-label", name);
+    el.textContent = glyph;
+    old.parentNode.replaceChild(el, old);
+  }
+
+  var arrows = bar.querySelectorAll(".daybar-arrow");
+  var date = bar.querySelector(".daybar-date");
+  var cross = bar.querySelector(".daybar-link");
+  if (arrows.length !== 2 || !date || !cross) return;
+  arrow(arrows[0], i ? days[i - 1] : "", "‹", "Önceki gün");
+  arrow(arrows[1], i + 1 < days.length ? days[i + 1] : "", "›", "Sonraki gün");
+  date.textContent = label(g);
+  var link;
+  if (news.indexOf(g) >= 0) {
+    link = document.createElement("a");
+    link.className = "daybar-link";
+    link.href = "/haberler/" + g + ".html";
+    link.textContent = "MEDYA TAKİBİ →";
+  } else {
+    link = document.createElement("span");
+    link.className = "daybar-link daybar-link--off";
+    link.textContent = "Medya takibi yok";
+  }
+  cross.parentNode.replaceChild(link, cross);
+  bar.setAttribute("data-g", g);
+})();
