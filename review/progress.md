@@ -29,7 +29,7 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 | 22 | PASS (deneme 2; d1 FAIL P1-2 "1 / 536") | 2 | 29a9667, d9565c1 | yok |
 | 21 | PASS (deneme 2; d1 FAIL P0-2 kanıt eksikti) | 2 | 00d908c, 5c1134b | yok |
 | 23 | PASS | 1 | 4ca4ef5 | P0-2: prompt yapıştırma + sonraki 3 rapor (human-checks.md) |
-| 32 | d1 FAIL (gerileme: CI İLK-EKRAN 817px); d2 sürüyor | 1→2 | 8116831 (d1) | P1-1: sonraki 5 rapor |
+| 32 | PASS (deneme 2; d1 FAIL CI İLK-EKRAN 817px gerilemesi) | 2 | 8116831, 78e6632 | P1-1: sonraki 5 rapor |
 | 24 | PASS | 1 | 41b6998 | yok |
 | 33 | PASS | 1 | 325d9fe | yok |
 | 31 | PASS | 1 | 6c2c3c1 | P0-3 canlı: main'e alındıktan sonra gerçek aday.md (human-checks.md) |

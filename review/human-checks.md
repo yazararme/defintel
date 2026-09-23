@@ -15,3 +15,10 @@ Bir oturuşta yapılacak liste. Her maddede: nerede, ne yapılacak, ne görülme
 
 3. **Dal main'e alındıktan sonraki ilk sabah, tarayıcı:** `https://defintel.shadovi.com/data/news/<o gün>-aday.md`
    *Görmen gereken:* dosyanın ilk bölümü "## Dünkü brifingden sonra gelenler (N)"; Türkçe harfler düzgün.
+
+## Rev 32 — yenilik cümlesi (R32-P1-1)
+
+4. **Aynı Instructions paneli (1. maddeyle aynı oturuşta):** `review/builder-notes/rev-32-prompt.md`'deki cümleyi Rev 23 cümlelerinin yanına yapıştır.
+   *Görmen gereken:* panelde yenilik cümlesi ("…neyin yeni olduğunu ilk cümlesinde söyleyerek girer").
+5. **Sonraki 5 rapor, sitede brifing sayfası:** özet maddelerinde "ilk: <gün>" jetonu olan her maddenin ilk cümlesinde bir yenilik fiili ("resmîleşti", "sözleşmeye döndü", "bedel açıklandı" gibi).
+   *Görmen gereken:* jetonlu hiçbir madde eski haberi yeni gibi anlatmıyor.
