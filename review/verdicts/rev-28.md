@@ -1,0 +1,16 @@
+# Rev 28 — PASS
+
+Reviewed against PRODUCT.md, the rev-28 criteria, review/shots/rev-28/{before,after,after-bos-kesisim}/ and http://localhost:8000 at 375×812 and 1440×900, light and dark. My screenshots are in review/shots/rev-28/reviewer/deneme2/. The orchestrator's message had no builder rationale in it. The context note about the arranged build only describes how the evidence was made, so I checked it against the screenshots rather than taking it on trust.
+
+## Criteria
+
+- **R28-P0-1 PASS.** On /haberler/2026-09-23-kaynaklar.html the Elbit Systems row has "oyuncu: Elbit" and the Northrop Grumman row has "oyuncu: Northrop Grumman". The labels are right-aligned mono, 17px high (no wrap), and stay inside the column at 375 and 1440, light and dark. The 22nd also labels Leonardo, and the 17th labels MBDA, Elbit and Northrop. Evidence: reviewer/deneme2/crop-kaynaklar-2026-09-23-375-{light,dark}-oyuncu.png, reviewer/deneme2/kaynaklar-2026-09-{17,22,23}-{375,1440}-{light,dark}-full.png, after/haberler-2026-09-23-kaynaklar-*-full.png.
+- **R28-P0-2 PASS.**
+  - Named line: on 23 Eylül a single element reads "Elbit Systems ve Northrop Grumman'ın kendi duyuruları bugün okunamadı.", directly under TARAMA "50 kaynak · 536 başlık →" and above OYUNCULAR. At 375 it is one caveat line that wraps to two visual lines, with no overflow, and it sits below the first screen. At 1440 it is in the rail. It is the same in light and dark, and matches the 20th and the 22nd (the 22nd with three names). Evidence: reviewer/deneme2/reports-2026-09-23-375-{light,dark}-caveat.png, reviewer/deneme2/reports-2026-09-23-1440-dark.png, after/A-35910521447/…/kanit-boslugu-2026-09-23-ray-375.png.
+  - Empty intersection, no line: in the arranged CI build (run 35910757525), 23 Eylül is a swept day ("TARAMA 52 kaynak · 536 başlık →") and OYUNCULAR follows TARAMA directly, with no caveat, at 375 and 1440. Its Kaynaklar page reads "52 kaynak okundu", and Elbit and Northrop no longer appear among the unanswered rows. So the line disappears because the intersection is empty, not because the day wasn't swept. This closes the gap in deneme1. The local after-bos-kesisim/ pair matches. Evidence: after/A-35910757525/…/kanit-boslugu-2026-09-23-ray-375-bos-kesisim.png, …-ray-1440-bos-kesisim.png, …-kaynaklar-375-bos-kesisim.png, compared with after/A-35910521447/…/kanit-boslugu-2026-09-23-ray-375.png.
+  - (I): issue #5 has "KANIT-BOŞLUĞU: 23 Eyl · Elbit Systems (feed parsed but empty) · Northrop Grumman (HTTPError: 403 …) — okuyucuya satır basıldı". Evidence: after/I-issue-5-kanit-boslugu.jpg.
+- **R28-P1-1 PASS.** "yanıt vermedi" and "erişilemeyen" don't appear in the rendered text of kaynaklar 17–23, reports 15/20/22/23, haberler 23 or the home page, at either width or in either theme. Failed sources show only as unnumbered rows. Evidence: reviewer/deneme2/kaynaklar-2026-09-23-375-light-full.png, after/haberler-2026-09-23-kaynaklar-375-light-full.png.
+
+## Regressions
+
+- None found. The briefing first screen at 375 is the same as before (reviewer/deneme2/reports-2026-09-23-375-light.png compared with before/reports-2026-09-23-375-light.png). No page checked scrolls horizontally at 375 or 1440. The 1440 rail takes the caveat without pushing the first screen (reviewer/deneme2/reports-2026-09-23-1440-dark.png).
