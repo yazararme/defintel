@@ -44,6 +44,15 @@ maddesinin alt kenarı ≤812px (özet 4 maddeden kısaysa son maddesi). Uymazsa
 app.css'te `/* İLK-EKRAN:ray */` satırını yolda değiştirip rayı yeniden özetin üstüne
 taşır — diske ve depoya hiçbir şey yazılmaz; işaret bulunmazsa gün kırmızı olur.
 
+    python3 scripts/check_reports.py --ilk-ekran --tani [--base URL] [--gun G ...]
+
+İLK-EKRAN tanı (K5, bilgi amaçlı — uyarı yazmaz, çıkış 0): son 10 brifingin (ya da --gun)
+375×812'deki ilk ekran bütçesi — başlık satırı, alarm bandı ve ALARMLAR yüksekliği, ilk 4
+maddenin satırları — ve günün taşma nedeni (metin / yapı), bir de rapor isteminin sınırları
+(manşet ≤75, özet maddesi ≤110 karakter) uygulansaydı kenarlar: sayfa tarayıcıda kısaltılmış
+sahte bir kopyayla ölçülür, yerel ve CI en kötü hâlde (0,15px harf aralığı + jeton kendi
+satırında). Tablo (A) özetine.
+
     python3 scripts/check_reports.py --kanit-boslugu [--out DIR] [--base URL] [--gun G] [--bos-kesisim]
 
 KANIT-BOŞLUĞU kanıtı (Rev 28): brifingi (varsayılan: son rapor) 375×812 ve 1440×900'de tam
@@ -587,6 +596,163 @@ def ilk_ekran(base=None, gunler=None, boz=False, out=None):
     return 0
 
 
+# ── İLK-EKRAN tanı (K5) ──────────────────────────────────────────────────────
+# Her gün için ilk ekranın piksel bütçesi ve taşmanın nedeni; bir de rapor isteminin
+# sınırları (review/builder-notes/k5-prompt.md) uygulansaydı kenarların nerede olacağı.
+# Tahmin tarayıcıdaki sahte bir kopyadır: başlık ve özet maddeleri sınıra (kelime
+# sınırında) kısaltılır, "ilk:" jetonları yerinde kalır; yayımlanan sayfa ve veri değişmez.
+# "CI en kötü": başlık, bant ve özette 0,15px harf aralığı + her jeton kendi satırında —
+# Ubuntu Chromium'un daha geniş kırılımını yeniden üretir (Rev 32 deneme 2: 23 Eyl'de 817).
+
+IE_BASLIK_KR = 75        # istem: manşet en fazla 75 karakter (375'te 3 satır; 4 satırlıklar 80–83)
+IE_OZET_KR = 110         # istem: her özet maddesi en fazla 110 karakter
+IE_TANI_GUN = 10
+IE_SATIR_BUTCE_H2 = 280  # 3 satırlık başlıkla h2#ozet'in üst kenarı (masthead 49 + daybar 49 +
+                         # ızgara 8 + başlık 9+3×31,9 + şerit 8+51 + 10)
+
+IE_TANI_JS = """([ls, brk, h1kr, kr]) => {
+  const st = document.createElement('style');
+  if (ls) st.textContent = `.prose h2#ozet + ol, .report-title, .alarmbar, .prose > p { letter-spacing: ${ls}px !important; }`;
+  document.head.appendChild(st);
+  const kes = (el, n) => {
+    if (!el || !n) return;
+    const jeton = Array.from(el.querySelectorAll('a.ilk'));
+    jeton.forEach(a => a.remove());
+    const t = el.textContent.replace(/\\s+/g, ' ').trim();
+    if (t.length > n) {
+      let s = '';
+      for (const w of t.split(' ')) { if ((s + ' ' + w).trim().length > n) break; s = (s + ' ' + w).trim(); }
+      el.textContent = s;
+    }
+    jeton.forEach(a => { el.append(' '); el.append(a); });
+  };
+  kes(document.querySelector('.report-title'), h1kr);
+  const h2 = document.querySelector('.prose h2#ozet');
+  const lis = h2 && h2.nextElementSibling && h2.nextElementSibling.tagName === 'OL'
+      ? Array.from(h2.nextElementSibling.children) : [];
+  lis.forEach(li => kes(li, kr));
+  if (brk) document.querySelectorAll('h2#ozet + ol a.ilk').forEach(a => a.before(document.createElement('br')));
+  const R = e => e.getBoundingClientRect();
+  const satir = e => { const c = getComputedStyle(e);
+    const ic = R(e).height - parseFloat(c.paddingTop) - parseFloat(c.paddingBottom)
+               - parseFloat(c.borderTopWidth) - parseFloat(c.borderBottomWidth);
+    return Math.round(ic / parseFloat(c.lineHeight)); };
+  const metin = e => e.textContent.replace(/\\s+/g, ' ').replace(/ ?ilk: \\d+ \\S+/g, '').trim();
+  const h1 = document.querySelector('.report-title');
+  const bant = document.querySelector('.alarmbar');
+  const al = document.querySelector('.prose h2#alarmlar');
+  const ilk4 = lis.slice(0, 4);
+  return {
+    h2: h2 ? R(h2).top : null,
+    madde: ilk4.length ? R(ilk4[ilk4.length - 1]).bottom : null,
+    madde_n: lis.length,
+    h1: [satir(h1), metin(h1).length],
+    bant: bant ? [Math.round(R(bant).height + parseFloat(getComputedStyle(bant).marginBottom)), satir(bant)] : null,
+    alarmlar: al && h2 ? Math.round(R(h2).top - R(al).top) : null,
+    maddeler: ilk4.map(li => [satir(li), metin(li).length, li.querySelectorAll('a.ilk').length]),
+  };
+}"""
+
+
+async def _tani_kos(base, gunler):
+    from playwright.async_api import async_playwright
+    async with async_playwright() as p:
+        try:
+            browser = await p.chromium.launch()
+        except Exception:
+            browser = await p.chromium.launch(channel="chrome")
+        sonuc = []
+        try:
+            for gun in gunler:
+                olc = {}
+                for ad, arg in (("yerel", [0, 0, 0, 0]),
+                                ("sinir", [0, 0, IE_BASLIK_KR, IE_OZET_KR]),
+                                ("sinir_ci", [0.15, 1, IE_BASLIK_KR, IE_OZET_KR])):
+                    ctx = await browser.new_context(viewport={"width": IE_EKRAN[0], "height": IE_EKRAN[1]},
+                                                    service_workers="block", locale="tr-TR")
+                    page = await ctx.new_page()
+                    try:
+                        await page.goto(f"{base}/reports/{gun}.html", wait_until="load")
+                        await page.evaluate("document.fonts ? document.fonts.ready.then(() => 1) : 1")
+                        await page.wait_for_timeout(150)
+                        olc[ad] = await page.evaluate(IE_TANI_JS, arg)
+                    except Exception as e:   # noqa: BLE001
+                        olc[ad] = {"hata": str(e).splitlines()[0][:160]}
+                    finally:
+                        await ctx.close()
+                sonuc.append((gun, olc))
+        finally:
+            await browser.close()
+        return sonuc
+
+
+def _tani_neden(b):
+    """Günün taşma nedeni, ölçülen bütçeden. Eşikler İLK-EKRAN'ınkiyle aynı."""
+    w, h = IE_EKRAN
+    neden = []
+    if b["bant"] or b["alarmlar"]:
+        neden.append(f"yapı: alarm bandı {b['bant'][0] if b['bant'] else 0}px + ALARMLAR "
+                     f"{b['alarmlar'] or 0}px özetten önce")
+    if b["h1"][0] > 3:
+        neden.append(f"metin: başlık {b['h1'][0]} satır ({b['h1'][1]} kr.)")
+    # 4 madde, h2 3 satırlık başlığın yerinde (280) olsaydı sığar mıydı?
+    if b["madde"] - b["h2"] > h - IE_SATIR_BUTCE_H2:
+        uzun = max(m[1] for m in b["maddeler"])
+        neden.append(f"metin: ilk 4 madde {sum(m[0] for m in b['maddeler'])} satır (en uzunu {uzun} kr.)")
+    ok = b["h2"] <= IE_H2_SINIR and b["madde"] <= h
+    return ok, ("; ".join(neden) if not ok else "—") or "—"
+
+
+def ilk_ekran_tani(base=None, gunler=None):
+    """K5: son 10 brifingin ilk ekran bütçesi, nedeni ve istem sınırlarıyla tahmini — (A) özetine.
+    Bilgi amaçlı: uyarı yazmaz, çıkış 0 (sayfa açılamadıysa 1)."""
+    import asyncio
+    gunler = list(gunler or []) or [f.stem for f in sorted((ROOT / "reports").glob("????-??-??.html"))[-IE_TANI_GUN:]]
+    srv = None
+    if not base:
+        srv, base = _sun()
+    try:
+        sonuc = asyncio.run(_tani_kos(base.rstrip("/"), gunler))
+    finally:
+        if srv:
+            srv.shutdown()
+    w, h = IE_EKRAN
+    ozet = [f"### İLK-EKRAN tanı — son {len(gunler)} brifing, {w}×{h} (K5)", "",
+            f"Eşikler değişmedi: `h2#ozet` üst ≤{IE_H2_SINIR}px, 4. madde alt ≤{h}px. Bütçe: masthead + "
+            f"daybar 98px, 3 satırlık başlıkla özet başlığı {IE_SATIR_BUTCE_H2}px; her başlık satırı +32px, "
+            "her özet satırı +26px. Son sütun, rapor istemindeki sınırlar (manşet ≤"
+            f"{IE_BASLIK_KR}, özet maddesi ≤{IE_OZET_KR} karakter) uygulansaydı: tarayıcıda kısaltılmış "
+            "sahte kopya; \"CI\" = 0,15px harf aralığı + her \"ilk:\" jetonu kendi satırında.", "",
+            "| gün | h2 üst | 4. madde alt | başlık | alarm (bant · ALARMLAR) | ilk 4 madde (satır · en uzun) "
+            "| neden | sınır uygulansaydı (yerel · CI en kötü) |",
+            "|---|---|---|---|---|---|---|---|"]
+    hata = 0
+    for gun, o in sonuc:
+        b, s, c = o.get("yerel", {}), o.get("sinir", {}), o.get("sinir_ci", {})
+        if any("hata" in x or not x or x.get("h2") is None for x in (b, s, c)):
+            hata += 1
+            ozet.append(f"| {gun} | — | — | — | — | — | 🔴 ölçülemedi | — |")
+            continue
+        ok, neden = _tani_neden(b)
+        alarm = (f"{b['bant'][0] if b['bant'] else 0}px · {b['alarmlar'] or 0}px"
+                 if (b["bant"] or b["alarmlar"]) else "—")
+        maddeler = (f"{sum(m[0] for m in b['maddeler'])} satır "
+                    f"({'+'.join(str(m[0]) for m in b['maddeler'])}) · {max(m[1] for m in b['maddeler'])} kr.")
+        tahmin = all(x["h2"] <= IE_H2_SINIR and x["madde"] <= h for x in (s, c))
+        ozet.append(
+            f"| {gun} | {b['h2']:.0f}px | {b['madde']:.0f}px | {b['h1'][0]} satır · {b['h1'][1]} kr. | {alarm} "
+            f"| {maddeler} | {'🟢 geçti' if ok else '🔴 ' + neden} "
+            f"| {'🟢' if tahmin else '🔴'} {s['h2']:.0f}/{s['madde']:.0f} · {c['h2']:.0f}/{c['madde']:.0f} |")
+    ozet.append("")
+    metin = "\n".join(ozet) + "\n"
+    print(metin)
+    yol = os.environ.get("GITHUB_STEP_SUMMARY")
+    if yol:
+        with open(yol, "a", encoding="utf-8") as fh:
+            fh.write(metin)
+    return 1 if hata else 0
+
+
 # ── KANIT-BOŞLUĞU (Rev 28) ───────────────────────────────────────────────────
 
 KB_JS = """() => {
@@ -757,7 +923,10 @@ def main(argv):
                         help="YYYY-MM-DD (varsayılan: reports/ altındaki son rapor)")
         ap.add_argument("--boz", action="store_true",
                         default=os.environ.get("ILK_EKRAN_BOZ", "0") == "1")
+        ap.add_argument("--tani", action="store_true")
         a = ap.parse_args(argv)
+        if a.tani:
+            return ilk_ekran_tani(a.base, a.gun)
         return ilk_ekran(a.base, a.gun, a.boz, a.out)
     if "--oyuncular" in argv:
         import argparse

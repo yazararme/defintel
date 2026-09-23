@@ -178,6 +178,12 @@ jobs:
               echo "🔴 görüntü artifact'i yüklenemedi."
             fi
           } >> "$GITHUB_STEP_SUMMARY"
+      # K5 — İLK-EKRAN tanı: son 10 brifingin ilk ekran bütçesi, taşma nedeni ve istem
+      # sınırları uygulansaydı tahmini, (A) tablosu. Bilgi amaçlı: uyarı yazmaz.
+      - name: İLK-EKRAN tanı
+        if: always() && steps.pw.outcome == 'success'
+        continue-on-error: true
+        run: python3 scripts/check_reports.py --ilk-ekran --tani
 
       # Rev 28 — KANIT-BOŞLUĞU (S) kanıtı: son brifing 375 ve 1440 (tam sayfa + ray) ve günün
       # Kaynaklar sayfası; sayfanın satırı kayıttaki kesişime uymalı. Her çalıştırmada; bos_kesisim

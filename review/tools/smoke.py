@@ -91,6 +91,12 @@ content.md §2's 16 defective items with today's translations must catch at leas
 retry/fallback flow with an injected fake translator and the CLI with --sahte-cevirmen: >10 left
 original → alert, exactly 10 → none); the prompt is sentence case and carries Ö1/Ö2/Ö3; the
 evidence workflow ceviri-dedektoru-test.yml has no secret, no Claude CLI install and no --refresh.
+K5: İLK-EKRAN tanı — `check_reports.py --ilk-ekran --tani` prints a row for each of the last 10
+reports (first-screen budget and the overflow's cause: text or alarm structure); with the report
+prompt's limits applied in a browser-only shortened copy (headline ≤75, summary item ≤110
+characters), every day without an alarm passes at 375×812 both locally and in the CI worst case
+(0.15px letter-spacing + every "ilk:" token on its own line); 17, 18 and 23 Sep still pass as
+published; the limits in check_reports.py are the numbers in review/builder-notes/k5-prompt.md.
 Later revisions extend CHECKS / PAGES. Exit 1 on any failure.
 """
 import os
@@ -566,6 +572,51 @@ def r24_checks(py, fails):
           " · 375: ray özet ile Portföy arasında, çipler tek satır, her kartta İZLENECEK; 1440: ray solda"))
     if kotu:
         fails.append("R24 tarayıcı")
+
+
+def k5_checks(py, fails):
+    """K5: İLK-EKRAN tanı — (A) tablosu her gün için satır ve neden; istem sınırları uygulansaydı
+    alarmsız her gün yerel ve CI en kötü hâlde geçer; bugün geçen günler geçmeye devam eder;
+    check_reports.py'deki sınırlar k5-prompt.md'deki cümleyle aynı sayı."""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import check_reports as C
+    istem = (ROOT / "review" / "builder-notes" / "k5-prompt.md")
+    metin = istem.read_text(encoding="utf-8") if istem.exists() else ""
+    ok = (f"en fazla {C.IE_BASLIK_KR} karakter" in metin and f"en fazla {C.IE_OZET_KR} karakter" in metin)
+    print(f"{'ok  ' if ok else 'FAIL'} K5 istem sınırları = tanıdaki sınırlar · manşet ≤{C.IE_BASLIK_KR}, "
+          f"özet maddesi ≤{C.IE_OZET_KR} karakter")
+    if not ok:
+        fails.append("K5 istem sınırları")
+    if not py:
+        print("FAIL K5 tanı · Playwright'lı python yok")
+        fails.append("K5 tanı")
+        return
+    env = {k: v for k, v in os.environ.items() if k not in ("ILK_EKRAN_BOZ", "RUNNER_TEMP", "GITHUB_STEP_SUMMARY")}
+    r = subprocess.run([py, "scripts/check_reports.py", "--ilk-ekran", "--tani", "--base", BASE],
+                       cwd=ROOT, capture_output=True, text=True, env=env)
+    satirlar = [l for l in r.stdout.splitlines() if re.match(r"\| 20\d\d-\d\d-\d\d \|", l)]
+    beklenen = min(C.IE_TANI_GUN, len(list((ROOT / "reports").glob("????-??-??.html"))))
+    kalan, notlar = [], []
+    for l in satirlar:
+        h = [c.strip() for c in l.strip("|").split("|")]
+        gun, neden, tahmin = h[0], h[6], h[7]
+        alarm = "yapı: alarm" in neden
+        if not neden.startswith("🟢") and not ("metin:" in neden or alarm):
+            kalan.append(f"{gun} nedensiz kırmızı")
+        if not alarm and not tahmin.startswith("🟢"):
+            kalan.append(f"{gun} sınırla da kalıyor ({tahmin})")
+        notlar.append(f"{gun[5:]} {h[1]}/{h[2]}→{tahmin.split(' ', 1)[1] if ' ' in tahmin else tahmin}"
+                      + (" ⚠alarm" if alarm else ""))
+    # K5-3: bu veri kümesinde bugün geçen günler (17, 18, 23 Eyl) geçmeye devam eder.
+    for gun in ("2026-09-17", "2026-09-18", "2026-09-23"):
+        l = next((l for l in satirlar if l.startswith(f"| {gun} ")), None)
+        if (ROOT / "reports" / f"{gun}.html").exists() and (not l or "🟢 geçti" not in l):
+            kalan.append(f"{gun} artık geçmiyor")
+    ok = r.returncode == 0 and len(satirlar) == beklenen and not kalan
+    print(f"{'ok  ' if ok else 'FAIL'} K5 İLK-EKRAN tanı ({len(satirlar)}/{beklenen} gün; h2/madde → sınırla yerel · CI) · "
+          + " · ".join(notlar) + (f" · SORUN: {kalan}" if kalan else "") + ("" if satirlar else r.stderr[-300:]))
+    if not ok:
+        fails.append("K5 tanı")
 
 
 def _tr_upper(text):
@@ -1510,6 +1561,9 @@ def main():
 
     # Rev 24: İLK-EKRAN
     r24_checks(py, fails)
+
+    # K5: İLK-EKRAN tanı · istem sınırları
+    k5_checks(py, fails)
 
     # Rev 29: L1-DOLGU · ÇİZGİ-KONTRAST · ilk ziyaret bildirim kartı
     r29_checks(build.stdout, py, fails)
