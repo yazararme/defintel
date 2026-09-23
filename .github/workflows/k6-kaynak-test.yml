@@ -5,10 +5,15 @@ name: k6-kaynak-test
 # feedparser yalnız Northrop RSS'ini gerçek ayrıştırıcıyla okumak için kurulur (PyPI'dan).
 # (A) özeti: iki kaynağın tablosu (tür, istek düzeltmesi, ayrıştırılan, son 3 başlık) + 🟢/🔴.
 # Yalnız rev21-33 dalında koşar; main'e alınmadan önce silinir. Sır yok.
+# K6 deneme 2 — "tani" işi (AĞA ÇIKAR, yalnız rev21-33'e push'ta): scripts/k6_tani.py,
+# collect_news.py'nin istek biçimiyle elbitsystems.com/feed/ ve Northrop RSS'ine (başlıklı/başlıksız)
+# + iki Elbit adayı ve Elbit UK sayfasına birer düz GET. (A) özetine her biri için HTTP durumu,
+# Content-Type, yönlendirme zinciri, gövdenin ilk 500 baytı (kaçışlı) ve tek satır yorum.
+# Sır yok, yazma yok (Drive, data/news, repo); toplama çalıştırılmaz; her zaman yeşil biter.
 on:
   push:
     branches: [rev21-33]
-    paths: ['scripts/collect_news.py', 'scripts/test_k6.py', 'scripts/fixtures/k6-*',
+    paths: ['scripts/collect_news.py', 'scripts/test_k6.py', 'scripts/k6_tani.py', 'scripts/fixtures/k6-*',
             '.github/workflows/k6-kaynak-test.yml']
   workflow_dispatch:
 permissions:
@@ -22,3 +27,12 @@ jobs:
       - run: pip install feedparser
       - name: K6 ayrıştırıcı testi (ağsız, fixture)
         run: python3 scripts/test_k6.py
+  tani:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/rev21-33'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install requests feedparser
+      - name: K6 tanı (canlı GET, yalnız Elbit ve Northrop'un kendi adresleri)
+        run: python3 scripts/k6_tani.py

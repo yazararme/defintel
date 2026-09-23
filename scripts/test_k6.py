@@ -19,6 +19,9 @@ Kırmızı koşullar:
      vermiyor; boş/yabancı sayfa kalem uyduruyor; bilinmeyen ayristirici hata vermiyor
   4. ağsız toplama (collect_news.py --fixture, ağ kütüphanesi tuzağıyla) iki kaynağı okumuyor,
      arıza yazıyor, SİLME-YOK eşit değil ya da data/news'e dokunuyor
+  5. tanı betiği (scripts/k6_tani.py, CI'da ağa çıkan "tani" işi) sahte yanıtlarla: yorum satırı
+     2xx-HTML-sayfa / boş akış / bot doğrulaması / WAF 403 / yönlendirmeyi doğru adlandırmıyor;
+     özet durum, Content-Type, zinciri ve ilk 500 baytı kaçışlı göstermiyor
 
 Yalnızca stdlib (+ varsa feedparser). CI'da `$GITHUB_STEP_SUMMARY`'ye (A) tablosu ve 🟢/🔴 satırı.
 """
@@ -204,6 +207,46 @@ def main():
         kontrol("ağsız toplama: SİLME-YOK 2/2 eşit, uyarı yok",
                 "2/2 kaynak eşit" in ozet and not uyari, str(uyari)[:200])
     kontrol("data/news değişmedi", sorted(p.name for p in C.OUT_DIR.iterdir()) == data_news_once)
+
+    # 5 · tanı betiği, ağsız (sahte get)
+    import k6_tani as K
+
+    def yanit(url, durum, govde, tip="text/html", sunucu="", gecmis=()):
+        return types.SimpleNamespace(url=url, status_code=durum, content=govde, history=list(gecmis),
+                                     headers={"Content-Type": tip, "Server": sunucu})
+
+    def tani(kaynak, r):
+        return K.yokla(kaynak, lambda url, headers=None, timeout=None: r)
+
+    rss = {"ad": "Elbit Systems", "tur": "rss", "url": K.ELBIT_FEED}
+    kabuk = b'<?xml version="1.0"?><rss version="2.0"><channel><title>Elbit</title></channel></rss>'
+    durumlar = {
+        "ana sayfa": (tani(rss, yanit("https://elbitsystems.com/", 200, b"<!doctype html><html><body>Home</body></html>",
+                                      gecmis=[yanit(K.ELBIT_FEED, 301, b"")])), "HTML sayfa"),
+        "boş kabuk": (tani(rss, yanit(K.ELBIT_FEED, 200, kabuk, "application/rss+xml")), "HİÇ kayıt yok"),
+        "cloudflare": (tani(rss, yanit(K.ELBIT_FEED, 200, b"<html><title>Just a moment...</title></html>")), "Cloudflare"),
+        "awselb 403": (tani(rss, yanit(K.ELBIT_FEED, 403, b"<h1>403 Forbidden</h1>", sunucu="awselb/2.0")), "awselb"),
+        "boş gövde": (tani(rss, yanit(K.ELBIT_FEED, 200, b"")), "gövde BOŞ"),
+    }
+    if not fp:  # feedparser'sız parse_body(rss) ImportError verir; yorum yolları kalem=[] ile aynı
+        for s_, _ in durumlar.values():
+            s_["kalem"], s_["hata"] = [], None
+    yanlis = {ad: K.yorumla(s_) for ad, (s_, beklenen) in durumlar.items() if beklenen not in K.yorumla(s_)}
+    kontrol("tanı yorumu: HTML sayfa / boş akış / Cloudflare / awselb 403 / boş gövde doğru adlandırılır",
+            not yanlis, str(yanlis)[:300])
+    kontrol("tanı yorumu: yönlendirme zinciri yoruma girer",
+            "1 yönlendirme sonrası https://elbitsystems.com/" in K.yorumla(durumlar["ana sayfa"][0]))
+    euk_t = tani(ELBIT_UK, yanit(EUK_URL, 200, (FX / "k6-elbitsystems-uk-recent-news.html.txt").read_bytes()))
+    kontrol("tanı: Elbit UK fixture'ı → ÇALIŞIYOR, 20 kayıt", K.yorumla(euk_t).startswith("ÇALIŞIYOR: 20 kayıt"),
+            K.yorumla(euk_t))
+    ozet_md = "\n".join(K.ozet([(e, durumlar["ana sayfa"][0]) for e, _ in K.YOKLAMALAR], "sınama"))
+    kontrol("tanı özeti: durum, Content-Type, zincir, ilk 500 bayt kaçışlı, yorum",
+            "| 200 | text/html |" in ozet_md and "301 https://elbitsystems.com/feed/" in ozet_md
+            and "&lt;!doctype html&gt;" in ozet_md and "<!doctype" not in ozet_md
+            and ozet_md.count("**Yorum:**") == len(K.YOKLAMALAR))
+    kontrol("tanı: yalnız Elbit ve Northrop'un kendi adresleri",
+            all(k["url"].split("/")[2].endswith(("elbitsystems.com", "elbitsystems-uk.com", "northropgrumman.com"))
+                for _, k in K.YOKLAMALAR))
 
     ok = all(sonuc)
     satirlar = [f"### K6 · Elbit ve Northrop akışları — ayrıştırıcı testi (ağsız, fixture)", "",

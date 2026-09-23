@@ -108,6 +108,10 @@ every other source are unchanged; the Elbit UK HTML parser yields 20 dated items
 last 3; the offline collection reads both, 0 failures, SİLME-YOK equal); the evidence workflow
 k6-kaynak-test.yml runs only on rev21-33, has no secret and never runs the real collection; the
 customer note k6-kaynaklar.md carries the two paste-ready entries as valid JSON.
+K6 attempt 2: the workflow's networked "tani" job (scripts/k6_tani.py) runs only on push to
+rev21-33 and the offline "ayristirici" job stays; k6-kaynaklar.md's Northrop replace text and Elbit UK
+line, applied to sample kaynaklar.json files (compact and spaced), give valid JSON that changes
+nothing else, and the note says to paste after the merge.
 Later revisions extend CHECKS / PAGES. Exit 1 on any failure.
 """
 import os
@@ -1590,19 +1594,43 @@ def k6_checks(fails):
     print(f"{'ok  ' if ok else 'FAIL'} k6-kaynak-test.yml: yalnız rev21-33, sır yok, gerçek toplama yok")
     if not ok:
         fails.append("k6-kaynak-test.yml")
+    # K6 deneme 2: ağa çıkan tanı işi yalnız rev21-33'e push'ta; ağsız ayrıştırıcı işi yerinde
+    import yaml
+    isler = (yaml.safe_load(wf) or {}).get("jobs") or {}
+    tani = isler.get("tani") or {}
+    ok = ("ayristirici" in isler and "tani" in isler
+          and tani.get("if") == "github.event_name == 'push' && github.ref == 'refs/heads/rev21-33'"
+          and any("scripts/k6_tani.py" in (st.get("run") or "") for st in tani.get("steps") or []))
+    print(f"{'ok  ' if ok else 'FAIL'} k6-kaynak-test.yml: tanı işi yalnız rev21-33 push, ağsız ayrıştırıcı işi duruyor")
+    if not ok:
+        fails.append("k6-kaynak-test.yml tani")
+    # K6-4: yapıştırılacaklar örnek kaynaklar.json'a (sıkışık ve boşluklu) uygulanınca geçerli JSON
     not_ = (ROOT / "review" / "builder-notes" / "k6-kaynaklar.md").read_text(encoding="utf-8")
-    girdiler = []
-    for blok in re.findall(r"```json\n(.*?)```", not_, re.S):
-        try:
-            girdiler.append(json.loads(blok))
-        except ValueError:
-            girdiler.append(None)
-    ng = next((g for g in girdiler if isinstance(g, dict) and g.get("ad") == "Northrop Grumman"), None)
-    eu = next((g for g in girdiler if isinstance(g, dict) and g.get("ad") == "Elbit Systems UK"), None)
-    ok = (None not in girdiler and ng is not None and eu is not None
-          and ng.get("istek_basligi", {}).get("Accept-Language") == "en-US,en;q=0.9"
-          and eu.get("tur") == "html" and eu.get("ayristirici") == "elbitsystems-uk")
-    print(f"{'ok  ' if ok else 'FAIL'} k6-kaynaklar.md: {len(girdiler)} JSON girdisi, Northrop istek_basligi, Elbit UK html")
+    bloklar = [b.strip() for b in re.findall(r"```text\n(.*?)```", not_, re.S)]
+    ok = len(bloklar) == 3 and "main'e alındıktan sonra" in not_
+    if ok:
+        aranan, yerine, euk_satir = bloklar
+        ng_url = "https://investor.northropgrumman.com/rss/news-releases.xml"
+        for bicim in (json.dumps, lambda o: json.dumps(o, indent=2, separators=(",", ":")),
+                      lambda o: json.dumps(o, separators=(",", ":"))):
+            ornek = [{"ad": "Elbit Systems", "url": "https://elbitsystems.com/feed/", "tur": "rss"},
+                     {"ad": "Northrop Grumman", "url": ng_url, "tur": "rss", "ulke": "US"}]
+            metin = bicim(ornek)
+            metin = metin.replace(aranan, yerine).replace(aranan.replace('":"', '": "'), yerine)
+            metin = metin.replace("[", "[\n" + euk_satir, 1)
+            try:
+                son = json.loads(metin)
+            except ValueError:
+                ok = False
+                break
+            ng = next(g for g in son if g["ad"] == "Northrop Grumman")
+            eu = [g for g in son if g["ad"] == "Elbit Systems UK"]
+            ok = ok and (len(son) == 3 and ng.get("url") == ng_url and ng.get("ulke") == "US"
+                         and ng.get("istek_basligi") == {"Accept-Language": "en-US,en;q=0.9"}
+                         and len(eu) == 1 and eu[0].get("tur") == "html"
+                         and eu[0].get("ayristirici") == "elbitsystems-uk"
+                         and son[1] == ornek[0])
+    print(f"{'ok  ' if ok else 'FAIL'} k6-kaynaklar.md: Northrop değiştirme + Elbit UK satırı örnek dosyaya uygulanınca geçerli JSON; zaman: merge sonrası")
     if not ok:
         fails.append("k6-kaynaklar.md")
 
