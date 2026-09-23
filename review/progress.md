@@ -27,7 +27,7 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 |---|---|---|---|---|
 | 30 | PASS (issue kanalı) | 1 (+1 iptal edilen push sürümü) | aa9a4c3 | yok |
 | 22 | PASS (deneme 2; d1 FAIL P1-2 "1 / 536") | 2 | 29a9667, d9565c1 | yok |
-| 21 | d1 FAIL (P0-2 kanıt yok: <64 hâlinde Mühimmat çipi); d2 sürüyor | 1→2 | 00d908c (d1) | yok |
+| 21 | PASS (deneme 2; d1 FAIL P0-2 kanıt eksikti) | 2 | 00d908c, 5c1134b | yok |
 
 ## Notlar / anlaşmazlıklar
 
@@ -51,7 +51,10 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 - Rev 21 d1 kanıtı: normal run 35871179217 (alias 64/64), kapsam_boz=thales run 35871351691 → issue #5 KAPSAM-SAYI satırı. 64 oyuncunun 36'sının pozitif örneği kurgu (`pos_kaynak: kurgu`) — plan buna izin veriyor, müşteriye not.
 - Rev 21 inceleyici notu: etkin çipin etiketi fare üstündeyken neredeyse görünmüyor (dokunmatikte yapışabilir).
 
+- Rev 21 d2: etkin çip hover kontrastı düzeltildi (app.css). İnceleyici gerilemeleri: 375px'te Nammo ve NORINCO satırlarında yaş/sayı jetonu alt satıra kırılıyor (küçük).
+
 ## Açık (orkestratörün eklediği)
 
 1. ~~(push kanalı için)~~ Kanal issue'ya döndü; müşteri issue'nun herkese açık olduğunu bilerek seçti — kapandı. Eski metin: Repo herkese açık → (A) Actions özet sayfası da herkese açık ve uyarı metnini listeliyor. Plan bildirime dokununca bu sayfayı açtırıyor, ama "uyarı metni herkese açık dosyaya yazılmaz" diyor. Özete yalnızca kural adı + sayı mı yazılsın?
 2. **R22 kapsam satırı birimi.** Plan "{görünen} / 536 başlık" ve roketsan için "2 / 536" diyor; görünen = satır sayısı (aynı başlık iki bölümde iki satır). Payda benzersiz başlık. Sonuç: tümünü eşleyen süzgeçte "551 / 536" basılabilir. Pay benzersiz başlık mı olsun (roketsan "1 / 536", ölçütle çelişir), yoksa payda da satır mı? Deneme 2 plana harfiyen uydu.
+3. **Brifing "Oyuncular" rayı ↔ /oyuncular.html.** Rev 21'den sonra oyuncular sayfası "Bugün 15" diyor (tüm başlıklar, 64 oyuncu), brifingin rayı hâlâ 9 ad sayıyor (yalnız brifing gövdesi; Thales yok). Plan R21.1 "ray adları olduğu gibi kalır" diyor. Ray da genişletilmiş eşleştiriciyi kullansın mı, yoksa iki yüzeyin farklı soruyu yanıtladığı (brifingde geçen / günün başlıklarında geçen) etiketle mi söylensin?
