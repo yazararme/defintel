@@ -10,6 +10,8 @@ kaydeder. Kırmızı koşullar:
   1. uyarılı çalıştırma → issue sayısı 1 değil, satır/atanan/etiket/başlık yanlış
   2. aynı gün tekrar (bir eski + bir yeni) → ikinci issue, tekrar satırı, yorum sayısı ≠ 1
   3. uyarısız çalıştırma → API çağrısı 0 değil
+  9. `$`/`*`/`_` içeren metin → GitHub'a kaçışsız (LaTeX/italik) yazılıyor
+  10. bugünün kaçışsız eski satırı, kaçışlı hâliyle yeniden yazılıyor
   + main dışı dal → API çağrısı 0 değil · kapalı issue yeniden açılmıyor · API hatası
     işi düşürüyor · okuyucu push'u (/notify) çağrılıyor · uyarı metni data/*.json'da
 
@@ -213,6 +215,33 @@ def main():
     p = subprocess.run([sys.executable, str(UYARI), "ekle", "UYDURMA", "x"],
                        env=env, capture_output=True, text=True)
     kontrol("8 · bilinmeyen kural reddedildi", p.returncode != 0 and "bilinmeyen kural" in p.stderr)
+
+    # 9 — Markdown kaçışı: iki `$` LaTeX'e dönmez, `*`/`_` italik yapmaz; (A) de kaçışlı
+    DOLAR = ("KUR", "sınama: 1,5 milyar $ ↔ 20 $'i")
+    YILDIZ = ("SLUG", "sınama: a*b*c_d_e `kod` <b> [x]|~#")
+    n_yorum = len(gh.comments)
+    out, ozet, rc, _ = calistir(dict(env, GITHUB_RUN_ID="109"), [DOLAR, YILDIZ])
+    s = satirlar(gh.issues[0])
+    kontrol("9 · iki `$` → <span>$</span> (GitHub belgesi, matematik dışı)",
+            "- **KUR** · sınama: 1,5 milyar <span>$</span> ↔ 20 <span>$</span>'i · "
+            f"[çalıştırma](https://github.com/{REPO}/actions/runs/109)" in s, s[-2:])
+    kontrol("9 · `*` `_` ` < [ | ~ # ters eğik çizgiyle kaçışlı",
+            "- **SLUG** · sınama: a\\*b\\*c\\_d\\_e \\`kod\\` \\<b\\> \\[x\\]\\|\\~\\# · "
+            f"[çalıştırma](https://github.com/{REPO}/actions/runs/109)" in s, s[-2:])
+    kontrol("9 · (A) özeti de kaçışlı", "<span>$</span>" in ozet and "a\\*b\\*c" in ozet
+            and "milyar $ ↔" not in ozet, ozet)
+    out, ozet, rc, _ = calistir(dict(env, GITHUB_RUN_ID="110"), [DOLAR, YILDIZ])
+    kontrol("9 · kaçışlı satırlar tekrar yazılmaz", "+0 satır" in ozet
+            and len(satirlar(gh.issues[0])) == len(s) and len(gh.comments) == n_yorum + 1, ozet)
+
+    # 10 — bugünün issue'sunda eski (kaçışsız) satır: kaçışlı hâli tekrar sayılır
+    ESKI = ("TİP-BELİRTECİ", "sınama: eski *düz* 3 $ ile 5 $ satırı")
+    gh.issues[0]["body"] += (f"- **{ESKI[0]}** · {ESKI[1]} · "
+                             f"[çalıştırma](https://github.com/{REPO}/actions/runs/99)\n")
+    once = len(satirlar(gh.issues[0]))
+    out, ozet, rc, _ = calistir(dict(env, GITHUB_RUN_ID="111"), [ESKI])
+    kontrol("10 · eski kaçışsız satır → +0 satır, yorum yok", "+0 satır" in ozet
+            and len(satirlar(gh.issues[0])) == once and len(gh.comments) == n_yorum + 1, ozet)
 
     # OPERATÖR-YALNIZ — okuyucu kanalı
     push = sum("notify" in p for p in gh.tum_yollar)

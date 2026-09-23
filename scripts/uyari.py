@@ -148,16 +148,37 @@ def turkiye_gunu():
     return datetime.datetime.now(tz).date().isoformat()
 
 
+# GitHub Markdown'ında serbest metin harfi harfine görünsün. `$` için GitHub belgesinin
+# ("Writing mathematical expressions") matematik dışı önerisi `<span>$</span>`: iki `$`
+# arası LaTeX sayılmaz. Diğer etkin karakterler CommonMark ters eğik çizgi kaçışıyla.
+_KACIS = {c: "\\" + c for c in "\\*_`<>[]|~#"}
+_KACIS["$"] = "<span>$</span>"
+_COZ_RE = re.compile(r"<span>\$</span>|\\([!-/:-@\[-`{-~])")
+
+
+def kacir(metin):
+    """Serbest metni GitHub Markdown'ına güvenli yaz (kural adı/bağlantı hariç)."""
+    return "".join(_KACIS.get(c, c) for c in str(metin))
+
+
+def coz(metin):
+    """kacir()'ın tersi — issue'daki satırı ham metne döndürür (tekrar denetimi için)."""
+    return _COZ_RE.sub(lambda m: m[1] or "$", metin)
+
+
 def satir(kural, metin, run_url):
-    return f"- **{kural}** · {metin} · [çalıştırma]({run_url})"
+    return f"- **{kural}** · {kacir(metin)} · [çalıştırma]({run_url})"
 
 
 def mevcut_anahtarlar(govde):
+    """Issue'daki (kural, ham metin) çiftleri. Rev 30 ilk sürümü kaçışsız yazdı; o satırlar
+    için metin olduğu gibi de eklenir, böylece kaçışlı/kaçışsız ikisi de tekrar sayılır."""
     anahtarlar = set()
     for line in (govde or "").splitlines():
         m = SATIR_RE.match(line.strip())
         if m:
             anahtarlar.add((m["kural"], m["metin"]))
+            anahtarlar.add((m["kural"], coz(m["metin"])))
     return anahtarlar
 
 
@@ -230,7 +251,7 @@ def gonder(uyarilar, env):
     _beklenen(durum, (200,), "issue güncelleme", yanit)
     is_akisi = env.get("GITHUB_WORKFLOW") or "iş akışı"
     durum, yanit = api("POST", f"/repos/{repo}/issues/{issue['number']}/comments",
-                       {"body": f"+{len(yeni)} uyarı · {is_akisi}"})
+                       {"body": f"+{len(yeni)} uyarı · {kacir(is_akisi)}"})
     _beklenen(durum, (201,), "yorum", yanit)
     return issue["number"], issue.get("html_url", ""), len(yeni), api.cagri
 
@@ -267,7 +288,7 @@ def bosalt(env=None):
         _temizle()
         return ozet
 
-    ozet += [f"- **{k}** · {m}" for k, m in uyarilar] + [""]
+    ozet += [f"- **{k}** · {kacir(m)}" for k, m in uyarilar] + [""]
     onek = env.get("UYARI_TEST_ONEK", "")
     ref = env.get("GITHUB_REF", "")
     if ref != "refs/heads/main" and not onek:

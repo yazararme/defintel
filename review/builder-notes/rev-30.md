@@ -82,3 +82,19 @@ forms were checked.
   and `build.yml` does not.
 - `uyari-test.yml` should be deleted, or left dormant, before `rev21-33` is merged. It only
   triggers on that branch.
+
+## Follow-up: Markdown escaping in issue lines
+
+- Problem: a line with two `$` signs (e.g. "1,5 milyar $ ↔ … $'i") was rendered by GitHub as
+  LaTeX math. `*`, `_`, `` ` ``, `<`, `[`, `]`, `|`, `~` and `#` could also break a line.
+- Fix in `scripts/uyari.py`: `kacir()` escapes only the free text of each line; the bold rule
+  name and the run link are unchanged. It is applied to the issue body, the comment's workflow
+  name and the (A) summary. `$` becomes `<span>$</span>`, which is what GitHub's "Writing
+  mathematical expressions" page documents for a literal `$` outside math (that page gives `\$`
+  only for use inside math). The other characters get a CommonMark backslash escape.
+- Dedupe: `mevcut_anahtarlar()` stores each existing line both as written and as un-escaped
+  with `coz()`. Escaped lines are recognised as repeats, and so are lines from today's issue
+  that were written before this fix without escaping.
+- Tests: 9 (two `$`, and `*`/`_`/etc., in both the issue and (A), with a rerun that adds +0) and
+  10 (an old unescaped line already in the issue gives +0 lines and no comment). Result: 33/33.
+  Turning off escaping makes 2 checks fail. Smoke OK.
