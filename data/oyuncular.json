@@ -632,9 +632,14 @@
   "segmentler": [
    "roket_bomba"
   ],
-  "gunler": [],
-  "son": "",
-  "sayi_30g": 0
+  "gunler": [
+   {
+    "g": "2026-09-23",
+    "u": "/haberler/2026-09-23.html?q=Roketsan"
+   }
+  ],
+  "son": "2026-09-23",
+  "sayi_30g": 1
  },
  "repkon": {
   "rol": "yerli-rakip",
@@ -650,14 +655,9 @@
   "segmentler": [
    "hafif_silah"
   ],
-  "gunler": [
-   {
-    "g": "2026-09-23",
-    "u": "/haberler/2026-09-23.html?q=Sars%C4%B1lmaz"
-   }
-  ],
-  "son": "2026-09-23",
-  "sayi_30g": 1
+  "gunler": [],
+  "son": "",
+  "sayi_30g": 0
  },
  "canik": {
   "rol": "yerli-rakip",
@@ -728,14 +728,9 @@
  "stm": {
   "rol": "emsal",
   "segmentler": [],
-  "gunler": [
-   {
-    "g": "2026-09-23",
-    "u": "/haberler/2026-09-23.html?q=STM"
-   }
-  ],
-  "son": "2026-09-23",
-  "sayi_30g": 1
+  "gunler": [],
+  "son": "",
+  "sayi_30g": 0
  },
  "asfat": {
   "rol": "emsal",
