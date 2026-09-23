@@ -26,6 +26,7 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 | Rev | Karar | Deneme | Commit | Bekleyen insan kontrolü |
 |---|---|---|---|---|
 | 30 | PASS (issue kanalı) | 1 (+1 iptal edilen push sürümü) | aa9a4c3 | yok |
+| 22 | deneme 1 FAIL (P1-2: roketsan "1 / 536", plan "2 / 536"); deneme 2 sürüyor | 1→2 | 29a9667 (d1) | yok |
 
 ## Notlar / anlaşmazlıklar
 
@@ -42,6 +43,10 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 - `uyari-test.yml` yalnız rev21-33 dalında tetiklenir; main'e alınmadan önce silinebilir.
 - (A) özetleri GitHub'da yalnız oturum açıkken görünüyor; kanıt Chrome (oturumlu) ekran görüntüsüyle alınıyor.
 
+- design-reviewer.md (P)'yi PENDING-HUMAN sayıyor; Rev 30 sonrası (P) → (I) değişimini her inceleme istemine yazıyorum. Tanım dosyasını değiştirmedim (kullanıcının dosyası).
+- Rev 22 d1 kanıtı: yeşil run 35867515608, bozuk (boz=fetch) run 35867655946 → issue #5'e DÖRT-DURUM satırı (issue yeniden açıldı).
+
 ## Açık (orkestratörün eklediği)
 
 1. ~~(push kanalı için)~~ Kanal issue'ya döndü; müşteri issue'nun herkese açık olduğunu bilerek seçti — kapandı. Eski metin: Repo herkese açık → (A) Actions özet sayfası da herkese açık ve uyarı metnini listeliyor. Plan bildirime dokununca bu sayfayı açtırıyor, ama "uyarı metni herkese açık dosyaya yazılmaz" diyor. Özete yalnızca kural adı + sayı mı yazılsın?
+2. **R22 kapsam satırı birimi.** Plan "{görünen} / 536 başlık" ve roketsan için "2 / 536" diyor; görünen = satır sayısı (aynı başlık iki bölümde iki satır). Payda benzersiz başlık. Sonuç: tümünü eşleyen süzgeçte "551 / 536" basılabilir. Pay benzersiz başlık mı olsun (roketsan "1 / 536", ölçütle çelişir), yoksa payda da satır mı? Deneme 2 plana harfiyen uydu.

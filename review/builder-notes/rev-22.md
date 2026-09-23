@@ -79,3 +79,19 @@ re-add).
   `ubuntu-latest`. Locally I only used system Chrome.
 - A dispatch with `boz=none` on a non-main branch commits and pushes the build to that branch.
   That was already true before.
+
+## Attempt 2 — R22-P1-2 (verdict FAIL: "1 / 536", criterion "2 / 536")
+
+- **Change.** `assets/app.js` `rescope()`: the numerator is now the count of **visible rows**
+  (the literal "{görünen}" in R22.1), not unique headlines. It equals the sum of the section
+  counts next to it, so the scope line and the badges agree. The denominator is unchanged
+  (the day's unique headline count). `?oyuncu=roketsan` → **"2 / 536 başlık"** (Türk savunma
+  sanayii 1 + İhale ve Sözleşmeler 1). `baykar` is now "4 / 536". Known trade-off: a filter
+  matching every row would read 551 / 536, because Öne çıkanlar and the Türk sanayii slice
+  repeat headlines. My attempt-1 dedup is dropped because the criterion is written as 2.
+- **Smoke.** `review/tools/smoke.py` now also asserts numerator == visible `[data-search]`
+  rows, and that `?oyuncu=roketsan` reads exactly "2 / {toplam}" when roketsan is on the page.
+- **Results.** `build.py` exit 0 (only the `app.js?v=` cache-bust changes in the HTML);
+  `check_reports.py --dort-durum` 4/4 green; smoke OK. Headless system Chrome at 375×812 and
+  1440×900, light and dark: "2 / 536 başlık · 50 kaynak · son 48 saat", no horizontal overflow,
+  no page errors.

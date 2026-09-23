@@ -112,20 +112,17 @@ function loadPlayers() {
 
   /* Kapsam satırı süzgeçle yeniden sayılır (Rev 22, Rev 18b'nin yasası):
      süzgeç açıkken "536 başlık" süzülmemiş sayfayı anlatır, altındaki liste
-     başka bir şeyi. Payda başlık sayısı; aynı başlık Öne çıkanlar'da,
-     kendi kategorisinde ve Türk sanayii kesitinde üç kez durabilir, o yüzden
-     pay da satır değil başlık sayar (data-search aynı başlığın imzası). */
+     başka bir şeyi. Pay "görünen": okurun listede gördüğü satırlar — bölüm
+     sayılarının toplamı. Aynı başlık iki bölümde duruyorsa (ör. İhale ve
+     Türk sanayii kesiti) iki kez görünür ve iki kez sayılır; pay ile
+     bölüm sayıları birbirini tutar (Rev 22 kabulü: ?oyuncu=roketsan →
+     "2 / 536"). Payda değişmez: günün tekil başlık sayısı. */
   var stat = document.querySelector(".news-stat > .num");
   var statRest = stat ? stat.textContent : "";
   function rescope(active) {
     if (!stat) return;
     if (!active) { stat.textContent = statRest; return; }
-    var seen = {}, n = 0;
-    rows.forEach(function (el) {
-      if (el.hidden) return;
-      var key = el.getAttribute("data-search");
-      if (!seen[key]) { seen[key] = true; n++; }
-    });
+    var n = rows.filter(function (el) { return !el.hidden; }).length;
     stat.textContent = n + " / " + statRest;
   }
 

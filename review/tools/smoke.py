@@ -49,11 +49,22 @@ with sync_playwright() as p:
     pg = b.new_context(service_workers="block").new_page()
     pg.goto(url + "?oyuncu=" + who); pg.wait_for_timeout(600)
     on = pg.inner_text(".news-stat > .num")
+    gorunen = pg.evaluate("Array.from(document.querySelectorAll('[data-search]')).filter(e => !e.hidden).length")
+    roket = None
+    if 'roketsan' in html:
+        pg.goto(url + "?oyuncu=roketsan"); pg.wait_for_timeout(600)
+        roket = pg.inner_text(".news-stat > .num")
+        pg.goto(url + "?oyuncu=" + who); pg.wait_for_timeout(600)
     pg.click(".pill-x"); pg.wait_for_timeout(200)
     off = pg.inner_text(".news-stat > .num")
     b.close()
 ok = re.fullmatch(r"\d+ / \d+", on) and re.fullmatch(r"\d+", off) and on.endswith("/ " + off)
-print(f"{who}: '{on} başlık' → × → '{off} başlık'")
+# Pay = görünen satır sayısı (Rev 22 attempt 2); roketsan kabulü "2 / {toplam}".
+ok = ok and on.split(" / ")[0] == str(gorunen)
+if roket is not None:
+    ok = ok and roket == "2 / " + off
+print(f"{who}: '{on} başlık' (görünen satır {gorunen}) → × → '{off} başlık'"
+      + (f" · roketsan: '{roket} başlık'" if roket is not None else ""))
 sys.exit(0 if ok else 1)
 """
 
