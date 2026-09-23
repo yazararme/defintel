@@ -92,11 +92,16 @@ retry/fallback flow with an injected fake translator and the CLI with --sahte-ce
 original → alert, exactly 10 → none); the prompt is sentence case and carries Ö1/Ö2/Ö3; the
 evidence workflow ceviri-dedektoru-test.yml has no secret, no Claude CLI install and no --refresh.
 K5: İLK-EKRAN tanı — `check_reports.py --ilk-ekran --tani` prints a row for each of the last 10
-reports (first-screen budget and the overflow's cause: text or alarm structure); with the report
-prompt's limits applied in a browser-only shortened copy (headline ≤75, summary item ≤110
-characters), every day without an alarm passes at 375×812 both locally and in the CI worst case
-(0.15px letter-spacing + every "ilk:" token on its own line); 17, 18 and 23 Sep still pass as
-published; the limits in check_reports.py are the numbers in review/builder-notes/k5-prompt.md.
+reports (first-screen budget and the overflow's cause); no day has a structural cause any more
+(ALARMLAR is behind the summary); with the report prompt's limits applied in a browser-only
+shortened copy (headline ≤65, alarm title ≤70, summary item ≤110 characters), every day —
+the alarm day included — passes at 375×812 locally and in the CI worst case (0.3px
+letter-spacing + every "ilk:" token on its own line); 17, 18, 21, 22 and 23 Sep pass as
+published, locally and in the CI worst case; the limits in check_reports.py are the numbers in
+review/builder-notes/k5-prompt.md. K5 attempt 2 (alarm day, 375/834/1440, light and dark): the
+band is the column's first element, above the headline; ALARMLAR follows the summary in the DOM
+at every width; the band links to #alarmlar and a tap brings ALARMLAR into view; at 375 the chip
+strip follows the summary on the alarm day and precedes it on other days; no sideways scroll.
 Later revisions extend CHECKS / PAGES. Exit 1 on any failure.
 """
 import os
@@ -574,17 +579,63 @@ def r24_checks(py, fails):
         fails.append("R24 tarayıcı")
 
 
+K5_ALARM_PY = r"""
+import sys, json
+from playwright.sync_api import sync_playwright
+base = sys.argv[1]
+JS = '''() => {
+  const col = document.querySelector('.report-grid > .column');
+  const bant = document.querySelector('.alarmbar');
+  const a = bant && bant.querySelector('a[href="#alarmlar"]');
+  const h1 = document.querySelector('.report-title');
+  const ol = document.querySelector('h2#ozet + ol');
+  const al = document.querySelector('h2#alarmlar');
+  const nav = document.querySelector('.report-grid .devnav');
+  const T = e => e ? e.getBoundingClientRect().top : null;
+  const onde = (x, y) => !!(x && y && (x.compareDocumentPosition(y) & Node.DOCUMENT_POSITION_FOLLOWING));
+  return {ilk: col && col.firstElementChild === bant, bant_ust: T(bant), h1_ust: T(h1),
+          bag: !!a, al_sonra: onde(ol, al), serit_ol: T(nav) !== null && T(ol) !== null ? T(nav) > T(ol) : null,
+          bant_metin: bant ? bant.textContent.trim().length : 0,
+          tasma: document.documentElement.scrollWidth > innerWidth};
+}'''
+out = []
+with sync_playwright() as p:
+    try: b = p.chromium.launch()
+    except Exception: b = p.chromium.launch(channel="chrome")
+    for gun, alarmli in (("2026-09-14", 1), ("2026-09-17", 0)):
+        for w, h in ((375, 812), (834, 1112), (1440, 900)):
+            for sema in ("light", "dark"):
+                if not alarmli and (w != 375 or sema != "light"):
+                    continue
+                ctx = b.new_context(viewport={"width": w, "height": h}, color_scheme=sema,
+                                    service_workers="block", locale="tr-TR")
+                pg = ctx.new_page(); pg.goto(f"{base}/reports/{gun}.html", wait_until="load")
+                pg.evaluate("document.fonts ? document.fonts.ready.then(() => 1) : 1"); pg.wait_for_timeout(150)
+                r = pg.evaluate(JS)
+                if alarmli:
+                    pg.click(".alarmbar a"); pg.wait_for_timeout(500)
+                    r["hash"] = pg.evaluate("location.hash")
+                    r["al_gorunur"] = pg.evaluate("(() => { const t = document.querySelector('h2#alarmlar')"
+                                                  ".getBoundingClientRect().top; return t >= 0 && t < innerHeight / 2; })()")
+                out.append([gun, alarmli, w, sema, r]); ctx.close()
+    b.close()
+print(json.dumps(out, ensure_ascii=False))
+"""
+
+
 def k5_checks(py, fails):
-    """K5: İLK-EKRAN tanı — (A) tablosu her gün için satır ve neden; istem sınırları uygulansaydı
-    alarmsız her gün yerel ve CI en kötü hâlde geçer; bugün geçen günler geçmeye devam eder;
-    check_reports.py'deki sınırlar k5-prompt.md'deki cümleyle aynı sayı."""
+    """K5: İLK-EKRAN tanı — (A) tablosu her gün için satır ve neden; yapısal neden kalmadı; istem
+    sınırları uygulansaydı her gün (alarm günü dahil) yerel ve CI en kötü hâlde geçer; bugün geçen
+    günler geçmeye devam eder (CI en kötü dahil); check_reports.py'deki sınırlar k5-prompt.md'deki
+    cümlelerle aynı sayı. Deneme 2: alarm günü bant en üstte ve ALARMLAR gövdesine bağlı."""
+    import json
     sys.path.insert(0, str(ROOT / "scripts"))
     import check_reports as C
     istem = (ROOT / "review" / "builder-notes" / "k5-prompt.md")
     metin = istem.read_text(encoding="utf-8") if istem.exists() else ""
-    ok = (f"en fazla {C.IE_BASLIK_KR} karakter" in metin and f"en fazla {C.IE_OZET_KR} karakter" in metin)
+    ok = all(f"en fazla {n} karakter" in metin for n in (C.IE_BASLIK_KR, C.IE_BANT_KR, C.IE_OZET_KR))
     print(f"{'ok  ' if ok else 'FAIL'} K5 istem sınırları = tanıdaki sınırlar · manşet ≤{C.IE_BASLIK_KR}, "
-          f"özet maddesi ≤{C.IE_OZET_KR} karakter")
+          f"alarm başlığı ≤{C.IE_BANT_KR}, özet maddesi ≤{C.IE_OZET_KR} karakter")
     if not ok:
         fails.append("K5 istem sınırları")
     if not py:
@@ -599,24 +650,57 @@ def k5_checks(py, fails):
     kalan, notlar = [], []
     for l in satirlar:
         h = [c.strip() for c in l.strip("|").split("|")]
-        gun, neden, tahmin = h[0], h[6], h[7]
-        alarm = "yapı: alarm" in neden
-        if not neden.startswith("🟢") and not ("metin:" in neden or alarm):
+        gun, ci, neden, tahmin = h[0], h[3], h[7], h[8]
+        if "yapı:" in neden:
+            kalan.append(f"{gun} yapısal neden ({neden})")
+        if not neden.startswith("🟢") and "metin:" not in neden:
             kalan.append(f"{gun} nedensiz kırmızı")
-        if not alarm and not tahmin.startswith("🟢"):
+        if not tahmin.startswith("🟢"):
             kalan.append(f"{gun} sınırla da kalıyor ({tahmin})")
-        notlar.append(f"{gun[5:]} {h[1]}/{h[2]}→{tahmin.split(' ', 1)[1] if ' ' in tahmin else tahmin}"
-                      + (" ⚠alarm" if alarm else ""))
-    # K5-3: bu veri kümesinde bugün geçen günler (17, 18, 23 Eyl) geçmeye devam eder.
-    for gun in ("2026-09-17", "2026-09-18", "2026-09-23"):
+        notlar.append(f"{gun[5:]} {h[1]}/{h[2]} CI {ci.split(' ', 1)[-1]}→{tahmin.split(' ', 1)[-1]}")
+    # K5-3: bugün geçen günler geçmeye devam eder, CI en kötü hâlde de (17 Eyl CI'da K5'ten önce 826'ydı).
+    for gun in ("2026-09-17", "2026-09-18", "2026-09-21", "2026-09-22", "2026-09-23"):
         l = next((l for l in satirlar if l.startswith(f"| {gun} ")), None)
-        if (ROOT / "reports" / f"{gun}.html").exists() and (not l or "🟢 geçti" not in l):
-            kalan.append(f"{gun} artık geçmiyor")
+        if (ROOT / "reports" / f"{gun}.html").exists() and (
+                not l or "🟢 geçti" not in l or not l.strip("|").split("|")[3].strip().startswith("🟢")):
+            kalan.append(f"{gun} artık geçmiyor (yerel ya da CI)")
     ok = r.returncode == 0 and len(satirlar) == beklenen and not kalan
-    print(f"{'ok  ' if ok else 'FAIL'} K5 İLK-EKRAN tanı ({len(satirlar)}/{beklenen} gün; h2/madde → sınırla yerel · CI) · "
+    print(f"{'ok  ' if ok else 'FAIL'} K5 İLK-EKRAN tanı ({len(satirlar)}/{beklenen} gün; h2/madde · CI → sınırla yerel · CI) · "
           + " · ".join(notlar) + (f" · SORUN: {kalan}" if kalan else "") + ("" if satirlar else r.stderr[-300:]))
     if not ok:
         fails.append("K5 tanı")
+
+    # Deneme 2 — alarm günü geometrisi (orkestratör kararı): bant en üstte, gövde özetin arkasında.
+    if not (ROOT / "reports" / "2026-09-14.html").exists():
+        return
+    r = subprocess.run([py, "-c", K5_ALARM_PY, BASE], cwd=ROOT, capture_output=True, text=True)
+    try:
+        olc = json.loads(r.stdout.strip().splitlines()[-1])
+    except Exception:  # noqa: BLE001
+        print(f"FAIL K5 alarm günü · ölçülemedi {r.stderr[-300:]}")
+        fails.append("K5 alarm günü")
+        return
+    sorun = []
+    for gun, alarmli, w, sema, m in olc:
+        et = f"{gun[5:]} {w} {sema}"
+        if m["tasma"]:
+            sorun.append(f"{et} yatay taşma")
+        if w == 375 and m["serit_ol"] is not bool(alarmli):
+            sorun.append(f"{et} çip şeridi {'özetin önünde' if alarmli else 'özetin arkasında'}")
+        if not alarmli:
+            continue
+        if not (m["ilk"] and m["bant_ust"] < m["h1_ust"] and m["bant_metin"]):
+            sorun.append(f"{et} bant başlığın üstünde değil")
+        if not (m["bag"] and m.get("hash") == "#alarmlar" and m.get("al_gorunur")):
+            sorun.append(f"{et} bant ALARMLAR'a indirmiyor")
+        if not m["al_sonra"]:
+            sorun.append(f"{et} ALARMLAR özetin önünde")
+    ok = not sorun and len(olc) == 7
+    print(f"{'ok  ' if ok else 'FAIL'} K5 alarm günü (14 Eyl, 375/834/1440 × açık/koyu): bant başlığın üstünde, "
+          f"ALARMLAR özetin arkasında, bant #alarmlar'a indiriyor; 375'te çip şeridi yalnız alarm günü özetin "
+          f"arkasında" + (f" · SORUN: {sorun}" if sorun else ""))
+    if not ok:
+        fails.append("K5 alarm günü")
 
 
 def _tr_upper(text):

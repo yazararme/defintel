@@ -762,7 +762,8 @@ body:has(.endnav) .foot { margin-top: 0; }
      ekrana özetin 5 maddesinden 2'si sığıyordu. Ray gizlenmez, yalnız sırası
      değişir: ızgara bir sütunlu esnek kutu olur, makale ve .prose kutusuzlaşır
      (display: contents), ray `order` ile özetin (h2#ozet + ol) arkasına geçer.
-     Alarm günü ALARMLAR özetin önünde kalır — o da özetten önce gelen metin.
+     Alarm günü ALARMLAR'ın gövdesi özetin arkasında (K5, her genişlikte, DOM'da);
+     özetin önünde yalnız alarm bandı kalır.
      1440'ta hiçbir şey değişmez: ray solda, yerinde. */
   .report-grid {
     display: flex;
@@ -831,6 +832,23 @@ body:has(.endnav) .foot { margin-top: 0; }
   .report-grid .prose > h2:first-child { margin-top: 10px; }
   .report-grid .prose > h2#ozet { margin-bottom: 10px; }
   .prose h2#ozet + ol { font-size: 17.5px; }
+
+  /* K5 — İLK-EKRAN payı, yalnız krom (metin bloğu, eşikler aynı). 375'te başlığın
+     üst çizgisi daybar'ın alt çizgisinin 8px altında ikinci bir çizgiydi: sınırı
+     daybar zaten çiziyor, başlığın çizgisi ve 8px iç boşluğu kalkar (9px). Izgara
+     üstü 8→6, çip şeridi 8/8→6/6, özet başlığının üstü 10→8 (8px). 17 Eyl CI'da
+     826 → 809. */
+  .report-grid { margin-top: 6px; }
+  .report-grid .report-title { border-top: 0; padding-top: 0; }
+  .report-grid .devnav { margin-top: 6px; padding-bottom: 6px; }
+  .report-grid .prose > h2:first-child { margin-top: 8px; }
+  /* K5 — alarm günü (orkestratör kararı, deneme 2): bant başlığın üstünde kalır,
+     ALARMLAR'ın gövdesi özetin arkasında (DOM). Çip şeridi — krom — özetin
+     arkasına iner (ray ile aynı sıra: 1); bant sıkılaşır (dolgu 9→6, alt boşluk 14→8).
+     Özet başlığı böylece başlığın hemen altında. */
+  .report--alarm .report-grid .devnav { order: 1; margin-top: 18px; }
+  .report--alarm .report-grid .prose > h2#ozet { margin-top: 14px; }
+  .report-grid .alarmbar { margin-bottom: 8px; padding-block: 6px; }
 
   /* Üç sütunlu tablo telefona sığmıyor: her satırı etiketli bloğa çevir. */
   .prose table, .prose tbody, .prose tr, .prose td { display: block; width: 100%; }
@@ -964,6 +982,11 @@ body:has(.endnav) .foot { margin-top: 0; }
   font-size: 15.5px;
   line-height: 1.4;
 }
+/* K5 — bant, özetin arkasına inen ALARMLAR gövdesine bağlanır. Metin rengi aynı
+   (renk durumu taşır, bağlantıyı değil); ok --muted, bağlantı olduğunu söyler. */
+.alarmbar a { color: inherit; text-decoration: none; }
+.alarmbar a:hover { text-decoration: underline; text-decoration-color: var(--rule-2); }
+.alarmbar-go { color: var(--muted); }
 
 /* ---------- gezinme şeridi ---------- */
 

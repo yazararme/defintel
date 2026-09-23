@@ -412,11 +412,20 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
     # kanonik olan tarihli olanıdır.
     canonical = f"{SITE_URL}/reports/{iso}.html" if depth == 0 else ""
 
-    banner = (
-        f'<p class="alarmbar">{html.escape(str(meta.get("alarm_title") or "Alarm"))}</p>'
-        if meta.get("alarm")
-        else ""
-    )
+    # K5 (deneme 2): bant sayfanın en üstünde, başlığın da üstünde kalır (Rev 9'un
+    # sinyali); ALARMLAR'ın gövdesi özetin arkasına indi (enrich.SECTION_ORDER), bant
+    # oraya bağlanır — dokunulunca iner. Gövde yoksa bant düz metin kalır: hedefi
+    # olmayan bir bağlantı okuyucuyu olmayan bir yere yollar.
+    bant_metni = html.escape(str(meta.get("alarm_title") or "Alarm"))
+    if meta.get("alarm") and 'id="alarmlar"' in body_html:
+        bas, _, son = bant_metni.rpartition(" ")
+        banner = (f'<p class="alarmbar"><a href="#alarmlar">{bas + " " if bas else ""}'
+                  f'<span class="nb">{son}&nbsp;<span class="alarmbar-go" aria-hidden="true">↓</span></span>'
+                  '</a></p>')
+    elif meta.get("alarm"):
+        banner = f'<p class="alarmbar">{bant_metni}</p>'
+    else:
+        banner = ""
     # The day bar above already carries the date and the link to that day's
     # clippings, so the rail only repeats what the reader just read.
     rail = [

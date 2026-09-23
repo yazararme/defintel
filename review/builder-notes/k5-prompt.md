@@ -1,11 +1,12 @@
-# K5: prompt addition (first-screen limits)
+# K5: prompt addition (first-screen limits) — attempt 2
 
-The desktop task's real instruction is not in this repo. The customer pastes these two
+The desktop task's real instruction is not in this repo. The customer pastes these three
 sentences into it themselves, on merge day. They join the same block as Rev 23 and Rev 32
 (`rev-23-prompt.md`, `rev-32-prompt.md`). Paste them word for word:
 
 ```
-Manşet en fazla 75 karakterdir, boşluklar dahil (yaklaşık 10 kelime).
+Manşet en fazla 65 karakterdir, boşluklar dahil (yaklaşık 9 kelime).
+Alarm günü alarm_title en fazla 70 karakterdir, boşluklar dahil; gelişmenin adını ve son tarihini taşır, açıklamayı değil.
 Her özet maddesi en fazla 110 karakterdir, boşluklar dahil (yaklaşık 15 kelime); ayrıntı gelişmenin kendi bloğunda kalır.
 ```
 
@@ -16,72 +17,94 @@ Tutarı kaynağın verdiği para biriminde yaz. Kaynak kendi çevirisini veriyor
 Başlık günün tezidir, özet maddelerinden biri değildir.
 Her özet maddesi kimin ne yaptığını söyler.
 Önceki 7 raporda anlatılmış bir gelişme manşete ya da özete ancak neyin yeni olduğunu ilk cümlesinde söyleyerek girer ('resmîleşti', 'sözleşmeye döndü', 'bedel açıklandı').
-Manşet en fazla 75 karakterdir, boşluklar dahil (yaklaşık 10 kelime).
+Manşet en fazla 65 karakterdir, boşluklar dahil (yaklaşık 9 kelime).
+Alarm günü alarm_title en fazla 70 karakterdir, boşluklar dahil; gelişmenin adını ve son tarihini taşır, açıklamayı değil.
 Her özet maddesi en fazla 110 karakterdir, boşluklar dahil (yaklaşık 15 kelime); ayrıntı gelişmenin kendi bloğunda kalır.
 ```
+
+What changed from attempt 1: the headline limit goes from 75 to **65**, and there is a new
+sentence for `alarm_title` (**70**). The summary limit stays at **110**.
 
 ## Where each sentence goes
 
 1. **Headline sentence:** put it in the frontmatter `title` rule, **in place of** the
    existing "at most 14 words" limit. Keep the "one development" part of that rule.
-   Fourteen words gave 4- and 5-line headlines at 375px.
-2. **Summary sentence:** put it in the YÖNETİCİ ÖZETİ rules, after the Rev 32 sentence.
+2. **Alarm title sentence:** put it in the frontmatter `alarm_title` rule. That text is the
+   alarm band, which stays at the very top of the page, above the headline.
+3. **Summary sentence:** put it in the YÖNETİCİ ÖZETİ rules, after the Rev 32 sentence.
 
 ## How the limits were derived
 
-Every figure below comes from the 10 reports of 14–23 Sep. They were measured at 375×812 in
-Chrome, as published and in a browser-only shortened copy. The full table is in `k5.md`.
+All figures come from the 10 reports of 14–23 Sep, measured in Chrome at 375×812 after the
+K5 layout change. The shortened versions were built in the browser only. Published pages and
+data are unchanged.
 
-- **The fixed part of the page.** The masthead and daybar end at 98px. With a 3-line
-  headline, the summary heading sits at **280px**, 20px under the 300px threshold. Each extra
-  headline line costs 32px, so a 4-line headline puts it at 311px and a 5-line one at 343px.
-  **The headline must fit in 3 lines.**
-- **Headline: characters decide, words do not.** The 3-line headlines had 63–69 characters
-  and 9–11 words. The 4-line ones had 80–83 characters but only 8–14 words (16 Sep: 8 words,
-  4 lines). I cut every headline one word at a time and measured each version, both normally
-  and with CI's wider line breaks. **No version up to 77 characters went past 3 lines.** The
-  limit is 75, which leaves 2 characters of margin. As a word limit, only 7 words would be
-  guaranteed, and 17 Sep already had 10 words in 3 lines.
-- **Summary.** With the heading at 280px, item 4 must end by 812px. That leaves room for
-  **17 summary lines** across items 1–4, at 26px each. The days that pass had exactly 16. The
-  failing days had 19–21 (15 and 16 Sep), because their items ran to 150–209 characters. The
-  17th line is the only spare, and two things use it:
-  - **CI wraps wider.** 17 Sep grows from 16 to 18 lines at 0.15px letter spacing (773 → 826).
-  - **The "ilk:" token** (Rev 32) can drop onto a line of its own. 20 Sep has 3 tokens.
+**The CI worst case is now 0.3px letter spacing, plus every "ilk:" token on its own line.**
+Attempt 1 used 0.15px. In the reviewer's CI run, that model was too mild. CI measured 16 Sep's
+headline, cut to 75 characters (70 characters in practice), at 4 lines (311 / 805). Locally at
+0.15px the same text was 3 lines. At 0.3px it is 4 lines. Every limit below was also checked at
+0.45px.
 
-  I cut the items one word at a time and measured. **3 lines are guaranteed up to 97
-  characters and 4 lines up to 137.** At 110 characters, all 10 days pass in the CI worst
-  case: 0.15px letter spacing plus every token on its own line. The worst day is 20 Sep, at
-  280 / 799. At 120 characters, 20 Sep fails in that worst case (852). At 137 it fails too.
-  So the limit is 110.
+- **The fixed part of the page (after K5).** On a day without an alarm, the masthead and
+  daybar end at 98px. With a 3-line headline, the summary heading sits at **263px**. Each
+  extra headline line costs 32px. With 3 headline lines, items 1–4 get **18 summary lines**
+  (26.25px each) before 812px.
+- **Headline ≤ 65.** I cut every headline one word at a time and counted its lines. Across
+  the 10 headlines:
+  - Locally and at 0.15px, the shortest cut that reached 4 lines was 78 characters (14 Sep).
+  - At 0.3px and 0.45px it was **70 characters** (16 Sep). That is the break CI showed.
 
-With both limits applied, all nine days without an alarm pass. The measurements are in
-the shortened copy, and the published pages are unchanged:
+  65 leaves 5 characters, about one word, under the shortest known 4-line cut. Attempt 1's
+  75 was already over that edge. The headlines that fit in 3 lines ran to 63–69 characters,
+  so this limit costs them at most one word.
+- **Alarm title ≤ 70.** The band text wraps at about 308px at 15.5px. I put 49 Turkish texts
+  into the band one word at a time: 14 Sep's `alarm_title` and every summary item from the
+  10 days. **Every cut up to 70 characters stayed within 2 lines**, from 0 to 0.45px. The
+  shortest 3-line cut was 71 characters, or 78 locally. A 3rd line still passes: with a
+  3-line band the summary heading sits at 295px. So 70 needs no extra margin. The limit also
+  keeps the name and the deadline: "USAF namlulu hava savunma pazar araştırması — yanıt
+  9 Ekim'de doluyor" is 69 characters. The published title is 90 characters and wraps to
+  3 lines.
+- **Summary item ≤ 110** (unchanged). I cut each item to the limit and measured item 4. With
+  headline ≤ 65 and items ≤ 110, the worst of the 10 days is 20 Sep, at **782px** at both
+  0.3 and 0.45px with every token on its own line. That leaves 30px, more than one line. At
+  120 or 130 characters, 20 Sep reaches 835px in the CI worst case and fails.
 
-| day | as published (h2 / item 4) | with limits: local | with limits: CI worst |
-|---|---|---|---|
-| 15 Sep | 280 / 904 | 280 / 694 | 280 / 747 |
-| 16 Sep | 311 / 884 | 280 / 721 | 280 / 747 |
-| 19 Sep | 343 / 837 | 280 / 747 | 280 / 747 |
-| 20 Sep | 343 / 863 | 280 / 747 | 280 / 799 |
-| 21 Sep | 311 / 700 | 280 / 668 | 280 / 668 |
-| 22 Sep | 311 / 726 | 280 / 668 | 280 / 668 |
+With all three limits applied, **all 10 days pass, including the alarm day**, locally and in
+the CI worst case (0.3px shown; 0.45px gives the same result):
 
-17, 18 and 23 Sep already pass, and still pass with the limits.
+| day | as published: local | as published: CI worst | with limits: local | with limits: CI worst |
+|---|---|---|---|---|
+| 14 Sep (alarm) | 330 / 903 | 330 / 929 | 277 / 692 | 277 / 718 |
+| 15 Sep | 263 / 887 | 263 / 940 | 263 / 677 | 263 / 730 |
+| 16 Sep | 294 / 867 | 294 / 893 | 263 / 704 | 263 / 756 |
+| 17 Sep | 263 / 756 | 263 / 809 | 263 / 704 | 263 / 704 |
+| 18 Sep | 263 / 756 | 263 / 809 | 263 / 677 | 263 / 756 |
+| 19 Sep | 326 / 820 | 326 / 820 | 263 / 730 | 263 / 730 |
+| 20 Sep | 326 / 846 | 326 / 898 | 263 / 730 | 263 / 782 |
+| 21 Sep | 294 / 683 | 294 / 683 | 263 / 651 | 263 / 651 |
+| 22 Sep | 294 / 709 | 294 / 735 | 263 / 651 | 263 / 677 |
+| 23 Sep | 263 / 756 | 263 / 782 | 263 / 704 | 263 / 730 |
 
-**The alarm day (14 Sep) is not fixed by these sentences.** With the limits, it goes from
-840 / 1423 to 808 / 1234. See `k5.md`: the alarm day needs a decision, not a prompt limit.
+Each cell is the summary heading's top / item 4's bottom, in px. The thresholds are ≤300 and ≤812.
 
 ## How the build checks them (the build does not stop)
 
 - **İLK-EKRAN** (Rev 24, unchanged) still measures the day's report at 375×812. It alerts
   through the Rev 30 channel when the heading is below 300px or item 4 ends below 812px.
-- **İLK-EKRAN tanı** (new, K5) writes a table to (A) on every run. For each of the last 10
-  reports it shows the headline's lines and characters, the summary's lines, the cause of
-  any overflow, and the estimate with the limits applied. A day where the agent broke the
-  limit shows up there as "metin: başlık 4 satır (83 kr.)".
-- The build does not count characters itself. `guard_headline()` still warns at more than
-  14 words. That is a looser check than the new sentence, and I left it unchanged.
+- **İLK-EKRAN tanı** (K5) writes a table to (A) on every run. For each of the last 10
+  reports it shows:
+  - both edges, locally and in the CI worst case
+  - the headline's lines and characters
+  - the band's lines, and ALARMLAR's height if it comes before the summary (0 since K5)
+  - the summary's lines
+  - the cause of any overflow
+  - the estimate with the limits applied
 
-Acceptance ("the next reports stay inside the limits") depends on dates, so the reviewer
-marks it PENDING-HUMAN.
+  A day where the agent broke a limit shows up there as, for example, "metin: başlık 4 satır
+  (83 kr.)" or "metin: alarm bandı 3 satır (91 kr.)".
+- The build does not count characters itself. `guard_headline()` still warns at more than
+  14 words. That is looser than the new sentence, and I left it unchanged.
+
+Acceptance ("the next reports stay inside the limits") depends on future dates, so the
+reviewer marks it PENDING-HUMAN.

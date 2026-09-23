@@ -632,7 +632,12 @@ def drop_mke_agenda(text):
 # Okuma sırası: karar önce, gerekçe sonra. Yönetici özeti ne olduğunu söyler,
 # Fırsatlar/Riskler ne anlama geldiğini; gelişmelerin tam anlatımı ikisinin
 # ardından gelir. Ajan hâlâ kendi sırasıyla yazıyor, sıra burada kuruluyor.
-SECTION_ORDER = ["alarmlar", "ozet", "portfoy", "gelismeler",
+# K5 (deneme 2, orkestratör kararı 24 Eylül): ALARMLAR'ın gövdesi özetin arkasına
+# iner, her genişlikte. Alarm günü 375×812'de ALARMLAR bölümü (431px) özeti ilk
+# ekranın dışına itiyordu (14 Eyl: özet başlığı 840px). Rev 9'un sinyali — alarm
+# günü tanıdık tepenin bozulması — sayfanın en üstündeki alarm bandında kalır;
+# bant bu bölüme bağlanır (build.build_report).
+SECTION_ORDER = ["ozet", "alarmlar", "portfoy", "gelismeler",
                  "izleme-listesi", "kaynaklar", "ek"]
 
 
