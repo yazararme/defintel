@@ -1,0 +1,320 @@
+<!-- K6 fixture: https://www.elbitsystems.com/news (elbitsystems.com/feed/ 301 → 301 → /news), HTTP 200 text/html 68151 B,
+     fetched by the k6-kaynak-test "tani" job, run 35928738920, 2026-09-23T22:31Z. Trimmed to the listing
+     (view-content … up to the pager); markup otherwise unedited. -->
+<div class="view-content">
+            <div class="new-first-item views-row first-row"><div class="views-field views-field-field-thumbnail"><div class="field-content"><a href="https://www.elbitsystems.com/news/elbit-systems-files-shelf-prospectus-israel-0"><div>
+  
+  
+  <div class="field field--name-field-media-image field--type-image field--label-visually_hidden">
+    <div class="field__label visually-hidden">תמונה</div>
+              <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/blog_big_890x480/public/2025-02/untitled_design.jpg.webp?itok=0IdyT8FS" width="890" height="480" alt="Elbit Logo" />
+
+
+</div>
+          </div>
+
+</div>
+</a></div></div><div class="views-field views-field-title"><span class="field-content"><a href="/news/elbit-systems-files-shelf-prospectus-israel-0"><div class="date"><time datetime="2026-09-18T12:00:00Z">18  September,  2026</time>
+ </div>
+<h2 class="title">Elbit Systems Files a Shelf Prospectus in Israel </h2>
+
+<div class="button-read-more-a-blue">Read More </div></a></span></div></div>
+
+    </div>
+    
+
+  
+  
+
+  
+  
+</div>
+
+    </div>
+  
+  
+  
+
+  <div class="view-content">
+            <div class="new-box views-row first-row"><a href="/news/successful-live-demonstration-loitering-system-diehl-defence-and-elbit-systems-successfully">
+    <div class="thumbnail">
+                    
+            <div class="field field--name-field-thumbnail field--type-entity-reference field--label-hidden field__item"><div>
+  
+  
+  <div class="field field--name-field-media-image field--type-image field--label-visually_hidden">
+    <div class="field__label visually-hidden">תמונה</div>
+              <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/blog_small_728x522/public/2026-09/Sky_Striker_Demo-9.jpg.webp?itok=ld43liDU" width="728" height="522" alt="SkyStriker Demo" />
+
+
+</div>
+          </div>
+
+</div>
+</div>
+      
+            </div>
+    <div class="text">
+        <div class="title">
+<span>Successful Live Demonstration of the Loitering System: Diehl Defence and Elbit Systems successfully demonstrated SkyStriker’s Capabilities</span>
+</div>
+        <div class="date">
+            <div class="field field--name-field-date field--type-datetime field--label-hidden field__item"><time datetime="2026-09-14T12:00:00Z">14  September,  2026</time>
+</div>
+      </div>
+        <div class="teaser"></div>
+        <div class="button"><div class="button-read-more-a-blue">Read More</div></div>
+    </div>
+</a>
+</div>
+    <div class="new-box views-row"><a href="/news/one2many-elbit-systems-fuse-introduces-military-grade-autonomous-systems-built-scale">
+    <div class="thumbnail">
+                    
+            <div class="field field--name-field-thumbnail field--type-entity-reference field--label-hidden field__item"><div>
+  
+  
+  <div class="field field--name-field-media-image field--type-image field--label-visually_hidden">
+    <div class="field__label visually-hidden">תמונה</div>
+              <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/blog_small_728x522/public/2026-09/FUSE.jpg.webp?itok=z4WIQJQM" width="728" height="522" alt="FUSE" />
+
+
+</div>
+          </div>
+
+</div>
+</div>
+      
+            </div>
+    <div class="text">
+        <div class="title">
+<span>One2Many:  Elbit Systems’ FUSE Introduces Military-Grade Autonomous Systems Built for Scale</span>
+</div>
+        <div class="date">
+            <div class="field field--name-field-date field--type-datetime field--label-hidden field__item"><time datetime="2026-09-09T12:00:00Z">9  September,  2026</time>
+</div>
+      </div>
+        <div class="teaser"></div>
+        <div class="button"><div class="button-read-more-a-blue">Read More</div></div>
+    </div>
+</a>
+</div>
+    <div class="new-box views-row"><a href="/news/elbit-systems-signed-contracts-international-customer-valued-approximately-270-million">
+    <div class="thumbnail">
+                    
+            <div class="field field--name-field-thumbnail field--type-entity-reference field--label-hidden field__item"><div>
+  
+  
+  <div class="field field--name-field-media-video-file field--type-file field--label-visually_hidden">
+    <div class="field__label visually-hidden">קובץ וידאו</div>
+              <div class="field__item"><video  autoplay="autoplay" loop="loop" muted="muted" width="728" height="522">
+      <source  src="/sites/default/files/2025-02/spectro_tm_xr.mp4" type="video/mp4" />
+  </video>
+</div>
+          </div>
+
+</div>
+</div>
+      
+            </div>
+    <div class="text">
+        <div class="title">
+<span>Elbit Systems Signed Contracts with an International Customer Valued at Approximately $270 Million for Advanced ISR &amp; Targeting Payloads</span>
+</div>
+        <div class="date">
+            <div class="field field--name-field-date field--type-datetime field--label-hidden field__item"><time datetime="2026-09-01T12:00:00Z">1  September,  2026</time>
+</div>
+      </div>
+        <div class="teaser"></div>
+        <div class="button"><div class="button-read-more-a-blue">Read More</div></div>
+    </div>
+</a>
+</div>
+    <div class="new-box views-row"><a href="/news/elbit-systems-sweden-launch-thms-mobile-battlefield-networking-platform-dalo">
+    <div class="thumbnail">
+                    
+            <div class="field field--name-field-thumbnail field--type-entity-reference field--label-hidden field__item"><div>
+  
+  
+  <div class="field field--name-field-media-video-file field--type-file field--label-visually_hidden">
+    <div class="field__label visually-hidden">קובץ וידאו</div>
+              <div class="field__item"><video  autoplay="autoplay" loop="loop" muted="muted" width="728" height="522">
+      <source  src="/sites/default/files/2026-08/THMS%20Marketing%20Movie_Authorized_2.mp4" type="video/mp4" />
+  </video>
+</div>
+          </div>
+
+</div>
+</div>
+      
+            </div>
+    <div class="text">
+        <div class="title">
+<span>Elbit Systems Sweden to Launch THMS Mobile Battlefield Networking Platform at DALO</span>
+</div>
+        <div class="date">
+            <div class="field field--name-field-date field--type-datetime field--label-hidden field__item"><time datetime="2026-08-19T12:00:00Z">19  August,  2026</time>
+</div>
+      </div>
+        <div class="teaser"></div>
+        <div class="button"><div class="button-read-more-a-blue">Read More</div></div>
+    </div>
+</a>
+</div>
+    <div class="new-box views-row"><a href="/news/elbit-systems-reports-second-quarter-2026-results">
+    <div class="thumbnail">
+                    
+            <div class="field field--name-field-thumbnail field--type-entity-reference field--label-hidden field__item"><div>
+  
+  
+  <div class="field field--name-field-media-image field--type-image field--label-visually_hidden">
+    <div class="field__label visually-hidden">תמונה</div>
+              <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/blog_small_728x522/public/2025-02/untitled_design.jpg.webp?itok=jU8DoRCa" width="728" height="522" alt="Elbit Logo" />
+
+
+</div>
+          </div>
+
+</div>
+</div>
+      
+            </div>
+    <div class="text">
+        <div class="title">
+<span>Elbit Systems Reports Second Quarter 2026 Results</span>
+</div>
+        <div class="date">
+            <div class="field field--name-field-date field--type-datetime field--label-hidden field__item"><time datetime="2026-08-11T12:00:00Z">11  August,  2026</time>
+</div>
+      </div>
+        <div class="teaser"></div>
+        <div class="button"><div class="button-read-more-a-blue">Read More</div></div>
+    </div>
+</a>
+</div>
+    <div class="new-box views-row"><a href="/news/elbit-systems-announces-results-its-annual-general-meeting-shareholders-held-august-5-2026">
+    <div class="thumbnail">
+                    
+            <div class="field field--name-field-thumbnail field--type-entity-reference field--label-hidden field__item"><div>
+  
+  
+  <div class="field field--name-field-media-image field--type-image field--label-visually_hidden">
+    <div class="field__label visually-hidden">תמונה</div>
+              <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/blog_small_728x522/public/2025-02/untitled_design.jpg.webp?itok=jU8DoRCa" width="728" height="522" alt="Elbit Logo" />
+
+
+</div>
+          </div>
+
+</div>
+</div>
+      
+            </div>
+    <div class="text">
+        <div class="title">
+<span>Elbit Systems Announces the Results of its Annual General Meeting of Shareholders Held on August 5, 2026</span>
+</div>
+        <div class="date">
+            <div class="field field--name-field-date field--type-datetime field--label-hidden field__item"><time datetime="2026-08-06T12:00:00Z">6  August,  2026</time>
+</div>
+      </div>
+        <div class="teaser"></div>
+        <div class="button"><div class="button-read-more-a-blue">Read More</div></div>
+    </div>
+</a>
+</div>
+    <div class="new-box views-row"><a href="/news/elbit-systems-america-awarded-contracts-us-customs-and-border-protection-totaling-over-370">
+    <div class="thumbnail">
+                    
+            <div class="field field--name-field-thumbnail field--type-entity-reference field--label-hidden field__item"><div>
+  
+  
+  <div class="field field--name-field-media-image field--type-image field--label-visually_hidden">
+    <div class="field__label visually-hidden">תמונה</div>
+              <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/blog_small_728x522/public/2026-07/Elbit-8.7.262147.JPG.webp?itok=BX7zZ5fD" width="728" height="522" alt="Elbit Systems CEO and President Butzi Machlis" />
+
+
+</div>
+          </div>
+
+</div>
+</div>
+      
+            </div>
+    <div class="text">
+        <div class="title">
+<span>Elbit Systems of America Awarded Contracts from U.S Customs and Border Protection Totaling Over $370 Million to Enhance U.S. National Security</span>
+</div>
+        <div class="date">
+            <div class="field field--name-field-date field--type-datetime field--label-hidden field__item"><time datetime="2026-07-20T12:00:00Z">20  July,  2026</time>
+</div>
+      </div>
+        <div class="teaser"></div>
+        <div class="button"><div class="button-read-more-a-blue">Read More</div></div>
+    </div>
+</a>
+</div>
+    <div class="new-box views-row"><a href="/news/elbit-systems-uk-showcases-innovation-and-advanced-air-technologies-farnborough-2026">
+    <div class="thumbnail">
+                    
+            <div class="field field--name-field-thumbnail field--type-entity-reference field--label-hidden field__item"><div>
+  
+  
+  <div class="field field--name-field-media-image field--type-image field--label-visually_hidden">
+    <div class="field__label visually-hidden">תמונה</div>
+              <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/blog_small_728x522/public/2025-03/untitled_design_yellow.jpg.webp?itok=mp5Non1B" width="728" height="522" alt="yellow logo" />
+
+
+</div>
+          </div>
+
+</div>
+</div>
+      
+            </div>
+    <div class="text">
+        <div class="title">
+<span>Elbit Systems UK Showcases Innovation and Advanced Air Technologies at Farnborough 2026</span>
+</div>
+        <div class="date">
+            <div class="field field--name-field-date field--type-datetime field--label-hidden field__item"><time datetime="2026-07-17T12:00:00Z">17  July,  2026</time>
+</div>
+      </div>
+        <div class="teaser"></div>
+        <div class="button"><div class="button-read-more-a-blue">Read More</div></div>
+    </div>
+</a>
+</div>
+    <div class="new-box views-row"><a href="/news/elbit-systems-report-second-quarter-2026-financial-results-august-11-2026">
+    <div class="thumbnail">
+                    
+            <div class="field field--name-field-thumbnail field--type-entity-reference field--label-hidden field__item"><div>
+  
+  
+  <div class="field field--name-field-media-image field--type-image field--label-visually_hidden">
+    <div class="field__label visually-hidden">תמונה</div>
+              <div class="field__item">  <img loading="lazy" src="/sites/default/files/styles/blog_small_728x522/public/2025-02/untitled_design.jpg.webp?itok=jU8DoRCa" width="728" height="522" alt="Elbit Logo" />
+
+
+</div>
+          </div>
+
+</div>
+</div>
+      
+            </div>
+    <div class="text">
+        <div class="title">
+<span>Elbit Systems to Report Second Quarter 2026 Financial Results on August 11, 2026</span>
+</div>
+        <div class="date">
+            <div class="field field--name-field-date field--type-datetime field--label-hidden field__item"><time datetime="2026-07-13T12:00:00Z">13  July,  2026</time>
+</div>
+      </div>
+        <div class="teaser"></div>
+        <div class="button"><div class="button-read-more-a-blue">Read More</div></div>
+    </div>
+</a>
+</div>
+
+    </div>
+      

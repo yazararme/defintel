@@ -40,7 +40,9 @@ K6 — two optional per-source fields in kaynaklar.json (absent = behaviour unch
       Northrop's investor RSS (Akamai) answers 403 to a Chrome User-Agent that sends no
       Accept-Language — a bot fingerprint — and 200 with it.
   "tur": "html" + "ayristirici": "<name>"  a press-release page with no working feed; a narrow
-      parser from HTML_PARSERS reads title + date + URL (stdlib only).
+      parser from HTML_PARSERS reads title + date + URL (stdlib only). Elbit Systems' /feed/
+      301s to the HTML page www.elbitsystems.com/news (CI diagnosis, 24 Sep 2026) →
+      "elbitsystems-news"; Elbit Systems UK's recent-news page → "elbitsystems-uk".
 """
 
 import argparse
@@ -261,9 +263,29 @@ def parse_elbitsystems_uk(text, base_url):
     return items
 
 
+def parse_elbitsystems_news(text, base_url):
+    """www.elbitsystems.com/news (Drupal view; elbitsystems.com/feed/ 301s here since the feed was
+    removed): one `new-first-item views-row` / `new-box views-row` block per release — first link
+    href, <time datetime="2026-09-18T12:00:00Z">, title in <h2 class="title"> or
+    <div class="title"><span>. Page 1 only (10 releases)."""
+    items = []
+    for block in re.split(r'<div class="new-(?:first-item|box) views-row', text)[1:]:
+        link = re.search(r'<a href="([^"]+)"', block)
+        stamp = re.search(r'<time datetime="(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})Z"', block)
+        title = re.search(r'<h2 class="title">(.*?)</h2>|<div class="title">\s*<span>(.*?)</span>', block, re.S)
+        if not (link and stamp and title):
+            continue
+        published = dt.datetime.strptime(stamp.group(1), "%Y-%m-%dT%H:%M:%S").replace(tzinfo=dt.timezone.utc)
+        name = " ".join(strip_tags(title.group(1) or title.group(2)).split())
+        url = urllib.parse.urljoin(base_url, html.unescape(link.group(1)).strip())
+        if name and url:
+            items.append({"title": name, "url": url, "published": published})
+    return items
+
+
 # K6: `tur: "html"` sources name their parser with `ayristirici`. Each parser is narrow on
 # purpose — one page's markup; a redesign gives "feed parsed but empty", as a dead feed does.
-HTML_PARSERS = {"elbitsystems-uk": parse_elbitsystems_uk}
+HTML_PARSERS = {"elbitsystems-uk": parse_elbitsystems_uk, "elbitsystems-news": parse_elbitsystems_news}
 
 
 def parse_body(source, content):

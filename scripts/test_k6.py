@@ -8,6 +8,9 @@ Fixture'lar 24 Eylül 2026'da canlı alınmış ham yanıtlardır (scripts/fixtu
                                       (Accept-Language ile 200; onsuz 403)
   k6-elbitsystems-uk-recent-news.html.txt  www.elbitsystems-uk.com/media-events/recent-news
                                       (tur: "html", ayristirici: "elbitsystems-uk")
+  k6-elbitsystems-news.html.txt       www.elbitsystems.com/news — elbitsystems.com/feed/ buraya
+                                      301'leniyor (CI tanısı, run 35928738920); liste bölümüne
+                                      kırpılmış (tur: "html", ayristirici: "elbitsystems-news")
 
 Kırmızı koşullar:
   1. Northrop: kaynak girdisinin `istek_basligi` alanı isteğe Accept-Language koymuyor; Akamai
@@ -15,8 +18,8 @@ Kırmızı koşullar:
      olmayan kaynakların başlıkları değişti (User-Agent + Accept */*, başka hiçbir şey)
   2. Northrop RSS fixture'ı 10 kalem ve beklenen son 3 başlık/tarih/URL vermiyor (feedparser
      yüklüyse gerçek ayrıştırıcıyla; yoksa bu kontrol yerelde "atlandı" yazılır, CI'da kurulu)
-  3. Elbit UK HTML ayrıştırıcısı fixture'dan 20 kalem ve beklenen son 3 başlık/tarih/URL
-     vermiyor; boş/yabancı sayfa kalem uyduruyor; bilinmeyen ayristirici hata vermiyor
+  3. Elbit /news ve Elbit UK HTML ayrıştırıcıları fixture'dan 20 kalem ve beklenen son 3 başlık/tarih/URL
+     vermiyor (/news: 10; UK: 20); boş/yabancı sayfa kalem uyduruyor; bilinmeyen ayristirici hata vermiyor
   4. ağsız toplama (collect_news.py --fixture, ağ kütüphanesi tuzağıyla) iki kaynağı okumuyor,
      arıza yazıyor, SİLME-YOK eşit değil ya da data/news'e dokunuyor
   5. tanı betiği (scripts/k6_tani.py, CI'da ağa çıkan "tani" işi) sahte yanıtlarla: yorum satırı
@@ -45,6 +48,9 @@ AL = {"Accept-Language": "en-US,en;q=0.9"}
 # Drive'daki girdinin değişmeyen alanları repoda yok; testin ilgilendiği alanlar bunlar.
 NORTHROP_ESKI = {"ad": "Northrop Grumman", "tur": "rss", "url": NG_URL, "ulke": "US", "dil": "en"}
 NORTHROP = {**NORTHROP_ESKI, "istek_basligi": AL}
+ELBIT_NEWS_URL = "https://www.elbitsystems.com/news"
+ELBIT = {"ad": "Elbit Systems", "tur": "html", "ayristirici": "elbitsystems-news",
+         "url": ELBIT_NEWS_URL, "ulke": "IL", "dil": "en"}
 ELBIT_UK = {"ad": "Elbit Systems UK", "tur": "html", "ayristirici": "elbitsystems-uk",
             "url": EUK_URL, "ulke": "GB", "dil": "en"}
 
@@ -58,6 +64,17 @@ NG_BEKLENEN = [
     ("Northrop Grumman to Participate in the 14th Annual Morgan Stanley Laguna Conference",
      "2026-09-10", "https://investor.northropgrumman.com/news-releases/news-release-details/"
      "northrop-grumman-participate-14th-annual-morgan-stanley-laguna"),
+]
+ELBIT_BEKLENEN = [
+    ("Elbit Systems Files a Shelf Prospectus in Israel", "2026-09-18",
+     "https://www.elbitsystems.com/news/elbit-systems-files-shelf-prospectus-israel-0"),
+    ("Successful Live Demonstration of the Loitering System: Diehl Defence and Elbit Systems "
+     "successfully demonstrated SkyStriker’s Capabilities", "2026-09-14",
+     "https://www.elbitsystems.com/news/successful-live-demonstration-loitering-system-diehl-defence-"
+     "and-elbit-systems-successfully"),
+    ("One2Many: Elbit Systems’ FUSE Introduces Military-Grade Autonomous Systems Built for Scale",
+     "2026-09-09", "https://www.elbitsystems.com/news/one2many-elbit-systems-fuse-introduces-"
+     "military-grade-autonomous-systems-built-scale"),
 ]
 EUK_BEKLENEN = [
     ("Elbit Systems UK Showcases Latest Land and Autonomous Capabilities at DVD 2026", "2026-09-16",
@@ -103,7 +120,8 @@ _HTTPError.__name__ = "HTTPError"
 def sahte_requests(gonderilen):
     """Akamai taklidi: Chrome User-Agent + Accept-Language yok → 403 (canlıda ölçülen)."""
     govde = {NG_URL: (FX / "k6-northrop-news-releases.xml").read_bytes(),
-             EUK_URL: (FX / "k6-elbitsystems-uk-recent-news.html.txt").read_bytes()}
+             EUK_URL: (FX / "k6-elbitsystems-uk-recent-news.html.txt").read_bytes(),
+             ELBIT_NEWS_URL: (FX / "k6-elbitsystems-news.html.txt").read_bytes()}
 
     def get(url, headers=None, timeout=None):
         gonderilen.append(dict(headers or {}))
@@ -140,6 +158,7 @@ def main():
         _, eski_kalem, eski_hata = C.read_feed(NORTHROP_ESKI)
         _, ng_kalem, ng_hata = C.read_feed(NORTHROP)
         _, euk_kalem, euk_hata = C.read_feed(ELBIT_UK)
+        _, el_kalem, el_hata = C.read_feed(ELBIT)
     finally:
         if gercek is None:
             sys.modules.pop("requests", None)
@@ -148,7 +167,7 @@ def main():
     kontrol("eski Northrop girdisi: 403 (17–23 Eylül'deki hata aynen)",
             eski_hata == f"HTTPError: 403 Client Error: Forbidden for url: {NG_URL}"[:110], eski_hata)
     kontrol("yeni Northrop girdisi: istekte Accept-Language, HTTP hatası yok",
-            gonderilen[-2].get("Accept-Language") == AL["Accept-Language"]
+            gonderilen[-3].get("Accept-Language") == AL["Accept-Language"]
             and not (ng_hata or "").startswith("HTTPError"), ng_hata)
 
     # 2 · Northrop RSS ayrıştırma
@@ -163,7 +182,19 @@ def main():
         ng_uc = ilk3([{**i, "published": C.parse_date(i["published"])} for i in ng_std])
         kontrol("Northrop: son 3 başlık/tarih/URL (stdlib)", ng_uc == NG_BEKLENEN, str(ng_uc))
 
-    # 3 · Elbit UK HTML ayrıştırıcısı
+    # 3 · Elbit /news ve Elbit UK HTML ayrıştırıcıları
+    el_sayfa = (FX / "k6-elbitsystems-news.html.txt").read_text(encoding="utf-8")
+    el = C.parse_body(ELBIT, el_sayfa)
+    kontrol("Elbit /news: 10 kalem, hepsi tarihli ve mutlak URL'li",
+            len(el) == 10 and all(i["published"] and i["url"].startswith("https://www.elbitsystems.com/news/")
+                                  for i in el), str(len(el)))
+    kontrol("Elbit /news: son 3 başlık/tarih/URL", ilk3(el) == ELBIT_BEKLENEN, str(ilk3(el)))
+    kontrol("Elbit /news: read_feed aynı sonucu verir (sahte ağ)",
+            el_hata is None and len(el_kalem) == 10 and ilk3(el_kalem) == ELBIT_BEKLENEN, str(el_hata))
+    kontrol("Elbit /news: başka sayfa / boş gövde / UK sayfası → 0 kalem",
+            C.parse_body(ELBIT, "<html><body><h1>403 Forbidden</h1></body></html>") == []
+            and C.parse_body(ELBIT, b"") == []
+            and C.parse_body(ELBIT, (FX / "k6-elbitsystems-uk-recent-news.html.txt").read_text(encoding="utf-8")) == [])
     sayfa = (FX / "k6-elbitsystems-uk-recent-news.html.txt").read_text(encoding="utf-8")
     euk = C.parse_body(ELBIT_UK, sayfa)
     kontrol("Elbit UK: 20 kalem, hepsi tarihli ve mutlak URL'li",
@@ -188,8 +219,9 @@ def main():
         (d / "out").mkdir()
         (d / "published.json").write_text("{}", encoding="utf-8")
         (d / "k6.json").write_text(json.dumps({
-            "sources": [ELBIT_UK, NORTHROP],
-            "feeds": {"Elbit Systems UK": {"body": sayfa}, "Northrop Grumman": {"items": ng_std}},
+            "sources": [ELBIT, ELBIT_UK, NORTHROP],
+            "feeds": {"Elbit Systems": {"body": el_sayfa}, "Elbit Systems UK": {"body": sayfa},
+                      "Northrop Grumman": {"items": ng_std}},
         }, ensure_ascii=False), encoding="utf-8")
         r, ozet, uyari = T.toplama(d, "k6.json", T.SABAH, "--hours", "480")
         gun = json.loads((d / "out" / f"{T.GUN}.json").read_text(encoding="utf-8")) if not r.returncode else {}
@@ -198,14 +230,15 @@ def main():
             kaynak.setdefault(i["source"], []).append(i)
         kontrol("ağsız toplama: çıkış 0, ağ kütüphanesi yüklenmedi", r.returncode == 0,
                 (r.stderr or r.stdout)[-300:])
-        kontrol("ağsız toplama: iki kaynak okundu, arıza 0",
-                gun.get("sources") == ["Elbit Systems UK", "Northrop Grumman"]
+        kontrol("ağsız toplama: üç kaynak okundu, arıza 0",
+                gun.get("sources") == ["Elbit Systems", "Elbit Systems UK", "Northrop Grumman"]
                 and gun.get("failures") == [], str(gun.get("failures")))
-        kontrol("ağsız toplama: pencere içi kalemler yazıldı (Elbit UK 2, Northrop 3)",
-                len(kaynak.get("Elbit Systems UK", [])) == 2 and len(kaynak.get("Northrop Grumman", [])) == 3,
+        kontrol("ağsız toplama: pencere içi kalemler yazıldı (Elbit 3, Elbit UK 2, Northrop 3)",
+                len(kaynak.get("Elbit Systems", [])) == 3
+                and len(kaynak.get("Elbit Systems UK", [])) == 2 and len(kaynak.get("Northrop Grumman", [])) == 3,
                 str({k: len(v) for k, v in kaynak.items()}))
-        kontrol("ağsız toplama: SİLME-YOK 2/2 eşit, uyarı yok",
-                "2/2 kaynak eşit" in ozet and not uyari, str(uyari)[:200])
+        kontrol("ağsız toplama: SİLME-YOK 3/3 eşit, uyarı yok",
+                "3/3 kaynak eşit" in ozet and not uyari, str(uyari)[:200])
     kontrol("data/news değişmedi", sorted(p.name for p in C.OUT_DIR.iterdir()) == data_news_once)
 
     # 5 · tanı betiği, ağsız (sahte get)
@@ -237,6 +270,13 @@ def main():
     kontrol("tanı yorumu: yönlendirme zinciri yoruma girer",
             "1 yönlendirme sonrası https://elbitsystems.com/" in K.yorumla(durumlar["ana sayfa"][0]))
     euk_t = tani(ELBIT_UK, yanit(EUK_URL, 200, (FX / "k6-elbitsystems-uk-recent-news.html.txt").read_bytes()))
+    el_t = tani(ELBIT, yanit(ELBIT_NEWS_URL, 200, (FX / "k6-elbitsystems-news.html.txt").read_bytes()))
+    kontrol("tanı: Elbit /news fixture'ı → ÇALIŞIYOR, 10 kayıt, en yenisi 18 Eylül",
+            K.yorumla(el_t).startswith("ÇALIŞIYOR: 10 kayıt ayrıştırıldı, en yenisi 2026-09-18"), K.yorumla(el_t))
+    tani_ozet = "\n".join(K.ozet([(e, el_t if "/news" in e else durumlar["ana sayfa"][0]) for e, _ in K.YOKLAMALAR], "sınama"))
+    kontrol("tanı özeti: Elbit /news onarım satırı sayı + son 3 başlığı gösterir",
+            "**Elbit — K6 onarımı /news (2):** ÇALIŞIYOR: 10 kayıt" in tani_ozet
+            and all(f"{g} “{t}”" in tani_ozet for t, g, _ in ELBIT_BEKLENEN), tani_ozet[:400])
     kontrol("tanı: Elbit UK fixture'ı → ÇALIŞIYOR, 20 kayıt", K.yorumla(euk_t).startswith("ÇALIŞIYOR: 20 kayıt"),
             K.yorumla(euk_t))
     ozet_md = "\n".join(K.ozet([(e, durumlar["ana sayfa"][0]) for e, _ in K.YOKLAMALAR], "sınama"))
@@ -256,6 +296,8 @@ def main():
                 "| Kaynak | Tür | İstek düzeltmesi | Ayrıştırılan | Son 3 başlık (tarih) |",
                 "|---|---|---|--:|---|"]
     for ad, tur, duz, n, uc in [
+            ("Elbit Systems", "html · `elbitsystems-news` (www.elbitsystems.com/news)",
+             "url: /feed/ → /news (feed kaldırılmış, 301)", len(el), ilk3(el)),
             ("Northrop Grumman", "rss", "`Accept-Language: en-US,en;q=0.9` (onsuz 403)", len(ng_std), ng_uc),
             ("Elbit Systems UK", "html · `elbitsystems-uk`", "—", len(euk), ilk3(euk))]:
         satirlar.append(f"| {ad} | {tur} | {duz} | {n} | "

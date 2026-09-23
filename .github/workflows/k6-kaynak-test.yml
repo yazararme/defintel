@@ -7,7 +7,8 @@ name: k6-kaynak-test
 # Yalnız rev21-33 dalında koşar; main'e alınmadan önce silinir. Sır yok.
 # K6 deneme 2 — "tani" işi (AĞA ÇIKAR, yalnız rev21-33'e push'ta): scripts/k6_tani.py,
 # collect_news.py'nin istek biçimiyle elbitsystems.com/feed/ ve Northrop RSS'ine (başlıklı/başlıksız)
-# + iki Elbit adayı ve Elbit UK sayfasına birer düz GET. (A) özetine her biri için HTTP durumu,
+# + Elbit /news sayfasına (K6 onarımı: ayrıştırılan kayıt sayısı + son 3), Elbit IR RSS'ine ve Elbit UK
+# sayfasına birer düz GET. (A) özetine her biri için HTTP durumu,
 # Content-Type, yönlendirme zinciri, gövdenin ilk 500 baytı (kaçışlı) ve tek satır yorum.
 # Sır yok, yazma yok (Drive, data/news, repo); toplama çalıştırılmaz; her zaman yeşil biter.
 on:

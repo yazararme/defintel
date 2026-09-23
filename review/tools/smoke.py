@@ -111,7 +111,9 @@ customer note k6-kaynaklar.md carries the two paste-ready entries as valid JSON.
 K6 attempt 2: the workflow's networked "tani" job (scripts/k6_tani.py) runs only on push to
 rev21-33 and the offline "ayristirici" job stays; k6-kaynaklar.md's Northrop replace text and Elbit UK
 line, applied to sample kaynaklar.json files (compact and spaced), give valid JSON that changes
-nothing else, and the note says to paste after the merge.
+nothing else, and the note says to paste after the merge. After the CI diagnosis (run 35928738920:
+Elbit's /feed/ 301s to the HTML page www.elbitsystems.com/news) the note's Elbit find/replaces
+(url → /news + ayristirici elbitsystems-news, tur rss → html, only inside that entry) are applied too.
 Later revisions extend CHECKS / PAGES. Exit 1 on any failure.
 """
 import os
@@ -1607,16 +1609,21 @@ def k6_checks(fails):
     # K6-4: yapıştırılacaklar örnek kaynaklar.json'a (sıkışık ve boşluklu) uygulanınca geçerli JSON
     not_ = (ROOT / "review" / "builder-notes" / "k6-kaynaklar.md").read_text(encoding="utf-8")
     bloklar = [b.strip() for b in re.findall(r"```text\n(.*?)```", not_, re.S)]
-    ok = len(bloklar) == 3 and "main'e alındıktan sonra" in not_
+    ok = len(bloklar) == 7 and "main'e alındıktan sonra" in not_
     if ok:
-        aranan, yerine, euk_satir = bloklar
+        ng_ara, ng_yeni, el_ara, el_yeni, tur_ara, tur_yeni, euk_satir = bloklar
         ng_url = "https://investor.northropgrumman.com/rss/news-releases.xml"
+
+        def uygula(metin, ara, yeni, n=-1):
+            return metin.replace(ara, yeni, n).replace(ara.replace('":"', '": "'), yeni, n)
         for bicim in (json.dumps, lambda o: json.dumps(o, indent=2, separators=(",", ":")),
                       lambda o: json.dumps(o, separators=(",", ":"))):
-            ornek = [{"ad": "Elbit Systems", "url": "https://elbitsystems.com/feed/", "tur": "rss"},
+            ornek = [{"ad": "Elbit Systems", "url": "https://elbitsystems.com/feed/", "tur": "rss",
+                      "site": "https://elbitsystems.com/"},
                      {"ad": "Northrop Grumman", "url": ng_url, "tur": "rss", "ulke": "US"}]
-            metin = bicim(ornek)
-            metin = metin.replace(aranan, yerine).replace(aranan.replace('":"', '": "'), yerine)
+            metin = uygula(bicim(ornek), el_ara, el_yeni)
+            metin = uygula(metin, tur_ara, tur_yeni, 1)  # Elbit ilk girdi: yalnız onun "tur"u değişir
+            metin = uygula(metin, ng_ara, ng_yeni)
             metin = metin.replace("[", "[\n" + euk_satir, 1)
             try:
                 son = json.loads(metin)
@@ -1624,13 +1631,17 @@ def k6_checks(fails):
                 ok = False
                 break
             ng = next(g for g in son if g["ad"] == "Northrop Grumman")
+            el = next(g for g in son if g["ad"] == "Elbit Systems")
             eu = [g for g in son if g["ad"] == "Elbit Systems UK"]
             ok = ok and (len(son) == 3 and ng.get("url") == ng_url and ng.get("ulke") == "US"
+                         and ng.get("tur") == "rss"
                          and ng.get("istek_basligi") == {"Accept-Language": "en-US,en;q=0.9"}
+                         and el == {"ad": "Elbit Systems", "url": "https://www.elbitsystems.com/news",
+                                    "ayristirici": "elbitsystems-news", "tur": "html",
+                                    "site": "https://elbitsystems.com/"}
                          and len(eu) == 1 and eu[0].get("tur") == "html"
-                         and eu[0].get("ayristirici") == "elbitsystems-uk"
-                         and son[1] == ornek[0])
-    print(f"{'ok  ' if ok else 'FAIL'} k6-kaynaklar.md: Northrop değiştirme + Elbit UK satırı örnek dosyaya uygulanınca geçerli JSON; zaman: merge sonrası")
+                         and eu[0].get("ayristirici") == "elbitsystems-uk")
+    print(f"{'ok  ' if ok else 'FAIL'} k6-kaynaklar.md: Northrop + Elbit bul-değiştir ve Elbit UK satırı örnek dosyaya uygulanınca geçerli JSON; zaman: merge sonrası")
     if not ok:
         fails.append("k6-kaynaklar.md")
 

@@ -26,12 +26,15 @@ import collect_news as C  # noqa: E402
 
 AL = {"Accept-Language": "en-US,en;q=0.9"}
 ELBIT_FEED = "https://elbitsystems.com/feed/"            # Drive kaynaklar.json'daki girdi (24 Eyl)
+ELBIT_NEWS = "https://www.elbitsystems.com/news"          # /feed/ → 301 → 301 → burası (CI tanısı, 23 Eyl 22:31Z)
 NG_FEED = "https://investor.northropgrumman.com/rss/news-releases.xml"
 
 # (etiket, kaynak girdisi — request_headers()/parse_body()'ye aynen verilir)
 YOKLAMALAR = [
     ("Elbit Systems · /feed/ · bugünkü girdi (CI'daki 'feed parsed but empty' isteğinin aynısı)",
      {"ad": "Elbit Systems", "tur": "rss", "url": ELBIT_FEED}),
+    ("Elbit Systems · /news · html `elbitsystems-news` (K6 onarımı: /feed/ buraya yönleniyor)",
+     {"ad": "Elbit Systems", "tur": "html", "ayristirici": "elbitsystems-news", "url": ELBIT_NEWS}),
     ("Elbit Systems · /feed/ · + Accept-Language",
      {"ad": "Elbit Systems", "tur": "rss", "url": ELBIT_FEED, "istek_basligi": AL}),
     ("Northrop Grumman · RSS · bugünkü girdi (başlıksız; 17–23 Eyl'de 403)",
@@ -41,8 +44,6 @@ YOKLAMALAR = [
     ("Elbit aday · IR RSS · + Accept-Language",
      {"ad": "Elbit IR", "tur": "rss", "url": "https://ir.elbitsystems.com/rss/news-releases.xml",
       "istek_basligi": AL}),
-    ("Elbit aday · basın bültenleri sayfası (HTML)",
-     {"ad": "Elbit PR", "tur": "sayfa", "url": "https://elbitsystems.com/media-resources/press-releases/"}),
     ("Elbit Systems UK · HTML (K6 ek kaynağı)",
      {"ad": "Elbit Systems UK", "tur": "html", "ayristirici": "elbitsystems-uk",
       "url": "https://www.elbitsystems-uk.com/media-events/recent-news"}),
@@ -134,9 +135,19 @@ def kacisli(b, n=500):
 
 def ozet(sonuclar, saat):
     nereden = "GitHub Actions runner IP'si" if os.environ.get("GITHUB_ACTIONS") else "yerel makine (CI değil)"
+    def bul(parca):
+        return next(((n, s) for n, (e, s) in enumerate(sonuclar, 1) if parca in e), (0, {}))
+
+    def son3(s):
+        k = sorted(s.get("kalem") or [], key=lambda i: i["published"] or dt.datetime.min.replace(
+            tzinfo=dt.timezone.utc), reverse=True)[:3]
+        return "; ".join(f"{i['published'].date() if i['published'] else 'tarihsiz'} “{i['title']}”" for i in k) or "—"
+
+    (n1, s1), (n2, s2), (n3, s3) = bul("bugünkü girdi (CI"), bul("/news"), bul("istek_basligi")
     satir = [f"### K6 · tanı — Elbit ve Northrop, canlı GET · {nereden}", "",
-             f"**Elbit — CI'daki arızanın nedeni (1):** {yorumla(sonuclar[0][1])}", "",
-             f"**Northrop — K6 onarımı bu IP'den (4):** {yorumla(sonuclar[3][1])}", "",
+             f"**Elbit — CI'daki arızanın nedeni ({n1}):** {yorumla(s1) if s1 else '—'}", "",
+             f"**Elbit — K6 onarımı /news ({n2}):** {yorumla(s2) if s2 else '—'} Son 3: {son3(s2)}", "",
+             f"**Northrop — K6 onarımı bu IP'den ({n3}):** {yorumla(s3) if s3 else '—'} Son 3: {son3(s3)}", "",
              f"{saat} · istek biçimi `collect_news.request_headers()` (User-Agent `{C.UA}`, `Accept: */*`, "
              f"+ kaynağın `istek_basligi`), zaman aşımı {C.TIMEOUT} sn, yönlendirmeler izlenir. "
              "Sır yok, yazma yok. Tam gövdeler iş günlüğünde.", "",
@@ -158,7 +169,8 @@ def ozet(sonuclar, saat):
                          + f"ham <item>/<entry>: {s['ham']}" + (f" · ayrıştırma hatası: {s['hata']}" if s.get('hata') else "")
                          + "\n\nilk 500 bayt:\n"))
                   + ("" if s.get("istisna") else kacisli(s["govde"])) + "</pre>", "",
-                  f"**Yorum:** {html.escape(yorumla(s))}", ""]
+                  f"**Yorum:** {html.escape(yorumla(s))}"
+                  + (f" · son 3: {html.escape(son3(s))}" if s.get("kalem") else ""), ""]
     return satir
 
 
