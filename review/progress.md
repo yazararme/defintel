@@ -29,6 +29,7 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 | 22 | PASS (deneme 2; d1 FAIL P1-2 "1 / 536") | 2 | 29a9667, d9565c1 | yok |
 | 21 | PASS (deneme 2; d1 FAIL P0-2 kanıt eksikti) | 2 | 00d908c, 5c1134b | yok |
 | 23 | PASS | 1 | 4ca4ef5 | P0-2: prompt yapıştırma + sonraki 3 rapor (human-checks.md) |
+| 25 | FAIL (yalnız P0-1 (S) yarısı doğrulanamaz; diğer 6 ölçüt PASS) — bkz. not | 1 | d054ccd | P0-1 (S): canlı ilk toplamadan sonra Trend.az araması |
 | 32 | PASS (deneme 2; d1 FAIL CI İLK-EKRAN 817px gerilemesi) | 2 | 8116831, 78e6632 | P1-1: sonraki 5 rapor |
 | 24 | PASS | 1 | 41b6998 | yok |
 | 33 | PASS | 1 | 325d9fe | yok |
@@ -70,6 +71,9 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 
 - Rev 32 kanıtı: normal run 35891692823, uyari_test run 35891836966 → issue #5 TEKRAR-MANŞET satırı. Dikkat: aynı normal run'da CI İLK-EKRAN kırmızı (4. madde 817px > 812; yerelde 791) — "ilk:" jetonu CI'daki satır kırılımıyla özeti uzatmış olabilir.
 - **Devam noktası:** sıradaki Rev 25 (brief hazır: review/briefs/rev-25.md), sonra 27, 29, 28, 26.
+
+- **Rev 25 anlaşmazlığı (verdict değiştirilmedi):** inceleyici, tanımı gereği doğrulanamayan R25-P0-1 (S) yarısı yüzünden FAIL verdi. O kalemler 23 Eylül'de toplanırken düşürüldüğü için saklı veride yok; yeni bir kurucu bunu düzeltemez, kanıt yalnız canlı toplamayla oluşur (sabah hattını daldan çalıştırmak yasak). Yeniden deneme yapılmadı; sonraki revizyonlar buna bağlı değil. Kalan 6 ölçüt PASS, gerileme yok. İnceleyici gözlemi: Deniz ve İnsansız Sistemler 16→39, sivil dron teslimat gürültüsü (DroneXL dahil) oraya taşındı — S3'ün yan etkisi.
+- Rev 25 kanıtı: silme-yok-test run 35902549021 (esit yeşil, bozuk kırmızı), build run 35902548911 (Kategori isabeti, ipucu 0). Yeni kök dosya `oyuncu_eslestir.py`. 17–22 Eylül eski kategorilerde kaldı. `silme-yok-test.yml` main'e alınmadan silinebilir.
 
 ## Açık (orkestratörün eklediği)
 

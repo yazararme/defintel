@@ -22,3 +22,8 @@ Bir oturuşta yapılacak liste. Her maddede: nerede, ne yapılacak, ne görülme
    *Görmen gereken:* panelde yenilik cümlesi ("…neyin yeni olduğunu ilk cümlesinde söyleyerek girer").
 5. **Sonraki 5 rapor, sitede brifing sayfası:** özet maddelerinde "ilk: <gün>" jetonu olan her maddenin ilk cümlesinde bir yenilik fiili ("resmîleşti", "sözleşmeye döndü", "bedel açıklandı" gibi).
    *Görmen gereken:* jetonlu hiçbir madde eski haberi yeni gibi anlatmıyor.
+
+## Rev 25 — süzgeç artık düşürmüyor (R25-P0-1, canlı)
+
+6. **Dal main'e alındıktan sonraki ilk sabah, telefon ya da tarayıcı:** o günün medya takibi sayfası → arama kutusuna `Trend` yaz.
+   *Görmen gereken:* Trend.az'dan savunmayla ilgisiz en az bir başlık (ör. ekonomi/pamuk), Genel'in tam dökümünde, Türkçe başlıkla.
