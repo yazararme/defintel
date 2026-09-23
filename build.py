@@ -448,11 +448,11 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
         for name, anchor, role in rivals:
             if anchor and role == "rakip":
                 units.append(f'<a href="{anchor}">{html.escape(name)}</a>')
-        for name, _nid, hit in turkish:
+        for name, nid, hit in turkish:
             if not hit:
                 continue
             units.append(
-                f'<a href="{day_url("news", iso)}?q={urlparse.quote(name)}">'
+                f'<a href="{day_url("news", iso)}?oyuncu={nid}">'
                 f'{html.escape(name)}</a>' if has_news else html.escape(name)
             )
         arrow = '<a class="rival-count" href="/oyuncular.html">→</a>'
@@ -1002,7 +1002,7 @@ def players_page(hist):
             f'<li class="player-row{"" if son else " player-row--quiet"}"'
             f' data-seg="{" ".join(segs)}"'
             f' data-today="{1 if gap == 0 else 0}" data-seen="{1 if n else 0}">'
-            f'<a class="pname" href="/arsiv.html?q={urlparse.quote(rival["name"])}">'
+            f'<a class="pname" href="/arsiv.html?oyuncu={rival["id"]}">'
             f'{html.escape(rival["name"])}</a>'
             f'<span class="ptags">{tags}</span>{age}{cnt}</li>'
         )
@@ -1211,6 +1211,8 @@ def clip_html(item, day, cited, sec=""):
     if item.get("summary_scope") is True and not item.get("summary_tr"):
         meta.append('<span class="clip-nosum">özet alınamadı</span>')
 
+    ids = item.get("tr_ids") or []
+    oyuncu = f' data-oyuncu="{" ".join(ids)}"' if ids else ""
     url = html.escape(tr_url(item["url"], item.get("lang", "")), quote=True)
     raw_url = html.escape(item["url"], quote=True)
     title = html.escape(item.get("title_tr") or item["title"])
@@ -1226,7 +1228,7 @@ def clip_html(item, day, cited, sec=""):
 
     if not summary:
         return (
-            f'<li class="clip" data-sec="{sec}" data-search="{haystack}">'
+            f'<li class="clip" data-sec="{sec}"{oyuncu} data-search="{haystack}">'
             f'<a href="{url}" target="_blank" rel="noopener">{row}</a></li>'
         )
 
@@ -1236,7 +1238,7 @@ def clip_html(item, day, cited, sec=""):
         if item.get("title_tr") else ""
     )
     return (
-        f'<li data-sec="{sec}"><details class="clip" data-search="{haystack}">'
+        f'<li data-sec="{sec}"{oyuncu}><details class="clip" data-search="{haystack}">'
         f"<summary>{row}</summary>"
         f'<div class="clip-body">{orig}'
         f'<p class="clip-summary">{html.escape(summary)}</p>'
@@ -1441,6 +1443,7 @@ def entry_html(r, news_counts):
     ).lower()
 
     return f"""<article class="entry"
+   data-day="{r.get('date', '')}"
    data-tags="{html.escape('|'.join(str(t) for t in r.get('tags', [])))}"
    data-search="{html.escape(haystack)}">
   <div class="entry-rail">{''.join(rail)}</div>
@@ -1890,7 +1893,7 @@ def player_history(sources, news):
     if not config or not sources:
         return {}
     by_name = {r["name"]: r for r in config}
-    hist = {r["id"]: {"rol": r.get("role", "rakip"),
+    hist = {r["id"]: {"ad": r["name"], "rol": r.get("role", "rakip"),
                       "segmentler": r.get("segments") or [],
                       "gunler": []} for r in config}
 
@@ -1947,10 +1950,15 @@ def tag_turkish_headlines(items):
             for title in (item.get("title") or "", item.get("title_tr") or ""):
                 if title and rival_in_title(rival["id"], title):
                     # Satır kendi etiketini taşır: sayfada kaynaktan sonra
-                    # hangi şirket için listelendiği yazıyor.
+                    # hangi şirket için listelendiği yazıyor. Kimlik ayrı
+                    # tutuluyor — süzme ada değil kimliğe bakmalı, yoksa
+                    # "Bayraktar" başlığı Baykar süzgecinden kaçar.
                     tags = item.setdefault("tr_tags", [])
+                    ids = item.setdefault("tr_ids", [])
                     if rival["name"] not in tags:
                         tags.append(rival["name"])
+                    if rival["id"] not in ids:
+                        ids.append(rival["id"])
                     found = True
                     break
         if found:

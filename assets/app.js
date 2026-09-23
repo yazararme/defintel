@@ -1,4 +1,64 @@
 /* DEFINTEL — client-side arşiv filtresi. İçerik HTML'de hazır; bu yalnızca süzer. */
+
+/* Oyuncu süzgeci hapı.
+
+   Brifingin "Oyuncular" satırından ya da Oyuncular sayfasından gelen bağlantı
+   ?oyuncu=<kimlik> taşıyor. Eskiden ?q=<ad> ile geliyordu ve arama kutusuna
+   adı yazıyordu — iki sorun: kutuda bir şey yazıyor olması okuyucuya "bunu ben
+   yazdım" dedirtiyor, ve ad üzerinden arama "Bayraktar" başlığını Baykar
+   süzgecinden kaçırıyordu. Kimlik eşleşmesi build'de yapıldı; sayfa yalnız
+   onu okuyor. Kutu boş kalıyor ve süzgecin varlığı hapta duruyor. */
+function playerPill(label, onRemove) {
+  var host = document.querySelector(".controls");
+  if (!host) return null;
+  var old = document.querySelector(".pill-wrap");
+  if (old) old.remove();
+  var wrap = document.createElement("div");
+  wrap.className = "pill-wrap";
+  var pill = document.createElement("span");
+  pill.className = "pill";
+  var text = document.createElement("span");
+  text.className = "pill-label";
+  text.textContent = label;
+  var x = document.createElement("button");
+  x.type = "button";
+  x.className = "pill-x";
+  x.setAttribute("aria-label", "Filtreyi kaldır");
+  x.textContent = "×";
+  x.addEventListener("click", onRemove);
+  pill.appendChild(text);
+  pill.appendChild(x);
+  wrap.appendChild(pill);
+  host.parentNode.insertBefore(wrap, host.nextSibling);
+  return wrap;
+}
+
+function readParam(name) {
+  try { return new URLSearchParams(location.search).get(name) || ""; }
+  catch (err) { return ""; }
+}
+
+function dropParam(name, push) {
+  try {
+    var u = new URL(location.href);
+    u.searchParams.delete(name);
+    var next = u.pathname + (u.search || "") + u.hash;
+    // pushState, replaceState değil: "× sonrası geri tuşu süzülmüş hâle
+    // dönsün" ancak yeni bir geçmiş kaydıyla mümkün. replaceState bulunulan
+    // kaydı ezer ve geri tuşu bir önceki *sayfaya* gider.
+    if (history.pushState) history[push ? "pushState" : "replaceState"](null, "", next);
+  } catch (err) { /* geçmiş API'si yoksa adres olduğu gibi kalır */ }
+}
+
+/* Kimlik → görünen ad. Hem kupür sayfası hem arşiv aynı dosyayı okuyor. */
+var playerIndex = null;
+function loadPlayers() {
+  if (playerIndex) return playerIndex;
+  playerIndex = fetch("/data/oyuncular.json", { cache: "no-store" })
+    .then(function (r) { return r.json(); })
+    .catch(function () { return {}; });
+  return playerIndex;
+}
 (function () {
   "use strict";
 
@@ -14,6 +74,16 @@
     return (s || "").toLocaleLowerCase("tr").replace(/ı/g, "i").replace(/İ/g, "i");
   }
 
+  // Oyuncu kapsamı: null ise herkes. Metin süzgeciyle VE'leniyor — hap
+  // duruyorken kutuya yazmak hapın satırları içinde daraltır, dışına çıkmaz.
+  var scope = "";
+  function inScope(el) {
+    if (!scope) return true;
+    var host = el.hasAttribute("data-oyuncu") ? el : el.closest("[data-oyuncu]");
+    if (!host) return false;
+    return (host.getAttribute("data-oyuncu") || "").split(/\s+/).indexOf(scope) !== -1;
+  }
+
   function apply() {
     var term = norm(q ? q.value.trim() : "");
     var shown = 0;
@@ -21,7 +91,8 @@
     if (!term) folds.forEach(function (el, i) { el.open = resting[i]; });
 
     rows.forEach(function (el) {
-      var visible = !term || norm(el.getAttribute("data-search")).indexOf(term) !== -1;
+      var visible = inScope(el) &&
+        (!term || norm(el.getAttribute("data-search")).indexOf(term) !== -1);
       el.hidden = !visible;
       if (!visible) return;
       shown++;
@@ -35,7 +106,7 @@
     });
 
     if (none) none.hidden = shown !== 0;
-    retally(!!term);
+    retally(!!term || !!scope);
   }
 
   /* Süzme açıkken bölüm sayıları ve gezinme sayıları da süzülmüş olanı
@@ -98,28 +169,43 @@
     });
   }
 
-  // Brifingden gelen bağlantı ?q=Baykar taşıyor, Oyuncular sayfasından
-  // ?q=Hanwha. Kutuyu doldur ve "input" olayını yay: aynı olaya hem bu
-  // süzgeç hem arşivin içerik araması bağlı. Kendi kendine apply() çağırmak
-  // arşivde çalışmazdı — o arama ayrı bir dinleyicide duruyor.
-  //
-  // setTimeout gerekli: bu blok kendi IIFE'si içinde hemen koşuyor, arşiv
-  // araması dosyanın altında ve dinleyicisini henüz kurmamış oluyor.
-  if (q) {
-    var want = "";
-    try { want = new URLSearchParams(location.search).get("q") || ""; }
-    catch (err) { want = ""; }
-    if (want) {
-      setTimeout(function () {
-        q.value = want;
-        q.dispatchEvent(new Event("input", { bubbles: true }));
-        // Kupür sayfasında ilk eşleşmeye git; arşivde sonuç paneli akışın
-        // yerine geçiyor, kaydıracak bir şey yok.
-        if (!document.querySelector(".clips")) return;
-        var first = rows.filter(function (el) { return !el.hidden; })[0];
-        if (first) setTimeout(function () { first.scrollIntoView({ block: "center" }); }, 60);
-      }, 0);
+  // ?q= düz metin için duruyor (paylaşılan aramalar); oyuncu bağlantıları
+  // artık ?oyuncu=<kimlik> ile geliyor ve kutuya dokunmuyor.
+  function applyUrl(first) {
+    var who = readParam("oyuncu");
+    var want = readParam("q");
+    scope = who;
+    var existing = document.querySelector(".pill-wrap");
+    if (existing) existing.remove();
+    if (who && document.querySelector(".clips")) {
+      loadPlayers().then(function (index) {
+        var entry = index[who];
+        playerPill((entry && entry.ad) || who, function () {
+          dropParam("oyuncu", true);
+          scope = "";
+          var w = document.querySelector(".pill-wrap");
+          if (w) w.remove();
+          apply();
+        });
+      });
     }
+    if (want) q.value = want;
+    else if (first) q.value = "";
+    apply();
+    if (want && document.querySelector(".clips")) {
+      var hit = rows.filter(function (el) { return !el.hidden; })[0];
+      if (hit) setTimeout(function () { hit.scrollIntoView({ block: "center" }); }, 60);
+    }
+  }
+
+  if (q) {
+    // setTimeout: arşivin içerik araması dosyanın altında, dinleyicisini
+    // henüz kurmamış oluyor; "input" olayı ona da ulaşsın.
+    setTimeout(function () {
+      applyUrl(true);
+      if (readParam("q")) q.dispatchEvent(new Event("input", { bubbles: true }));
+    }, 0);
+    window.addEventListener("popstate", function () { applyUrl(false); });
   }
 
   // "/" focuses search, the way every reader expects
@@ -714,7 +800,9 @@
     load().then(function (rows) {
       if (norm(box.value.trim()) !== term) return;   // kullanıcı yazmaya devam etti
       feed.hidden = true;
+      // Hap duruyorsa arama da onun günleri içinde kalır (VE).
       render(rows.filter(function (r) {
+        if (allowDays && allowDays.indexOf(r.d) === -1) return false;
         return norm(r.t).indexOf(term) !== -1 || norm(r.s).indexOf(term) !== -1;
       }), box.value.trim());
     });
@@ -722,6 +810,42 @@
 
   box.addEventListener("input", run);
   box.addEventListener("keydown", function (e) { if (e.key === "Escape") setTimeout(run, 0); });
+
+  /* Oyuncular sayfasından gelen ?oyuncu=<kimlik>: akıştaki gün kartlarını
+     o şirketin geçtiği günlere indir. Gün listesi data/oyuncular.json'dan —
+     eşleştirme build'de yapıldı, sayfa onu yeniden hesaplamıyor. */
+  var cards = Array.prototype.slice.call(feed.querySelectorAll(".entry"));
+  var allowDays = null;          // null = kapsam yok
+
+  function scopeDays(days) {
+    allowDays = days;
+    cards.forEach(function (card) {
+      card.hidden = !!days && days.indexOf(card.getAttribute("data-day")) === -1;
+    });
+  }
+
+  function applyPlayer(first) {
+    var who = readParam("oyuncu");
+    var old = document.querySelector(".pill-wrap");
+    if (old) old.remove();
+    if (!who) { scopeDays(null); return; }
+    loadPlayers().then(function (index) {
+      var entry = index[who] || {};
+      var days = (entry.gunler || []).map(function (d) { return d.g; });
+      scopeDays(days);
+      playerPill(entry.ad || who, function () {
+        dropParam("oyuncu", true);
+        var w = document.querySelector(".pill-wrap");
+        if (w) w.remove();
+        scopeDays(null);
+        run();
+      });
+      run();
+    });
+  }
+
+  applyPlayer(true);
+  window.addEventListener("popstate", function () { applyPlayer(false); });
 })();
 
 

@@ -1,5 +1,6 @@
 {
  "rheinmetall": {
+  "ad": "Rheinmetall",
   "rol": "rakip",
   "segmentler": [
    "muhimmat",
@@ -28,6 +29,7 @@
   "sayi_30g": 4
  },
  "nammo": {
+  "ad": "Nammo",
   "rol": "rakip",
   "segmentler": [
    "muhimmat",
@@ -39,6 +41,7 @@
   "sayi_30g": 0
  },
  "knds": {
+  "ad": "KNDS",
   "rol": "rakip",
   "segmentler": [
    "muhimmat",
@@ -54,6 +57,7 @@
   "sayi_30g": 1
  },
  "bae-systems": {
+  "ad": "BAE Systems",
   "rol": "rakip",
   "segmentler": [
    "muhimmat",
@@ -73,6 +77,7 @@
   "sayi_30g": 2
  },
  "elbit": {
+  "ad": "Elbit",
   "rol": "rakip",
   "segmentler": [
    "muhimmat",
@@ -84,6 +89,7 @@
   "sayi_30g": 0
  },
  "hanwha": {
+  "ad": "Hanwha",
   "rol": "rakip",
   "segmentler": [
    "muhimmat",
@@ -120,6 +126,7 @@
   "sayi_30g": 6
  },
  "poongsan": {
+  "ad": "Poongsan",
   "rol": "rakip",
   "segmentler": [
    "muhimmat",
@@ -130,6 +137,7 @@
   "sayi_30g": 0
  },
  "eurenco": {
+  "ad": "Eurenco",
   "rol": "rakip",
   "segmentler": [
    "muhimmat"
@@ -139,6 +147,7 @@
   "sayi_30g": 0
  },
  "chemring": {
+  "ad": "Chemring",
   "rol": "rakip",
   "segmentler": [
    "muhimmat"
@@ -148,6 +157,7 @@
   "sayi_30g": 0
  },
  "gd-ots": {
+  "ad": "General Dynamics OTS",
   "rol": "rakip",
   "segmentler": [
    "muhimmat",
@@ -158,6 +168,7 @@
   "sayi_30g": 0
  },
  "csg": {
+  "ad": "CSG",
   "rol": "rakip",
   "segmentler": [
    "muhimmat",
@@ -177,6 +188,7 @@
   "sayi_30g": 2
  },
  "pgz": {
+  "ad": "PGZ",
   "rol": "rakip",
   "segmentler": [
    "muhimmat",
@@ -192,6 +204,7 @@
   "sayi_30g": 1
  },
  "munitions-india": {
+  "ad": "Munitions India",
   "rol": "rakip",
   "segmentler": [
    "muhimmat"
@@ -201,6 +214,7 @@
   "sayi_30g": 0
  },
  "solar-industries": {
+  "ad": "Solar Industries",
   "rol": "rakip",
   "segmentler": [
    "muhimmat"
@@ -210,6 +224,7 @@
   "sayi_30g": 0
  },
  "yugoimport": {
+  "ad": "Yugoimport",
   "rol": "rakip",
   "segmentler": [
    "muhimmat",
@@ -221,6 +236,7 @@
   "sayi_30g": 0
  },
  "arsenal-bulgaria": {
+  "ad": "Arsenal Bulgaria",
   "rol": "rakip",
   "segmentler": [
    "muhimmat",
@@ -231,6 +247,7 @@
   "sayi_30g": 0
  },
  "vmz-sopot": {
+  "ad": "VMZ Sopot",
   "rol": "rakip",
   "segmentler": [
    "muhimmat",
@@ -241,6 +258,7 @@
   "sayi_30g": 0
  },
  "norinco": {
+  "ad": "NORINCO",
   "rol": "rakip",
   "segmentler": [
    "muhimmat",
@@ -258,6 +276,7 @@
   "sayi_30g": 1
  },
  "pof": {
+  "ad": "Pakistan Ordnance Factories",
   "rol": "rakip",
   "segmentler": [
    "muhimmat",
@@ -268,6 +287,7 @@
   "sayi_30g": 0
  },
  "diehl": {
+  "ad": "Diehl",
   "rol": "rakip",
   "segmentler": [
    "muhimmat",
@@ -278,6 +298,7 @@
   "sayi_30g": 0
  },
  "junghans": {
+  "ad": "Junghans",
   "rol": "rakip",
   "segmentler": [
    "muhimmat"
@@ -287,6 +308,7 @@
   "sayi_30g": 0
  },
  "leonardo": {
+  "ad": "Leonardo",
   "rol": "rakip",
   "segmentler": [
    "hava_savunma",
@@ -310,6 +332,7 @@
   "sayi_30g": 3
  },
  "kongsberg": {
+  "ad": "Kongsberg",
   "rol": "rakip",
   "segmentler": [
    "hava_savunma"
@@ -332,6 +355,7 @@
   "sayi_30g": 3
  },
  "northrop-grumman": {
+  "ad": "Northrop Grumman",
   "rol": "rakip",
   "segmentler": [
    "hava_savunma"
@@ -346,6 +370,7 @@
   "sayi_30g": 1
  },
  "saab": {
+  "ad": "Saab",
   "rol": "rakip",
   "segmentler": [
    "hava_savunma"
@@ -355,6 +380,7 @@
   "sayi_30g": 0
  },
  "mbda": {
+  "ad": "MBDA",
   "rol": "rakip",
   "segmentler": [
    "hava_savunma"
@@ -369,6 +395,7 @@
   "sayi_30g": 1
  },
  "thales": {
+  "ad": "Thales",
   "rol": "rakip",
   "segmentler": [
    "hava_savunma",
@@ -379,6 +406,7 @@
   "sayi_30g": 0
  },
  "rafael": {
+  "ad": "Rafael",
   "rol": "rakip",
   "segmentler": [
    "hava_savunma",
@@ -394,6 +422,7 @@
   "sayi_30g": 1
  },
  "iai": {
+  "ad": "Israel Aerospace Industries",
   "rol": "rakip",
   "segmentler": [
    "hava_savunma"
@@ -403,6 +432,7 @@
   "sayi_30g": 0
  },
  "hensoldt": {
+  "ad": "Hensoldt",
   "rol": "rakip",
   "segmentler": [
    "hava_savunma"
@@ -417,6 +447,7 @@
   "sayi_30g": 1
  },
  "anduril": {
+  "ad": "Anduril",
   "rol": "rakip",
   "segmentler": [
    "hava_savunma"
@@ -435,6 +466,7 @@
   "sayi_30g": 2
  },
  "epirus": {
+  "ad": "Epirus",
   "rol": "rakip",
   "segmentler": [
    "hava_savunma"
@@ -444,6 +476,7 @@
   "sayi_30g": 0
  },
  "smart-shooter": {
+  "ad": "Smart Shooter",
   "rol": "rakip",
   "segmentler": [
    "hava_savunma"
@@ -453,6 +486,7 @@
   "sayi_30g": 0
  },
  "weibel": {
+  "ad": "Weibel",
   "rol": "rakip",
   "segmentler": [
    "hava_savunma"
@@ -467,6 +501,7 @@
   "sayi_30g": 1
  },
  "bharat-forge": {
+  "ad": "Bharat Forge",
   "rol": "rakip",
   "segmentler": [
    "topcu"
@@ -476,6 +511,7 @@
   "sayi_30g": 0
  },
  "tata": {
+  "ad": "Tata Advanced Systems",
   "rol": "rakip",
   "segmentler": [
    "topcu"
@@ -485,6 +521,7 @@
   "sayi_30g": 0
  },
  "denel": {
+  "ad": "Denel",
   "rol": "rakip",
   "segmentler": [
    "topcu",
@@ -495,6 +532,7 @@
   "sayi_30g": 0
  },
  "fn-herstal": {
+  "ad": "FN Herstal",
   "rol": "rakip",
   "segmentler": [
    "hafif_silah"
@@ -504,6 +542,7 @@
   "sayi_30g": 0
  },
  "heckler-koch": {
+  "ad": "Heckler & Koch",
   "rol": "rakip",
   "segmentler": [
    "hafif_silah"
@@ -513,6 +552,7 @@
   "sayi_30g": 0
  },
  "cz": {
+  "ad": "Colt CZ",
   "rol": "rakip",
   "segmentler": [
    "hafif_silah"
@@ -522,6 +562,7 @@
   "sayi_30g": 0
  },
  "beretta": {
+  "ad": "Beretta",
   "rol": "rakip",
   "segmentler": [
    "hafif_silah"
@@ -531,6 +572,7 @@
   "sayi_30g": 0
  },
  "sig-sauer": {
+  "ad": "SIG Sauer",
   "rol": "rakip",
   "segmentler": [
    "hafif_silah"
@@ -540,6 +582,7 @@
   "sayi_30g": 0
  },
  "iwi": {
+  "ad": "Israel Weapon Industries",
   "rol": "rakip",
   "segmentler": [
    "hafif_silah"
@@ -549,6 +592,7 @@
   "sayi_30g": 0
  },
  "cbc-global": {
+  "ad": "CBC Global",
   "rol": "rakip",
   "segmentler": [
    "hafif_silah"
@@ -558,6 +602,7 @@
   "sayi_30g": 0
  },
  "prvi-partizan": {
+  "ad": "Prvi Partizan",
   "rol": "rakip",
   "segmentler": [
    "hafif_silah"
@@ -567,6 +612,7 @@
   "sayi_30g": 0
  },
  "olin": {
+  "ad": "Olin",
   "rol": "rakip",
   "segmentler": [
    "hafif_silah"
@@ -581,6 +627,7 @@
   "sayi_30g": 1
  },
  "fiocchi": {
+  "ad": "Fiocchi",
   "rol": "rakip",
   "segmentler": [
    "hafif_silah"
@@ -590,6 +637,7 @@
   "sayi_30g": 0
  },
  "aselsan": {
+  "ad": "Aselsan",
   "rol": "yerli-rakip",
   "segmentler": [
    "hava_savunma"
@@ -628,6 +676,7 @@
   "sayi_30g": 7
  },
  "roketsan": {
+  "ad": "Roketsan",
   "rol": "yerli-rakip",
   "segmentler": [
    "roket_bomba"
@@ -642,6 +691,7 @@
   "sayi_30g": 1
  },
  "repkon": {
+  "ad": "Repkon",
   "rol": "yerli-rakip",
   "segmentler": [
    "muhimmat"
@@ -651,6 +701,7 @@
   "sayi_30g": 0
  },
  "sarsilmaz": {
+  "ad": "Sarsılmaz",
   "rol": "yerli-rakip",
   "segmentler": [
    "hafif_silah"
@@ -660,6 +711,7 @@
   "sayi_30g": 0
  },
  "canik": {
+  "ad": "Canik",
   "rol": "yerli-rakip",
   "segmentler": [
    "hafif_silah"
@@ -669,6 +721,7 @@
   "sayi_30g": 0
  },
  "kalekalip": {
+  "ad": "Kalekalıp",
   "rol": "yerli-rakip",
   "segmentler": [
    "hafif_silah"
@@ -678,6 +731,7 @@
   "sayi_30g": 0
  },
  "tubitak-sage": {
+  "ad": "TÜBİTAK SAGE",
   "rol": "yerli-rakip",
   "segmentler": [
    "roket_bomba"
@@ -687,6 +741,7 @@
   "sayi_30g": 0
  },
  "baykar": {
+  "ad": "Baykar",
   "rol": "emsal",
   "segmentler": [],
   "gunler": [
@@ -703,6 +758,7 @@
   "sayi_30g": 2
  },
  "tusas": {
+  "ad": "TUSAŞ",
   "rol": "emsal",
   "segmentler": [],
   "gunler": [],
@@ -710,6 +766,7 @@
   "sayi_30g": 0
  },
  "havelsan": {
+  "ad": "Havelsan",
   "rol": "emsal",
   "segmentler": [],
   "gunler": [
@@ -726,6 +783,7 @@
   "sayi_30g": 2
  },
  "stm": {
+  "ad": "STM",
   "rol": "emsal",
   "segmentler": [],
   "gunler": [],
@@ -733,6 +791,7 @@
   "sayi_30g": 0
  },
  "asfat": {
+  "ad": "ASFAT",
   "rol": "emsal",
   "segmentler": [],
   "gunler": [],
@@ -740,6 +799,7 @@
   "sayi_30g": 0
  },
  "fnss": {
+  "ad": "FNSS",
   "rol": "emsal",
   "segmentler": [],
   "gunler": [
@@ -756,6 +816,7 @@
   "sayi_30g": 2
  },
  "otokar": {
+  "ad": "Otokar",
   "rol": "emsal",
   "segmentler": [],
   "gunler": [
@@ -768,6 +829,7 @@
   "sayi_30g": 1
  },
  "bmc": {
+  "ad": "BMC",
   "rol": "emsal",
   "segmentler": [],
   "gunler": [],
@@ -775,6 +837,7 @@
   "sayi_30g": 0
  },
  "nurol-makina": {
+  "ad": "Nurol Makina",
   "rol": "emsal",
   "segmentler": [],
   "gunler": [],
@@ -782,6 +845,7 @@
   "sayi_30g": 0
  },
  "meteksan": {
+  "ad": "Meteksan",
   "rol": "emsal",
   "segmentler": [],
   "gunler": [],
