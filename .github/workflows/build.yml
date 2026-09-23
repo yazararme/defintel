@@ -1,14 +1,28 @@
 name: build
 on:
   push:
-    paths: ['source/**', 'build.py', 'assets/**']
+    paths: ['source/**', 'build.py', 'assets/**', 'scripts/check_reports.py']
   workflow_dispatch:
+    inputs:
+      boz:
+        # Rev 22 — DÖRT-DURUM kırmızı kanıtı. Seçilen senaryo için tarayıcıya giden
+        # app.js yolda eski hatasıyla değiştirilir; depoya bozuk kod girmez. Bu
+        # çalıştırma kırmızı biter, commit atmaz ve uyarıyı "[TEST] " önekli issue'ya yazar.
+        description: 'DÖRT-DURUM: bilerek bozulacak senaryo (none = normal build)'
+        type: choice
+        options: [none, fetch, noresults, yukleniyor, sonuc]
+        default: none
 permissions:
   contents: write
   issues: write
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      DORT_DURUM_BOZ: ${{ inputs.boz || 'none' }}
+      # Yalnız bilerek bozulan çalıştırma test önekiyle (ve main dışında da) issue açar;
+      # normal çalıştırmalarda boş → Rev 30 davranışı: issue yalnız main'de.
+      UYARI_TEST_ONEK: ${{ (inputs.boz && inputs.boz != 'none') && '[TEST] ' || '' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -16,6 +30,45 @@ jobs:
           python-version: '3.12'
       - run: pip install markdown pyyaml
       - run: python3 build.py
+
+      # Rev 22 — DÖRT-DURUM (bloklayıcı): yeni build'i iş içinde yerel bir porttan sunup
+      # başsız Chromium'da dört arama durumunu sınar; (A) özetine geçti/kaldı tablosu yazar.
+      # Kalırsa aşağıdaki commit adımı koşmaz (build durur) ve uyarı Rev 30 kanalına gider.
+      - name: Playwright kur
+        id: pw
+        run: pip install playwright && python -m playwright install --with-deps chromium
+      - name: DÖRT-DURUM
+        id: dd
+        run: python3 scripts/check_reports.py --dort-durum --out "$RUNNER_TEMP/dort-durum"
+      - name: DÖRT-DURUM koşamadı
+        if: always() && steps.pw.outcome == 'failure'
+        run: python3 scripts/uyari.py ekle DÖRT-DURUM "denetim koşamadı — Playwright kurulamadı, build durdu"
+      # Görüntüler: GitHub özet sanitizer'ı data: URI'lı <img>'i siler, göreli yol da
+      # çözülmez; bu yüzden görüntüler artifact olarak yüklenir ve özete bağlantısı yazılır.
+      - name: DÖRT-DURUM görüntüleri (artifact)
+        id: art
+        if: always() && steps.dd.outcome != 'skipped'
+        uses: actions/upload-artifact@v4
+        with:
+          name: dort-durum-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/dort-durum/*.png
+          if-no-files-found: warn
+          retention-days: 30
+      - name: DÖRT-DURUM görüntüleri (özet bağlantısı)
+        if: always() && steps.dd.outcome != 'skipped'
+        env:
+          ART_URL: ${{ steps.art.outputs.artifact-url }}
+        run: |
+          {
+            echo "#### DÖRT-DURUM görüntüleri"
+            echo
+            if [ -n "$ART_URL" ]; then
+              echo "Dört senaryonun ekran görüntüsü (1-fetch, 2-noresults, 3-yukleniyor, 4-sonuc): [artifact'i indir]($ART_URL)"
+            else
+              echo "🔴 görüntü artifact'i yüklenemedi."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - run: |
           git config user.name "defintel-bot"
           git config user.email "actions@github.com"

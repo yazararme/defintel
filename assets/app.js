@@ -107,6 +107,26 @@ function loadPlayers() {
 
     if (none) none.hidden = shown !== 0;
     retally(!!term || !!scope);
+    rescope(!!term || !!scope);
+  }
+
+  /* Kapsam satırı süzgeçle yeniden sayılır (Rev 22, Rev 18b'nin yasası):
+     süzgeç açıkken "536 başlık" süzülmemiş sayfayı anlatır, altındaki liste
+     başka bir şeyi. Payda başlık sayısı; aynı başlık Öne çıkanlar'da,
+     kendi kategorisinde ve Türk sanayii kesitinde üç kez durabilir, o yüzden
+     pay da satır değil başlık sayar (data-search aynı başlığın imzası). */
+  var stat = document.querySelector(".news-stat > .num");
+  var statRest = stat ? stat.textContent : "";
+  function rescope(active) {
+    if (!stat) return;
+    if (!active) { stat.textContent = statRest; return; }
+    var seen = {}, n = 0;
+    rows.forEach(function (el) {
+      if (el.hidden) return;
+      var key = el.getAttribute("data-search");
+      if (!seen[key]) { seen[key] = true; n++; }
+    });
+    stat.textContent = n + " / " + statRest;
   }
 
   /* Süzme açıkken bölüm sayıları ve gezinme sayıları da süzülmüş olanı
@@ -134,13 +154,17 @@ function loadPlayers() {
     if (counters[id].badge) counters[id].rest = counters[id].badge.textContent;
   });
 
-  /* Başlığın gövdesi: bölüm bir kapsayıcı değil, h2 + kardeşleri. */
+  /* Başlığın gövdesi: bölüm bir kapsayıcı değil, h2 + kardeşleri.
+     Yürüyüş #noresults'ta durur (Rev 22): o paragraf son bölümün kardeşi ama
+     hiçbir bölüme ait değil. Eskiden son bölüm boşalınca onu da gizliyordu —
+     "sonuç yok" tam da görünmesi gerektiği anda kayboluyor, sayfa boş kalıyordu. */
   function sectionParts(head) {
     if (!head) return [];
     if (head.tagName === "SECTION") return [head];
     if (head.tagName === "SUMMARY") return [head.parentElement];
     var out = [head];
     for (var el = head.nextElementSibling; el; el = el.nextElementSibling) {
+      if (el.id === "noresults") break; /* DÖRT-DURUM:noresults */
       if (el.tagName === "H2" || el.tagName === "SECTION") break;
       out.push(el);
     }
@@ -174,7 +198,11 @@ function loadPlayers() {
   function applyUrl(first) {
     var who = readParam("oyuncu");
     var want = readParam("q");
-    scope = who;
+    // Kapsam yalnız kupür sayfasında satır süzer. Arşivde gün kartları
+    // data-oyuncu taşımıyor, kapsamı aşağıdaki scopeDays() uyguluyor; burada da
+    // uygulanınca her kart gizleniyor ve kartlar geri gelse de "eşleşen rapor
+    // yok" ekranda kalıyordu (Rev 22: sonuç varken "sonuç yok").
+    scope = document.querySelector(".clips") ? who : "";
     var existing = document.querySelector(".pill-wrap");
     if (existing) existing.remove();
     if (who && document.querySelector(".clips")) {
@@ -728,15 +756,32 @@ function loadPlayers() {
   var box = document.getElementById("q");
   if (!feed || !box) return;                  // yalnızca arşivde
 
-  var index = null, loading = null, panel = null;
+  var index = null, loading = null, panel = null, slow = null;
+  var none = document.getElementById("noresults");
+  // Yükleme bu eşiği aşarsa panel "Aranıyor…" der; altında bir yanıp sönme olmasın.
+  var SLOW_MS = 300; /* DÖRT-DURUM:yukleniyor */
 
+  /* Hata asla boş diziyle çözümlenmez (Rev 22). Eskiden .catch() [] döndürüyordu:
+     ağ koptuğunda panel "kayıt yok" diyordu — arama çalışmıyorken "aradım,
+     yok" demek. Hata reddedilir, run() onu kendi durumu olarak çizer; loading
+     sıfırlanır ki bir sonraki tuş vuruşu yeniden denesin. */
   function load() {
     if (index) return Promise.resolve(index);
     if (!loading) {
       loading = fetch("data/search.json", { cache: "no-store" })
-        .then(function (r) { return r.json(); })
-        .then(function (rows) { index = rows; return rows; })
-        .catch(function () { index = []; return index; });
+        .then(function (r) {
+          if (!r.ok) throw new Error("search.json " + r.status);
+          return r.json();
+        })
+        .then(function (rows) {
+          if (!Array.isArray(rows)) throw new Error("search.json biçimi");
+          index = rows;
+          return rows;
+        })
+        .catch(function (err) {
+          loading = null;
+          throw err; /* DÖRT-DURUM:fetch */
+        });
     }
     return loading;
   }
@@ -758,12 +803,26 @@ function loadPlayers() {
     return d.innerHTML;
   }
 
-  function render(rows, term) {
+  function ensurePanel() {
     if (!panel) {
       panel = document.createElement("section");
       panel.className = "found";
+      panel.setAttribute("aria-live", "polite");
       feed.parentNode.insertBefore(panel, feed);
     }
+    return panel;
+  }
+
+  /* Dört durum, dördü de ayrı cümle: yükleniyor, hata, sonuç yok, N sonuç.
+     Hata nedeni yazılmaz — okuyucu onunla bir şey yapamaz; yapabileceği tek
+     şey yenilemek. */
+  function say(text) {
+    feed.hidden = true;
+    ensurePanel().innerHTML = '<p class="found-none">' + esc(text) + "</p>";
+  }
+
+  function render(rows, term) {
+    ensurePanel();
     if (!rows.length) {
       panel.innerHTML = '<p class="found-none">“' + esc(term) + '” için kayıt yok.</p>';
       return;
@@ -790,21 +849,36 @@ function loadPlayers() {
       }).join("");
   }
 
+  function match(r, term) {
+    if (allowDays && allowDays.indexOf(r.d) === -1) return false;
+    return norm(r.t).indexOf(term) !== -1 || norm(r.s).indexOf(term) !== -1;
+  }
+
   function run() {
     var term = norm(box.value.trim());
+    clearTimeout(slow);
     if (!term) {
       if (panel) { panel.remove(); panel = null; }
       feed.hidden = false;
       return;
     }
+    // Arama sürerken sonucun sahibi panel: kart başlıklarını süzen üstteki
+    // süzgecin "eşleşen rapor yok"u panelle yan yana ikinci bir hüküm olurdu.
+    if (none) none.hidden = true;
+    if (!index) slow = setTimeout(function () { say("Aranıyor…"); }, SLOW_MS);
     load().then(function (rows) {
+      clearTimeout(slow);
       if (norm(box.value.trim()) !== term) return;   // kullanıcı yazmaya devam etti
       feed.hidden = true;
       // Hap duruyorsa arama da onun günleri içinde kalır (VE).
       render(rows.filter(function (r) {
-        if (allowDays && allowDays.indexOf(r.d) === -1) return false;
-        return norm(r.t).indexOf(term) !== -1 || norm(r.s).indexOf(term) !== -1;
+        var hit = match(r, term); /* DÖRT-DURUM:sonuc */
+        return hit;
       }), box.value.trim());
+    }, function () {
+      clearTimeout(slow);
+      if (norm(box.value.trim()) !== term) return;
+      say("Arama şu an çalışmıyor — sayfayı yenileyin.");
     });
   }
 
