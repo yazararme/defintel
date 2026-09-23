@@ -25,7 +25,7 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 
 | Rev | Karar | Deneme | Commit | Bekleyen insan kontrolü |
 |---|---|---|---|---|
-| 30 | YENİDEN — push kanalı iptal (müşteri, 23 Eyl), issue kanalı kuruluyor | 2 | — | — |
+| 30 | PASS (issue kanalı) | 1 (+1 iptal edilen push sürümü) | aa9a4c3 | yok |
 
 ## Notlar / anlaşmazlıklar
 
@@ -36,6 +36,11 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 - Rev 30: (A) kanıtı için geçici `rev30-ci` dalı push'u ve inceleyici alt ajanı otomatik mod izin sınıflandırıcısınca reddedildi. Hiçbir şey commit/push edilmedi. P1-1 (A) → PENDING-HUMAN.
 - Rev 30: iPhone kaydı için 5 dokunuş (altbilgi notu) eklendi; `#operator=` Android'de de çalışır.
 - Rev 30 kuralı yok: 18 kuralın hiçbiri henüz kodda değil; P0-2 ve P0-3 ancak ilk kural (Rev 22) gelince telefonda denenebilir.
+
+- Rev 30 commit'i (aa9a4c3) inceleyiciden **önce** atıldı: (I)/(A) kanıtı ancak dal push'uyla üretilebiliyor. Sonraki revizyonlarda da (A)/(I) gerekiyorsa aynı sıra: commit → push → kanıt → inceleme; FAIL'de düzeltme commit'i.
+- Rev 30 inceleyici notu: uyarısız özet satırı "issue — ·" (kozmetik). Bilinen sınır: main'de aynı anda iki boşaltma aynı gün iki issue açabilir (kilit yok).
+- `uyari-test.yml` yalnız rev21-33 dalında tetiklenir; main'e alınmadan önce silinebilir.
+- (A) özetleri GitHub'da yalnız oturum açıkken görünüyor; kanıt Chrome (oturumlu) ekran görüntüsüyle alınıyor.
 
 ## Açık (orkestratörün eklediği)
 
