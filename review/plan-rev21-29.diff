@@ -1,0 +1,1278 @@
+--- /private/tmp/claude-502/-Users-shinc/6a429f77-3ed8-4530-b197-93deeb06fc38/scratchpad/plan-before.md	2026-09-23 14:57:59
++++ review/plan-rev21-29.md	2026-09-23 15:06:25
+@@ -1,603 +1,865 @@
+-# Revizyon 21–29 — denetim sonrası plan
++# Revizyon 21–33 — denetim sonrası plan
+ 
+ Kaynaklar: `audit/findings.md` (F-01…F-17), `audit/content.md` (Ö1–Ö7, S1–S8),
+-`review/blind.md`, `review/reconcile.md` (C1–C10) ve müşterinin 23 Eylül'de seçtiği dört
+-seçenek. Biçim `design-review-log-TR.md` ile aynı. Bu metin henüz loga eklenmedi; onaydan
+-sonra Rev 20'nin arkasına eklenecek.
++`review/blind.md`, `review/reconcile.md` (C1–C10) ve müşterinin 23 Eylül'deki iki tur
++kararı. Biçim `design-review-log-TR.md` ile aynı. Bu metin henüz loga eklenmedi; onaydan
++sonra Rev 20'nin arkasına eklenecek. (Dosyanın adı değişmedi; kapsamı Rev 33'e kadar
++genişledi.)
+ 
+-**Müşterinin seçtikleri**
++**Müşterinin seçtikleri — birinci tur**
+ 
+ 1. **Genel / süzgeç.** Kapı şartı: rastgele 100 elenmiş kalemde en fazla 2 ilgili kalem
+    olacak ve bunu taze bir alt ajan değerlendirecek. Elenen kalemler aranabilir kalacak.
+-   Süzgecin kalemleri düşürüp düşürmediği doğrulanacak. → **Kapı geçilmedi** (Rev 25).
++   → **Kapı geçilmedi** (Rev 25).
+ 2. **Başlık düzeni:** cümle düzeni.
+-3. **Rakip Duyuruları:** izlenen 64 oyuncuyla sınırlanacak, adı nötr olacak (Rev 17'nin
+-   gerekçesiyle).
++3. **Rakip Duyuruları:** izlenen 64 oyuncuyla sınırlanacak, adı nötr olacak.
+ 4. **Oyuncu sayıları:** sayı yok, yalnızca adlar. Eşleştirici 64 oyuncuya alias testleriyle
+-   genişletilecek. "N kez" aynı eşleştiriciyi kullanıyorsa ona da aynısı yapılacak.
+-   → **Kullanıyor** (Rev 21).
++   genişletilecek. "N kez" de aynı muameleyi görecek.
+ 
+----
++**Müşterinin seçtikleri — ikinci tur**
+ 
+-## R21–29.0 — Puanlar
++5. Aselsan–Roketsan sözleşmesinin brifinge ulaşmamasının nedeni bulunacak ve giderilecek
++   → **Rev 31**. Çerçeve sorusu (MKE'ye) ayrı tutulacak.
++6. Oyuncu sayıları **ya hep ya hiç**: 64 oyuncunun hepsi alias testini geçmeden hiçbir
++   oyuncuya sayı basılmayacak (Rev 21 buna göre değişti).
++7. Uyarı veren her build kuralı uyarısını müşterinin push alarmına gönderecek → **Rev 30**.
++8. Günler arası tekrarlanan manşet → **Rev 32**. İngilizce kaynak adlarındaki noktalı İ
++   → **Rev 33**.
++9. Özet kutusunun kenar çizgisi kalkacak; "asla ikisi birden" kuralı olduğu gibi kalacak
++   → R29.4.
++10. Tutulan savunma dışı başlıkların (yalnızca başlık, özet yok) günlük çeviri maliyeti
++    → R25.1.
+ 
+-Her puanın yanında 7 ve 10'un DEFINTEL için somut tarifi var. "Bugün" 23 Eylül yayınıdır.
++### Her revizyonun taşıması gerekenler
+ 
++Her revizyon dört şey taşır: **Hedef**, **Dosyalar**, adıyla bir **build kuralı** ve bir
++inceleyicinin **yalnızca ekran görüntüsünden** kontrol edebileceği kabul ölçütleri.
++
++Kabul edilen ekran görüntüsü yüzeyleri:
++
++- **(S)** canlı sitenin sayfası, 375×812 ya da 1440×900
++- **(P)** operatörün telefonuna gelen push uyarısı (Rev 30)
++- **(A)** GitHub Actions çalıştırmasının özet sayfası (`$GITHUB_STEP_SUMMARY`)
++- **(D)** sitenin tarayıcıda açılan herkese açık bir veri dosyası (`/data/…`)
++
++Kaynak kod, JSON içeriği ya da terminal çıktısı kabul ölçütü olamaz.
++
++---
++
++## R21–33.0 — Puanlar
++
+ | Boyut | Puan | 7 nasıl görünür | 10 nasıl görünür |
+ |---|---|---|---|
+-| **Hiyerarşi** | 6 | Her gelişmenin başlığı etiketinin kendisi; H1 özet maddesini tekrar etmiyor; bölüm çizgileri seçilebilir (≥3:1) | Sayfadaki her yazı boyutu 6–7 belirteçten biri; her sınır tek mekanizmayla işaretli; sayfa baştan sona tek sesle okunuyor |
+-| **4 dakikalık okuma** | 5 | 375×812'de YÖNETİCİ ÖZETİ 300px'ten önce başlıyor ve 5 maddenin 4'ü ilk ekranda; her madde kimin ne yaptığını söylüyor | İlk ekran = tarih + 5 madde; her sayı ve adın tek değeri var ve build'in çapraz denetiminden geçmiş; yönetici aşağı kaydırmadan "bugün kararımı değiştiren var mı" sorusunu cevaplıyor |
+-| **Gezinme** | 5 | İplik sayfası okunan güne dönüyor; `→ bugün:` bağlantısının indiği başlık bağlantı metniyle aynı | Her bağlantı nereye gittiğini söylüyor; her iniş, tıklanan şeyin adını ekranın üstünde gösteriyor; kalıcı URL'ler (slug) hiç kırılmıyor |
+-| **Süzme / arama** | 4 | Ağ hatası "kayıt yok" demiyor; sıfır sonuç açıkça söyleniyor; yükleme görünüyor; süzülmüş listenin üstündeki her sayı süzgeçle yeniden sayılıyor | Arama, kategori ve oyuncu hapı birlikte çalışıyor; boş sonucun, hatanın ve yüklemenin her biri ayrı ve dürüst bir durum; testler build'de koşuyor |
+-| **Mobil** | 6 | Taşma yok (bugün de yok), ilk ekran doğru, kart alanlarının etiketi var | Telefon birincil tasarım: yapışkan bütçe (88px) içinde bölüm gezinmesi, başparmakla ulaşılan hedefler, her kartın alanı adıyla |
+-| **İçerik güveni (çeviri + kategori)** | 3 | Adı olan kategorilerde isabet ≥%70; çeviri kusuru ≤%15; sessiz cümle silme sıfır; başlıklarda tek düzen | Build her gün kategori isabetini ve çeviri dedektörlerini ölçüyor ve kayda basıyor; kusurlu kalem yayımlanmadan yeniden çevriliyor; ajanın yazdığı hiçbir sayı kaynağıyla çelişmiyor |
+-| **Üretici durumu sızıntısı** | 5 | Okuyucuya basılan her sayı yazıldığı biçimde doğru ("Bugün 9" gibi eksik kapsamlı sayılar kalkmış); ağ arızası içerik olgusu olarak görünmüyor | İnanç değiştiren tek arıza (izlenen oyuncunun kendi kaynağı) tek hesaplanmış satırla söyleniyor; başka hiçbir boru hattı durumu okuyucuya ulaşmıyor; her sayı bir kapsam testine bağlı |
++| **Hiyerarşi** | 6 | Her gelişmenin başlığı kendi etiketi; H1 özet maddesini tekrar etmiyor; bölüm çizgileri seçilebilir (≥3:1) | Sayfadaki her yazı boyutu 6–7 belirteçten biri; her sınır tek mekanizmayla işaretli |
++| **4 dakikalık okuma** | 5 | 375×812'de YÖNETİCİ ÖZETİ 300px'ten önce başlıyor ve 5 maddenin 4'ü ilk ekranda; her madde kimin ne yaptığını söylüyor; önceden verilmiş bir haber yeni diye sunulmuyor | İlk ekran = tarih + 5 madde; her sayı ve adın tek değeri var ve build'in çapraz denetiminden geçmiş |
++| **Gezinme** | 5 | İplik sayfası okunan güne dönüyor; `→ bugün:` bağlantısının indiği başlık bağlantı metniyle aynı | Her bağlantı nereye gittiğini söylüyor; her iniş, tıklanan şeyin adını gösteriyor; kalıcı URL'ler hiç kırılmıyor |
++| **Süzme / arama** | 4 | Ağ hatası "kayıt yok" demiyor; sıfır sonuç açıkça söyleniyor; yükleme görünüyor; süzülmüş listenin üstündeki sayılar yeniden sayılıyor | Arama, kategori ve oyuncu hapı birlikte çalışıyor; dört durumun her birinin kendi dürüst ekranı var ve testleri build'de koşuyor |
++| **Mobil** | 6 | Taşma yok, ilk ekran doğru, kart alanları etiketli | Telefon birincil tasarım: 88px yapışkan bütçe içinde bölüm gezinmesi, her kart alanı adıyla |
++| **İçerik güveni (çeviri + kategori)** | 3 | Adı olan kategorilerde isabet ≥%70; çeviri kusuru ≤%15; sessiz eksiltme sıfır; tek başlık düzeni; yabancı adlar doğru harflerle | Build her gün isabeti ve dedektörleri ölçüyor, eşik aşılınca operatöre haber veriyor; ajanın yazdığı hiçbir sayı kaynağıyla çelişmiyor |
++| **Üretici durumu sızıntısı** | 5 | Okuyucuya basılan her sayı yazıldığı biçimde doğru; ağ arızası içerik olgusu olarak görünmüyor | İnanç değiştiren tek arıza tek satırla söyleniyor; geri kalan her şey sayfaya değil yalnızca operatöre gidiyor |
+ 
+ ---
+ 
+-## R21–29.1 — Sıralama: kullanıcı etkisi ÷ emek
++## R21–33.1 — Sıralama: kullanıcı etkisi ÷ emek
+ 
+ Etki 1–5: kaç okuyucuyu ne kadar yanıltıyor ya da durduruyor. Emek 1–5: 1 = tek dosyada
+ bir öğleden sonra. Yukarıdan aşağı uygulanır. Bağımlılıklar parantez içinde.
+ 
+-| Sıra | Madde | Kaynak | Etki | Emek | Oran |
++**Rev 30 birinci sırada.** Kendi etkisi düşük, ama sonraki bütün uyarı kuralları ona
++bağlı. O olmadan bir uyarı kuralı, okunmayan bir build kaydına yazmaktan ibaret
++(PRODUCT.md: *açılmayan sayfa denetim değildir*).
++
++| Sıra | Madde | Rev | Etki | Emek | Oran |
+ |---|---|---|---|---|---|
+-| 1 | Ağ hatası "kayıt yok" demesin | F-01 | 5 | 1 | 5.0 |
+-| 2 | Oyuncu sayıları kalksın, yalnız adlar kalsın | seçim 4, C3 | 5 | 1 | 5.0 |
+-| 3 | Ajan para birimi çevirmesin, build uyarsın | C1 | 4 | 1 | 4.0 |
+-| 4 | Gelişme başlığı = etiket (Rev 11 kusuru) | C2 | 3 | 1 | 3.0 |
+-| 5 | Sıfır sonuç görünsün | F-02 | 3 | 1 | 3.0 |
+-| 6 | Yöneticinin ilk ekranı | F-15 | 5 | 2 | 2.5 |
+-| 7 | Kategori kuralları: S2 + S3 + S6 | content §4 | 4 | 2 | 2.0 |
+-| 8 | İplik sayfası: durum satırı, güne dönüş | C6, F-09, F-10 | 4 | 2 | 2.0 |
+-| 9 | Süzgeç altında kapsam satırı yeniden sayılsın | F-06 | 2 | 1 | 2.0 |
+-| 10 | Arama yükleniyor durumu | F-16 | 2 | 1 | 2.0 |
+-| 11 | H1 özet maddesini tekrar etmesin | C5 | 2 | 1 | 2.0 |
+-| 12 | Mobil kartta "İzlenecek" etiketi | C9 | 2 | 1 | 2.0 |
+-| 13 | Bölüm çizgisi ≥3:1 | F-12 | 2 | 1 | 2.0 |
+-| 14 | Kaynaklar'da "yanıt vermedi" sütunu kalksın | F-05 | 2 | 1 | 2.0 |
+-| 15 | Kategori isabeti build kaydına | S8 | 2 | 1 | 2.0 |
+-| 16 | Çeviri: cümle düzeni + üç dedektör + Ö1/Ö2/Ö3 | seçim 2, content §1–3 | 5 | 3 | 1.7 |
+-| 17 | Mevcut süzgeç düşürmesin, gizlesin | seçim 1 | 3 | 2 | 1.5 |
+-| 18 | Rakip Duyuruları → "Oyuncu Duyuruları", 64 ile sınırlı (← 20) | seçim 3, S4/S5 | 3 | 2 | 1.5 |
+-| 19 | İzlenen oyuncunun kaynağı düştüğünde uyarı satırı | F-04 | 4 | 3 | 1.3 |
+-| 20 | Eşleştirici 64 oyuncuya, alias testleriyle | seçim 4 | 4 | 3 | 1.3 |
+-| 21 | Dili metinden tespit et | Ö6 | 2 | 2 | 1.0 |
+-| 22 | Bildirim teklifi ilk ziyarette, kart zili örtmesin | F-03, F-14 | 2 | 2 | 1.0 |
+-| 23 | Ölü `:not([data-theme])` koruması + F-07/F-08 | F-13, F-07, F-08 | 1 | 1 | 1.0 |
+-| 24 | Yazı boyutu belirteçleri + CSS kuralı | C7 | 2 | 3 | 0.7 |
+-| 25 | İngilizce dışı kaynaklar için geri çeviri | Ö7 | 3 | 4 | 0.75 |
+-| 26 | Slug'lar kelime sınırında, tarihsiz, yönlendirmeli | C6 | 1 | 2 | 0.5 |
+-| 27 | Masaüstü genişlikleri tek ızgara | F-11 | 1 | 2 | 0.5 |
++| 0 | Operatör uyarı kanalı (bütün uyarı kurallarının ön şartı) | 30 | — | 2 | ön şart |
++| 1 | Ağ hatası "kayıt yok" demesin | 22 | 5 | 1 | 5.0 |
++| 2 | Oyuncu sayıları kalksın, yalnız adlar kalsın | 21 | 5 | 1 | 5.0 |
++| 3 | Ajan para birimi çevirmesin | 23 | 4 | 1 | 4.0 |
++| 4 | Brifingden sonra gelen haber işaretlensin ve ertesi güne taşınsın | 31 | 4 | 1 | 4.0 |
++| 5 | Gelişme başlığı = etiket | 23 | 3 | 1 | 3.0 |
++| 6 | Sıfır sonuç görünsün | 22 | 3 | 1 | 3.0 |
++| 7 | Yabancı adlarda noktalı İ | 33 | 3 | 1 | 3.0 |
++| 8 | Yöneticinin ilk ekranı | 24 | 5 | 2 | 2.5 |
++| 9 | Tekrar eden manşet işaretlensin | 32 | 4 | 2 | 2.0 |
++| 10 | Kategori kuralları: S2 + S3 + S6 | 25 | 4 | 2 | 2.0 |
++| 11 | İplik sayfası: durum satırı, güne dönüş | 27 | 4 | 2 | 2.0 |
++| 12 | Süzgeç altında kapsam satırı yeniden sayılsın | 22 | 2 | 1 | 2.0 |
++| 13 | Arama yükleniyor durumu | 22 | 2 | 1 | 2.0 |
++| 14 | H1 özet maddesini tekrar etmesin | 23 | 2 | 1 | 2.0 |
++| 15 | Mobil kartta "İzlenecek" etiketi | 24 | 2 | 1 | 2.0 |
++| 16 | Bölüm çizgisi ≥3:1 | 29 | 2 | 1 | 2.0 |
++| 17 | Özet kutusunun kenar çizgisi kalksın | 29 | 2 | 1 | 2.0 |
++| 18 | Kaynaklar'da "yanıt vermedi" sütunu kalksın | 28 | 2 | 1 | 2.0 |
++| 19 | Kategori isabeti ölçülsün | 25 | 2 | 1 | 2.0 |
++| 20 | Yanlış `dil` etiketli kaynağın düzeltilmesi (Ö6'nın ucuz yarısı) | 26 | 2 | 1 | 2.0 |
++| 21 | Çeviri: cümle düzeni + dedektörler + Ö1/Ö2/Ö3 | 26 | 5 | 3 | 1.7 |
++| 22 | Mevcut süzgeç düşürmesin, işaretlesin | 25 | 3 | 2 | 1.5 |
++| 23 | "Oyuncu Duyuruları", 64 ile sınırlı (← 25) | 25 | 3 | 2 | 1.5 |
++| 24 | İzlenen oyuncunun kaynağı düştüğünde uyarı satırı | 28 | 4 | 3 | 1.3 |
++| 25 | Eşleştirici 64 oyuncuya, alias testleriyle | 21 | 4 | 3 | 1.3 |
++| 26 | Bildirim teklifi ilk ziyarette, kart zili örtmesin | 29 | 2 | 2 | 1.0 |
++| 27 | Ölü tema koruması, F-07, F-08 | 29 | 1 | 1 | 1.0 |
++| 28 | Dili metinden tespit et (Ö6'nın tamamı) | 26 | 2 | 2 | 1.0 |
++| 29 | İngilizce dışı kaynaklar için geri çeviri (Ö7) | 26 | 3 | 4 | 0.75 |
++| 30 | Yazı boyutu belirteçleri | 29 | 2 | 3 | 0.7 |
++| 31 | Slug'lar | 27 | 1 | 2 | 0.5 |
++| 32 | Masaüstü genişlikleri tek ızgara | 29 | 1 | 2 | 0.5 |
+ 
+-**Yapılmayacak:** S1 (süzgeci herkese varsayılan açmak). Kapı geçilmedi, bkz. Rev 25.
+-S7 (sıralamayı değiştirmek) da yapılmayacak: denetimin kendi ölçümüne göre kalemlerin
+-yalnızca %2,2'sinde belirleyici.
++### S2/S3/S6 ve çeviri düzeltmeleri — teyit
+ 
++- **S2, S3, S6** Rev 25'te, **P0** olarak var. Ertelenmedi; sıra 10.
++- **Çeviri:** cümle düzeni, Ö1, Ö2 ve ÇEVİRİ-DEDEKTÖRÜ Rev 26'da **P0**, Ö3 **P1**, hepsi
++  sıra 21'de. Ertelenmedi. Tek satırlık bir düzeltme değil: prompt değişiyor, dedektörler
++  yazılıyor ve canlı pencere yeniden çevriliyor, bu yüzden oranı 1.7.
++- **Ertelenen iki madde:**
++  - **Ö6** ikiye bölündü. Ucuz yarısı (bilinen yanlış `dil` etiketini Drive'daki
++    `kaynaklar.json`'da düzeltmek) sıra 20'ye çıktı. Tamamı (dili metinden tespit etmek)
++    sıra 28'de kaldı. Gerekçe: denetim yalnızca bir yanlış etiketli kaynak buldu; önce
++    etiketi düzeltmek aynı hatayı sıfır kodla kapatıyor.
++  - **Ö7** (geri çeviri) sıra 29'da, P3. Gerekçe: İngilizce dışı her başlık için ikinci bir
++    model çağrısı gerekiyor, yani çağrı sayısı o kaynaklar için ikiye katlanıyor. Hedeflediği
++    hataların (anlam kayması, eksiltme) büyük kısmını Ö1, Ö2 ve ÇEVİRİ-DEDEKTÖRÜ zaten
++    yakalamaya çalışıyor. Önce onların etkisi ölçülecek; İngilizce dışı kusur oranı hâlâ
++    İngilizcenin 1,5 katından fazlaysa Ö7 açılacak.
++
++**Yapılmayacak:** S1, süzgeci herkese varsayılan açmak (kapı geçilmedi, Rev 25). S7,
++sıralamayı değiştirmek (yalnızca %2,2 kalemde belirleyici).
++
+ ---
+ 
+ ## Revizyon 21 — sayı bir iddiadır: oyuncu sayıları
+ 
+-### R21.0 — Tanı: eşleştirici oyuncuların yarısını görüyor, sayılar ise hepsini görüyormuş gibi konuşuyor
++**Hedef.** Okuyucuya basılan hiçbir oyuncu sayısı, eşleştiricinin görmediği oyuncular
++yüzünden yanlış olmasın.
++**Dosyalar.** `build.py` (`players_page`, `player_history`, `tag_turkish_headlines`),
++`data/rakipler.json`, `assets/app.css`.
++**Build kuralı.** KAPSAM-SAYI.
+ 
++### R21.0 — Tanı: eşleştirici oyuncuların yarısını görüyor, sayılar hepsini görüyormuş gibi konuşuyor
++
+ 23 Eylül'de ray "Bugün 9" diyor. İzlenen 64 adı günün 536 satırında sözcük sınırıyla
+ aradım. Sayılmayan dokuz izlenen oyuncu daha çıktı: Thales 4, PGZ 3, Northrop Grumman 3,
+-Anduril 2, KNDS 1, Hanwha 1, Rafael 1, IAI 1, Munitions India 1. Nedeni yapısal. Birinci
+-geçiş (`rival_hits`) yalnızca brifing gövdesine bakıyor. İkinci geçiş
+-(`tag_turkish_headlines`) başlıklara bakıyor ama yalnızca `yerli-rakip`/`emsal` rollerine.
+-Yabancı bir oyuncu brifinge girmediyse, medya takibinde dört kez geçse de hiç sayılmıyor.
++Anduril 2, KNDS 1, Hanwha 1, Rafael 1, IAI 1, Munitions India 1.
+ 
+-PRODUCT.md bunu önceden yazmış: *eşleştirici oyuncuların bir kısmını kapsıyorsa sayı
+-eksik değildir, **yanlıştır**.*
++Nedeni yapısal. Birinci geçiş (`rival_hits`) yalnızca brifing gövdesine bakıyor. İkinci
++geçiş (`tag_turkish_headlines`) yalnızca Türk rollerini arıyor. PRODUCT.md'ye göre bu
++durumda sayı eksik değil, **yanlış**.
+ 
+ **"N kez" aynı eşleştiriciyi kullanıyor.** `player_history()` (`build.py:1972`) aynı iki
+-geçişi gün gün topluyor ve `sayi_30g` buradan geliyor. Sayfanın üst satırındaki "son 30
+-günde 22" (`build.py:1033`) de oradan geliyor. Aynı kusurun ikinci bir katmanı daha var:
+-`sayi_30g` **gün** sayıyor, geçiş değil. "Aselsan · 7 kez" aslında "son 30 günün 7'sinde"
+-demek.
++geçişi gün gün topluyor ve `sayi_30g` oradan geliyor. "son 30 günde 22" (`build.py:1033`)
++de oradan. `sayi_30g` ayrıca **gün** sayıyor, geçiş sayısı değil.
+ 
+-Rev 18b'nin kuralı da ("görülmemiş şirketin jetonu yok; **boşluk ifadenin kendisidir**")
+-bugün yalan söylüyor. Thales'in satırındaki boşluk "bu ay hiç geçmedi" diyor, oysa bugün
+-dört kez geçti.
++Rev 18b'nin "boşluk ifadenin kendisidir" kuralı da bugün yalan söylüyor: Thales'in
++satırındaki boşluk "bu ay hiç geçmedi" diyor, oysa bugün dört kez geçti.
+ 
+-### R21.1 — Sayı gider, adlar kalır
++### R21.1 — Sayılar gider, adlar kalır
+ 
+-- **Ray:** "Oyuncular" bloğunda adlar olduğu gibi kalıyor, sayı zaten yok. Bir ad listede
+-  varsa o oyuncu gerçekten geçmiş demektir, bu doğru bir olgu. Listenin eksik olabileceğini
+-  ise hiçbir şey iddia etmiyor. **Listenin sonuna "hepsi bu" okunacak bir işaret
+-  konmayacak.**
+-- **/oyuncular.html üst satırı:** "Bugün 9 · son 30 günde 22 · izlenen 64" yerine yalnızca
+-  **"izlenen 64"** yazılacak. Bu, yapılandırmadan gelen ve kapsamdan bağımsız tek sayı.
+-- **Satırlar:** `N kez` ve `bugün / dün / N gün önce` jetonları kalkıyor. İkisi de aynı
+-  eşleştiriciden türüyor. Yaş jetonu da bir iddia: Thales için "3 gün önce" yazmak, bugünü
+-  kaçırmışken "bugün değil" demek olur.
+-- **Sıra:** Sıklığa göre sıralama kalkıyor, çünkü sıklık yanlış bir sayı. Sıra alfabetik
+-  olacak. Rev 18b'nin "kim aktif" sorusu bu kez **R21.2 tamamlanınca** geri gelecek.
+-- **Segment çipleri ve arşiv bağlantısı** kalıyor. İkisi de eşleştiriciye dayanmıyor.
++- **Ray:** adlar olduğu gibi kalıyor. Bir ad listedeyse o oyuncu gerçekten geçmiş demektir.
++  Listenin sonuna "hepsi bu" diye okunacak bir işaret konmayacak.
++- **/oyuncular.html üst satırı:** yalnızca **"izlenen 64"**. Bu, yapılandırmadan gelen,
++  kapsamdan bağımsız tek sayı.
++- **Satırlar:** `N kez` ve yaş jetonları (`bugün / dün / N gün önce`) **hep birlikte**
++  kalkıyor.
++- **Sıra:** alfabetik, Türkçe harmanlamayla.
++- Segment çipleri ve arşiv bağlantısı kalıyor. Eşleştiriciye dayanmıyorlar.
+ 
+-### R21.2 — Sayılar oyuncu oyuncu, testle geri gelir
++### R21.2 — Sayılar ya hep ya hiç (müşterinin kararı)
+ 
+-Eşleştirici iki geçişte de 64 oyuncunun hepsini kapsayacak. Yabancı oyuncular da
+-başlıklarda aranacak. Rev 17'nin rol kuralı değişmiyor: **rol yalnızca render'a aittir,
+-eşleştirmeye değil.** Sayılar hep birden değil, oyuncu oyuncu geri gelecek:
++Eşleştirici iki geçişte de 64 oyuncunun hepsini kapsayacak, yabancılar dahil. Rev 17'nin
++"rol render'a aittir" kuralı değişmiyor. `data/rakipler.json` içindeki her oyuncuya
++`aliases[]` ve `alias_test{pos[],neg[]}` eklenecek: en az bir pozitif örnek, ≤4 harfli her
++alias için en az bir negatif örnek (`IAI` ↛ "sa**iai**d", `CSG` ↛ "C**SG**O").
+ 
+-- `data/rakipler.json` içindeki her oyuncuya `alias` listesi ve `alias_test` eklenecek.
+-  `alias_test` en az bir pozitif örnek (başlık metni → eşleşir) ve kısa ya da belirsiz her
+-  alias için en az bir negatif örnek taşıyacak. Örnek: `IAI` → "sa**iai**d" eşleşmez;
+-  `CSG` → "C**SG**O" eşleşmez; `Rafael` → futbolcu Rafael Leão?
+-- Bir oyuncunun türetilmiş değerleri (`N gün`, yaş jetonu) **yalnızca `alias_test`'i
+-  geçmişse** basılır. Geçmeyen oyuncunun satırında jeton olmaz, bu kez kapsam sınırı
+-  olarak. Satır bunu tek mono bir jetonla söyler: `izlenmiyor`. Bu bir iç durum değil;
+-  okuyucunun o satırı nasıl okuyacağını değiştiren bir olgu.
+-- **Toplam sayılar** ("Bugün N", "son 30 günde N") ancak 64'ün 64'ü testi geçince geri
+-  gelecek.
+-- Etiket `N kez` → **`N gün`** olacak. Ölçülen şey bu.
++**Oyuncu oyuncu açılma yok.** 64'ün 64'ü testi geçene kadar hiçbir satırda sayı ya da yaş
++jetonu basılmaz, üst satır da "izlenen 64" olarak kalır. 64'ün hepsi geçtiğinde şunlar
++birlikte döner: üst satırdaki "Bugün N · son 30 günde N", satırdaki `N gün` (eski adı
++`N kez`), yaş jetonu ve sıklığa göre sıralama.
+ 
+-### Build kuralı — R21
++Gerekçe: bir tarafta sayısı olan, öbür tarafta sayısı olmayan bir tablo okuyucuya iki ayrı
++sözleşme sunar. Sayısız satır da "az geçti" diye okunur.
+ 
+-> **KAPSAM-SAYI.** Oyunculardan türeyen bir sayı ya da jeton yalnızca dayandığı kümenin
+-> tamamı `alias_test`'i geçtiyse basılır. Toplamlar için küme 64 oyuncudur, satır jetonu
+-> için tek oyuncu. `build.py` her derlemede `alias_test`'leri koşar. Bir oyuncu kalırsa
+-> ya da hiç testi yoksa o oyuncunun jetonları basılmaz ve build kaydına ad ad yazılır.
+-> Sayfa yine üretilir (build durmaz). **Test sonucu sayfaya basılmaz.**
++### Build kuralı — KAPSAM-SAYI
+ 
++> Oyunculardan türeyen herhangi bir sayı ya da jeton, **64 oyuncunun tamamı**
++> `alias_test`'i geçtiyse basılır. Bir oyuncu bile kalırsa hiçbiri basılmaz. `build.py`
++> testleri her derlemede koşar. Sonuç **(A)** özetine "alias testi 57/64 — kalanlar: …"
++> olarak yazılır. 64/64'ten aşağı düşüş (ya da 64/64'e ilk varış) **Rev 30** kanalına
++> uyarı gönderir. Sayfa her durumda üretilir.
++
+ ### Uygulama listesi — Revizyon 21
+ 
+-| # | Dosya | Değişiklik | Kabul testi |
++| # | Dosya | Değişiklik | Kabul (ekran görüntüsü) |
+ |---|---|---|---|
+-| R21-P0-1 | `build.py` `players_page` | Üst satır yalnızca "izlenen {n}"; `pcount` ve yaş jetonu kaldırılır; sıralama `name` üzerinden, Türkçe harmanlama ile | 23 Eylül'de /oyuncular.html'de "Bugün", "son 30 günde", "kez", "gün önce" dizgilerinin hiçbiri geçmez; Türkçe harmanlamada ilk iki satır "Anduril", "Arsenal Bulgaria" (kod noktası sırası "ASFAT"ı başa alırdı, harmanlama bunun için) |
+-| R21-P0-2 | `build.py` | Süzgeç açıkken üst satırın yeniden sayılması (Rev 18b) "izlenen {n}" için sürer | "Mühimmat" çipinde üst satır o segmentteki izlenen sayıyı basar |
+-| R21-P1-1 | `data/rakipler.json` | 64 oyuncuya `aliases[]` + `alias_test{pos[],neg[]}` | 64/64 oyuncunun testi var; kısa (≤4 harf) her alias'ın en az bir negatifi var |
+-| R21-P1-2 | `build.py` | Başlık geçişi (`tag_turkish_headlines`) bütün rollere genişler, adı `tag_player_headlines` olur | 23 Eylül'de Thales, PGZ, Northrop, Anduril eşleşir; Rev 17'deki `#kat-turk` kesiti hâlâ yalnızca Türk rolleri |
+-| R21-P1-3 | `build.py` | KAPSAM-SAYI kuralı; `N kez` → `N gün` | Bir oyuncunun testi bilerek bozulduğunda onun jetonu kaybolur, satırda `izlenmiyor` görünür, build kaydında adı yazar |
++| R21-P0-1 | `build.py` `players_page` | Üst satır "izlenen {n}"; `pcount` ve yaş jetonu kalkar; alfabetik sıra | **(S)** /oyuncular.html, 375px: üst satır yalnızca "izlenen 64"; hiçbir satırda "kez" ya da "önce" yok; ilk iki satır Anduril, Arsenal Bulgaria |
++| R21-P0-2 | `build.py` | Segment süzgecinde üst satır yeniden sayılır | **(S)** "Mühimmat" çipi açıkken üst satır "izlenen {o segmentteki sayı}" |
++| R21-P1-1 | `data/rakipler.json` | 64 oyuncuya `aliases` + `alias_test` | **(A)** özet: "alias testi 64/64" |
++| R21-P1-2 | `build.py` | Başlık geçişi bütün rollere genişler (`tag_player_headlines`) | **(S)** `/haberler/2026-09-23.html?oyuncu=thales` en az 1 satır gösterir |
++| R21-P1-3 | `build.py` | KAPSAM-SAYI; `N kez` → `N gün` | **(P)** Bir oyuncunun testi bilerek bozulduğunda "KAPSAM-SAYI: 63/64" uyarısı gelir. **(S)** O derlemede hiçbir satırda sayı yok. 64/64'te **(S)** "Bugün N", "N gün" ve yaş jetonları görünür |
+ 
+-**Yapılmayacak:** "Bugün 9" sayısını dipnotla ("yalnızca brifingdekiler") kurtarmak, çünkü
+-kapsam sınırı bulgu olarak yayımlanmaz. Sayıyı yalnızca Türk oyuncular için bırakmak da
+-yapılmayacak: yarım kapsam, yarım yalan olur.
++**Yapılmayacak:** sayıyı dipnotla kurtarmak; sayıyı yalnızca Türk oyuncular için bırakmak;
++testi geçen oyuncuları tek tek açmak (müşterinin kararı).
+ 
+ ---
+ 
+ ## Revizyon 22 — arama durumlarını ayırmak
+ 
+-### R22.0 — Tanı: dört ayrı durum, iki ekran
++**Hedef.** Arama ve süzme dört durumu ayrı ve doğru söylesin: yükleniyor, hata, sonuç
++yok, N sonuç.
++**Dosyalar.** `assets/app.js` (`load()`, `retally`/`sectionParts`, kapsam satırı),
++`scripts/check_reports.py`, `.github/workflows/build.yml`.
++**Build kuralı.** DÖRT-DURUM.
+ 
+-Arama ve süzme dört ayrı şey söyleyebilmeli: *yükleniyor*, *hata*, *sonuç yok*, *N sonuç*.
+-Bugün sayfa bunlardan ikisini gösterebiliyor. Arşivde hata "sonuç yok" gibi görünüyor
+-(F-01, P0). `load()` hatayı `[]` ile çözümlüyor ve boş dizi "kayıt yok" yolundan gidiyor.
+-Medya takibinde sonuç yok durumu boş sayfa gibi görünüyor (F-02): `sectionParts()` son
+-`h2`'den sonra `#noresults`'ı da gizliyor. Yükleme durumu hiç görünmüyor (F-16).
++### R22.0 — Tanı
+ 
+-Rev 7'nin kanunu arama için de geçerli: **bir yüzey, sonucunu bildiremediği bir eylemi
+-tetikleyemez.**
++- Arşivde ağ hatası "sonuç yok" gibi görünüyor (F-01, P0): `load()` hatayı `[]` ile
++  çözümlüyor.
++- Medya takibinde sonuç yok durumu boş sayfa gibi görünüyor (F-02): `sectionParts()`
++  `#noresults`'ı da gizliyor.
++- Yükleme durumu yok (F-16).
++- Kapsam satırı süzgeçle yeniden sayılmıyor (F-06). Rev 18b'nin yasası bu sayfada
++  uygulanmamış.
+ 
++Rev 7'nin kanunu: **bir yüzey, sonucunu bildiremediği bir eylemi tetikleyemez.**
++
+ ### R22.1 — Kural
+ 
+-- `load()` bir hatayı asla boş diziyle çözümlemez. Hata kendi durumu olarak döner ve panel
+-  şunu yazar: *"Arama şu an çalışmıyor — sayfayı yenileyin."* Neden (ağ, JSON) yazılmaz;
+-  o hat kaydına ait. Cümle okuyucunun yapabileceği tek şeyi söylüyor.
+-- `#noresults` bölüm yürüyüşünün dışına taşınır, kendi sahibi olur.
++- `load()` hatayı asla boş diziyle çözümlemez. Hata durumunda panel *"Arama şu an
++  çalışmıyor — sayfayı yenileyin."* yazar. Neden yazılmaz.
++- `#noresults` bölüm yürüyüşünün dışına taşınır.
+ - 300ms'yi geçen yüklemede panel "Aranıyor…" yazar.
+-- Kapsam satırı süzgeçle yeniden sayılır (F-06). Bu zaten yasa ("süzülmüş bir listenin
+-  üstündeki sayı süzgeçle yeniden sayılır"), yalnızca medya sayfasında uygulanmamış.
+-  Süzgeç açıkken satır **"{görünen} / 536 başlık"** yazar.
++- Süzgeç açıkken kapsam satırı **"{görünen} / 536 başlık"** yazar.
+ 
+-### Build kuralı — R22
++### Build kuralı — DÖRT-DURUM
+ 
+-> **DÖRT-DURUM.** `scripts/check_reports.py` başsız bir tarayıcıda dört senaryo koşar
+-> ve her biri kendi dizgisini görmek zorundadır: `fetch` reddedilir → "çalışmıyor";
+-> "xyzzy" → `#noresults` görünür; 3 sn gecikme → "Aranıyor…"; "Hanwha" → ≥1 sonuç.
+-> Senaryolardan biri kalırsa **build durur**. Diğer kurallardan farklı olarak bu kural
+-> bloklayıcı, çünkü sessizce yanlış olan tek yüzey bu.
++> `check_reports.py` başsız bir tarayıcıda dört senaryo koşar: `fetch` reddedilir →
++> "çalışmıyor"; "xyzzy" → `#noresults` görünür; 3 sn gecikme → "Aranıyor…"; "Hanwha" → ≥1
++> sonuç. Her senaryonun ekran görüntüsü **(A)** özetine eklenir. Biri kalırsa **build
++> durur** ve **Rev 30** kanalına uyarı gider. Bu kural bloklayıcı, çünkü sessizce yanlış
++> olan tek yüzey bu.
+ 
+ ### Uygulama listesi — Revizyon 22
+ 
+-| # | Dosya | Değişiklik | Kabul testi |
++| # | Dosya | Değişiklik | Kabul (ekran görüntüsü) |
+ |---|---|---|---|
+-| R22-P0-1 | `assets/app.js:733` `load()` | `.catch` `index = []` yerine `{error:true}` döner; `render` hata dalını ayrı çizer | F-01 senaryosu "çalışmıyor" yazar, "kayıt yok" yazmaz |
+-| R22-P0-2 | `assets/app.js` `retally`/`sectionParts` | Yürüyüş `P#noresults` ve sahipli `DETAILS`'ta durur | "xyzzy" → `#noresults.hidden === false` |
+-| R22-P1-1 | `assets/app.js` | 300 ms eşikli yükleniyor durumu | 3 sn gecikmede "Aranıyor…" görünür, sonuçla kalkar |
+-| R22-P1-2 | `assets/app.js` | Medya kapsam satırı süzgeçle yeniden sayılır | `?oyuncu=roketsan` → "2 / 536 başlık" (satırlar çapraz kesit dahil sayılır, Rev 17) |
+-| R22-P1-3 | `scripts/check_reports.py` + `build.yml` | DÖRT-DURUM kuralı | Kuralın bir dalı bilerek bozulduğunda iş kırmızıya döner |
++| R22-P0-1 | `assets/app.js:733` | Hata dalı ayrı çizilir | **(A)** "fetch reddedildi" senaryosunun görüntüsü "Arama şu an çalışmıyor" gösterir, "kayıt yok" göstermez |
++| R22-P0-2 | `assets/app.js` | Yürüyüş `#noresults`'ta durur | **(S)** medya takibi, 375px, "xyzzy" arandı: "sonuç yok" metni görünür |
++| R22-P1-1 | `assets/app.js` | Yükleniyor durumu | **(A)** 3 sn gecikme senaryosunda "Aranıyor…" |
++| R22-P1-2 | `assets/app.js` | Kapsam satırı yeniden sayılır | **(S)** `?oyuncu=roketsan` → "2 / 536 başlık" |
++| R22-P1-3 | `check_reports.py`, `build.yml` | DÖRT-DURUM | **(A)** dört görüntü yeşil; bir dal bilerek bozulduğunda kırmızı çalıştırma ve **(P)** uyarısı |
+ 
+ ---
+ 
+ ## Revizyon 23 — bir olgu, bir ad, bir değer
+ 
++**Hedef.** Bir gelişmenin adı ve sayıları sayfanın her yerinde tek ve doğru olsun.
++**Dosyalar.** `enrich.py`, `build.py`, rapor promptu (masaüstü görev talimatı; müşteri
++yapıştırır).
++**Build kuralları.** ETİKET-BAŞLIK · KUR · H1-TEKRAR.
++
+ ### R23.0 — Tanı: yasa var, uygulanmıyor
+ 
+-Rev 6 ve Rev 11 kuralı koydu: *her olgunun tek sahibi var; `developments[].label` tek
+-doğruluk kaynağı.* 23 Eylül'de dört yerde bu kural tutmadı.
++1. **Etiket başlık olmadı.** `source/2026-09-23.md:9`'da G9'un etiketi "Lynx XM30 prototip
++   teslimi", ama sayfa başlığı "American Rheinmetall". Aynı sorun G3 ve G8'de de var.
++   İzleme listesindeki bağlantı "Lynx XM30 prototip teslimi" diyor, indiği başlık başka
++   bir şey söylüyor.
++2. **Ajan kur çevirdi ve yanıldı.** Brifing "1,5 milyar $ (16 milyar NOK)" diyor. Kaynak
++   özetleri ise "NOK 16 milyar (yaklaşık 1,74 milyar dolar)" diyor
++   (`data/news/2026-09-23.json:1179`).
++3. **H1, özetin 1. maddesi.**
++4. **Özetin 2. maddesinde özne yok.**
+ 
+-1. **Etiket başlık olmadı.** `source/2026-09-23.md:9` G9'a "Lynx XM30 prototip teslimi"
+-   diyor, sayfa başlığı ise "American Rheinmetall". Başlık ajanın kalın yazdığı giriş
+-   kelimelerinden geliyor, etiketten değil. Aynı şey G3'te ("Leonardo / Alkeon") ve G8'de
+-   ("Hensoldt") de var. İzleme satırındaki `→ bugün: Lynx XM30 prototip teslimi` bağlantısı
+-   "American Rheinmetall" başlığına iniyor.
+-2. **Ajan kur çevirdi ve yanıldı.** Brifing SAN CUAS için "yaklaşık 1,5 milyar $ (16
+-   milyar NOK)" diyor. Aynı haberin iki kaynak özeti ise "NOK 16 milyar (yaklaşık 1,74
+-   milyar dolar)" diyor (`data/news/2026-09-23.json:1179`). Kaynak kendi çevirisini
+-   vermiş, ajan kendininkini yazmış. Kanun şu: *ajan yargı üretir, build sayar ve türetir.*
+-3. **H1, özetin 1. maddesi.** Aynı cümle ilk 300 pikselde iki kez okunuyor.
+-4. **Özetin 2. maddesinde özne yok.** "…sipariş verildi" deniyor; siparişi kimin verdiği
+-   ve kimin aldığı yalnızca gövdede yazıyor.
+-
+ ### R23.1 — Karar
+ 
+-- Gelişme başlığı **her zaman** `label`. Ajanın kalın giriş kelimeleri gövdeden atılır;
+-  Rev 11'in `G#` işaretleriyle aynı yolla, `enrich.py`'de.
+-- Prompt'a kur kuralı eklenir: **"Tutarı kaynağın verdiği para biriminde yaz. Kaynak kendi
+-  çevirisini veriyorsa onu parantez içinde aynen aktar. Kendin kur çevirme."**
+-- Prompt'a H1 kuralı eklenir: **"Başlık günün tezidir, özet maddelerinden biri değildir."**
+-  Ajan bir tez bulamıyorsa H1 = tarih olur. Rev 9 buna izin veriyor: sessiz günün sesi
+-  yoktur.
+-- Prompt'a özne kuralı eklenir: **"Her özet maddesi kimin ne yaptığını söyler; edilgen
+-  çatı yalnızca özne bilinmiyorsa kullanılır."**
++- Gelişme başlığı **her zaman** `label`. Ajanın kalın yazdığı giriş kelimeleri gövdeden
++  atılır (`enrich.py`, Rev 11'in yolu).
++- Prompt'a üç cümle eklenir:
++  - Kur: *"Tutarı kaynağın verdiği para biriminde yaz. Kaynak kendi çevirisini veriyorsa
++    parantez içinde aynen aktar. Kendin kur çevirme."*
++  - H1: *"Başlık günün tezidir, özet maddelerinden biri değildir."*
++  - Özne: *"Her özet maddesi kimin ne yaptığını söyler."*
+ 
+ ### Build kuralları — R23
+ 
+-> **ETİKET-BAŞLIK.** Render edilen her `h3.dev` metni kendi `developments[].label`'ına
+-> eşit olmak zorunda; değilse build uyarır. Her `→ bugün:` bağlantı metni de indiği
+-> başlığa eşit olmak zorunda.
+->
+-> **KUR.** Gövdede `\d+[,.]?\d*\s*(milyon|milyar)\s*\$[^)]{0,20}\(\s*\d+[,.]?\d*\s*(milyon|milyar)\s*[A-Z]{3}\)`
+-> kalıbı (bir para birimi ve parantez içinde başka biri) varsa build uyarır. İki değer de
+-> aynı `[K#]`'in medya özetinde geçiyorsa uyarı düşer.
+->
+-> **H1-TEKRAR.** H1 ile herhangi bir özet maddesinin sözcük kümesi örtüşmesi (Jaccard)
+-> ≥0,6 ise build uyarır.
+->
+-> Üçü de uyarıdır, durdurmaz. Rapor insan incelemesi olmadan yayımlanıyor (PRODUCT.md);
+-> bir uyarı yüzünden raporu durdurmak, yöneticiye hiç rapor gitmemesi demek.
++> **ETİKET-BAŞLIK.** Her `h3.dev` kendi `label`'ına eşit olmalı. Her `→ bugün:` bağlantı
++> metni de indiği başlığa eşit olmalı.
++> **KUR.** Gövdede bir para birimi ve yanında parantez içinde başka bir para birimi varsa
++> uyarı verilir, iki değer de aynı `[K#]`'in medya özetinde geçmiyorsa.
++> **H1-TEKRAR.** H1 ile herhangi bir özet maddesinin sözcük örtüşmesi ≥0,6 ise uyarı
++> verilir.
++> Üçü de **Rev 30** kanalına uyarı gönderir, derlemeyi durdurmaz. Rapor insan incelemesi
++> olmadan yayımlanıyor; durdurmak, yöneticiye o sabah hiç rapor gitmemesi demek.
+ 
+ ### Uygulama listesi — Revizyon 23
+ 
+-| # | Dosya | Değişiklik | Kabul testi |
++| # | Dosya | Değişiklik | Kabul (ekran görüntüsü) |
+ |---|---|---|---|
+-| R23-P0-1 | `enrich.py` | Gelişme başlığı `label`'dan; kalın giriş kelimeleri atılır | 23 Eylül'de başlık "Lynx XM30 prototip teslimi"; "American Rheinmetall" ifadesi gövdede metin olarak kalır |
+-| R23-P0-2 | rapor promptu | Kur, H1 ve özne kuralları (üç cümle) | Sonraki 3 raporda KUR ve H1-TEKRAR uyarısı yok |
+-| R23-P1-1 | `build.py` | ETİKET-BAŞLIK, KUR, H1-TEKRAR uyarıları | 23 Eylül yeniden derlendiğinde KUR (SAN CUAS) ve H1-TEKRAR uyarıları görünür |
++| R23-P0-1 | `enrich.py` | Başlık `label`'dan | **(S)** 23 Eylül brifingi, 1440px: G9'un başlığı "Lynx XM30 prototip teslimi"; izleme listesindeki aynı adlı bağlantı bu başlığa iner |
++| R23-P0-2 | rapor promptu | Kur, H1 ve özne cümleleri | Sonraki 3 raporda **(P)** KUR ve H1-TEKRAR uyarısı gelmez |
++| R23-P1-1 | `build.py` | Üç kural | 23 Eylül yeniden derlendiğinde **(P)** "KUR: SAN CUAS 1,5 milyar $ ↔ özet 1,74" ve "H1-TEKRAR: özet 1" uyarıları gelir |
+ 
+-**Yapılmayacak:** Kur çevirisini build'e yaptırmak. Build ağa çıkmaz (Rev 5, Rev 14) ve
+-kur tarihi kaynaktan kaynağa değişir.
++**Yapılmayacak:** kur çevirisini build'e yaptırmak (build ağa çıkmaz).
+ 
+ ---
+ 
+ ## Revizyon 24 — yöneticinin ilk ekranı
+ 
++**Hedef.** Telefonda yöneticinin ilk ekranında özet olsun, üstveri değil.
++**Dosyalar.** `assets/app.css`, `build.py` (tablo kartı), `scripts/check_reports.py`.
++**Build kuralı.** İLK-EKRAN.
++
+ ### R24.0 — Tanı
+ 
+-375×812'de ekranın ilk 470 pikseli içerikten önce geliyor: daybar, Tarama satırı, dokuz
+-oyuncu, H1 ve iki satırlık çip şeridi (F-15). Özetin 5 maddesinden ilk ekrana 2'si
+-sığıyor. Ray masaüstünde yan sütunda duruyor, doğru yer orası. Tek sütuna geçince özetin
+-**üstüne** yığılıyor.
++375×812'de ilk 470 piksel içerikten önce geliyor (F-15). İlk ekrana 5 özet maddesinden
++2'si sığıyor. Ray tek sütunda özetin üstüne yığılıyor. Rev 6: **dönüş kromu değiştirir,
++metin bloğunu asla.**
+ 
+-Rev 6'nın kanunu burada iş görüyor: **dönüş kromu değiştirir, metin bloğunu asla.** Ray
+-kromdur. Tek sütunda nereye gideceği metnin sırasını bozmadan seçilebilir.
+-
+ ### R24.1 — Karar
+ 
+-- **920 pikselin altında ray, yönetici özetinin arkasına taşınır** (Portföy'den önce).
+-  Masaüstünde değişiklik yok.
+-- Çip şeridi 920 pikselin altında tek satırda kalır, taşarsa yatay kaydırılır. İki satır
+-  101 piksel tutuyordu, tek satır ~50 piksel tutar. Şerit yapışkan değildir, Rev 0'ın 88
+-  piksellik yapışkan bütçesine dokunmaz.
+-- H1 (Rev 23 sonrası tez ya da tarih) yerinde kalır.
+-- Mobil kartın üçüncü alanı (İzlenecek gösterge) `order` ile etiketini taşır. Etiket de
+-  Etki jetonuyla aynı sesle yazılır: mono, küçük.
++- 920px'in altında ray, özetin arkasına (Portföy'den önce) taşınır.
++- Çip şeridi tek satıra iner, taşarsa yatay kaydırılır. Yapışkan değildir.
++- Mobil kartın üçüncü alanı "İzlenecek" etiketini taşır.
+ 
+-### Build kuralı — R24
++### Build kuralı — İLK-EKRAN
+ 
+-> **İLK-EKRAN.** `check_reports.py` 375×812'de brifingi açar. `h2#yonetici-ozeti`'nin
+-> `top` değeri ≤300px olmalı, özetin 4. maddesinin `bottom` değeri ≤812px olmalı. Olmazsa
+-> build uyarır. Ölçüm, Rev 18'deki kural gereği `getClientRects()` sayısıyla değil rect
+-> değerleriyle yapılır.
++> `check_reports.py` 375×812'de brifingi açar ve **(A)** özetine ekran görüntüsünü ekler.
++> `h2#yonetici-ozeti` üst kenarı ≤300px ve özetin 4. maddesinin alt kenarı ≤812px
++> olmalı. Olmazsa **Rev 30** kanalına uyarı gider.
+ 
+ ### Uygulama listesi — Revizyon 24
+ 
+-| # | Dosya | Değişiklik | Kabul testi |
++| # | Dosya | Değişiklik | Kabul (ekran görüntüsü) |
+ |---|---|---|---|
+-| R24-P0-1 | `assets/app.css` | `@media (max-width: 919px)`: ray `order` ile özetin arkasına | 375px'te YÖNETİCİ ÖZETİ ≤300px; 1440px'te ray yerinde |
+-| R24-P0-2 | `assets/app.css` | Çip şeridi tek satır + `overflow-x:auto` | 375px'te şerit ≤56px |
+-| R24-P1-1 | `assets/app.css` + `build.py` tablo | Mobil kartta "İzlenecek" etiketi | 375px'te her kartın üçüncü alanının üstünde etiket var |
+-| R24-P1-2 | `scripts/check_reports.py` | İLK-EKRAN ölçümü | Ray bilerek geri taşındığında uyarı çıkar |
++| R24-P0-1 | `assets/app.css` | Ray `order` ile özetin arkasına | **(S)** 375×812: ilk ekranda YÖNETİCİ ÖZETİ başlığı ve en az 4 madde; Oyuncular ilk ekranda yok. **(S)** 1440: ray solda, yerinde |
++| R24-P0-2 | `assets/app.css` | Çipler tek satır | **(S)** 375px: çipler tek satırda |
++| R24-P1-1 | `assets/app.css`, `build.py` | Kart etiketi | **(S)** 375px: her kartın üçüncü alanının üstünde "İZLENECEK" |
++| R24-P1-2 | `check_reports.py` | İLK-EKRAN | **(A)** 375×812 görüntüsü; ray bilerek geri taşındığında **(P)** uyarı |
+ 
+-**Yapılmayacak:** Ray bloğunu mobilde gizlemek. Oyuncular iş 2'nin girişi. Üçüncü bir
+-yapışkan katman eklemek de yapılmayacak (Rev 0).
++**Yapılmayacak:** rayı mobilde gizlemek; üçüncü bir yapışkan katman eklemek.
+ 
+ ---
+ 
+-## Revizyon 25 — Genel: süzgeç kapısı ve kategoriler
++## Revizyon 25 — Genel: süzgeç kapısı, kategoriler, çeviri maliyeti
+ 
++**Hedef.** Adı olan kategoriler konu vaatlerini tutsun, ve hiçbir kalem sessizce
++düşürülmesin.
++**Dosyalar.** `scripts/collect_news.py`, `build.py` (kategori görünen adı), Drive'daki
++`kaynaklar.json` (değişiklik yok, yalnızca okundu).
++**Build kuralları.** SİLME-YOK · İPUCU-YOK.
++
+ ### R25.0 — Kapı geçilmedi
+ 
+-İstenen şart: rastgele 100 elenmiş kalemde en fazla 2 ilgili kalem, taze bir alt ajanın
+-değerlendirmesiyle.
++content.md'nin "536 → 208" rakamı süzgeci yalnızca Genel'e uyguluyor. Süzgeç **her
++kaynağa** uygulandığında 23 Eylül'de **405 kalem elenir, 131 kalır**. Elenenlerin 77'si
++adı olan kategorilerden gelir.
+ 
+-**Önce bir düzeltme.** content.md'nin "536 → 208" rakamı süzgeci yalnızca Genel'e
+-uyguluyor (328 kalem). S1'in önerdiği ise süzgeci **her kaynağa** uygulamak. Bunu
+-`collect_news.looks_defence` ile 23 Eylül'ün 536 satırında ölçtüm: **405 kalem elenir,
+-131 kalır.** Elenenlerin 77'si adı olan kategorilerden gelir: C-UAS 21, Topçu 19, Deniz
+-11, Rakip Duyuruları 10, İhale 7.
++Bu 405 kalemden sabit tohumla (`20260923`) 100'lük bir örneklem çekildi
++(`review/filtre-orneklem-100.tsv`). Sonucu beklenen şartı bilmeyen taze bir alt ajan
++değerlendirdi: **İLGİLİ 49 · SINIRDA 23 · İLGİSİZ 28.** Şart ≤2 idi.
+ 
+-**Örneklem.** 405 kalemden, sabit tohumla (`20260923`), 100 kalem seçildi:
+-`review/filtre-orneklem-100.tsv`. Sonucu beklenen şartı bilmeyen taze bir alt ajan
+-değerlendirdi. Sonuç: **İLGİLİ 49 · SINIRDA 23 · İLGİSİZ 28.** Şart ≤2 idi.
++Elenen ilgili kalemlerden örnekler: günün manşeti (*"Morana statt Archer…"*), Norveç'in
++WiSENT 2 siparişi, PGZ'nin geleceği tartışması.
+ 
+-Elenen ilgili kalemlerden örnekler: *"Morana statt Archer: Lettland entscheidet sich bei
+-Artillerie um"* (günün manşeti, Soldat und Technik); *"Norwegen bestellt drei weitere
+-WiSENT 2 Bergepanzer"*; *"Debata o przyszłości PGZ na MSPO 2026"*; *"Torpedo Fired From
+-Uncrewed Submarine"*; *"Delivery of UK's future tank capability remains uncertain"*.
+-Terim listesinde `artillerie`, `tank`, `frigate/destroyer`, `pentagon`, `F-35` gibi
+-kelimeler yok. Dil sınırında da kırılıyor: Lehçe, Almanca, Malayca.
++**Rev 0'ın NOT'u yerinde kalıyor ve artık bir ölçümü var.** S1 uygulanmayacak.
+ 
+-**Sonuç: Rev 0'ın NOT'u yerinde kalıyor ve artık bir ölçümü var.** Kelime süzgeci
+-tautolojik: sözlüğe girmeyen savunma haberini savunma sayamıyor. S1 uygulanmayacak.
++### R25.1 — Süzgeç düşürüyor. Tutmanın maliyeti
+ 
+-### R25.1 — "Düşürüyor mu, gizliyor mu?" — düşürüyor
++`collect_news.py:288-294`: notunda `filtre` yazan kaynaklarda süzgeçten geçemeyen kalem
++`continue` ile atlanıyor. Kalem toplanmıyor, yazılmıyor, aranamıyor. Bu, Rev 0'ın
++"hiçbir kalem silinmez" sözleşmesine aykırı.
+ 
+-`scripts/collect_news.py:288-294`: notunda `filtre` yazan kaynaklarda `looks_defence`
+-tutmayan kalem `continue` ile atlanıyor. Kalem hiç toplanmıyor, JSON'a yazılmıyor,
+-çevrilmiyor, aranamıyor. Bugün de opt-in kaynaklarda, aynı süzgeçle, ölçülemeyen bir kayıp
+-yaşanıyor. Kaybın boyutu bilinmiyor, çünkü düşen hiçbir yere yazılmıyor. Bu, Rev 0'ın
+-"hiçbir kalem silinmez" sözleşmesiyle doğrudan çelişiyor.
++**Karar:** süzgeç düşürmez, **işaretler** (`savunma_terimi: false`). Kalem Genel'in kapalı
++tam dökümünde durur ve aranabilir.
+ 
+-**Karar:** Süzgeç düşürmez, **işaretler.** Kalem `savunma_terimi: false` ile toplanır ve
+-Genel'in kapalı tam dökümünde (Rev 0'ın üçüncü katmanı) durur. Aramada da çıkar. Kategori
+-sayılarına girer, çünkü sayfada bulunuyor.
++**Maliyet ölçümü (23 Eylül).** Drive'daki `kaynaklar.json`'da 126 kaynağın 9'u filtre
++notlu: Trend.az, Report.az, Dawn, AA güncel, AA analiz, Al Jazeera, Al Arabiya, Arab News,
++Middle East Monitor. Dokuz akış bugün okundu. 48 saatlik pencerede süzgecin düşüreceği
++kalem sayısı **226**, geçen kalem 13. Al Arabiya boş döndü, yani bu bir alt sınır. Ortalama
++başlık uzunluğu 69 karakter.
+ 
+-Bir de açık soru var, müşteriye: filtre notu taşıyan kaynaklar bu kalemler için çeviri
+-bütçesi harcamaya değer mi? Değmiyorsa kalem **özgün dilinde** aranabilir kalır, yine de
+-düşürülmez.
++| | |
++|---|---|
++| Günde yeni başlık | ~200–350 (akışlar 48 saatten azını tutuyor, bu yüzden çoğu her gün yeni; yedek ikinci çalıştırma üst ucu artırır) |
++| Çağrı | `translate_news.py`, 60'lık partiler: günde **4–6 `claude -p` çağrısı** |
++| Çağrı başına jeton | girdi ~2,1 bin (prompt ~600 + 60 başlık ~1.500), çıktı ~2,4 bin |
++| API karşılığı (Sonnet 5: 2 $ / 10 $ milyon jeton) | günde **~0,11–0,17 $**, ayda ~3,5–5 $. Claude Code CLI'nın her çağrıya eklediği sabit sistem istemi ölçülmedi; o eklenince tahmin **günde ≤0,30 $, ayda ≤10 $** |
++| **Gerçek nakit maliyet** | **~0 $.** Çeviri API anahtarıyla değil abonelik jetonuyla çalışıyor (`translate_news.py:3`). Gerçek bedel abonelik kotasından günde 4–6 ek çağrı |
+ 
+-### R25.2 — Kategoriler: yanlış olan Genel değil, adı olanlar
++Özetler hariç (müşterinin sınırı).
+ 
+-content.md §4'ün bulgusunu kabul ediyorum. İsabet İhale'de %10, Topçu'da %15, C-UAS'ta
+-%22, Genel'de ise %85. Okuyucunun **konu vaadiyle** açtığı kategoriler en bozuk olanlar.
+-Genel'i küçültmek sorunu çözmez; adı olan kategoriler temizlenmeli.
++Karar müşterinin: bu kalemler (a) çevrilsin mi, (b) özgün dilinde aranabilir mi kalsın?
++Her iki seçenekte de kalem düşürülmez.
+ 
+-- **S2** `SOURCE_HINTS` kalkar. Kelimeye değmeyen kalem Genel'de kalır: Genel'de doğru
+-  durmak, adı olan bir kategoride yanlış durmaktan iyidir.
+-- **S3** Çıplak dron kelimeleri (`drone`, `dron`, `uav`, `uas`) C-UAS'tan çıkar ve
+-  "Deniz ve İnsansız Sistemler"e gider. C-UAS yalnızca mücadele ifadelerini taşır.
+-- **S6** İhale kümesi tedarik olayına özgü ifadelerle sınırlanır (`deal`, `signs`,
+-  `imzala` çıkar).
+-- **S8** Build, kategori başına iki sayıyı **kayda** basar: yalnızca kaynak ipucuyla
+-  gelen kalem sayısı (S2 sonrası 0 olmalı) ve hiçbir kelimeye değmeyen kalem sayısı.
+-  Sayfaya basmaz.
++### R25.2 — Kategoriler
+ 
++- **S2** `SOURCE_HINTS` kalkar.
++- **S3** Çıplak dron kelimeleri C-UAS'tan çıkar ve "Deniz ve İnsansız Sistemler"e gider.
++- **S6** İhale kümesi tedarik olayına özgü ifadelerle sınırlanır.
++- **S8** Kategori başına "yalnızca ipucuyla gelen" ve "hiçbir kelimeye değmeyen" sayıları
++  **(A)** özetine yazılır.
++
+ ### R25.3 — Rakip Duyuruları → "Oyuncu Duyuruları"
+ 
+-Kapsam: izlenen 64 oyuncu (müşterinin seçimi). Kategori adı nötr olmalı, çünkü 64'ün
+-içinde `yerli-rakip` ve `emsal` rolleri var. Rev 17 "Aselsan'ı rakip başlığı altında
+-göstermek ürünün yetkisinde olmayan bir beyandır" dedi. Kategori adı aynı beyanı her gün,
+-400 satırın ortasında yapıyor.
++Kapsam izlenen 64 oyuncu. Ad **"Oyuncu Duyuruları"**. "Oyuncu" Rev 18'de bir gözlem
++olarak tanımlandı, bir sınıflandırma olarak değil. "Duyuru" da S4'ün kuralını
++adlandırıyor: öznesi oyuncunun kendisi olan eylem.
+ 
+-**Öneri: "Oyuncu Duyuruları".** Gerekçe: "Oyuncu" ürünün zaten kullandığı ve Rev 18'de
+-*bir sınıflandırma değil, bir gözlem* diye tanımlanmış kelime (ray bloğu ve
+-/oyuncular.html). "Duyuru" ise S4'ün kuralını adlandırıyor: öznesi oyuncunun kendisi olan
+-eylem (kazandı, tanıttı, teslim etti, yatırım yaptı).
+-Elenen alternatifler: *"Oyuncu Hareketleri"*. "Hareket" iplik sayfasında zaten sayılan
+-şeyin adı ("4 hareket"); iki anlama gelirdi. *"Şirket Haberleri"* de elendi: roster'la
+-bağı kopuyor ve her şirket haberini kapsıyor gibi okunuyor.
++- "Oyuncu Hareketleri" elendi, çünkü "hareket" iplik sayfasında zaten kullanılıyor.
++- "Şirket Haberleri" elendi, çünkü roster'la bağı yok.
+ 
+-Veri anahtarı değişmez, yalnızca görünen ad değişir (Rev 2'deki `MKE` → "Doğrudan ilgili"
+-emsali).
++Veri anahtarı değişmez (Rev 2 emsali). **S4** Rev 21'in alias'lı eşleştiricisini kullanır
++(← R21-P1).
+ 
+-**S4** Öznesi bir oyuncu olan başlık "Oyuncu Duyuruları"na gider. Eşleştirme Rev 21'in
+-alias'lı eşleştiricisini kullanır, bu yüzden **Rev 21 P1'e bağımlı.**
++### Build kuralları — R25
+ 
+-### Build kuralı — R25
++> **SİLME-YOK.** `collect_news.py` okuduğu ve zaman penceresine giren her kalemi yazar.
++> Kaynak başına `okunan == yazılan` eşitliği **(A)** özetinde tablo olarak basılır. Eşitlik
++> bozulursa iş kırmızıya döner ve **Rev 30** kanalına uyarı gider.
++> **İPUCU-YOK.** Kategori ataması yalnızca başlıktaki kelime eşleşmesinden gelir.
++> "Yalnızca ipucuyla gelen" sayısı >0 ise **Rev 30** kanalına uyarı gider.
+ 
+-> **SİLME-YOK.** `collect_news.py` bir kaynaktan okuduğu ve zaman penceresine giren her
+-> kalemi JSON'a yazar. Toplayıcı, kaynak başına `okunan == yazılan` eşitliğini kayda
+-> basar; eşitlik bozulursa iş kırmızıya döner.
+->
+-> **İPUCU-YOK.** Kategori atamasının tek kaynağı başlıktaki kelime eşleşmesidir. S8
+-> kaydındaki "yalnızca ipucuyla gelen" sayısı >0 ise build uyarır.
+-
+ ### Uygulama listesi — Revizyon 25
+ 
+-| # | Dosya | Değişiklik | Kabul testi |
++| # | Dosya | Değişiklik | Kabul (ekran görüntüsü) |
+ |---|---|---|---|
+-| R25-P0-1 | `scripts/collect_news.py:293` | `continue` → `item["savunma_terimi"]=False`; kalem toplanır | Filtre notlu bir kaynağın okunan ve yazılan sayısı eşit; kalem aramada bulunur |
+-| R25-P0-2 | `scripts/collect_news.py` | S2: `SOURCE_HINTS` kaldırılır | "Tournai" ve "Zipline" başlıkları C-UAS'ta değil |
+-| R25-P0-3 | `scripts/collect_news.py` | S3 ve S6 terim kümeleri | DroneXL'in 13 kaleminden hiçbiri C-UAS'ta değil; "Grönland Güvenlik Anlaşması" İhale'de değil |
+-| R25-P1-1 | `build.py` / render | "Rakip Duyuruları" görünen adı → "Oyuncu Duyuruları" | Sayfada eski ad geçmez; veri anahtarı aynı |
+-| R25-P1-2 | `scripts/collect_news.py` | S4 (← R21-P1-1/2) | "Hanwha mühimmat yatırımını…" → Oyuncu Duyuruları |
+-| R25-P1-3 | `collect_news.py` + `build.py` | S8 kaydı, SİLME-YOK ve İPUCU-YOK | Kayıtta kategori başına iki sayı; sayfada hiçbir iz yok |
+-| R25-P2-1 | — | Kategori isabetini content.md §4'ün ölçütüyle bir kez daha ölç | Adı olan kategorilerin hepsi ≥%70 isabetli |
++| R25-P0-1 | `collect_news.py:293` | `continue` → işaretle | **(A)** SİLME-YOK tablosunda 9 filtre notlu kaynağın okunan ve yazılan sayısı eşit. **(S)** medya takibinde Trend.az'dan savunma dışı bir başlık arandığında bulunuyor |
++| R25-P0-2 | `collect_news.py` | S2 | **(S)** medya takibinde C-UAS bölümünde "Tournai" ve "Zipline" yok |
++| R25-P0-3 | `collect_news.py` | S3, S6 | **(S)** C-UAS bölümünde DroneXL satırı yok; İhale'de "Grönland Güvenlik Anlaşması" yok |
++| R25-P1-1 | `build.py` | Görünen ad | **(S)** medya takibinin kategori rayında "Oyuncu Duyuruları"; "Rakip Duyuruları" hiçbir yerde yok |
++| R25-P1-2 | `collect_news.py` | S4 (← R21-P1) | **(S)** "Hanwha mühimmat yatırımını…" Oyuncu Duyuruları altında |
++| R25-P1-3 | `collect_news.py`, `build.py` | S8, İPUCU-YOK | **(A)** kategori başına iki sayı; "ipucuyla gelen" sütunu 0 |
++| R25-P2-1 | — | İsabet yeniden ölçülür | Bir inceleyici **(S)** her kategorinin ilk 20 satırının görüntüsünden isabeti sayar; hedef ≥%70 |
+ 
+-**Yapılmayacak:** S1 (kapı geçilmedi). Kelime sözlüğünü büyüterek kapıyı yeniden denemek
+-de yapılmayacak: 49 ilgili kalemin çoğu sözlük eksikliğinden değil dil ve bağlam
+-sınırından eleniyor, ve Rev 0 büyütülmüş sözlüğü zaten denedi. S7 (sıralama) da
+-yapılmayacak.
++**Yapılmayacak:** S1; sözlüğü büyütüp kapıyı yeniden denemek; S7.
+ 
+ ---
+ 
+ ## Revizyon 26 — çeviri: cümle düzeni ve üç dedektör
+ 
++**Hedef.** Başlıklar tek düzende olsun ve hiçbir başlık bir önermesini ya da konuşanını
++sessizce kaybetmesin.
++**Dosyalar.** `scripts/translate_news.py` (prompt, sözlük, dedektörler), Drive'daki
++`kaynaklar.json` (`dil` düzeltmesi; müşteri yapar).
++**Build kuralı.** ÇEVİRİ-DEDEKTÖRÜ.
++
+ ### R26.0 — Tanı
+ 
+-content.md'nin iki bulgusu tek karara indirgeniyor. (1) İki prompt kuralı birbiriyle
+-çelişiyor: "Türkçeyse aynen ver" ve "düzen sabittir: her kelime büyük". Bu yüzden Türkçe
+-kaynaklı 37 başlık "bozuk" sayılıyor. (2) Kusurun en tehlikeli sınıfı sessiz eksiltme:
+-"…says it is exiting power procurement" cümlesi atılmış. Atıf da siliniyor: "Iran's
+-military says" → "İran:".
++İki prompt kuralı çelişiyor: "Türkçeyse aynen ver" ve "her kelime büyük". En tehlikeli
++kusur sınıfı sessiz eksiltme ve atıf silme.
+ 
+-### R26.1 — Karar: cümle düzeni (müşterinin seçimi)
++### R26.1 — Karar: cümle düzeni
+ 
+-- `translate_news.py:48`'deki kural cümle düzenine döner: ilk harf ve özel adlar büyük,
+-  gerisi küçük. Türk haber başlığı geleneği bu, ve **çelişki kendiliğinden kalkıyor**:
+-  Türkçe kaynaklı başlık artık aynen geçebilir.
+-- **Ö5 tersine döner.** Denetimde cümle düzeni kusur işaretiydi. Artık **her kelimesi
+-  büyük** çıkan bir çeviri kusur işareti. Model kuralı tutamadıysa büyük ihtimalle başka
+-  bir kuralı da tutamamıştır.
+-- **Ö1** Prompt'a eklenir: *"Başlıktaki her bağımsız önerme çeviride yer alır; virgülle ya
+-  da 'says/announces' ile bağlanmış ikinci cümle atılamaz. Uzunsa kısaltma, olduğu gibi
+-  çevir."*
+-- **Ö2** Prompt'a eklenir: *"'X says', 'according to Y' kalıplarını koru ve özneyi
+-  daraltma: 'Iran's military' → 'İran ordusu'."*
+-- **Ö3** Sözlüğe coğrafya, kurum ve tören kelimeleri eklenir (content.md'deki liste).
+-- **Geçiş.** Canlı pencere (son 48 saat) yeni kuralla yeniden çevrilir. Arşivdeki günler
+-  eski düzende kalır. Rev 4'ün kanunu bu durumu karşılıyor: **tekdüzelik blok içinde
+-  zorunludur, sayfalar arasında değil.** Bir günün sayfası tek bir düzende olur.
++- `translate_news.py:48` cümle düzenine döner. Çelişki böylece kalkar.
++- **Ö5 tersine döner:** her kelimesi büyük harfle çıkan bir çeviri kusur işareti sayılır.
++- **Ö1** (önerme koruma) ve **Ö2** (atıf koruma) prompt'a eklenir.
++- **Ö3** sözlük eklemeleri yapılır.
++- **Ö6 ucuz yarısı:** "Defense Studies" için `dil: "id"` Drive'da düzeltilir.
++- **Geçiş:** canlı pencere yeniden çevrilir. Arşivdeki günler eski düzende kalır. Rev 4:
++  tekdüzelik blok içinde zorunludur, sayfalar arasında değil.
+ 
+-### Build kuralı — R26
++### Build kuralı — ÇEVİRİ-DEDEKTÖRÜ
+ 
+-> **ÇEVİRİ-DEDEKTÖRÜ.** `translate_news.py` her çıktıyı yayımlamadan önce üç sınamadan
+-> geçirir. Biri tutarsa kalem bir kez yeniden çevrilir. İkinci deneme de tutarsa özgün
+-> başlık basılır. Rev 5 bunu "başarısızlık durumu" sayıyor ama sessizce eksik bir Türkçe
+-> başlıktan iyidir, çünkü özgün başlık kendi eksikliğini açıkça gösteriyor.
+-> 1. **Düzen:** muaf olmayan kelimelerin >%60'ı büyük harfle başlıyorsa.
+-> 2. **Uzunluk:** çeviri < özgün × 0,6 karakterse (Türkçe genelde daha uzun).
+-> 3. **Atıf:** özgünde `\b(says|said|claims|according to)\b` ya da ` — ` ile ayrılmış bir
+->    konuşan varsa ve çeviride `(dedi|açıkladı|göre|:|—)` yoksa.
+->
+-> Sayılar build kaydına yazılır, sayfaya yazılmaz.
++> Her çıktı yayımlanmadan önce üç sınamadan geçer: **düzen** (muaf olmayan kelimelerin
++> >%60'ı büyük harfle başlıyor), **uzunluk** (çeviri < özgün × 0,6), **atıf** (özgünde
++> says/according to var, çeviride dedi/göre/: yok). Biri tutarsa kalem bir kez yeniden
++> çevrilir. İkinci deneme de tutarsa özgün başlık basılır.
++> **(A)** özetine sınama başına yakalanan sayısı ve content.md §2'nin 16 kusurlu kalemiyle
++> koşan sabit testin sonucu yazılır. Bir günde özgün bırakılan başlık sayısı >10 ise
++> **Rev 30** kanalına uyarı gider.
+ 
+ ### Uygulama listesi — Revizyon 26
+ 
+-| # | Dosya | Değişiklik | Kabul testi |
++| # | Dosya | Değişiklik | Kabul (ekran görüntüsü) |
+ |---|---|---|---|
+-| R26-P0-1 | `scripts/translate_news.py` | Cümle düzeni kuralı; Ö1, Ö2 | "Govt invites bids… says it is exiting power procurement" çevirisinde "çekil" kökü var |
+-| R26-P0-2 | `scripts/translate_news.py` | ÇEVİRİ-DEDEKTÖRÜ | content.md §2'deki 16 kusurlu kalemin en az 7'si yakalanır |
+-| R26-P1-1 | sözlük | Ö3 eklemeleri | "Hürmüz Boğazı" doğru; "Commons" → "Avam Kamarası" |
+-| R26-P1-2 | `translate_news.py` | Canlı pencerenin yeniden çevrilmesi | 23 ve 24 Eylül sayfalarında tek düzen |
+-| R26-P2-1 | `translate_news.py` | Ö6: dil metinden tespit edilir, `dil` alanı yalnızca ipucu | "Defense Studies" Endonezce olarak çevrilir |
+-| R26-P3-1 | `translate_news.py` | Ö7: İngilizce dışı kaynaklarda geri çeviri | Ertelendi: önce P0 ve P1'in kusur oranına etkisi ölçülecek |
++| R26-P0-1 | `translate_news.py` | Cümle düzeni, Ö1, Ö2 | **(S)** medya takibi, 1440px, Öne çıkanlar: 12 satırın hepsi cümle düzeninde |
++| R26-P0-2 | `translate_news.py` | ÇEVİRİ-DEDEKTÖRÜ | **(A)** sabit testte 16 kalemden en az 7'si yakalanmış; "…exiting power procurement" satırının yeniden çevirisi "çekil" kökünü içeriyor |
++| R26-P1-1 | sözlük | Ö3 | **(S)** medya takibinde "Hürmüz" araması "Hürmüz Boğazı" gösterir, "Hormuç" göstermez |
++| R26-P1-2 | `translate_news.py` | Canlı pencere yeniden çevrilir | **(S)** 23 ve 24 Eylül medya sayfalarının her birinde tek düzen |
++| R26-P1-3 | Drive `kaynaklar.json` | Ö6 ucuz yarısı | **(S)** "KF-21 Berbagi dengan F-16V?" satırının çevirisinde KF-21 özne |
++| R26-P2-1 | `translate_news.py` | Ö6 tamamı | **(A)** özette "dil etiketiyle metin uyuşmuyor: n" |
++| R26-P3-1 | `translate_news.py` | Ö7 | Ertelendi; açılma şartı yukarıda (sıralama teyidi) |
+ 
+ ---
+ 
+ ## Revizyon 27 — iplik sayfası: ne oldu, şimdi ne durumda
+ 
++**Hedef.** İplik sayfası iş 2'nin sorusunu ilk satırda cevaplasın ve okunan güne geri
++götürsün.
++**Dosyalar.** `build.py` (iplik sayfası, `thread_slug`), `assets/app.js` (daybar
++`?g=`), `assets/app.css`.
++**Build kuralları.** İPLİK-DURUM · SLUG.
++
+ ### R27.0 — Tanı
+ 
+-İş 2'nin tanımı "kim hareket etti ve **ona ne oldu**". İplik sayfası bugün bir başlık
+-listesi. Günün durum cümlesi ("Prototip teslim edildi, şart hâlâ tanımlı değil") yalnızca
+-o günün izleme satırında duruyor ve iplik sayfasına hiç ulaşmıyor. Satırlar bağlantı ama
+-düz metin gibi görünüyor. Brifingde ise her bağlantının altı çizili. Okunan güne dönüş de
+-yok (F-09). Sayı ile satırlar uyuşmuyor: "4 hareket" yazıyor, 5 satır var (F-10).
++- Günün durum cümlesi iplik sayfasına ulaşmıyor.
++- Satırlar bağlantı ama öyle görünmüyor.
++- Güne dönüş yok (F-09).
++- "4 hareket" yazıyor ama 5 satır var (F-10).
++- Slug'lar yarım kelimeyle bitiyor ya da tarih taşıyor.
+ 
+ ### R27.1 — Karar
+ 
+-- **Durum satırı:** Sayfanın başlığının altında en son hareketin `→ bugün:` sonrası
+-  cümlesi yazılır, tarihiyle birlikte. Cümle yoksa satır basılmaz (bilinmiyor ≠ boş).
+-- Her hareket satırı o günün cümlesini taşır, yalnızca gelişmenin etiketini değil.
+-- **Daybar** iplik sayfasında da var. Gösterdiği gün, gelinen gündür (`?g=`
+-  parametresi). Parametre yoksa en son hareketin günü gösterilir.
+-- Açılış satırı ayrı biçimde çizilir (mono "açıldı" jetonu var, bağlantısı yok); sayı
+-  "4 hareket" olarak kalır. Satır sayısı ile hareket sayısı artık görsel olarak da ayrı.
+-- Satırlar brifingdeki bağlantılarla aynı görünümü alır.
+-- **Slug'lar** etiketten türer, kelime sınırında kesilir, içlerinde tarih olmaz. Eski
+-  slug'lar yeni adrese yönlendirilir: bunlar kalıcı URL'ler.
++- Başlığın altında en son hareketin durum cümlesi, tarihiyle.
++- Her hareket satırı o günün cümlesini taşır.
++- İplikte daybar olur, gelinen günü gösterir (`?g=`).
++- Açılış satırı ayrı biçimde çizilir: "açıldı" jetonu var, bağlantısı yok.
++- Satırlar bağlantı gibi görünür.
++- Slug'lar etiketten türer, kelime sınırında kesilir, tarih içermez. Eski adresler
++  yönlendirilir.
+ 
+-### Build kuralı — R27
++### Build kuralları — R27
+ 
+-> **İPLİK-DURUM.** Son hareketinde durum cümlesi bulunan bir ipliğin sayfasında
+-> `.thread-status` yoksa build uyarır. **SLUG** kuralı: slug `-[a-z0-9]{1,3}$` ile bitemez
+-> (yarım kelime), içinde `\d{2}-\d{2}-\d{4}` olamaz; eski slug'dan yeni slug'a
+-> yönlendirme sayfası yoksa build uyarır.
++> **İPLİK-DURUM.** Son hareketinde durum cümlesi olan bir ipliğin sayfasında
++> `.thread-status` yoksa **Rev 30** kanalına uyarı gider.
++> **SLUG.** Slug yarım kelimeyle bitemez ve tarih içeremez. Yönlendirmesi eksik eski
++> slug varsa **Rev 30** kanalına uyarı gider.
+ 
+ ### Uygulama listesi — Revizyon 27
+ 
+-| # | Dosya | Değişiklik | Kabul testi |
++| # | Dosya | Değişiklik | Kabul (ekran görüntüsü) |
+ |---|---|---|---|
+-| R27-P0-1 | `build.py` iplik sayfası | Durum satırı + satır başına cümle | XM30 ipliğinin üstünde "Prototip teslim edildi, şart hâlâ tanımlı değil. · 23 Eylül" |
+-| R27-P0-2 | `build.py` + `app.js` | İplikte daybar, `?g=` | Brifingden ipliğe, oradan daybar ile aynı güne: 2 dokunuş |
+-| R27-P1-1 | `assets/app.css` | Satırlarda bağlantı görünümü; açılış satırı ayrı | 5 satırın 4'ü bağlantı gibi, 1'i jetonlu |
+-| R27-P2-1 | `build.py:729` `thread_slug` | Kelime sınırı, tarih yok, yönlendirme | Eski `…-mut.html` yeni adrese yönlenir |
++| R27-P0-1 | `build.py` | Durum satırı + satır cümleleri | **(S)** XM30 ipliği, 375px: başlığın altında "Prototip teslim edildi, şart hâlâ tanımlı değil. · 23 Eylül" |
++| R27-P0-2 | `build.py`, `app.js` | Daybar | **(S)** brifingden açılan iplik sayfasının tepesinde "23 Eyl · Çar" daybar'ı |
++| R27-P1-1 | `app.css` | Bağlantı görünümü; açılış satırı ayrı | **(S)** 4 satır altı çizili, açılış satırı "AÇILDI" jetonlu ve altı çizili değil |
++| R27-P2-1 | `thread_slug` | Slug + yönlendirme | **(S)** eski `…-mut.html` adresi açıldığında adres çubuğunda yeni slug |
+ 
+ ---
+ 
+ ## Revizyon 28 — izlenen oyuncunun kaynağı düştüğünde
+ 
++**Hedef.** İnanç değiştiren tek arıza okuyucuya tek satırla söylensin. Başka hiçbir
++arıza söylenmesin.
++**Dosyalar.** `data/rakipler.json` (`kaynak` alanı), `build.py` (brifing rayı, Kaynaklar
++sayfası).
++**Build kuralı.** KANIT-BOŞLUĞU.
++
+ ### R28.0 — Tanı
+ 
+-PRODUCT.md'nin tek istisnası bu vaka: *izlenen bir oyuncunun kendi kaynağı düşerse bir
+-duyuru eksik olabilir; build bunu tek, hesaplanmış bir uyarı satırıyla söyler.* 23 Eylül'de
+-bu vaka yaşandı: Elbit Systems ve Northrop Grumman'ın kendi kaynakları yanıt vermedi (F-04).
+-Bu bilgi yalnızca Kaynaklar sayfasında, soluk bir satırda duruyordu. DECISIONS'ta Açık
+-maddesi olarak zaten bekliyordu.
++23 Eylül'de Elbit ve Northrop'un kendi kaynakları yanıt vermedi (F-04). Bu bilgi
++yalnızca Kaynaklar sayfasında soluk bir satırdı.
+ 
+ ### R28.1 — Karar
+ 
+-- `data/rakipler.json` içindeki her oyuncuya `kaynak` alanı eklenir: oyuncunun kendi
+-  basın odası ya da kendi akışı.
+-- O gün bu kaynaklardan biri yanıt vermediyse brifingin Tarama satırının altına **tek bir
+-  satır** basılır: *"Elbit Systems ve Northrop Grumman'ın kendi duyuruları bugün
+-  okunamadı."* Satırda neden, sayı ya da renk olmaz. Eksik olan şey arıza değil, bir
+-  duyuru olabilir.
+-- Hiçbir oyuncu kaynağı düşmediyse satır basılmaz. Rev 15'in "her gün bas" kuralı burada
+-  geçerli değil. Rev 15 bir ölçümü karşılaştırılabilir kılmak içindi; bu satır ise bir
+-  kanıt boşluğunu söylüyor. Rev 9'un kanunu uygulanıyor: *alışkanlığın kırılması
+-  sinyalin kendisidir.*
+-- **F-05:** Kaynaklar sayfasındaki "yanıt vermedi" sütunu kalkar. Yanıt vermeyen kaynağın
+-  satırı soluk kalır (Rev 19), ama nedeni yazılmaz. Satırın ne anlama geldiğini artık R28
+-  satırı söylüyor.
++- Her oyuncunun `kaynak` alanı olur.
++- Kesişim boş değilse Tarama satırının altında tek satır: *"Elbit Systems ve Northrop
++  Grumman'ın kendi duyuruları bugün okunamadı."* Satırda neden, sayı ya da renk yok.
++- Kesişim boşsa satır basılmaz (Rev 9: alışkanlığın kırılması sinyalin kendisidir).
++- Kaynaklar sayfasındaki "yanıt vermedi" sütunu kalkar; satır soluk kalır (Rev 19).
+ 
+-### Build kuralı — R28
++### Build kuralı — KANIT-BOŞLUĞU
+ 
+-> **KANIT-BOŞLUĞU.** Uyarı satırının tek tetiği `failed_sources ∩ {r.kaynak for r in
+-> rakipler}` kesişimi. Ajanın beyanı tetik olamaz (Rev 14). Kesişim boşsa satır basılmaz.
++> Satırın tek tetiği `failed_sources ∩ {r.kaynak}` kesişimi. Ajanın beyanı tetik olamaz
++> (Rev 14). Satır basıldığı gün **Rev 30** kanalına da bildirim gider: operatörün kaynağı
++> onarması gerekebilir.
+ 
+ ### Uygulama listesi — Revizyon 28
+ 
+-| # | Dosya | Değişiklik | Kabul testi |
++| # | Dosya | Değişiklik | Kabul (ekran görüntüsü) |
+ |---|---|---|---|
+-| R28-P0-1 | `data/rakipler.json` | Oyunculara `kaynak` alanı | Elbit ve Northrop'un `kaynak` alanı dolu |
+-| R28-P0-2 | `build.py` | KANIT-BOŞLUĞU satırı | 23 Eylül yeniden derlendiğinde satır iki adla görünür; kesişimi boş bir günde görünmez |
+-| R28-P1-1 | `build.py` Kaynaklar sayfası | "yanıt vermedi" sütunu kalkar | Sayfada "yanıt vermedi" dizgisi 0 kez geçer |
++| R28-P0-1 | `rakipler.json` | `kaynak` alanı | **(S)** /haberler/…-kaynaklar.html: Elbit ve Northrop satırlarının yanında adları |
++| R28-P0-2 | `build.py` | KANIT-BOŞLUĞU satırı | **(S)** 23 Eylül yeniden derlendi, 375px: Tarama altında iki adlı tek satır; kesişimi boş bir günde satır yok. **(P)** o gün bildirim |
++| R28-P1-1 | `build.py` | Sütun kalkar | **(S)** Kaynaklar sayfasında "yanıt vermedi" yazısı yok |
+ 
+ ---
+ 
+ ## Revizyon 29 — görsel sistem ve hijyen
+ 
++**Hedef.** Kanun metne uysun: her sınır tek mekanizma, her yazı boyutu bir belirteç.
++**Dosyalar.** `assets/app.css`, `assets/app.js` (bildirim kartı), `build.py` (masthead
++metni), `scripts/check_reports.py`.
++**Build kuralları.** L1-DOLGU · ÇİZGİ-KONTRAST · TİP-BELİRTECİ.
++
+ ### R29.1 — Çizgiler (F-12)
+ 
+-Seviye 2'nin mekanizması çizgi, ama `--rule-2` zemine karşı 1,65:1. **Yalnızca bölüm
+-sınırı** çizgileri (`.kicker` border-top) ≥3:1 olan bir değere çekilir. İnce ayraçlar
+-(`--rule`) olduğu gibi kalır. Yeni belirteç eklenmez; `--rule-2`'nin değeri değişir.
+-Tasarım ilkesi "yeni belirteç yok, silinmeden" diyor, değer değiştirmek bu ilkeyi ihlal
+-etmiyor.
++Bölüm sınırı çizgisi (`--rule-2`) ≥3:1'e çekilir. İnce ayraçlar (`--rule`) kalır. Yeni
++belirteç eklenmez, yalnızca değer değişir.
+ 
+ ### R29.2 — Yazı boyutları
+ 
+-`app.css` 75 yerde yaklaşık 20 farklı `font-size` değeri kullanıyor (10–34px, yarım
+-piksel adımlarla). Hiçbiri belirteç değil, bu yüzden "yeni belirteç yok" ilkesi yazı için
+-hiç işlemiyor. 7 belirteçlik bir ölçek önerisi: `--fs-meta 11` · `--fs-small 13` ·
+-`--fs-body 17` · `--fs-lead 18.5` · `--fs-h3 20` · `--fs-h2 23` · `--fs-h1 34`.
+-Kalan her değer en yakın belirtece iner.
++Yaklaşık 20 değer 7 belirtece iner: `--fs-meta 11` · `--fs-small 13` · `--fs-body 17` ·
++`--fs-lead 18.5` · `--fs-h3 20` · `--fs-h2 23` · `--fs-h1 34`.
+ 
+-> **Build kuralı — TİP-BELİRTECİ.** `app.css` içinde `font-size:` yalnızca `var(--fs-*)`
+-> alabilir. Aksi hâlde build uyarır.
+-
+ ### R29.3 — Küçük maddeler
+ 
+-- **F-13:** `:root:not([data-theme="light"])` koruması `:root` olur. Tema anahtarı
+-  yapılmayacak (Rev 0 NOT), koruma hiçbir işe yaramıyor.
+-- **F-03 / F-14:** Rev 7'nin *hangi yüzeyler* kararı değişmiyor. Yeni kanıt derinlik
+-  ölçümü (%99). Kart ilk ziyarette brifingin sonunda (endnav'ın üstünde, akış içinde)
+-  bir kez görünür. Sabit kart zili örtmesin diye footer'a da `endnav`'ın 96px'lik alt
+-  boşluğu verilir.
+-- **F-07:** Masthead'deki tagline'ın yanına günün yüzü yazılır: "· brifing" /
+-  "· medya takibi". Masthead bir kolofon (Rev 0); bu ekleme kolofonu ihlal etmiyor.
+-- **F-08:** Daybar çipine sayı eklenmeyecek. 375px'te çip 138px, sayıyla birlikte 88px
+-  yapışkan bütçenin genişliğini aşıyor. Sayı endnav'da ve arşiv kartında zaten var.
+-- **F-11:** Oyuncular ve İzleme dizini brifingin ızgarasına geçer (ray sütunu boş kalır).
+-  Öncelik düşük.
++- **F-13:** ölü koruma `:root` olur. Tema anahtarı yapılmayacak (Rev 0 NOT).
++- **F-03/F-14:** kart ilk ziyarette endnav'ın üstünde, akış içinde görünür. Footer'a 96px
++  alt boşluk eklenir.
++- **F-07:** masthead'e "· brifing" / "· medya takibi" eklenir.
++- **F-08:** daybar çipine sayı eklenmez (88px yapışkan bütçe).
++- **F-11:** Oyuncular ve İzleme dizini brifingin ızgarasına geçer.
+ 
++### R29.4 — Özet kutusunun kenar çizgisi kalkar (müşterinin kararı)
++
++PRODUCT.md'nin kanunu olduğu gibi kalıyor: *sınır çizgi alır, durum renk, içerik büyüklük
++— asla ikisi birden.* Rev 0'ın L1 tanımı ("dolgu + kenar") bu kanunla çelişiyordu. Karar
++kanun lehine: yönetici özeti yalnızca `--paper-2` zeminini taşır, 3px'lik `--brand` sol
++kenar kalkar.
++
++Özet kutusu artık tek bir mekanizmayla, zeminiyle ayrılıyor. Rev 0'ın gerekçesi ("yönetici
++özeti görsel olarak ayrılmıyordu") zeminle karşılanmaya devam ediyor.
++
++**Tersine dönüş kaydı:** Rev 0 → R29.4. DECISIONS.md › *Reversals* listesine 9. madde
++olarak eklenecek: "L1 dolgu + kenar — Rev 0 belirledi, R29.4 kanuna uydurmak için kenarı
++kaldırdı."
++
++### Build kuralları — R29
++
++> **L1-DOLGU.** Zemin belirteci taşıyan hiçbir öğe aynı anda `border-left` taşıyamaz.
++> **ÇİZGİ-KONTRAST.** Build CSS belirteçlerinden `--rule-2`'nin iki temada da zemine
++> karşı oranını hesaplar; <3:1 ise uyarı verilir.
++> **TİP-BELİRTECİ.** `font-size:` yalnızca `var(--fs-*)` alabilir.
++> Üçü de **(A)** özetinde bir satır, ihlalde **Rev 30** kanalına uyarı.
++
++### Uygulama listesi — Revizyon 29
++
++| # | Dosya | Değişiklik | Kabul (ekran görüntüsü) |
++|---|---|---|---|
++| R29-P0-1 | `app.css` | Özet kutusunun kenarı kalkar | **(S)** 375 ve 1440: YÖNETİCİ ÖZETİ kutusu zeminli, solda koyu yeşil çizgi yok |
++| R29-P1-1 | `app.css` | `--rule-2` ≥3:1 | **(S)** 1440: bölüm başlıklarının üstündeki çizgi açık ve koyu temada seçilebilir. **(A)** ÇİZGİ-KONTRAST satırında iki oran ≥3 |
++| R29-P1-2 | `app.js`, `app.css` | F-03/F-14 | **(S)** depolama temiz, ilk ziyaret, 375px: brifingin sonunda bildirim kartı; kart açıkken footer zili görünür |
++| R29-P2-1 | `build.py` | F-07 | **(S)** masthead'de "· brifing" |
++| R29-P2-2 | `app.css` | F-13 | Görsel değişiklik yok; **(A)** L1-DOLGU ve TİP-BELİRTECİ satırları yeşil |
++| R29-P3-1 | `app.css` | Yazı belirteçleri | **(A)** TİP-BELİRTECİ: 0 ihlal |
++| R29-P3-2 | `app.css` | F-11 | **(S)** 1440: brifing ve /oyuncular.html'de içerik sol kenarı aynı x noktasında |
++
+ ---
+ 
++## Revizyon 30 — operatör uyarı kanalı
++
++**Hedef.** Uyarı veren her build kuralı, uyarısını operatörün telefonuna push olarak
++iletsin. Tek bir okuyucu bile bu uyarıları görmesin.
++**Dosyalar.** `worker/worker.js` (yeni `/alert` uç noktası, operatör aboneliği), `sw.js`
++(uyarı bildirimini gösterme), `scripts/uyari.py` (yeni, ortak yardımcı), `build.py`,
++`scripts/collect_news.py`, `scripts/translate_news.py`, `scripts/check_reports.py`,
++`.github/workflows/{build,collect-news,pull-drive}.yml`.
++**Build kuralı.** OPERATÖR-YALNIZ.
++
++### R30.0 — Tanı: bugün tek bir push var, o da okuyuculara gidiyor
++
++`worker.js`'in `/notify`'ı KV'deki her `sub:` aboneliğine içeriksiz bir push gönderiyor.
++Servis çalışanı (`sw.js:26`) sitenin rapor listesini okuyup "yeni rapor" duyuruyor. Bu
++kanal MKE yöneticilerine gidiyor. Build uyarısını oraya göndermek, PRODUCT.md'nin çekirdek
++kuralını en yüksek sesle çiğnemek olurdu: üreticinin iç durumu okuyucunun telefonunda
++görünürdü.
++
++PRODUCT.md "operatöre doğrudan" diyor ve "eşik alarmı henüz kurulmadı" diye yazıyor. Bu
++revizyon o alarmın da kanalı.
++
++### R30.1 — Karar
++
++- **Ayrı abonelik anahtarı.** Operatörün cihazı `op:` önekiyle kaydedilir. Kayıt
++  `/subscribe?rol=operator` üzerinden, `NOTIFY_SECRET`'tan ayrı bir `OPERATOR_SECRET` ile
++  yapılır. Okuyucu kaydı `sub:` önekinde kalır.
++- **Yeni uç nokta `/alert`.** Yalnızca `op:` anahtarlarına gönderir. `/notify`
++  değişmez.
++- **İçerik şifreli payload'la gider** (Web Push, RFC 8291). Okuyucu push'ları içeriksiz
++  kalır. Uyarı metni sitenin herkese açık bir dosyasına **yazılmaz**, çünkü site herkese
++  açık.
++- **Bir çalıştırma, bir push.** Her iş (build, collect, pull-drive) uyarılarını
++  `uyari.py` ile toplar ve sonunda tek bir push gönderir: *"DEFINTEL · 23 Eyl · 3 uyarı:
++  KUR, H1-TEKRAR, TEKRAR-MANŞET"*. Bildirime dokunulunca o çalıştırmanın Actions özet
++  sayfası açılır.
++- **Aynı gün aynı uyarı bir kez gider.** Tekrarı KV'de gün anahtarıyla bastırılır.
++- **Kural adları sabit.** Push'ta kural adı geçer (KAPSAM-SAYI, KUR, …), böylece plan ile
++  uyarı aynı dili konuşur.
++
++**Bu kanala uyarı gönderen kurallar:** KAPSAM-SAYI, DÖRT-DURUM, ETİKET-BAŞLIK, KUR,
++H1-TEKRAR, İLK-EKRAN, SİLME-YOK, İPUCU-YOK, ÇEVİRİ-DEDEKTÖRÜ, İPLİK-DURUM, SLUG,
++KANIT-BOŞLUĞU, L1-DOLGU, ÇİZGİ-KONTRAST, TİP-BELİRTECİ, GEÇ-GELEN, TEKRAR-MANŞET,
++NOKTALI-İ. Bloklayıcı iki kural (DÖRT-DURUM, SİLME-YOK) da buraya gönderir, çünkü kırmızı
++bir çalıştırma da kimse bakmazsa görünmez.
++
++### Build kuralı — OPERATÖR-YALNIZ
++
++> `/alert` yalnızca `op:` önekli anahtarlara gönderir. `worker.js`'in testi bir `sub:` ve
++> bir `op:` aboneliğiyle koşar; `sub:` bir push alırsa test kırmızıya döner. Ayrıca her
++> `/alert` çağrısının yanıtı gönderilen `op:` sayısını döndürür. Sayı 0 ise (operatör
++> kaydı düşmüş) iş **(A)** özetinde kırmızı bir satır basar. Bu kanalın kendi arızasını
++> bildirebileceği tek yer burası.
++
++### Uygulama listesi — Revizyon 30
++
++| # | Dosya | Değişiklik | Kabul (ekran görüntüsü) |
++|---|---|---|---|
++| R30-P0-1 | `worker.js` | `op:` kaydı, `/alert`, şifreli payload | **(P)** operatör telefonunda "DEFINTEL · test uyarısı". Aynı dakikada okuyucu olarak kayıtlı ikinci telefonun bildirim ekranı boş |
++| R30-P0-2 | `sw.js` | Payload'lı push'u göster, dokununca Actions sayfasını aç | **(P)** bildirim metninde kural adları; dokunulunca **(A)** özet sayfası açılıyor |
++| R30-P0-3 | `uyari.py` + üç iş akışı | Toplama, çalıştırma başına tek push, aynı gün tekrar bastırma | Aynı uyarıyı üreten iki derlemeden sonra telefonda **(P)** tek bildirim |
++| R30-P1-1 | `worker.js` testi | OPERATÖR-YALNIZ | **(A)** "OPERATÖR-YALNIZ: sub 0 push · op 1 push" satırı yeşil |
++
++**Yapılmayacak:**
++- Uyarıyı sitede herkese açık bir dosyaya yazmak.
++- Okuyucu kanalını paylaşmak.
++- Bir durum sayfası açmak (PRODUCT.md: planlanmıyor).
++- Her uyarıya ayrı push göndermek (alarm yorgunluğu, Rev 9: her zaman ateşleyen kanal
++  sıfır bilgi taşır).
++
++---
++
++## Revizyon 31 — brifingden sonra gelen haber
++
++**Hedef.** Brifingin kesim saatinden sonra gelen hiçbir haber iki gün arasında
++kaybolmasın, ve medya takibi hangi kalemin brifingden sonra geldiğini söylesin.
++**Dosyalar.** `scripts/collect_news.py` (`ilk_goruldu`, aday dosyasının ilk bölümü),
++`build.py` (medya satırı jetonu), `assets/app.css`.
++**Build kuralı.** GEÇ-GELEN.
++
++### R31.0 — Tanı: Aselsan–Roketsan sözleşmesi neden brifinge ulaşmadı
++
++Bu bir yargı hatası değil, bir zamanlama boşluğu. Kanıt git geçmişinde:
++
++| saat (TR) | olay | AA kalemi |
++|---|---|---|
++| 05:19 | `collect-news` (Apps Script tetiği): 539 başlık, **AA akışı okundu, 0 AA kalemi** | yok |
++| 06:00 | Ajan `…-aday.md`'yi okur | yok |
++| 06:16 | Brifing yayımlanır | — |
++| 11:04 | GitHub'ın beş saat gecikmeli `40 2` cron'u, yedek: 536 başlık, **aynı dosyaların üzerine yazar** | **var** (aday.md satır 112) |
++
++Anadolu Ajansı'nın akışı 05:19'da sorunsuz okundu; haber henüz yayımlanmamıştı. 11:04'teki
++yedek çalıştırma günün dosyalarını sessizce değiştirdi. Medya takibi artık brifingin hiç
++görmediği bir haberi aynı günün "ham yüzü" olarak gösteriyor. Rev 0'ın sözü ("bir gün, iki
++yüzü olan tek dosya") bu satır için tutmuyor. Brifingin Oyuncular rayındaki "Roketsan" da
++bu geç kalemden geliyor.
++
++Ertesi gün, 24 Eylül'ün aday listesi 48 saatlik pencere sayesinde kalemi yeniden
++taşıyacak. Ama onu dünden kalan *yeni bir şey* olarak işaretleyen hiçbir şey yok. Ayrıca
++260'lık sınır onu Genel ve İhale arasında kesebilir.
++
++**Ayrı tutulan soru:** Ajan kalemi görseydi brifinge alır mıydı? Bu, DECISIONS › Açık
++maddesindeki Türk emsal çerçeve sorusu. MKE'ye gider ve bu revizyonun parçası değil.
++Bu revizyon yalnızca *görme* koşulunu düzeltiyor.
++
++### R31.1 — Karar
++
++- Her kalem `ilk_goruldu` zaman damgasını taşır. Aynı gün yeniden toplandığında var olan
++  kalemin damgası **değişmez**. Yeni kalem kendi damgasıyla eklenir, var olanların üzerine
++  yazılmaz.
++- Medya takibinde `ilk_goruldu` brifingin yayın saatinden sonra olan satır **"BRİFİNGDEN
++  SONRA"** jetonunu taşır. Jeton `BRİFİNGDE` ile aynı yuvada, mono ve `--muted` renkte
++  durur. İkisi birbirini dışlar. Rev 0'ın "tek renkli meta jetonu BRİFİNGDE" kuralı
++  korunuyor: yeni jeton renksiz.
++- Ertesi günün `…-aday.md`'si **"## Dünkü brifingden sonra gelenler (N)"** bölümüyle
++  başlar. `CANDIDATE_ORDER`'da bu bölüm birinci sıradadır, böylece 260 sınırı onu kesemez.
++
++### Build kuralı — GEÇ-GELEN
++
++> Bir kalemin `ilk_goruldu` değeri yeniden toplamada değişirse **Rev 30** kanalına uyarı
++> gider. Önceki günün brifinginden sonra ilk görülen her kalem bugünkü aday dosyasının
++> ilk bölümünde bulunmak zorunda. Eksikse uyarı gider. Çalıştırma, jetonlu satır sayısını
++> **(A)** özetine yazar.
++
++### Uygulama listesi — Revizyon 31
++
++| # | Dosya | Değişiklik | Kabul (ekran görüntüsü) |
++|---|---|---|---|
++| R31-P0-1 | `collect_news.py` | `ilk_goruldu`; yeniden toplamada var olan kalemin üzerine yazılmaz | **(A)** ikinci çalıştırmanın özetinde "yeni: n · değişmedi: m · damga değişti: 0" |
++| R31-P0-2 | `build.py`, `app.css` | "BRİFİNGDEN SONRA" jetonu | **(S)** `/haberler/2026-09-23.html?oyuncu=roketsan`, 375px: AA satırında "BRİFİNGDEN SONRA" |
++| R31-P0-3 | `collect_news.py` | Aday dosyasının ilk bölümü | **(D)** `/data/news/2026-09-24-aday.md` tarayıcıda: ilk bölüm "Dünkü brifingden sonra gelenler" ve AA satırını içeriyor |
++| R31-P1-1 | `collect_news.py` | GEÇ-GELEN | Damga bilerek değiştirildiğinde **(P)** "GEÇ-GELEN" uyarısı |
++
++**Yapılmayacak:**
++- Yedek cron'u kaldırmak (memory'deki gerekçe: GitHub cron'u beş saat geç çalışıyor;
++  yedek tek güvence).
++- Geç kalemi gizlemek (Rev 0: hiçbir kalem silinmez).
++- Brifingi geç kalem için yeniden yazdırmak (brifing günde bir kez, insan incelemesi
++  olmadan yayımlanıyor; ikinci bir sürüm, okuyucunun okuduğunun değiştiği anlamına gelir).
++
++---
++
++## Revizyon 32 — tekrar eden manşet
++
++**Hedef.** Önceki bir raporda verilmiş bir gelişme yeni diye sunulmasın; tekrar
++geliyorsa neyin yeni olduğunu söyleyerek gelsin.
++**Dosyalar.** `build.py` (karşılaştırma, özet maddesi jetonu), rapor promptu, `assets/app.css`.
++**Build kuralı.** TEKRAR-MANŞET.
++
++### R32.0 — Tanı
++
++19 Eylül'ün H1'i: *"Letonya imzalı Archer niyet mektubunu bozup … Çek Morana'ya geçti"*.
++23 Eylül'ün H1'i ve özetin 1. maddesi: *"Letonya … Archer'ı bırakıp Çek Morana'yı
++seçti"*. Dört gün sonra aynı karar yeniden günün manşeti oldu. Yeni olan tek şey
++bakanlığın 22 Eylül tarihli resmî açıklamasıydı, ama bu cümlenin hiçbir yerinde yazmıyor.
++Dört dakikası olan okuyucu aynı haberi iki kez yeni diye okuyor. Bu, Rev 16'nın "tek
++anlatı evi" ilkesinin günler arasına uzanan hâli.
++
++### R32.1 — Karar
++
++- **Prompt:** *"Önceki 7 raporda anlatılmış bir gelişme manşete ya da özete ancak neyin
++  yeni olduğunu ilk cümlesinde söyleyerek girer ('resmîleşti', 'sözleşmeye döndü',
++  'bedel açıklandı')."*
++- **Build, geriye doğru bağlantıyı kendisi türetir.** Önceki 7 raporun herhangi bir
++  gelişmesiyle eşleşen bir özet maddesi, sonunda mono bir jeton taşır: **"ilk: 19 Eyl"**.
++  Jeton o raporun ilgili gelişmesine bağlanır. Rev 6'nın kuralına uyuyor: atıf tek yönlü,
++  eskiye doğru, ve Rev 11'e göre bir kimlikten ibaret değil, tarih taşıyor. Rev 10'a da
++  uyuyor: ajan değil build türetiyor.
++- **Eşleşme:** paylaşılan `[K#]` URL'si, **ya da** en az iki ortak özel ad (büyük harfle
++  başlayan, sözlükte olmayan kelimeler) artı sözcük örtüşmesi ≥0,4.
++
++### Build kuralı — TEKRAR-MANŞET
++
++> H1 ya da bir özet maddesi önceki 7 günle eşleşirse "ilk: {gün}" jetonu basılır. Eşleşen
++> H1 için **Rev 30** kanalına uyarı gider: *"TEKRAR-MANŞET: 23 Eyl H1 ↔ 19 Eyl"*. Jeton
++> sayfaya basılır, çünkü okuyucu için anlamı olan bir olgu. Uyarı operatöre gider, çünkü
++> promptun tutmadığını gösteriyor.
++
++### Uygulama listesi — Revizyon 32
++
++| # | Dosya | Değişiklik | Kabul (ekran görüntüsü) |
++|---|---|---|---|
++| R32-P0-1 | `build.py`, `app.css` | "ilk:" jetonu | **(S)** 23 Eylül yeniden derlendi, 375px: özetin 1. maddesinin sonunda "ilk: 19 Eyl"; dokunulunca 19 Eylül raporunun Letonya gelişmesi açılıyor |
++| R32-P0-2 | `build.py` | TEKRAR-MANŞET uyarısı | **(P)** "TEKRAR-MANŞET: 23 Eyl H1 ↔ 19 Eyl" |
++| R32-P1-1 | rapor promptu | Yenilik cümlesi | Sonraki 5 raporda jetonlu her maddenin ilk cümlesinde bir yenilik fiili var (**(S)** özet görüntüsünden okunur) |
++
++**Yapılmayacak:**
++- Tekrar eden maddeyi build'in silmesi. Madde ajanın yargısı; build yalnızca bağlamı
++  ekler.
++- Eşiği URL eşleşmesine indirgemek. 19 ve 23 Eylül farklı kaynaklara atıf veriyor.
++
++---
++
++## Revizyon 33 — yabancı adlarda noktalı İ
++
++**Hedef.** Büyük harfe çevrilen yabancı adlar kendi dilinin harfleriyle yazılsın.
++**Dosyalar.** `build.py` (kaynak adı yardımcısı, medya satırı, Kaynaklar sayfası),
++`assets/app.css` (değişiklik yok, doğrulama için).
++**Build kuralı.** NOKTALI-İ.
++
++### R33.0 — Tanı
++
++Sayfa `<html lang="tr">`. `.clip-meta` (`app.css:1153`) `text-transform: uppercase`
++taşıyor. Tarayıcı Türkçe büyük harf kuralını uyguluyor ve `i` → `İ` oluyor. 23 Eylül
++medya takibinde: **"UNMANNED AİRSPACE"**, **"DEFENSE DAİLY"**. Yabancı her kaynak adında
++`i` varsa aynı şey oluyor. Türkçe etiketler ("MEDYA TAKİBİ") doğru, çünkü onlarda
++istenen şey bu.
++
++### R33.1 — Karar
++
++- Kaynak adları tek bir yardımcıdan (`src_name()`) geçer. Yardımcı, kaynağın ülkesi TR
++  değilse adı `<span lang="en">` ile sarar. Tarayıcı o zaman İngilizce büyük harf kuralını
++  uygular.
++- Aynısı büyük harfe çevrilen bir alanda duran her yabancı özel ad için geçerli (ör.
++  kaynakça jetonları, oyuncu adları).
++- CSS'e dokunulmaz. Büyük harf dönüşümü doğru; yanlış olan dil bilgisi.
++
++### Build kuralı — NOKTALI-İ
++
++> Derlenmiş HTML'de `text-transform: uppercase` taşıyan sınıfların (liste `app.css`'ten
++> türetilir) içinde, `lang` özniteliği olmadan duran ve ülkesi TR olmayan bir kaynağın adı
++> bulunursa **Rev 30** kanalına uyarı gider. Build, sayfanın ilk 10 örneğini **(A)**
++> özetine yazar.
++
++### Uygulama listesi — Revizyon 33
++
++| # | Dosya | Değişiklik | Kabul (ekran görüntüsü) |
++|---|---|---|---|
++| R33-P0-1 | `build.py` `src_name()` | `lang="en"` sarmalı | **(S)** medya takibi, 1440px, Öne çıkanlar: "UNMANNED AIRSPACE", "DEFENSE DAILY" noktasız I ile; "ANADOLU AJANSI" değişmemiş |
++| R33-P0-2 | `build.py` | Kaynakça ve diğer büyük harfli alanlar | **(S)** /haberler/…-kaynaklar.html: yabancı adlarda noktalı İ yok |
++| R33-P1-1 | `build.py` | NOKTALI-İ | Sarmal bilerek kaldırıldığında **(P)** "NOKTALI-İ" uyarısı |
++
++---
++
+ ## Açık — müşterinin kararı gerekiyor
+ 
+-1. **PRODUCT.md ile Rev 0 çelişiyor.** PRODUCT.md'nin kanunu: *sınır çizgi alır, durum
+-   renk, içerik büyüklük, **asla ikisi birden**.* Rev 0 ise L1'i "dolgu + kenar" olarak
+-   tanımlıyor ve yönetici özeti tam olarak böyle çizili. İkisi de "yerleşik". Önerim:
+-   kanunun metni "**tek bir iş için** asla ikisi birden" diye düzeltilsin. L1 kutusu iki
+-   iş yapıyor: sınır ve zemin (seviye). Yeni bir inceleyicinin bunu yeniden işaretlemesini
+-   önlemenin tek yolu metni değiştirmek.
+-2. **Filtre notlu kaynakların ilgisiz kalemleri çevrilsin mi?** (R25.1) Bu bir bütçe sorusu,
+-   tasarım sorusu değil.
+-3. **Aselsan–Roketsan 1,2 milyar €'luk sözleşmesi brifingde yok** (reconcile C4).
+-   DECISIONS'taki Türk emsal sorusu için canlı bir örnek; o soruyla birlikte MKE'ye
+-   götürülmeli. Bu plan onu kendi başına çözmüyor.
++1. **Tutulan savunma dışı başlıklar çevrilsin mi?** (R25.1) Nakit maliyeti ~0 $; bedeli
++   abonelik kotasından günde 4–6 ek çağrı. Çevrilmezlerse özgün dilinde aranabilir kalırlar.
++2. **Aselsan–Roketsan: çerçeve sorusu.** Ajan kalemi görseydi brifinge alır mıydı? Bu,
++   DECISIONS'taki Türk emsal çerçeve sorusu ve MKE'ye gider. Rev 31 yalnızca ajanın kalemi
++   görmesini güvenceye alıyor.
