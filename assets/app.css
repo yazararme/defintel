@@ -1039,6 +1039,25 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
   white-space: nowrap;
 }
 
+/* Rev 32: "ilk: 19 Eyl" — özet maddesi önceki bir raporun gelişmesini yineliyor;
+   jeton o gelişmeye bağlanır (atıf eskiye doğru, tarih taşır). Yaş jetonuyla aynı
+   ses: mono, soluk, renksiz — bir ölçü, durum değil. Satır içinde kalır; dikey
+   dolgu satır kutusunu büyütmeden dokunma alanını 44px'e çıkarır. */
+.prose a.ilk {
+  margin-left: 6px;
+  padding-block: 16px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  /* çizgi border değil: dikey dolgu border'ı metnin 16px altına iterdi */
+  text-decoration: underline 1px var(--rule-2);
+  text-underline-offset: 3px;
+  white-space: nowrap;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+.prose a.ilk:hover { color: var(--brand); text-decoration-color: var(--brand); }
 
 /* Kaynakçadaki okuma yolu. Kaynakça Rev 1 hiyerarşisinde Seviye 3: 16 satıra
    16 çerçeveli çip Seviye 2 mobilyası olurdu. Sessiz bağlantı, mono kayıt —

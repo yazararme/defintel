@@ -28,6 +28,13 @@ a browser pass over every report at 375×812 and 1440×900, light and dark: at 3
 after the summary list and before h2#portfoy, the chip strip is one row, each card's third field
 shows "İZLENECEK" above it, no horizontal overflow; at 1440 the rail is in the left column,
 level with the top of the article, and no card label shows.
+Rev 32: TEKRAR-MANŞET — the build's per-report "ilk:" tokens and its TEKRAR-MANŞET line (on the
+23 Sep build: summary item 1 "ilk: 19 Eyl" → 19 Sep G1, alert "TEKRAR-MANŞET: 23 Eyl H1 ↔ 19 Eyl"),
+rule controls on synthetic input (shared URL → match; two shared proper nouns + overlap ≥0,4 →
+match; one proper noun, dictionary words only, or another development → no match), and a 375×812
+touch pass on /reports/2026-09-23.html and /: the token ends summary item 1, is mono and --muted,
+one piece, its tap area is ≥44px high, the page does not scroll sideways, and tapping it lands on
+/reports/2026-09-19.html#g1 with the Latvia heading in view.
 Later revisions extend CHECKS / PAGES. Exit 1 on any failure.
 """
 import os
@@ -143,6 +150,61 @@ with sync_playwright() as p:
     b.close()
 ok = metin == baslik and hash_ == "#" + gid and gorunur
 print(f"1440px: '→ bugün: {metin}' → {hash_} başlık '{baslik}' (görünür {gorunur})")
+sys.exit(0 if ok else 1)
+"""
+
+
+# Rev 32 R32-P0-1 (S): 375px dokunmatik — özetin 1. maddesinin sonunda "ilk: 19 Eyl"; dokununca
+# 19 Eylül raporunun Letonya gelişmesi (h3#g1) ekranda. argv: url, beklenen metin, [görüntü öneki].
+ILK_JS = r"""
+import sys
+from playwright.sync_api import sync_playwright
+url, beklenen = sys.argv[1], sys.argv[2]
+shot = sys.argv[3] if len(sys.argv) > 3 else ""
+OLC = '''() => {
+  const li = document.querySelector("h2#ozet + ol > li");
+  const a = li && li.querySelector("a.ilk");
+  if (!a) return null;
+  const cs = getComputedStyle(a), rect = a.getBoundingClientRect();
+  const son = li.lastElementChild === a && !(a.nextSibling && a.nextSibling.textContent.trim());
+  const probe = document.createElement("span"); probe.style.color = "var(--muted)";
+  li.appendChild(probe); const muted = getComputedStyle(probe).color; probe.remove();
+  return {text: a.textContent.trim(), href: a.getAttribute("href"), son: son,
+          mono: /Plex Mono|monospace/.test(cs.fontFamily), renk: cs.color === muted,
+          h: Math.round(rect.height), rects: a.getClientRects().length,
+          tasma: document.documentElement.scrollWidth - innerWidth};
+}'''
+VARIS = '''() => {
+  const h = document.getElementById(location.hash.slice(1));
+  if (!h) return null;
+  const c = h.cloneNode(true); c.querySelectorAll("button").forEach(x => x.remove());
+  const t = h.getBoundingClientRect();
+  return {yol: location.pathname, hash: location.hash, baslik: c.innerText.trim(),
+          gorunur: t.top >= 0 && t.bottom <= innerHeight};
+}'''
+with sync_playwright() as p:
+    try: b = p.chromium.launch()
+    except Exception: b = p.chromium.launch(channel="chrome")
+    ctx = b.new_context(service_workers="block", viewport={"width": 375, "height": 812},
+                        device_scale_factor=2, is_mobile=True, has_touch=True)
+    pg = ctx.new_page()
+    pg.goto(url); pg.wait_for_timeout(400)
+    r = pg.evaluate(OLC)
+    if r is None:
+        print("375px: özet 1'de a.ilk yok"); b.close(); sys.exit(1)
+    jeton = pg.locator("h2#ozet + ol > li a.ilk").first
+    jeton.scroll_into_view_if_needed()
+    if shot: pg.screenshot(path=shot + "-once.png")
+    jeton.tap(); pg.wait_for_timeout(900)
+    varis = pg.evaluate(VARIS)
+    if shot: pg.screenshot(path=shot + "-sonra.png")
+    b.close()
+ok = bool(r["text"] == beklenen and r["son"] and r["mono"] and r["renk"] and r["h"] >= 44
+          and r["rects"] == 1 and r["tasma"] <= 0 and varis
+          and varis["yol"] + varis["hash"] == r["href"] and varis["gorunur"])
+print(f"375px: özet 1 sonunda “{r['text']}” (son öğe {r['son']}, mono {r['mono']}, --muted {r['renk']}, "
+      f"dokunma yüksekliği {r['h']}px, tek parça {r['rects'] == 1}, yatay taşma {r['tasma']}px) → dokununca "
+      + (f"{varis['yol']}{varis['hash']} “{varis['baslik']}” (ekranda {varis['gorunur']})" if varis else "hedef yok"))
 sys.exit(0 if ok else 1)
 """
 
@@ -446,6 +508,54 @@ def r31_checks(build_stdout, py, fails):
         fails.append("(D) aday ilk bölüm")
 
 
+def r32_checks(build_stdout, py, fails):
+    """Rev 32: TEKRAR-MANŞET — jeton satırları, uyarı, kural kontrolleri, 375px dokunma."""
+    sys.path.insert(0, str(ROOT))
+    import build as B
+    iso = sorted((ROOT / "source").glob("????-??-??.md"))[-1].stem
+    satirlar = [l.strip() for l in build_stdout.splitlines()]
+    jeton = [l for l in satirlar if re.match(r"· reports/\S+\.html · özet \d+ ilk:", l)]
+    ozet = [l for l in satirlar if l.startswith(f"· TEKRAR-MANŞET {iso}:")]
+    uy = [l for l in satirlar if l.startswith("! TEKRAR-MANŞET ·")]
+    if iso == "2026-09-23":   # R32 kabulü: özet 1 → 19 Eylül G1, H1 uyarısı
+        ok = (any(l.startswith("· reports/2026-09-23.html · özet 1 ilk: 19 Eyl G1") for l in jeton)
+              and any(l.endswith("TEKRAR-MANŞET: 23 Eyl H1 ↔ 19 Eyl") for l in uy))
+    else:
+        ok = bool(ozet)
+    print(f"{'ok  ' if ok else 'FAIL'} TEKRAR-MANŞET · {ozet[0].lstrip('· ') if ozet else 'satır yok'}")
+    for l in jeton + uy:
+        print(f"       {l[:170]}")
+    if not ok:
+        fails.append("TEKRAR-MANŞET build")
+    # Kural kontrolleri — sözlük: derlemde küçük harfle geçen kelimeler.
+    sozluk = {"savunma", "bakanlık", "karar", "seçti", "obüsünü"}
+    once = {"metinler": ["Letonya, Archer yerine Çek Morana obüsünü seçti."], "url": {"https://a.b/1"}, "etiket": "x"}
+    url = B._eslesme("Pentagon 17 firmayı seçti.", {"https://a.b/1"}, once, sozluk)
+    ad = B._eslesme("Letonya Archer'ı bırakıp Çek Morana obüsünü seçti.", set(), once, sozluk)
+    tek_ad = B._eslesme("Letonya obüsünü seçti.", set(), once, sozluk)
+    sozluk_ad = B._eslesme("Savunma Bakanlık Karar obüsünü seçti.", set(),
+                           {"metinler": ["Savunma Bakanlık Karar obüsünü seçti."], "url": set(), "etiket": "x"},
+                           sozluk)
+    baska = B._eslesme("Leonardo ve Alkeon Danimarka'da top üretecek.", set(), once, sozluk)
+    ok = bool(url and url[0] == "url" and ad and ad[0] == "ad" and not tek_ad and not sozluk_ad and not baska)
+    print(f"{'ok  ' if ok else 'FAIL'} TEKRAR-MANŞET kural kontrolleri · ortak URL → {bool(url)} · "
+          f"2+ özel ad + örtüşme → {bool(ad)} · tek özel ad → {bool(tek_ad)} · yalnız sözlük kelimesi → "
+          f"{bool(sozluk_ad)} · başka gelişme → {bool(baska)}")
+    if not ok:
+        fails.append("TEKRAR-MANŞET kural kontrolleri")
+    if iso != "2026-09-23":
+        return
+    if not py:
+        print("FAIL TEKRAR-MANŞET 375px · Playwright'lı python yok")
+        fails.append("TEKRAR-MANŞET 375px")
+        return
+    for sayfa in (f"/reports/{iso}.html", "/"):
+        r = subprocess.run([py, "-c", ILK_JS, BASE + sayfa, "ilk: 19 Eyl"], cwd=ROOT, capture_output=True, text=True)
+        print(f"{'ok  ' if r.returncode == 0 else 'FAIL'} TEKRAR-MANŞET 375px {sayfa} · {r.stdout.strip() or r.stderr[-300:]}")
+        if r.returncode:
+            fails.append(f"TEKRAR-MANŞET 375px {sayfa}")
+
+
 def r23_checks(build_stdout, fails):
     """Rev 23: kuralların uyarı satırları, etiket = başlık, kural kontrolleri."""
     sys.path.insert(0, str(ROOT))
@@ -552,6 +662,9 @@ def main():
 
     # Rev 33: NOKTALI-İ
     r33_checks(build.stdout, py, fails)
+
+    # Rev 32: TEKRAR-MANŞET
+    r32_checks(build.stdout, py, fails)
 
     # Rev 24: İLK-EKRAN
     r24_checks(py, fails)

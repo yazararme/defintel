@@ -1731,12 +1731,15 @@ def main():
     published = stamp_publish(publish_times(), [iso for iso, _m, _b in sources])
     # Gün -> {kalem anahtarı: iplik slug'ı}: satırdaki ad kendi dosyasına bağlanır.
     threads, day_slugs = build_threads(sources)
+    # Rev 32: özet maddesi / H1 önceki 7 raporun bir gelişmesiyle eşleşiyor mu.
+    tekrar = tekrar_eslesmeleri(sources)
 
     reports = []
     for i, (iso, meta, body) in enumerate(sources):
         developments = meta.get("developments") or []
         body_html = render_body(body, developments, bool(meta.get("alarm")), iso,
                                 day_slugs.get(iso))
+        body_html = ilk_jetonlari(body_html, tekrar[iso]["ozet"])   # Rev 32: "ilk: GG Aaa"
         page = build_report(
             meta, body_html, iso,
             sources[i - 1][0] if i else None,
@@ -1770,7 +1773,9 @@ def main():
                 "path": f"reports/{iso}.html",
             }
         )
-        print(f"  · reports/{iso}.html")
+        print(f"  · reports/{iso}.html"
+              + "".join(f" · özet {n} ilk: {tr_daybar(t['gun']).split(' · ')[0]} {t['gid'].upper()}"
+                        for n, t in sorted(tekrar[iso]["ozet"].items())))
 
     reports.sort(key=lambda r: r["date"], reverse=True)
 
@@ -1838,6 +1843,9 @@ def main():
                                 day_slugs.get(iso))
         # Rev 23: ETİKET-BAŞLIK · KUR · H1-TEKRAR — yalnız günün raporu, uyarı verir, durdurmaz.
         r23_kurallari(iso, meta, body, body_html, news)
+        # Rev 32: TEKRAR-MANŞET — H1 eşleşirse uyarı; özet maddelerine "ilk:" jetonu.
+        tekrar_manset_kurali(iso, tekrar[iso])
+        body_html = ilk_jetonlari(body_html, tekrar[iso]["ozet"])
         (ROOT / "index.html").write_text(
             build_report(meta, body_html, iso,
                          sources[-2][0] if len(sources) > 1 else None, None,
@@ -2830,6 +2838,206 @@ def noktali_i_kurali():
         uyari.ekle("NOKTALI-İ", f"NOKTALI-İ: büyük harfli alanda lang'sız yabancı ad {len(ornekler)} örnek, "
                                 f"{sayfa_n} sayfada{boz} — ilk: {ilk}")
     return ornekler
+
+
+# ── Rev 32 — tekrar eden manşet (TEKRAR-MANŞET) ──────────────────────────────
+# Önceki bir raporda verilmiş gelişme yeni diye sunulmasın: özet maddesi (ya da H1)
+# önceki 7 raporun bir gelişmesiyle eşleşirse maddenin sonuna "ilk: 19 Eyl" jetonu
+# basılır ve o raporun gelişmesine bağlanır (atıf tek yönlü, eskiye doğru — Rev 6;
+# kimlik değil tarih taşır — Rev 11; ajan değil build türetir — Rev 10). Madde
+# silinmez: madde ajanın yargısı, build yalnız bağlamı ekler.
+#
+# Eşleşme: paylaşılan [K#] URL'si, ya da en az iki ortak özel ad (büyük harfle
+# başlayan, sözlükte olmayan kelime) artı sözcük örtüşmesi ≥ 0,4 (ortak / kısa olanın
+# sözcük sayısı — H1-TEKRAR'ın ölçüsü). "Sözlük" derlemin kendisi: raporlarda bir
+# yerde küçük harfle geçen kelime özel ad değildir ("Savunma" cümle başında büyük
+# yazılır ama "savunma" da geçer); ay ve gün adları Türkçede hep büyük yazıldığı için
+# ayrıca sözlüktedir.
+
+TEKRAR_PENCERE = 7          # önceki kaç rapor
+TEKRAR_ORTUSME = 0.4
+TEKRAR_OZEL_AD = 2
+_TEKRAR_SOZLUK_EK = {tr_fold(w) for w in TR_MONTHS + TR_DAYS}
+_BUYUK = "A-ZÇĞİÖŞÜ"
+_OZEL_AD_RE = re.compile(rf"(?<![\w-])[{_BUYUK}][\w-]*")
+
+
+def _ozet_maddeleri(body):
+    """[(gid|None, metin)] — YÖNETİCİ ÖZETİ maddeleri, sırasıyla."""
+    block = re.search(r"##\s*YÖNETİCİ ÖZETİ\s*\n(.*?)(?=\n##|\Z)", body, re.S)
+    out = []
+    if not block:
+        return out
+    for line in block.group(1).split("\n"):
+        m = re.match(r"\s*(?:\d+[.)]|[-*])\s+(.*)", line)
+        if not m:
+            continue
+        g = re.match(r"\s*\**(G\d+)\**\s*[—-]\s*(.*)", m.group(1))
+        out.append((g.group(1).lower(), g.group(2).strip()) if g else (None, m.group(1).strip()))
+    return out
+
+
+def _kaynak_urlleri(body):
+    """{K#: normalleştirilmiş URL} — KAYNAKLAR bölümünden."""
+    out = {}
+    for m in re.finditer(r"^\s*[-*]\s*\[(K\d+)\][^\n]*?(https?://\S+)", body, re.M):
+        out[m.group(1)] = norm_url(m.group(2).rstrip(").,;"))
+    return out
+
+
+def _ilk_cumle(text):
+    text = re.sub(r"\s*\[K\d+\]", "", text).strip()
+    m = re.match(r"(.+?[.!?])(?:\s+(?=[{0}0-9\"“])|$)".format(_BUYUK), text, re.S)
+    return (m.group(1) if m else text)[:400]
+
+
+def _ozel_adlar(text, sozluk):
+    """Büyük harfle başlayan, derlemde küçük harfle hiç geçmeyen kelimeler (katlanmış)."""
+    text = re.sub(r"\bG\d+\b|\[K\d+\]", " ", text)
+    out = set()
+    for w in _OZEL_AD_RE.findall(text):
+        w = re.split(r"['’]", w, maxsplit=1)[0].strip("-")
+        f = tr_fold(w)
+        if len(f) < 2 or f in sozluk or f in _TEKRAR_SOZLUK_EK:
+            continue
+        out.add(f)
+    return out
+
+
+def tekrar_sozlugu(sources):
+    """Derlemde küçük harfle başlayarak geçen her kelime (katlanmış) — "sözlük"."""
+    sozluk = set()
+    for _iso, meta, body in sources:
+        metin = body + " " + str(meta.get("summary", "")) + " " + str(meta.get("title", ""))
+        for w in re.findall(r"(?<![\w-])[a-zçğıöşü][\wçğıöşü]*", metin):
+            sozluk.add(tr_fold(w))
+    return sozluk
+
+
+def rapor_gelismeleri(body):
+    """{gid: {"metinler": [...], "url": {...}, "etiket": str}} — bir raporun gelişmeleri.
+
+    Karşılaştırma metni gelişmenin özet maddesi (varsa) ve etiket + gövdenin ilk
+    cümlesi; URL kümesi gelişme bloğunun atıf verdiği [K#]'lerin adresleri.
+    """
+    urller = _kaynak_urlleri(body)
+    ozet = {g: t for g, t in _ozet_maddeleri(body) if g}
+    out = {}
+    for _n, gid, etiket, govde in development_blocks(body):
+        d = out.setdefault(gid, {"metinler": [], "url": set(), "etiket": etiket.strip()})
+        d["metinler"].append(f"{etiket.strip()} — {_ilk_cumle(govde)}")
+        d["url"] |= {urller[k] for k in re.findall(r"\[(K\d+)\]", govde) if k in urller}
+    for gid, t in ozet.items():
+        if gid in out:
+            out[gid]["metinler"].insert(0, t)
+    return out
+
+
+def _eslesme(metin, url, onceki, sozluk):
+    """(neden, örtüşme, ortak özel adlar) ya da None."""
+    if url and url & onceki["url"]:
+        return ("url", 1.0, [])
+    a = _sozcukler(metin)
+    oa = _ozel_adlar(metin, sozluk)
+    en_iyi = None
+    for t in onceki["metinler"]:
+        b = _sozcukler(t)
+        if not a or not b:
+            continue
+        ortak_ad = oa & _ozel_adlar(t, sozluk)
+        oran = len(a & b) / min(len(a), len(b))
+        if len(ortak_ad) >= TEKRAR_OZEL_AD and oran >= TEKRAR_ORTUSME:
+            if en_iyi is None or oran > en_iyi[1]:
+                en_iyi = ("ad", oran, sorted(ortak_ad))
+    return en_iyi
+
+
+def tekrar_eslesmeleri(sources):
+    """{iso: {"ozet": {sıra: bulgu}, "h1": bulgu|None}} — bulgu: önceki 7 rapordaki en
+    eski eşleşen gelişme ({"gun", "gid", "etiket", "neden", "oran", "adlar"})."""
+    sozluk = tekrar_sozlugu(sources)
+    gelismeler = [(iso, rapor_gelismeleri(body)) for iso, _m, body in sources]
+    out = {}
+    for i, (iso, meta, body) in enumerate(sources):
+        onceki = gelismeler[max(0, i - TEKRAR_PENCERE):i]      # eskiden yeniye
+        bugun = gelismeler[i][1]
+
+        def ara(metin, url):
+            for gun, devs in onceki:                              # en eski önce: "ilk"
+                for gid, d in sorted(devs.items(), key=lambda kv: int(kv[0][1:])):
+                    e = _eslesme(metin, url, d, sozluk)
+                    if e:
+                        return {"gun": gun, "gid": gid, "etiket": d["etiket"],
+                                "neden": e[0], "oran": e[1], "adlar": e[2]}
+            return None
+
+        ozet = {}
+        for n, (gid, metin) in enumerate(_ozet_maddeleri(body), 1):
+            url = bugun.get(gid, {}).get("url", set()) if gid else set()
+            b = ara(metin, url)
+            if b:
+                ozet[n] = dict(b, gid_bugun=gid, metin=metin)
+        h1 = guard_headline(meta.get("title"), iso)
+        out[iso] = {"ozet": ozet, "h1": ara(h1, set()) if h1 else None}
+    return out
+
+
+def ilk_jetonu(bulgu):
+    gun = bulgu["gun"]
+    return (f' <a class="ilk" href="{day_url("report", gun, "#" + bulgu["gid"])}"'
+            f' title="{html.escape(tr_date(gun))} raporu: {html.escape(bulgu["etiket"])}">'
+            f'ilk: {tr_daybar(gun).split(" · ")[0]}</a>')
+
+
+def ilk_jetonlari(body_html, bulgular):
+    """Özetin n. maddesinin sonuna (</li> önüne) "ilk: GG Aaa" jetonu."""
+    if not bulgular:
+        return body_html
+    sec = re.search(r'(<h2 id="ozet">.*?</h2>\s*<ol>)(.*?)(</ol>)', body_html, re.S)
+    if not sec:
+        return body_html
+    maddeler = re.split(r"(?=<li>)", sec.group(2))
+    n = 0
+    for i, parca in enumerate(maddeler):
+        if not parca.startswith("<li>"):
+            continue
+        n += 1
+        if n in bulgular:
+            j = parca.rfind("</li>")
+            if j >= 0:
+                maddeler[i] = parca[:j] + ilk_jetonu(bulgular[n]) + parca[j:]
+    return body_html[:sec.start(2)] + "".join(maddeler) + body_html[sec.end(2):]
+
+
+def tekrar_manset_kurali(iso, eslesme):
+    """TEKRAR-MANŞET: log satırı + (A); günün H1'i eşleşirse Rev 30 kanalına uyarı."""
+    import os
+    kisa = lambda g: tr_daybar(g).split(" · ")[0]
+    h1 = eslesme.get("h1")
+    ozet = eslesme.get("ozet", {})
+    satirlar = [f"özet {n} ↔ {kisa(b['gun'])} {b['gid'].upper()} “{b['etiket']}” ({b['neden']}"
+                + (f" {b['oran']:.2f}".replace(".", ",") + " · " + ", ".join(b["adlar"]) if b["neden"] == "ad" else "")
+                + ")" for n, b in sorted(ozet.items())]
+    print(f"  · TEKRAR-MANŞET {iso}: H1 {('↔ ' + kisa(h1['gun'])) if h1 else '—'}"
+          f" · jetonlu özet maddesi {len(ozet)}")
+    for s in satirlar:
+        print(f"      {s}")
+    summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary:
+        md = ["### TEKRAR-MANŞET — önceki 7 raporla eşleşen manşet ve özet (Rev 32)", "",
+              f"**{'🔴' if h1 else '🟢'} H1:** "
+              + (f"{kisa(iso)} H1 ↔ {kisa(h1['gun'])} ({h1['gid'].upper()} “{h1['etiket']}”)" if h1 else "yeni")
+              + f" · **“ilk:” jetonlu özet maddesi {len(ozet)}**", ""]
+        md += [f"- {s}" for s in satirlar]
+        try:
+            with open(summary, "a", encoding="utf-8") as fh:
+                fh.write("\n".join(md) + "\n\n")
+        except OSError as exc:
+            print(f"  ! TEKRAR-MANŞET: özet yazılamadı: {exc}")
+    if h1:
+        from scripts import uyari
+        uyari.ekle("TEKRAR-MANŞET", f"TEKRAR-MANŞET: {kisa(iso)} H1 ↔ {kisa(h1['gun'])}")
+    return h1
 
 
 if __name__ == "__main__":
