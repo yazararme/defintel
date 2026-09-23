@@ -95,3 +95,17 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 7. **Rev 26: canlı pencerenin yeniden çevrilmesi.** Cümle düzeni, Ö1/Ö2 ve sözlük yalnız yeni çevirilerde görünür. R26-P0-1, P1-1, P1-2 ve P0-2'nin ikinci yarısı `translate_news.py`'nin `claude -p` ile gerçek çağrılarını (abonelik kotası; 23 Eylül için ~9 parti) ve yayımlanan `data/news/*.json`'ın yeniden yazılmasını gerektiriyor. Bu turda izin yoktu, atlandı. İzin verilirse: hangi günler (yalnız 23? 17–23?) ve yerelde mi, `collect-news` dispatch'iyle mi?
 8. **KANIT-BOŞLUĞU her gün ateşliyor (Rev 28).** Elbit'in akışı boş, Northrop'unki 403 — 17–23 Eylül'ün 7 tarama gününün 7'sinde brifingde "…kendi duyuruları bugün okunamadı" satırı ve operatör uyarısı var (Rev 9 deseni). Satır doğru, ama iki akış onarılana kadar sabit. Akışlar onarılsın mı (kaynaklar.json, Drive), yoksa sürekli arızalı kaynak için satır bastırılsın mı?
 9. **Rev 26 geçiş riski.** Cümle düzeni dedektörü eski (her kelimesi büyük) çevirilerin çoğunu yakalıyor: sahte günde 40'ın 30'u, 31 başlık özgün bırakıldı. main'e alındıktan sonra model yeni promptta cümle düzenine uymazsa çok sayıda başlık İngilizce/özgün kalır ve her gün ÇEVİRİ-DEDEKTÖRÜ uyarısı gelir. İlk canlı çevirinin sonucuna bakılmalı (human-checks).
+
+## Müşteri kararları — 23 Eylül akşamı (Açık 1–9)
+
+1. Kapsam satırı payı = benzersiz başlık; ölçüt "1 / 536" (plan R22-P1-2 güncellendi). → **K1**
+2. İki oyuncu listesi kalır; etiketler "brifingde geçen" / "başlıklarda geçen". → **K2**
+3. KUR genişletmesi onaylandı (iş yok).
+4. 23 Eylül'ün kayıp 92 kalemi geri getirilir, BRİFİNGDEN SONRA etiketiyle. → **K4**
+5. İLK-EKRAN'da alarm günü muafiyeti yok; 10 günün 7'sinin taşma nedeni bulunup düzeltilir (ör. promptta özet maddesine kelime sınırı); kural kalır. → **K5**
+6. Elbit ve Northrop akışları onarılır; onarılamıyorsa yerine kaynak önerilir (ör. şirketin basın bülteni sayfası). Onarılana kadar satır kalır. → **K6**
+7–8. Yeniden çeviri yalnız main'e alındıktan sonra: bir gün yerelde yeniden çevrilir, 20 başlıklık önce/sonra örneği gösterilir, müşterinin onayı beklenir.
+- human-checks: 4 sınama iş akışı main'e alınmadan silinir. Issue #5 kapatılır (K döngülerinden sonra; döngüler onu yeniden açar). Instructions metni merge günü yapıştırılır → tek blok `review/builder-notes/merge-day-prompt.md`. Drive `dil` düzeltmesini müşteri yapıyor.
+
+| K | Karar | Deneme | Commit |
+|---|---|---|---|

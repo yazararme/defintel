@@ -244,7 +244,7 @@ Rev 7'nin kanunu: **bir yüzey, sonucunu bildiremediği bir eylemi tetikleyemez.
 | R22-P0-1 | `assets/app.js:733` | Hata dalı ayrı çizilir | **(A)** "fetch reddedildi" senaryosunun görüntüsü "Arama şu an çalışmıyor" gösterir, "kayıt yok" göstermez |
 | R22-P0-2 | `assets/app.js` | Yürüyüş `#noresults`'ta durur | **(S)** medya takibi, 375px, "xyzzy" arandı: "sonuç yok" metni görünür |
 | R22-P1-1 | `assets/app.js` | Yükleniyor durumu | **(A)** 3 sn gecikme senaryosunda "Aranıyor…" |
-| R22-P1-2 | `assets/app.js` | Kapsam satırı yeniden sayılır | **(S)** `?oyuncu=roketsan` → "2 / 536 başlık" |
+| R22-P1-2 | `assets/app.js` | Kapsam satırı yeniden sayılır (pay = benzersiz başlık; müşteri, 23 Eyl) | **(S)** `?oyuncu=roketsan` → "1 / 536 başlık" |
 | R22-P1-3 | `check_reports.py`, `build.yml` | DÖRT-DURUM | **(A)** dört görüntü yeşil; bir dal bilerek bozulduğunda kırmızı çalıştırma ve **(P)** uyarısı |
 
 ---
