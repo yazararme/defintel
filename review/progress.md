@@ -111,3 +111,7 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 |---|---|---|---|
 | K1 | PASS | 1 | 56501f2 |
 | K2 | PASS (deneme 2; d1 FAIL: ray adları metinde yoktu — alias; alt-64 kanıtı eskiydi). Yan etki: raylardan başlık taramasından gelen Türk oyuncular düştü (17–22 Eyl); 23 Eyl rayında Rheinmetall yok (yalnız basılmayan G9 girişinde geçiyordu) | 2 | 727d21c, 449f883 |
+| K5 | d1 FAIL (14 Eyl alarm günü düzeltilmedi; 16/17 Eyl CI en kötü hâlde kalıyor). d2: orkestratör kararı — alarm bandı en üstte kalır, ALARMLAR gövdesi özetin arkasına (tersine dönüş adayı); sürüyor | 1→2 | aeedc4f (d1) |
+
+- **K4 bekliyor:** müşteriye soruldu — 92 kalem brifingden ÖNCE (05:19) toplanmış, 33ü aday listesindeydi; "BRİFİNGDEN SONRA" yanlış olur. Seçenekler: A etiketsiz, B doğru başka etiket, C yine de BRİFİNGDEN SONRA.
+- **Devam noktası:** K5 d2 → K6 (brief hazır) → K4 (yanıt gelirse) → merge-day-prompt.md → 4 sınama iş akışını sil → issue #5 kapat → human-checks.md yeniden yaz.
