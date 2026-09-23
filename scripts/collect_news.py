@@ -32,6 +32,15 @@ Offline test path (no network, no Drive, no model):
 F.json = {"sources": [kaynaklar entries], "feeds": {"<ad>": {"items": [{title, url,
 published}]} | {"error": "…"}}}. `--sinama-damga-boz` (fixture only) deliberately changes
 one existing stamp to prove GEÇ-GELEN fires. See scripts/test_collect.py.
+A fixture feed may instead carry the raw response, {"body": "…"}: it then goes through the
+same parse_body() as a live fetch (K6, scripts/test_k6.py).
+
+K6 — two optional per-source fields in kaynaklar.json (absent = behaviour unchanged):
+  "istek_basligi": {"Header": "value"}   extra request headers for this source only.
+      Northrop's investor RSS (Akamai) answers 403 to a Chrome User-Agent that sends no
+      Accept-Language — a bot fingerprint — and 200 with it.
+  "tur": "html" + "ayristirici": "<name>"  a press-release page with no working feed; a narrow
+      parser from HTML_PARSERS reads title + date + URL (stdlib only).
 """
 
 import argparse
@@ -44,6 +53,7 @@ import pathlib
 import re
 import sys
 import unicodedata
+import urllib.parse
 import xml.etree.ElementTree as ET
 
 # feedparser / requests / google-auth are imported where they are used: the offline
@@ -224,23 +234,49 @@ def strip_tags(text):
     return html.unescape(re.sub(r"<[^>]+>", " ", text or "")).strip()
 
 
-def read_feed(source):
-    """Return (source, items, error). feedparser copes with the broken feeds."""
-    import feedparser
-    import requests
-    error = None
-    for attempt in (1, 2):
-        try:
-            res = requests.get(source["url"], headers={"User-Agent": UA, "Accept": "*/*"},
-                               timeout=TIMEOUT)
-            res.raise_for_status()
-            break
-        except Exception as exc:  # noqa: BLE001 - a dead feed must not stop the run
-            error = f"{type(exc).__name__}: {exc}"[:110]
-            if attempt == 2:
-                return source, [], error
+def request_headers(source):
+    """K6: the collector's standard headers plus the source's own `istek_basligi`."""
+    headers = {"User-Agent": UA, "Accept": "*/*"}
+    headers.update({str(k): str(v) for k, v in (source.get("istek_basligi") or {}).items()})
+    return headers
 
-    parsed = feedparser.parse(res.content)
+
+def parse_elbitsystems_uk(text, base_url):
+    """elbitsystems-uk.com/media-events/recent-news: one <li class="media"> per release —
+    <h3>16 September 2026</h3> then <p><a href="/media-events/recent-news/…">Title</a></p>."""
+    items = []
+    for block in re.findall(r'<li class="media[^"]*">(.*?)</li>', text, re.S):
+        day = re.search(r"<h3>\s*(\d{1,2} [A-Za-z]+ \d{4})\s*</h3>", block)
+        link = re.search(r'<p>\s*<a href="([^"]+)"[^>]*>(.*?)</a>', block, re.S)
+        if not (day and link):
+            continue
+        try:
+            published = dt.datetime.strptime(day.group(1), "%d %B %Y").replace(tzinfo=dt.timezone.utc)
+        except ValueError:
+            published = None
+        title = " ".join(strip_tags(link.group(2)).split())
+        url = urllib.parse.urljoin(base_url, html.unescape(link.group(1)).strip())
+        if title and url:
+            items.append({"title": title, "url": url, "published": published})
+    return items
+
+
+# K6: `tur: "html"` sources name their parser with `ayristirici`. Each parser is narrow on
+# purpose — one page's markup; a redesign gives "feed parsed but empty", as a dead feed does.
+HTML_PARSERS = {"elbitsystems-uk": parse_elbitsystems_uk}
+
+
+def parse_body(source, content):
+    """Response body → [{title, url, published}] by the source's `tur`. Raises on an unknown
+    parser. RSS/Atom needs feedparser (imported here: the html path stays stdlib-only)."""
+    if source.get("tur") == "html":
+        parser = HTML_PARSERS.get(source.get("ayristirici") or "")
+        if parser is None:
+            raise ValueError(f"bilinmeyen ayristirici: {source.get('ayristirici')!r}")
+        text = content.decode("utf-8", "replace") if isinstance(content, bytes) else content
+        return parser(text, source.get("url") or "")
+    import feedparser
+    parsed = feedparser.parse(content)
     items = []
     for entry in parsed.entries:
         title = strip_tags(entry.get("title"))
@@ -250,7 +286,26 @@ def read_feed(source):
                      else parse_date(entry.get("published") or entry.get("updated")))
         if title and link:
             items.append({"title": title, "url": link, "published": published})
-    return source, items, None
+    return items
+
+
+def read_feed(source):
+    """Return (source, items, error). feedparser copes with the broken feeds."""
+    import requests
+    error = None
+    for attempt in (1, 2):
+        try:
+            res = requests.get(source["url"], headers=request_headers(source), timeout=TIMEOUT)
+            res.raise_for_status()
+            break
+        except Exception as exc:  # noqa: BLE001 - a dead feed must not stop the run
+            error = f"{type(exc).__name__}: {exc}"[:110]
+            if attempt == 2:
+                return source, [], error
+    try:
+        return source, parse_body(source, res.content), None
+    except Exception as exc:  # noqa: BLE001
+        return source, [], f"{type(exc).__name__}: {exc}"[:110]
 
 
 def has_term(text, term):
@@ -559,6 +614,11 @@ def fixture_reader(feeds):
         feed = feeds.get(source["ad"]) or {"items": []}
         if feed.get("error"):
             return source, [], feed["error"]
+        if "body" in feed:   # K6: kayıtlı ham yanıt, canlı toplamayla aynı ayrıştırıcıdan
+            try:
+                return source, parse_body(source, feed["body"]), None
+            except Exception as exc:  # noqa: BLE001
+                return source, [], f"{type(exc).__name__}: {exc}"[:110]
         return source, [{"title": i["title"], "url": i["url"],
                          "published": parse_date(i.get("published"))}
                         for i in feed.get("items") or []], None
@@ -601,7 +661,7 @@ def main():
     else:
         all_sources, reader = load_sources(), read_feed
     sources = [s for s in all_sources
-               if s.get("tur") == "rss" and s.get("test", {}).get("sonuc") != "kapali"]
+               if s.get("tur") in ("rss", "html") and s.get("test", {}).get("sonuc") != "kapali"]
     cutoff = now - dt.timedelta(hours=args.hours)
 
     collected, failures = [], []

@@ -102,6 +102,12 @@ review/builder-notes/k5-prompt.md. K5 attempt 2 (alarm day, 375/834/1440, light 
 band is the column's first element, above the headline; ALARMLAR follows the summary in the DOM
 at every width; the band links to #alarmlar and a tap brings ALARMLAR into view; at 375 the chip
 strip follows the summary on the alarm day and precedes it on other days; no sideways scroll.
+K6: Elbit and Northrop feeds — scripts/test_k6.py (offline, fixtures under scripts/fixtures/k6-*:
+Northrop's `istek_basligi` Accept-Language turns the simulated Akamai 403 into 200 and headers of
+every other source are unchanged; the Elbit UK HTML parser yields 20 dated items and the expected
+last 3; the offline collection reads both, 0 failures, SİLME-YOK equal); the evidence workflow
+k6-kaynak-test.yml runs only on rev21-33, has no secret and never runs the real collection; the
+customer note k6-kaynaklar.md carries the two paste-ready entries as valid JSON.
 Later revisions extend CHECKS / PAGES. Exit 1 on any failure.
 """
 import os
@@ -1569,6 +1575,38 @@ def k2_check(py, hal, fails):
         fails.append("K2 ray kanıtı")
 
 
+def k6_checks(fails):
+    """K6: Elbit ve Northrop akışları — ağsız ayrıştırıcı testi, kanıt iş akışı, müşteri notu."""
+    import json
+    t = subprocess.run([sys.executable, "scripts/test_k6.py"], cwd=ROOT, capture_output=True, text=True)
+    son = t.stdout.strip().splitlines()[-1] if t.stdout.strip() else t.stderr[-300:]
+    print(f"{'ok  ' if t.returncode == 0 else 'FAIL'} scripts/test_k6.py · {son}")
+    if t.returncode:
+        print(t.stdout[-2500:], t.stderr[-1500:])
+        fails.append("test_k6.py")
+    wf = (ROOT / ".github" / "workflows" / "k6-kaynak-test.yml").read_text(encoding="utf-8")
+    ok = ("secrets." not in wf and "branches: [rev21-33]" in wf and "scripts/test_k6.py" in wf
+          and "collect_news.py --" not in wf and "collect-news" not in wf)
+    print(f"{'ok  ' if ok else 'FAIL'} k6-kaynak-test.yml: yalnız rev21-33, sır yok, gerçek toplama yok")
+    if not ok:
+        fails.append("k6-kaynak-test.yml")
+    not_ = (ROOT / "review" / "builder-notes" / "k6-kaynaklar.md").read_text(encoding="utf-8")
+    girdiler = []
+    for blok in re.findall(r"```json\n(.*?)```", not_, re.S):
+        try:
+            girdiler.append(json.loads(blok))
+        except ValueError:
+            girdiler.append(None)
+    ng = next((g for g in girdiler if isinstance(g, dict) and g.get("ad") == "Northrop Grumman"), None)
+    eu = next((g for g in girdiler if isinstance(g, dict) and g.get("ad") == "Elbit Systems UK"), None)
+    ok = (None not in girdiler and ng is not None and eu is not None
+          and ng.get("istek_basligi", {}).get("Accept-Language") == "en-US,en;q=0.9"
+          and eu.get("tur") == "html" and eu.get("ayristirici") == "elbitsystems-uk")
+    print(f"{'ok  ' if ok else 'FAIL'} k6-kaynaklar.md: {len(girdiler)} JSON girdisi, Northrop istek_basligi, Elbit UK html")
+    if not ok:
+        fails.append("k6-kaynaklar.md")
+
+
 def main():
     fails = []
     build = subprocess.run([sys.executable, "build.py"], cwd=ROOT, capture_output=True, text=True)
@@ -1626,6 +1664,9 @@ def main():
 
     # Rev 31: GEÇ-GELEN
     r31_checks(build.stdout, py, fails)
+
+    # K6: Elbit ve Northrop akışları (ağsız)
+    k6_checks(fails)
 
     # Rev 25: SİLME-YOK · İPUCU-YOK · kategoriler
     r25_checks(build.stdout, py, fails)

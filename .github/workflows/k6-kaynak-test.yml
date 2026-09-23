@@ -1,0 +1,24 @@
+name: k6-kaynak-test
+# K6 kanıt iş akışı: Elbit ve Northrop kaynaklarının ayrıştırıcı testi AĞSIZ, fixture'la
+# (scripts/fixtures/k6-*, 24 Eylül 2026'da canlı alınmış ham yanıtlar). Sabah hattı
+# çalıştırılmaz: kaynaklara, Drive'a, Claude/çeviriye çıkılmaz; data/news'e yazılmaz.
+# feedparser yalnız Northrop RSS'ini gerçek ayrıştırıcıyla okumak için kurulur (PyPI'dan).
+# (A) özeti: iki kaynağın tablosu (tür, istek düzeltmesi, ayrıştırılan, son 3 başlık) + 🟢/🔴.
+# Yalnız rev21-33 dalında koşar; main'e alınmadan önce silinir. Sır yok.
+on:
+  push:
+    branches: [rev21-33]
+    paths: ['scripts/collect_news.py', 'scripts/test_k6.py', 'scripts/fixtures/k6-*',
+            '.github/workflows/k6-kaynak-test.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency: k6-kaynak-test
+jobs:
+  ayristirici:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install feedparser
+      - name: K6 ayrıştırıcı testi (ağsız, fixture)
+        run: python3 scripts/test_k6.py

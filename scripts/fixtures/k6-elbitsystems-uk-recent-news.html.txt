@@ -1,0 +1,1243 @@
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PQ6CHJR');</script>
+    <!-- End Google Tag Manager -->
+
+    
+    
+    <link href="https://www.elbitsystems-uk.com/media-events/recent-news" rel="canonical" />
+    
+
+
+    <!-- <base href="/" /> -->
+    <meta charset="utf-8" />
+    <meta content="IE=EDGE" http-equiv="X-UA-Compatible" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=6.0, user-scalable=yes" name="viewport" />
+    <!-- old css -->
+    <link href="https://diox3em1zayec.cloudfront.net/assets/css/elbit.css?63" rel="stylesheet" type="text/css" />
+    <!-- new css - old to be worked in at a later time-->
+    <link href="https://diox3em1zayec.cloudfront.net/assets/dist/main.css" rel="stylesheet" type="text/css" />
+
+    <!-- favicons -->
+    <link href="https://diox3em1zayec.cloudfront.net/assets/favicons/apple-touch-icon.png" rel="apple-touch-icon"
+        sizes="180x180" />
+    <link href="https://diox3em1zayec.cloudfront.net/assets/favicons/favicon-32x32.png" rel="icon" sizes="32x32"
+        type="image/png" />
+    <link href="https://diox3em1zayec.cloudfront.net/assets/favicons/favicon-16x16.png" rel="icon" sizes="16x16"
+        type="image/png" />
+    <link rel="manifest" href="https://diox3em1zayec.cloudfront.net/assets/favicons/site.webmanifest" />
+    <link color="#234B8D" href="https://diox3em1zayec.cloudfront.net/assets/favicons/safari-pinned-tab.svg"
+        rel="mask-icon" />
+    
+    <meta content="Elbit Systems UK" name="apple-mobile-web-app-title" />
+    <meta content="Elbit Systems UK" name="application-name" />
+    <meta content="#ffffff" name="msapplication-TileColor" />
+    <meta content="#234B8D" name="theme-color" />
+
+    <!-- Twitter Card data -->
+    <meta content="summary" name="twitter:card" />
+    <meta content="@ElbitSystemsLtd" name="twitter:site" />
+    
+        <meta name="twitter:title" content="Recent News" />
+        <meta name="twitter:description" content="Recent News" />
+    
+    
+    <meta content="@ElbitSystemsLtd" name="twitter:creator" />
+    
+
+    
+    
+    
+    <meta property="og:image" content="" />
+
+    
+    <meta name="twitter:image:src" content="" />
+
+
+    
+
+    <!-- Open Graph data -->
+    
+    <meta content="article" property="og:type" />
+    
+        <meta name="title" property="og:title" content="Recent News" />
+        <meta content="https://www.elbitsystems-uk.com/media-events/recent-news" property="og:url" />
+        <meta property="og:description" content="Recent News" />
+    
+    
+    
+    
+    <meta content="Elbit Systems UK" property="og:site_name" />
+
+    <!--[if lt IE 9]><script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script><![endif]-->
+    <!--[if gt IE 8]><script type="text/javascript" src="https://diox3em1zayec.cloudfront.net/assets/js/min/elbit-min.js?cache=14"></script><![endif]-->
+    <!--[if !IE]> -->
+    <script type="text/javascript" src="https://diox3em1zayec.cloudfront.net/assets/js/min/elbit-min.js?cache=25">
+    </script>
+    <!-- <![endif]-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+
+<title>Recent News | Elbit Systems UK</title>
+<meta name="description" content="Recent News">
+
+
+
+
+    <script>
+        var onloadCallback = function () {
+            //console.log('callback')
+            grecaptcha.render('recaptcha', {
+                'sitekey': '6Lct4f8UAAAAAL76GBcaTQAsJGZR0V-xE-0foYXi'
+            });
+        };
+    </script>
+
+    <link rel="preload" as="font">
+</head>
+
+
+
+<body>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQ6CHJR"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div class="container-fluid browser-support-banner d-none" id="browser-support-banner">
+        <div class="row">
+            <div class="col-xs-12 text-center bg-primary">
+                <div class="text p-4">
+                    <p>Internet Explorer is no longer supported</p>
+                    <small>Please update your browser to the latest version for the best viewing experience</small>
+                </div>
+                <div class="result" id="result"></div>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+
+
+
+
+
+
+
+
+<header>
+    <div class="header-image d-flex flex-column justify-content-between"
+        
+        style="background-image:url('https://s3.eu-west-2.amazonaws.com/esuk-website/images/8ACVU8YCScKnwJIgjNxS-1600w-news-jpg'); background-position:center">
+        <div class="header-top">
+  <div class="container">
+    <div class="row">
+      <div class="  col-xs-8 col-md-5 col-sm-7 col-lg-3   header-top-logo ">
+        <a href="/"><img
+            alt="Eblit Systems UK"
+            class="img-fluid"
+            src="https://diox3em1zayec.cloudfront.net/assets/images/logo.png"
+            width="600"
+            height="220" /></a>
+      </div>
+
+      <div class="col-xs-4 col-sm-5 col-md-7 col-lg-9 d-flex justify-content-end header-icon-wrapper d-block d-lg-none mt-auto mb-auto ">
+
+        <ul class="list-inline header-icon d-block d-lg-none ml-auto">
+          <li class="list-inline-item">
+            <a
+              class="icon icon-twitter text-secondary"
+              aria-label="Twitter"
+              href="https://twitter.com/ElbitSystemsLtd"
+              target="_blank"
+              rel="noopener"></a>
+          </li>
+          <li class="list-inline-item">
+            <a
+              class="icon icon-linkedin text-secondary"
+              aria-label="linkedin"
+              href="https://www.linkedin.com/company/elbitsystems/"
+              target="_blank"
+              rel="noopener"></a>
+          </li>
+        </ul>
+        <i class="icon-menu my-auto" id="icon-menu-header"></i>
+
+      </div>
+      <div class="col-1 d-xl-flex d-xs-none "></div>
+
+      <div class="col-xl-8 col-xs-12  col-lg-8 header-top-menu">
+        <div class="navbar-expand-xs hideNav">
+          <div class="svg-wrapper">
+            <svg
+              version="1.1"
+              viewbox="0 0 2000 55"
+              x="0px"
+              y="0px">
+              <polygon class="svg-dark d-none d-lg-block" points="0,0 59,55 2000,55 2000,0 " />
+            </svg>
+          </div>
+          <ul class="list-inline search-list d-none d-lg-block ">
+            <li class="list-inline-item ">
+
+              <input
+                autocomplete="off"
+                class="form-control googleSearch "
+                id="googleSearch"
+                name="search"
+                placeholder="SEARCH"
+                type="text"
+                required /></li>
+            <li class="list-inline-item socials">
+              <a
+                class="icon icon-linkedin"
+                aria-label="linkedin"
+                href="https://www.linkedin.com/company/elbit-systems-uk/"></a>
+            </li>
+            <li class="list-inline-item socials">
+              <a
+                class="icon icon-youtube"
+                aria-label="youtube"
+                href="https://www.youtube.com/channel/UCgWM6EKynkUOg4AO3DZlMig"></a>
+            </li>
+
+          </ul>
+          <ul class="navbar-nav justify-content-end flex-xs-column flex-lg-row fade-in" id="main-menu">
+
+    
+    <li class="nav-item">
+
+        <a class="nav-link " href="/about-us">
+            <span class="d-flex justify-content-between">About Us
+
+                <span class=" icon-up-down d-block d-lg-none"></span>
+
+                <span class="indicator-line bg-primary"></span>
+
+            </span>
+
+        </a>
+        <div class="submenu-wrapper fade-in">
+  <svg
+    class="submenu-svg"
+    version="1.1"
+    viewbox="0 0 2000 55"
+    x="0px"
+    y="0px">
+    <polygon class="svg-tertiary text-white d-none d-lg-block" points="0,0 59,55 2000,55 2000,0 " />
+  </svg>
+  <ul class="navbar-nav ">
+
+    
+      <li class="nav-item">
+        <a class="nav-link sub-link " href="/about-us/vision-mission">
+          <span>Vision & Mission<span class="indicator-line"></span>
+          </span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-link sub-link " href="/about-us/ethics-conduct">
+          <span>Ethics & Conduct<span class="indicator-line"></span>
+          </span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-link sub-link " href="/about-us/elbit-systems-uk-group-locations">
+          <span>ESUK Group Locations<span class="indicator-line"></span>
+          </span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-link sub-link " href="/supplychain">
+          <span>Supply Chain<span class="indicator-line"></span>
+          </span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-link sub-link " href="/about-us/uk-operations">
+          <span>UK Operations<span class="indicator-line"></span>
+          </span>
+        </a>
+      </li>
+    
+
+  </ul>
+</div>
+    </li>
+    
+    <li class="nav-item">
+
+        <a class="nav-link " href="/what-we-do">
+            <span class="d-flex justify-content-between">What we do
+
+                <span class=" icon-up-down d-block d-lg-none"></span>
+
+                <span class="indicator-line bg-primary"></span>
+
+            </span>
+
+        </a>
+        <div class="submenu-wrapper fade-in">
+  <svg
+    class="submenu-svg"
+    version="1.1"
+    viewbox="0 0 2000 55"
+    x="0px"
+    y="0px">
+    <polygon class="svg-tertiary text-white d-none d-lg-block" points="0,0 59,55 2000,55 2000,0 " />
+  </svg>
+  <ul class="navbar-nav ">
+
+    
+      <li class="nav-item">
+        <a class="nav-link sub-link " href="/what-we-do/air-space">
+          <span>Air & Space<span class="indicator-line"></span>
+          </span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-link sub-link " href="/what-we-do/land">
+          <span>Land<span class="indicator-line"></span>
+          </span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-link sub-link " href="/what-we-do/naval">
+          <span>Naval<span class="indicator-line"></span>
+          </span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-link sub-link " href="/what-we-do/unmanned">
+          <span>Unmanned<span class="indicator-line"></span>
+          </span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-link sub-link " href="/what-we-do/cyber">
+          <span>Cyber<span class="indicator-line"></span>
+          </span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-link sub-link " href="/what-we-do/national-security">
+          <span>National Security<span class="indicator-line"></span>
+          </span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-link sub-link " href="/what-we-do/commercial">
+          <span>Commercial<span class="indicator-line"></span>
+          </span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-link sub-link " href="/what-we-do/training-simulation">
+          <span>Training<span class="indicator-line"></span>
+          </span>
+        </a>
+      </li>
+    
+
+  </ul>
+</div>
+    </li>
+    
+    <li class="nav-item">
+
+        <a class="nav-link " href="/careers">
+            <span class="d-flex justify-content-between">Careers
+
+                <span class=" icon-up-down d-block d-lg-none"></span>
+
+                <span class="indicator-line bg-primary"></span>
+
+            </span>
+
+        </a>
+        
+    </li>
+    
+    <li class="nav-item">
+
+        <a class="nav-link active" href="/media-events">
+            <span class="d-flex justify-content-between">News
+
+                <span class=" icon-up-down d-block d-lg-none"></span>
+
+                <span class="indicator-line bg-primary"></span>
+
+            </span>
+
+        </a>
+        <div class="submenu-wrapper fade-in">
+  <svg
+    class="submenu-svg"
+    version="1.1"
+    viewbox="0 0 2000 55"
+    x="0px"
+    y="0px">
+    <polygon class="svg-tertiary text-white d-none d-lg-block" points="0,0 59,55 2000,55 2000,0 " />
+  </svg>
+  <ul class="navbar-nav ">
+
+    
+      <li class="nav-item">
+        <a class="nav-link sub-link active" href="/media-events/recent-news">
+          <span>Recent News<span class="indicator-line"></span>
+          </span>
+        </a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-link sub-link " href="/media-events/case-studies">
+          <span>Case Studies<span class="indicator-line"></span>
+          </span>
+        </a>
+      </li>
+    
+
+  </ul>
+</div>
+    </li>
+    
+    <li class="nav-item">
+
+        <a class="nav-link " href="/contact">
+            <span class="d-flex justify-content-between">Contact
+
+                <span class=" icon-up-down d-block d-lg-none"></span>
+
+                <span class="indicator-line bg-primary"></span>
+
+            </span>
+
+        </a>
+        
+    </li>
+    
+
+</ul>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="indicator-line  d-block d-lg-none bg-secondary"></div> -->
+
+  <ul class="list-inline search-list d-block d-lg-none bg-tertiary text-center m-0 p-3 py-4">
+    <li class="list-inline-item d-flex"><input
+        autocomplete="off"
+        required
+        class="form-control googleSearch text-uppercase w-100"
+        id="googleSearch"
+        name="search"
+        placeholder="SEARCH"
+        type="text" /></li>
+  </ul>
+</div>
+        <!-- does a nav exist for this top level page -->
+        
+        <div class="submenu d-none d-lg-block ">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="nav">
+                    
+                    <li class="nav-item active">
+                        <a href="/media-events/recent-news" class="nav-link">
+                            <span>Recent News</span>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item ">
+                        <a href="/media-events/case-studies" class="nav-link">
+                            <span>Case Studies</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <div class="share-submenu">
+                    <div class="share-wrapper">
+                        <span class="share-menu">
+                            <ul class="list-inline">
+                                <li class="list-inline-item">
+                                    <a class="icon icon-mail-alt" aria-label="Mail" href="/cdn-cgi/l/email-protection#d8e7abadbab2bdbbace58abdbbbdb6acf396bdafabfeb9b5a8e3bab7bca1e5b0acaca8abe2f7f7afafaff6bdb4bab1acaba1abacbdb5abf5adb3f6bbb7b5f7b5bdbcb1b9f5bdaebdb6acabf7aabdbbbdb6acf5b6bdafab"></a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="icon icon-linkedin" aria-label="Linkedin"
+                                        href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.elbitsystems-uk.com/media-events/recent-news&title=Recent+News"></a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="icon icon-twitter" aria-label="Twitter"
+                                        href="https://twitter.com/share?text=Recent+News&url=https://www.elbitsystems-uk.com/media-events/recent-news"></a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class=" icon icon-facebook" aria-label="Facebook"
+                                        href="https://www.facebook.com/sharer.php?u=https://www.elbitsystems-uk.com/media-events/recent-news"></a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="icon icon-whatsapp" aria-label="WhatsApp"
+                                        href="https://wa.me/?text=Recent+News https://www.elbitsystems-uk.com/media-events/recent-news"></a>
+                                </li>
+                            </ul>
+                        </span>
+                        <span class="icon icon-share d-flex flex-column justify-content-center text-white"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        
+    </div>
+</header>
+
+
+
+
+
+
+
+    
+<div class="container " id="content-split" >
+	<div class="row">
+		
+		<div class="breadcrumb-container col-12   d-lg-block d-xs-none">
+    <nav aria-label="breadcrumb" class="breadcrumb-inner-wrapper">
+        <ol class="breadcrumb">
+            
+            
+                
+                    
+                
+
+            
+                
+                <li class="breadcrumb-item">
+                    <a href="/media-events">News</a>
+                </li>
+            
+                
+            
+                
+                    
+                
+
+            
+                
+                <li class="breadcrumb-item">
+                    <a href="/media-events/recent-news">Recent News</a>
+                </li>
+            
+                
+            
+
+
+             
+
+            
+
+        </ol>
+
+    </nav>
+</div>
+		<section id="main-content" class="col-lg-8 col-xs-12">
+			 
+
+ 
+ 
+
+
+ 
+
+
+
+
+
+
+
+    
+
+ 
+
+<div class="text-container  "  >
+    <div class="container">
+        <div class="row">
+            
+                    <div
+                        class="col-lg-8 col-12 mx-auto text  ">
+                        <h1>Latest news from Elbit Systems UK</h1>
+                        
+                            
+                            
+                    </div>
+                    
+        </div>
+    </div>
+</div><div class="news-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-xs-12 ml-auto mr-auto">
+                
+                <ul class="list-unstyled">
+    
+    <li class="media ">
+        <a href="/media-events/recent-news/elbit-systems-uk-showcases-latest-land-and-autonomous-capabilities-at-dvd-2026">
+            
+            <img src="https://s3.eu-west-2.amazonaws.com/esuk-website/images/0zNMLLdT2y1dLEzAnUHg-800w-d-s-b-08674-j-pg" class="mr-4" width="200" alt="" />
+            
+        </a>
+        <div class="media-body text">
+            <h3>16 September 2026</h3>
+            <p>
+                <a href="/media-events/recent-news/elbit-systems-uk-showcases-latest-land-and-autonomous-capabilities-at-dvd-2026">Elbit Systems UK Showcases Latest Land and Autonomous Capabilities at DVD 2026</a>
+            </p>
+        </div>
+    </li>
+    
+    <li class="media my-4">
+        <a href="/media-events/recent-news/elbit-systems-uk-plays-key-role-in-landmark-live-virtual-constructive-training-exercise">
+            
+            <img src="https://s3.eu-west-2.amazonaws.com/esuk-website/images/dNn1sQGSqendXaDPPt3m-800w-d-s-b-08689-j-pg" class="mr-4" width="200" alt="" />
+            
+        </a>
+        <div class="media-body text">
+            <h3>07 September 2026</h3>
+            <p>
+                <a href="/media-events/recent-news/elbit-systems-uk-plays-key-role-in-landmark-live-virtual-constructive-training-exercise">Elbit Systems UK Plays Key Role in Landmark Live Virtual Constructive Training Exercise</a>
+            </p>
+        </div>
+    </li>
+    
+    <li class="media my-4">
+        <a href="/media-events/recent-news/elbit-systems-uk-achieves-gold-defence-employer-recognition-scheme-award">
+            
+            <img src="https://s3.eu-west-2.amazonaws.com/esuk-website/images/T4IQwLwWSH295fXaH8LG-800w-news-article-thumb-jpg" class="mr-4" width="200" alt="" />
+            
+        </a>
+        <div class="media-body text">
+            <h3>05 August 2026</h3>
+            <p>
+                <a href="/media-events/recent-news/elbit-systems-uk-achieves-gold-defence-employer-recognition-scheme-award">Elbit Systems UK Achieves Gold Defence Employer Recognition Scheme Award</a>
+            </p>
+        </div>
+    </li>
+    
+    <li class="media my-4">
+        <a href="/media-events/recent-news/gbsr-at-project-capstone-convergence-2026">
+            
+            <img src="https://s3.eu-west-2.amazonaws.com/esuk-website/images/DsmbOsHT6a4RGJPoF6Ey-800w-whats-app-image-2026-07-29-at-14-47-02-jpeg" class="mr-4" width="200" alt="" />
+            
+        </a>
+        <div class="media-body text">
+            <h3>04 August 2026</h3>
+            <p>
+                <a href="/media-events/recent-news/gbsr-at-project-capstone-convergence-2026">GBSR at Project Capstone Convergence 2026</a>
+            </p>
+        </div>
+    </li>
+    
+    <li class="media my-4">
+        <a href="/media-events/recent-news/elbit-systems-uk-delivers-ground-based-surveillance-radars-to-the-british-army">
+            
+            <img src="https://s3.eu-west-2.amazonaws.com/esuk-website/images/V2X5dkcoRYeA1wEVxM5j-800w-image-28-jpg" class="mr-4" width="200" alt="" />
+            
+        </a>
+        <div class="media-body text">
+            <h3>12 November 2025</h3>
+            <p>
+                <a href="/media-events/recent-news/elbit-systems-uk-delivers-ground-based-surveillance-radars-to-the-british-army">Elbit Systems UK delivers Ground Based Surveillance Radars to the British Army</a>
+            </p>
+        </div>
+    </li>
+    
+    <li class="media my-4">
+        <a href="/media-events/recent-news/elbit-systems-uk-delivers-advanced-new-fires-training-to-the-british-army">
+            
+            <img src="https://s3.eu-west-2.amazonaws.com/esuk-website/images/2wfoa4XUSuAefPjszGVP-800w-iidfs-105mm-light-gun-2-jpeg" class="mr-4" width="200" alt="" />
+            
+        </a>
+        <div class="media-body text">
+            <h3>25 September 2025</h3>
+            <p>
+                <a href="/media-events/recent-news/elbit-systems-uk-delivers-advanced-new-fires-training-to-the-british-army">Elbit Systems UK Delivers Advanced New Fires Training to the British Army</a>
+            </p>
+        </div>
+    </li>
+    
+    <li class="media my-4">
+        <a href="/media-events/recent-news/elbit-systems-uk-bolsters-its-position-as-a-leading-provider-of-night-vision-capabilities-to-uk-defence">
+            
+            <img src="https://s3.eu-west-2.amazonaws.com/esuk-website/images/ET3EYd8ToSjOcxjdGH1A-800w-nvg-cropped-jpg" class="mr-4" width="200" alt="" />
+            
+        </a>
+        <div class="media-body text">
+            <h3>29 January 2025</h3>
+            <p>
+                <a href="/media-events/recent-news/elbit-systems-uk-bolsters-its-position-as-a-leading-provider-of-night-vision-capabilities-to-uk-defence">Elbit Systems UK bolsters its position as a leading provider of night vision capabilities to UK Defence</a>
+            </p>
+        </div>
+    </li>
+    
+    <li class="media my-4">
+        <a href="/media-events/recent-news/elbit-systems-uk-delivers-full-suite-of-fires-training-to-the-british-armed-forces">
+            
+            <img src="https://s3.eu-west-2.amazonaws.com/esuk-website/images/1PTOQUZrR8K2eZYGZRiP-800w-jfst-uat-3-j-peg" class="mr-4" width="200" alt="" />
+            
+        </a>
+        <div class="media-body text">
+            <h3>04 December 2024</h3>
+            <p>
+                <a href="/media-events/recent-news/elbit-systems-uk-delivers-full-suite-of-fires-training-to-the-british-armed-forces">Elbit Systems UK delivers full suite of fires training to the British Armed Forces</a>
+            </p>
+        </div>
+    </li>
+    
+    <li class="media my-4">
+        <a href="/media-events/recent-news/elbit-systems-uk-completes-critical-design-review-for-the-dismounted-joint-fires-integrator-d-jfi-programme">
+            
+            <img src="https://s3.eu-west-2.amazonaws.com/esuk-website/images/UU9rY9gaRUS0iMNsKNGo-800w-d-jfi-soldier-close-up-02-jpg" class="mr-4" width="200" alt="" />
+            
+        </a>
+        <div class="media-body text">
+            <h3>17 September 2024</h3>
+            <p>
+                <a href="/media-events/recent-news/elbit-systems-uk-completes-critical-design-review-for-the-dismounted-joint-fires-integrator-d-jfi-programme">Elbit Systems UK completes Critical Design Review for the Dismounted Joint Fires Integrator (D-JFI) Programme </a>
+            </p>
+        </div>
+    </li>
+    
+    <li class="media my-4">
+        <a href="/media-events/recent-news/elbit-systems-uk-remain-at-the-forefront-of-british-armed-forces-training">
+            
+            <img src="https://s3.eu-west-2.amazonaws.com/esuk-website/images/u3tlxS7zQDG19nR17DNp-800w-1-x-31-g-pl-rk-wh-cxnfzjy-nr-730w-1599px-royal-artillery-firing-105mm-light-guns-mod-jpg-jpg" class="mr-4" width="200" alt="" />
+            
+        </a>
+        <div class="media-body text">
+            <h3>29 November 2023</h3>
+            <p>
+                <a href="/media-events/recent-news/elbit-systems-uk-remain-at-the-forefront-of-british-armed-forces-training">Elbit Systems UK remain at the forefront of British Armed Forces training</a>
+            </p>
+        </div>
+    </li>
+    
+    <li class="media my-4">
+        <a href="/media-events/recent-news/elbit-systems-uk-s-joint-fires-synthetic-trainer-delivers-over-4700-training-hours">
+            
+            <img src="https://s3.eu-west-2.amazonaws.com/esuk-website/images/GVua0BNROufZDrSwlV9w-800w-jfst-supporting-29-commando-regiment-plymouth-jpg" class="mr-4" width="200" alt="" />
+            
+        </a>
+        <div class="media-body text">
+            <h3>21 September 2023</h3>
+            <p>
+                <a href="/media-events/recent-news/elbit-systems-uk-s-joint-fires-synthetic-trainer-delivers-over-4700-training-hours">Elbit Systems UK’s Joint Fires Synthetic Trainer Delivers Over 4700 Training Hours</a>
+            </p>
+        </div>
+    </li>
+    
+    <li class="media my-4">
+        <a href="/media-events/recent-news/elbit-systems-uk-to-provide-further-icavs-d-to-support-uk-armed-forces">
+            
+            <img src="https://s3.eu-west-2.amazonaws.com/esuk-website/images/u46aqzgIQISLTBKN5BjF-800w-0-e-8-a-3811-j-pg" class="mr-4" width="200" alt="" />
+            
+        </a>
+        <div class="media-body text">
+            <h3>14 September 2023</h3>
+            <p>
+                <a href="/media-events/recent-news/elbit-systems-uk-to-provide-further-icavs-d-to-support-uk-armed-forces">Elbit Systems UK to provide further ICAVS(D) to support UK Armed Forces</a>
+            </p>
+        </div>
+    </li>
+    
+    <li class="media my-4">
+        <a href="/media-events/recent-news/elbit-systems-uk-selected-to-provide-artillery-and-mortar-simulators-to-the-british-army">
+            
+            <img src="https://s3.eu-west-2.amazonaws.com/esuk-website/images/q4KWTAaiSGOHrlL0leMM-800w-1599px-royal-artillery-firing-105mm-light-guns-mod-jpg" class="mr-4" width="200" alt="" />
+            
+        </a>
+        <div class="media-body text">
+            <h3>13 September 2023</h3>
+            <p>
+                <a href="/media-events/recent-news/elbit-systems-uk-selected-to-provide-artillery-and-mortar-simulators-to-the-british-army">Elbit Systems UK selected to provide Artillery and Mortar Simulators to the British Army</a>
+            </p>
+        </div>
+    </li>
+    
+    <li class="media my-4">
+        <a href="/media-events/recent-news/elbit-systems-uk-announces-new-centres-of-excellence">
+            
+            <img src="https://s3.eu-west-2.amazonaws.com/esuk-website/images/QXBQBpbeRLKo4DlteWVv-800w-d-s-c-f-1592-1-j-pg" class="mr-4" width="200" alt="" />
+            
+        </a>
+        <div class="media-body text">
+            <h3>12 September 2023</h3>
+            <p>
+                <a href="/media-events/recent-news/elbit-systems-uk-announces-new-centres-of-excellence">Elbit Systems UK announces new ‘Centres of Excellence’</a>
+            </p>
+        </div>
+    </li>
+    
+    <li class="media my-4">
+        <a href="/media-events/recent-news/elbit-systems-uk-opens-new-advanced-manufacturing-and-development-facility">
+            
+            <img src="https://s3.eu-west-2.amazonaws.com/esuk-website/images/Ob03JIqSo2r7nirisaTJ-800w-9f-0-c-8232-22-ea-4d-12-a-79-d-0246adbf-442-b-jpg" class="mr-4" width="200" alt="" />
+            
+        </a>
+        <div class="media-body text">
+            <h3>18 July 2023</h3>
+            <p>
+                <a href="/media-events/recent-news/elbit-systems-uk-opens-new-advanced-manufacturing-and-development-facility">Elbit Systems UK Opens New Advanced Manufacturing and Development Facility </a>
+            </p>
+        </div>
+    </li>
+    
+    <li class="media my-4">
+        <a href="/media-events/recent-news/craig-mackinlay-mp-opens-new-optic-centre-at-instro-precision-ltd-an-elbit-systems-uk-subsidiary">
+            
+            <img src="https://s3.eu-west-2.amazonaws.com/esuk-website/images/YxlJMlh0QheE4eiRGLGw-800w-23-05-elbit-instro-pr-craig-mackinlay-mp-wearing-nv-33-j-pg" class="mr-4" width="200" alt="" />
+            
+        </a>
+        <div class="media-body text">
+            <h3>23 May 2023</h3>
+            <p>
+                <a href="/media-events/recent-news/craig-mackinlay-mp-opens-new-optic-centre-at-instro-precision-ltd-an-elbit-systems-uk-subsidiary">Craig Mackinlay MP opens new Optic Centre at Instro Precision Ltd, an Elbit Systems UK subsidiary </a>
+            </p>
+        </div>
+    </li>
+    
+    <li class="media my-4">
+        <a href="/media-events/recent-news/elbit-systems-uk-to-deliver-ground-based-surveillance-radar-to-british-armed-forces">
+            
+            <img src="https://s3.eu-west-2.amazonaws.com/esuk-website/images/eq1gAWQBQ2CxPdzejZdj-800w-elbit-systems-uk-gbsr-2-jpg" class="mr-4" width="200" alt="" />
+            
+        </a>
+        <div class="media-body text">
+            <h3>23 May 2023</h3>
+            <p>
+                <a href="/media-events/recent-news/elbit-systems-uk-to-deliver-ground-based-surveillance-radar-to-british-armed-forces">Elbit Systems UK to Deliver Ground-Based Surveillance Radar to British Armed Forces</a>
+            </p>
+        </div>
+    </li>
+    
+    <li class="media my-4">
+        <a href="/media-events/recent-news/elbit-systems-uk-awarded-contract-for-future-armoured-vehicle-training">
+            
+            <img src="https://s3.eu-west-2.amazonaws.com/esuk-website/images/3iPbF6R7SyyhcBFfEosj-800w-vulcan-picture-2-jpeg" class="mr-4" width="200" alt="" />
+            
+        </a>
+        <div class="media-body text">
+            <h3>09 May 2023</h3>
+            <p>
+                <a href="/media-events/recent-news/elbit-systems-uk-awarded-contract-for-future-armoured-vehicle-training">Elbit Systems UK Awarded Contract for Future Armoured Vehicle Training</a>
+            </p>
+        </div>
+    </li>
+    
+    <li class="media my-4">
+        <a href="/media-events/recent-news/elbit-systems-uk-is-first-to-deploy-defence-virtual-simulation-2-d-v-s-2-s-oftware-for-british-army">
+            
+            <img src="https://s3.eu-west-2.amazonaws.com/esuk-website/images/ujkrSYZfQ1iuB7YCVnG2-800w-i-c-a-v-s-v-b-s-4-j-pg" class="mr-4" width="200" alt="" />
+            
+        </a>
+        <div class="media-body text">
+            <h3>04 April 2023</h3>
+            <p>
+                <a href="/media-events/recent-news/elbit-systems-uk-is-first-to-deploy-defence-virtual-simulation-2-d-v-s-2-s-oftware-for-british-army">Elbit Systems UK is First to Deploy Defence Virtual Simulation 2 (DVS2) Software for British Army</a>
+            </p>
+        </div>
+    </li>
+    
+    <li class="media ">
+        <a href="/media-events/recent-news/elbit-systems-uk-to-deliver-magni-x-uas-for-british-army">
+            
+            <img src="https://s3.eu-west-2.amazonaws.com/esuk-website/images/0qVXK2zpT9OhwWPhGpsy-800w-magnix-5-1500-px-jpg" class="mr-4" width="200" alt="" />
+            
+        </a>
+        <div class="media-body text">
+            <h3>12 January 2023</h3>
+            <p>
+                <a href="/media-events/recent-news/elbit-systems-uk-to-deliver-magni-x-uas-for-british-army">Elbit Systems UK to deliver Magni-X UAS for British Army</a>
+            </p>
+        </div>
+    </li>
+    
+</ul>
+<div class="pagination d-flex justify-content-between">
+    
+    
+    <a class="btn btn-primary ml-auto" href="/media-events/recent-news/2">Older</a>
+    
+</div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+		</section>
+		<aside id="side-content" class="col-lg-4 col-xs-12">
+			
+    
+
+
+
+
+    
+
+
+
+<div class="cards">
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="col-12 card-group fade-in cards-mod2">
+                
+                    
+                        
+                        
+                        
+                            
+                        
+                    
+                    <div class="card bg-primary text-dark  media-contact ">
+
+                        <div class="card-header">
+                            <h3 class="text-uppercase">Media Contact</h3>
+                        </div>
+                        <div class="card-body ">
+                            <p><a href="/cdn-cgi/l/email-protection#48252d2c2129082d242a213c3b313b3c2d253b653d23662b2725" rel="noopener noreferrer" target="_blank"><span class="__cf_email__" data-cfemail="1c717978757d5c79707e75686f656f6879716f316977327f7371">[email&#160;protected]</span></a></p><p><br></p>
+
+                        </div>
+                        
+                    </div>
+                
+                    
+                        
+                        
+                    
+                    <div class="card bg-primary text-dark ">
+
+                        <div class="card-header">
+                            <h3 class="text-uppercase"></h3>
+                        </div>
+                        <div class="card-body ">
+                            <h3>About Elbit Systems&nbsp;</h3><p>Elbit Systems Ltd. is an international high technology company engaged in a wide range of defense, homeland security and commercial programs throughout the world. The Company, which includes Elbit Systems and its subsidiaries, operates in the areas of aerospace, land, and naval systems, command, control, communications, computers, intelligence surveillance and reconnaissance (“C4ISR”), unmanned aircraft systems, advanced electro-optics, electro-optic space systems, EW suites, signal intelligence systems, data links and communications systems, radios and cyber-based systems and munitions. The Company also focuses on the upgrading of existing platforms, developing new technologies for defense, homeland security and commercial applications and providing a range of support services, including training and simulation systems.</p><p>For additional information visit:&nbsp;<a href="http://www.elbitsystems.com/" rel="noopener noreferrer" target="_blank">elbitsystems.com</a>, follow us on:&nbsp;<a href="https://twitter.com/ElbitSystemsLtd" rel="noopener noreferrer" target="_blank">Twitter</a>,&nbsp;<a href="https://www.linkedin.com/company/elbitsystems/" rel="noopener noreferrer" target="_blank">LinkedIn</a>,&nbsp;<a href="https://www.facebook.com/elbitsystemsltd/" rel="noopener noreferrer" target="_blank">Facebook</a>&nbsp;or visit our official&nbsp;<a href="https://www.youtube.com/c/elbitsystems" rel="noopener noreferrer" target="_blank">YouTube</a>&nbsp;Channel.</p><p>This press release contains forward‑looking statements (within the meaning of Section 27A of the Securities Act of 1933, as amended and Section 21E of the Securities Exchange Act of 1934, as amended) regarding Elbit Systems Ltd. and/or its subsidiaries (collectively the Company), to the extent such statements do not relate to historical or current fact.&nbsp;Forward-looking statements are based on management’s expectations, estimates, projections and assumptions.&nbsp;Forward‑looking statements are made pursuant to the safe harbor provisions of the Private Securities Litigation Reform Act of 1995, as amended.&nbsp;These statements are not guarantees of future performance and involve certain risks and uncertainties, which are difficult to predict.&nbsp;Therefore, actual future results, performance and trends may differ materially from these forward‑looking statements due to a variety of factors, including, without limitation: scope and length of customer contracts; governmental regulations and approvals; changes in governmental budgeting priorities; general market, political and economic conditions in the countries in which the Company operates or sells, including Israel and the United States among others; differences in anticipated and actual program performance, including the ability to perform under long-term fixed-price contracts; and the outcome of legal and/or regulatory proceedings.&nbsp;The factors listed above are not all-inclusive, and further information is contained in Elbit Systems Ltd.’s latest annual report on Form 20-F, which is on file with the U.S. Securities and Exchange Commission. All forward‑looking statements speak only as of the date of this release. The Company does not undertake to update its forward-looking statements. Elbit Systems Ltd., its logo, brand, product, service and process names appearing in this Press Release are the trademarks or service marks of Elbit Systems Ltd. or its affiliated companies.&nbsp;All other brand, product, service and process names appearing are the trademarks of their respective holders.&nbsp;Reference to or use of a product, service or process other than those of Elbit Systems Ltd. does not imply recommendation, approval, affiliation or sponsorship of that product, service or process by Elbit Systems Ltd. Nothing contained herein shall be construed as conferring by implication, estoppel or otherwise any license or right under any patent, copyright, trademark or other intellectual property right of Elbit Systems Ltd. or any third party, except as expressly granted herein.</p>
+
+                        </div>
+                        
+                    </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+		</aside>
+	</div>
+</div>
+
+
+
+    
+
+<footer>
+
+    <a class="btn btn-primary  fix-bottom back-to-top-btn text-dark text-uppercase px-3 pt-2 font-weight-light"
+        href="#">
+        <div class="d-flex flex-column">
+            <span class=" icon-up-open-big"></span>
+            back to top
+        </div>
+    </a>
+
+    <div class="footer bg-secondary text-white mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-2 col-sm-4 col-xs-6">
+                    <h4>About Us</h4>
+                    <ul class="list-unstyled">
+  
+    
+    <li>
+      <a href="/about-us/vision-mission">Vision & Mission</a>
+    </li>
+    
+
+  
+    
+    <li>
+      <a href="/about-us/ethics-conduct">Ethics & Conduct</a>
+    </li>
+    
+
+  
+    
+    <li>
+      <a href="/about-us/elbit-systems-uk-group-locations">ESUK Group Locations</a>
+    </li>
+    
+
+  
+    
+    <li>
+      <a href="/supplychain">Supply Chain</a>
+    </li>
+    
+
+  
+</ul>
+                </div>
+                
+                <div class="col-xl-4 col-sm-8 col-xs-6 footer-2col">
+                    <h4>What We Do</h4>
+                    <ul class="list-unstyled">
+  
+    
+    <li>
+      <a href="/what-we-do/air-space">Air & Space</a>
+    </li>
+    
+
+  
+    
+    <li>
+      <a href="/what-we-do/land">Land</a>
+    </li>
+    
+
+  
+    
+    <li>
+      <a href="/what-we-do/naval">Naval</a>
+    </li>
+    
+
+  
+    
+    <li>
+      <a href="/what-we-do/unmanned">Unmanned</a>
+    </li>
+    
+
+  
+    
+    <li>
+      <a href="/what-we-do/cyber">Cyber</a>
+    </li>
+    
+
+  
+    
+    <li>
+      <a href="/what-we-do/national-security">National Security</a>
+    </li>
+    
+
+  
+    
+    <li>
+      <a href="/what-we-do/commercial">Commercial</a>
+    </li>
+    
+
+  
+</ul>
+                </div>
+                
+                <div class="col-xl-2 col-sm-4 col-xs-6">
+                    <h4>PR & News</h4>
+                    <ul class="list-unstyled">
+  
+    
+    <li>
+      <a href="/media-events/recent-news">Recent News</a>
+    </li>
+    
+
+  
+</ul>
+                </div>
+                <div class="col-xl-2 col-sm-4 col-xs-6">
+                    <h4>Careers</h4>
+                    <ul class="list-unstyled">
+  
+    
+    <li>
+      <a href="/careers">Work with us</a>
+    </li>
+    
+
+  
+    
+    <li>
+      <a href="/vacancies">Vacancies</a>
+    </li>
+    
+
+  
+</ul>
+                </div>
+                <div class="col-xl-2 col-sm-4 col-xs-6">
+                    <h4>Contact</h4>
+                    <p>
+                        <!-- <a href="tel:+44 (0)20 3206 9400">+44 (0)20 3206 9400</a><br /> -->
+                        <a href="/cdn-cgi/l/email-protection#aec1c8c8c7cdcb9f9c9d">Send Email</a>
+                    </p>
+                    <h4>Follow Us</h4>
+                    <ul class="list-inline footer-social">
+  
+    <li class="list-inline-item">
+        <a class="icon icon-linkedin" aria-label="linkedin"
+            href="https://www.linkedin.com/company/elbit-systems-uk/"></a>
+    </li>
+    <li class="list-inline-item">
+        <a class="icon icon-youtube" aria-label="youtube"
+            href="https://www.youtube.com/channel/UCgWM6EKynkUOg4AO3DZlMig"></a>
+    </li>
+
+</ul>
+                </div>
+                <div class="col-12 small footer-small">
+                    <div class="row">
+                        <div class="col-12 mb-5">
+                            <img src="https://diox3em1zayec.cloudfront.net/assets/images/ERS_Gold_Undated_banner_4x.png" width="300" class="img-fluid" alt="Employer Recognition Scheme - Gold Award" />
+                        </div>
+                        <div class="col-lg-auto col-md-12">
+                            <ul class="list-inline">
+   
+        <li class="list-inline-item ">
+            <a href="/privacy-policy">Privacy Policy</a>
+        </li>
+    
+        <li class="list-inline-item ">
+            <a href="/cookie-policy">Cookie Policy</a>
+        </li>
+    
+        <li class="list-inline-item ">
+            <a href="/environmental-policy">Environmental Policy</a>
+        </li>
+    
+        <li class="list-inline-item ">
+            <a href="/gender-reporting">Gender Reporting</a>
+        </li>
+    
+        <li class="list-inline-item ">
+            <a href="/carbon-reduction-plan">Carbon Reduction Plan</a>
+        </li>
+    
+        <li class="list-inline-item ">
+            <a href="/terms-of-use">Terms of Use</a>
+        </li>
+    
+</ul>
+
+
+                        </div>
+                        
+                        <div class="col-12 text">
+                            
+                            <p>&copy; Elbit Systems UK Limited, its logo, brand, product, service and process names appearing in this issue are the trademarks or service marks of Elbit Systems UK Limited or its affiliated companies. All other brand, product, service and process names appearing are the trademarks of their respective holders. Reference to or use of a product, service or process other than those of Elbit Systems UK Limited does not imply recommendation, approval, affiliation, or sponsorship of that product, service or process by Elbit Systems UK Limited. Nothing contained herein shall be construed as conferring by implication, estoppel or otherwise any license or right under any patent, copyright, trademark, or other intellectual property right of Elbit Systems UK Limited or any third party, except as expressly granted herein.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Email modal -->
+    <div class="modal emailmodal" id="privacyModal" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font-weight-bold">Contact us for more information</h5>
+                    <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-check checkboxTextWrapper">
+                        <input class="form-check-input " id="privacyConsent" type="checkbox" value="">
+                        <label class="form-check-label" for="privacyConsent">
+                            By checking this box you give us your consent to use that data according to our
+                            <a href="/policies">
+                                Privacy Policy.
+                            </a>
+                        </label>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <a class="btn-indicator btn-indicator-secondary email-submit disabledContent" href="mailto"
+                        id="emailReveal">
+                        Send Email
+                        <span class="indicator-line"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Cookie pop up -->
+
+    <div class="bg-dark text-white" id="cookieMessage">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>We use cookies</h3>
+                    <div class="row">
+                        <div class="col">
+                            Welcome! By entering our site, you accept our terms of use, privacy policy, and our use of
+                            cookies. Visit our <a class="cookielink" href="/policies" rel="noopener" target="_blank">privacy policy</a> page to learn more.
+                        </div>
+                        <div class="col-sm-auto">
+                            <button class="btn btn-secondary" id="cookieAccept">Accept</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+
+</html>
