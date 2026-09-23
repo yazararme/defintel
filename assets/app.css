@@ -547,6 +547,9 @@ a { color: var(--brand); text-underline-offset: 2px; }
    soluk. Kuralı hiç yoktu — gövdenin serifini miras alıp rayın tek serif
    öğesi olarak duruyordu, üstelik 16px'te, etiketlerden büyük. */
 .rail-sub { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+/* K2 — iki oyuncu listesinin neyi saydığını söyleyen etiket: rayda "brifingde geçen",
+   /oyuncular.html'in üst satırında "başlıklarda geçen". Aynı meta ses; yeni renk yok. */
+.tally-src { font-family: var(--mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
 /* R28 — KANIT-BOŞLUĞU: izlenen bir oyuncunun kendi kaynağı okunamadıysa Tarama'nın altında
    tek satır. Rayın mono sesi, rail-value'nun rengi — durum rengi yok, neden ve sayı yok.
    Dar ekranda blok satır yönünde; flex-basis onu Tarama'nın altına indirir. */

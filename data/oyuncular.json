@@ -46,7 +46,7 @@
    }
   ],
   "son": "2026-09-23",
-  "gun_30g": 9
+  "gun_30g": 7
  },
  "nammo": {
   "ad": "Nammo",
@@ -209,7 +209,7 @@
    }
   ],
   "son": "2026-09-23",
-  "gun_30g": 8
+  "gun_30g": 5
  },
  "poongsan": {
   "ad": "Poongsan",
@@ -270,8 +270,8 @@
     "u": "/reports/2026-09-19.html#g1"
    }
   ],
-  "son": "2026-09-23",
-  "gun_30g": 2
+  "son": "",
+  "gun_30g": 0
  },
  "pgz": {
   "ad": "PGZ",
@@ -382,8 +382,8 @@
     "u": "/reports/2026-09-14.html#g13"
    }
   ],
-  "son": "2026-09-14",
-  "gun_30g": 1
+  "son": "",
+  "gun_30g": 0
  },
  "pof": {
   "ad": "Pakistan Ordnance Factories",
@@ -478,7 +478,7 @@
    }
   ],
   "son": "2026-09-23",
-  "gun_30g": 3
+  "gun_30g": 2
  },
  "northrop-grumman": {
   "ad": "Northrop Grumman",
@@ -555,7 +555,7 @@
    }
   ],
   "son": "2026-09-19",
-  "gun_30g": 4
+  "gun_30g": 3
  },
  "thales": {
   "ad": "Thales",
@@ -615,7 +615,7 @@
    }
   ],
   "son": "2026-09-23",
-  "gun_30g": 3
+  "gun_30g": 2
  },
  "iai": {
   "ad": "Israel Aerospace Industries",
@@ -844,8 +844,8 @@
     "u": "/reports/2026-09-18.html#g2"
    }
   ],
-  "son": "2026-09-18",
-  "gun_30g": 1
+  "son": "",
+  "gun_30g": 0
  },
  "fiocchi": {
   "ad": "Fiocchi",
@@ -894,7 +894,7 @@
    }
   ],
   "son": "2026-09-23",
-  "gun_30g": 7
+  "gun_30g": 6
  },
  "roketsan": {
   "ad": "Roketsan",

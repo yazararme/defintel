@@ -45,6 +45,12 @@ Chrome, so on 23 Sep the token fell onto a line of its own there (item 4 at 817p
 latest report is measured with every summary "ilk:" token forced onto its own line (a <br> before
 it), bare and with 0.15px letter-spacing on the title and summary (which reproduces CI's wrap on
 23 Sep); h2#ozet top must stay ≤300 and item 4's bottom ≤812 in every variant.
+K2: two player lists, two labels — at 375×812 and 1440×900, light and dark, the latest report's
+Oyuncular rail block carries "brifingde geçen" (mono, --muted, before the names) and the
+/oyuncular.html top line reads "Bugün N başlıklarda geçen · son 30 günde N · izlenen N" with the
+label right after the day's number, also with the Mühimmat chip on; every rail name links to a
+#g anchor (briefing-body matches only) and "Bugün N" equals the day's headline-matched players; in the KAPSAM_BOZ=thales state
+the top line is only "izlenen N" and "başlıklarda geçen" appears nowhere.
 Rev 25: SİLME-YOK · İPUCU-YOK — scripts/test_silme_yok.py (offline collection over the nine
 filter-noted sources: read == written; a deliberately broken run exits red with the alert), the
 build's "İPUCU-YOK / S8" line for the latest day (hint-only 0), the offline re-categorisation of
@@ -188,6 +194,75 @@ ok = (tally == f"izlenen {len(cfg)}" and not sayili and names[:2] == ["Anduril",
       and tally_m == f"izlenen {muh}" and thales >= 1)
 print(f"<64: '{tally}' · sayılı satır {len(sayili)} · ilk iki {names[:2]} · Mühimmat → '{tally_m}' (beklenen {muh})"
       f" · ?oyuncu=thales {thales} satır")
+sys.exit(0 if ok else 1)
+"""
+
+
+# K2 (S): iki oyuncu listesi, iki etiket — 375×812 ve 1440×900, açık/koyu. Brifing rayının
+# Oyuncular bloğunda "brifingde geçen"; /oyuncular.html üst satırında günlük sayının hemen
+# arkasında "başlıklarda geçen" (Mühimmat çipi açıkken de, sayı yeniden sayılmış hâlde). İkisi de
+# mono ve --muted (rayda .rail-label'la aynı aile ve renk; sayfada .kicker'ın ailesi, --muted üst satırın rengi). argv: base,
+# rapor yolu, hâl ("tam" | "boz"). "boz" (<64): üst satır yalnız "izlenen N", "başlıklarda geçen"
+# hiçbir yerde yok; rayın etiketi durur.
+K2_JS = r"""
+import re, sys
+from playwright.sync_api import sync_playwright
+base, rapor, hal = sys.argv[1], sys.argv[2], sys.argv[3]
+beklenen = int(sys.argv[4]) if len(sys.argv) > 4 else None
+RAY = r'''() => {
+  const lab = [...document.querySelectorAll('.rail-label')].find(e => e.textContent.trim() === 'Oyuncular');
+  if (!lab) return null;
+  const blok = lab.closest('.rail-block'), src = blok.querySelector('.rail-src');
+  const r = src && src.getBoundingClientRect(), cs = src && getComputedStyle(src), ls = getComputedStyle(lab);
+  const val = blok.querySelector('.rail-value');
+  return {text: src ? src.innerText.trim() : '', gorunur: !!r && r.width > 0 && r.height > 0,
+          mono: !!cs && cs.fontFamily === ls.fontFamily, renk: !!cs && cs.color === ls.color,
+          once: !!src && !!val && (src.compareDocumentPosition(val) & 4) > 0,
+          adlar: [...val.querySelectorAll('a:not(.rival-count)')].map(a => a.getAttribute('href')),
+          tasma: document.documentElement.scrollWidth > innerWidth};
+}'''
+TALLY = r'''() => {
+  const t = document.getElementById('ptally'), src = t.querySelector('.tally-src');
+  const kick = getComputedStyle(document.querySelector('.kicker'));
+  const cs = src && getComputedStyle(src);
+  const bugun = t.querySelector('[data-tally="today"]');
+  return {metin: t.innerText.replace(/\s+/g, ' ').trim(), src: src ? src.innerText.trim() : '',
+          bitisik: !!src && !!bugun && bugun.nextElementSibling === src,
+          mono: !!cs && cs.fontFamily === kick.fontFamily, renk: !!cs && cs.color === getComputedStyle(t).color,
+          heryerde: document.body.innerText.includes('başlıklarda geçen'),
+          tasma: document.documentElement.scrollWidth > innerWidth};
+}'''
+ok, out = True, []
+with sync_playwright() as p:
+    try: b = p.chromium.launch()
+    except Exception: b = p.chromium.launch(channel="chrome")
+    for w, h in ((375, 812), (1440, 900)):
+        for tema in ("light", "dark"):
+            pg = b.new_context(service_workers="block", viewport={"width": w, "height": h},
+                               color_scheme=tema).new_page()
+            pg.goto(base + rapor); pg.wait_for_timeout(300)
+            r = pg.evaluate(RAY)
+            k = (bool(r) and r["text"] == "brifingde geçen" and r["gorunur"] and r["mono"] and r["renk"]
+                 and r["once"] and not r["tasma"] and all(h.startswith("#g") for h in r["adlar"]))
+            pg.goto(base + "/oyuncular.html"); pg.wait_for_timeout(300)
+            t = pg.evaluate(TALLY)
+            pg.click('.pchip[data-seg="muhimmat"]'); pg.wait_for_timeout(200)
+            tm = pg.evaluate(TALLY)
+            if hal == "tam":
+                rx = r"Bugün \d+ başlıklarda geçen · son 30 günde \d+ · izlenen \d+"
+                k2 = (all(re.fullmatch(rx, x["metin"]) and x["src"] == "başlıklarda geçen" and x["bitisik"]
+                          and x["mono"] and x["renk"] and not x["tasma"] for x in (t, tm))
+                      and t["metin"] != tm["metin"]
+                      and (beklenen is None or t["metin"].startswith(f"Bugün {beklenen} ")))
+            else:
+                k2 = all(re.fullmatch(r"izlenen \d+", x["metin"]) and not x["src"] and not x["heryerde"]
+                         for x in (t, tm))
+            ok = ok and k and k2
+            out.append(f"{w}/{tema}: ray {len(r['adlar']) if r else 0} ad, hepsi #g {'✓' if k else '✗ ' + str(r)} · üst satır {'✓' if k2 else '✗ ' + str(t)}"
+                       f" '{t['metin']}' → Mühimmat '{tm['metin']}'")
+            pg.close()
+    b.close()
+print(" | ".join(out[::2]) if ok else "\n".join(out))
 sys.exit(0 if ok else 1)
 """
 
@@ -1300,6 +1375,22 @@ def r26_checks(fails):
         fails.append("ceviri-dedektoru-test.yml")
 
 
+def k2_check(py, hal, fails):
+    """K2: iki oyuncu listesinin etiketleri — "tam" (64/64) ya da "boz" (KAPSAM_BOZ, <64)."""
+    rapor = latest("reports", "????-??-??.html")
+    # "Bugün N" = günün başlıklarında eşleşen oyuncu sayısı (brifing gövdesi değil).
+    sys.path.insert(0, str(ROOT))
+    import build as _b, json
+    gun = pathlib.Path(rapor).stem
+    items = json.loads((ROOT / "data" / "news" / f"{gun}.json").read_text(encoding="utf-8")).get("items", [])
+    beklenen = len(set(_b.tag_player_headlines(items)))
+    k = subprocess.run([py, "-c", K2_JS, BASE, rapor, hal, str(beklenen)], cwd=ROOT, capture_output=True, text=True)
+    print(f"{'ok  ' if k.returncode == 0 else 'FAIL'} K2 etiketler ({hal}, başlıkta eşleşen {beklenen}) · "
+          f"{k.stdout.strip() or k.stderr[-400:]}")
+    if k.returncode:
+        fails.append(f"K2 {hal}")
+
+
 def main():
     fails = []
     build = subprocess.run([sys.executable, "build.py"], cwd=ROOT, capture_output=True, text=True)
@@ -1394,6 +1485,7 @@ def main():
         print(f"{'ok  ' if ks.returncode == 0 else 'FAIL'} KAPSAM-SAYI 64/64 hâli · {satir[0] if satir else ks.stderr[-300:]}")
         if ks.returncode:
             fails.append("KAPSAM-SAYI 64/64")
+        k2_check(py, "tam", fails)
         # <64 hâli: bilerek bozulan derleme, denetim, sonra normal derlemeye dönüş
         boz = subprocess.run([sys.executable, "build.py"], cwd=ROOT, capture_output=True, text=True,
                              env={**os.environ, "KAPSAM_BOZ": "thales"})
@@ -1415,6 +1507,7 @@ def main():
                   f"{satir2[0] if satir2 else ks2.stdout[-300:] + ks2.stderr[-300:]}")
             if ks2.returncode:
                 fails.append("KAPSAM-SAYI <64 --oyuncular")
+            k2_check(py, "boz", fails)
         finally:
             back = subprocess.run([sys.executable, "build.py"], cwd=ROOT, capture_output=True, text=True,
                                   env={k: v for k, v in os.environ.items() if k != "KAPSAM_BOZ"})

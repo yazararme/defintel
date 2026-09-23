@@ -457,28 +457,21 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
     # sırada ve bağlantının nereye gittiğinde — ama başlık artık kimseyi
     # bir şey ilan etmiyor; "oyuncu" bir sınıflandırma değil, bir gözlem.
     if rivals or turkish:
-        # Bağlantı rolü değil delili izler. Bir süre rol izliyordu: Türk
-        # şirketi o günün bir gelişmesinde geçse bile medya takibine
-        # gidiyordu — 23 Eylül'de Aselsan #g7'deydi ve bağlantı onu atlıyordu.
-        # Yan yana duran iki ad, görünür bir sebep olmadan farklı davranıyordu.
-        # Kural tek: adı bugünün bir gelişmesinde geçiyorsa oraya, yalnız
-        # başlık taramasında geçiyorsa taramaya.
+        # K2 (23 Eylül, müşteri kararı): ray "brifingde geçen" der, öyleyse
+        # yalnız brifing gövdesinde (bir gelişmede) eşleşen adları sayar; her ad
+        # kendi gelişmesine bağlanır. Rev 17'nin ikinci geçişi (günün başlıkları)
+        # artık rayda değil: o soru /oyuncular.html'in "başlıklarda geçen"
+        # sayısının ve medya takibinin ?oyuncu= süzgecinin. Sıra: rakipler
+        # gövdedeki sırayla, sonra Türk sanayii yapılandırma sırasıyla.
         dev_anchor = {name: anchor for name, anchor, _role in rivals if anchor}
         units = []
         for name, anchor, role in rivals:
             if anchor and role == "rakip":
                 units.append(f'<a href="{anchor}">{html.escape(name)}</a>')
-        for name, nid, hit in turkish:
-            if not hit:
-                continue
+        for name, _nid, _hit in turkish:
             anchor = dev_anchor.get(name)
             if anchor:
                 units.append(f'<a href="{anchor}">{html.escape(name)}</a>')
-            else:
-                units.append(
-                    f'<a href="{day_url("news", iso)}?oyuncu={nid}">'
-                    f'{html.escape(name)}</a>' if has_news else html.escape(name)
-                )
         arrow = '<a class="rival-count" href="/oyuncular.html">→</a>'
         if units:
             # Ok son adla aynı kırılmaz birimde: tek başına satır başına
@@ -490,7 +483,11 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
         else:
             body = f'<span class="nb">— {arrow}</span>'
         rail.append(
+            # K2: iki oyuncu listesi farklı şey sayıyor; her biri neyi saydığını
+            # etiketiyle söyler. Ray "brifingde geçen", /oyuncular.html'in günlük
+            # sayısı "başlıklarda geçen". Mono + --muted: rayın mevcut alt satır sesi.
             '<div class="rail-block"><span class="rail-label">Oyuncular</span>'
+            '<span class="rail-sub rail-src">brifingde geçen</span>'
             f'<span class="rail-value rail-flow">{body}</span></div>'
         )
     news_counts = news_counts or {}
@@ -1148,7 +1145,7 @@ def tr_collate(text):
     return key
 
 
-def players_page(hist, kap):
+def players_page(hist, kap, today=""):
     """/oyuncular.html — kim, hangi segmentte; kapsam tamsa en son ne zaman, kaç gün.
 
     Tek liste. Bir süre üç başlık altında duruyordu — "Uluslararası rakipler",
@@ -1173,7 +1170,10 @@ def players_page(hist, kap):
     tam = kap["tam"]
     labels = segment_labels()
     order = {r["id"]: i for i, r in enumerate(config)}
-    today = max((e.get("son") or "" for e in hist.values()), default="")
+    # K2: "bugün" en son kaynağın günü. `son` artık yalnız başlık geçişinden;
+    # en büyüğünü "bugün" saymak, bugün hiçbir başlıkta ad geçmediyse dünü
+    # "bugün" diye basardı.
+    today = today or max((e.get("son") or "" for e in hist.values()), default="")
 
     def row(rival):
         e = hist.get(rival["id"], {})
@@ -1220,7 +1220,11 @@ def players_page(hist, kap):
     if tam:
         seen_today = sum(1 for e in hist.values() if e.get("son") and e["son"] == today)
         seen_30 = sum(1 for e in hist.values() if e.get("gun_30g"))
-        tally = (f'Bugün <strong data-tally="today">{seen_today}</strong> ·\n'
+        # K2: günlük sayı neyi saydığını söyler — brifing rayının "brifingde
+        # geçen" listesinden farklı bir soru. Etiket yalnız sayıyla birlikte
+        # basılır: alt-64 hâlinde sayı yok, etiket de yok (Rev 21).
+        tally = (f'Bugün <strong data-tally="today">{seen_today}</strong>'
+                 f' <span class="tally-src">başlıklarda geçen</span> ·\n'
                  f'    son {WINDOW_DAYS} günde <strong data-tally="seen">{seen_30}</strong> ·\n'
                  f'    {tracked}')
     else:
@@ -2073,7 +2077,7 @@ def main():
         PLAYERS_JSON.write_text(
             json.dumps(players_json(hist, kap["tam"]), ensure_ascii=False, indent=1) + "\n",
             encoding="utf-8")
-        players_file.write_text(players_page(hist, kap), encoding="utf-8")
+        players_file.write_text(players_page(hist, kap, sources[-1][0]), encoding="utf-8")
         kapsam_report(kap, previous)
         # Eski adres ölü kalmasın: rayda haftalardır bu bağlantı duruyordu.
         (ROOT / "rakipler.html").write_text(
@@ -2366,6 +2370,7 @@ def player_history(sources, news):
     hist = {r["id"]: {"ad": r["name"], "rol": r.get("role", "rakip"),
                       "segmentler": r.get("segments") or [],
                       "gunler": []} for r in config}
+    baslik = {r["id"]: set() for r in config}   # K2: başlıkta geçtiği günler
 
     def record(name, iso, url, strong):
         rival = by_name.get(name)
@@ -2386,14 +2391,21 @@ def player_history(sources, news):
                 record(name, iso, f"/reports/{iso}.html{anchor}", True)
         for name in tag_player_headlines(items):
             record(name, iso, f"/haberler/{iso}.html?oyuncu={by_name[name]['id']}", False)
+            baslik[by_name[name]["id"]].add(iso)
 
+    # K2: `gunler` iki geçişin birleşimi kalır (arşivin ?oyuncu= süzgeci onu
+    # okuyor, brifing günü de bir gün). `son` ve `gun_30g` ise yalnız başlık
+    # geçişinden: /oyuncular.html "başlıklarda geçen"i sayıyor, brifing rayı
+    # "brifingde geçen"i. 23 Eylül'de CSG yalnız brifingde (#g1) geçiyordu ve
+    # "Bugün"e giriyordu — sayı etiketinin söylediğinden birini fazla sayıyordu.
     latest = _dt.date.fromisoformat(sources[-1][0])
-    for entry in hist.values():
+    for rid, entry in hist.items():
         entry["gunler"].sort(key=lambda d: d["g"], reverse=True)
-        entry["son"] = entry["gunler"][0]["g"] if entry["gunler"] else ""
+        gunler_b = sorted(baslik[rid], reverse=True)
+        entry["son"] = gunler_b[0] if gunler_b else ""
         entry["gun_30g"] = sum(
-            1 for d in entry["gunler"]
-            if (latest - _dt.date.fromisoformat(d["g"])).days < WINDOW_DAYS)
+            1 for g in gunler_b
+            if (latest - _dt.date.fromisoformat(g)).days < WINDOW_DAYS)
     return hist
 
 
