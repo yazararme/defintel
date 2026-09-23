@@ -65,6 +65,16 @@ left border, the rule over each section heading is ≥3:1 against the page); and
 storage, service workers ALLOWED, 375×812) on the latest report: the notification card is in the
 flow right above .endnav, the footer bell is visible and hit-testable while it is open and still
 after the install bar appears, and "Şimdi değil" hides it for the next load.
+Rev 28: KANIT-BOŞLUĞU — the build's "KANIT-BOŞLUĞU <gün>:" line (on the 23 Sep build: the sentence
+"Elbit Systems ve Northrop Grumman'ın kendi duyuruları bugün okunamadı." and one alert naming both
+sources), static checks over every built report (the .rail-not line is present exactly on the days
+whose failures[] ∩ rakipler.json `kaynak` is non-empty, absent on days without a sweep), no
+"yanıt vermedi" on any Kaynaklar page and "oyuncu: Elbit" / "oyuncu: Northrop Grumman" beside those
+rows, rule controls on synthetic input (an empty intersection → no line and no alert; one player → one
+line with the right genitive and one alert; the rail carries the line only when given), and a 375×812
+pass: on /reports/2026-09-23.html and / the line sits directly under the Tarama row, --ink-2 mono, once
+per page, no sideways scroll; the first report (no sweep) has none; the Kaynaklar page shows no
+"yanıt vermedi".
 Later revisions extend CHECKS / PAGES. Exit 1 on any failure.
 """
 import os
@@ -725,6 +735,157 @@ def r32_checks(build_stdout, py, fails):
         fails.append("İLK-EKRAN en kötü hâl")
 
 
+# Rev 28: KANIT-BOŞLUĞU — 375×812, Tarama'nın altındaki tek satır ve Kaynaklar sayfası.
+KANIT_JS = r"""
+import sys, json
+from playwright.sync_api import sync_playwright
+base, sayfalar, kaynak = sys.argv[1], sys.argv[2].split(","), sys.argv[3]
+OLC = '''() => {
+  const n = document.querySelectorAll(".rail-not");
+  const t = [...document.querySelectorAll(".rail-label")].find(e => e.textContent.trim() === "Tarama");
+  const tasma = document.documentElement.scrollWidth - innerWidth;
+  if (!n.length) return {adet: 0, tasma};
+  const v = t ? t.parentElement.querySelector(".rail-value") : null;
+  const rn = n[0].getBoundingClientRect(), rv = v ? v.getBoundingClientRect() : null;
+  const ink = document.createElement("span"); ink.style.color = "var(--ink-2)"; document.body.appendChild(ink);
+  const ink2 = getComputedStyle(ink).color; ink.remove();
+  const cs = getComputedStyle(n[0]);
+  return {adet: n.length, metin: n[0].innerText.trim(), ayni_blok: !!(t && t.parentElement.contains(n[0])),
+          altinda: !!(rv && rn.top >= rv.bottom - 1), sol: t ? Math.round(rn.left - t.getBoundingClientRect().left) : null,
+          renk: cs.color === ink2, mono: /Plex Mono|monospace/.test(cs.fontFamily), tasma};
+}'''
+out = {}
+with sync_playwright() as p:
+    try: b = p.chromium.launch(channel="chrome")
+    except Exception: b = p.chromium.launch()
+    ctx = b.new_context(service_workers="block", viewport={"width": 375, "height": 812}, is_mobile=True, has_touch=True)
+    pg = ctx.new_page()
+    for s in sayfalar:
+        pg.goto(base + s, wait_until="load"); out[s] = pg.evaluate(OLC)
+    pg.goto(base + kaynak, wait_until="load")
+    govde = pg.inner_text("main")
+    out["kaynak"] = {"yanit_vermedi": "yanıt vermedi" in govde.lower(),
+                     "elbit": "oyuncu: Elbit" in govde, "northrop": "oyuncu: Northrop Grumman" in govde,
+                     "tasma": pg.evaluate("document.documentElement.scrollWidth - innerWidth")}
+    b.close()
+print(json.dumps(out, ensure_ascii=False))
+"""
+
+
+def r28_checks(build_stdout, py, fails):
+    """Rev 28: KANIT-BOŞLUĞU — build satırı, statik, kural kontrolleri, 375px."""
+    import json
+    sys.path.insert(0, str(ROOT))
+    import build as B
+    from scripts import uyari
+    iso = sorted((ROOT / "source").glob("????-??-??.md"))[-1].stem
+    cumle = "Elbit Systems ve Northrop Grumman'ın kendi duyuruları bugün okunamadı."
+    satirlar = [l.strip() for l in build_stdout.splitlines()]
+    ana = [l for l in satirlar if l.startswith(f"· KANIT-BOŞLUĞU {iso}:")]
+    uy = [l for l in satirlar if l.startswith("! KANIT-BOŞLUĞU ·")]
+    if iso == "2026-09-23":
+        ok = (bool(ana) and ana[0].endswith(cumle) and len(uy) == 1
+              and "Elbit Systems (" in uy[0] and "Northrop Grumman (" in uy[0])
+    else:
+        ok = bool(ana)
+    print(f"{'ok  ' if ok else 'FAIL'} KANIT-BOŞLUĞU build · {ana[0].lstrip('· ') if ana else 'satır yok'}")
+    for l in uy:
+        print(f"       {l[:200]}")
+    if not ok:
+        fails.append("KANIT-BOŞLUĞU build")
+
+    # Statik: satır tam olarak kesişimi boş olmayan günlerde.
+    news = B.load_news()
+    yanlis, gunler = [], []
+    for f in sorted((ROOT / "reports").glob("????-??-??.html")):
+        h = f.read_text(encoding="utf-8")
+        beklenen = [k for k, *_ in B.kanit_boslugu(news.get(f.stem))]
+        var = re.findall(r'<span class="rail-not"[^>]*>([^<]*)</span>', h)
+        gunler.append(f"{f.stem[8:]}:{len(beklenen) if f.stem in news else '—'}")
+        if (len(var) != (1 if beklenen else 0)
+                or (beklenen and var[0].replace("&#x27;", "'") != B.kanit_cumlesi(beklenen))):
+            yanlis.append(f.stem)
+    kok = (ROOT / "index.html").read_text(encoding="utf-8")
+    kok_ok = kok.count('class="rail-not"') == (1 if B.kanit_boslugu(news.get(iso)) else 0)
+    sayfalar = sorted((ROOT / "haberler").glob("*-kaynaklar.html"))
+    yv = [f.name for f in sayfalar if "yanıt vermedi" in f.read_text(encoding="utf-8")]
+    son_k = ROOT / "haberler" / f"{iso}-kaynaklar.html"
+    k_html = son_k.read_text(encoding="utf-8") if son_k.exists() else ""
+    adlar = ("oyuncu: Elbit<" in k_html and "oyuncu: Northrop Grumman<" in k_html) if iso == "2026-09-23" else True
+    ok = not yanlis and kok_ok and not yv and adlar
+    print(f"{'ok  ' if ok else 'FAIL'} KANIT-BOŞLUĞU statik · satır = kesişim {len(gunler) - len(yanlis)}/{len(gunler)} rapor "
+          f"(gün:ad, — = medya takibi yok: {' '.join(gunler)}) · index.html {kok_ok} · "
+          f"“yanıt vermedi” {len(yv)}/{len(sayfalar)} Kaynaklar sayfasında · Elbit/Northrop satırında ad {adlar}"
+          + (f" · yanlış: {yanlis}" if yanlis else ""))
+    if not ok:
+        fails.append("KANIT-BOŞLUĞU statik")
+
+    # Kural kontrolleri: boş kesişim → satır yok, uyarı yok; tek oyuncu → tek satır, tek uyarı.
+    # CI'da gerçek uyarı dosyasına ve (A)'ya yazmasın diye RUNNER_TEMP / GITHUB_STEP_SUMMARY gizlenir.
+    gizli = {k: os.environ.pop(k) for k in ("RUNNER_TEMP", "GITHUB_STEP_SUMMARY") if k in os.environ}
+    try:
+        once = len(uyari._BELLEK)
+        bos = {"failures": [{"source": "Hartpunkt", "error": "x"}, {"source": "AeroVironment", "error": "403"}]}
+        bos_ad = B.kanit_boslugu_kurali("2026-09-30", bos)
+        bos_uy = len(uyari._BELLEK) - once
+        tek = {"failures": [{"source": "Elbit Systems", "error": "feed parsed but empty"}]}
+        tek_ad = B.kanit_boslugu_kurali("2026-09-30", tek)
+        tek_uy = len(uyari._BELLEK) - once - bos_uy
+        yok = B.kanit_boslugu_kurali("2026-09-30", None)
+    finally:
+        os.environ.update(gizli)
+    ekler = {a: B._ilgi_eki(a) for a in ("Northrop Grumman", "Leonardo", "MBDA", "Elbit Systems", "KNDS")}
+    ek_ok = ekler == {"Northrop Grumman": "'ın", "Leonardo": "'nun", "MBDA": "'nın",
+                      "Elbit Systems": "'in", "KNDS": "'nin"}
+    ray_bos = B.build_report({"title": "t"}, "", "2026-09-30", scan=(1, 2))
+    ray_dolu = B.build_report({"title": "t"}, "", "2026-09-30", scan=(1, 2), bosluk=["Leonardo"])
+    ok = (bos_ad == [] and bos_uy == 0 and tek_ad == ["Elbit Systems"] and tek_uy == 1 and yok == []
+          and B.kanit_html([]) == "" and ek_ok and "rail-not" not in ray_bos
+          and "Leonardo&#x27;nun kendi duyuruları bugün okunamadı." in ray_dolu)
+    print(f"{'ok  ' if ok else 'FAIL'} KANIT-BOŞLUĞU kural kontrolleri · boş kesişim → satır {bool(bos_ad)}, uyarı {bos_uy} · "
+          f"Elbit tek → {B.kanit_cumlesi(tek_ad)!r}, uyarı {tek_uy} · medya takibi yok → satır {bool(yok)} · "
+          f"ekler {' '.join(a + e for a, e in ekler.items())}")
+    if not ok:
+        fails.append("KANIT-BOŞLUĞU kural kontrolleri")
+
+    if not py:
+        print("FAIL KANIT-BOŞLUĞU 375px · Playwright'lı python yok")
+        fails.append("KANIT-BOŞLUĞU 375px")
+        return
+    ilk = sorted((ROOT / "reports").glob("????-??-??.html"))[0].stem
+    sayfa = [f"/reports/{iso}.html", "/", f"/reports/{ilk}.html"]
+    r = subprocess.run([py, "-c", KANIT_JS, BASE, ",".join(sayfa), f"/haberler/{iso}-kaynaklar.html"],
+                       cwd=ROOT, capture_output=True, text=True)
+    try:
+        o = json.loads(r.stdout)
+    except ValueError:
+        print(f"FAIL KANIT-BOŞLUĞU 375px · {r.stderr[-400:]}")
+        fails.append("KANIT-BOŞLUĞU 375px")
+        return
+    beklenen = B.kanit_cumlesi([k for k, *_ in B.kanit_boslugu(news.get(iso))])
+    kotu = []
+    for s in sayfa[:2]:
+        x = o[s]
+        if not (x["adet"] == (1 if beklenen else 0) and (not beklenen or (
+                x["metin"] == beklenen and x["ayni_blok"] and x["altinda"] and x["sol"] == 0
+                and x["renk"] and x["mono"])) and x["tasma"] <= 0):
+            kotu.append(f"{s}: {x}")
+    if not B.kanit_boslugu(news.get(ilk)) and o[sayfa[2]]["adet"] != 0:
+        kotu.append(f"{sayfa[2]}: {o[sayfa[2]]}")
+    k = o["kaynak"]
+    if k["yanit_vermedi"] or k["tasma"] > 0 or (iso == "2026-09-23" and not (k["elbit"] and k["northrop"])):
+        kotu.append(f"kaynaklar: {k}")
+    x = o[sayfa[0]]
+    print(f"{'ok  ' if not kotu else 'FAIL'} KANIT-BOŞLUĞU 375px · {sayfa[0]} ve /: "
+          + (f"“{x.get('metin')}” Tarama'nın altında {x.get('altinda')}, aynı sol kenar {x.get('sol') == 0}, "
+             f"--ink-2 {x.get('renk')}, mono {x.get('mono')}, sayfada {x['adet']}" if x["adet"] else "satır yok")
+          + f" · {sayfa[2]}: satır {o[sayfa[2]]['adet']}"
+          + f" · Kaynaklar: “yanıt vermedi” {k['yanit_vermedi']}, oyuncu: Elbit {k['elbit']}, "
+            f"oyuncu: Northrop Grumman {k['northrop']}"
+          + (f" · {kotu}" if kotu else ""))
+    if kotu:
+        fails.append("KANIT-BOŞLUĞU 375px")
+
 # Rev 29: tarayıcıda L1-DOLGU / ÇİZGİ-KONTRAST — hesaplanan stil, açık ve koyu, 375 ve 1440.
 R29_JS = r"""
 import sys, json
@@ -1105,6 +1266,9 @@ def main():
 
     # Rev 32: TEKRAR-MANŞET
     r32_checks(build.stdout, py, fails)
+
+    # Rev 28: KANIT-BOŞLUĞU
+    r28_checks(build.stdout, py, fails)
 
     # Rev 27: İPLİK-DURUM · iplik sayfası (durum satırı, ?g= daybar, satırlar)
     r27_checks(build.stdout, py, fails)

@@ -405,7 +405,7 @@ def guard_headline(title, iso=""):
 
 
 def build_report(meta, body_html, iso, prev_day=None, next_day=None,
-                 news_counts=None, mke_count=0, published="", scan=None, rivals=(), turkish=(), has_news=False, depth=1):
+                 news_counts=None, mke_count=0, published="", scan=None, rivals=(), turkish=(), has_news=False, depth=1, bosluk=()):
     title = guard_headline(meta.get("title"), iso) or f"{tr_date(iso)} raporu"
     up = "../" * depth
     # Kök sayfa bugünün brifingi; aynı belge iki adreste durduğu için
@@ -447,8 +447,11 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
             '<span class="rival-sep"> · </span>'
             f'<span class="nb"><a href="{day_url("news", iso)}">'
             f'<span class="num">{scan[1]}</span> başlık{tail}</a></span>'
-            f'{mke_part}</span></div>'
+            f'{mke_part}</span>{kanit_html(bosluk)}</div>'
         )
+    elif bosluk:
+        # Tarama satırı yoksa (başlık sayısı bilinmiyor) uyarı yine kendi bloğunda durur.
+        rail.append(f'<div class="rail-block">{kanit_html(bosluk)}</div>')
     # Oyuncular: bugün adı geçen herkes, tek blokta. Dört blok raya sığmıyordu
     # ve üçü aynı soruyu farklı başlıklarla soruyordu. Rol hâlâ duruyor —
     # sırada ve bağlantının nereye gittiğinde — ama başlık artık kimseyi
@@ -1665,12 +1668,17 @@ def sources_page(day, data, has_report):
     rows = source_rows(data)
     if not rows:
         return ""
+    # R28-P0-1: bir izlenen oyuncunun kendi kaynağıysa satırın yanında oyuncunun adı.
+    # R28-P1-1: "yanıt vermedi" sütunu kalktı — satır soluk kalır (Rev 19), sebep build
+    # kaydında; okuyucuya giden tek arıza brifingdeki KANIT-BOŞLUĞU satırı.
+    oyuncu = oyuncu_kaynaklari()
     body = "".join(
         f'<li class="srow{"" if ok else " srow--off"}">'
         f'<span class="sname">{src_name(name)}</span>'
+        + (f'<span class="scount soyuncu">oyuncu: {html.escape(oyuncu[name][0])}</span>' if name in oyuncu else "")
         + (f'<span class="scount num">{n}</span>' if ok and n
            else '<span class="scount num">—</span>' if ok
-           else '<span class="scount">yanıt vermedi</span>')
+           else "")
         + "</li>"
         for name, n, ok in rows
     )
@@ -1682,8 +1690,7 @@ def sources_page(day, data, has_report):
         + f"""<main class="wrap thread">
   <p class="kicker">Kapsam</p>
   <h1 class="report-title">Kaynaklar · {tr_date(day)}</h1>
-  <p class="thread-meta num"><strong>{read}</strong> kaynak okundu ·
-    <strong>{data.get("failed_sources", 0)}</strong> yanıt vermedi</p>
+  <p class="thread-meta num"><strong>{read}</strong> kaynak okundu</p>
   <ul class="slist">{body}</ul>
   <nav class="endnav" aria-label="Devam"><span class="wrap endnav-inner">
     <a class="endnav-go" href="{day_url("news", day)}">{tr_date(day)} medya takibi →</a>
@@ -1943,6 +1950,7 @@ def main():
             rival_hits(body, developments),
             turkish_line(body, news.get(iso, {}).get("items", [])),
             iso in news,
+            bosluk=[k for k, *_ in kanit_boslugu(news.get(iso))],
         )
         # Atıf kanonik kalmalı: [K#] yayıncının kendi sayfasını gösterir, vekili
         # değil. Okuma yolu ayrı bir çipte durur — o yüzden koruma "KAYNAKLAR
@@ -1968,6 +1976,9 @@ def main():
         print(f"  · reports/{iso}.html"
               + "".join(f" · özet {n} ilk: {tr_daybar(t['gun']).split(' · ')[0]} {t['gid'].upper()}"
                         for n, t in sorted(tekrar[iso]["ozet"].items())))
+        kb = kanit_boslugu(news.get(iso))
+        if kb:
+            print(f"      KANIT-BOŞLUĞU: {kanit_cumlesi([k for k, *_ in kb])}")
 
     reports.sort(key=lambda r: r["date"], reverse=True)
 
@@ -2037,6 +2048,8 @@ def main():
         r23_kurallari(iso, meta, body, body_html, news)
         # Rev 32: TEKRAR-MANŞET — H1 eşleşirse uyarı; özet maddelerine "ilk:" jetonu.
         tekrar_manset_kurali(iso, tekrar[iso])
+        # Rev 28: KANIT-BOŞLUĞU — izlenen oyuncunun kendi kaynağı okunamadıysa uyarı.
+        bosluk = kanit_boslugu_kurali(iso, news.get(iso))
         body_html = ilk_jetonlari(body_html, tekrar[iso]["ozet"])
         (ROOT / "index.html").write_text(
             build_report(meta, body_html, iso,
@@ -2045,7 +2058,7 @@ def main():
                          published.get(iso, ""), scan_counts.get(iso),
                          rival_hits(body, meta.get("developments") or []),
                          turkish_line(body, news.get(iso, {}).get("items", [])),
-                         iso in news, depth=0),
+                         iso in news, depth=0, bosluk=bosluk),
             encoding="utf-8")
     # Oyuncular: rayın "bugün kim" sorusunun yanındaki "ne zamandan beri" sayfası.
     kategori_isabeti(news)   # Rev 25: S8 + İPUCU-YOK
@@ -3302,6 +3315,100 @@ def r29_kurallari(css_text=None):
         uyari.ekle("ÇİZGİ-KONTRAST", "ÇİZGİ-KONTRAST: --rule-2 zemine karşı 3:1'in altında — "
                                      + " · ".join(f"{t} {fmt(o)}:1" for t, _r, _z, o in dusuk))
     return ihlal, oranlar
+
+
+# ── Rev 28 — izlenen oyuncunun kendi kaynağı düştüğünde (KANIT-BOŞLUĞU) ───────────
+# İnanç değiştiren tek arıza: bir izlenen oyuncunun kendi duyuru kaynağı okunamadıysa o
+# oyuncunun bugünkü duyurusu eksik olabilir. Okuyucuya tek satır, operatöre tek uyarı.
+# Tetik yalnız toplayıcının kaydı (data/news/<gün>.json failures[].source) ile
+# rakipler.json `kaynak` alanının kesişimi — ajanın beyanı tetik olamaz (Rev 14).
+# Kesişim boşsa satır basılmaz (Rev 9).
+
+def oyuncu_kaynaklari():
+    """{kaynak adı: (oyuncu adı, oyuncu id)} — `kaynak` alanı olan oyuncular."""
+    return {r["kaynak"]: (r["name"], r["id"]) for r in rivals_config() if r.get("kaynak")}
+
+
+def kanit_boslugu(data):
+    """[(kaynak, oyuncu adı, oyuncu id, hata)] — bugün kendi kaynağı okunamayan oyuncular."""
+    hatalar = {}
+    for f in (data or {}).get("failures") or []:
+        if f.get("source"):
+            hatalar[f["source"]] = " ".join(str(f.get("error") or "").split())
+    oyuncu = oyuncu_kaynaklari()
+    return sorted(((k, ad, rid, hatalar[k]) for k, (ad, rid) in oyuncu.items() if k in hatalar),
+                  key=lambda x: tr_fold(x[0]))
+
+
+_UNLU = "aeıioöuü"
+
+
+def _ilgi_eki(ad):
+    """Tamlayan eki, kesme işaretiyle: Grumman → 'ın, Leonardo → 'nun, MBDA → 'nın."""
+    kelime = re.sub(r"[^\w]", "", ad.split()[-1]) if ad.split() else ""
+    if not kelime:
+        return "'ın"
+    if len(kelime) > 1 and kelime.isupper():
+        # Kısaltma harf harf okunur: ünsüz harflerin adı e ile biter (be, de…), K ka'dır.
+        son = kelime[-1].translate(str.maketrans("İI", "ii")).lower()
+        ses = son if son in _UNLU else ("a" if son == "k" else "e")
+        tampon = "n"
+    else:
+        k = kelime.translate(str.maketrans("İI", "iı")).lower()
+        unluler = [c for c in k if c in _UNLU]
+        ses = unluler[-1] if unluler else "e"
+        tampon = "n" if k[-1] in _UNLU else ""
+    ek = {"a": "ı", "ı": "ı", "e": "i", "i": "i", "o": "u", "u": "u", "ö": "ü", "ü": "ü"}[ses]
+    return f"'{tampon}{ek}n"
+
+
+def kanit_cumlesi(adlar):
+    """"A ve B'nin kendi duyuruları bugün okunamadı." — neden, sayı, renk yok."""
+    adlar = list(adlar)
+    if not adlar:
+        return ""
+    liste = adlar[0] if len(adlar) == 1 else ", ".join(adlar[:-1]) + " ve " + adlar[-1]
+    return f"{liste}{_ilgi_eki(adlar[-1])} kendi duyuruları bugün okunamadı."
+
+
+def kanit_html(adlar):
+    """Tarama bloğunun altındaki tek satır; kesişim boşsa hiçbir şey."""
+    if not adlar:
+        return ""
+    return f'<span class="rail-not" data-kural="KANIT-BOŞLUĞU">{html.escape(kanit_cumlesi(adlar))}</span>'
+
+
+def kanit_boslugu_kurali(iso, data):
+    """Günün raporu: log satırı + (A); satır basılıyorsa Rev 30 kanalına uyarı. → [kaynak]"""
+    import os
+    kb = kanit_boslugu(data)
+    adlar = [k for k, *_ in kb]
+    kisa = tr_daybar(iso).split(" · ")[0]
+    if data is None:
+        durum = "medya takibi yok — satır yok"
+    elif kb:
+        durum = "satır: " + kanit_cumlesi(adlar)
+    else:
+        durum = f"kesişim boş ({len((data or {}).get('failures') or [])} başarısız kaynak, hiçbiri oyuncu kaynağı değil) — satır yok"
+    print(f"  · KANIT-BOŞLUĞU {iso}: {durum}")
+    for k, ad, _rid, hata in kb:
+        print(f"      {k} ({ad}): {hata or 'hata metni yok'}")
+    summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary:
+        md = ["### KANIT-BOŞLUĞU — izlenen oyuncunun kendi kaynağı (Rev 28)", "",
+              f"**{'🔴' if kb else '🟢'} {kisa}:** {durum}", ""]
+        md += [f"- {k} ({ad}): `{hata or '—'}`" for k, ad, _rid, hata in kb]
+        try:
+            with open(summary, "a", encoding="utf-8") as fh:
+                fh.write("\n".join(md) + "\n\n")
+        except OSError as exc:
+            print(f"  ! KANIT-BOŞLUĞU: özet yazılamadı: {exc}")
+    if kb:
+        from scripts import uyari
+        uyari.ekle("KANIT-BOŞLUĞU", f"KANIT-BOŞLUĞU: {kisa} · "
+                   + " · ".join(f"{k} ({hata or 'hata metni yok'})" for k, _ad, _rid, hata in kb)
+                   + " — okuyucuya satır basıldı, kaynağı onar")
+    return adlar
 
 
 if __name__ == "__main__":

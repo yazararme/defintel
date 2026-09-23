@@ -547,6 +547,10 @@ a { color: var(--brand); text-underline-offset: 2px; }
    soluk. Kuralı hiç yoktu — gövdenin serifini miras alıp rayın tek serif
    öğesi olarak duruyordu, üstelik 16px'te, etiketlerden büyük. */
 .rail-sub { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+/* R28 — KANIT-BOŞLUĞU: izlenen bir oyuncunun kendi kaynağı okunamadıysa Tarama'nın altında
+   tek satır. Rayın mono sesi, rail-value'nun rengi — durum rengi yok, neden ve sayı yok.
+   Dar ekranda blok satır yönünde; flex-basis onu Tarama'nın altına indirir. */
+.rail-not { flex-basis: 100%; font-family: var(--mono); font-size: 11px; line-height: 1.5; color: var(--ink-2); }
 /* Rayın içindeki tek dokunulabilir şey; 16px'lik hedefe parmakla basılmıyor.
    gap şart: inline-flex, öğeler arasındaki boşluk karakterini yutuyor ve
    "1başlık" diye bitişik yazıyordu. */
@@ -747,7 +751,7 @@ body:has(.endnav) .foot { margin-top: 0; }
     border-top: 0;
     padding-top: 0;
   }
-  .rail-block { flex-direction: row; align-items: baseline; gap: 8px; }
+  .rail-block { flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: 8px; }
   .report-title { order: -1; }
 
   /* R24-P0-1 — tek sütunda ray özetin arkasına, Portföy'ün önüne iner. Rayın

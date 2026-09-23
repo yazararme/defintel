@@ -1,5 +1,5 @@
 {
- "_schema": "id: stable slug. name: canonical display name, also matched. aliases: extra match strings. Any match string of <=4 characters - name or alias - matches titles/headlines only, case-sensitive; longer ones also match bodies, case-insensitively. tr_disi: aliases never matched in Turkish text (title_tr, Turkish-language headlines, report development titles) - 'BAE' is the UAE in Turkish. haric: regexes blanked out of a text before matching (e.g. 'Rafael Grossi', 'POF-USA', 'Korkut Özal'). alias_test (Rev 21, KAPSAM-SAYI): pos[] must match and neg[] must not, as a foreign-language headline; pos_tr[]/neg_tr[] the same as Turkish text. At least one pos or pos_tr; every <=4-character match string needs a neg/neg_tr that contains it. pos_kaynak: 'veri' = at least one positive copied verbatim from data/news or source/, 'kurgu' = no headline in the data yet, written example. build.py runs the tests on every build; any player failing hides every player-derived number and age token. Product names are aliases only where unambiguous: SMASH and Bushmaster were removed because a second vendor sells the same name; Gökberk (a common first name), CBC (broadcaster), FN (Scandinavian 'UN'), PPU (power processing unit), MIL/OFB/'Ordnance Factory' (split across India's DPSUs) and bare 'Oerlikon' (OC Oerlikon) were removed in Rev 21. role: 'rakip' = international rival, counted in the Rakip gündemi strip; 'yerli-rakip' = Turkish company competing in an MKE segment; 'emsal' = Turkish industry peer, benchmarked not rivalled. The last two feed the Türk sanayii line and are never shown under a heading that calls them rivals. segments: informational.",
+ "_schema": "id: stable slug. name: canonical display name, also matched. aliases: extra match strings. Any match string of <=4 characters - name or alias - matches titles/headlines only, case-sensitive; longer ones also match bodies, case-insensitively. tr_disi: aliases never matched in Turkish text (title_tr, Turkish-language headlines, report development titles) - 'BAE' is the UAE in Turkish. haric: regexes blanked out of a text before matching (e.g. 'Rafael Grossi', 'POF-USA', 'Korkut Özal'). alias_test (Rev 21, KAPSAM-SAYI): pos[] must match and neg[] must not, as a foreign-language headline; pos_tr[]/neg_tr[] the same as Turkish text. At least one pos or pos_tr; every <=4-character match string needs a neg/neg_tr that contains it. pos_kaynak: 'veri' = at least one positive copied verbatim from data/news or source/, 'kurgu' = no headline in the data yet, written example. build.py runs the tests on every build; any player failing hides every player-derived number and age token. Product names are aliases only where unambiguous: SMASH and Bushmaster were removed because a second vendor sells the same name; Gökberk (a common first name), CBC (broadcaster), FN (Scandinavian 'UN'), PPU (power processing unit), MIL/OFB/'Ordnance Factory' (split across India's DPSUs) and bare 'Oerlikon' (OC Oerlikon) were removed in Rev 21. role: 'rakip' = international rival, counted in the Rakip gündemi strip; 'yerli-rakip' = Turkish company competing in an MKE segment; 'emsal' = Turkish industry peer, benchmarked not rivalled. The last two feed the Türk sanayii line and are never shown under a heading that calls them rivals. segments: informational. kaynak (Rev 28, KANIT-BOŞLUĞU): the player's own announcements source, spelt exactly as the collector names it (data/news failures[].source, the kaynaklar.json roster), e.g. 'Elbit Systems'. Only players whose own feed is in the roster carry one. The build never matches with it; it only intersects it with the day's failed sources: a non-empty intersection prints one caveat line under Tarama on the briefing and alerts the operator (Rev 30); the Kaynaklar page names the player beside that source's row.",
  "_segments": {
   "muhimmat": "Large-calibre ammunition, fuzes, energetics and propellants",
   "hava_savunma": "Medium calibre, SHORAD and C-UAS (TOLGA, ILGAZ, 35 mm)",
@@ -126,6 +126,7 @@
   {
    "id": "elbit",
    "name": "Elbit",
+   "kaynak": "Elbit Systems",
    "aliases": [
     "IMI Systems"
    ],
@@ -492,6 +493,7 @@
   {
    "id": "leonardo",
    "name": "Leonardo",
+   "kaynak": "Leonardo",
    "aliases": [],
    "segments": [
     "hava_savunma",
@@ -536,6 +538,7 @@
   {
    "id": "northrop-grumman",
    "name": "Northrop Grumman",
+   "kaynak": "Northrop Grumman",
    "aliases": [
     "Northrop"
    ],
@@ -582,6 +585,7 @@
   {
    "id": "mbda",
    "name": "MBDA",
+   "kaynak": "MBDA",
    "aliases": [
     "Sky Warden"
    ],
