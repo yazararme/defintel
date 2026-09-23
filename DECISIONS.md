@@ -256,6 +256,7 @@ Each cost a round. Check this list before reopening anything.
 7. **`?q=<name>` player links** — Rev 17 shipped with a passing acceptance test, Rev 20 found it broken by design.
 8. **"The archive is only a day picker"** — Rev 0 said so, Rev 1 corrected it: a selector for a two-faced day must let you pick the face.
 9. **L1 fill + edge** — Rev 0 set the executive summary box to fill plus a 3px `--brand` left edge; R29.4 removed the edge to obey the law *boundary takes a line, state takes colour, content takes size — never two at once*. The fill alone still separates the box. The same edge came off Öne çıkanlar (`.highlights`) for the same reason; L1-DOLGU now enforces it.
+10. **ALARMLAR above the summary** — Rev 9 put the whole alarm section at the top; K5 (client: no alarm-day exemption from the first-screen rule) keeps only the alarm **band** above the headline — the break in familiarity — and moves the ALARMLAR body after the summary at every width. The band links down to it.
 
 ## Laws
 
