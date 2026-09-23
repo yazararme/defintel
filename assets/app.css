@@ -722,6 +722,40 @@ body:has(.endnav) .foot { margin-top: 0; }
   }
   .rail-block { flex-direction: row; align-items: baseline; gap: 8px; }
   .report-title { order: -1; }
+
+  /* R24-P0-1 — tek sütunda ray özetin arkasına, Portföy'ün önüne iner. Rayın
+     üstünde durduğu hâlde 375×812'de ilk ~470px içerikten önce geliyordu; ilk
+     ekrana özetin 5 maddesinden 2'si sığıyordu. Ray gizlenmez, yalnız sırası
+     değişir: ızgara bir sütunlu esnek kutu olur, makale ve .prose kutusuzlaşır
+     (display: contents), ray `order` ile özetin (h2#ozet + ol) arkasına geçer.
+     Alarm günü ALARMLAR özetin önünde kalır — o da özetten önce gelen metin.
+     1440'ta hiçbir şey değişmez: ray solda, yerinde. */
+  .report-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    max-width: var(--measure);
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .report-grid > .column,
+  .report-grid .prose { display: contents; }
+  .report-grid > .rail { order: 1; margin: 0; }   /* İLK-EKRAN:ray */
+  /* Üstteki .report-title { order: -1 } ızgarada etkisizdi (başlık makalenin
+     içindeydi); burada canlanıp başlığı alarm bandının üstüne çıkarmasın. */
+  .report-grid .report-title { order: 0; }
+  .report-grid .prose > h2#ozet + ol ~ *,
+  .report-grid .prose ~ * { order: 2; }
+  /* Esnek kutuda kenar boşlukları çökmüyor ve her öğe kendi biçimlendirme
+     bağlamını kuruyor; metin bloğunun dikey ritmi 920 üstündekiyle aynı kalsın
+     diye blok akışının çöken değerleri burada elle kuruluyor (dönüş kromu
+     değiştirir, metin bloğunu asla). Kural: iki komşu arasındaki boşluk
+     max(öncekinin alt, sonrakinin üst) boşluğu. */
+  .report-grid .devnav { margin-bottom: 0; }
+  .report-grid .prose > :has(+ h2, + h3, + .appendix, + .refs) { margin-bottom: 0; }
+  .report-grid .prose > .watch { margin-top: 0; }
+  .report-grid .prose > :is(ul, ol) > li:last-child { margin-bottom: 0; }
 }
 
 @media (max-width: 700px) {
@@ -738,6 +772,22 @@ body:has(.endnav) .foot { margin-top: 0; }
   .entry-title { font-size: 21px; }
   .report-title { font-size: 27px; }
   .kicker, .prose h2 { font-size: 12px; }
+
+  /* R24-P0-2 — bölüm şeridi tek satır; sığmazsa yatay kayar (yapışkan değil,
+     700 altında zaten akışta). İki satırken ilk ekranın 101px'ini alıyordu.
+     Şerit ekran kenarına kadar uzanır: kenarda kesilen çip, sağda devamı
+     olduğunu söyler — kaydırmalı şeridin gizlediği şey tam da buydu. Üst
+     boşluklar (ızgara 26→12, şerit 18→10) krom; metin bloğu aynı. */
+  .report-grid { margin-top: 12px; }
+  .report-grid .devnav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin: 10px -18px 0;
+    padding: 2px 18px 10px;
+    scroll-padding-inline: 18px;
+  }
+  .report-grid .devnav::-webkit-scrollbar { display: none; }
   .prose h2#ozet + ol { font-size: 17.5px; }
 
   /* Üç sütunlu tablo telefona sığmıyor: her satırı etiketli bloğa çevir. */
@@ -757,6 +807,15 @@ body:has(.endnav) .foot { margin-top: 0; }
      Üç hücrenin üstündeki üç etiket, satır başına üç kez tekrar ediyordu —
      yapı zaten hangisinin ne olduğunu söylüyor. */
   .prose td::before { content: none; }
+  /* R24-P1-1 — kartın üçüncü alanı (gösterge) kendi etiketini taşır: gövdeyle
+     aynı gri blok olarak okunuyor, neyi izleyeceğini söylemiyordu. Etiket
+     sesi ortak (.prose td::before: mono, büyük harf); metni build.py'den. */
+  .prose td[data-kart]::before {
+    content: attr(data-kart);
+    display: block;
+    margin-bottom: 2px;
+    color: var(--muted);
+  }
   /* Etki çipi kartın ilk satırı: okuyucu satırı okumadan önce hangi yönde
      olduğunu bilsin. DOM'da ikinci sütun, ekranda başta. */
   .prose tbody tr { display: flex; flex-direction: column; }

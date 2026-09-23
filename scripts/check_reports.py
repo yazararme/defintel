@@ -32,6 +32,17 @@ satır yalnız "izlenen N", hiçbir satırda "gün"/"önce"/"bugün" yok, sıra 
 koyu temada `3-…6-oyuncular-muhimmat-*.png` çeker: üst satırdaki "izlenen N" ekrandaki
 satır sayısına ve o segmentteki oyuncu sayısına eşit olmalı; imleç çipin üstündeyken
 etkin çipin yazı/zemin kontrastı ≥ 4.5:1 olmalı. Uymazsa çıkış 1.
+
+    python3 scripts/check_reports.py --ilk-ekran [--out DIR] [--base URL] [--gun G ...] [--boz]
+
+İLK-EKRAN (Rev 24, uyarı kuralı — bloklamaz): brifingi (varsayılan: reports/ altındaki son
+gün) 375×812'de açar, ilk ekranın görüntüsünü `ilk-ekran-<gün>-375x812.png` olarak DIR'e
+yazar ve (A) özetine ölçülen iki kenarı yazar: özet başlığının (`h2#ozet` — brifte
+`h2#yonetici-ozeti` diye anılan, sayfadaki kimliği `ozet`) üst kenarı ≤300px, özetin 4.
+maddesinin alt kenarı ≤812px (özet 4 maddeden kısaysa son maddesi). Uymazsa her gün için
+`uyari.ekle("İLK-EKRAN", …)` ve çıkış 1. `--boz` (ya da ILK_EKRAN_BOZ=1) tarayıcıya giden
+app.css'te `/* İLK-EKRAN:ray */` satırını yolda değiştirip rayı yeniden özetin üstüne
+taşır — diske ve depoya hiçbir şey yazılmaz; işaret bulunmazsa gün kırmızı olur.
 """
 import http.server
 import os
@@ -415,7 +426,168 @@ def oyuncular(base=None, out=None):
     return 1 if kalan else 0
 
 
+# ── İLK-EKRAN (Rev 24) ───────────────────────────────────────────────────────
+
+IE_EKRAN = (375, 812)
+IE_H2_SINIR = 300        # özet başlığının üst kenarı ≤ bu
+IE_MADDE = 4             # özetin bu maddesinin alt kenarı ≤ ekran yüksekliği
+# boz: app.css'teki bu satır yolda değiştirilir — ray tek sütunda yeniden özetin
+# (ve başlığın) önüne geçer. İşaret bulunmazsa gün "boz uygulanamadı" diye kırmızı
+# olur; bozulmamış bir çalıştırma yeşil görünüp kanıt yerine geçemez.
+IE_BOZ = ("  .report-grid > .rail { order: 1; margin: 0; }   /* İLK-EKRAN:ray */",
+          "  .report-grid > .rail { order: -2; margin: 0 0 22px; }")
+
+IE_OLC_JS = """(n) => {
+    const h2 = document.querySelector('.prose h2#ozet');
+    const lis = h2 && h2.nextElementSibling && h2.nextElementSibling.tagName === 'OL'
+        ? Array.from(h2.nextElementSibling.children) : [];
+    const li = lis[Math.min(n, lis.length) - 1];
+    const ray = document.querySelector('.report-grid > .rail');
+    const rr = ray && ray.getClientRects().length ? ray.getBoundingClientRect() : null;
+    return {
+      h2: h2 ? h2.getBoundingClientRect().top : null,
+      madde: li ? li.getBoundingClientRect().bottom : null,
+      madde_n: lis.length,
+      ray: rr ? rr.top : null,
+      ray_metin: rr ? ray.innerText.replace(/\\s+/g, ' ').trim().slice(0, 60) : '',
+      tasma: document.documentElement.scrollWidth > window.innerWidth,
+    };
+}"""
+
+
+def _son_rapor():
+    files = sorted((ROOT / "reports").glob("????-??-??.html"))
+    return files[-1].stem if files else None
+
+
+async def _ie_kos(base, gunler, boz, out):
+    from playwright.async_api import async_playwright
+    async with async_playwright() as p:
+        try:
+            browser = await p.chromium.launch()
+        except Exception:   # paketli chromium yok (yerel Mac): sistem Chrome'u
+            browser = await p.chromium.launch(channel="chrome")
+        sonuc = []
+        try:
+            for gun in gunler:
+                w, h = IE_EKRAN
+                ctx = await browser.new_context(viewport={"width": w, "height": h},
+                                                service_workers="block", locale="tr-TR")
+                page = await ctx.new_page()
+                bulunamadi = []
+                if boz:
+                    async def app_css(route):
+                        resp = await route.fetch()
+                        body = await resp.text()
+                        if IE_BOZ[0] not in body:
+                            bulunamadi.append(IE_BOZ[0].strip())
+                        await route.fulfill(response=resp, body=body.replace(*IE_BOZ),
+                                            headers={**resp.headers, "cache-control": "no-store"})
+                    await page.route("**/assets/app.css*", app_css)
+                try:
+                    await page.goto(f"{base}/reports/{gun}.html", wait_until="load")
+                    await page.evaluate("document.fonts ? document.fonts.ready.then(() => 1) : 1")
+                    await page.wait_for_timeout(200)
+                    b = await page.evaluate(IE_OLC_JS, IE_MADDE)
+                    resim = None
+                    if out:
+                        resim = out / f"ilk-ekran-{gun}-{w}x{h}{'-boz' if boz else ''}.png"
+                        await page.screenshot(path=str(resim))
+                    sonuc.append((gun, b, bulunamadi, resim))
+                except Exception as e:   # noqa: BLE001 — sayfa açılamadıysa da kırmızı
+                    sonuc.append((gun, {"hata": str(e).splitlines()[0][:160]}, bulunamadi, None))
+                finally:
+                    await ctx.close()
+        finally:
+            await browser.close()
+        return sonuc
+
+
+def ilk_ekran(base=None, gunler=None, boz=False, out=None):
+    """İLK-EKRAN: 375×812'de özet başlığı ≤300px, özetin 4. maddesinin alt kenarı ≤812px.
+    Kalırsa `uyari.ekle("İLK-EKRAN", …)` (Rev 30 kanalı, bloklamaz) ve çıkış 1."""
+    import asyncio
+    gunler = list(gunler or []) or [g for g in [_son_rapor()] if g]
+    if not gunler:
+        print("İLK-EKRAN: reports/ altında rapor yok")
+        return 1
+    out = pathlib.Path(out) if out else None
+    if out:
+        out.mkdir(parents=True, exist_ok=True)
+    srv = None
+    if not base:
+        srv, base = _sun()
+    try:
+        sonuc = asyncio.run(_ie_kos(base.rstrip("/"), gunler, boz, out))
+    finally:
+        if srv:
+            srv.shutdown()
+
+    w, h = IE_EKRAN
+    ozet = [f"### İLK-EKRAN — yöneticinin ilk ekranı, {w}×{h} (Rev 24)", ""]
+    if boz:
+        ozet += ["> ⚠️ **ilk_ekran_boz** — bu çalıştırmada ray sırası bilerek geri alındı"
+                 " (app.css yolda değiştirildi; depoda bozuk kod yok).", ""]
+    ozet += [f"| gün | `h2#ozet` üst kenarı (≤{IE_H2_SINIR}) | özetin {IE_MADDE}. maddesi alt kenarı"
+             f" (≤{h}) | ray üst kenarı | sonuç | görüntü |", "|---|---|---|---|---|---|"]
+    kalan = []
+    for gun, b, bulunamadi, resim in sonuc:
+        if "hata" in b:
+            ok, neden = False, f"sayfa ölçülemedi: {b['hata']}"
+            h2 = madde = ray = "—"
+        else:
+            sorun = []
+            if b["h2"] is None:
+                sorun.append("h2#ozet yok")
+            elif b["h2"] > IE_H2_SINIR:
+                sorun.append(f"özet başlığı {b['h2']:.0f}px > {IE_H2_SINIR}")
+            if b["madde"] is None:
+                sorun.append("özet listesi yok")
+            elif b["madde"] > h:
+                sorun.append(f"{min(IE_MADDE, b['madde_n'])}. madde alt kenarı {b['madde']:.0f}px > {h}")
+            if b["tasma"]:
+                sorun.append("sayfa yatay taşıyor")
+            if bulunamadi:
+                sorun = [f"boz uygulanamadı: app.css'te “{bulunamadi[0][:60]}” yok"]
+            ok, neden = not sorun, "; ".join(sorun)
+            h2 = f"{b['h2']:.0f}px" if b["h2"] is not None else "—"
+            madde = (f"{b['madde']:.0f}px" if b["madde"] is not None else "—") + \
+                (f" ({b['madde_n']} maddelik özet)" if b["madde_n"] < IE_MADDE else "")
+            ray = f"{b['ray']:.0f}px" if b["ray"] is not None else "gizli"
+        if not ok:
+            kalan.append((gun, neden))
+        ozet.append(f"| {gun} | {h2} | {madde} | {ray} | {'🟢 geçti' if ok else '🔴 ' + neden.replace('|', '/')}"
+                    f" | {resim.name if resim else '—'} |")
+    ozet += ["", f"**{'🟢 İLK-EKRAN: ' + str(len(sonuc)) + '/' + str(len(sonuc)) + ' gün geçti' if not kalan else f'🔴 İLK-EKRAN: {len(kalan)} gün kaldı — uyarı Rev 30 kanalına'}**", ""]
+    metin = "\n".join(ozet) + "\n"
+    print(metin)
+    yol = os.environ.get("GITHUB_STEP_SUMMARY")
+    if yol:
+        with open(yol, "a", encoding="utf-8") as fh:
+            fh.write(metin)
+    if kalan:
+        sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+        import uyari
+        ek = " (ilk_ekran_boz, ray bilerek geri taşındı)" if boz else ""
+        for gun, neden in kalan:
+            uyari.ekle("İLK-EKRAN", f"{gun} brifingi {w}×{h}{ek}: {neden}")
+        return 1
+    return 0
+
+
 def main(argv):
+    if "--ilk-ekran" in argv:
+        import argparse
+        ap = argparse.ArgumentParser()
+        ap.add_argument("--ilk-ekran", action="store_true")
+        ap.add_argument("--out")
+        ap.add_argument("--base")
+        ap.add_argument("--gun", nargs="*", default=[],
+                        help="YYYY-MM-DD (varsayılan: reports/ altındaki son rapor)")
+        ap.add_argument("--boz", action="store_true",
+                        default=os.environ.get("ILK_EKRAN_BOZ", "0") == "1")
+        a = ap.parse_args(argv)
+        return ilk_ekran(a.base, a.gun, a.boz, a.out)
     if "--oyuncular" in argv:
         import argparse
         ap = argparse.ArgumentParser()

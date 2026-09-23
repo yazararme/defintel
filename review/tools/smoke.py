@@ -21,6 +21,13 @@ Turkish-locale check of the latest media page (Öne çıkanlar shows "UNMANNED A
 DAILY" with dotless I, "ANADOLU AJANSI" unchanged, no foreign source name rendered with İ anywhere
 in .clip-meta) and of its Kaynaklar page; then a NOKTALI_BOZ=1 build (the alert fires with
 examples, the browser shows "UNMANNED AİRSPACE") and a normal rebuild.
+Rev 24: İLK-EKRAN — every built report carries one data-kart="İzlenecek" cell per table row;
+`check_reports.py --ilk-ekran` on the latest report is green (edges printed), and with
+ILK_EKRAN_BOZ=1 (rail order undone in the browser only) it is red and emits the İLK-EKRAN alert;
+a browser pass over every report at 375×812 and 1440×900, light and dark: at 375 the rail sits
+after the summary list and before h2#portfoy, the chip strip is one row, each card's third field
+shows "İZLENECEK" above it, no horizontal overflow; at 1440 the rail is in the left column,
+level with the top of the article, and no card label shows.
 Later revisions extend CHECKS / PAGES. Exit 1 on any failure.
 """
 import os
@@ -200,6 +207,112 @@ with sync_playwright() as p:
     b.close()
 print(json.dumps(r, ensure_ascii=False))
 """
+
+
+# Rev 24 (S): ilk ekran düzeni, her rapor, iki genişlik, açık/koyu.
+ILK_EKRAN_JS = r"""
+import json, sys
+from playwright.sync_api import sync_playwright
+base, gunler = sys.argv[1], sys.argv[2].split(",")
+JS = '''(w) => {
+  const top = e => e.getBoundingClientRect().top + scrollY;
+  const ray = document.querySelector('.report-grid > .rail');
+  const ol = document.querySelector('.prose h2#ozet + ol');
+  const pf = document.getElementById('portfoy');
+  const h1 = document.querySelector('h1.report-title');
+  const chips = Array.from(document.querySelectorAll('#devnav .chip'));
+  const rows = Array.from(document.querySelectorAll('.prose tbody tr'));
+  const lab = rows.map(tr => {
+    const td = tr.querySelector('td[data-kart]');
+    if (!td) return 'yok';
+    const c = getComputedStyle(td, '::before');
+    return c.content === 'none' ? 'none' : c.content.replace(/"/g, '') + '/' + c.textTransform;
+  });
+  const r = {tasma: document.documentElement.scrollWidth > innerWidth,
+             cip_satir: new Set(chips.map(c => Math.round(c.getBoundingClientRect().top))).size,
+             kart: lab, satir: rows.length};
+  if (w < 900) {
+    r.ray_sira = !!(ray && ol && pf && top(ray) >= top(ol) + ol.offsetHeight && top(ray) < top(pf));
+    r.ray_gorunur = !!(ray && ray.getClientRects().length);
+  } else {
+    const col = document.querySelector('article.column').getBoundingClientRect();
+    r.ray_sira = !!(ray && ray.getBoundingClientRect().right <= col.left && Math.abs(top(ray) - top(document.querySelector('article.column'))) < 2);
+    r.ray_gorunur = true;
+  }
+  return r;
+}'''
+out = {}
+with sync_playwright() as p:
+    try: b = p.chromium.launch(channel="chrome")
+    except Exception: b = p.chromium.launch()
+    for w, h in ((375, 812), (1440, 900)):
+        for tema in ("light", "dark"):
+            ctx = b.new_context(service_workers="block", viewport={"width": w, "height": h},
+                                locale="tr-TR", color_scheme=tema)
+            pg = ctx.new_page()
+            for g in gunler:
+                pg.goto(f"{base}/reports/{g}.html", wait_until="load"); pg.wait_for_timeout(150)
+                out[f"{g}@{w}/{tema}"] = pg.evaluate(JS, w)
+            ctx.close()
+    b.close()
+print(json.dumps(out, ensure_ascii=False))
+"""
+
+
+def r24_checks(py, fails):
+    """Rev 24: İLK-EKRAN — kart etiketi (statik), denetim iki yönde, tarayıcı düzeni."""
+    import json
+    raporlar = sorted((ROOT / "reports").glob("????-??-??.html"))
+    eksik = []
+    for f in raporlar:
+        h = f.read_text(encoding="utf-8")
+        tb = re.search(r"<tbody>.*?</tbody>", h, re.S)
+        n_tr = len(re.findall(r"<tr>", tb.group(0))) if tb else 0
+        n_k = h.count('data-kart="İzlenecek"')
+        if n_tr != n_k:
+            eksik.append(f"{f.stem}: {n_k}/{n_tr}")
+    print(f"{'ok  ' if not eksik else 'FAIL'} R24 kart etiketi (data-kart) · {len(raporlar) - len(eksik)}/{len(raporlar)} rapor"
+          + (f" · {eksik}" if eksik else ""))
+    if eksik:
+        fails.append("R24 kart etiketi")
+    if not py:
+        print("FAIL İLK-EKRAN · Playwright'lı python yok")
+        fails.append("İLK-EKRAN")
+        return
+    env = {k: v for k, v in os.environ.items() if k not in ("ILK_EKRAN_BOZ", "RUNNER_TEMP", "GITHUB_STEP_SUMMARY")}
+    ie = subprocess.run([py, "scripts/check_reports.py", "--ilk-ekran", "--base", BASE],
+                        cwd=ROOT, capture_output=True, text=True, env=env)
+    satir = [l for l in ie.stdout.splitlines() if l.startswith("| 20")]
+    print(f"{'ok  ' if ie.returncode == 0 else 'FAIL'} İLK-EKRAN normal · {satir[0] if satir else ie.stderr[-300:]}")
+    if ie.returncode:
+        fails.append("İLK-EKRAN normal")
+    bz = subprocess.run([py, "scripts/check_reports.py", "--ilk-ekran", "--base", BASE],
+                        cwd=ROOT, capture_output=True, text=True, env={**env, "ILK_EKRAN_BOZ": "1"})
+    uy = [l.strip() for l in bz.stdout.splitlines() if l.strip().startswith("! İLK-EKRAN")]
+    ok = bz.returncode == 1 and bool(uy) and "boz uygulanamadı" not in bz.stdout
+    print(f"{'ok  ' if ok else 'FAIL'} İLK-EKRAN ILK_EKRAN_BOZ=1 → uyarı · {uy[0] if uy else bz.stdout[-300:] + bz.stderr[-300:]}")
+    if not ok:
+        fails.append("İLK-EKRAN boz")
+    tr = subprocess.run([py, "-c", ILK_EKRAN_JS, BASE, ",".join(f.stem for f in raporlar)],
+                        cwd=ROOT, capture_output=True, text=True)
+    try:
+        sonuc = json.loads(tr.stdout)
+    except ValueError:
+        print(f"FAIL R24 tarayıcı · {tr.stderr[-400:]}")
+        fails.append("R24 tarayıcı")
+        return
+    kotu = []
+    for k, r in sonuc.items():
+        mobil = "@375" in k
+        beklenen = "İzlenecek/uppercase" if mobil else "none"
+        if (r["tasma"] or not r["ray_sira"] or not r["ray_gorunur"] or r["cip_satir"] != 1
+                or r["satir"] == 0 or any(x != beklenen for x in r["kart"])):
+            kotu.append(f"{k}: {r}")
+    print(f"{'ok  ' if not kotu else 'FAIL'} R24 tarayıcı (375/1440 × açık/koyu × {len(raporlar)} rapor) · "
+          f"{len(sonuc) - len(kotu)}/{len(sonuc)}" + (f" · {kotu[:2]}" if kotu else
+          " · 375: ray özet ile Portföy arasında, çipler tek satır, her kartta İZLENECEK; 1440: ray solda"))
+    if kotu:
+        fails.append("R24 tarayıcı")
 
 
 def _tr_upper(text):
@@ -439,6 +552,9 @@ def main():
 
     # Rev 33: NOKTALI-İ
     r33_checks(build.stdout, py, fails)
+
+    # Rev 24: İLK-EKRAN
+    r24_checks(py, fails)
 
     # Rev 21: KAPSAM-SAYI — alias testi 64/64 (normal build'in çıktısından)
     m = [l for l in build.stdout.splitlines() if "KAPSAM-SAYI: alias testi" in l]

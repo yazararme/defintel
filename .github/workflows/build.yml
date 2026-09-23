@@ -37,6 +37,15 @@ on:
         description: 'NOKTALI-İ: yabancı ad sarmalını bu çalıştırmada kapat (commit yok)'
         type: boolean
         default: false
+      ilk_ekran_boz:
+        # Rev 24 — İLK-EKRAN kanıtı. Kodu bozmaz: ILK_EKRAN_BOZ=1 yalnız bu çalıştırmanın
+        # tarayıcısına giden app.css'te rayın sırasını geri alır (ray yeniden özetin üstüne);
+        # İLK-EKRAN denetimi 375×812'de iki kenarı ölçer, (A)'ya tabloyu ve görüntü
+        # artifact'inin bağlantısını yazar, uyarıyı "[TEST] " önekli issue'ya gönderir.
+        # Commit/push atılmaz.
+        description: 'İLK-EKRAN: rayı bu çalıştırmanın tarayıcısında özetin üstüne geri al (commit yok)'
+        type: boolean
+        default: false
 permissions:
   contents: write
   issues: write
@@ -47,9 +56,10 @@ jobs:
       DORT_DURUM_BOZ: ${{ inputs.boz || 'none' }}
       KAPSAM_BOZ: ${{ inputs.kapsam_boz || 'none' }}
       NOKTALI_BOZ: ${{ inputs.noktali_boz == true && '1' || '0' }}
+      ILK_EKRAN_BOZ: ${{ inputs.ilk_ekran_boz == true && '1' || '0' }}
       # Yalnız bilerek bozulan (ya da uyari_test işaretli) çalıştırma test önekiyle (ve main dışında da) issue açar;
       # normal çalıştırmalarda boş → Rev 30 davranışı: issue yalnız main'de.
-      UYARI_TEST_ONEK: ${{ ((inputs.boz && inputs.boz != 'none') || (inputs.kapsam_boz && inputs.kapsam_boz != 'none') || inputs.uyari_test == true || inputs.noktali_boz == true) && '[TEST] ' || '' }}
+      UYARI_TEST_ONEK: ${{ ((inputs.boz && inputs.boz != 'none') || (inputs.kapsam_boz && inputs.kapsam_boz != 'none') || inputs.uyari_test == true || inputs.noktali_boz == true || inputs.ilk_ekran_boz == true) && '[TEST] ' || '' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -127,9 +137,41 @@ jobs:
             fi
           } >> "$GITHUB_STEP_SUMMARY"
 
-      # Bilerek bozulan KAPSAM-SAYI / NOKTALI-İ çalıştırması yayına gitmez: sayısız ya da
-      # sarmasız sayfa yalnız kanıttır.
-      - if: env.KAPSAM_BOZ == 'none' && env.NOKTALI_BOZ != '1'
+      # Rev 24 — İLK-EKRAN: son brifing 375×812'de; h2#ozet üst kenarı ≤300px, özetin 4.
+      # maddesinin alt kenarı ≤812px. Kalırsa uyarı Rev 30 kanalına gider; bloklamaz.
+      - name: İLK-EKRAN
+        id: ie
+        if: always() && steps.pw.outcome == 'success'
+        continue-on-error: true   # uyarı kuralı: build'i durdurmaz, (A) tablosunda 🔴 olur
+        run: python3 scripts/check_reports.py --ilk-ekran --out "$RUNNER_TEMP/ilk-ekran"
+      - name: İLK-EKRAN görüntüsü (artifact)
+        id: ieart
+        if: always() && steps.ie.outcome != 'skipped'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ilk-ekran-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/ilk-ekran/*.png
+          if-no-files-found: warn
+          retention-days: 30
+      - name: İLK-EKRAN görüntüsü (özet bağlantısı)
+        if: always() && steps.ie.outcome != 'skipped'
+        env:
+          ART_URL: ${{ steps.ieart.outputs.artifact-url }}
+        run: |
+          {
+            echo "#### İLK-EKRAN görüntüsü"
+            echo
+            if [ -n "$ART_URL" ]; then
+              echo "Son brifing, 375×812 ilk ekran (ILK_EKRAN_BOZ=$ILK_EKRAN_BOZ): [artifact'i indir]($ART_URL)"
+            else
+              echo "🔴 görüntü artifact'i yüklenemedi."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # Bilerek bozulan KAPSAM-SAYI / NOKTALI-İ / İLK-EKRAN çalıştırması yayına gitmez:
+      # sayısız ya da sarmasız sayfa yalnız kanıttır (İLK-EKRAN'da site bozulmaz, ama
+      # kanıt çalıştırması dala commit atmaz).
+      - if: env.KAPSAM_BOZ == 'none' && env.NOKTALI_BOZ != '1' && env.ILK_EKRAN_BOZ != '1'
         run: |
           git config user.name "defintel-bot"
           git config user.email "actions@github.com"

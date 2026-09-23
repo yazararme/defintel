@@ -95,6 +95,13 @@ def split_frontmatter(text):
     return yaml.safe_load(fm) or {}, body.lstrip("\n")
 
 
+# R24-P1-1 — telefonda tablo satırı karta dönüşünce sütun başlıkları gizleniyor;
+# "İzlenecek gösterge" hücresi soluk son satırda, anlam hücresiyle aynı görünüyordu.
+# Bu sütunun hücresi karttaki etiketini taşır (app.css: td[data-kart]::before).
+# Sütun konumla değil başlığıyla bulunur: sıra değişirse etiket yerinde kalır.
+KART_ETIKET = {"İzlenecek gösterge": "İzlenecek"}
+
+
 def label_table_cells(table_html):
     """Copy each column's header onto its cells so phones can stack the row."""
     headers = [
@@ -113,7 +120,9 @@ def label_table_cells(table_html):
             seen[0] += 1
             if i >= len(headers):
                 return cell_match.group(0)
-            return f'<td data-label="{html.escape(headers[i])}"{cell_match.group(1)}'
+            kart = KART_ETIKET.get(headers[i])
+            kart = f' data-kart="{html.escape(kart)}"' if kart else ""
+            return f'<td data-label="{html.escape(headers[i])}"{kart}{cell_match.group(1)}'
 
         return re.sub(r"<td(\s[^>]*>|>)", label_cell, row_match.group(0))
 
