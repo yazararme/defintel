@@ -29,6 +29,14 @@ on:
         description: 'Uyarıları [TEST] önekli issue''ya yaz (normal build, bozma yok)'
         type: boolean
         default: false
+      noktali_boz:
+        # Rev 33 — NOKTALI-İ kanıtı. Kodu bozmaz: NOKTALI_BOZ=1 yalnız bu çalıştırmada
+        # src_name()'in lang="en" sarmalını kapatır; build.py'nin NOKTALI-İ denetimi
+        # sarmasız yabancı adları bulur, (A)'ya ilk 10 örneği yazar ve uyarıyı "[TEST] "
+        # önekli issue'ya gönderir. Commit/push atılmaz (sarmasız sayfa yayına gitmez).
+        description: 'NOKTALI-İ: yabancı ad sarmalını bu çalıştırmada kapat (commit yok)'
+        type: boolean
+        default: false
 permissions:
   contents: write
   issues: write
@@ -38,9 +46,10 @@ jobs:
     env:
       DORT_DURUM_BOZ: ${{ inputs.boz || 'none' }}
       KAPSAM_BOZ: ${{ inputs.kapsam_boz || 'none' }}
+      NOKTALI_BOZ: ${{ inputs.noktali_boz == true && '1' || '0' }}
       # Yalnız bilerek bozulan (ya da uyari_test işaretli) çalıştırma test önekiyle (ve main dışında da) issue açar;
       # normal çalıştırmalarda boş → Rev 30 davranışı: issue yalnız main'de.
-      UYARI_TEST_ONEK: ${{ ((inputs.boz && inputs.boz != 'none') || (inputs.kapsam_boz && inputs.kapsam_boz != 'none') || inputs.uyari_test == true) && '[TEST] ' || '' }}
+      UYARI_TEST_ONEK: ${{ ((inputs.boz && inputs.boz != 'none') || (inputs.kapsam_boz && inputs.kapsam_boz != 'none') || inputs.uyari_test == true || inputs.noktali_boz == true) && '[TEST] ' || '' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -118,8 +127,9 @@ jobs:
             fi
           } >> "$GITHUB_STEP_SUMMARY"
 
-      # Bilerek bozulan KAPSAM-SAYI çalıştırması yayına gitmez: sayısız sayfa yalnız kanıttır.
-      - if: env.KAPSAM_BOZ == 'none'
+      # Bilerek bozulan KAPSAM-SAYI / NOKTALI-İ çalıştırması yayına gitmez: sayısız ya da
+      # sarmasız sayfa yalnız kanıttır.
+      - if: env.KAPSAM_BOZ == 'none' && env.NOKTALI_BOZ != '1'
         run: |
           git config user.name "defintel-bot"
           git config user.email "actions@github.com"

@@ -132,6 +132,7 @@ def render_body(md_text, developments=(), alarm=False, report_iso="", slugs=None
     md = markdown.Markdown(extensions=["tables", "fenced_code", "attr_list", "sane_lists"])
     out = md.convert(md_text)
     out = enrich.enrich(out, developments, alarm, report_iso, slugs)
+    out = kaynakca_sar(out)   # Rev 33: kaynakçadaki yabancı kaynak adları lang="en"
     out = re.sub(r"<table>.*?</table>", lambda m: label_table_cells(m.group(0)), out, flags=re.S)
     out = out.replace("<table>", '<div class="table-wrap"><table>')
     out = out.replace("</table>", "</table></div>")
@@ -1315,7 +1316,8 @@ def clip_html(item, day, cited, sec=""):
     bir yüzey tek bağlantı olamaz. Duruş hâlinde iki anatomi neredeyse özdeş görünür;
     farkı chevronun varlığı söyler.
     """
-    meta = [html.escape(item.get("source", ""))]
+    # Rev 33: yabancı kaynak adı lang="en" ile sarılı — .clip-meta büyük harf, sayfa lang="tr".
+    meta = [src_name(item.get("source", ""))]
     if norm_url(item.get("url")) in cited:
         meta.append('<span class="clip-cited">Brifingde</span>')
     elif brifingden_sonra(item, day):
@@ -1464,7 +1466,7 @@ def sources_page(day, data, has_report):
         return ""
     body = "".join(
         f'<li class="srow{"" if ok else " srow--off"}">'
-        f'<span class="sname">{html.escape(name)}</span>'
+        f'<span class="sname">{src_name(name)}</span>'
         + (f'<span class="scount num">{n}</span>' if ok and n
            else '<span class="scount num">—</span>' if ok
            else '<span class="scount">yanıt vermedi</span>')
@@ -1690,6 +1692,7 @@ def main():
 
     news = load_news()
     news_days = sorted(news)
+    kaynak_ulkeleri(news)   # Rev 33: src_name() kaynağın ülkesini buradan bilir
     # kupür çipi o günün başlık sayısını taşıyor: dokunmak için somut bir sebep
     news_counts = {day: data.get("unique_items", 0) for day, data in news.items()}
     # Sayılabilen şeyi build sayar: ajan aday listesinden bir sayıyı elle
@@ -1911,6 +1914,8 @@ def main():
             print(f"      {entry}")
     print(f"  · arsiv.html  ({len(reports)} rapor)  ·  index.html = {sources[-1][0] if sources else '—'}")
     print("  · data/reports.json")
+    # Rev 33: NOKTALI-İ — derlenmiş HTML'in büyük harfli alanlarında sarmasız yabancı ad.
+    noktali_i_kurali()
     if check_links():
         sys.exit(1)
 
@@ -2534,6 +2539,288 @@ def r23_kurallari(iso, meta, body, body_html, news):
           f" · KUR {sum(k == 'KUR' for k, _ in bulgular)}"
           f" · H1-TEKRAR {sum(k == 'H1-TEKRAR' for k, _ in bulgular)}")
     return bulgular
+
+
+# ── Rev 33 — yabancı adlarda noktalı İ (NOKTALI-İ) ─────────────────────────────
+# Sayfa <html lang="tr">; `text-transform: uppercase` taşıyan alanda tarayıcı Türkçe büyük
+# harf kuralını uygular ve i → İ olur ("UNMANNED AİRSPACE"). Dönüşüm doğru, yanlış olan dil
+# bilgisi: yabancı ad lang="en" ile sarılır, tarayıcı o adı İngilizce kuralla büyütür. CSS'e
+# dokunulmaz; Türkçe etiketler ("MEDYA TAKİBİ") Türkçe kuralla kalır.
+
+SRC_ULKE = {}   # kaynak adı → ülke kodu (kalemlerin `country` alanı); main() doldurur
+TR_HARFLER = frozenset("çğıöşüÇĞİÖŞÜ")
+
+
+def noktali_boz():
+    """NOKTALI_BOZ=1: sarmal yalnız bu derlemede kapanır (build.yml `noktali_boz` kanıtı)."""
+    import os
+    return os.environ.get("NOKTALI_BOZ", "").strip().lower() not in ("", "0", "none", "false")
+
+
+def kaynak_ulkeleri(news):
+    """Bütün günlerin kalemlerinden ad → ülke. Aynı ad farklı günde farklı ülkeyle gelirse son gün kazanır."""
+    SRC_ULKE.clear()
+    for day in sorted(news):
+        for item in news[day].get("items") or []:
+            if item.get("source") and item.get("country"):
+                SRC_ULKE[item["source"]] = item["country"]
+
+
+def yabanci_kaynak(name):
+    """Kaynağın ülkesi TR değil mi? Hiç kalem getirmemiş (ülkesi veride olmayan) kaynakta:
+    adında Türkçe harf yoksa yabancı sayılır — roster'da yalnız ad var, ülke yok."""
+    if not name:
+        return False
+    ulke = SRC_ULKE.get(name)
+    if ulke:
+        return ulke != "TR"
+    return not (set(name) & TR_HARFLER)
+
+
+def ad_parcalari(name):
+    """(yabancı kısım, Türkçe kuyruk): "SCMP (Çin)" → ("SCMP", " (Çin)").
+
+    Parantez içindeki Türkçe niteleme Türkçe kuralla büyümeli ("ÇİN"); sarmal yalnız
+    özel adı kapsar. Türkçe harf taşımayan parantez ("Defence24 (PL)") adın parçasıdır.
+    """
+    m = re.fullmatch(r"(.+?)(\s*\([^()]*\))", name or "")
+    if m and set(m.group(2)) & TR_HARFLER:
+        return m.group(1), m.group(2)
+    return name or "", ""
+
+
+def yabanci_ad(name):
+    """Yabancı özel ad → `<span lang="en">ad</span>` (+ Türkçe kuyruk sarmal dışında)."""
+    if noktali_boz():
+        return html.escape(name)
+    bas, kuyruk = ad_parcalari(name)
+    return f'<span lang="en">{html.escape(bas)}</span>{html.escape(kuyruk)}'
+
+
+def src_name(name):
+    """Kaynak adının tek kapısı: ülkesi TR değilse lang="en" sarmalı, TR ise düz metin."""
+    return yabanci_ad(name) if yabanci_kaynak(name) else html.escape(name or "")
+
+
+def kaynakca_sar(body_html):
+    """Brifing kaynakçası (li.source): "… — {Kaynak}, GG.AA.YYYY" içindeki bilinen yabancı
+    kaynak adını src_name()'den geçirir. Ajanın yazdığı, veride olmayan adlar (ör. şirket
+    siteleri) bilinmediği için düz kalır — o satırlar büyük harfli değil."""
+    adlar = sorted((a for a in SRC_ULKE if yabanci_kaynak(a)), key=len, reverse=True)
+    if not adlar:
+        return body_html
+
+    def li(m):
+        ic = m.group(2)
+        for ad in adlar:
+            esc = html.escape(ad, quote=False)
+            if f" — {esc}," in ic:
+                ic = ic.replace(f" — {esc},", f" — {src_name(ad)},", 1)
+                break
+        return m.group(1) + ic + m.group(3)
+
+    return re.sub(r'(<li id="k\d+" class="source">)((?:(?!</li>).)*)(</li>)', li, body_html, flags=re.S)
+
+
+# ── NOKTALI-İ denetimi ──
+
+_VOID = frozenset("area base br col embed hr img input link meta param source track wbr".split())
+
+
+def _secici(sel):
+    """'.a b', '.a > summary', 'th' → [(etiket, {sınıflar}, çocuk mu)]; desteklenmeyen → None."""
+    out, cocuk = [], False
+    for tok in sel.replace(">", " > ").split():
+        if tok == ">":
+            cocuk = True
+            continue
+        m = re.fullmatch(r"([a-z][a-z0-9]*)?((?:\.[\w-]+)*)", tok)
+        if not m or not tok:
+            return None
+        out.append((m.group(1) or "", frozenset(c for c in m.group(2).split(".") if c), cocuk))
+        cocuk = False
+    return out or None
+
+
+def buyuk_harf_kurallari(css_text=None):
+    """app.css'ten [(seçici, büyük harf mi, metin)] — dosyadaki sırayla (sonraki kazanır).
+
+    Sözde öğeler (`.prose td::before` — metni data-label özniteliğinden gelir, sarılamaz)
+    ve :hover gibi durumlar atlanır; `text-transform: none` kuralları da alınır ki
+    miras kesilsin (.tagline). @media blokları koşulsuz sayılır.
+    """
+    css = css_text if css_text is not None else (ROOT / "assets" / "app.css").read_text(encoding="utf-8")
+    css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+    kurallar = []
+    for m in re.finditer(r"([^{}]+)\{([^{}]*)\}", css):
+        d = re.search(r"text-transform\s*:\s*([\w-]+)", m.group(2))
+        if not d:
+            continue
+        for sel in m.group(1).split(","):
+            sel = sel.strip()
+            if ":" in sel:
+                continue
+            p = _secici(sel)
+            if p:
+                kurallar.append((p, d.group(1) == "uppercase", sel))
+    return kurallar
+
+
+def _uyar(el, s):
+    etiket, siniflar, _c = s
+    return (not etiket or el[0] == etiket) and siniflar <= el[1]
+
+
+def _eslesir(yigin, p):
+    """yigin: [(etiket, sınıflar)], son öğe denenen; p: _secici çıktısı."""
+    if not _uyar(yigin[-1], p[-1]):
+        return False
+
+    def geri(j, i):
+        if j < 0:
+            return True
+        if p[j + 1][2]:
+            return i >= 1 and _uyar(yigin[i - 1], p[j]) and geri(j - 1, i - 1)
+        return any(_uyar(yigin[k], p[j]) and geri(j - 1, k) for k in range(i - 1, -1, -1))
+
+    return geri(len(p) - 2, len(yigin) - 1)
+
+
+def buyuk_harfli_metinler(page_html, kurallar):
+    """[(sınıf, metin)] — büyük harfle çizilen her en dış öğenin, lang'lı alt ağaçları
+    '\\x00' ile kesilmiş metni. <html lang="tr"> sayılmaz: soru, adın kendi lang'ı var mı."""
+    from html.parser import HTMLParser
+
+    class P(HTMLParser):
+        def __init__(self):
+            super().__init__(convert_charrefs=True)
+            self.yigin, self.durum, self.kayitlar, self.acik = [], [], [], None
+
+        def handle_starttag(self, tag, attrs):
+            if tag in _VOID:
+                return
+            a = dict(attrs)
+            el = (tag, frozenset((a.get("class") or "").split()))
+            self.yigin.append(el)
+            ust = self.durum[-1] if self.durum else {"buyuk": False, "lang": False}
+            buyuk = ust["buyuk"]
+            for p, deger, _s in kurallar:
+                if _eslesir(self.yigin, p):
+                    buyuk = deger
+            lang = ust["lang"] or (tag != "html" and "lang" in a)
+            self.durum.append({"buyuk": buyuk, "lang": lang})
+            if buyuk and not ust["buyuk"] and self.acik is None:
+                self.acik = [len(self.yigin), tag + "".join("." + c for c in sorted(el[1])), []]
+
+        def handle_startendtag(self, tag, attrs):
+            if tag not in _VOID:
+                self.handle_starttag(tag, attrs)
+                self.handle_endtag(tag)
+
+        def handle_endtag(self, tag):
+            if tag in _VOID or not any(e[0] == tag for e in self.yigin):
+                return
+            while self.yigin:
+                if self.acik and len(self.yigin) == self.acik[0]:
+                    self.kayitlar.append((self.acik[1], "".join(self.acik[2])))
+                    self.acik = None
+                e = self.yigin.pop()
+                self.durum.pop()
+                if e[0] == tag:
+                    break
+
+        def handle_data(self, data):
+            if self.acik is None or not self.durum:
+                return
+            d = self.durum[-1]
+            if not d["buyuk"]:
+                self.acik[2].append("\x00")
+            elif d["lang"]:
+                self.acik[2].append("\x00")
+            else:
+                self.acik[2].append(data)
+
+    p = P()
+    p.feed(page_html)
+    p.close()
+    return p.kayitlar
+
+
+def yabanci_adlar():
+    """Denetimde aranan adlar: ülkesi TR olmayan kaynaklar (yabancı kısmı) + Türk rolü
+    olmayan izlenen oyuncular. Tek kalıp, en uzun önce, harf duyarlı, sözcük sınırlı."""
+    adlar = {ad_parcalari(a)[0] for a in SRC_ULKE if yabanci_kaynak(a)}
+    try:
+        adlar |= {r["name"] for r in rivals_config() if r.get("role") not in TURKISH_ROLES}
+    except Exception:
+        pass
+    adlar = sorted((a for a in adlar if a.strip()), key=len, reverse=True)
+    if not adlar:
+        return None
+    return re.compile(r"(?<![\w])(" + "|".join(re.escape(a) for a in adlar) + r")(?![\w])")
+
+
+def noktali_i_tara(sayfalar, kurallar=None, kalip=None):
+    """[(sayfa, sınıf, ad, bağlam)] — büyük harfli alanda lang'sız duran yabancı ad."""
+    kurallar = kurallar if kurallar is not None else buyuk_harf_kurallari()
+    kalip = kalip if kalip is not None else yabanci_adlar()
+    ornekler = []
+    if not kalip:
+        return ornekler
+    for yol in sayfalar:
+        metin = yol.read_text(encoding="utf-8")
+        for sinif, t in buyuk_harfli_metinler(metin, kurallar):
+            for m in kalip.finditer(t):
+                baglam = " ".join(t.replace("\x00", "·").split())
+                ornekler.append((yol.relative_to(ROOT).as_posix(), sinif, m.group(1), baglam))
+    return ornekler
+
+
+def noktali_i_sayfalari():
+    """Denetlenen sayfalar, medya takibi önce, en yeni gün önce."""
+    out = []
+    for d in ("haberler", "reports", "izleme"):
+        out += sorted((ROOT / d).glob("*.html"), reverse=True)
+    return out + sorted(ROOT.glob("*.html"))
+
+
+def noktali_i_kurali():
+    """NOKTALI-İ: her derlemede log + (A) satırı; örnek varsa Rev 30 kanalına uyarı."""
+    import os
+    kurallar = buyuk_harf_kurallari()
+    sayfalar = noktali_i_sayfalari()
+    ornekler = noktali_i_tara(sayfalar, kurallar)
+    siniflar = sorted({s for _p, _b, s in kurallar if _b})
+    boz = " (NOKTALI_BOZ=1, bilerek)" if noktali_boz() else ""
+    sayfa_n = len({o[0] for o in ornekler})
+    print(f"  · NOKTALI-İ: {len(ornekler)} örnek{boz} · {len(sayfalar)} sayfa, "
+          f"{len(siniflar)} büyük harfli seçici (app.css)")
+    for o in ornekler[:10]:
+        print(f"      {o[0]} · {o[1]} · “{o[2]}” ← “{o[3][:70]}”")
+    summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary:
+        md = ["### NOKTALI-İ — büyük harfli alanda yabancı ad (Rev 33)", "",
+              f"**{'🟢' if not ornekler else '🔴'} NOKTALI-İ: {len(ornekler)} örnek**{boz}"
+              + (f" · {sayfa_n} sayfada" if ornekler else "")
+              + f" · {len(sayfalar)} sayfa tarandı · büyük harfli seçiciler (app.css): "
+              + ", ".join(f"`{s}`" for s in siniflar), ""]
+        if ornekler:
+            md += ["İlk 10 örnek:", "", "| # | sayfa | öğe | ad | metin |", "|---|---|---|---|---|"]
+            boru = "|"
+            md += [f"| {i} | `{p}` | `{c}` | {a} | {b[:80].replace(boru, chr(92) + boru)} |"
+                   for i, (p, c, a, b) in enumerate(ornekler[:10], 1)]
+        try:
+            with open(summary, "a", encoding="utf-8") as fh:
+                fh.write("\n".join(md) + "\n\n")
+        except OSError as exc:
+            print(f"  ! NOKTALI-İ: özet yazılamadı: {exc}")
+    if ornekler:
+        from scripts import uyari
+        tekil = list(dict.fromkeys((p, a) for p, _c, a, _b in ornekler))
+        ilk = " · ".join(f"{p} “{a}”" for p, a in tekil[:3])
+        uyari.ekle("NOKTALI-İ", f"NOKTALI-İ: büyük harfli alanda lang'sız yabancı ad {len(ornekler)} örnek, "
+                                f"{sayfa_n} sayfada{boz} — ilk: {ilk}")
+    return ornekler
 
 
 if __name__ == "__main__":

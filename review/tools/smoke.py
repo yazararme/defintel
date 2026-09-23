@@ -16,6 +16,11 @@ line, a 375px check that the AA row on /haberler/2026-09-23.html?oyuncu=roketsan
 "BRİFİNGDEN SONRA" in --muted (never with BRİFİNGDE), and, when the local-only
 data/news/2026-09-24-aday.md exists, that its first section is "Dünkü brifingden sonra gelenler"
 and holds the AA row.
+Rev 33: NOKTALI-İ — the build's "NOKTALI-İ: 0 örnek" line, src_name() unit cases, a 1440px
+Turkish-locale check of the latest media page (Öne çıkanlar shows "UNMANNED AIRSPACE" and "DEFENSE
+DAILY" with dotless I, "ANADOLU AJANSI" unchanged, no foreign source name rendered with İ anywhere
+in .clip-meta) and of its Kaynaklar page; then a NOKTALI_BOZ=1 build (the alert fires with
+examples, the browser shows "UNMANNED AİRSPACE") and a normal rebuild.
 Later revisions extend CHECKS / PAGES. Exit 1 on any failure.
 """
 import os
@@ -170,6 +175,124 @@ sys.exit(0 if ok else 1)
 """
 
 
+# Rev 33 R33-P0-1/P0-2 (S): 1440px, tr-TR — büyük harfe çevrilmiş kaynak adları tarayıcının
+# kendi çiziminden (innerText, text-transform uygulanmış) okunur.
+NOKTALI_JS = r"""
+import json, sys
+from playwright.sync_api import sync_playwright
+url, kaynak = sys.argv[1], sys.argv[2]
+JS = '''() => {
+  const h = Array.from(document.querySelectorAll('h2.kicker')).find(e => e.textContent.trim().startsWith('Öne çıkanlar'));
+  const one = [];
+  for (let n = h && h.nextElementSibling; n && !n.matches('h2.kicker, details.general'); n = n.nextElementSibling)
+    n.querySelectorAll('.clip-meta').forEach(m => one.push(m.innerText));
+  return {lang: document.documentElement.lang, one: one,
+          all: Array.from(document.querySelectorAll('.clip-meta')).map(m => m.innerText)};
+}'''
+with sync_playwright() as p:
+    try: b = p.chromium.launch(channel="chrome")
+    except Exception: b = p.chromium.launch()
+    pg = b.new_context(service_workers="block", viewport={"width": 1440, "height": 900}, locale="tr-TR").new_page()
+    pg.goto(url); pg.wait_for_timeout(500)
+    r = pg.evaluate(JS)
+    pg.goto(kaynak); pg.wait_for_timeout(300)
+    r["snames"] = pg.eval_on_selector_all(".sname", "els => els.map(e => [e.innerText, !!e.querySelector('[lang=en]')])")
+    b.close()
+print(json.dumps(r, ensure_ascii=False))
+"""
+
+
+def _tr_upper(text):
+    return text.replace("i", "İ").upper()
+
+
+def r33_checks(build_stdout, py, fails):
+    """Rev 33: NOKTALI-İ — build satırı, src_name() birim durumları, tarayıcı (1440, tr-TR), bozuk derleme."""
+    import json
+    sys.path.insert(0, str(ROOT))
+    import build as B
+    satir = [l.strip() for l in build_stdout.splitlines() if "· NOKTALI-İ:" in l]
+    ok = bool(satir) and "NOKTALI-İ: 0 örnek" in satir[0]
+    print(f"{'ok  ' if ok else 'FAIL'} NOKTALI-İ build satırı · {satir[0].lstrip('· ') if satir else 'satır yok'}")
+    if not ok:
+        fails.append("NOKTALI-İ build satırı")
+
+    B.kaynak_ulkeleri(B.load_news())
+    birim = {
+        "Unmanned Airspace": '<span lang="en">Unmanned Airspace</span>',
+        "Anadolu Ajansı — güncel": "Anadolu Ajansı — güncel",
+        "SCMP (Çin)": '<span lang="en">SCMP</span> (Çin)',
+        "Defence24 (PL)": '<span lang="en">Defence24 (PL)</span>',
+        "European Security & Defence": '<span lang="en">European Security &amp; Defence</span>',
+        "Hartpunkt": '<span lang="en">Hartpunkt</span>',   # yalnız roster'da: ülke yok, Türkçe harf yok
+        "Savunma Günlüğü": "Savunma Günlüğü",               # bilinmeyen + Türkçe harf → Türk sayılır
+    }
+    yanlis = {k: B.src_name(k) for k, v in birim.items() if B.src_name(k) != v}
+    print(f"{'ok  ' if not yanlis else 'FAIL'} src_name() birim durumları · {len(birim) - len(yanlis)}/{len(birim)}"
+          + (f" · yanlış: {yanlis}" if yanlis else ""))
+    if yanlis:
+        fails.append("src_name birim")
+
+    yabanci = sorted({B.ad_parcalari(a)[0] for a in B.SRC_ULKE if B.yabanci_kaynak(a)})
+    noktali = [_tr_upper(a) for a in yabanci if "i" in a]
+
+    def tarayici(etiket):
+        kupur = latest("haberler", "????-??-??.html")
+        kaynak = kupur.replace(".html", "-kaynaklar.html")
+        r = subprocess.run([py, "-c", NOKTALI_JS, BASE + kupur, BASE + kaynak], cwd=ROOT, capture_output=True, text=True)
+        if r.returncode:
+            print(f"FAIL NOKTALI-İ tarayıcı ({etiket}) · {r.stderr[-400:]}")
+            return None
+        return json.loads(r.stdout)
+
+    if not py:
+        print("FAIL NOKTALI-İ tarayıcı · Playwright'lı python yok")
+        fails.append("NOKTALI-İ tarayıcı")
+        return
+    r = tarayici("normal")
+    ok = bool(r)
+    if r:
+        one, tum = " | ".join(r["one"]), " | ".join(r["all"])
+        hatali = sorted({n for n in noktali if n in tum})
+        sn_hatali = [t for t, lang in r["snames"] if B.yabanci_kaynak(t) and t in B.SRC_ULKE and not lang]
+        ok = (r["lang"] == "tr" and "UNMANNED AIRSPACE" in one and "DEFENSE DAILY" in one
+              and "AİRSPACE" not in tum and "DAİLY" not in tum and "ANADOLU AJANSI" in tum
+              and not hatali and not sn_hatali)
+        print(f"{'ok  ' if ok else 'FAIL'} NOKTALI-İ 1440px tr-TR · lang={r['lang']} · Öne çıkanlar: "
+              f"{'“UNMANNED AIRSPACE”' if 'UNMANNED AIRSPACE' in one else 'UNMANNED AIRSPACE yok'}, "
+              f"{'“DEFENSE DAILY”' if 'DEFENSE DAILY' in one else 'DEFENSE DAILY yok'} · "
+              f"{'“ANADOLU AJANSI” değişmedi' if 'ANADOLU AJANSI' in tum else 'ANADOLU AJANSI yok'} · "
+              f"İ'li yabancı ad {len(hatali)}{' ' + str(hatali[:4]) if hatali else ''} · "
+              f"Kaynaklar sayfasında sarmasız yabancı ad {len(sn_hatali)}")
+    if not ok:
+        fails.append("NOKTALI-İ tarayıcı")
+
+    # Bozuk derleme: sarmal kapalı → uyarı örneklerle gelir, tarayıcı noktalı İ çizer; sonra normal derleme.
+    boz = subprocess.run([sys.executable, "build.py"], cwd=ROOT, capture_output=True, text=True,
+                         env={**os.environ, "NOKTALI_BOZ": "1"})
+    try:
+        bs = [l.strip() for l in boz.stdout.splitlines() if "· NOKTALI-İ:" in l]
+        uy = [l.strip() for l in boz.stdout.splitlines() if l.strip().startswith("! NOKTALI-İ ·")]
+        m = re.search(r"NOKTALI-İ: (\d+) örnek", bs[0]) if bs else None
+        rb = tarayici("bozuk")
+        one_b = " | ".join(rb["one"]) if rb else ""
+        ok = bool(boz.returncode == 0 and m and int(m.group(1)) > 0 and uy
+                  and "(NOKTALI_BOZ=1, bilerek)" in uy[0] and "UNMANNED AİRSPACE" in one_b)
+        print(f"{'ok  ' if ok else 'FAIL'} NOKTALI-İ bozuk derleme (NOKTALI_BOZ=1) · "
+              f"{bs[0].lstrip('· ') if bs else 'satır yok'} · uyarı {'var' if uy else 'yok'} · tarayıcı "
+              f"{'“UNMANNED AİRSPACE”' if 'UNMANNED AİRSPACE' in one_b else 'noktalı İ görünmedi'}")
+        if uy:
+            print(f"       {uy[0][:220]}")
+        if not ok:
+            fails.append("NOKTALI-İ bozuk derleme")
+    finally:
+        back = subprocess.run([sys.executable, "build.py"], cwd=ROOT, capture_output=True, text=True,
+                              env={k: v for k, v in os.environ.items() if k != "NOKTALI_BOZ"})
+        if back.returncode or "NOKTALI-İ: 0 örnek" not in back.stdout:
+            print("FAIL NOKTALI-İ: normal derlemeye dönüş")
+            fails.append("rebuild (NOKTALI-İ)")
+
+
 def r31_checks(build_stdout, py, fails):
     """Rev 31: GEÇ-GELEN — ağsız toplama testi, build satırı, jeton (375px), yerel aday dosyası."""
     t = subprocess.run([sys.executable, "scripts/test_collect.py"], cwd=ROOT, capture_output=True, text=True)
@@ -313,6 +436,9 @@ def main():
 
     # Rev 31: GEÇ-GELEN
     r31_checks(build.stdout, py, fails)
+
+    # Rev 33: NOKTALI-İ
+    r33_checks(build.stdout, py, fails)
 
     # Rev 21: KAPSAM-SAYI — alias testi 64/64 (normal build'in çıktısından)
     m = [l for l in build.stdout.splitlines() if "KAPSAM-SAYI: alias testi" in l]
