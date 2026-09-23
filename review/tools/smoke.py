@@ -161,6 +161,16 @@ def main():
             print(f"{'ok  ' if ok else 'FAIL'} KAPSAM-SAYI <64 hâli (KAPSAM_BOZ=thales) · {kk.stdout.strip() or kk.stderr[-300:]}")
             if not ok:
                 fails.append("KAPSAM-SAYI <64")
+            # attempt 2: the pipeline's own evidence check in the <64 state — it also opens the
+            # Mühimmat chip (R21-P0-2: "izlenen {segment}") and checks the active chip's contrast
+            # with the pointer still on it, light and dark.
+            ks2 = subprocess.run([py, "scripts/check_reports.py", "--oyuncular", "--base", BASE],
+                                 cwd=ROOT, capture_output=True, text=True)
+            satir2 = [l for l in ks2.stdout.splitlines() if "Mühimmat" in l and "375px" in l]
+            print(f"{'ok  ' if ks2.returncode == 0 else 'FAIL'} KAPSAM-SAYI <64 --oyuncular (Tümü + Mühimmat, açık/koyu) · "
+                  f"{satir2[0] if satir2 else ks2.stdout[-300:] + ks2.stderr[-300:]}")
+            if ks2.returncode:
+                fails.append("KAPSAM-SAYI <64 --oyuncular")
         finally:
             back = subprocess.run([sys.executable, "build.py"], cwd=ROOT, capture_output=True, text=True,
                                   env={k: v for k, v in os.environ.items() if k != "KAPSAM_BOZ"})

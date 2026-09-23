@@ -79,7 +79,7 @@ jobs:
             fi
           } >> "$GITHUB_STEP_SUMMARY"
 
-      # Rev 21 — KAPSAM-SAYI (S) kanıtı: /oyuncular.html 375 ve 1440 px, tam sayfa.
+      # Rev 21 — KAPSAM-SAYI (S) kanıtı: /oyuncular.html 375 ve 1440 px, tam sayfa; Tümü + "Mühimmat" çipi (açık/koyu).
       # Her çalıştırmada; kapsam_boz seçiliyse bu, sayısız hâlin görüntüsüdür.
       - name: KAPSAM-SAYI görüntüleri
         id: ks
@@ -104,7 +104,7 @@ jobs:
             echo "#### KAPSAM-SAYI görüntüleri"
             echo
             if [ -n "$ART_URL" ]; then
-              echo "/oyuncular.html (1-oyuncular-375, 2-oyuncular-1440; KAPSAM_BOZ=$KAPSAM_BOZ): [artifact'i indir]($ART_URL)"
+              echo "/oyuncular.html (1-2: Tümü 375/1440; 3-6: Mühimmat çipi açık, 375/1440, açık/koyu; KAPSAM_BOZ=$KAPSAM_BOZ): [artifact'i indir]($ART_URL)"
             else
               echo "🔴 görüntü artifact'i yüklenemedi."
             fi

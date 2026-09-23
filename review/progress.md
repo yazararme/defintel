@@ -27,6 +27,7 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 |---|---|---|---|---|
 | 30 | PASS (issue kanalı) | 1 (+1 iptal edilen push sürümü) | aa9a4c3 | yok |
 | 22 | PASS (deneme 2; d1 FAIL P1-2 "1 / 536") | 2 | 29a9667, d9565c1 | yok |
+| 21 | d1 FAIL (P0-2 kanıt yok: <64 hâlinde Mühimmat çipi); d2 sürüyor | 1→2 | 00d908c (d1) | yok |
 
 ## Notlar / anlaşmazlıklar
 
@@ -46,6 +47,9 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 - design-reviewer.md (P)'yi PENDING-HUMAN sayıyor; Rev 30 sonrası (P) → (I) değişimini her inceleme istemine yazıyorum. Tanım dosyasını değiştirmedim (kullanıcının dosyası).
 - Rev 22 d1 kanıtı: yeşil run 35867515608, bozuk (boz=fetch) run 35867655946 → issue #5'e DÖRT-DURUM satırı (issue yeniden açıldı).
 - Rev 22 inceleyici notları: "2 / 536" bir başlığı iki kez sayıyor (Açık 2); yeşil özet görüntüsü d1 run'ından (d2 artifact'leri ayrı). Taze tarayıcıda 375px'te "Yeni rapor çıkınca haber verelim mi?" bandı ~150px kaplıyor; shoot.py `service_workers="block"` kullandığı için çekimlerde yok. Bant Rev 22'den önce de vardı (app.js ziyaret sayacı); plan Rev 29 sıra 26 (P2) ile ilgili.
+
+- Rev 21 d1 kanıtı: normal run 35871179217 (alias 64/64), kapsam_boz=thales run 35871351691 → issue #5 KAPSAM-SAYI satırı. 64 oyuncunun 36'sının pozitif örneği kurgu (`pos_kaynak: kurgu`) — plan buna izin veriyor, müşteriye not.
+- Rev 21 inceleyici notu: etkin çipin etiketi fare üstündeyken neredeyse görünmüyor (dokunmatikte yapışabilir).
 
 ## Açık (orkestratörün eklediği)
 

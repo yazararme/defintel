@@ -28,7 +28,10 @@ KAPSAM-SAYI kanıtı (Rev 21): /oyuncular.html'i 375×812 ve 1440×900'de (tam s
 çeker, `1-oyuncular-375.png` / `2-oyuncular-1440.png` olarak DIR'e yazar ve sayfanın
 kendi hâline (data-kapsam) uyup uymadığını (A) özetine yazar: 64/64'ün altındaysa üst
 satır yalnız "izlenen N", hiçbir satırda "gün"/"önce"/"bugün" yok, sıra alfabetik;
-64/64'te "Bugün N" ve "N gün" görünür. Uymazsa çıkış 1.
+64/64'te "Bugün N" ve "N gün" görünür. Ayrıca (R21-P0-2) "Mühimmat" çipi açıkken açık ve
+koyu temada `3-…6-oyuncular-muhimmat-*.png` çeker: üst satırdaki "izlenen N" ekrandaki
+satır sayısına ve o segmentteki oyuncu sayısına eşit olmalı; imleç çipin üstündeyken
+etkin çipin yazı/zemin kontrastı ≥ 4.5:1 olmalı. Uymazsa çıkış 1.
 """
 import http.server
 import os
@@ -264,7 +267,29 @@ def dort_durum(base=None, boz="none", out=None):
     return 0
 
 
+OY_SEG = ("muhimmat", "Mühimmat")   # R21-P0-2 kanıtı: bu çip açıkken üst satır yeniden sayılır
+
+OY_BILGI_JS = """() => {
+    const on = document.querySelector('.pchip.pchip--on');
+    const cs = on ? getComputedStyle(on) : null;
+    return {
+    kapsam: (document.querySelector('.player-list') || {dataset: {}}).dataset.kapsam || '',
+    tally: (document.getElementById('ptally') || {}).innerText || '',
+    rows: Array.from(document.querySelectorAll('.player-row')).filter(r => !r.hidden).map(r => r.innerText),
+    names: Array.from(document.querySelectorAll('.player-row')).filter(r => !r.hidden)
+                .map(r => (r.querySelector('.pname') || {}).innerText || ''),
+    toplam: document.querySelectorAll('.player-row').length,
+    segde: Array.from(document.querySelectorAll('.player-row'))
+                .filter(r => (r.dataset.seg || '').split(/\\s+/).includes(%r)).length,
+    cip: on ? on.innerText.trim() : '',
+    cip_renk: cs ? [cs.color, cs.backgroundColor] : [],
+}}""" % OY_SEG[0]
+
+
 async def _oyuncular_kos(base, out):
+    """Her genişlikte: (1) açılış hâli, açık tema; (2) "Mühimmat" çipi açık, açık ve koyu tema.
+    Çipe tıklandıktan sonra imleç çipin üstünde bırakılır — telefonda dokunuştan sonra
+    kalan :hover hâli budur; etkin çipin yazısı o hâlde de okunmalı."""
     from playwright.async_api import async_playwright
     async with async_playwright() as p:
         try:
@@ -272,28 +297,64 @@ async def _oyuncular_kos(base, out):
         except Exception:   # paketli chromium yok (yerel Mac): sistem Chrome'u
             browser = await p.chromium.launch(channel="chrome")
         sonuc = []
+        genislik = ((375, 812), (1440, 900))
         try:
-            for i, (w, h) in enumerate(((375, 812), (1440, 900)), 1):
-                ctx = await browser.new_context(viewport={"width": w, "height": h},
-                                                service_workers="block", locale="tr-TR")
-                page = await ctx.new_page()
-                await page.goto(base + "/oyuncular.html", wait_until="load")
-                await page.wait_for_timeout(300)
-                bilgi = await page.evaluate("""() => ({
-                    kapsam: (document.querySelector('.player-list') || {dataset: {}}).dataset.kapsam || '',
-                    tally: (document.getElementById('ptally') || {}).innerText || '',
-                    rows: Array.from(document.querySelectorAll('.player-row')).map(r => r.innerText),
-                    names: Array.from(document.querySelectorAll('.player-row .pname')).map(a => a.innerText),
-                })""")
-                resim = None
-                if out:
-                    resim = out / f"{i}-oyuncular-{w}.png"
-                    await page.screenshot(path=str(resim), full_page=True)
-                sonuc.append((w, bilgi, resim))
-                await ctx.close()
+            for tur, tema, no in (("tumu", "light", 1), ("seg", "light", 3), ("seg", "dark", 5)):
+                for i, (w, h) in enumerate(genislik):
+                    ctx = await browser.new_context(viewport={"width": w, "height": h},
+                                                    service_workers="block", locale="tr-TR",
+                                                    color_scheme=tema)
+                    page = await ctx.new_page()
+                    await page.goto(base + "/oyuncular.html", wait_until="load")
+                    await page.wait_for_timeout(300)
+                    ad = f"oyuncular-{w}" if tur == "tumu" else \
+                        f"oyuncular-{OY_SEG[0]}-{w}" + ("-koyu" if tema == "dark" else "")
+                    if tur == "seg":
+                        await page.click(f'.pchip[data-seg="{OY_SEG[0]}"]')
+                        await page.wait_for_timeout(250)   # renk geçişi (.12s) bitsin
+                    bilgi = await page.evaluate(OY_BILGI_JS)
+                    resim = None
+                    if out:
+                        resim = out / f"{no + i}-{ad}.png"
+                        await page.screenshot(path=str(resim), full_page=True)
+                    sonuc.append((w, tur, tema, bilgi, resim))
+                    await ctx.close()
         finally:
             await browser.close()
         return sonuc
+
+
+def _renk(css):
+    m = re.findall(r"[\d.]+", css or "")
+    return tuple(float(x) for x in m[:3]) if len(m) >= 3 else None
+
+
+def _kontrast(a, b):
+    def lum(c):
+        v = [x / 255 for x in c]
+        v = [x / 12.92 if x <= 0.03928 else ((x + 0.055) / 1.055) ** 2.4 for x in v]
+        return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2]
+    la, lb = sorted((lum(a), lum(b)), reverse=True)
+    return (la + 0.05) / (lb + 0.05)
+
+
+_TR_KOLAT = None
+
+
+def _tr_anahtar(ad):
+    """build.py'nin tr_collate'i — sayfayı sıralayan fonksiyonun kendisi. build.py'yi içe
+    aktarmadan (markdown/yaml gerektirir) yalnız TR_ALPHABET ve tr_collate çekilir."""
+    global _TR_KOLAT
+    if _TR_KOLAT is None:
+        import ast
+        agac = ast.parse((ROOT / "build.py").read_text(encoding="utf-8"))
+        parca = [d for d in agac.body
+                 if (isinstance(d, ast.FunctionDef) and d.name == "tr_collate")
+                 or (isinstance(d, ast.Assign) and any(getattr(t, "id", "") == "TR_ALPHABET" for t in d.targets))]
+        ad_alani = {}
+        exec(compile(ast.Module(body=parca, type_ignores=[]), "build.py", "exec"), ad_alani)
+        _TR_KOLAT = ad_alani["tr_collate"]
+    return _TR_KOLAT(ad)
 
 
 def oyuncular(base=None, out=None):
@@ -311,25 +372,39 @@ def oyuncular(base=None, out=None):
         if srv:
             srv.shutdown()
     ozet = ["### KAPSAM-SAYI — /oyuncular.html görüntüleri (Rev 21)", "",
-            "| genişlik | kapsam | üst satır | ilk iki satır | denetim | görüntü |",
-            "|---|---|---|---|---|---|"]
+            "| genişlik | çip | kapsam | üst satır | ilk iki satır | denetim | görüntü |",
+            "|---|---|---|---|---|---|---|"]
     kalan = 0
-    for w, b, resim in sonuc:
+    for w, tur, tema, b, resim in sonuc:
         m = re.fullmatch(r"(\d+)/(\d+)", b["kapsam"])
         tam = bool(m) and m.group(1) == m.group(2)
         tally = " ".join(b["tally"].split())
         sayili = [r for r in b["rows"] if re.search(r"\d+ gün|önce|bugün|dün|\bkez\b", r)]
+        gorunen = len(b["rows"])
+        notlar = [f"{len(sayili)} satırda sayı/jeton"]
         if not m:
-            ok, neden = False, "data-kapsam yok"
+            ok, notlar = False, ["data-kapsam yok"]
         elif tam:
             ok = tally.startswith("Bugün ") and "son 30 günde" in tally and bool(sayili)
-            neden = f"{len(sayili)} satırda sayı/jeton"
         else:
             ok = (re.fullmatch(r"izlenen \d+", tally) is not None and not sayili)
-            neden = f"{len(sayili)} satırda sayı/jeton"
+            if tur == "tumu":   # R21-P0-1: alfabetik sıra
+                ok = ok and b["names"] == sorted(b["names"], key=_tr_anahtar)
+        # "izlenen N" her iki hâlde de ekrandaki satırları sayar (R21-P0-2)
+        iz = re.search(r"izlenen (\d+)$", tally)
+        if tur == "seg":
+            fg, bg = _renk((b["cip_renk"] or [None, None])[0]), _renk((b["cip_renk"] or [None, None])[1])
+            k = _kontrast(fg, bg) if fg and bg else 0
+            ok = (ok and iz is not None and int(iz.group(1)) == gorunen == b["segde"] < b["toplam"]
+                  and b["cip"] == OY_SEG[1] and k >= 4.5)
+            notlar.append(f"izlenen = görünen {gorunen} = segmentte {b['segde']} / {b['toplam']}")
+            notlar.append(f"etkin çip “{b['cip']}” kontrast {k:.1f}:1 (imleç üstünde)")
+        else:
+            ok = ok and iz is not None and int(iz.group(1)) == gorunen == b["toplam"]
         kalan += not ok
-        ozet.append(f"| {w}px | {b['kapsam'] or '—'} | {tally} | {', '.join(b['names'][:2])}"
-                    f" | {'🟢' if ok else '🔴'} {neden} | {resim.name if resim else '—'} |")
+        cip = "Tümü" if tur == "tumu" else f"{OY_SEG[1]} ({'koyu' if tema == 'dark' else 'açık'})"
+        ozet.append(f"| {w}px | {cip} | {b['kapsam'] or '—'} | {tally} | {', '.join(b['names'][:2])}"
+                    f" | {'🟢' if ok else '🔴'} {'; '.join(notlar)} | {resim.name if resim else '—'} |")
     ozet.append("")
     metin = "\n".join(ozet) + "\n"
     print(metin)

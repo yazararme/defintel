@@ -1326,7 +1326,12 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
   cursor: pointer;
   background: transparent;
 }
-.pchip--on { color: var(--paper); background: var(--brand); border-color: var(--brand); }
+/* Etkin çip :hover/:active altında da dolgusunu korur. .chip:hover (iki seçici) tek
+   sınıflı .pchip--on'u eziyordu: açık zemin + açık yazı, dokunuştan sonra telefonda
+   :hover kaldığı için etiket boş görünüyordu. */
+.pchip--on,
+.pchip--on:hover,
+.pchip--on:active { color: var(--paper); background: var(--brand); border-color: var(--brand); }
 
 .player-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
 /* Son satırın çizgisi ile endnav'ın çizgisi arasında 48px boşluk kalıyor ve
