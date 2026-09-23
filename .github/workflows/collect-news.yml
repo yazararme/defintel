@@ -42,6 +42,10 @@ jobs:
       # requests; a new feed costs one.
       - if: github.event_name == 'schedule' || inputs.dry_run == false
         run: python3 scripts/probe_proxy.py || echo "vekil yoklaması atlandı"
+      # Rev 26 — ÇEVİRİ-DEDEKTÖRÜ sabit testi (ağsız, model çağrısı yok): (A)'ya 16 kusurlu
+      # kalemden yakalanan sayısı; günün sınama tablosunu translate_news.py kendisi yazar.
+      - if: github.event_name == 'schedule' || inputs.dry_run == false
+        run: python3 scripts/test_ceviri_dedektoru.py sabit || echo "sabit test kırmızı"
       # Translation runs on the Claude subscription token, not an API key.
       - if: github.event_name == 'schedule' || inputs.dry_run == false
         env:

@@ -1,0 +1,40 @@
+name: ceviri-dedektoru-test
+# Rev 26 kanıt iş akışı: ÇEVİRİ-DEDEKTÖRÜ, MODEL ÇAĞRISI YOK. Claude CLI kurulmaz, sır yok
+# (yalnız GITHUB_TOKEN), ağ yok (uyarı boşaltması hariç); data/news'e yazılmaz (çıktı $RUNNER_TEMP'te).
+# Tek iş:
+#   1) yerel test : sabit test (content.md §2'nin 16 kusurlu kalemi, mevcut çeviriler) + akış
+#                   → (A)'da sınama başına tablo ve "16 kalemden en az N yakalandı" satırı.
+#   2) sahte gün  : §2'nin 40 başlığı translate_news.py'den --sahte-cevirmen ile geçer (ilk ve
+#                   yeniden çeviri = bugünkü kusurlu çeviri; yalnız wheeling auction "çekil"e düzelir)
+#                   → (A)'da günün ÇEVİRİ-DEDEKTÖRÜ tablosu, >10 özgün → "[TEST] " önekli issue'da
+#                   ÇEVİRİ-DEDEKTÖRÜ satırı (I). Sahte çeviri gerçek yeniden çeviri DEĞİLDİR.
+# Yalnız rev21-33 dalında koşar; main'e alınmadan önce silinebilir.
+on:
+  push:
+    branches: [rev21-33]
+    paths: ['scripts/translate_news.py', 'scripts/test_ceviri_dedektoru.py',
+            '.github/workflows/ceviri-dedektoru-test.yml']
+  workflow_dispatch:
+permissions:
+  issues: write
+  contents: read
+concurrency: ceviri-dedektoru-test
+env:
+  UYARI_TEST_ONEK: "[TEST] "
+  GITHUB_TOKEN: ${{ github.token }}
+jobs:
+  sabit-ve-akis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Yerel test (sabit test + akış, model çağrısı yok)
+        run: python3 scripts/test_ceviri_dedektoru.py
+      - name: Sınama dosyaları
+        run: python3 scripts/test_ceviri_dedektoru.py hazirla "$RUNNER_TEMP/cd"
+      - name: Sahte gün — 24 Eylül, 40 başlık, sahte çevirmen
+        run: >
+          python3 scripts/translate_news.py --date 2026-09-24
+          --news-dir "$RUNNER_TEMP/cd/news" --sahte-cevirmen "$RUNNER_TEMP/cd/sahte.json"
+      - name: Operatör uyarıları
+        if: always()
+        run: python3 scripts/uyari.py

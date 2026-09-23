@@ -80,6 +80,11 @@ line with the right genitive and one alert; the rail carries the line only when 
 pass: on /reports/2026-09-23.html and / the line sits directly under the Tarama row, --ink-2 mono, once
 per page, no sideways scroll; the first report (no sweep) has none; the Kaynaklar page shows no
 "yanıt vermedi".
+Rev 26: ÇEVİRİ-DEDEKTÖRÜ — scripts/test_ceviri_dedektoru.py (no model call: the fixed test over
+content.md §2's 16 defective items with today's translations must catch at least 7, plus the
+retry/fallback flow with an injected fake translator and the CLI with --sahte-cevirmen: >10 left
+original → alert, exactly 10 → none); the prompt is sentence case and carries Ö1/Ö2/Ö3; the
+evidence workflow ceviri-dedektoru-test.yml has no secret, no Claude CLI install and no --refresh.
 Later revisions extend CHECKS / PAGES. Exit 1 on any failure.
 """
 import os
@@ -1260,6 +1265,28 @@ def r27_checks(build_stdout, py, fails):
             fails.append("rebuild (İPLİK-DURUM)")
 
 
+def r26_checks(fails):
+    """Rev 26: ÇEVİRİ-DEDEKTÖRÜ — model çağırmayan test, istem, kanıt iş akışı."""
+    t = subprocess.run([sys.executable, "scripts/test_ceviri_dedektoru.py"], cwd=ROOT, capture_output=True, text=True)
+    son = t.stdout.strip().splitlines()[-1] if t.stdout.strip() else t.stderr[-300:]
+    print(f"{'ok  ' if t.returncode == 0 else 'FAIL'} scripts/test_ceviri_dedektoru.py · {son}")
+    if t.returncode:
+        print(t.stdout[-2500:], t.stderr[-1500:])
+        fails.append("test_ceviri_dedektoru.py")
+    src = (ROOT / "scripts" / "translate_news.py").read_text(encoding="utf-8")
+    ok = ("Cümle düzeni" in src and "her kelimenin ilk harfi büyük" not in src
+          and "Hiçbir önermeyi atma" in src and "Konuşan daraltılmaz" in src and "Hürmüz Boğazı" in src)
+    print(f"{'ok  ' if ok else 'FAIL'} ÇEVİRİ-DEDEKTÖRÜ istem: cümle düzeni, Ö1, Ö2, Ö3")
+    if not ok:
+        fails.append("ÇEVİRİ-DEDEKTÖRÜ istem")
+    wf = (ROOT / ".github" / "workflows" / "ceviri-dedektoru-test.yml").read_text(encoding="utf-8")
+    ok = ("secrets." not in wf and "claude-code" not in wf and "--refresh" not in wf
+          and "--sahte-cevirmen" in wf and "UYARI_TEST_ONEK" in wf)
+    print(f"{'ok  ' if ok else 'FAIL'} ceviri-dedektoru-test.yml: sır yok, Claude CLI yok, sahte çevirmen")
+    if not ok:
+        fails.append("ceviri-dedektoru-test.yml")
+
+
 def main():
     fails = []
     build = subprocess.run([sys.executable, "build.py"], cwd=ROOT, capture_output=True, text=True)
@@ -1311,6 +1338,9 @@ def main():
             print(f"{'ok  ' if et.returncode == 0 else 'FAIL'} ETİKET-BAŞLIK tıklama · {et.stdout.strip() or et.stderr[-300:]}")
             if et.returncode:
                 fails.append("ETİKET-BAŞLIK tıklama")
+
+    # Rev 26: ÇEVİRİ-DEDEKTÖRÜ (model çağrısı yok)
+    r26_checks(fails)
 
     # Rev 31: GEÇ-GELEN
     r31_checks(build.stdout, py, fails)
