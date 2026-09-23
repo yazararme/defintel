@@ -10,3 +10,8 @@ Bir oturuşta yapılacak liste. Her maddede: nerede, ne yapılacak, ne görülme
 2. **Sonraki 3 raporun sabahı (dal main'e alındıktan sonra), GitHub Mobile / Issues.**
    O günlerin `DEFINTEL uyarıları · <tarih>` issue'sunda **KUR** ve **H1-TEKRAR** satırı olmamalı.
    *Görmen gereken:* üç gün boyunca bu iki kural adı yok (issue hiç açılmamışsa da geçer).
+
+## Rev 31 — ertesi günün aday dosyası (R31-P0-3, canlı)
+
+3. **Dal main'e alındıktan sonraki ilk sabah, tarayıcı:** `https://defintel.shadovi.com/data/news/<o gün>-aday.md`
+   *Görmen gereken:* dosyanın ilk bölümü "## Dünkü brifingden sonra gelenler (N)"; Türkçe harfler düzgün.

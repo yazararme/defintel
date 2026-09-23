@@ -29,6 +29,7 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 | 22 | PASS (deneme 2; d1 FAIL P1-2 "1 / 536") | 2 | 29a9667, d9565c1 | yok |
 | 21 | PASS (deneme 2; d1 FAIL P0-2 kanıt eksikti) | 2 | 00d908c, 5c1134b | yok |
 | 23 | PASS | 1 | 4ca4ef5 | P0-2: prompt yapıştırma + sonraki 3 rapor (human-checks.md) |
+| 31 | PASS | 1 | 6c2c3c1 | P0-3 canlı: main'e alındıktan sonra gerçek aday.md (human-checks.md) |
 
 ## Notlar / anlaşmazlıklar
 
@@ -57,6 +58,8 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 - Rev 23 kurucu notları: H1-TEKRAR 15, 18, 20, 21, 22 Eylül'de de ateşlerdi (desen). Oyuncular rayı Rheinmetall'i G9'a bağlıyor, oysa G9'un başlığı artık etiket ("Lynx XM30 prototip teslimi") ve gövdede ad yok. Eski günlerin başlıkları da etikete döndü.
 
 - Rev 23 kanıtı: uyari_test dispatch run 35882418738 → issue #5 KUR + H1-TEKRAR satırları. İnceleyici: issue gövdesinde iki "$" GitHub'da matematik olarak işleniyor (KUR satırı kısmen okunmaz) → Rev 30 düzeltmesi (uyari.py kaçış) ayrı commit.
+
+- Rev 31 kanıtı: gec-gelen-test run 35884913775 (çevrimdışı, sabah hattı çalıştırılmadı). `data/news/2026-09-24-aday.md` yalnız yerel, commit edilmedi. Yerel http.server .md için charset göndermiyor → Türkçe harfler bozuk görünüyor; canlı site utf-8 gönderiyor. `gec-gelen-test.yml` ve `uyari-test.yml` main'e alınmadan önce silinebilir.
 
 ## Açık (orkestratörün eklediği)
 
