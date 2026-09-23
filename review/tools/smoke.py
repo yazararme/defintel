@@ -5,8 +5,9 @@
 Runs `python3 build.py`, then checks that the main pages and every top-level
 /data/*.json answer 200 from http://localhost:8000 (python -m http.server from
 the repo root) and that the key HTML files are non-empty. stdlib only; the Rev 22
-DÖRT-DURUM and scope-line checks need a Playwright python (DEFINTEL_PW_PYTHON or
-~/.local/share/defintel-shotenv/bin/python).
+DÖRT-DURUM and scope-line checks, and the Rev 21 KAPSAM-SAYI checks (64/64 state, then a
+KAPSAM_BOZ=thales build for the <64 state, then a normal rebuild), need a Playwright python
+(DEFINTEL_PW_PYTHON or ~/.local/share/defintel-shotenv/bin/python).
 Later revisions extend CHECKS / PAGES. Exit 1 on any failure.
 """
 import os
@@ -69,6 +70,37 @@ sys.exit(0 if ok else 1)
 """
 
 
+# Rev 21 KAPSAM-SAYI: <64 hâlinde (KAPSAM_BOZ=thales ile üretilir) üst satır "izlenen 64",
+# satırlarda sayı/jeton yok, ilk iki satır Anduril, Arsenal Bulgaria; "Mühimmat" çipi
+# üst satırı "izlenen {o segmentteki sayı}" yapar. Ayrıca ?oyuncu=thales ≥1 kupür satırı.
+KAPSAM_SAYI_JS = r"""
+import json, re, sys
+from playwright.sync_api import sync_playwright
+base, root, kupur = sys.argv[1], sys.argv[2], sys.argv[3]
+cfg = json.load(open(root + "/data/rakipler.json", encoding="utf-8"))["rakipler"]
+muh = sum(1 for r in cfg if "muhimmat" in (r.get("segments") or []))
+with sync_playwright() as p:
+    try: b = p.chromium.launch()
+    except Exception: b = p.chromium.launch(channel="chrome")
+    pg = b.new_context(service_workers="block", viewport={"width": 375, "height": 812}).new_page()
+    pg.goto(base + "/oyuncular.html"); pg.wait_for_timeout(300)
+    tally = " ".join(pg.inner_text("#ptally").split())
+    rows = pg.eval_on_selector_all(".player-row", "els => els.map(e => e.innerText)")
+    names = pg.eval_on_selector_all(".player-row .pname", "els => els.map(e => e.innerText)")
+    pg.click('.pchip[data-seg="muhimmat"]'); pg.wait_for_timeout(200)
+    tally_m = " ".join(pg.inner_text("#ptally").split())
+    pg.goto(base + kupur + "?oyuncu=thales"); pg.wait_for_timeout(600)
+    thales = pg.evaluate("Array.from(document.querySelectorAll('[data-search]')).filter(e => !e.hidden && e.offsetParent !== null).length")
+    b.close()
+sayili = [r for r in rows if re.search(r"\d+ gün|önce|bugün|dün|kez", r)]
+ok = (tally == f"izlenen {len(cfg)}" and not sayili and names[:2] == ["Anduril", "Arsenal Bulgaria"]
+      and tally_m == f"izlenen {muh}" and thales >= 1)
+print(f"<64: '{tally}' · sayılı satır {len(sayili)} · ilk iki {names[:2]} · Mühimmat → '{tally_m}' (beklenen {muh})"
+      f" · ?oyuncu=thales {thales} satır")
+sys.exit(0 if ok else 1)
+"""
+
+
 def main():
     fails = []
     build = subprocess.run([sys.executable, "build.py"], cwd=ROOT, capture_output=True, text=True)
@@ -103,6 +135,38 @@ def main():
         print(f"{'ok  ' if ks.returncode == 0 else 'FAIL'} kapsam satırı süzgeçle · {ks.stdout.strip() or ks.stderr[-300:]}")
         if ks.returncode:
             fails.append("kapsam satırı")
+
+    # Rev 21: KAPSAM-SAYI — alias testi 64/64 (normal build'in çıktısından)
+    m = [l for l in build.stdout.splitlines() if "KAPSAM-SAYI: alias testi" in l]
+    ok = bool(m) and "alias testi 64/64" in m[0]
+    print(f"{'ok  ' if ok else 'FAIL'} KAPSAM-SAYI · {m[0].strip(' ·') if m else 'satır yok'}")
+    if not ok:
+        fails.append("KAPSAM-SAYI alias testi")
+    if py:
+        # 64/64 hâli: sayılar, "N gün", yaş jetonları görünür (check_reports --oyuncular)
+        ks = subprocess.run([py, "scripts/check_reports.py", "--oyuncular", "--base", BASE],
+                            cwd=ROOT, capture_output=True, text=True)
+        satir = [l for l in ks.stdout.splitlines() if l.startswith("| 375px")]
+        print(f"{'ok  ' if ks.returncode == 0 else 'FAIL'} KAPSAM-SAYI 64/64 hâli · {satir[0] if satir else ks.stderr[-300:]}")
+        if ks.returncode:
+            fails.append("KAPSAM-SAYI 64/64")
+        # <64 hâli: bilerek bozulan derleme, denetim, sonra normal derlemeye dönüş
+        boz = subprocess.run([sys.executable, "build.py"], cwd=ROOT, capture_output=True, text=True,
+                             env={**os.environ, "KAPSAM_BOZ": "thales"})
+        try:
+            kupur = latest("haberler", "????-??-??.html")
+            kk = subprocess.run([py, "-c", KAPSAM_SAYI_JS, BASE, str(ROOT), kupur],
+                                cwd=ROOT, capture_output=True, text=True)
+            ok = boz.returncode == 0 and "alias testi 63/64" in boz.stdout and kk.returncode == 0
+            print(f"{'ok  ' if ok else 'FAIL'} KAPSAM-SAYI <64 hâli (KAPSAM_BOZ=thales) · {kk.stdout.strip() or kk.stderr[-300:]}")
+            if not ok:
+                fails.append("KAPSAM-SAYI <64")
+        finally:
+            back = subprocess.run([sys.executable, "build.py"], cwd=ROOT, capture_output=True, text=True,
+                                  env={k: v for k, v in os.environ.items() if k != "KAPSAM_BOZ"})
+            if back.returncode or "alias testi 64/64" not in back.stdout:
+                print("FAIL normal derlemeye dönüş")
+                fails.append("rebuild")
 
     pages = ["/", "/index.html", "/arsiv.html", "/oyuncular.html", "/rakipler.html", "/sw.js",
              "/manifest.webmanifest", latest("reports", "????-??-??.html"),

@@ -1,5 +1,5 @@
 {
- "_schema": "id: stable slug. name: canonical display name, also matched. aliases: extra match strings. Any match string of <=4 characters - name or alias - matches titles/headlines only, case-sensitive; longer ones also match bodies, case-insensitively. Product names are aliases only where unambiguous: SMASH and Bushmaster were removed because a second vendor sells the same name. role: 'rakip' = international rival, counted in the Rakip gündemi strip; 'yerli-rakip' = Turkish company competing in an MKE segment; 'emsal' = Turkish industry peer, benchmarked not rivalled. The last two feed the Türk sanayii line and are never shown under a heading that calls them rivals. segments: informational.",
+ "_schema": "id: stable slug. name: canonical display name, also matched. aliases: extra match strings. Any match string of <=4 characters - name or alias - matches titles/headlines only, case-sensitive; longer ones also match bodies, case-insensitively. tr_disi: aliases never matched in Turkish text (title_tr, Turkish-language headlines, report development titles) - 'BAE' is the UAE in Turkish. haric: regexes blanked out of a text before matching (e.g. 'Rafael Grossi', 'POF-USA', 'Korkut Özal'). alias_test (Rev 21, KAPSAM-SAYI): pos[] must match and neg[] must not, as a foreign-language headline; pos_tr[]/neg_tr[] the same as Turkish text. At least one pos or pos_tr; every <=4-character match string needs a neg/neg_tr that contains it. pos_kaynak: 'veri' = at least one positive copied verbatim from data/news or source/, 'kurgu' = no headline in the data yet, written example. build.py runs the tests on every build; any player failing hides every player-derived number and age token. Product names are aliases only where unambiguous: SMASH and Bushmaster were removed because a second vendor sells the same name; Gökberk (a common first name), CBC (broadcaster), FN (Scandinavian 'UN'), PPU (power processing unit), MIL/OFB/'Ordnance Factory' (split across India's DPSUs) and bare 'Oerlikon' (OC Oerlikon) were removed in Rev 21. role: 'rakip' = international rival, counted in the Rakip gündemi strip; 'yerli-rakip' = Turkish company competing in an MKE segment; 'emsal' = Turkish industry peer, benchmarked not rivalled. The last two feed the Türk sanayii line and are never shown under a heading that calls them rivals. segments: informational.",
  "_segments": {
   "muhimmat": "Large-calibre ammunition, fuzes, energetics and propellants",
   "hava_savunma": "Medium calibre, SHORAD and C-UAS (TOLGA, ILGAZ, 35 mm)",
@@ -21,7 +21,7 @@
    "aliases": [
     "Expal",
     "Nitrochemie",
-    "Oerlikon",
+    "Oerlikon Contraves",
     "Skyranger",
     "Skynex"
    ],
@@ -30,7 +30,20 @@
     "hava_savunma",
     "topcu"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Rheinmetall breaks ground to expand Quebec facility",
+     "Rheinmetall-Werk für Mission Master in Kanada"
+    ],
+    "pos_tr": [
+     "Rheinmetall'den Kanada'da Mission Master Fabrikası"
+    ],
+    "neg": [
+     "OC Oerlikon reports higher surface-solutions orders"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "nammo",
@@ -43,21 +56,42 @@
     "hafif_silah",
     "roket_bomba"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Nammo CEO warns European rupture with US risks 10-year capability gap"
+    ],
+    "pos_tr": [
+     "Nammo CEO'su, Avrupa'nın ABD ile kopmasının 10 yıllık bir kabiliyet açığı riski taşıdığı konusunda uyarıyor"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "knds",
    "name": "KNDS",
    "aliases": [
     "Nexter",
-    "Krauss-Maffei",
+    "Krauss-Maffei Wegmann",
     "KMW"
    ],
    "segments": [
     "muhimmat",
     "topcu"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "KNDS France va équiper 126 hélicoptères d’attaque légers indiens Prachand avec sa tourelle THL20 de 20 mm",
+     "HAL Seals Deal With KNDS For 126 THL20 Turrets To Boost Light Combat Helicopter Prachand Firepower"
+    ],
+    "neg": [
+     "Weekend reading: best wknds for hunting season",
+     "KMWE Group expands aerospace machining in Eindhoven",
+     "KraussMaffei injection-moulding unit sold to Chinese owner"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "bae-systems",
@@ -69,7 +103,25 @@
     "muhimmat",
     "topcu"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "tr_disi": [
+    "BAE"
+   ],
+   "alias_test": {
+    "pos": [
+     "BAE wins work to modernise American assault ship"
+    ],
+    "pos_tr": [
+     "Skyranger 30, Rheinmetall Skyranger 35, Rheinmetall Skynex, BAE Systems Bofors TRIDON Mk2, Northrop Grumman Raid Hunter"
+    ],
+    "neg": [
+     "BAES pension scheme closes to new members"
+    ],
+    "neg_tr": [
+     "PIC Wire & Cable, Hiconnex ile ortaklık kurarak Güney Afrika ve BAE'ye açılıyor"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "elbit",
@@ -82,7 +134,16 @@
     "topcu",
     "roket_bomba"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "BEL Inks Export Deal With Elbit Systems For DIRCM Sub-Assemblies"
+    ],
+    "pos_tr": [
+     "BEL, Elbit Systems İle DIRCM Alt-Montajları İçin İhracat Anlaşması İmzaladı"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "hanwha",
@@ -93,7 +154,20 @@
     "topcu",
     "hava_savunma"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "haric": [
+    "Hanwha (?:Qcells|Q CELLS|Solutions|Life)"
+   ],
+   "alias_test": {
+    "pos": [
+     "Hanwha and Lockheed Martin unveil new fighting vehicle at DVD 2026",
+     "MSPO: Hanwha präsentiert Fahrzeuge mit Drohnenabwehr-Laser"
+    ],
+    "neg": [
+     "Hanwha Qcells expands US solar module plant in Georgia"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "poongsan",
@@ -103,7 +177,13 @@
     "muhimmat",
     "hafif_silah"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Poongsan wins export order for 155 mm artillery shells"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "eurenco",
@@ -112,7 +192,13 @@
    "segments": [
     "muhimmat"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Eurenco to double nitrocellulose-free propellant output at Bergerac"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "chemring",
@@ -121,7 +207,13 @@
    "segments": [
     "muhimmat"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Chemring secures countermeasures contract from European customer"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "gd-ots",
@@ -134,7 +226,17 @@
     "muhimmat",
     "roket_bomba"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "GD-OTS awarded 155mm metal parts contract",
+     "General Dynamics Ordnance and Tactical Systems opens Texas LAP plant"
+    ],
+    "neg": [
+     "General Dynamics Gets $194 Million Contract for SLCM-N Fire Control Work"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "csg",
@@ -148,7 +250,25 @@
     "muhimmat",
     "topcu"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "haric": [
+    "CSG-\\d"
+   ],
+   "alias_test": {
+    "pos": [
+     "CSG completes acquisition of Kinetic Group ammunition business",
+     "Czechoslovak Group files for Amsterdam listing"
+    ],
+    "pos_tr": [
+     "Letonya, Haziran 2025'te 18 adet Archer için imzaladığı niyet mektubunu bırakıp Çek Excalibur Army'nin Morana 155 mm obüsünü seçti; gerekçe fiyat, teslim süresi ve yerli sanayi katılımı."
+    ],
+    "neg": [
+     "CSGO major final draws record audience",
+     "Carrier group CSG-3 returns to San Diego",
+     "Londres se félicite d’une «avancée majeure» après le tir d’une torpille par le drone sous-marin Excalibur de la Royal Navy"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "pgz",
@@ -165,20 +285,41 @@
     "muhimmat",
     "topcu"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Miliardowy kontrakt i nowości MESKO na targach MSPO 2026",
+     "HSW delivers first Krab howitzers of new batch"
+    ],
+    "pos_tr": [
+     "Viasat ve PGZ uzay alanında iş birliği planlıyor"
+    ],
+    "neg": [
+     "HSWA 1974 prosecution follows depot explosion",
+     "Shipping firm HPGZ posts quarterly loss"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "munitions-india",
    "name": "Munitions India",
    "aliases": [
-    "Ordnance Factory",
-    "OFB",
-    "MIL"
+    "Ammunition Factory Khadki",
+    "Ammunition Factory Kirkee",
+    "Ordnance Factory Khamaria"
    ],
    "segments": [
     "muhimmat"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Munitions India Limited bags Rs 1,500 crore order for artillery shells",
+     "Ordnance Factory Khamaria ramps up 155 mm shell filling"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "solar-industries",
@@ -189,7 +330,14 @@
    "segments": [
     "muhimmat"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Solar Industries wins Pinaka rocket export order",
+     "Economic Explosives Ltd tests loitering munition"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "yugoimport",
@@ -203,20 +351,37 @@
     "topcu",
     "roket_bomba"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Yugoimport SDPR showcases Nora B-52 howitzer at Partner fair",
+     "Krušik ammunition plant expands mortar round production"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "arsenal-bulgaria",
    "name": "Arsenal Bulgaria",
    "aliases": [
-    "Arsenal AD",
-    "Arsenal JSCo"
+    "Arsenal JSCo",
+    "Arsenal Kazanlak"
    ],
    "segments": [
     "muhimmat",
     "hafif_silah"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Arsenal Bulgaria hires 1,000 workers as shell demand soars",
+     "Kazanlak: Arsenal JSCo opens new 155 mm line"
+    ],
+    "neg": [
+     "Arsenal beat Chelsea 2-0 in north London"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "vmz-sopot",
@@ -228,19 +393,40 @@
     "muhimmat",
     "roket_bomba"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "VMZ Sopot signs deal to supply 122 mm rockets",
+     "Bulgarian VMZ expands artillery fuze output"
+    ],
+    "neg": [
+     "Streaming platform BVMZ launches in Balkans"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "norinco",
    "name": "NORINCO",
-   "aliases": [],
+   "aliases": [
+    "China North Industries"
+   ],
    "segments": [
     "muhimmat",
     "topcu",
     "roket_bomba",
     "hava_savunma"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "NORINCO displays new wheeled howitzer at Zhuhai Airshow"
+    ],
+    "pos_tr": [
+     "Orta menzil ihalesinde KM-SAM (G. Kore), NORINCO Sky Dragon 100 ve Akash (Hindistan) yarışı sürüyor."
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "pof",
@@ -252,7 +438,21 @@
     "muhimmat",
     "hafif_silah"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "haric": [
+    "POF[- ]USA"
+   ],
+   "alias_test": {
+    "pos": [
+     "Pakistan Ordnance Factories unveils new artillery shell line",
+     "POF Wah signs ammunition export deal"
+    ],
+    "neg": [
+     "POF-USA unveils Renegade rifle",
+     "Chip maker POFX raises capital"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "diehl",
@@ -264,16 +464,30 @@
     "muhimmat",
     "hava_savunma"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Diehl Defence to supply more IRIS-T SLM fire units to Ukraine"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "junghans",
    "name": "Junghans",
-   "aliases": [],
+   "aliases": [
+    "Junghans Microtec"
+   ],
    "segments": [
     "muhimmat"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Junghans Microtec wins artillery fuze framework contract"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "leonardo",
@@ -283,7 +497,22 @@
     "hava_savunma",
     "topcu"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "haric": [
+    "Leonardo (?:da Vinci|DiCaprio)"
+   ],
+   "alias_test": {
+    "pos": [
+     "Leonardo unveils containerised Falcon Shield C-UAS system"
+    ],
+    "pos_tr": [
+     "Leonardo, konteynerize Falcon Shield C-UAS sistemini tanıttı"
+    ],
+    "neg": [
+     "Flights diverted from Rome's Leonardo da Vinci airport after drone sighting"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "kongsberg",
@@ -292,25 +521,63 @@
    "segments": [
     "hava_savunma"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Leonardo contributes to enhancing KONGSBERG`s Counter-UAS capabilities",
+     "Advanced Navigation secures $18.5 million Kongsberg order for Boreas systems on Polish Protector counter drone platforms"
+    ],
+    "pos_tr": [
+     "Advanced Navigation, KONGSBERG'e C-UAS Hassas Navigasyon Sistemleri Tedarik Edecek"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "northrop-grumman",
    "name": "Northrop Grumman",
-   "aliases": [],
+   "aliases": [
+    "Northrop"
+   ],
    "segments": [
     "hava_savunma"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Northrop Grumman wins contract for Marine UH-1Y, AH-1Z Link 16 kits",
+     "Northrop eyes munitions supply work, Lockheed eyes funding: CEOs"
+    ],
+    "pos_tr": [
+     "Northrop, Yeni Utah Tesisiyle B-21 Üretim Kapasitesini Genişletiyor"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "saab",
    "name": "Saab",
-   "aliases": [],
+   "aliases": [
+    "SAAB"
+   ],
    "segments": [
     "hava_savunma"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Saab builds T-7A Red Hawk fuselages in Indiana for planned 350-aircraft fleet set to train more than 1,000 U.S. Air Force pilots annually",
+     "SAAB WINS CARL-GUSTAF ORDER"
+    ],
+    "pos_tr": [
+     "Saab Indiana'da T-7A Red Hawk Gövdeleri İnşa Ediyor, 350 Uçak Filosu 1.000+ Pilot Eğitimi İçin"
+    ],
+    "neg": [
+     "Saabye appointed Danish defence attaché",
+     "LOCAL NEWS: SAABYE FAMILY OPENS BAKERY"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "mbda",
@@ -321,7 +588,17 @@
    "segments": [
     "hava_savunma"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "MBDA completes validation firing of Teseo MK2/E anti-ship missile",
+     "Video: MBDA Pitches Combat-Proven Aster Missiles to Royal Danish Navy"
+    ],
+    "neg": [
+     "IMBDA conference opens in Lisbon"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "thales",
@@ -331,7 +608,17 @@
     "hava_savunma",
     "roket_bomba"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Thales unveils HexaForce: AI-powered, sovereign command and control for NATO and allied nations",
+     "Thales launches HexaForce AI command platform for Nato, allies"
+    ],
+    "pos_tr": [
+     "Thales, HexaForce'u Tanıttı: NATO Ve Müttefik Uluslar İçin Yapay Zeka Destekli, Bağımsız Komuta Kontrol Sistemi"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "rafael",
@@ -343,7 +630,24 @@
     "hava_savunma",
     "roket_bomba"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "haric": [
+    "Rafael (?:Mariano )?Grossi",
+    "Rafael Nadal"
+   ],
+   "alias_test": {
+    "pos": [
+     "RAFAEL presents National Air Defense with Rafael’s SPYDER",
+     "MSPO 2026: Rafael o Trophy na K2PL. „To system ubezpieczenia na życie”"
+    ],
+    "pos_tr": [
+     "Çekya Rafael SPYDER hava savunma sistemini hizmete aldı"
+    ],
+    "neg": [
+     "IAEA chief Rafael Grossi to visit Zaporizhzhia plant"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "iai",
@@ -354,7 +658,18 @@
    "segments": [
     "hava_savunma"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Israel Aerospace Industries signs Barak MX deal with Asian customer",
+     "IAI unveils new loitering munition"
+    ],
+    "neg": [
+     "Militia commander killed near saiaid checkpoint",
+     "KIAI festival opens in Seoul"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "hensoldt",
@@ -363,7 +678,16 @@
    "segments": [
     "hava_savunma"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Hensoldt introduces KENIS sensor and secures major customer order at AAD 2026"
+    ],
+    "pos_tr": [
+     "Hensoldt Otomatik Spektrum Yönetim Sistemini Tanıtıyor"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "anduril",
@@ -372,7 +696,14 @@
    "segments": [
     "hava_savunma"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Profile: Anduril Barracuda Autonomous Air Vehicle Family",
+     "FQ-44 Fury Dedah Taring—Dron Tempur Anduril Bakal Ubah Perang Udara"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "epirus",
@@ -381,7 +712,16 @@
    "segments": [
     "hava_savunma"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Epirus Leonidas high-power microwave downs drone swarm"
+    ],
+    "pos_tr": [
+     "16-17 Eylül'de Rheinmetall, Aselsan, Roketsan, Elbit, KNDS, BAE Systems, Leonardo, Kongsberg, Saab, Nammo, Anduril, Epirus ve NORINCO cephesinde raporlanacak yeni sözleşme, ürün lansmanı ya da ihracat duyurusu çıkmadı."
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "smart-shooter",
@@ -390,7 +730,13 @@
    "segments": [
     "hava_savunma"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Smart Shooter fire control systems ordered by NATO army"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "weibel",
@@ -399,18 +745,37 @@
    "segments": [
     "hava_savunma"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Denmark purchases Weibel Scientific radars for military’s C-UAS effort"
+    ],
+    "pos_tr": [
+     "Danimarka, Ordunun C-UAS Çalışması İçin Weibel Scientific Radarları Satın Alıyor"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "bharat-forge",
    "name": "Bharat Forge",
    "aliases": [
-    "Kalyani"
+    "Kalyani Strategic Systems"
    ],
    "segments": [
     "topcu"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Bharat Forge bags artillery gun barrel export order",
+     "Kalyani Strategic Systems to supply ATAGS howitzers"
+    ],
+    "neg": [
+     "Kalyani Nagar metro station to open next month"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "tata",
@@ -421,7 +786,18 @@
    "segments": [
     "topcu"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Tata Advanced Systems to build WhAP vehicles in Morocco",
+     "TASL delivers first C-295 fuselage section"
+    ],
+    "neg": [
+     "TASLAK YÖNETMELİK KAMUOYUNA AÇILDI",
+     "Tata Steel posts quarterly profit"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "denel",
@@ -431,18 +807,34 @@
     "topcu",
     "muhimmat"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Denel Land Systems secures G6 howitzer support contract"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "fn-herstal",
    "name": "FN Herstal",
    "aliases": [
-    "FN"
+    "FN America"
    ],
    "segments": [
     "hafif_silah"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "FN Herstal unveils new machine gun at Eurosatory",
+     "FN America wins US Army M4 carbine contract"
+    ],
+    "neg": [
+     "FN-styrker trekker seg ut av Mali"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "heckler-koch",
@@ -454,7 +846,18 @@
    "segments": [
     "hafif_silah"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Heckler & Koch reports record order backlog",
+     "H&K to supply rifles to French army"
+    ],
+    "neg": [
+     "Retail chain SH&K opens flagship store",
+     "Buy now at h&k outlet"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "cz",
@@ -462,21 +865,43 @@
    "aliases": [
     "Česká zbrojovka",
     "Ceska zbrojovka",
-    "CZUB"
+    "CZUB",
+    "Colt Canada",
+    "Colt's Manufacturing"
    ],
    "segments": [
     "hafif_silah"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Colt Canada brings C25 to UK and Europe",
+     "Colt CZ Group raises full-year guidance",
+     "CZUB wins Czech army rifle tender"
+    ],
+    "neg": [
+     "Coach Czuba named new national team manager",
+     "CZUBAK ELECTED MAYOR"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "beretta",
    "name": "Beretta",
-   "aliases": [],
+   "aliases": [
+    "Beretta Defense Technologies"
+   ],
    "segments": [
     "hafif_silah"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Beretta wins Italian army pistol contract"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "sig-sauer",
@@ -485,7 +910,17 @@
    "segments": [
     "hafif_silah"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "SIG Sauer ships more XM7 rifles to US Army",
+     "Sig Sauer faces lawsuit over P320 pistol"
+    ],
+    "neg": [
+     "SIG plans new CEO appointment"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "iwi",
@@ -496,7 +931,18 @@
    "segments": [
     "hafif_silah"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Israel Weapon Industries opens plant in India",
+     "IWI unveils new Tavor variant"
+    ],
+    "neg": [
+     "Iwi leaders welcome NZDF base upgrade",
+     "KIWI RAIL CONTRACT SIGNED"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "cbc-global",
@@ -504,23 +950,40 @@
    "aliases": [
     "Sellier & Bellot",
     "Magtech",
-    "CBC"
+    "Companhia Brasileira de Cartuchos"
    ],
    "segments": [
     "hafif_silah"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "CBC Global Ammunition acquires stake in Kinetic Group",
+     "Sellier & Bellot expands 9 mm production in Vlašim"
+    ],
+    "neg": [
+     "CBC News reports on Canadian army recruitment"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "prvi-partizan",
    "name": "Prvi Partizan",
-   "aliases": [
-    "PPU"
-   ],
+   "aliases": [],
    "segments": [
     "hafif_silah"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Prvi Partizan to build new primer plant in Užice"
+    ],
+    "neg": [
+     "Partizan Belgrade wins basketball derby"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "olin",
@@ -531,7 +994,25 @@
    "segments": [
     "hafif_silah"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "haric": [
+    "Olin (?:College|Business School)"
+   ],
+   "alias_test": {
+    "pos": [
+     "Olin reports higher Winchester ammunition sales",
+     "Winchester Ammunition wins Lake City operating contract"
+    ],
+    "pos_tr": [
+     "ABD Ordusu 5,56, 7,62 ve 12,7 mm mühimmat tedarikini tek teklifle 2031'e kadar Olin Winchester'a bağladı."
+    ],
+    "neg": [
+     "Colin Kahl comments on Pentagon budget",
+     "Olin Business School launches defence MBA",
+     "OLINDA MAYOR VISITS NAVAL BASE"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "fiocchi",
@@ -540,19 +1021,44 @@
    "segments": [
     "hafif_silah"
    ],
-   "role": "rakip"
+   "role": "rakip",
+   "alias_test": {
+    "pos": [
+     "Fiocchi Munizioni expands US ammunition plant in Missouri"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "aselsan",
    "name": "Aselsan",
    "aliases": [
-    "KORKUT",
-    "Gökberk"
+    "KORKUT"
    ],
    "segments": [
     "hava_savunma"
    ],
-   "role": "yerli-rakip"
+   "role": "yerli-rakip",
+   "alias_test": {
+    "pos": [
+     "ASELSAN presents multi-domain capabilities at AAD 2026",
+     "ASELSAN Korkut: 35 mm Air Defence and Pakistan"
+    ],
+    "pos_tr": [
+     "ASELSAN, AAD 2026'da çok alanlı kabiliyetlerini sundu",
+     "Pakistan Hava Kuvvetleri 7 Eylül'de yayımladığı görüntülerde yeni envantere aldığı Çin menşeli HQ-17AE kısa menzilli hava savunma sistemi ile Türk menşeli Korkut 150/35 çift namlulu 35 mm otomatik uçaksavar ve Şahin C-UAS sistemini sergiledi"
+    ],
+    "neg_tr": [
+     "Rusya'nın Korkutulmasının Olanaksız Olması Herkes Tarafından Bellidir — Putin",
+     "Dede Korkut Hikâyeleri yeniden basıldı",
+     "Korkut Özal anıldı"
+    ],
+    "pos_kaynak": "veri"
+   },
+   "haric": [
+    "Dede Korkut",
+    "Korkut (?:Özal|Eken|Ata)\\b"
+   ]
   },
   {
    "id": "roketsan",
@@ -561,7 +1067,16 @@
    "segments": [
     "roket_bomba"
    ],
-   "role": "yerli-rakip"
+   "role": "yerli-rakip",
+   "alias_test": {
+    "pos": [
+     "Roketsan unveils new ballistic missile at IDEF"
+    ],
+    "pos_tr": [
+     "ASELSAN ile ROKETSAN arasında 1,2 milyar avroluk sözleşme imzalandı"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "repkon",
@@ -570,7 +1085,16 @@
    "segments": [
     "muhimmat"
    ],
-   "role": "yerli-rakip"
+   "role": "yerli-rakip",
+   "alias_test": {
+    "pos": [
+     "Repkon USA to build 155 mm shell plant in Texas"
+    ],
+    "pos_tr": [
+     "Repkon, 155 mm mermi gövdesi üretim hattını teslim etti"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "sarsilmaz",
@@ -581,7 +1105,16 @@
    "segments": [
     "hafif_silah"
    ],
-   "role": "yerli-rakip"
+   "role": "yerli-rakip",
+   "alias_test": {
+    "pos": [
+     "Sarsilmaz opens pistol factory in the United States"
+    ],
+    "pos_tr": [
+     "SARSILMAZ, yeni tabancasını fuarda tanıttı"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "canik",
@@ -592,7 +1125,22 @@
    "segments": [
     "hafif_silah"
    ],
-   "role": "yerli-rakip"
+   "role": "yerli-rakip",
+   "haric": [
+    "Canik (?:[Bb]elediye|[İi]lçe|[Kk]aymakam)"
+   ],
+   "alias_test": {
+    "pos": [
+     "Canik launches METE MC9 Prime pistol"
+    ],
+    "pos_tr": [
+     "CANIK, 12,7 mm makineli tüfek siparişi aldı"
+    ],
+    "neg_tr": [
+     "Canik Belediyesi yeni park açtı"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "kalekalip",
@@ -603,7 +1151,16 @@
    "segments": [
     "hafif_silah"
    ],
-   "role": "yerli-rakip"
+   "role": "yerli-rakip",
+   "alias_test": {
+    "pos": [
+     "Kalekalip showcases KCR556 rifle at IDEF"
+    ],
+    "pos_tr": [
+     "Kalekalıp, piyade tüfeği ihracatı için anlaşma imzaladı"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "tubitak-sage",
@@ -614,7 +1171,21 @@
    "segments": [
     "roket_bomba"
    ],
-   "role": "yerli-rakip"
+   "role": "yerli-rakip",
+   "alias_test": {
+    "pos": [
+     "TÜBİTAK SAGE tests new air-to-air missile"
+    ],
+    "pos_tr": [
+     "SAGE, SOM-J füzesinin atış testini tamamladı"
+    ],
+    "neg": [
+     "PASSAGE OF DEFENCE BILL DELAYED",
+     "MESSAGE FROM THE MINISTER",
+     "Sage Group profits rise"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "baykar",
@@ -622,7 +1193,16 @@
    "aliases": [
     "Bayraktar"
    ],
-   "role": "emsal"
+   "role": "emsal",
+   "alias_test": {
+    "pos": [
+     "Baykar adds UAV 300 supersonic missile to AKINCI arsenal after direct hit on target more than 250 kilometres away"
+    ],
+    "pos_tr": [
+     "Denizaltılara Kötü Haber: Bayraktar TB3’te Sonobuoy Dönemi!"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "tusas",
@@ -632,13 +1212,36 @@
     "Turkish Aerospace",
     "TUSAS"
    ],
-   "role": "emsal"
+   "role": "emsal",
+   "alias_test": {
+    "pos": [
+     "Turkish Aerospace rolls out second KAAN prototype",
+     "TAI signs HÜRJET deal with Spain"
+    ],
+    "pos_tr": [
+     "TUSAŞ, ANKA-3 için seri üretim sözleşmesi imzaladı"
+    ],
+    "neg": [
+     "TAIWAN ORDERS MORE HARPOON BATTERIES",
+     "Taipei hosts drone expo"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "havelsan",
    "name": "Havelsan",
    "aliases": [],
-   "role": "emsal"
+   "role": "emsal",
+   "alias_test": {
+    "pos": [
+     "Havelsan signs simulator deal with Malaysia"
+    ],
+    "pos_tr": [
+     "HAVELSAN Girişimcilik Merkezi için başvurular başladı"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "stm",
@@ -646,43 +1249,111 @@
    "aliases": [
     "Savunma Teknolojileri Mühendislik"
    ],
-   "role": "emsal"
+   "role": "emsal",
+   "alias_test": {
+    "pos": [
+     "STM delivers first MİLGEM corvette to Pakistan"
+    ],
+    "pos_tr": [
+     "STM, KARGU'nun yeni versiyonunu tanıttı"
+    ],
+    "neg": [
+     "STMicroelectronics warns on chip demand",
+     "Board uses STM32 microcontroller"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "asfat",
    "name": "ASFAT",
    "aliases": [],
-   "role": "emsal"
+   "role": "emsal",
+   "alias_test": {
+    "pos": [
+     "ASFAT launches new ammunition joint venture"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "fnss",
    "name": "FNSS",
    "aliases": [],
-   "role": "emsal"
+   "role": "emsal",
+   "alias_test": {
+    "pos": [
+     "First Vehicle Pre-delivery Acceptance Tests Successfully Completed in the Kaplan APC Program Developed by FNSS and PT Pindad"
+    ],
+    "pos_tr": [
+     "FNSS Ve PT Pindad Tarafından Geliştirilen Kaplan APC Programında İlk Araç Teslimat Öncesi Kabul Testleri Başarıyla Tamamlandı"
+    ],
+    "neg": [
+     "FNSSX index rebalanced"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "otokar",
    "name": "Otokar",
    "aliases": [],
-   "role": "emsal"
+   "role": "emsal",
+   "alias_test": {
+    "pos": [
+     "Otokar and Leonardo validate TULPAR medium tank’s 120 mm firepower in static and moving live-fire trials for international customers"
+    ],
+    "pos_tr": [
+     "Otokar ve Leonardo, TULPAR Orta Tankının 120 mm Ateş Gücünü Statik ve Hareketli Canlı Ateş Denemelerinde Doğruladı"
+    ],
+    "pos_kaynak": "veri"
+   }
   },
   {
    "id": "bmc",
    "name": "BMC",
    "aliases": [],
-   "role": "emsal"
+   "role": "emsal",
+   "haric": [
+    "BMC (?:Software|Medicine)"
+   ],
+   "alias_test": {
+    "pos": [
+     "BMC delivers ALTAY tanks to Turkish army"
+    ],
+    "pos_tr": [
+     "BMC, Kirpi II araçlarının teslimatını tamamladı"
+    ],
+    "neg": [
+     "BMC Software acquires observability startup",
+     "IBMC lab opens in Shenzhen"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "nurol-makina",
    "name": "Nurol Makina",
    "aliases": [],
-   "role": "emsal"
+   "role": "emsal",
+   "alias_test": {
+    "pos": [
+     "Nurol Makina signs Ejder Yalçın export deal"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   },
   {
    "id": "meteksan",
    "name": "Meteksan",
    "aliases": [],
-   "role": "emsal"
+   "role": "emsal",
+   "alias_test": {
+    "pos": [
+     "Meteksan Defence unveils new sonar at IDEF"
+    ],
+    "pos_kaynak": "kurgu"
+   }
   }
  ]
 }

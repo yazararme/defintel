@@ -972,79 +972,114 @@ def thread_page(th, latest):
     )
 
 
-def players_page(hist):
-    """/oyuncular.html — kim, hangi segmentte, en son ne zaman, kaç kez.
+TR_ALPHABET = "abcçdefgğhıijklmnoöpqrsştuüvwxyz"
 
-    Tek liste, sıklığa göre. Bir süre üç başlık altında duruyordu —
-    "Uluslararası rakipler", "Yerli rakipler", "Türk sanayi emsalleri" — ama
-    Rev 18'de ray başlığı tam da bu yüzden kaldırılmıştı: ürünün kimin rakip
-    olduğuna karar verme yetkisi yok. Başlığı raydan kaldırıp sayfada üç
-    tane bırakmak, aynı beyanı daha yüksek sesle yapmaktı.
 
-    Sıra artık ilişkiyi değil olguyu yansıtıyor: bu ay kimin adı kaç kez
-    geçti. Türk ve yabancı iç içe, çünkü okuyucunun sorusu "kim aktif",
-    "kim bizden" değil.
+def tr_collate(text):
+    """Türkçe harmanlama anahtarı: ç ç'de, ı i'den önce, Ş s'den sonra.
 
-    Görülmemiş şirketin jetonu yok. Boşluk bir eksiklik değil, ifadenin
-    kendisi: "bu ada bakıyoruz ve bu ayda hiç geçmedi".
+    Büyük I → ı, İ → i (Türkçe kural). Türk alfabesinde olmayan aksanlı
+    harfler (Č, é) temel harflerine iner; harf dışı her şey harflerden önce.
+    """
+    import unicodedata
+    low = text.replace("I", "ı").replace("İ", "i").lower()
+    key = []
+    for ch in low:
+        if ch not in TR_ALPHABET:
+            base = unicodedata.normalize("NFD", ch)[0]
+            ch = base if base in TR_ALPHABET else ch
+        key.append((1, TR_ALPHABET.index(ch)) if ch in TR_ALPHABET else (0, ord(ch)))
+    return key
+
+
+def players_page(hist, kap):
+    """/oyuncular.html — kim, hangi segmentte; kapsam tamsa en son ne zaman, kaç gün.
+
+    Tek liste. Bir süre üç başlık altında duruyordu — "Uluslararası rakipler",
+    "Yerli rakipler", "Türk sanayi emsalleri" — ama Rev 18'de ray başlığı tam
+    da bu yüzden kaldırılmıştı: ürünün kimin rakip olduğuna karar verme
+    yetkisi yok.
+
+    KAPSAM-SAYI (Rev 21): bir sayı bir iddiadır. Eşleştirici bir oyuncuyu
+    bile güvenle göremiyorsa (alias_test kaldıysa) "Bugün N", "N gün", yaş
+    jetonu ve sıklık sırası hep birlikte kalkar; üst satır yalnız "izlenen 64"
+    — yapılandırmadan gelen, kapsamdan bağımsız tek sayı — ve sıra
+    alfabetik. Oyuncu oyuncu açılma yok. 64'ün hepsi geçince hepsi birlikte
+    döner. Sayfa her durumda üretilir.
+
+    Kapsam tamken görülmemiş şirketin jetonu yok: boşluk ifadenin kendisi,
+    "bu ada bakıyoruz ve bu ayda hiç geçmedi" — ve artık gerçekten bakılıyor.
     """
     import datetime as _dt
     config = rivals_config()
     if not config:
         return ""
+    tam = kap["tam"]
     labels = segment_labels()
     order = {r["id"]: i for i, r in enumerate(config)}
     today = max((e.get("son") or "" for e in hist.values()), default="")
 
     def row(rival):
         e = hist.get(rival["id"], {})
-        segs = e.get("segmentler") or []
+        segs = e.get("segmentler") or rival.get("segments") or []
         # Ayıraçsız etiketler tek bir dizeye yapışıyordu: "Mühimmat Topçu Hava
         # savunma" üç segment değil bir cümle gibi okunuyor.
         tags = '<span class="ptag-sep">·</span>'.join(
             f'<span class="ptag">{html.escape(labels.get(sg, sg))}</span>' for sg in segs)
-        son, n = e.get("son") or "", e.get("sayi_30g") or 0
+        name = (f'<a class="pname" href="/arsiv.html?oyuncu={rival["id"]}">'
+                f'{html.escape(rival["name"])}</a><span class="ptags">{tags}</span>')
+        if not tam:
+            # Sayı yok, jeton yok, "hiç geçmedi" soluklaştırması da yok: o da
+            # eşleştiricinin sonucundan türeyen bir iddia.
+            return f'<li class="player-row" data-seg="{" ".join(segs)}">{name}</li>'
+        son, n = e.get("son") or "", e.get("gun_30g") or 0
         gap = ((_dt.date.fromisoformat(today) - _dt.date.fromisoformat(son)).days
                if son and today else None)
         age = (f'<span class="page num">{age_words(gap)}</span>'
                if gap is not None else "")
-        cnt = f'<span class="pcount num">{n} kez</span>' if n else ""
+        # "N gün": son 30 günün kaçında adı geçti. Eski "N kez" geçiş sayıyor
+        # gibi okunuyordu, oysa gün sayıyordu.
+        cnt = f'<span class="pcount num">{n} gün</span>' if n else ""
         return (
             f'<li class="player-row{"" if son else " player-row--quiet"}"'
             f' data-seg="{" ".join(segs)}"'
             f' data-today="{1 if gap == 0 else 0}" data-seen="{1 if n else 0}">'
-            f'<a class="pname" href="/arsiv.html?oyuncu={rival["id"]}">'
-            f'{html.escape(rival["name"])}</a>'
-            f'<span class="ptags">{tags}</span>{age}{cnt}</li>'
+            f'{name}{age}{cnt}</li>'
         )
 
     def sort_key(rival):
         e = hist.get(rival["id"], {})
         son = e.get("son") or ""
-        return (-(e.get("sayi_30g") or 0),
+        return (-(e.get("gun_30g") or 0),
                 -_dt.date.fromisoformat(son).toordinal() if son else 0,
                 order[rival["id"]])
 
-    rows = "".join(row(r) for r in sorted(config, key=sort_key))
+    ranked = (sorted(config, key=sort_key) if tam
+              else sorted(config, key=lambda r: tr_collate(r["name"])))
+    rows = "".join(row(r) for r in ranked)
     chips = "".join(
         f'<button class="chip pchip" type="button" data-seg="{k}">'
         f'{html.escape(v)}</button>' for k, v in labels.items())
-    seen_today = sum(1 for e in hist.values() if e.get("son") and e["son"] == today)
-    seen_30 = sum(1 for e in hist.values() if e.get("sayi_30g"))
+    tracked = f'izlenen <strong data-tally="all">{len(config)}</strong>'
+    if tam:
+        seen_today = sum(1 for e in hist.values() if e.get("son") and e["son"] == today)
+        seen_30 = sum(1 for e in hist.values() if e.get("gun_30g"))
+        tally = (f'Bugün <strong data-tally="today">{seen_today}</strong> ·\n'
+                 f'    son {WINDOW_DAYS} günde <strong data-tally="seen">{seen_30}</strong> ·\n'
+                 f'    {tracked}')
+    else:
+        tally = tracked
     return (
         head(f"Oyuncular — {SITE_NAME}")
         + masthead()
         + f"""<main class="wrap thread">
   <p class="kicker">Referans</p>
   <h1 class="report-title">Oyuncular</h1>
-  <p class="thread-meta num" id="ptally">Bugün
-    <strong data-tally="today">{seen_today}</strong> ·
-    son {WINDOW_DAYS} günde <strong data-tally="seen">{seen_30}</strong> ·
-    izlenen <strong data-tally="all">{len(config)}</strong></p>
+  <p class="thread-meta num" id="ptally">{tally}</p>
   <nav class="devnav pchips" aria-label="Segment">
     <button class="chip pchip pchip--on" type="button" data-seg="">Tümü</button>{chips}
   </nav>
-  <ul class="player-list">{rows}</ul>
+  <ul class="player-list" data-kapsam="{kap['gecen']}/{kap['toplam']}">{rows}</ul>
   <nav class="endnav" aria-label="Devam"><span class="wrap endnav-inner">
     <a class="endnav-go" href="/">Bugünün brifingi →</a>
     <a class="endnav-go" href="/arsiv.html">Tüm raporlar</a>
@@ -1054,6 +1089,53 @@ def players_page(hist):
         + f'<script src="{asset("app.js")}" defer></script>\n'
         + FOOT
     )
+
+
+KAPSAM_RE = re.compile(r'class="player-list" data-kapsam="(\d+)/(\d+)"')
+
+
+def kapsam_report(kap, previous_page):
+    """KAPSAM-SAYI'nın operatör yüzü: (A) özeti her derlemede, uyarı yalnız geçişte.
+
+    Önceki hâl yayındaki /oyuncular.html'in data-kapsam'ından okunur — okuyucunun
+    gördüğü şeyin kendisi. İşaret yoksa (ilk derleme) önceki hâl bilinmiyor
+    sayılır ve hangi hâldeysek o bir kez bildirilir.
+    """
+    import os
+    n, total = kap["gecen"], kap["toplam"]
+    m = KAPSAM_RE.search(previous_page or "")
+    prev_tam = (m.group(1) == m.group(2)) if m else None
+    kalan_adlar = ", ".join(ad for ad, _w in kap["kalanlar"])
+    boz = f" (KAPSAM_BOZ={','.join(kap['boz'])}, bilerek)" if kap["boz"] else ""
+
+    line = f"alias testi {n}/{total}" + (f" — kalanlar: {kalan_adlar}" if kalan_adlar else "")
+    print(f"  · KAPSAM-SAYI: {line}{boz} · oyuncu sayıları "
+          f"{'basıldı' if kap['tam'] else 'basılmadı'}")
+    for ad, why in kap["kalanlar"]:
+        print(f"      {ad}: {'; '.join(why[:3])}")
+    summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary:
+        md = ["### KAPSAM-SAYI — oyuncu sayıları (Rev 21)", "",
+              f"**{'🟢' if kap['tam'] else '🔴'} {line}**{boz}", "",
+              ("/oyuncular.html: “Bugün N · son 30 günde N”, “N gün”, yaş jetonları basıldı."
+               if kap["tam"] else
+               "/oyuncular.html: hiçbir sayı ya da yaş jetonu basılmadı; üst satır "
+               f"yalnız “izlenen {total}”, sıra alfabetik.")]
+        for ad, why in kap["kalanlar"]:
+            md.append(f"- {ad}: {'; '.join(why[:3])}")
+        try:
+            with open(summary, "a", encoding="utf-8") as fh:
+                fh.write("\n".join(md) + "\n\n")
+        except OSError as exc:
+            print(f"  ! KAPSAM-SAYI: özet yazılamadı: {exc}")
+
+    from scripts import uyari
+    if not kap["tam"] and prev_tam is not False:
+        uyari.ekle("KAPSAM-SAYI", f"KAPSAM-SAYI: {n}/{total} — kalanlar: {kalan_adlar}{boz}"
+                   " · oyuncu sayıları basılmadı")
+    elif kap["tam"] and prev_tam is not True:
+        uyari.ekle("KAPSAM-SAYI", f"KAPSAM-SAYI: {n}/{total} — sayılar döndü (64/64'e varış)"
+                   .replace("64/64", f"{total}/{total}"))
 
 
 def redirect_page(title, target, note):
@@ -1222,7 +1304,7 @@ def clip_html(item, day, cited, sec=""):
     if item.get("summary_scope") is True and not item.get("summary_tr"):
         meta.append('<span class="clip-nosum">özet alınamadı</span>')
 
-    ids = item.get("tr_ids") or []
+    ids = item.get("oyuncu_ids") or []
     oyuncu = f' data-oyuncu="{" ".join(ids)}"' if ids else ""
     url = html.escape(tr_url(item["url"], item.get("lang", "")), quote=True)
     raw_url = html.escape(item["url"], quote=True)
@@ -1401,7 +1483,7 @@ def turkish_section(rows, day, cited):
 def build_news_page(day, data, prev_day, next_day, has_report, cited):
     items = data.get("items", [])
     # Etiketleme düzenden önce: clip_html satırın etiketini okuyor.
-    tag_turkish_headlines(items)
+    tag_player_headlines(items)
     top, present = news_layout(items, day, cited)
     ranked_all = [r for _n, rows in present for r in rows]
     turk_rows = sorted((r for r in ranked_all if r[2].get("tr_tags")),
@@ -1715,9 +1797,15 @@ def main():
     # Oyuncular: rayın "bugün kim" sorusunun yanındaki "ne zamandan beri" sayfası.
     hist = player_history(sources, news)
     if hist:
+        # KAPSAM-SAYI: testler her derlemede koşar; sayfa her durumda üretilir.
+        kap = kapsam()
+        players_file = ROOT / "oyuncular.html"
+        previous = players_file.read_text(encoding="utf-8") if players_file.exists() else ""
         PLAYERS_JSON.write_text(
-            json.dumps(hist, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-        (ROOT / "oyuncular.html").write_text(players_page(hist), encoding="utf-8")
+            json.dumps(players_json(hist, kap["tam"]), ensure_ascii=False, indent=1) + "\n",
+            encoding="utf-8")
+        players_file.write_text(players_page(hist, kap), encoding="utf-8")
+        kapsam_report(kap, previous)
         # Eski adres ölü kalmasın: rayda haftalardır bu bağlantı duruyordu.
         (ROOT / "rakipler.html").write_text(
             redirect_page("Oyuncular", "/oyuncular.html",
@@ -1886,32 +1974,125 @@ def _word(pattern):
 
 @functools.lru_cache(maxsize=None)
 def rival_patterns(rid):
-    """(uzun desenler, kısa desenler) — bir rakibin eşleşme kalıpları.
+    """{"loose", "short", "tr_disi", "haric"} — bir oyuncunun eşleşme kalıpları.
 
     Dört karakter ve altındaki her dizi — kanonik ad ya da takma ad, ayrımı
     yok — yalnız başlıkta ve harf duyarlı aranır. "MIL", "FN", "STM", "TAI"
     gibi diziler Türkçe gövde metninde tesadüfen geçiyor ve sözcük sınırı
     bunu durdurmuyor; başlık kısa ve özenle yazılmış, tesadüf çok daha zor.
+
+    `tr_disi` Türkçe metinde hiç aranmayan diziler: Türkçe başlıkta "BAE"
+    Birleşik Arap Emirlikleri demek (Rev 21'de gerçek bir satır BAE
+    Systems'e yazılıyordu). `haric` eşleşmeden önce metinden silinen
+    kalıplar: "Rafael Grossi" bir UAEA başkanı, "POF-USA" bir tüfek üreticisi.
     """
     rival = next((r for r in rivals_config() if r["id"] == rid), None)
     if not rival:
-        return (), ()
+        return {"loose": (), "short": (), "tr_disi": frozenset(), "haric": ()}
     strings = [rival["name"]] + [a for a in (rival.get("aliases") or []) if a.strip()]
-    return (tuple(_word(tr_fold(n)) for n in strings if len(n) > SHORT_NAME),
-            tuple(_word(n) for n in strings if len(n) <= SHORT_NAME))
+    tr_disi = frozenset(rival.get("tr_disi") or ())
+    return {
+        "loose": tuple((n, _word(tr_fold(n))) for n in strings if len(n) > SHORT_NAME),
+        "short": tuple((n, _word(n)) for n in strings if len(n) <= SHORT_NAME),
+        "tr_disi": tr_disi,
+        "haric": tuple(re.compile(h) for h in (rival.get("haric") or ())),
+    }
 
 
-def rival_in_title(rid, title):
-    loose, short = rival_patterns(rid)
+def _haric(pats, text):
+    for h in pats["haric"]:
+        text = h.sub(" ", text)
+    return text
+
+
+def rival_in_title(rid, title, tr=False):
+    """Başlıkta geçiyor mu? `tr`: metin Türkçe (çeviri, Türkçe kaynak, rapor)."""
+    pats = rival_patterns(rid)
+    title = _haric(pats, title)
     folded = tr_fold(title)
-    return any(p.search(folded) for p in loose) or any(p.search(title) for p in short)
+    skip = pats["tr_disi"] if tr else frozenset()
+    return (any(p.search(folded) for n, p in pats["loose"] if n not in skip)
+            or any(p.search(title) for n, p in pats["short"] if n not in skip))
 
 
-def rival_in_body(rid, body):
+def rival_in_body(rid, body, tr=True):
     """Gövdede yalnız uzun diziler aranır — kısa olanlar başlığa ait."""
-    loose, _short = rival_patterns(rid)
-    folded = tr_fold(body)
-    return any(p.search(folded) for p in loose)
+    pats = rival_patterns(rid)
+    folded = tr_fold(_haric(pats, body))
+    skip = pats["tr_disi"] if tr else frozenset()
+    return any(p.search(folded) for n, p in pats["loose"] if n not in skip)
+
+
+def headline_has(rid, item):
+    """Kupür satırı bu oyuncuyu anıyor mu — özgün başlık ve Türkçe çevirisi."""
+    title, title_tr = item.get("title") or "", item.get("title_tr") or ""
+    return bool((title and rival_in_title(rid, title, tr=item.get("lang") == "tr"))
+                or (title_tr and rival_in_title(rid, title_tr, tr=True)))
+
+
+# ── KAPSAM-SAYI (Rev 21) ─────────────────────────────────────────────────────
+# Oyunculardan türeyen her sayı ve jeton ancak 64 oyuncunun hepsi alias_test'i
+# geçtiyse basılır. Tek oyuncu kalırsa hiçbiri. Oyuncu oyuncu açılma yok:
+# bir tarafı sayılı, öbür tarafı sayısız bir tablo okuyucuya iki sözleşme sunar.
+
+KAPSAM_BOZ_POS = "KAPSAM_BOZ: bu başlıkta izlenen hiçbir oyuncu yok"
+
+
+def kapsam_boz():
+    """KAPSAM_BOZ=<id>[,<id>…] — kanıt için bilerek bozulan oyuncular (yerel ya da CI)."""
+    import os
+    raw = (os.environ.get("KAPSAM_BOZ") or "").strip()
+    if raw in ("", "none"):
+        return ()
+    ids = tuple(x.strip() for x in raw.split(",") if x.strip())
+    known = {r["id"] for r in rivals_config()}
+    unknown = [x for x in ids if x not in known]
+    if unknown:
+        sys.exit(f"KAPSAM_BOZ: bilinmeyen oyuncu {', '.join(unknown)} (data/rakipler.json id'leri)")
+    return ids
+
+
+def alias_test(rival, boz=False):
+    """Bir oyuncunun alias_test'i: [] = geçti, yoksa sebepler."""
+    why = []
+    if not isinstance(rival.get("aliases"), list):
+        why.append("aliases[] yok")
+    t = rival.get("alias_test")
+    if not isinstance(t, dict):
+        return why + ["alias_test yok"]
+    pos, pos_tr = list(t.get("pos") or []), list(t.get("pos_tr") or [])
+    neg, neg_tr = list(t.get("neg") or []), list(t.get("neg_tr") or [])
+    if boz:
+        # Test yolu aynı: eşleşmeyecek bir pozitif eklenir ve test gerçekten kalır.
+        pos.append(KAPSAM_BOZ_POS)
+    if not pos and not pos_tr:
+        why.append("pozitif örnek yok")
+    rid = rival["id"]
+    for text, tr in [(x, False) for x in pos] + [(x, True) for x in pos_tr]:
+        if not rival_in_title(rid, text, tr=tr):
+            why.append(f"eşleşmedi: “{text[:60]}”")
+    for text, tr in [(x, False) for x in neg] + [(x, True) for x in neg_tr]:
+        if rival_in_title(rid, text, tr=tr):
+            why.append(f"yanlış eşleşti: “{text[:60]}”")
+    negs = [tr_fold(x) for x in neg + neg_tr]
+    for s in [rival["name"]] + list(rival.get("aliases") or []):
+        if len(s) <= SHORT_NAME and not any(tr_fold(s) in x for x in negs):
+            why.append(f"“{s}” kısa, onu içeren negatif örnek yok")
+    return why
+
+
+def kapsam():
+    """{"gecen", "toplam", "kalanlar": [(ad, [sebep])], "tam", "boz"} — her derlemede."""
+    config = rivals_config()
+    boz = kapsam_boz()
+    kalan = []
+    for r in config:
+        why = alias_test(r, boz=r["id"] in boz)
+        if why:
+            kalan.append((r["name"], why))
+    n = len(config)
+    return {"gecen": n - len(kalan), "toplam": n, "kalanlar": kalan,
+            "tam": n > 0 and not kalan, "boz": boz}
 
 
 def development_blocks(body):
@@ -1946,7 +2127,7 @@ def rival_hits(body, developments=()):
     for rival in rivals_config():
         anchor = ""
         for b in blocks:
-            if rival_in_title(rival["id"], b[2]):
+            if rival_in_title(rival["id"], b[2], tr=True):
                 anchor = f"#{b[1]}"
                 break
         if not anchor:
@@ -1970,12 +2151,15 @@ def segment_labels():
 
 
 def player_history(sources, news):
-    """id -> {rol, segmentler, gunler[], son, sayi_30g} — iki geçişin birleşik kaydı.
+    """id -> {ad, rol, segmentler, gunler[], son, gun_30g} — iki geçişin birleşik kaydı.
 
     Yeni eşleştirme yok: aynı iki geçiş, bu kez gün gün toplanıyor. Rayda
     "bugün kimin adı geçti" sorusunun cevabı var; burada "ne zamandan beri,
-    kaç kez" sorusununki. İkincisi olmadan roster bir liste, birincisi
-    olmadan da sayfa bir arşiv — ikisi birlikte bir referans.
+    kaç gün" sorusununki. İkinci geçiş Rev 21'den beri bütün rolleri
+    kapsıyor: eskiden yalnız Türk adlarını arıyordu ve Thales'in satırı, o
+    gün dört başlıkta geçmişken "bu ay hiç geçmedi" diyordu.
+
+    `gun_30g` gün sayar, geçiş değil (eski adı sayi_30g; sayfada "N gün").
     """
     import datetime as _dt
     config = rivals_config()
@@ -2003,56 +2187,71 @@ def player_history(sources, news):
         for name, anchor, _role in rival_hits(body):
             if anchor:
                 record(name, iso, f"/reports/{iso}.html{anchor}", True)
-        for name in tag_turkish_headlines(items):
-            record(name, iso, f"/haberler/{iso}.html?q={urlparse.quote(name)}", False)
+        for name in tag_player_headlines(items):
+            record(name, iso, f"/haberler/{iso}.html?oyuncu={by_name[name]['id']}", False)
 
     latest = _dt.date.fromisoformat(sources[-1][0])
     for entry in hist.values():
         entry["gunler"].sort(key=lambda d: d["g"], reverse=True)
         entry["son"] = entry["gunler"][0]["g"] if entry["gunler"] else ""
-        entry["sayi_30g"] = sum(
+        entry["gun_30g"] = sum(
             1 for d in entry["gunler"]
             if (latest - _dt.date.fromisoformat(d["g"])).days < WINDOW_DAYS)
     return hist
 
 
+def players_json(hist, tam):
+    """data/oyuncular.json — (D) yüzeyi. KAPSAM-SAYI kalırsa türetilmiş sayı ve
+    jeton (son, gun_30g) yazılmaz; gün listesi kalır, arşivin ?oyuncu= süzgeci onu okuyor."""
+    if tam:
+        return hist
+    return {k: {f: v for f, v in e.items() if f not in ("son", "gun_30g")}
+            for k, e in hist.items()}
+
+
 TURKISH_ROLES = ("yerli-rakip", "emsal")
 
 
-def tag_turkish_headlines(items):
-    """Günün başlıklarını Türk sanayii adlarıyla etiketle; eşleşen adları döndür.
+def tag_player_headlines(items):
+    """Günün başlıklarını izlenen bütün oyuncularla etiketle; eşleşen adları döndür.
 
     Başlık taraması brifingden ayrı bir kanal: rapor yalnız o günün dokuz
-    gelişmesini anlatıyor, medya takibinde 400+ satır var ve Türk sanayiine
-    dair haberin çoğu oraya düşüyor. İki geçiş de aynı kurala tabi.
+    gelişmesini anlatıyor, medya takibinde 400+ satır var. Rev 17'de bu
+    geçiş yalnız Türk rollerini arıyordu; Rev 21'de 64 oyuncunun hepsine
+    genişledi — sayı ancak her oyuncuya bakıldıysa doğru olabilir.
 
-    Eşleşme başlıkta aranıyor — hem özgün hem çeviri — çünkü satırın kendisi
-    bir başlık; gövde yok.
+    Satır iki etiket taşıyor, iki ayrı iş için:
+    - `oyuncu_ids` (bütün roller) → `data-oyuncu`, ?oyuncu= süzgeci onu okur.
+      Kimlik ayrı tutuluyor — süzme ada değil kimliğe bakmalı, yoksa
+      "Bayraktar" başlığı Baykar süzgecinden kaçar.
+    - `tr_tags` (yalnız Türk rolleri) → "Türk savunma sanayii" kesiti ve
+      satırdaki şirket etiketi. Rol render'a ait (Rev 17): yabancı bir oyuncu
+      Türk sanayii kesitine düşmez.
     """
-    turkish = [r for r in rivals_config() if r.get("role") in TURKISH_ROLES]
-    if not turkish:
-        return []
     hit_names = []
-    for rival in turkish:
+    for rival in rivals_config():
+        turkish = rival.get("role") in TURKISH_ROLES
         found = False
         for item in items:
-            for title in (item.get("title") or "", item.get("title_tr") or ""):
-                if title and rival_in_title(rival["id"], title):
-                    # Satır kendi etiketini taşır: sayfada kaynaktan sonra
-                    # hangi şirket için listelendiği yazıyor. Kimlik ayrı
-                    # tutuluyor — süzme ada değil kimliğe bakmalı, yoksa
-                    # "Bayraktar" başlığı Baykar süzgecinden kaçar.
-                    tags = item.setdefault("tr_tags", [])
-                    ids = item.setdefault("tr_ids", [])
-                    if rival["name"] not in tags:
-                        tags.append(rival["name"])
-                    if rival["id"] not in ids:
-                        ids.append(rival["id"])
-                    found = True
-                    break
+            if not headline_has(rival["id"], item):
+                continue
+            ids = item.setdefault("oyuncu_ids", [])
+            if rival["id"] not in ids:
+                ids.append(rival["id"])
+            if turkish:
+                tags = item.setdefault("tr_tags", [])
+                if rival["name"] not in tags:
+                    tags.append(rival["name"])
+            found = True
         if found:
             hit_names.append(rival["name"])
     return hit_names
+
+
+def tag_turkish_headlines(items):
+    """Türk sanayii satırı için: bugün başlıkta geçen Türk rollü adlar."""
+    turkish = {r["name"] for r in rivals_config() if r.get("role") in TURKISH_ROLES}
+    return [n for n in tag_player_headlines(items) if n in turkish]
 
 
 def turkish_line(body, items):

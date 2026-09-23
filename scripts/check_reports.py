@@ -21,6 +21,14 @@ verilmezse depo kökünden bu süreç içinde rastgele bir yerel porta sunulur.
 eski hatasını geri getirir — diske ve depoya hiçbir şey yazılmaz; kırmızı çalıştırma kanıtı
 bozuk commit atmadan böyle üretilir. Tarayıcı: Playwright'ın chromium'u, yoksa sistem
 Chrome'u (channel="chrome").
+
+    python3 scripts/check_reports.py --oyuncular [--out DIR] [--base URL]
+
+KAPSAM-SAYI kanıtı (Rev 21): /oyuncular.html'i 375×812 ve 1440×900'de (tam sayfa)
+çeker, `1-oyuncular-375.png` / `2-oyuncular-1440.png` olarak DIR'e yazar ve sayfanın
+kendi hâline (data-kapsam) uyup uymadığını (A) özetine yazar: 64/64'ün altındaysa üst
+satır yalnız "izlenen N", hiçbir satırda "gün"/"önce"/"bugün" yok, sıra alfabetik;
+64/64'te "Bugün N" ve "N gün" görünür. Uymazsa çıkış 1.
 """
 import http.server
 import os
@@ -256,7 +264,91 @@ def dort_durum(base=None, boz="none", out=None):
     return 0
 
 
+async def _oyuncular_kos(base, out):
+    from playwright.async_api import async_playwright
+    async with async_playwright() as p:
+        try:
+            browser = await p.chromium.launch()
+        except Exception:   # paketli chromium yok (yerel Mac): sistem Chrome'u
+            browser = await p.chromium.launch(channel="chrome")
+        sonuc = []
+        try:
+            for i, (w, h) in enumerate(((375, 812), (1440, 900)), 1):
+                ctx = await browser.new_context(viewport={"width": w, "height": h},
+                                                service_workers="block", locale="tr-TR")
+                page = await ctx.new_page()
+                await page.goto(base + "/oyuncular.html", wait_until="load")
+                await page.wait_for_timeout(300)
+                bilgi = await page.evaluate("""() => ({
+                    kapsam: (document.querySelector('.player-list') || {dataset: {}}).dataset.kapsam || '',
+                    tally: (document.getElementById('ptally') || {}).innerText || '',
+                    rows: Array.from(document.querySelectorAll('.player-row')).map(r => r.innerText),
+                    names: Array.from(document.querySelectorAll('.player-row .pname')).map(a => a.innerText),
+                })""")
+                resim = None
+                if out:
+                    resim = out / f"{i}-oyuncular-{w}.png"
+                    await page.screenshot(path=str(resim), full_page=True)
+                sonuc.append((w, bilgi, resim))
+                await ctx.close()
+        finally:
+            await browser.close()
+        return sonuc
+
+
+def oyuncular(base=None, out=None):
+    """KAPSAM-SAYI (S) kanıtı: iki genişlikte ekran görüntüsü + hâl denetimi."""
+    import asyncio
+    out = pathlib.Path(out) if out else None
+    if out:
+        out.mkdir(parents=True, exist_ok=True)
+    srv = None
+    if not base:
+        srv, base = _sun()
+    try:
+        sonuc = asyncio.run(_oyuncular_kos(base.rstrip("/"), out))
+    finally:
+        if srv:
+            srv.shutdown()
+    ozet = ["### KAPSAM-SAYI — /oyuncular.html görüntüleri (Rev 21)", "",
+            "| genişlik | kapsam | üst satır | ilk iki satır | denetim | görüntü |",
+            "|---|---|---|---|---|---|"]
+    kalan = 0
+    for w, b, resim in sonuc:
+        m = re.fullmatch(r"(\d+)/(\d+)", b["kapsam"])
+        tam = bool(m) and m.group(1) == m.group(2)
+        tally = " ".join(b["tally"].split())
+        sayili = [r for r in b["rows"] if re.search(r"\d+ gün|önce|bugün|dün|\bkez\b", r)]
+        if not m:
+            ok, neden = False, "data-kapsam yok"
+        elif tam:
+            ok = tally.startswith("Bugün ") and "son 30 günde" in tally and bool(sayili)
+            neden = f"{len(sayili)} satırda sayı/jeton"
+        else:
+            ok = (re.fullmatch(r"izlenen \d+", tally) is not None and not sayili)
+            neden = f"{len(sayili)} satırda sayı/jeton"
+        kalan += not ok
+        ozet.append(f"| {w}px | {b['kapsam'] or '—'} | {tally} | {', '.join(b['names'][:2])}"
+                    f" | {'🟢' if ok else '🔴'} {neden} | {resim.name if resim else '—'} |")
+    ozet.append("")
+    metin = "\n".join(ozet) + "\n"
+    print(metin)
+    yol = os.environ.get("GITHUB_STEP_SUMMARY")
+    if yol:
+        with open(yol, "a", encoding="utf-8") as fh:
+            fh.write(metin)
+    return 1 if kalan else 0
+
+
 def main(argv):
+    if "--oyuncular" in argv:
+        import argparse
+        ap = argparse.ArgumentParser()
+        ap.add_argument("--oyuncular", action="store_true")
+        ap.add_argument("--out")
+        ap.add_argument("--base")
+        a = ap.parse_args(argv)
+        return oyuncular(a.base, a.out)
     if "--dort-durum" in argv:
         import argparse
         ap = argparse.ArgumentParser()
