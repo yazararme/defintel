@@ -114,3 +114,29 @@ def rival_start(rid, title, tr=False):
         return None
     start, text = min(found, key=lambda f: f[0])
     return text[:start]
+
+
+def rival_surfaces(rid, text, tr=True, short=True):
+    """[(konum, yapılandırmadaki dizi, metindeki yazım)] — eşleşen her dizinin ilk geçişi.
+
+    K2: ray "brifingde geçen" der; ad metinde yazılı değilse (takma adla
+    eşleştiyse: CSG ← "Excalibur Army") okuyucu kanıtı görebilsin diye
+    metindeki yazım gerekiyor. Kural rival_in_title/rival_in_body ile aynı;
+    `short` False ise kısa diziler aranmaz (gövde).
+    """
+    pats = rival_patterns(rid)
+    text = _haric(pats, text)
+    folded = tr_fold(text)
+    same = len(folded) == len(text)
+    skip = pats["tr_disi"] if tr else frozenset()
+    found = []
+    for n, p in pats["loose"]:
+        m = None if n in skip else p.search(folded)
+        if m:
+            found.append((m.start(), n, text[m.start():m.end()] if same else n))
+    if short:
+        for n, p in pats["short"]:
+            m = None if n in skip else p.search(text)
+            if m:
+                found.append((m.start(), n, m.group(0)))
+    return sorted(found)

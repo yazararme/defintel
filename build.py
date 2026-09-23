@@ -463,15 +463,21 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
         # artık rayda değil: o soru /oyuncular.html'in "başlıklarda geçen"
         # sayısının ve medya takibinin ?oyuncu= süzgecinin. Sıra: rakipler
         # gövdedeki sırayla, sonra Türk sanayii yapılandırma sırasıyla.
-        dev_anchor = {name: anchor for name, anchor, _role in rivals if anchor}
+        # 2. deneme: ad o gelişmede yazılı değilse (takma adla eşleştiyse)
+        # metindeki yazım parantezde durur — "CSG (Excalibur Army)" — ki okuyucu
+        # etiketi bağlantının indiği yerde harfi harfine sınayabilsin.
+        def unit(name, anchor, via):
+            kanit = (f' <span class="rail-via">({html.escape(via)})</span>' if via else "")
+            return f'<a href="{anchor}">{html.escape(name)}{kanit}</a>'
+
+        dev_anchor = {name: (anchor, via) for name, anchor, _role, via in rivals if anchor}
         units = []
-        for name, anchor, role in rivals:
+        for name, anchor, role, via in rivals:
             if anchor and role == "rakip":
-                units.append(f'<a href="{anchor}">{html.escape(name)}</a>')
+                units.append(unit(name, anchor, via))
         for name, _nid, _hit in turkish:
-            anchor = dev_anchor.get(name)
-            if anchor:
-                units.append(f'<a href="{anchor}">{html.escape(name)}</a>')
+            if name in dev_anchor:
+                units.append(unit(name, *dev_anchor[name]))
         arrow = '<a class="rival-count" href="/oyuncular.html">→</a>'
         if units:
             # Ok son adla aynı kırılmaz birimde: tek başına satır başına
@@ -1953,7 +1959,7 @@ def main():
             mke_counts.get(iso, 0),
             published.get(iso, ""),
             scan_counts.get(iso),
-            rival_hits(body, developments),
+            rail_hits(body, developments),
             turkish_line(body, news.get(iso, {}).get("items", [])),
             iso in news,
             bosluk=[k for k, *_ in kanit_boslugu(news.get(iso))],
@@ -2062,7 +2068,7 @@ def main():
                          sources[-2][0] if len(sources) > 1 else None, None,
                          news_counts, mke_counts.get(iso, 0),
                          published.get(iso, ""), scan_counts.get(iso),
-                         rival_hits(body, meta.get("developments") or []),
+                         rail_hits(body, meta.get("developments") or []),
                          turkish_line(body, news.get(iso, {}).get("items", [])),
                          iso in news, depth=0, bosluk=bosluk),
             encoding="utf-8")
@@ -2227,7 +2233,7 @@ def check_links():
 # Oyuncu eşleştiricisi oyuncu_eslestir.py'de (Rev 25: toplama da kullanıyor).
 from oyuncu_eslestir import (  # noqa: E402,F401
     RIVALS_JSON, SHORT_NAME, _haric, _word, headline_has, rival_in_body, rival_in_title,
-    rival_patterns, rivals_config, tr_fold,
+    rival_patterns, rival_surfaces, rivals_config, tr_fold,
 )
 
 
@@ -2339,6 +2345,41 @@ def rival_hits(body, developments=()):
         out.append((rival["name"], anchor, rival.get("role", "rakip")))
     return out
 
+
+
+def rail_hits(body, developments=()):
+    """[(ad, çapa|"", rol, kanıt)] — rayın "brifingde geçen" listesi, okuyucunun sınayabileceği biçimde.
+
+    K2 (2. deneme): ray bir iddia; okuyucu onu bağlantının indiği yerde sınayabilmeli.
+    Eşleşme rival_hits ile aynı (önce başlık, sonra gövde; en küçük g) — başlığa
+    ekrana basılan frontmatter `label` de katılır. Ama bir gelişme ancak adın ya da
+    takma adın o gelişmenin *ekrandaki* metninde (etiket + gövde) yazılı olmasıyla
+    sayılır: Rev 23'ten beri ajanın "**G9 · American Rheinmetall**" girişi basılmıyor
+    ve yalnız orada geçen bir ad okuyucu için yoktur.
+    `kanıt`: kanonik ad ekranda yazılı değilse metindeki takma ad yazımı
+    (CSG ← "Excalibur Army", Aselsan ← "Korkut"); rayda "CSG (Excalibur Army)".
+    """
+    labels = {str(d.get("id", "")).lower(): str(d.get("label", "")).strip()
+              for d in developments or () if d.get("id")}
+    blocks = development_blocks(body)
+    out = []
+    for rival in rivals_config():
+        rid = rival["id"]
+        anchor, via = "", ""
+        title_hit = [b for b in blocks
+                     if rival_in_title(rid, b[2], tr=True)
+                     or (labels.get(b[1]) and rival_in_title(rid, labels[b[1]], tr=True))]
+        body_hit = [b for b in blocks if rival_in_body(rid, b[3])]
+        for b in title_hit + body_hit:
+            shown = (labels.get(b[1]) or b[2]) + "\n" + b[3]
+            seen = rival_surfaces(rid, shown, tr=True)
+            if seen:
+                anchor = f"#{b[1]}"
+                if not any(n == rival["name"] for _p, n, _s in seen):
+                    via = seen[0][2]
+                break
+        out.append((rival["name"], anchor, rival.get("role", "rakip"), via))
+    return out
 
 PLAYERS_JSON = DATA / "oyuncular.json"
 WINDOW_DAYS = 30

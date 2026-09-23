@@ -207,6 +207,8 @@ sys.exit(0 if ok else 1)
 K2_JS = r"""
 import re, sys
 from playwright.sync_api import sync_playwright
+sys.path.insert(0, ".")
+from oyuncu_eslestir import tr_fold
 base, rapor, hal = sys.argv[1], sys.argv[2], sys.argv[3]
 beklenen = int(sys.argv[4]) if len(sys.argv) > 4 else None
 RAY = r'''() => {
@@ -219,6 +221,17 @@ RAY = r'''() => {
           mono: !!cs && cs.fontFamily === ls.fontFamily, renk: !!cs && cs.color === ls.color,
           once: !!src && !!val && (src.compareDocumentPosition(val) & 4) > 0,
           adlar: [...val.querySelectorAll('a:not(.rival-count)')].map(a => a.getAttribute('href')),
+          // 2. deneme: her ad (ya da parantezdeki takma adı) bağlantının indiği gelişmenin
+          // ekrandaki metninde yazılı mı — okuyucunun yapacağı sınama.
+          kanit: [...val.querySelectorAll('a:not(.rival-count)')].map(a => {
+            const hedef = document.getElementById(a.getAttribute('href').slice(1));
+            let metin = '';
+            if (hedef && hedef.tagName === 'H3') {
+              for (let e = hedef; e && !(e !== hedef && /^H[23]$/.test(e.tagName)); e = e.nextElementSibling)
+                metin += ' ' + e.innerText;
+            } else if (hedef) metin = hedef.innerText;
+            return [a.innerText.trim(), metin];
+          }),
           tasma: document.documentElement.scrollWidth > innerWidth};
 }'''
 TALLY = r'''() => {
@@ -244,6 +257,14 @@ with sync_playwright() as p:
             r = pg.evaluate(RAY)
             k = (bool(r) and r["text"] == "brifingde geçen" and r["gorunur"] and r["mono"] and r["renk"]
                  and r["once"] and not r["tasma"] and all(h.startswith("#g") for h in r["adlar"]))
+            yok = []
+            for ad, metin in (r["kanit"] if r else []):
+                m = re.fullmatch(r"(.+?)(?: \((.+)\))?", ad)
+                if tr_fold(m.group(2) or m.group(1)) not in tr_fold(metin):
+                    yok.append(ad)
+            k = k and not yok
+            if yok:
+                out.append(f"{w}/{tema}: gelişme metninde yazılı değil: {yok}")
             pg.goto(base + "/oyuncular.html"); pg.wait_for_timeout(300)
             t = pg.evaluate(TALLY)
             pg.click('.pchip[data-seg="muhimmat"]'); pg.wait_for_timeout(200)
@@ -1389,6 +1410,28 @@ def k2_check(py, hal, fails):
           f"{k.stdout.strip() or k.stderr[-400:]}")
     if k.returncode:
         fails.append(f"K2 {hal}")
+    # K2 2. deneme: bütün raporlarda (ve index.html) rayın her adı — takma adla eşleştiyse
+    # parantezdeki yazımı — bağlantının indiği gelişmenin ekrandaki metninde yazılı.
+    import html as _html
+    eksik, adlar, takma = [], 0, []
+    for f in sorted((ROOT / "reports").glob("????-??-??.html")) + [ROOT / "index.html"]:
+        s = f.read_text(encoding="utf-8")
+        ray = re.search(r'rail-src.*?</aside>', s, re.S)
+        for href, txt in re.findall(r'<a href="(#g\d+)">(.*?)</a>', ray.group(0) if ray else ""):
+            ad = _html.unescape(re.sub(r"<[^>]+>", "", txt))
+            m = re.fullmatch(r"(.+?)(?: \((.+)\))?", ad)
+            blok = (re.search(rf'<h3 id="{href[1:]}">.*?(?=<h[23])', s, re.S)
+                    or re.search(rf'<li id="{href[1:]}">.*?</li>', s, re.S))
+            metin = _html.unescape(re.sub(r"<[^>]+>", " ", blok.group(0))) if blok else ""
+            adlar += 1
+            if m.group(2):
+                takma.append(f"{f.stem}:{ad}")
+            if _b.tr_fold(m.group(2) or m.group(1)) not in _b.tr_fold(metin):
+                eksik.append(f"{f.stem}:{ad}{href}")
+    print(f"{'ok  ' if not eksik else 'FAIL'} K2 ray kanıtı: {adlar} ad, hepsi indiği gelişmede yazılı"
+          f" · takma adla: {', '.join(takma) or '—'}" + (f" · YAZILI DEĞİL: {eksik}" if eksik else ""))
+    if eksik:
+        fails.append("K2 ray kanıtı")
 
 
 def main():
