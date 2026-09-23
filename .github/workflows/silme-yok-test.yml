@@ -1,0 +1,57 @@
+name: silme-yok-test
+# Rev 25 kanıt iş akışı: collect_news.py AĞSIZ (--fixture), Rev 31 gec-gelen-test kalıbıyla.
+# Sabah hattı çalıştırılmaz: ağ, Drive, Claude/çeviri yok; data/news'e yazılmaz (çıktı
+# $RUNNER_TEMP'te). Fixture, Drive'daki kaynaklar.json'un filtre notlu 9 kaynağını temsil eder.
+# İki ardışık iş:
+#   1) esit  : yerel test, sonra 24 Eylül 05:19 toplaması. (A) "SİLME-YOK" tablosu: 9 filtre
+#              notlu kaynağın okunan == yazılan, savunma dışı başlıklar işaretli; uyarı yok.
+#   2) bozuk : aynı toplama, bir kalem bilerek düşürülür (--sinama-silme-boz) → (A)'da 🔴 satır,
+#              iş KIRMIZI (SİLME-YOK bloklayıcı) ve "[TEST] " önekli günün issue'sunda SİLME-YOK
+#              satırı (I).
+# Yalnız rev21-33 dalında koşar; main'e alınmadan önce silinebilir. Sır yok (GITHUB_TOKEN).
+on:
+  push:
+    branches: [rev21-33]
+    paths: ['scripts/collect_news.py', 'scripts/test_silme_yok.py', 'oyuncu_eslestir.py',
+            '.github/workflows/silme-yok-test.yml']
+  workflow_dispatch:
+permissions:
+  issues: write
+  contents: read
+concurrency: silme-yok-test
+env:
+  UYARI_TEST_ONEK: "[TEST] "
+  GITHUB_TOKEN: ${{ github.token }}
+jobs:
+  esit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Yerel test (ağsız, 22 kontrol)
+        run: python3 scripts/test_silme_yok.py
+      - name: Sınama dosyaları
+        run: python3 scripts/test_silme_yok.py hazirla "$RUNNER_TEMP/sy"
+      - name: Toplama — 24 Eylül 05:19, 9 filtre notlu kaynak + 2 özel akış
+        run: >
+          python3 scripts/collect_news.py --fixture "$RUNNER_TEMP/sy/silme.json"
+          --out "$RUNNER_TEMP/sy/out" --date 2026-09-24 --now 2026-09-24T05:19:00+03:00
+          --published "$RUNNER_TEMP/sy/published.json"
+      - name: Operatör uyarıları
+        if: always()
+        run: python3 scripts/uyari.py
+
+  bozuk:
+    needs: esit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sınama dosyaları
+        run: python3 scripts/test_silme_yok.py hazirla "$RUNNER_TEMP/sy"
+      - name: Toplama — bir kalem BİLEREK düşürülür (iş kırmızı biter)
+        run: >
+          python3 scripts/collect_news.py --fixture "$RUNNER_TEMP/sy/silme.json"
+          --out "$RUNNER_TEMP/sy/out" --date 2026-09-24 --now 2026-09-24T05:19:00+03:00
+          --published "$RUNNER_TEMP/sy/published.json" --sinama-silme-boz
+      - name: Operatör uyarıları
+        if: always()
+        run: python3 scripts/uyari.py

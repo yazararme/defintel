@@ -40,6 +40,15 @@ Chrome, so on 23 Sep the token fell onto a line of its own there (item 4 at 817p
 latest report is measured with every summary "ilk:" token forced onto its own line (a <br> before
 it), bare and with 0.15px letter-spacing on the title and summary (which reproduces CI's wrap on
 23 Sep); h2#ozet top must stay ≤300 and item 4's bottom ≤812 in every variant.
+Rev 25: SİLME-YOK · İPUCU-YOK — scripts/test_silme_yok.py (offline collection over the nine
+filter-noted sources: read == written; a deliberately broken run exits red with the alert), the
+build's "İPUCU-YOK / S8" line for the latest day (hint-only 0), the offline re-categorisation of
+23 Sep already applied (a dry run changes 0 items), summary scope and Öne çıkanlar never take a
+`savunma_terimi: false` item, and a 375×812 / 1440×900 pass over /haberler/2026-09-23.html: rail
+and chips say "Oyuncu Duyuruları", "Rakip Duyuruları" appears nowhere (text, HTML, or the address
+bar after the rail click), C-UAS has no Tournai, Zipline or DroneXL row, İhale no Greenland row,
+the Hanwha munitions-investment row is under Oyuncu Duyuruları, and a Genel full-dump title is
+found by search.
 Later revisions extend CHECKS / PAGES. Exit 1 on any failure.
 """
 import os
@@ -545,6 +554,101 @@ def r31_checks(build_stdout, py, fails):
         fails.append("(D) aday ilk bölüm")
 
 
+# Rev 25: kategori ölçütleri (S) — 23 Eylül medya takibi, 375×812 ve 1440×900.
+R25_JS = r"""
+import sys
+from playwright.sync_api import sync_playwright
+url = sys.argv[1]
+JS = '''() => {
+  const rows = sec => Array.from(document.querySelectorAll('li[data-sec="' + sec + '"]'))
+    .map(li => li.getAttribute('data-search')
+               || (li.querySelector('[data-search]') || {getAttribute: () => ''}).getAttribute('data-search') || '');
+  const has = (list, re) => list.filter(t => re.test(t)).length;
+  const cuas = rows('kat-c-uas-ve-hava-savunma'), ihale = rows('kat-ihale-ve-sozlesmeler');
+  const oyuncu = rows('kat-oyuncu-duyurulari');
+  const rail = Array.from(document.querySelectorAll('.news-rail-row')).map(e => e.innerText);
+  const chips = Array.from(document.querySelectorAll('.chip')).map(e => e.innerText);
+  return {rail: rail.some(t => t.includes('Oyuncu Duyuruları')),
+          chip: chips.some(t => t.includes('Oyuncu Duyuruları')),
+          rakip: /Rakip Duyuru|rakip-duyuru/i.test(document.documentElement.outerHTML)
+                 || /Rakip Duyuru/i.test(document.body.innerText),
+          cuas: cuas.length, cuas_bad: has(cuas, /Tournai|Zipline|DroneXL/),
+          ihale: ihale.length, ihale_bad: has(ihale, /Greenland|Grönland/),
+          hanwha: has(oyuncu, /Hanwha.*Mühimmat Yatırım/)};
+}'''
+ARA = '''() => Array.from(document.querySelectorAll('[data-search]'))
+  .filter(e => !e.hidden && e.offsetParent !== null && /Dolomites/.test(e.getAttribute('data-search'))
+               && e.closest('li[data-sec="kat-genel-savunma-gundemi"]') && e.closest('details.more')).length'''
+with sync_playwright() as p:
+    try: b = p.chromium.launch()
+    except Exception: b = p.chromium.launch(channel="chrome")
+    out, ok = [], True
+    for w, h in ((375, 812), (1440, 900)):
+        pg = b.new_context(service_workers="block", viewport={"width": w, "height": h}).new_page()
+        pg.goto(url); pg.wait_for_timeout(500)
+        r = pg.evaluate(JS)
+        link = pg.locator('.news-rail-row[href="#kat-oyuncu-duyurulari"], .chip[href="#kat-oyuncu-duyurulari"]')
+        link.filter(visible=True).first.click(); pg.wait_for_timeout(300)
+        r["hash"] = pg.evaluate("location.hash")
+        pg.fill("#q", "Dolomites"); pg.wait_for_timeout(700)
+        r["ara"] = pg.evaluate(ARA)
+        ok = (ok and r["rail"] and r["chip"] and not r["rakip"] and r["cuas_bad"] == 0
+              and r["ihale_bad"] == 0 and r["hanwha"] == 1 and r["hash"] == "#kat-oyuncu-duyurulari"
+              and r["ara"] >= 1)
+        out.append(f"{w}px: ray/çip 'Oyuncu Duyuruları' {r['rail']}/{r['chip']} · 'Rakip Duyuruları' {r['rakip']} · "
+                   f"C-UAS {r['cuas']} satır, Tournai/Zipline/DroneXL {r['cuas_bad']} · İhale {r['ihale']} satır, "
+                   f"Grönland {r['ihale_bad']} · Hanwha Oyuncu'da {r['hanwha']} · adres {r['hash']} · "
+                   f"arama 'Dolomites' Genel tam dökümde {r['ara']}")
+    b.close()
+print(" | ".join(out))
+sys.exit(0 if ok else 1)
+"""
+
+
+def r25_checks(build_stdout, py, fails):
+    """Rev 25: SİLME-YOK / İPUCU-YOK testi, build'in S8 satırı, 23 Eylül yeniden kategorilemesi, (S)."""
+    t = subprocess.run([sys.executable, "scripts/test_silme_yok.py"], cwd=ROOT, capture_output=True, text=True)
+    son = t.stdout.strip().splitlines()[-1] if t.stdout.strip() else t.stderr[-300:]
+    print(f"{'ok  ' if t.returncode == 0 else 'FAIL'} scripts/test_silme_yok.py · {son}")
+    if t.returncode:
+        print(t.stdout[-2500:], t.stderr[-1500:])
+        fails.append("test_silme_yok.py")
+    satir = [l.strip() for l in build_stdout.splitlines() if "İPUCU-YOK / S8" in l]
+    ok = bool(satir) and "yalnız ipucuyla gelen 0 ·" in satir[0]
+    print(f"{'ok  ' if ok else 'FAIL'} İPUCU-YOK / S8 build satırı · {satir[0].lstrip('· ')[:160] if satir else 'satır yok'}")
+    if not ok:
+        fails.append("İPUCU-YOK satırı")
+    r = subprocess.run([sys.executable, "scripts/yeniden_kategorile.py", "2026-09-23"], cwd=ROOT,
+                       capture_output=True, text=True)
+    ilk = r.stdout.splitlines()[0] if r.stdout else r.stderr[-200:]
+    ok = r.returncode == 0 and "· 0 kalemin kategorisi değişti" in ilk
+    print(f"{'ok  ' if ok else 'FAIL'} 23 Eylül yeniden kategorilenmiş (kuru çalıştırma) · {ilk}")
+    if not ok:
+        fails.append("yeniden kategorileme")
+    # Özet kapsamı ve Öne çıkanlar savunma dışı işaretli kalemi hiç almaz (müşteri kararı:
+    # yalnız başlık çevirisi, özet yok). Bellekte, 23 Eylül'ün ilk 60 kalemi işaretlenir.
+    kod = ("import build, json; d = json.load(open('data/news/2026-09-23.json'))['items'];"
+           "d = [dict(i) for i in d]; [i.update(savunma_terimi=False) for i in d[:60]];"
+           "v = build.default_visible(d, '2026-09-23', build.cited_urls('2026-09-23'));"
+           "top, _ = build.news_layout(d, '2026-09-23', set());"
+           "print(sum(1 for i in v if i.get('savunma_terimi') is False),"
+           " sum(1 for r in top if r[2].get('savunma_terimi') is False), len(v))")
+    k = subprocess.run([sys.executable, "-c", kod], cwd=ROOT, capture_output=True, text=True)
+    parts = k.stdout.split()
+    ok = k.returncode == 0 and parts[:2] == ["0", "0"]
+    print(f"{'ok  ' if ok else 'FAIL'} özet kapsamı / Öne çıkanlar savunma dışı kalem almaz · "
+          + ("kapsamda %s, öne çıkanlarda %s (kapsam %s)" % tuple(parts) if len(parts) == 3 else k.stderr[-200:]))
+    if not ok:
+        fails.append("savunma dışı özet kapsamı")
+    if py and (ROOT / "haberler" / "2026-09-23.html").exists():
+        g = subprocess.run([py, "-c", R25_JS, f"{BASE}/haberler/2026-09-23.html"],
+                           cwd=ROOT, capture_output=True, text=True)
+        print(f"{'ok  ' if g.returncode == 0 else 'FAIL'} R25 (S) 23 Eylül medya takibi · "
+              f"{g.stdout.strip() or g.stderr[-300:]}")
+        if g.returncode:
+            fails.append("R25 (S)")
+
+
 def r32_checks(build_stdout, py, fails):
     """Rev 32: TEKRAR-MANŞET — jeton satırları, uyarı, kural kontrolleri, 375px dokunma."""
     sys.path.insert(0, str(ROOT))
@@ -708,6 +812,9 @@ def main():
 
     # Rev 31: GEÇ-GELEN
     r31_checks(build.stdout, py, fails)
+
+    # Rev 25: SİLME-YOK · İPUCU-YOK · kategoriler
+    r25_checks(build.stdout, py, fails)
 
     # Rev 33: NOKTALI-İ
     r33_checks(build.stdout, py, fails)

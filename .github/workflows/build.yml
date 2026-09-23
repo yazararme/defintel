@@ -1,7 +1,7 @@
 name: build
 on:
   push:
-    paths: ['source/**', 'build.py', 'enrich.py', 'assets/**', 'scripts/check_reports.py', 'data/rakipler.json']
+    paths: ['source/**', 'build.py', 'enrich.py', 'oyuncu_eslestir.py', 'scripts/collect_news.py', 'assets/**', 'scripts/check_reports.py', 'data/rakipler.json']
   workflow_dispatch:
     inputs:
       boz:

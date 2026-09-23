@@ -528,7 +528,11 @@ GENERAL = "Genel Savunma Gündemi"
 
 # Veri anahtarı "MKE" kalıyor (collect_news.py ile eşleşsin diye); ekranda
 # şirket adı en büyük bölüm başlığı olarak durmasın.
-NEWS_LABELS = {"MKE": "Doğrudan ilgili"}
+# Rev 25: "Rakip Duyuruları" → "Oyuncu Duyuruları" — kapsam izlenen 64 oyuncu, kural S4
+# (öznesi oyuncunun kendisi olan eylem). Veri anahtarı değişmez (Rev 2 emsali); çapa
+# görünen adı izler, çünkü tıklanınca adres çubuğunda görünür.
+NEWS_LABELS = {"MKE": "Doğrudan ilgili", "Rakip Duyuruları": "Oyuncu Duyuruları"}
+NEWS_IDS = {"Rakip Duyuruları": "Oyuncu Duyuruları"}
 
 
 def news_label(name):
@@ -552,6 +556,7 @@ TR_SLUG = str.maketrans({
 
 def cat_id(name):
     """'C-UAS ve Hava Savunma' -> 'kat-c-uas-ve-hava-savunma'."""
+    name = NEWS_IDS.get(name, name)
     return "kat-" + re.sub(r"[^a-z0-9]+", "-", name.translate(TR_SLUG).lower()).strip("-")
 
 
@@ -664,7 +669,10 @@ def news_layout(items, day, cited):
 
     buckets = {}
     for row in ranked:
-        buckets.setdefault(row[2].get("category") or GENERAL, []).append(row)
+        # R25-P0-1: savunma dışı işaretli kalem yalnız Genel'de (kapalı tam döküm) durur —
+        # hangi kategori yazılmış olursa olsun; böylece özet kapsamına da hiç girmez.
+        cat = GENERAL if row[2].get("savunma_terimi") is False else row[2].get("category")
+        buckets.setdefault(cat or GENERAL, []).append(row)
     order = ([n for n in NEWS_ORDER if n != GENERAL]
              + sorted(set(buckets) - set(NEWS_ORDER)) + [GENERAL])
     present = [(name, sorted(buckets[name], key=lambda r: (-r[0], r[1])))
@@ -674,6 +682,8 @@ def news_layout(items, day, cited):
     # göre, kaynak başına en fazla ikisi
     top, quota = [], {}
     for row in ranked:
+        if row[2].get("savunma_terimi") is False:   # R25-P0-1: yalnız Genel'in tam dökümü
+            continue
         source = row[2].get("source", "")
         if quota.get(source, 0) >= HIGHLIGHT_PER_SOURCE:
             continue
@@ -1148,6 +1158,54 @@ def kapsam_report(kap, previous_page):
                    .replace("64/64", f"{total}/{total}"))
 
 
+def kategori_isabeti(news):
+    """S8 + İPUCU-YOK (Rev 25): son medya takibi gününde kategori başına iki sayı.
+
+    "yalnız ipucuyla gelen": adı olan bir kategoride, ama başlığı o kategorinin kendi
+    kuralına (kelime listesi; Oyuncu Duyuruları için S4) değmiyor — oraya ancak kaynak
+    ipucuyla gelmiş olabilir. "hiçbir kelimeye değmeyen": başlık hiçbir kategorinin hiçbir
+    kelimesine değmiyor. Kurallar scripts/collect_news.py'den okunur (tek kaynak).
+    (A) özetine tablo, kayda satır; ipucuyla gelen >0 ise İPUCU-YOK uyarısı (Rev 30).
+    """
+    import os
+    from scripts import collect_news as CN
+    days = sorted(d for d, data in news.items() if data.get("items"))
+    if not days:
+        return None
+    day = days[-1]
+    counts = CN.s8_counts(news[day]["items"])
+    order = [n for n in NEWS_ORDER if n in counts] + sorted(set(counts) - set(NEWS_ORDER))
+    ipucu = sum(r["ipucu"] or 0 for r in counts.values())
+    kelimesiz = sum(r["kelimesiz"] for r in counts.values())
+    print(f"  · İPUCU-YOK / S8 {day}: yalnız ipucuyla gelen {ipucu} · hiçbir kelimeye değmeyen "
+          f"{kelimesiz} · " + " · ".join(
+              f"{news_label(n)} {counts[n]['n']}: {'—' if counts[n]['ipucu'] is None else counts[n]['ipucu']}"
+              f"/{counts[n]['kelimesiz']}" for n in order))
+    summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary:
+        md = [f"### Kategori isabeti · {day} (Rev 25 S8 · İPUCU-YOK)", "",
+              f"**{'🟢' if not ipucu else '🔴'} yalnız ipucuyla gelen: {ipucu}** · hiçbir kelimeye "
+              f"değmeyen: {kelimesiz} · {sum(r['n'] for r in counts.values())} kalem", "",
+              "| Kategori | Kalem | Yalnız ipucuyla gelen | Hiçbir kelimeye değmeyen |",
+              "|---|--:|--:|--:|"]
+        for n in order:
+            r = counts[n]
+            md.append(f"| {news_label(n)} | {r['n']} | {'—' if r['ipucu'] is None else r['ipucu']} "
+                      f"| {r['kelimesiz']} |")
+        md += ["", "“—”: Genel'in kendi kelime listesi yok; oraya ipucuyla gelinmez."]
+        try:
+            with open(summary, "a", encoding="utf-8") as fh:
+                fh.write("\n".join(md) + "\n\n")
+        except OSError as exc:
+            print(f"  ! İPUCU-YOK: özet yazılamadı: {exc}")
+    if ipucu:
+        from scripts import uyari
+        ornek = next(n for n in order if counts[n]["ipucu"])
+        uyari.ekle("İPUCU-YOK", f"{day} · {ipucu} kalem adı olan bir kategoriye başlığındaki bir "
+                   f"kelime olmadan gelmiş — ör. {news_label(ornek)}: {counts[ornek]['ipucu']}")
+    return day, counts
+
+
 def redirect_page(title, target, note):
     """Taşınan adres: yönlendirir, ama sessizce değil."""
     return (
@@ -1423,7 +1481,8 @@ def general_section(rows, day, cited):
     worth, seen, picked = [], {}, set()
     for row in sorted(rows, key=lambda r: (-r[0], r[1])):
         source = row[2].get("source", "")
-        if row[2].get("tier") != "A" or seen.get(source, 0) >= 3:
+        if (row[2].get("tier") != "A" or seen.get(source, 0) >= 3
+                or row[2].get("savunma_terimi") is False):   # R25-P0-1: tam dökümde kalır
             continue
         seen[source] = seen.get(source, 0) + 1
         worth.append(row)
@@ -1856,6 +1915,7 @@ def main():
                          iso in news, depth=0),
             encoding="utf-8")
     # Oyuncular: rayın "bugün kim" sorusunun yanındaki "ne zamandan beri" sayfası.
+    kategori_isabeti(news)   # Rev 25: S8 + İPUCU-YOK
     hist = player_history(sources, news)
     if hist:
         # KAPSAM-SAYI: testler her derlemede koşar; sayfa her durumda üretilir.
@@ -2007,90 +2067,11 @@ def check_links():
     # uyarı; JavaScript'siz tarayıcıda gerçek bir kırık.)
     return sum(1 for _f, _h, why in broken if why == "dosya yok")
 
-RIVALS_JSON = DATA / "rakipler.json"
-
-
-def rivals_config():
-    """İzlenen rakipler — dosya yoksa boş: bilinmiyor, sıfır değil."""
-    try:
-        data = json.loads(RIVALS_JSON.read_text(encoding="utf-8"))
-    except Exception:
-        return []
-    return [r for r in data.get("rakipler", []) if r.get("name")]
-
-
-def tr_fold(text):
-    """Eşleştirme için Türkçe-duyarlı küçültme: İ/I/ı hepsi i'ye iner.
-
-    str.lower() "NORINCO"yu "norinco" yaparken "NORİNCO"yu başka bir şeye
-    çeviriyor; iki taraf da aynı fonksiyondan geçmezse marka adı eşleşmiyor.
-    """
-    return text.translate(str.maketrans("İIı", "iii")).lower()
-
-
-SHORT_NAME = 4
-
-
-def _word(pattern):
-    return re.compile(r"(?<!\w)" + re.escape(pattern) + r"(?!\w)")
-
-
-@functools.lru_cache(maxsize=None)
-def rival_patterns(rid):
-    """{"loose", "short", "tr_disi", "haric"} — bir oyuncunun eşleşme kalıpları.
-
-    Dört karakter ve altındaki her dizi — kanonik ad ya da takma ad, ayrımı
-    yok — yalnız başlıkta ve harf duyarlı aranır. "MIL", "FN", "STM", "TAI"
-    gibi diziler Türkçe gövde metninde tesadüfen geçiyor ve sözcük sınırı
-    bunu durdurmuyor; başlık kısa ve özenle yazılmış, tesadüf çok daha zor.
-
-    `tr_disi` Türkçe metinde hiç aranmayan diziler: Türkçe başlıkta "BAE"
-    Birleşik Arap Emirlikleri demek (Rev 21'de gerçek bir satır BAE
-    Systems'e yazılıyordu). `haric` eşleşmeden önce metinden silinen
-    kalıplar: "Rafael Grossi" bir UAEA başkanı, "POF-USA" bir tüfek üreticisi.
-    """
-    rival = next((r for r in rivals_config() if r["id"] == rid), None)
-    if not rival:
-        return {"loose": (), "short": (), "tr_disi": frozenset(), "haric": ()}
-    strings = [rival["name"]] + [a for a in (rival.get("aliases") or []) if a.strip()]
-    tr_disi = frozenset(rival.get("tr_disi") or ())
-    return {
-        "loose": tuple((n, _word(tr_fold(n))) for n in strings if len(n) > SHORT_NAME),
-        "short": tuple((n, _word(n)) for n in strings if len(n) <= SHORT_NAME),
-        "tr_disi": tr_disi,
-        "haric": tuple(re.compile(h) for h in (rival.get("haric") or ())),
-    }
-
-
-def _haric(pats, text):
-    for h in pats["haric"]:
-        text = h.sub(" ", text)
-    return text
-
-
-def rival_in_title(rid, title, tr=False):
-    """Başlıkta geçiyor mu? `tr`: metin Türkçe (çeviri, Türkçe kaynak, rapor)."""
-    pats = rival_patterns(rid)
-    title = _haric(pats, title)
-    folded = tr_fold(title)
-    skip = pats["tr_disi"] if tr else frozenset()
-    return (any(p.search(folded) for n, p in pats["loose"] if n not in skip)
-            or any(p.search(title) for n, p in pats["short"] if n not in skip))
-
-
-def rival_in_body(rid, body, tr=True):
-    """Gövdede yalnız uzun diziler aranır — kısa olanlar başlığa ait."""
-    pats = rival_patterns(rid)
-    folded = tr_fold(_haric(pats, body))
-    skip = pats["tr_disi"] if tr else frozenset()
-    return any(p.search(folded) for n, p in pats["loose"] if n not in skip)
-
-
-def headline_has(rid, item):
-    """Kupür satırı bu oyuncuyu anıyor mu — özgün başlık ve Türkçe çevirisi."""
-    title, title_tr = item.get("title") or "", item.get("title_tr") or ""
-    return bool((title and rival_in_title(rid, title, tr=item.get("lang") == "tr"))
-                or (title_tr and rival_in_title(rid, title_tr, tr=True)))
+# Oyuncu eşleştiricisi oyuncu_eslestir.py'de (Rev 25: toplama da kullanıyor).
+from oyuncu_eslestir import (  # noqa: E402,F401
+    RIVALS_JSON, SHORT_NAME, _haric, _word, headline_has, rival_in_body, rival_in_title,
+    rival_patterns, rivals_config, tr_fold,
+)
 
 
 # ── KAPSAM-SAYI (Rev 21) ─────────────────────────────────────────────────────

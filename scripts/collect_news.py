@@ -19,6 +19,14 @@ new items are appended with this run's stamp. The candidate list opens with
 briefing went out (data/published.json). Build rule GEÇ-GELEN (Rev 30 channel): a stamp
 changed on re-collection, or a late item missing from that first section.
 
+Rev 25 — SİLME-YOK: the defence filter on sources whose `not` says "filtre" marks
+(`savunma_terimi: false`, category Genel), it never drops; per source "read == written" goes to
+(A) as a table, and a mismatch sends SİLME-YOK (Rev 30, blocking) and exits 1. İPUCU-YOK: the
+category comes only from a word in the title (S2 source hints removed; S3, S4, S6; see
+CATEGORIES / PLAYER_CATEGORY). `--sinama-silme-boz` (fixture only) drops one read item to prove
+SİLME-YOK fires. See scripts/test_silme_yok.py; scripts/yeniden_kategorile.py re-applies the
+rules to a stored day offline.
+
 Offline test path (no network, no Drive, no model):
     python3 scripts/collect_news.py --fixture F.json --out DIR --date D --now ISO
 F.json = {"sources": [kaynaklar entries], "feeds": {"<ad>": {"items": [{title, url,
@@ -63,12 +71,18 @@ DEFENCE_TERMS = [
 
 # Category -> terms, in priority order. Short terms are matched on word
 # boundaries: "safe" as a plain word matched half the English-language feeds.
+# Rev 25 (İPUCU-YOK): a category comes only from a word in the title — there is no
+# source hint any more (S2). An item whose title hits no word stays in Genel: right in
+# Genel beats wrong in a named category, because the reader opens a named category on
+# its topic promise.
 CATEGORIES = [
+    # S3: only counter/air-defence phrases. Bare drone words (drone, dron, uav, uas) and
+    # loitering munitions are unmanned systems, not their defeat → İnsansız Sistemler.
     ("C-UAS ve Hava Savunma", [
         "c-uas", "counter-uas", "counter drone", "counter-drone", "anti-drone", "drone defen",
-        "dron savunma", "air defen", "hava savunma", "shorad", "manpads", "skyranger",
-        "jammer", "karıştırıc", "interceptor", "önleyici", "uav", "uas", "drone", "dron",
-        "loitering", "dolanan mühimmat", "patriot", "nasams", "iron dome", "s-400",
+        "karşı-dron", "dron savunma", "air defen", "hava savunma", "shorad", "manpads",
+        "skyranger", "jammer", "karıştırıc", "interceptor", "önleyici", "patriot", "nasams",
+        "iron dome", "s-400",
     ]),
     ("Topçu ve Mühimmat", [
         "artillery", "topçu", "howitzer", "obüs", "mortar", "havan", "ammunition", "mühimmat",
@@ -79,6 +93,7 @@ CATEGORIES = [
     ("Deniz ve İnsansız Sistemler", [
         "naval", "frigate", "fırkateyn", "submarine", "denizalt", "corvette", "korvet",
         "usv", "uuv", "sea drone", "deniz araç", "torpedo", "mayın gemi",
+        "drone", "dron", "uav", "uas", "loitering", "dolanan mühimmat",
     ]),
     ("Hafif Silah ve Mayın", [
         "rifle", "tüfek", "small arms", "hafif silah", "machine gun", "makineli",
@@ -89,23 +104,52 @@ CATEGORIES = [
         "steel price", "çelik", "copper", "bakır", "semiconductor", "chip shortage",
         "shortage", "darboğaz", "raw material", "hammadde",
     ]),
+    # S6: only procurement-event phrases. "deal", "signs", "imzala", "contract" pulled
+    # diplomatic headlines in ("Trump signs Greenland security agreement").
     ("İhale ve Sözleşmeler", [
-        "tender", "ihale", "contract", "sözleşme", "awarded", "awards", "order for",
-        "sipariş", "procure", "tedarik", "rfi", "rfp", "solicitation", "framework agreement",
-        "çerçeve anlaşma", "signs", "imzala", "deal",
+        "tender", "ihale", "solicitation", "rfp", "rfi", "awarded", "sözleşme verdi",
+        "sipariş verdi", "çerçeve anlaşma", "framework agreement",
     ]),
     ("Politika ve Regülasyon", [
         "export control", "ihracat kontrol", "itar", "caatsa", "sanction", "yaptırım",
         "regulation", "regülasyon", "defence policy", "savunma politika", "defense budget",
         "savunma bütçe", "parliament approve", "meclis", "nato summit", "eu defence",
     ]),
-    ("Rakip Duyuruları", [
-        "rheinmetall", "hanwha", "aselsan", "roketsan", "elbit", "knds", "nexter",
-        "bae systems", "leonardo", "kongsberg", "saab", "nammo", "anduril", "epirus",
-        "droneshield", "norinco", "raytheon", "lockheed", "northrop", "mbda", "diehl",
-        "junghans", "thales", "rtx",
-    ]),
 ]
+
+# S4 (Rev 25): "Oyuncu Duyuruları" (data key unchanged, Rev 2 precedent) — the title's
+# subject is one of the 64 tracked players (data/rakipler.json, Rev 21 alias matcher) and
+# the headline is that player's own action. Checked after MKE, before the product segments:
+# a player's announcement belongs here, not under its product. The old 24-brand word list
+# is gone — a brand merely mentioned is not its announcement.
+PLAYER_CATEGORY = "Rakip Duyuruları"
+# Subject = the name opens the title: at most a bullet/quote, a headline kicker ending in
+# ":" ("Heavy Weapon Carrier for the Infantry: Rheinmetall completes …"), one possessive
+# ("Poland's PGZ") or one co-subject ("Lockheed, Kongsberg test …") before it.
+SUBJECT_PREFIX = re.compile(
+    r"^[\W_]*"                                        # ► • " ‘ ( …
+    r"(?:[^:]{1,80}:\s*)?"                            # kicker:
+    r"(?:[\w.\-]+['’]s\s+"                            # possessive
+    r"|(?:[\w.\-&]+\s+){0,2}[\w.\-&]+(?:\s*,|\s+(?:and|&|ve|ile|und|et|e))\s+)?$",
+    re.U)
+# The player's own act: won, unveiled, delivered, invested, partnered … (EN / TR / DE),
+# matched on norm() text (ascii-folded, lower case).
+PLAYER_ACTION = re.compile(r"\b(?:" + "|".join([
+    r"wins?", r"won", r"secur(?:es|ed)", r"lands", r"bags", r"books",
+    r"unveil\w*", r"launch\w*", r"introduc\w*", r"debut\w*", r"showcas\w*", r"present\w*",
+    r"deliver\w*", r"hands? over", r"invest\w*", r"expand\w*", r"opens?", r"opened",
+    r"breaks? ground", r"acquir\w*", r"buys?", r"bought", r"partner\w*", r"teams? up",
+    r"teams? with", r"joins? forces", r"joint venture", r"signs?", r"signed", r"awarded",
+    r"receiv\w*", r"complet\w*", r"tests?", r"tested", r"test fires?", r"demonstrat\w*",
+    r"announc\w*", r"builds?", r"establish\w*", r"starts?", r"begins?", r"ramps? up",
+    r"to (?:build|supply|deliver|produce|develop|open|invest|acquire)", r"supplies",
+    r"kazand\w*", r"tanitt\w*", r"teslim\w*", r"yatirim\w*", r"ortaklik\w*", r"imzala\w*",
+    r"acti", r"acildi", r"satin al\w*", r"sergile\w*", r"baslatt\w*", r"uretime\w*", r"kurdu\w*",
+    r"genislet\w*", r"test etti\w*",
+    r"inaugurat\w*",
+    r"gewinnt", r"liefert", r"investiert", r"erhalt", r"ubernimmt", r"prasentiert", r"baut",
+    r"testet", r"unterzeichnet", r"startet", r"eroffnet", r"stellt\w* vor",
+]) + r")\b")
 
 MKE_TERMS = ["mke", "makine ve kimya", "tolga", "boran", "attila", "mpt-76", "pirana", "barkın"]
 GENERAL = "Genel Savunma Gündemi"
@@ -209,14 +253,6 @@ def read_feed(source):
     return source, items, None
 
 
-SOURCE_HINTS = [
-    ("C-UAS ve Hava Savunma", ["c-uas", "dron savunma", "insansız"]),
-    ("Topçu ve Mühimmat", ["mühimmat", "topçu"]),
-    ("Deniz ve İnsansız Sistemler", ["deniz sistem"]),
-    ("Rakip Duyuruları", ["rakip kurumsal", "üretici duyuru"]),
-]
-
-
 def has_term(text, term):
     term = norm(term).strip()
     if len(term) <= 5 and " " not in term:
@@ -224,18 +260,67 @@ def has_term(text, term):
     return term in text
 
 
-def categorise(title, source=None):
+def _players():
+    """Rev 21 matcher (oyuncu_eslestir.py at the repo root; stdlib only)."""
+    if str(ROOT) not in sys.path:
+        sys.path.insert(0, str(ROOT))
+    import oyuncu_eslestir
+    return oyuncu_eslestir
+
+
+def player_announcement(title, lang=""):
+    """S4: id of the tracked player whose own action this headline is, else None."""
+    if not PLAYER_ACTION.search(norm(title)):
+        return None
+    m = _players()
+    for rival in m.rivals_config():
+        before = m.rival_start(rival["id"], title, tr=lang == "tr")
+        if before is not None and SUBJECT_PREFIX.match(before):
+            return rival["id"]
+    return None
+
+
+def rule_hits(title, lang=""):
+    """Every category whose own rule the title satisfies, in priority order.
+
+    categorise() takes the first; S8 uses the whole list to count items that arrived
+    without a word of their own (hint-only) and items that touch no word at all.
+    """
     text = norm(title)
+    hits = []
     if any(has_term(text, t) for t in MKE_TERMS):
-        return "MKE"
-    for name, terms in CATEGORIES:
-        if any(has_term(text, t) for t in terms):
-            return name
-    scope = norm((source or {}).get("kapsam", ""))
-    for name, terms in SOURCE_HINTS:
-        if any(norm(term) in scope for term in terms):
-            return name
-    return GENERAL
+        hits.append("MKE")
+    if player_announcement(title, lang):
+        hits.append(PLAYER_CATEGORY)
+    hits += [name for name, terms in CATEGORIES if any(has_term(text, t) for t in terms)]
+    return hits
+
+
+def categorise(title, lang=""):
+    """İPUCU-YOK: the category comes only from a word in the title (no source hint)."""
+    hits = rule_hits(title, lang)
+    return hits[0] if hits else GENERAL
+
+
+def s8_counts(items):
+    """S8: per stored category → {"n", "ipucu", "kelimesiz"}.
+
+    ipucu     : in a named category although the title does not hit that category's own
+                rule — it could only have come from a source hint (İPUCU-YOK wants 0).
+    kelimesiz : the title hits no word of any category (MKE, S4 and all term lists).
+    Genel has no rule of its own, so its ipucu is None.
+    """
+    out = {}
+    for item in items:
+        cat = item.get("category") or GENERAL
+        hits = rule_hits(item.get("title") or "", item.get("lang") or "")
+        row = out.setdefault(cat, {"n": 0, "ipucu": None if cat == GENERAL else 0, "kelimesiz": 0})
+        row["n"] += 1
+        if cat != GENERAL and cat not in hits:
+            row["ipucu"] += 1
+        if not hits:
+            row["kelimesiz"] += 1
+    return out
 
 
 def looks_defence(title):
@@ -339,7 +424,9 @@ def write_candidates(day, payload, by_category, late=(), prev=None, brief_at=Non
         if not items or used >= CANDIDATE_LIMIT:
             continue
         room = CANDIDATE_LIMIT - used
-        lines.append(f"## {name} ({len(items)})")
+        # Rev 25: ajan da okuyucunun gördüğü adı görsün (veri anahtarı değişmez).
+        label = "Oyuncu Duyuruları" if name == PLAYER_CATEGORY else name
+        lines.append(f"## {label} ({len(items)})")
         if name == LATE_SECTION:
             lines.append(f"{prev} brifingi {brief_at:%H:%M}'de yayımlandı; bu kalemler ondan sonra "
                          "ilk görüldü, brifing onları görmedi. Kendi kategorilerinde de yer alabilirler.")
@@ -415,6 +502,57 @@ def write_summary(lines):
         print(f"  ! özet yazılamadı: {exc}")
 
 
+def silme_yok(okunan, items, filtreli):
+    """SİLME-YOK (Rev 25): kaynak başına okunan == yazılan.
+
+    okunan : zaman penceresine giren, akıştan okunan kalemler ({kaynak: [kalem]})
+    items  : günün dosyasına yazılacak kalemler (birleştirme dahil)
+    Okunan bir kalem yazılmış sayılır: bağlantısı dosyada ya da aynı başlık başka bir
+    yayından geldiği için `also` altında (tekilleştirme) ya da günün önceki toplamasında
+    zaten yazılmış. Döner: [(kaynak, filtre notlu mu, okunan, yazılan, savunma dışı,
+    ilk eksik başlık | None)] — filtre notlular önce, sonra ada göre.
+    """
+    urls = {url_key(i.get("url")) for i in items}
+    titles = {k for i in items if (k := title_key(i.get("title")))}
+    disi = {}
+    for i in items:
+        if i.get("savunma_terimi") is False:
+            disi[i.get("source")] = disi.get(i.get("source"), 0) + 1
+    rows = []
+    for ad, window in okunan.items():
+        lost = [r for r in window if url_key(r["url"]) not in urls
+                and not ((k := title_key(r["title"])) and k in titles)]
+        rows.append((ad, ad in filtreli, len(window), len(window) - len(lost),
+                     disi.get(ad, 0), lost[0]["title"] if lost else None))
+    rows.sort(key=lambda r: (not r[1], r[0].casefold()))
+    return rows
+
+
+def silme_yok_ozet(rows, today, onek=""):
+    """(A) tablosu + bozuksa Rev 30 uyarısı (bloklayıcı). Döner: bozuk kaynak sayısı."""
+    bozuk = [r for r in rows if r[2] != r[3]]
+    fl = [r for r in rows if r[1]]
+    renk = "🔴" if bozuk else "🟢"
+    lines = [f"### SİLME-YOK · {today} (Rev 25, bloklayıcı)", "",
+             f"**{renk} okunan == yazılan: {len(rows) - len(bozuk)}/{len(rows)} kaynak eşit** · "
+             f"filtre notlu {len(fl)} kaynak: okunan {sum(r[2] for r in fl)} · yazılan "
+             f"{sum(r[3] for r in fl)} · savunma dışı işaretli {sum(r[4] for r in fl)}", "",
+             "| Kaynak | Filtre notu | Okunan | Yazılan | Savunma dışı (`savunma_terimi: false`) | Durum |",
+             "|---|---|--:|--:|--:|---|"]
+    for ad, filtre, oku, yaz, disi, _ in rows:
+        lines.append(f"| {ad} | {'filtre' if filtre else '—'} | {oku} | {yaz} | "
+                     f"{disi if filtre else '—'} | {'🟢 eşit' if oku == yaz else '🔴 EŞİT DEĞİL'} |")
+    write_summary(lines)
+    for ad, filtre, oku, yaz, _, ilk in rows:
+        print(f"  · SİLME-YOK {ad}{' (filtre)' if filtre else ''}: okunan {oku} · yazılan {yaz}")
+    if bozuk:
+        import uyari
+        ad, _, oku, yaz, _, ilk = bozuk[0]
+        uyari.ekle("SİLME-YOK", f"{onek}{today} · {len(bozuk)} kaynakta okunan ≠ yazılan — ör. {ad}: "
+                   f"okunan {oku}, yazılan {yaz}, düşen “{(ilk or '')[:70]}”")
+    return len(bozuk)
+
+
 def fixture_reader(feeds):
     """Ağsız sınama: kayıtlı başlıklar read_feed ile aynı biçimde döner."""
     def read(source):
@@ -439,11 +577,15 @@ def main():
     ap.add_argument("--published", default=str(PUBLISHED), help="brifing yayın saatleri")
     ap.add_argument("--sinama-damga-boz", action="store_true",
                     help="(yalnız --fixture) var olan bir kalemin damgasını bilerek değiştir")
+    ap.add_argument("--sinama-silme-boz", action="store_true",
+                    help="(yalnız --fixture) okunan bir kalemi bilerek düşür → SİLME-YOK")
     args = ap.parse_args()
     if args.fixture and not args.out:
         sys.exit("--fixture ile --out zorunlu: sınama data/news'e yazmaz")
     if args.sinama_damga_boz and not args.fixture:
         sys.exit("--sinama-damga-boz yalnız --fixture ile")
+    if args.sinama_silme_boz and not args.fixture:
+        sys.exit("--sinama-silme-boz yalnız --fixture ile")
     onek = "SINAMA (fixture) — gerçek uyarı değil: " if args.fixture else ""
 
     out_dir = pathlib.Path(args.out) if args.out else OUT_DIR
@@ -463,19 +605,22 @@ def main():
     cutoff = now - dt.timedelta(hours=args.hours)
 
     collected, failures = [], []
+    okunan = {}   # SİLME-YOK: kaynak → zaman penceresine giren okunan kalemler
+    filtreli = set()
     with concurrent.futures.ThreadPoolExecutor(max_workers=12) as pool:
         for source, items, error in pool.map(reader, sources):
             if error:
                 failures.append((source["ad"], error))
                 continue
             general = "filtre" in (source.get("not") or "").lower()
-            kept = 0
+            if general:
+                filtreli.add(source["ad"])
+            window = okunan.setdefault(source["ad"], [])
             for item in items:
                 if item["published"] and item["published"] < cutoff:
                     continue
-                if general and not looks_defence(item["title"]):
-                    continue
-                collected.append({
+                window.append(item)
+                entry = {
                     "title": item["title"],
                     "url": item["url"],
                     "source": source["ad"],
@@ -483,11 +628,26 @@ def main():
                     "lang": source.get("dil", ""),
                     "tier": source.get("kademe", ""),
                     "published": item["published"].date().isoformat() if item["published"] else "",
-                    "category": categorise(item["title"], source),
-                })
-                kept += 1
-            if not kept and not items:
+                    "category": categorise(item["title"], source.get("dil", "")),
+                }
+                # R25-P0-1: the defence filter marks, it never drops (Rev 0: no item is
+                # deleted). A general-feed item with no defence term stays in the day
+                # file — searchable, title translated, never summarised — and sits in
+                # Genel's closed full dump (build.py), not in any named category.
+                if general:
+                    entry["savunma_terimi"] = looks_defence(item["title"])
+                    if not entry["savunma_terimi"]:
+                        entry["category"] = GENERAL
+                collected.append(entry)
+            if not items:
                 failures.append((source["ad"], "feed parsed but empty"))
+    if args.sinama_silme_boz:
+        # Rev 25 kanıtı: eski `continue` gibi, filtre notlu bir kaynağın bir kalemi düşürülür.
+        hedef = next((c for c in collected if c["source"] in filtreli), None) or \
+            next(iter(collected), None)
+        if hedef:
+            collected.remove(hedef)
+            print(f"  ~ SINAMA: bir kalem bilerek düşürüldü · {hedef['source']} · {hedef['title'][:60]}")
 
     # dedupe: same link, or the same headline from several outlets
     seen_urls, seen_titles, unique = set(), {}, []
@@ -521,10 +681,15 @@ def main():
         else:
             print("  ~ SINAMA: değiştirilecek damgalı kalem yok")
     same, changed, missing = stamp_audit(before, items)
+    silme_rows = silme_yok(okunan, items, filtreli)
 
     by_category = {}
     for item in items:
         by_category.setdefault(item["category"], []).append(item)
+    # Savunma dışı işaretli kalemler (R25-P0-1) ajanın aday dosyasında Genel'in sonunda:
+    # 260 sınırı önce onları keser, savunma başlıklarını değil.
+    if GENERAL in by_category:
+        by_category[GENERAL].sort(key=lambda i: i.get("savunma_terimi") is False)
 
     payload = dict(old_payload)
     payload.update({
@@ -601,6 +766,11 @@ def main():
         f"- dünkü ({prev}) brifing: {brief_txt(prev_brief)} · BRİFİNGDEN SONRA jetonlu satır: {len(late)}"
         + (f" · aday dosyasının ilk bölümünde {in_first}/{len(late)}" if in_first is not None else ""),
     ])
+
+    # Rev 25 — SİLME-YOK (bloklayıcı, Rev 30: uyari.BLOKLAYICI): dosyalar yazıldıktan sonra
+    # tablo (A)'ya basılır; eşitlik bozuksa uyarı kanala gider ve iş kırmızı biter.
+    if silme_yok_ozet(silme_rows, today, onek):
+        sys.exit(1)
 
 
 if __name__ == "__main__":
