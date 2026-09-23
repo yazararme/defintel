@@ -28,6 +28,7 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 | 30 | PASS (issue kanalı) | 1 (+1 iptal edilen push sürümü) | aa9a4c3 | yok |
 | 22 | PASS (deneme 2; d1 FAIL P1-2 "1 / 536") | 2 | 29a9667, d9565c1 | yok |
 | 21 | PASS (deneme 2; d1 FAIL P0-2 kanıt eksikti) | 2 | 00d908c, 5c1134b | yok |
+| 23 | PASS | 1 | 4ca4ef5 | P0-2: prompt yapıştırma + sonraki 3 rapor (human-checks.md) |
 
 ## Notlar / anlaşmazlıklar
 
@@ -54,6 +55,8 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 - Rev 21 d2: etkin çip hover kontrastı düzeltildi (app.css). İnceleyici gerilemeleri: 375px'te Nammo ve NORINCO satırlarında yaş/sayı jetonu alt satıra kırılıyor (küçük).
 
 - Rev 23 kurucu notları: H1-TEKRAR 15, 18, 20, 21, 22 Eylül'de de ateşlerdi (desen). Oyuncular rayı Rheinmetall'i G9'a bağlıyor, oysa G9'un başlığı artık etiket ("Lynx XM30 prototip teslimi") ve gövdede ad yok. Eski günlerin başlıkları da etikete döndü.
+
+- Rev 23 kanıtı: uyari_test dispatch run 35882418738 → issue #5 KUR + H1-TEKRAR satırları. İnceleyici: issue gövdesinde iki "$" GitHub'da matematik olarak işleniyor (KUR satırı kısmen okunmaz) → Rev 30 düzeltmesi (uyari.py kaçış) ayrı commit.
 
 ## Açık (orkestratörün eklediği)
 
