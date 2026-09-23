@@ -71,22 +71,12 @@ headline, cut to 75 characters (70 characters in practice), at 4 lines (311 / 80
   120 or 130 characters, 20 Sep reaches 835px in the CI worst case and fails.
 
 With all three limits applied, **all 10 days pass, including the alarm day**, locally and in
-the CI worst case (0.3px shown; 0.45px gives the same result):
-
-| day | as published: local | as published: CI worst | with limits: local | with limits: CI worst |
-|---|---|---|---|---|
-| 14 Sep (alarm) | 330 / 903 | 330 / 929 | 277 / 692 | 277 / 718 |
-| 15 Sep | 263 / 887 | 263 / 940 | 263 / 677 | 263 / 730 |
-| 16 Sep | 294 / 867 | 294 / 893 | 263 / 704 | 263 / 756 |
-| 17 Sep | 263 / 756 | 263 / 809 | 263 / 704 | 263 / 704 |
-| 18 Sep | 263 / 756 | 263 / 809 | 263 / 677 | 263 / 756 |
-| 19 Sep | 326 / 820 | 326 / 820 | 263 / 730 | 263 / 730 |
-| 20 Sep | 326 / 846 | 326 / 898 | 263 / 730 | 263 / 782 |
-| 21 Sep | 294 / 683 | 294 / 683 | 263 / 651 | 263 / 651 |
-| 22 Sep | 294 / 709 | 294 / 735 | 263 / 651 | 263 / 677 |
-| 23 Sep | 263 / 756 | 263 / 782 | 263 / 704 | 263 / 730 |
-
-Each cell is the summary heading's top / item 4's bottom, in px. The thresholds are ≤300 and ≤812.
+the CI worst case. This file gives no per-day figures. For those, read the (A) table
+"İLK-EKRAN tanı", which `check_reports.py --ilk-ekran --tani` writes on every run. Its
+"CI en kötü" columns use the model described above: 0.3px letter spacing plus every "ilk:"
+token on its own line. In Actions that model runs on top of Ubuntu Chromium's own wider
+line breaks, so its figures are higher than a local run's. Of the numbers above, only 20 Sep's
+782 and the 835 at 120 characters come from this model. They were measured locally.
 
 ## How the build checks them (the build does not stop)
 
