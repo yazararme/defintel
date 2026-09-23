@@ -55,6 +55,16 @@ the daybar reads "23 Eyl · Çar", the status line under the h1 reads "Prototip 
 tanımlı değil. · 23 Eylül", 4 underlined link rows plus an unlinked, not-underlined "AÇILDI" opening
 row; a thread opened from 20 Sep shows "20 Eyl · Paz" with both arrows live; an unknown ?g= leaves the
 default day; then an IPLIK_BOZ=1 build (the alert fires) and a normal rebuild.
+Rev 29: L1-DOLGU · ÇİZGİ-KONTRAST · bildirim kartı — the build's "L1-DOLGU: 0 ihlal" line and its
+ÇİZGİ-KONTRAST line (--rule-2 / --paper ≥3:1 in both themes); rule controls on mutated app.css (the
+summary box's old brand edge, an edge added by a longer selector or a :hover, and Rev 0's --rule-2
+values each fire exactly their alert through uyari.ekle; a four-sided `border:` box does not); a
+browser pass over the latest report and media page at 375×812 and 1440×900, light and dark (the
+summary box has no left edge and a --paper-2 ground, no element with a --paper/--paper-2 ground has a
+left border, the rule over each section heading is ≥3:1 against the page); and a first visit (clean
+storage, service workers ALLOWED, 375×812) on the latest report: the notification card is in the
+flow right above .endnav, the footer bell is visible and hit-testable while it is open and still
+after the install bar appears, and "Şimdi değil" hides it for the next load.
 Later revisions extend CHECKS / PAGES. Exit 1 on any failure.
 """
 import os
@@ -715,6 +725,172 @@ def r32_checks(build_stdout, py, fails):
         fails.append("İLK-EKRAN en kötü hâl")
 
 
+# Rev 29: tarayıcıda L1-DOLGU / ÇİZGİ-KONTRAST — hesaplanan stil, açık ve koyu, 375 ve 1440.
+R29_JS = r"""
+import sys, json
+from playwright.sync_api import sync_playwright
+base, sayfalar = sys.argv[1], sys.argv[2].split(",")
+JS = '''() => {
+  const rgb = s => (s.match(/[\\d.]+/g) || []).slice(0, 4).map(Number);
+  const lum = c => { const v = c.slice(0, 3).map(x => { x /= 255; return x <= 0.04045 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4; });
+                     return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2]; };
+  const oran = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+  const tok = n => { const d = document.createElement("i"); d.style.backgroundColor = `var(${n})`; document.body.appendChild(d);
+                     const c = getComputedStyle(d).backgroundColor; d.remove(); return c; };
+  const zemin = new Set([tok("--paper"), tok("--paper-2")]);
+  const ihlal = [];
+  for (const el of document.querySelectorAll("body *")) {
+    const s = getComputedStyle(el);
+    if (zemin.has(s.backgroundColor) && s.borderLeftStyle !== "none" && parseFloat(s.borderLeftWidth) > 0)
+      ihlal.push(el.tagName.toLowerCase() + (el.id ? "#" + el.id : "") + (el.className ? "." + String(el.className).split(" ")[0] : ""));
+  }
+  const ol = document.querySelector(".prose h2#ozet + ol");
+  const kutu = ol ? [getComputedStyle(ol).borderLeftWidth, getComputedStyle(ol).backgroundColor === tok("--paper-2")] : null;
+  const zem = rgb(getComputedStyle(document.body).backgroundColor);
+  const h2 = Array.from(document.querySelectorAll(".prose h2, .kicker")).filter(e => e.offsetParent);
+  const oranlar = h2.map(e => oran(rgb(getComputedStyle(e).borderTopColor), zem));
+  return {ihlal, kutu, h2: h2.length, min: oranlar.length ? Math.min(...oranlar) : null};
+}'''
+out = {}
+with sync_playwright() as p:
+    try: b = p.chromium.launch(channel="chrome")
+    except Exception: b = p.chromium.launch()
+    for sayfa in sayfalar:
+        for w, h in ((375, 812), (1440, 900)):
+            for cs in ("light", "dark"):
+                ctx = b.new_context(service_workers="block", viewport={"width": w, "height": h}, color_scheme=cs)
+                pg = ctx.new_page(); pg.goto(base + sayfa, wait_until="load")
+                out[f"{sayfa}@{w}/{cs}"] = pg.evaluate(JS); ctx.close()
+    b.close()
+print(json.dumps(out, ensure_ascii=False))
+"""
+
+# Rev 29 R29-P1-2 (S): ilk ziyaret, temiz depolama, service worker AÇIK (shoot.py onları engeller;
+# kart serviceWorker.ready + PushManager'a bağlı), 375×812.
+R29_KART_JS = r"""
+import sys, json
+from playwright.sync_api import sync_playwright
+url = sys.argv[1]
+M = '''() => {
+  const c = document.getElementById("notifycard"), b = document.getElementById("notify"),
+        ib = document.getElementById("installbar");
+  const br = b && !b.hidden ? b.getBoundingClientRect() : null;
+  const hit = br ? document.elementFromPoint(br.left + br.width / 2, br.top + br.height / 2) : null;
+  return {kart: !c.hidden, konum: getComputedStyle(c).position,
+          sonraki: c.nextElementSibling ? c.nextElementSibling.className : "",
+          zil: !!(br && br.top >= 0 && br.bottom <= innerHeight && hit && b.contains(hit)),
+          zil_ust: br ? Math.round(br.top) : null, kurulum: !ib.hidden,
+          kurulum_ust: ib.hidden ? null : Math.round(ib.getBoundingClientRect().top)};
+}'''
+DIP = "window.scrollTo(0, document.documentElement.scrollHeight)"
+with sync_playwright() as p:
+    try: b = p.chromium.launch(channel="chrome")
+    except Exception: b = p.chromium.launch()
+    ctx = b.new_context(service_workers="allow", viewport={"width": 375, "height": 812},
+                        is_mobile=True, has_touch=True, locale="tr-TR")
+    pg = ctx.new_page(); pg.goto(url, wait_until="load")
+    try:
+        pg.wait_for_function("!document.getElementById('notifycard').hidden", timeout=15000)
+    except Exception:
+        pass
+    pg.evaluate(DIP); pg.wait_for_timeout(300)
+    ilk = pg.evaluate(M)
+    pg.wait_for_timeout(2500)               # kurulum çubuğu: kaydırma > 400px → 1,2 s
+    pg.evaluate(DIP); pg.wait_for_timeout(300)
+    cubuk = pg.evaluate(M)
+    if ilk["kart"]:
+        pg.click("#notifycard [data-action=later]")
+    kapali = pg.evaluate("document.getElementById('notifycard').hidden")
+    pg.reload(wait_until="load"); pg.wait_for_timeout(2500)
+    sonra = pg.evaluate("document.getElementById('notifycard').hidden")
+    b.close()
+print(json.dumps({"ilk": ilk, "cubuk": cubuk, "simdi_degil": kapali, "yeniden": sonra}, ensure_ascii=False))
+"""
+
+
+def r29_checks(build_stdout, py, fails):
+    """Rev 29: L1-DOLGU · ÇİZGİ-KONTRAST (build satırı, kural kontrolleri, tarayıcı) + ilk ziyaret kartı."""
+    import contextlib
+    import io
+    import json
+    sys.path.insert(0, str(ROOT))
+    import build as B
+    from scripts import uyari
+    satirlar = [l.strip() for l in build_stdout.splitlines()]
+    l1 = [l for l in satirlar if l.startswith("· L1-DOLGU:")]
+    ck = [l for l in satirlar if l.startswith("· ÇİZGİ-KONTRAST:")]
+    oranlar = [float(x.replace(",", ".")) for x in re.findall(r"(?:açık|koyu) (\d+,\d+):1", ck[0])] if ck else []
+    uy = [l for l in satirlar if l.startswith("! L1-DOLGU") or l.startswith("! ÇİZGİ-KONTRAST")]
+    ok = bool(l1) and l1[0].startswith("· L1-DOLGU: 0 ihlal") and len(oranlar) == 2 and min(oranlar) >= 3 and not uy
+    print(f"{'ok  ' if ok else 'FAIL'} R29 build · {l1[0].lstrip('· ') if l1 else 'L1-DOLGU satırı yok'} · "
+          f"{ck[0].lstrip('· ') if ck else 'ÇİZGİ-KONTRAST satırı yok'}")
+    if not ok:
+        fails.append("R29 build")
+
+    # Kural kontrolleri: bozulmuş app.css kopyası (dosyaya yazılmaz) → uyari.ekle.
+    css = (ROOT / "assets" / "app.css").read_text(encoding="utf-8")
+    yedek = {k: os.environ.pop(k) for k in ("GITHUB_STEP_SUMMARY", "RUNNER_TEMP") if k in os.environ}
+    try:
+        durumlar = []
+        for etiket, metin, beklenen in (
+                ("özet kutusuna marka kenarı", css + "\n.prose h2#ozet + ol { border-left: 3px solid var(--brand); }", "L1-DOLGU"),
+                ("daha uzun seçici kenar ekler", css + "\n.report .prose h2#ozet + ol { border-left: 3px solid var(--brand); }", "L1-DOLGU"),
+                (":hover kenar ekler", css + "\n.chip:hover { border-left: 2px solid var(--brand); }", "L1-DOLGU"),
+                ("dört kenarlı kutu (border:)", css + "\n.x { background: var(--paper-2); border: 1px solid var(--rule-2); }", None),
+                ("Rev 0 --rule-2 değerleri", css.replace("#908E88", "#CAC6BC").replace("#62656B", "#3B4048"), "ÇİZGİ-KONTRAST")):
+            del uyari._BELLEK[:]
+            with contextlib.redirect_stdout(io.StringIO()):
+                B.r29_kurallari(metin)
+            kurallar = [k["kural"] for k in uyari._BELLEK]
+            durumlar.append((etiket, kurallar, (kurallar == [beklenen]) if beklenen else not kurallar))
+        del uyari._BELLEK[:]
+    finally:
+        os.environ.update(yedek)
+    ok = all(d[2] for d in durumlar)
+    print(f"{'ok  ' if ok else 'FAIL'} R29 kural kontrolleri · "
+          + " · ".join(f"{e} → {', '.join(k) or 'uyarı yok'}" for e, k, _ok in durumlar))
+    if not ok:
+        fails.append("R29 kural kontrolleri")
+
+    if not py:
+        print("FAIL R29 tarayıcı · Playwright'lı python yok")
+        fails.append("R29 tarayıcı")
+        return
+    rapor = latest("reports", "????-??-??.html")
+    sayfalar = [rapor, latest("haberler", "????-??-??.html")]
+    r = subprocess.run([py, "-c", R29_JS, BASE, ",".join(sayfalar)], cwd=ROOT, capture_output=True, text=True)
+    try:
+        sonuc = json.loads(r.stdout)
+    except ValueError:
+        sonuc = {}
+    kotu = [f"{k}: {v}" for k, v in sonuc.items()
+            if v["ihlal"] or (v["kutu"] is not None and (v["kutu"][0] != "0px" or not v["kutu"][1]))
+            or (k.startswith(rapor + "@") and v["kutu"] is None) or v["min"] is None or v["min"] < 3]
+    en_dusuk = min((v["min"] for v in sonuc.values() if v["min"]), default=0)
+    ok = bool(sonuc) and not kotu
+    print(f"{'ok  ' if ok else 'FAIL'} R29 tarayıcı (rapor + medya × 375/1440 × açık/koyu) · "
+          + (f"{len(sonuc)}/{len(sonuc)} · özet kutusu kenarsız, --paper-2 zemin · zeminli öğede border-left yok · "
+             + f"bölüm çizgisi en düşük {en_dusuk:.2f}:1".replace(".", ",") if ok else str(kotu[:2] or r.stderr[-400:])))
+    if not ok:
+        fails.append("R29 tarayıcı")
+
+    r = subprocess.run([py, "-c", R29_KART_JS, BASE + rapor], cwd=ROOT, capture_output=True, text=True)
+    try:
+        k = json.loads(r.stdout)
+    except ValueError:
+        k = None
+    ok = bool(k) and k["ilk"]["kart"] and k["ilk"]["konum"] == "static" and k["ilk"]["sonraki"] == "endnav" \
+        and k["ilk"]["zil"] and k["cubuk"]["zil"] and k["simdi_degil"] and k["yeniden"]
+    print(f"{'ok  ' if ok else 'FAIL'} R29 ilk ziyaret kartı (375×812, temiz depolama, SW açık) {rapor} · "
+          + (f"kart {'görünür' if k['ilk']['kart'] else 'YOK'}, akışta ({k['ilk']['konum']}), ardından "
+             f".{k['ilk']['sonraki']} · zil {'görünür' if k['ilk']['zil'] else 'ÖRTÜLÜ'} (üst {k['ilk']['zil_ust']}px) · "
+             f"kurulum çubuğu {'açık' if k['cubuk']['kurulum'] else 'kapalı'} (üst {k['cubuk']['kurulum_ust']}px) "
+             f"iken zil {'görünür' if k['cubuk']['zil'] else 'ÖRTÜLÜ'} (üst {k['cubuk']['zil_ust']}px) · Şimdi değil → "
+             f"{'gizli' if k['simdi_degil'] else 'AÇIK'}, yeniden yüklemede {'gizli' if k['yeniden'] else 'GÖRÜNÜR'}"
+             if k else r.stdout[-300:] + r.stderr[-400:]))
+    if not ok:
+        fails.append("R29 ilk ziyaret kartı")
+
 def r23_checks(build_stdout, fails):
     """Rev 23: kuralların uyarı satırları, etiket = başlık, kural kontrolleri."""
     sys.path.insert(0, str(ROOT))
@@ -935,6 +1111,9 @@ def main():
 
     # Rev 24: İLK-EKRAN
     r24_checks(py, fails)
+
+    # Rev 29: L1-DOLGU · ÇİZGİ-KONTRAST · ilk ziyaret bildirim kartı
+    r29_checks(build.stdout, py, fails)
 
     # Rev 21: KAPSAM-SAYI — alias testi 64/64 (normal build'in çıktısından)
     m = [l for l in build.stdout.splitlines() if "KAPSAM-SAYI: alias testi" in l]

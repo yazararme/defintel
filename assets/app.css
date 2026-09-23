@@ -9,7 +9,7 @@
   --ink-2:   #33363C;
   --muted:   #71747A;
   --rule:    #E3E0D9;
-  --rule-2:  #CAC6BC;
+  --rule-2:  #908E88;   /* bölüm sınırı: --paper'a karşı 3,17:1 (R29, ÇİZGİ-KONTRAST ≥3) */
   --brand:   #2F4C3B;   /* koyu asker yeşili: bağlantılar ve logo */
   /* İki durum var, ikisi de kullanılıyor: sakin ve alarm. Üçüncü bir jeton
      (--watch) tanımlıydı ve hiçbir yerde basılmıyordu — palet, üründe
@@ -34,7 +34,7 @@
     --ink-2:   #CFCCC6;
     --muted:   #93969C;
     --rule:    #282C32;
-    --rule-2:  #3B4048;
+    --rule-2:  #62656B;   /* 3,18:1 */
     --brand:   #8FB89C;
     --ok:      #74A886;
     --alarm:   #E0796A;
@@ -576,23 +576,23 @@ a { color: var(--brand); text-underline-offset: 2px; }
 
 .prose h2 { margin-bottom: 14px; }
 
-/* Seviye 1 — yöneticinin dört dakikası: dolu zemin + marka kenarı. */
+/* Seviye 1 — yöneticinin dört dakikası: yalnızca dolu zemin. Rev 0'ın marka
+   kenarı R29.4'te kalktı: bir öğe tek mekanizma taşır (L1-DOLGU). Kenarın 3px'i
+   iç boşluğa geçti, metin sütunu yerinde kalsın diye. */
 .prose h2#ozet + ol {
   margin: 0 0 22px;
-  padding: 14px 16px 14px 36px;
+  padding: 14px 16px 14px 39px;
   background: var(--paper-2);
-  border-left: 3px solid var(--brand);
   font-size: 18.5px;
   line-height: 1.5;
 }
 .prose h2#ozet + ol li { margin-bottom: 10px; }
 .prose h2#ozet + ol li:last-child { margin-bottom: 0; }
 /* Alarm günü belgenin kendisinde de farklı görünmeli, yalnızca arşiv
-   rozetinde değil: özet kutusunun kenarı durumu taşır. Zemin %4,5'lik bir
+   rozetinde değil: özet kutusunun zemini durumu taşır. Zemin %4,5'lik bir
    tint — gövde kontrastı 16,3:1'de kalıyor, yani sayfanın en çok okunan
    öğesi tam da önemli olduğu gün okunaksızlaşmıyor. */
 .report--alarm .prose h2#ozet + ol {
-  border-left-color: var(--alarm);
   background: var(--alarm-tint);
 }
 
@@ -685,7 +685,7 @@ body:has(.endnav) .foot { margin-top: 0; }
 
 .foot {
   margin-top: 60px;
-  padding: 18px 0 34px;
+  padding: 18px 0 96px;   /* R29: sabit kurulum çubuğu zili örtmesin */
   border-top: 1px solid var(--rule);
   color: var(--muted);
   font-size: 14px;
@@ -875,6 +875,20 @@ body:has(.endnav) .foot { margin-top: 0; }
   padding: 14px 0 max(14px, env(safe-area-inset-bottom));
 }
 
+/* Bildirim daveti yapışkan değil (R29, F-03/F-14): brifingin sonunda, sayfa sonu
+   gezinmesinin üstünde, akışın içinde bir bölüm. Sınırı tek çizgi; gölge, zemin
+   ve sabit konum kurulum çubuğuna kalır. */
+#notifycard {
+  position: static;
+  z-index: auto;
+  margin-top: 48px;
+  padding: 18px 0;
+  background: none;
+  box-shadow: none;
+  border-top: 1px solid var(--rule-2);
+}
+#notifycard + .endnav { margin-top: 0; }
+
 .promptbar-inner {
   display: flex;
   align-items: center;
@@ -927,6 +941,9 @@ body:has(.endnav) .foot { margin-top: 0; }
   .promptbar-inner { gap: 12px; }
   .promptbar-actions { width: 100%; }
   .pbtn { flex: 1; }
+  /* Dar ekranda düğmeler alt satıra iniyor ve kurulum çubuğu 130–152px oluyor;
+     footer'ın 96px'i onu karşılamıyor, zil çubuğun altında kalıyordu. */
+  body:has(#installbar:not([hidden])) .foot { padding-bottom: 168px; }
 }
 
 /* ---------- rapor başlığı: alarm bandı ---------- */
@@ -1200,12 +1217,12 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
 
 .catbar { display: none; }
 
-/* Seviye 1 — yöneticinin ilk ekranı. */
+/* Seviye 1 — yöneticinin ilk ekranı: yalnızca dolu zemin (R29.4, L1-DOLGU —
+   özet kutusuyla aynı L1 tanımı). Kenarın 3px'i iç boşluğa geçti. */
 .highlights {
   margin: 26px 0 0;
-  padding: 2px 16px 10px;
+  padding: 2px 16px 10px 19px;
   background: var(--paper-2);
-  border-left: 3px solid var(--brand);
 }
 .highlights .kicker { margin-top: 14px; border-top: 0; padding-top: 0; }
 .highlights .clip { border-bottom-color: var(--rule-2); }

@@ -2129,6 +2129,8 @@ def main():
     print("  · data/reports.json")
     # Rev 33: NOKTALI-İ — derlenmiş HTML'in büyük harfli alanlarında sarmasız yabancı ad.
     noktali_i_kurali()
+    # Rev 29: L1-DOLGU · ÇİZGİ-KONTRAST — app.css'in kendisi denetlenir.
+    r29_kurallari()
     if check_links():
         sys.exit(1)
 
@@ -3155,6 +3157,151 @@ def tekrar_manset_kurali(iso, eslesme):
         from scripts import uyari
         uyari.ekle("TEKRAR-MANŞET", f"TEKRAR-MANŞET: {kisa(iso)} H1 ↔ {kisa(h1['gun'])}")
     return h1
+
+
+# ── Rev 29 — görsel sistem: L1-DOLGU · ÇİZGİ-KONTRAST ───────────────────────
+
+ZEMIN_BELIRTECLERI = ("--paper", "--paper-2")   # sayfanın zemin aileleri; --alarm-tint bir DURUM rengi
+CIZGI_ESIK = 3.0
+
+
+def _app_css(css_text=None):
+    css = css_text if css_text is not None else (ROOT / "assets" / "app.css").read_text(encoding="utf-8")
+    return re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+
+
+def css_belirtecleri(css_text=None):
+    """{"açık": {ad: değer}, "koyu": {…}} — `:root {…}` ve prefers-color-scheme: dark içindeki
+    `:root:not([data-theme="light"]) {…}`. Koyu tema açığın üzerine yazılır (miras)."""
+    css = _app_css(css_text)
+
+    def blok(sec_re, metin):
+        m = re.search(sec_re + r"\s*\{([^{}]*)\}", metin)
+        return dict(re.findall(r"(--[\w-]+)\s*:\s*([^;]+);", m.group(1))) if m else {}
+
+    acik = blok(r"(?:^|\})\s*:root", css)
+    koyu_m = re.search(r"@media\s*\(\s*prefers-color-scheme\s*:\s*dark\s*\)\s*\{(.*?\})\s*\}", css, re.S)
+    koyu = {**acik, **(blok(r":root:not\(\[data-theme=\"light\"\]\)", koyu_m.group(1)) if koyu_m else {})}
+    return {"açık": {k: v.strip() for k, v in acik.items()}, "koyu": {k: v.strip() for k, v in koyu.items()}}
+
+
+def kontrast_orani(a, b):
+    """WCAG 2 bağıl parlaklık oranı; #RGB / #RRGGBB."""
+    def lum(h):
+        h = h.strip().lstrip("#")
+        if len(h) == 3:
+            h = "".join(c * 2 for c in h)
+        out = []
+        for i in (0, 2, 4):
+            c = int(h[i:i + 2], 16) / 255
+            out.append(c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4)
+        return 0.2126 * out[0] + 0.7152 * out[1] + 0.0722 * out[2]
+    x, y = sorted((lum(a), lum(b)), reverse=True)
+    return (x + 0.05) / (y + 0.05)
+
+
+def cizgi_kontrast(css_text=None):
+    """[(tema, --rule-2, --paper, oran)] — iki temada bölüm çizgisinin zemine karşı oranı."""
+    out = []
+    for tema, t in css_belirtecleri(css_text).items():
+        out.append((tema, t.get("--rule-2", "?"), t.get("--paper", "?"),
+                    kontrast_orani(t["--rule-2"], t["--paper"]) if "--rule-2" in t and "--paper" in t else 0.0))
+    return out
+
+
+def l1_dolgu_ihlalleri(css_text=None):
+    """[(seçici, zemin, sol kenar)] — zemin belirteci (--paper*) ile aynı anda border-left.
+
+    Her seçicinin bildirimleri dosya sırasıyla birleşir (sonraki kazanır; @media koşulsuz sayılır).
+    Aynı öğeyi daha dar yazan seçici, sonu onunla biten temel seçiciden miras alır
+    (`.report--alarm .prose h2#ozet + ol` ← `.prose h2#ozet + ol`; `.chip:hover` ← `.chip`), ki
+    zemin bir kuralda, kenar başka kuralda gelince de yakalansın. `border:` kısayolu (dört kenarlı
+    kutu, ör. çipler) sol kenar vurgusu sayılmaz."""
+    css = _app_css(css_text)
+    secici = {}
+    for m in re.finditer(r"([^{}]+)\{([^{}]*)\}", css):
+        bild = re.findall(r"([\w-]+)\s*:\s*([^;]+)", m.group(2))
+        for sel in m.group(1).split(","):
+            sel = re.sub(r"\s+", " ", sel).strip()
+            if not sel or sel.startswith("@") or sel.startswith(":root") or re.fullmatch(r"[\d.%]+|from|to", sel):
+                continue
+            d = secici.setdefault(sel, {})
+            for ad, deger in bild:
+                d[ad.lower()] = deger.strip()
+
+    def taban(sel):
+        adaylar = []
+        yalin = re.sub(r"(:(?:hover|active|focus|focus-visible|focus-within|visited))+$", "", sel)
+        if yalin != sel:
+            adaylar.append(yalin)
+        for b in secici:
+            if b != sel and (sel.endswith(" " + b) or sel.endswith("+ " + b) or sel.endswith("> " + b)):
+                adaylar.append(b)
+        return adaylar
+
+    def etkin(sel, gorulen=()):
+        d = {}
+        for b in taban(sel):
+            if b not in gorulen:
+                d.update(etkin(b, gorulen + (sel,)))
+        d.update(secici[sel])
+        return d
+
+    def sol_kenar(d):
+        for ad in ("border-left", "border-inline-start", "border-left-width", "border-inline-start-width"):
+            v = d.get(ad)
+            if v is not None:
+                if re.search(r"\b(none|hidden)\b", v) or re.fullmatch(r"0(px)?", v.strip()):
+                    return None
+                if ad.endswith("-width") and re.fullmatch(r"0(px)?", v.strip()):
+                    return None
+                return f"{ad}: {v}"
+        return None
+
+    out = []
+    zemin_re = re.compile(r"var\(\s*(" + "|".join(re.escape(z) for z in ZEMIN_BELIRTECLERI) + r")\s*\)")
+    for sel in secici:
+        d = etkin(sel)
+        zemin = next((f"{a}: {d[a]}" for a in ("background", "background-color")
+                      if a in d and zemin_re.search(d[a])), None)
+        kenar = sol_kenar(d)
+        if zemin and kenar:
+            out.append((sel, zemin, kenar))
+    return out
+
+
+def r29_kurallari(css_text=None):
+    """L1-DOLGU + ÇİZGİ-KONTRAST: log satırı, (A)'da birer satır, ihlalde Rev 30 kanalı."""
+    import os
+    from scripts import uyari
+    ihlal = l1_dolgu_ihlalleri(css_text)
+    oranlar = cizgi_kontrast(css_text)
+    dusuk = [o for o in oranlar if o[3] < CIZGI_ESIK]
+    fmt = lambda x: f"{x:.2f}".replace(".", ",")
+    oran_metni = " · ".join(f"{t} {fmt(o)}:1 ({r} / {z})" for t, r, z, o in oranlar)
+    print(f"  · L1-DOLGU: {len(ihlal)} ihlal · zemin belirteci (--paper, --paper-2) + border-left")
+    for sel, zemin, kenar in ihlal[:10]:
+        print(f"      {sel} · {zemin} · {kenar}")
+    print(f"  · ÇİZGİ-KONTRAST: --rule-2 / --paper · {oran_metni} · eşik {fmt(CIZGI_ESIK)}")
+    summary = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary:
+        md = ["### L1-DOLGU · ÇİZGİ-KONTRAST — görsel sistem (Rev 29)", "",
+              f"- **{'🟢' if not ihlal else '🔴'} L1-DOLGU: {len(ihlal)} ihlal** · zemin belirteci + `border-left`"
+              + (" · " + ", ".join(f"`{s}`" for s, _z, _k in ihlal[:5]) if ihlal else ""),
+              f"- **{'🟢' if not dusuk else '🔴'} ÇİZGİ-KONTRAST:** `--rule-2` / `--paper` · "
+              + " · ".join(f"{t} **{fmt(o)}:1**" for t, _r, _z, o in oranlar) + f" (eşik {fmt(CIZGI_ESIK)})", ""]
+        try:
+            with open(summary, "a", encoding="utf-8") as fh:
+                fh.write("\n".join(md) + "\n")
+        except OSError as exc:
+            print(f"  ! R29: özet yazılamadı: {exc}")
+    if ihlal:
+        uyari.ekle("L1-DOLGU", f"L1-DOLGU: {len(ihlal)} öğe zemin belirteciyle birlikte border-left taşıyor — "
+                               + ", ".join(s for s, _z, _k in ihlal[:3]))
+    if dusuk:
+        uyari.ekle("ÇİZGİ-KONTRAST", "ÇİZGİ-KONTRAST: --rule-2 zemine karşı 3:1'in altında — "
+                                     + " · ".join(f"{t} {fmt(o)}:1" for t, _r, _z, o in dusuk))
+    return ihlal, oranlar
 
 
 if __name__ == "__main__":

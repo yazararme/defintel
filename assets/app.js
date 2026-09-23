@@ -273,20 +273,6 @@ function loadPlayers() {
     }
   }
 
-  function visitCount() {
-    // Bildirim daveti ikinci ziyarette çıkar: ilk gelen okuyucu ürünün ne
-    // olduğunu henüz bilmiyor, ikinci gelen geri dönmeyi seçmiş demektir.
-    try {
-      var n = Number(localStorage.getItem("defintel:visits") || 0) + 1;
-      localStorage.setItem("defintel:visits", String(n));
-      return n;
-    } catch (e) {
-      return 1;
-    }
-  }
-
-  var VISITS = visitCount();
-
   function installed() {
     return (
       (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) ||
@@ -407,8 +393,13 @@ function loadPlayers() {
       });
   }
 
-  /* ---------- bildirim: kurulu uygulamadaki ilk davet ---------- */
+  /* ---------- bildirim: brifingin sonundaki davet ---------- */
 
+  // R29 (F-03/F-14): kart ilk ziyarette de çıkar ve ekranın altına sabitlenmez;
+  // sayfa akışında, sayfa sonu gezinmesinin (.endnav) hemen üstünde durur. Eskiden
+  // ikinci ziyareti bekleyip alta yapışıyordu: ilk okuyucu teklifi hiç görmüyor,
+  // gören de kartın altında kalan footer zilini göremiyordu. Okumayı bitiren
+  // okuyucu kartla orada karşılaşır; zil footer'da görünür kalır.
   var card = document.getElementById("notifycard");
 
   function cardSays(text, primary) {
@@ -425,13 +416,15 @@ function loadPlayers() {
   // iOS'ta Notification API yalnızca ana ekrana eklenmiş uygulamada var, o
   // yüzden orada kurulum şart kalıyor. Android ve masaüstünde tarayıcı
   // sekmesi yeterli: kurulum basamağını beklemek hunideki en büyük kayıptı.
-  var cardEligible = pushReady && (installed() || !isIOS()) && VISITS >= 2;
+  var cardEligible = pushReady && (installed() || !isIOS());
 
   if (card && cardEligible && Notification.permission === "default" && !snoozed("defintel:notify")) {
     navigator.serviceWorker.ready.then(function (reg) {
       return reg.pushManager.getSubscription();
     }).then(function (sub) {
       if (sub) return;
+      var endnav = document.querySelector(".endnav");
+      if (endnav) endnav.parentNode.insertBefore(card, endnav);
       card.hidden = false;
       card.addEventListener("click", function (e) {
         var action = e.target.closest("[data-action]");
@@ -451,10 +444,10 @@ function loadPlayers() {
           .catch(function () { return "failed"; })
           .then(function (state) {
             enable.disabled = false;
-            // Sonuç, eylemin olduğu yerde bildirilir. Kart ekranın altında
-            // sabit duruyor; dokunma anında okuyucunun gözü orada, zil ise
-            // büyük olasılıkla görüş alanı dışında — görünmeyen bir kontrole
-            // boya basmak hiç basmamakla aynı şey.
+            // Sonuç, eylemin olduğu yerde bildirilir: dokunma anında
+            // okuyucunun gözü kartta, zil ise büyük olasılıkla görüş alanı
+            // dışında — görünmeyen bir kontrole boya basmak hiç basmamakla
+            // aynı şey.
             if (state === "on") {
               card.hidden = true;     // durum artık zilde görünür
             } else {
