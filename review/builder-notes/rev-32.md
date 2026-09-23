@@ -107,3 +107,50 @@ The tree is left in the normal build.
 - R32-P1-1 acceptance (the next 5 reports) is PENDING-HUMAN.
 - `review/plan-rev21-29.md` (modified) and `review/briefs/rev-25.md` (untracked) changed on disk
   at 19:42 while I was working. I did not make those changes and left them alone.
+
+---
+
+## Attempt 2 — fixing the İLK-EKRAN regression (verdict `rev-32-deneme1.md`)
+
+**Cause (from the verdict's CI screenshot).** Ubuntu Chromium breaks the summary lines wider
+than macOS Chrome. On 23 Sep, item 1's last line ("tekerlekli obüsü seçti (22 Eylül).") is full
+there, so the token drops to a line of its own. Item 4 then ends at 817 instead of 791. Rev 24
+left only 21px under item 4, less than one summary line (26.25px), so any extra line fails.
+
+**Fix: real headroom, chrome only (`assets/app.css`, `max-width: 700px` block).** The space
+between the chip strip and the summary box is 18px tighter:
+- `.report-grid` margin-top 12→8
+- chip strip margin-top 10→8, bottom padding 10→8
+- first h2 (`.report-grid .prose > h2:first-child`) margin-top 16→10
+- `h2#ozet` margin-bottom 14→10
+
+The text block is unchanged: the summary box, its padding, the type size, line height and item
+spacing. The token is unchanged too, so the reviewer's PASS on R32-P0-1 still holds. At 1440
+and at 701–920 nothing changes. The İLK-EKRAN thresholds are unchanged.
+
+**Measured, 375×812, 23 Sep (local Chrome):**
+
+| | h2 top | item 4 bottom |
+|---|---|---|
+| before | 294 | 791 |
+| after | 280 | 773 |
+| after, token forced onto its own line | 280 | 799 |
+
+**CI worst case.** Adding 0.15px letter-spacing to the title and summary reproduces CI's break on
+23 Sep: at the attempt-1 CSS it gives 817, which is exactly the CI figure. With the new CSS, every
+variant (0–0.45px spacing, with or without a forced token break) gives ≤ 799. So the CI estimate
+is 280 / 799, which leaves 13px spare with the token on its own line.
+
+**Limit.** A second extra line would still fail. Without any token, 17 Sep goes 773→826 at
+0.15px. That is the text's own wrap sensitivity, which Rev 24 already had.
+
+**Tests.** All of these pass:
+- `build.py`
+- `check_reports.py` (all ok)
+- `--dort-durum` 🟢 4/4
+- `--oyuncular` 🟢
+- `--ilk-ekran` 🟢 280/773
+- `test_uyari` 33/33, `test_collect` 21/21
+- `smoke.py`: SMOKE OK. It has a new check, "İLK-EKRAN en kötü hâl": on the latest report, with
+  the token forced onto its own line, bare and with 0.15px spacing, h2 must be ≤300 and item 4
+  ≤812.

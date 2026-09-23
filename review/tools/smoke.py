@@ -35,6 +35,11 @@ match; one proper noun, dictionary words only, or another development → no mat
 touch pass on /reports/2026-09-23.html and /: the token ends summary item 1, is mono and --muted,
 one piece, its tap area is ≥44px high, the page does not scroll sideways, and tapping it lands on
 /reports/2026-09-19.html#g1 with the Latvia heading in view.
+Rev 32 (attempt 2): İLK-EKRAN worst case — CI (Ubuntu Chromium) breaks lines wider than macOS
+Chrome, so on 23 Sep the token fell onto a line of its own there (item 4 at 817px). At 375×812 the
+latest report is measured with every summary "ilk:" token forced onto its own line (a <br> before
+it), bare and with 0.15px letter-spacing on the title and summary (which reproduces CI's wrap on
+23 Sep); h2#ozet top must stay ≤300 and item 4's bottom ≤812 in every variant.
 Later revisions extend CHECKS / PAGES. Exit 1 on any failure.
 """
 import os
@@ -208,6 +213,38 @@ print(f"375px: özet 1 sonunda “{r['text']}” (son öğe {r['son']}, mono {r[
 sys.exit(0 if ok else 1)
 """
 
+
+# Rev 32 (deneme 2): İLK-EKRAN en kötü hâli — jeton kendi satırına düşse de (CI'da olduğu gibi)
+# 4. madde 812'de kalır. argv: url. Çıktı: JSON [[etiket, h2 üst, 4. madde alt, jeton], …].
+ILK_EKRAN_KOTU_JS = r"""
+import sys, json
+from playwright.sync_api import sync_playwright
+url = sys.argv[1]
+OLC = '''([ls, br]) => {
+  if (ls) { const st = document.createElement("style");
+    st.textContent = `.prose h2#ozet + ol, .report-title { letter-spacing: ${ls}px !important; }`;
+    document.head.appendChild(st); }
+  if (br) for (const a of document.querySelectorAll("h2#ozet + ol a.ilk")) a.before(document.createElement("br"));
+  const h2 = document.querySelector(".prose h2#ozet");
+  const lis = h2 ? Array.from(h2.nextElementSibling.children) : [];
+  const li = lis[Math.min(4, lis.length) - 1];
+  return [h2 ? h2.getBoundingClientRect().top : 9999, li ? li.getBoundingClientRect().bottom : 9999,
+          document.querySelectorAll("h2#ozet + ol a.ilk").length];
+}'''
+out = []
+with sync_playwright() as p:
+    try: b = p.chromium.launch()
+    except Exception: b = p.chromium.launch(channel="chrome")
+    for etiket, ls, br in (("normal", 0, 0), ("jeton kendi satırında", 0, 1),
+                           ("jeton kendi satırında + 0,15px harf aralığı", 0.15, 1)):
+        ctx = b.new_context(viewport={"width": 375, "height": 812}, service_workers="block", locale="tr-TR")
+        pg = ctx.new_page(); pg.goto(url, wait_until="load")
+        pg.evaluate("document.fonts ? document.fonts.ready.then(() => 1) : 1"); pg.wait_for_timeout(200)
+        h2, m, n = pg.evaluate(OLC, [ls, br])
+        out.append([etiket, round(h2), round(m), n]); ctx.close()
+    b.close()
+print(json.dumps(out, ensure_ascii=False))
+"""
 
 # Rev 31 R31-P0-2 (S): 375px, ?oyuncu=roketsan — AA satırı "BRİFİNGDEN SONRA", renksiz (--muted),
 # BRİFİNGDE ile aynı satırda asla; atıflı bir satırın BRİFİNGDE jetonu hâlâ renkli.
@@ -554,6 +591,18 @@ def r32_checks(build_stdout, py, fails):
         print(f"{'ok  ' if r.returncode == 0 else 'FAIL'} TEKRAR-MANŞET 375px {sayfa} · {r.stdout.strip() or r.stderr[-300:]}")
         if r.returncode:
             fails.append(f"TEKRAR-MANŞET 375px {sayfa}")
+    import json
+    r = subprocess.run([py, "-c", ILK_EKRAN_KOTU_JS, f"{BASE}/reports/{iso}.html"], cwd=ROOT,
+                       capture_output=True, text=True)
+    try:
+        olc = json.loads(r.stdout)
+    except ValueError:
+        olc = []
+    ok = bool(olc) and all(h2 <= 300 and m <= 812 for _, h2, m, _n in olc) and olc[0][3] >= 1
+    print(f"{'ok  ' if ok else 'FAIL'} İLK-EKRAN en kötü hâl (375×812, {olc[0][3] if olc else 0} jeton) · "
+          + (" · ".join(f"{e}: h2 {h2}px, 4. madde {m}px" for e, h2, m, _n in olc) if olc else r.stderr[-300:]))
+    if not ok:
+        fails.append("İLK-EKRAN en kötü hâl")
 
 
 def r23_checks(build_stdout, fails):

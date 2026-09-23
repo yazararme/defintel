@@ -777,17 +777,25 @@ body:has(.endnav) .foot { margin-top: 0; }
      700 altında zaten akışta). İki satırken ilk ekranın 101px'ini alıyordu.
      Şerit ekran kenarına kadar uzanır: kenarda kesilen çip, sağda devamı
      olduğunu söyler — kaydırmalı şeridin gizlediği şey tam da buydu. Üst
-     boşluklar (ızgara 26→12, şerit 18→10) krom; metin bloğu aynı. */
-  .report-grid { margin-top: 12px; }
+     boşluklar (ızgara 26→12, şerit 18→10) krom; metin bloğu aynı.
+     Rev 32 — ilk ekranın payı: 4. maddenin alt kenarı 812'ye 21px kalıyordu, bir
+     satırdan (26px) az. Ubuntu Chromium satırları daha geniş kırıyor; "ilk:" jetonu
+     orada 1. maddeye bir satır ekleyip 4. maddeyi 817'ye itti. Şerit ile özet kutusu
+     arasındaki krom 18px daha kısıldı (ızgara 12→8, şerit 10→8 / 10→8, özet başlığı
+     üstü 16→10, altı 14→10): jetonun kendi satırına düştüğü en kötü hâlde de 4. madde
+     ekranda kalır. Metin bloğu (özet kutusu, yazı, satır aralığı) aynı. */
+  .report-grid { margin-top: 8px; }
   .report-grid .devnav {
     flex-wrap: nowrap;
     overflow-x: auto;
     scrollbar-width: none;
-    margin: 10px -18px 0;
-    padding: 2px 18px 10px;
+    margin: 8px -18px 0;
+    padding: 2px 18px 8px;
     scroll-padding-inline: 18px;
   }
   .report-grid .devnav::-webkit-scrollbar { display: none; }
+  .report-grid .prose > h2:first-child { margin-top: 10px; }
+  .report-grid .prose > h2#ozet { margin-bottom: 10px; }
   .prose h2#ozet + ol { font-size: 17.5px; }
 
   /* Üç sütunlu tablo telefona sığmıyor: her satırı etiketli bloğa çevir. */

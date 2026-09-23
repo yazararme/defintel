@@ -29,6 +29,7 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 | 22 | PASS (deneme 2; d1 FAIL P1-2 "1 / 536") | 2 | 29a9667, d9565c1 | yok |
 | 21 | PASS (deneme 2; d1 FAIL P0-2 kanıt eksikti) | 2 | 00d908c, 5c1134b | yok |
 | 23 | PASS | 1 | 4ca4ef5 | P0-2: prompt yapıştırma + sonraki 3 rapor (human-checks.md) |
+| 32 | d1 FAIL (gerileme: CI İLK-EKRAN 817px); d2 sürüyor | 1→2 | 8116831 (d1) | P1-1: sonraki 5 rapor |
 | 24 | PASS | 1 | 41b6998 | yok |
 | 33 | PASS | 1 | 325d9fe | yok |
 | 31 | PASS | 1 | 6c2c3c1 | P0-3 canlı: main'e alındıktan sonra gerçek aday.md (human-checks.md) |
@@ -66,6 +67,9 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 - Rev 33 kanıtı: normal run 35886871966 (0 örnek), noktali_boz run 35887041545 (3212 örnek) → issue #5. Kurucu kararı: "SCMP (Çin)" yalnız "SCMP" sarıldı; ülkesi boş kaynaklar Türkçe harf yoksa yabancı sayılıyor.
 
 - Rev 24 kanıtı: normal run 35889572520 (294/791), ilk_ekran_boz run 35889721553 (401/898) → issue #5. İnceleyici: 375'te çip şeridinin kaydığını gösteren ipucu yok; alarm günlerinde özet ilk ekranın altında (Açık 6).
+
+- Rev 32 kanıtı: normal run 35891692823, uyari_test run 35891836966 → issue #5 TEKRAR-MANŞET satırı. Dikkat: aynı normal run'da CI İLK-EKRAN kırmızı (4. madde 817px > 812; yerelde 791) — "ilk:" jetonu CI'daki satır kırılımıyla özeti uzatmış olabilir.
+- **Devam noktası:** sıradaki Rev 25 (brief hazır: review/briefs/rev-25.md), sonra 27, 29, 28, 26.
 
 ## Açık (orkestratörün eklediği)
 
