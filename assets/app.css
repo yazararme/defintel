@@ -1401,41 +1401,54 @@ h3:hover .copylink, li:hover .copylink, .copylink:focus-visible { opacity: 1; }
 
 /* ---------- oyuncu süzgeci hapı ---------- */
 
-.pill-wrap { display: flex; margin: 10px 0 2px; }
+/* Kutu küçük, dokunma hedefi büyük. Bir süre × öğesinin kendisi 44px'ti ve
+   hapı 46px'e şişiriyordu: ekranda bir düğme kadar yer kaplayan, tek
+   kelimelik bir durum göstergesi. Hedef artık görünmeyen bir örtüyle
+   büyütülüyor — yerleşimi etkilemiyor, parmak yine 44px buluyor. */
+.pill-wrap { display: flex; margin: 12px 0 18px; }
 .pill {
   display: inline-flex;
   align-items: center;
-  gap: 2px;
-  padding-left: 12px;
+  gap: 8px;
+  padding: 4px 8px 4px 11px;
   font-family: var(--mono);
   font-size: 11.5px;
   letter-spacing: 0.04em;
   color: var(--brand);
   background: transparent;
   border: 1px solid color-mix(in srgb, var(--brand) 30%, transparent);
-  border-radius: 6px;
+  border-radius: 5px;
 }
 /* Eski tarayıcıda color-mix yoksa kenar yine de görünür. */
 @supports not (color: color-mix(in srgb, red 50%, blue)) {
   .pill { border-color: var(--rule); }
 }
-.pill-label { padding: 6px 0; }
-/* Parmakla basılabilir hedef: 44px. Etiketin yanında küçük bir × değil,
-   kendi alanı olan bir düğme — kapatmak süzgeci kurmak kadar kolay olmalı. */
+.pill-label { line-height: 18px; }
 .pill-x {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 44px;
-  min-height: 44px;
+  width: 16px;
+  height: 16px;
   padding: 0;
   font-family: var(--mono);
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1;
   color: var(--muted);
   background: transparent;
   border: 0;
   cursor: pointer;
 }
+/* Görünmez 44px'lik dokunma örtüsü: kutuyu büyütmeden hedefi büyütür. */
+.pill-x::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+}
 .pill-x:hover { color: var(--brand); }
-.pill-x:focus-visible { outline: 1px solid var(--brand); outline-offset: -4px; }
+.pill-x:focus-visible { outline: 1px solid var(--brand); outline-offset: 3px; }

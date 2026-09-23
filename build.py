@@ -444,6 +444,13 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
     # sırada ve bağlantının nereye gittiğinde — ama başlık artık kimseyi
     # bir şey ilan etmiyor; "oyuncu" bir sınıflandırma değil, bir gözlem.
     if rivals or turkish:
+        # Bağlantı rolü değil delili izler. Bir süre rol izliyordu: Türk
+        # şirketi o günün bir gelişmesinde geçse bile medya takibine
+        # gidiyordu — 23 Eylül'de Aselsan #g7'deydi ve bağlantı onu atlıyordu.
+        # Yan yana duran iki ad, görünür bir sebep olmadan farklı davranıyordu.
+        # Kural tek: adı bugünün bir gelişmesinde geçiyorsa oraya, yalnız
+        # başlık taramasında geçiyorsa taramaya.
+        dev_anchor = {name: anchor for name, anchor, _role in rivals if anchor}
         units = []
         for name, anchor, role in rivals:
             if anchor and role == "rakip":
@@ -451,10 +458,14 @@ def build_report(meta, body_html, iso, prev_day=None, next_day=None,
         for name, nid, hit in turkish:
             if not hit:
                 continue
-            units.append(
-                f'<a href="{day_url("news", iso)}?oyuncu={nid}">'
-                f'{html.escape(name)}</a>' if has_news else html.escape(name)
-            )
+            anchor = dev_anchor.get(name)
+            if anchor:
+                units.append(f'<a href="{anchor}">{html.escape(name)}</a>')
+            else:
+                units.append(
+                    f'<a href="{day_url("news", iso)}?oyuncu={nid}">'
+                    f'{html.escape(name)}</a>' if has_news else html.escape(name)
+                )
         arrow = '<a class="rival-count" href="/oyuncular.html">→</a>'
         if units:
             # Ok son adla aynı kırılmaz birimde: tek başına satır başına
