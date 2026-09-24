@@ -806,14 +806,9 @@
   "ad": "STM",
   "rol": "emsal",
   "segmentler": [],
-  "gunler": [
-   {
-    "g": "2026-09-24",
-    "u": "/haberler/2026-09-24.html?q=STM"
-   }
-  ],
-  "son": "2026-09-24",
-  "sayi_30g": 1
+  "gunler": [],
+  "son": "",
+  "sayi_30g": 0
  },
  "asfat": {
   "ad": "ASFAT",
