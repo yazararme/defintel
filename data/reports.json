@@ -1,5 +1,106 @@
 [
   {
+    "date": "2026-09-24",
+    "title": "Falcon Peak 26.2 tamamlandı: 20'den fazla tedarikçi tek bir komuta-kontrol omurgasına bağlandı",
+    "summary": "Yeni ihale açılmadı; günün ağırlığı C-UAS'ta entegrasyon standardı ve araç üstü topçu. ABD Kuzey Komutanlığı'nın Falcon Peak 26.2 tatbikatı Yuma'da tamamlandı; 20'den fazla tedarikçi Anduril'in Lattice platformuna bağlanarak denendi. Tayvan, 178 adetlik 105 mm 8x8 mobil top sistemini ilk kez gerçek atışlı sergiledi; üretim 2027'de başlıyor. Pentagon Aralık 2026'da lazer C-UAS atış elemesi planlıyor; Lockheed Martin mühimmat ve füze tedarik zincirine 8-9 milyar $ ayırdı; Almanya PAC-3 önleyicilerini yurt içinde üretmek istiyor.",
+    "lead": "Falcon Peak 26.2'de 20'den fazla tedarikçi, 15–30 önleme fırsatıyla tek bir komuta-kontrol omurgası üzerinden denendi.",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Topçu",
+      "URAN",
+      "Mühimmat",
+      "Hafif Silah",
+      "ABD",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Falcon Peak 26.2",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Tayvan 105 mm 8x8 mobil top",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "Pentagon lazer C-UAS elemesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "Lockheed Martin tedarik zinciri yatırımı",
+        "home": "rakip"
+      },
+      {
+        "id": "G5",
+        "label": "Almanya'nın PAC-3 üretim niyeti",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "SPYS önleyicisinin Geran-5 angajmanı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Ordu dron mıknatısını yurt içine bağlıyor",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "MAR556 Endonezya teslimatı",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "USAF orta kalibreli namlulu hava savunma pazar araştırması",
+        "home": "izleme"
+      },
+      {
+        "id": "G10",
+        "label": "Malezya MERAD (RMK-13)",
+        "home": "izleme"
+      },
+      {
+        "id": "G11",
+        "label": "665 milyon $'lık C-UAS test siparişine itiraz",
+        "home": "izleme"
+      },
+      {
+        "id": "G12",
+        "label": "ABD Deniz Piyadeleri Drone Round",
+        "home": "izleme"
+      },
+      {
+        "id": "G13",
+        "label": "ABD Donanması uygun maliyetli önleyici",
+        "home": "izleme"
+      },
+      {
+        "id": "G14",
+        "label": "Ukrayna'da güdümsüz 155 mm tercihi",
+        "home": "izleme"
+      },
+      {
+        "id": "G15",
+        "label": "Nadir toprak elementlerinde ticaret gerilimi",
+        "home": "izleme"
+      },
+      {
+        "id": "G16",
+        "label": "Ermenistan'ın Divyastra MK-1 seçimi",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-09-24.html"
+  },
+  {
     "date": "2026-09-23",
     "title": "Letonya araç üstü 155 mm obüste Archer'ı bırakıp Çek Morana'yı seçti",
     "summary": "Yeni ihale açılmadı; günün ağırlığı araç üstü topçu ve C-UAS tedarik zinciri. Letonya, Haziran 2025'te 18 adet için niyet mektubu imzaladığı İsveç Archer'ı bırakıp Çek Morana'yı seçti; karar gerekçesinde yerli sanayi katılımı öne çıktı. Polonya'nın 18 bataryalık SAN CUAS programında C-UAS istasyonlarına GPS'siz konumlama siparişi verildi. Leonardo 76/62 mm deniz topunun Danimarka'da üretimi için mutabakat imzaladı; Fransa ile Irak kinetik C-UAS önleyicisi için niyet mektubu imzaladı; Pentagon 17 firmayı bombardıman dronu elemesine aldı.",
