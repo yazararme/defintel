@@ -672,6 +672,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-09-25",
+    "u": "/haberler/2026-09-25.html?q=Aselsan"
+   },
+   {
     "g": "2026-09-23",
     "u": "/reports/2026-09-23.html#g7"
    },
@@ -700,8 +704,8 @@
     "u": "/reports/2026-09-14.html#g10"
    }
   ],
-  "son": "2026-09-23",
-  "sayi_30g": 7
+  "son": "2026-09-25",
+  "sayi_30g": 8
  },
  "roketsan": {
   "ad": "Roketsan",
@@ -711,12 +715,16 @@
   ],
   "gunler": [
    {
+    "g": "2026-09-25",
+    "u": "/haberler/2026-09-25.html?q=Roketsan"
+   },
+   {
     "g": "2026-09-23",
     "u": "/haberler/2026-09-23.html?q=Roketsan"
    }
   ],
-  "son": "2026-09-23",
-  "sayi_30g": 1
+  "son": "2026-09-25",
+  "sayi_30g": 2
  },
  "repkon": {
   "ad": "Repkon",
@@ -822,9 +830,14 @@
   "ad": "STM",
   "rol": "emsal",
   "segmentler": [],
-  "gunler": [],
-  "son": "",
-  "sayi_30g": 0
+  "gunler": [
+   {
+    "g": "2026-09-25",
+    "u": "/haberler/2026-09-25.html?q=STM"
+   }
+  ],
+  "son": "2026-09-25",
+  "sayi_30g": 1
  },
  "asfat": {
   "ad": "ASFAT",
