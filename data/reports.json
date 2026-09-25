@@ -1,5 +1,116 @@
 [
   {
+    "date": "2026-09-25",
+    "title": "Birleşik Krallık 105 mm Light Gun namlu üretimini yurda geri getiriyor",
+    "summary": "Yeni ihale açılmadı; günün ağırlığı çekili topçu sanayii ve C-UAS efektör tercihleri. Birleşik Krallık, 105 mm Light Gun desteği ve Sheffield'de 105/155 mm namlu üretiminin yeniden kurulması için BAE Systems ile dört yıllık anlaşma imzaladı. KNDS Fransa, TARGAS DSP10 karşı-dron sisteminin hard-kill katmanını Aerix Systems'in AXS-µ1 önleyici dronuna bağladı. Etiyopya'ya Çin menşeli 30 mm çift namlulu FK-2000 hava savunma sisteminin geldiği görüntülerle iddia edildi (doğrulanmamış); Hollanda EOS ile lazer silahında niyet mektubu imzaladı; Hindistan İçişleri Bakanlığı 1,55 milyar INR'lik mobil C-UAS siparişi verdi.",
+    "lead": "Birleşik Krallık, 105 mm Light Gun desteği ve Sheffield'de 105/155 mm namlu üretiminin yeniden kurulması için dört yıll…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Topçu",
+      "BORAN",
+      "Mühimmat",
+      "Dolanan Mühimmat",
+      "Afrika",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Birleşik Krallık 105 mm Light Gun desteği",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "KNDS–Aerix AXS-µ1 önleyicisi",
+        "home": "rakip"
+      },
+      {
+        "id": "G3",
+        "label": "Etiyopya'ya FK-2000",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "Hollanda–EOS lazer niyet mektubu",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "Hindistan mobil C-UAS siparişi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "Akdeniz'den gemi kaynaklı dron uyarısı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Ondas'ın üç savunma şirketi alımı",
+        "home": "rakip"
+      },
+      {
+        "id": "G8",
+        "label": "Tirupati Forge topçu mermisi lisansı",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "Anduril'in Tayvan sanayi tabanı",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "SİVRİSİNEK'in Azerbaycan'da görülmesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "USAF orta kalibreli namlulu hava savunma pazar araştırması",
+        "home": "izleme"
+      },
+      {
+        "id": "G12",
+        "label": "Malezya MERAD (RMK-13)",
+        "home": "izleme"
+      },
+      {
+        "id": "G13",
+        "label": "665 milyon $'lık C-UAS test siparişine itiraz",
+        "home": "izleme"
+      },
+      {
+        "id": "G14",
+        "label": "ABD Deniz Piyadeleri Drone Round",
+        "home": "izleme"
+      },
+      {
+        "id": "G15",
+        "label": "ABD Donanması uygun maliyetli önleyici",
+        "home": "izleme"
+      },
+      {
+        "id": "G16",
+        "label": "Ukrayna'da güdümsüz 155 mm tercihi",
+        "home": "izleme"
+      },
+      {
+        "id": "G17",
+        "label": "Nadir toprak elementlerinde ticaret gerilimi",
+        "home": "izleme"
+      },
+      {
+        "id": "G18",
+        "label": "Ermenistan'ın Divyastra MK-1 seçimi",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-09-25.html"
+  },
+  {
     "date": "2026-09-24",
     "title": "Falcon Peak 26.2 tamamlandı: 20'den fazla tedarikçi tek bir komuta-kontrol omurgasına bağlandı",
     "summary": "Yeni ihale açılmadı; günün ağırlığı C-UAS'ta entegrasyon standardı ve araç üstü topçu. ABD Kuzey Komutanlığı'nın Falcon Peak 26.2 tatbikatı Yuma'da tamamlandı; 20'den fazla tedarikçi Anduril'in Lattice platformuna bağlanarak denendi. Tayvan, 178 adetlik 105 mm 8x8 mobil top sistemini ilk kez gerçek atışlı sergiledi; üretim 2027'de başlıyor. Pentagon Aralık 2026'da lazer C-UAS atış elemesi planlıyor; Lockheed Martin mühimmat ve füze tedarik zincirine 8-9 milyar $ ayırdı; Almanya PAC-3 önleyicilerini yurt içinde üretmek istiyor.",
