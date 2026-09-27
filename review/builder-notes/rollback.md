@@ -6,14 +6,21 @@ bağlı değil. Emin değilsen üçünü de bu sırayla geri al.
 
 ## 1 · Site ve kod (merge'ü geri al)
 
-Terminalde, tek blok olarak yapıştır:
+Terminalde, tek satır olarak yapıştır:
 
 ```
-cd ~/Documents/Projects/defintel-repo && git switch main && git pull && M=$(git log --merges -1 --format=%H --grep='rev21-33') && echo "geri alınacak: $M" && git revert --no-edit -m 1 "$M" && git push
+cd ~/Documents/Projects/defintel-repo && cp review/tools/rollback.sh /tmp/rollback.sh && bash /tmp/rollback.sh
 ```
 
-**Görmen gereken:** `geri alınacak: <uzun bir kod>`, ardından `Revert "Merge branch 'rev21-33'"` ve
-push özeti (`main -> main`). `geri alınacak:` satırı boşsa dur, bana yaz (merge bulunamadı).
+**Görmen gereken:** `geri alınacak: <kod> Merge rev21-33 into main …` ve en sonda
+`TAMAM: merge geri alındı → <kod>`. Satır `DUR:` ile başlarsa hiçbir şey değişmemiştir; satırı bana
+yapıştır. `push reddedildi` görürsen (o sırada bir sabah çalıştırması main'e yazmıştır) birkaç dakika
+sonra aynı satırı yeniden yapıştır.
+
+Betik ne yapar: main'deki merge commit'ini bulur ve tersine çevirir; merge'den sonra sabah
+çalıştırmalarının yeniden yazdığı üretilmiş sayfalarda çakışma olursa merge öncesi hâli alır ve
+sayfaları eski `build.py` ile yeniden üretir; başka bir dosyada çakışma olursa dokunmadan durur.
+27 Eylül'de, merge + sonraki bir gün benzetimiyle push'suz denendi.
 
 - **Site ne zaman eski hâline döner:** push'tan yaklaşık **1–3 dakika** sonra (GitHub Pages yayını;
   son haftada 30–60 sn sürdü). Telefonda uygulama eski sayfayı önbellekten gösterebilir: sayfayı iki kez

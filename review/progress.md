@@ -125,7 +125,12 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 
 | K | Karar | Deneme | Commit |
 |---|---|---|---|
-| K4 | PASS (A: 92 kalem etiketsiz, `ilk_goruldu` 05:19:10; 536 → 628). Orkestratör K4-4'ü **inceleme öncesi** düzeltti: /oyuncular.html ve brifing sayıları günün başlıklarından türediği için değişir (Bugün 14→17; Saab, Sarsılmaz, STM 23 Eyl bağlantısı). Divyastra kalemi brifingde atıflı → BRİFİNGDE. Bir görünür yinelenen: Euro-SD "FQ-42 Vengeance…" mevcut Armada kalemiyle aynı başlık — A gereği tutuldu (düşerse 627) | 1 | (bu commit) |
+| K4 | PASS (A: 92 kalem etiketsiz, `ilk_goruldu` 05:19:10; 536 → 628). Orkestratör K4-4'ü **inceleme öncesi** düzeltti: /oyuncular.html ve brifing sayıları günün başlıklarından türediği için değişir (Bugün 14→17; Saab, Sarsılmaz, STM 23 Eyl bağlantısı). Divyastra kalemi brifingde atıflı → BRİFİNGDE. Bir görünür yinelenen: Euro-SD "FQ-42 Vengeance…" mevcut Armada kalemiyle aynı başlık — A gereği tutuldu (düşerse 627) | 1 | ad0da58 |
 
 - Drive yedeği: `kaynaklar-yedek-2026-09-27.json` (id `1-hX142ZN141ynOcD48CjGqxQcRVf-aYA`, 38.608 B, özgün son düzenleme 17 Eyl). Toplayıcı yalnız tam adı `kaynaklar.json` olanı okur.
 - Adım 3: `review/verdicts/self-check.md` (bağımsız alt ajan): K5-2 yeniden yazımı WEAKER; 110'da 10 maddenin 3'ü kilit bilgi kaybediyor; 120 ve 130 İLK-EKRAN'da 20 Eyl'de kalıyor (CI en kötü 835); 115: 1 kayıp, 10 günün hepsi geçiyor (20 Eyl 3px payla). Hiçbir şey değiştirilmedi — müşteri karar verir.
+| K7 | PASS (iş akışı başına `concurrency`, `cancel-in-progress: false`; ortak `publish` grubu kalktı). Kanıt: build #109/#110 (36349744589, 36349750603) — #110 "waiting for build #109", ikisi de success; tek issue #8 (+4 / +0 satır), sonra kapatıldı. Orkestratör K7-2'yi **inceleme öncesi** düzeltti ("satırlar eklenmiş" → aynı uyarılar yinelenmez, +0 olabilir) | 1 | 1c2a576 |
+
+- Adım 4 deneme merge'ü: `review/builder-notes/trial-merge.md`. 23 çakışma, hepsi üretilmiş dosya; kaynakta çakışma yok. Birleşik ağaçta build.py 0, kural testleri yeşil; smoke 79 ok / 10 FAIL (hepsi 23 Eyl'e sabitlenmiş test ya da beklenen: 27 Eyl İLK-EKRAN 835, eski kategoriler). Geçici dal silindi, push yok.
+- Düz `git merge` merge günü duracağı için `review/tools/merge_day.sh` ve `review/tools/rollback.sh` yazıldı; ikisi de push'suz denendi. `review/builder-notes/rollback.md`, `review/human-checks.md` yeniden yazıldı.
+- Oturum sonu: 8000 sunucusu durduruldu. Açık kararlar human-checks "Senin kararın gereken konular" 1–5.
