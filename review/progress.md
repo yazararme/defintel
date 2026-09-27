@@ -134,3 +134,19 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 - Adım 4 deneme merge'ü: `review/builder-notes/trial-merge.md`. 23 çakışma, hepsi üretilmiş dosya; kaynakta çakışma yok. Birleşik ağaçta build.py 0, kural testleri yeşil; smoke 79 ok / 10 FAIL (hepsi 23 Eyl'e sabitlenmiş test ya da beklenen: 27 Eyl İLK-EKRAN 835, eski kategoriler). Geçici dal silindi, push yok.
 - Düz `git merge` merge günü duracağı için `review/tools/merge_day.sh` ve `review/tools/rollback.sh` yazıldı; ikisi de push'suz denendi. `review/builder-notes/rollback.md`, `review/human-checks.md` yeniden yazıldı.
 - Oturum sonu: 8000 sunucusu durduruldu. Açık kararlar human-checks "Senin kararın gereken konular" 1–5.
+
+## 27 Eylül oturumu — müşteri kararları (1–5)
+
+1. Özet maddesi sınırı **115** (merge-day-prompt.md, k5-prompt.md güncellendi; check_reports benzetim sabiti smoke düzeltmesinde).
+2. **K5 açık kalır:** merge'den sonra ilk gerçek alarm gününde yayımlanan sayfada doğrulanır (human-checks "Merge'den sonra").
+3. collect-news + pull-drive tek ortak grup → **K8**.
+4. **24–27 Eylül toplandığı gibi kalır** (eski kategoriler, 17–22 gibi). Yeni kategoriler **merge gününden itibaren** toplanan günlere uygulanır. 23 Eylül Rev 25'te yeniden kategorilenmişti.
+5. Yinelenen başlık düşer → **K9** (627).
+- **Yeni kural (müşteri):** kabul ölçütü müşterinin onayı olmadan değiştirilmez; öneri yapılır, beklenir. K9-2 bu kuralla onaylanarak değişti.
+- Instructions paneli yedeği `review/builder-notes/instructions-backup.md`. Panelde "en fazla 14 kelime" kuralı **yok**; merge-day-prompt.md yapıştırma yeri buna göre düzeltildi (Kalite kontrolünün üstüne "Ek kurallar (Eylül 2026)").
+- Başlık testi: `review/verdicts/headline-check.md` — 65'te 10'un 1'i kilit bilgi kaybediyor, 75'te 0; İLK-EKRAN 75'te 20 Eyl CI en kötü 840px ile kalıyor, 65'te 10 gün geçiyor (20 Eyl 3px). Karar müşteride.
+
+| K | Karar | Deneme | Commit |
+|---|---|---|---|
+| K8 | PASS (collect-news + pull-drive `publish-${{ github.ref }}`; build, missing-report kendi grupları). Kanıt: collect-news dry_run #39/#40 (36351005079, 36351011322) — #40 "waiting for collect-news #39", 3 sn sonra başladı, ikisi success. pull-drive dalda dispatch edilmedi (main'e rebase edip dala push eder) | 1 | 7577505 |
+| K9 | PASS (Euro-SD "FQ-42 Vengeance…Creech" düştü; 627; K4 notu 91 geri + 1 yinelenen düştü). K9-2 müşteri onayıyla yeniden yazıldı | 1 | (bu commit) |

@@ -4,11 +4,11 @@
  "scanned_sources": 66,
  "failed_sources": 16,
  "collected_items": 541,
- "unique_items": 628,
+ "unique_items": 627,
  "categories": {
   "C-UAS ve Hava Savunma": 15,
   "Deniz ve İnsansız Sistemler": 42,
-  "Genel Savunma Gündemi": 539,
+  "Genel Savunma Gündemi": 538,
   "Hafif Silah ve Mayın": 2,
   "Politika ve Regülasyon": 6,
   "Rakip Duyuruları": 15,
@@ -4682,20 +4682,6 @@
    "ilk_goruldu": "2026-09-23T05:19:10+03:00"
   },
   {
-   "title": "FQ-42 Vengeance Finds New Home at Creech Air Force Base",
-   "url": "https://euro-sd.com/2026/09/news/air/53941/fq-42-vengeance/",
-   "source": "European Security & Defence",
-   "country": "DE",
-   "lang": "en",
-   "tier": "A",
-   "published": "2026-09-22",
-   "category": "Genel Savunma Gündemi",
-   "also": [],
-   "title_tr": "FQ-42 Vengeance, Creech Hava Kuvvetleri Üssü'nde Yeni Evini Buldu",
-   "summary_scope": true,
-   "ilk_goruldu": "2026-09-23T05:19:10+03:00"
-  },
-  {
    "title": "Virtueller Handlungstrainer HGXR für Spezialkräfte",
    "url": "https://esut.de/2026/09/allgemein/75146/hgxr/",
    "source": "ESUT",
@@ -8988,10 +8974,17 @@
    "yeni": 539,
    "geri_dolduruldu": "git 6fa289a",
    "geri_getirildi": {
-    "kalem": 92,
+    "kalem": 91,
     "kaynak": "git 6fa289a",
     "tarih": "2026-09-27",
-    "not": "Bu çalıştırmanın 539 kaleminden 92'si 11:04 yedek toplamasının dosyası (git 73c7cf9) üzerine yazılınca kaybolmuştu (Rev 31 öncesi). K4 ile git 6fa289a'daki alanlarıyla geri getirildi; yalnız category bugünkü kurallarla yeniden hesaplandı; ilk_goruldu bu çalıştırmanın commit zamanı."
+    "not": "Bu çalıştırmanın 539 kaleminden 92'si 11:04 yedek toplamasının dosyası (git 73c7cf9) üzerine yazılınca kaybolmuştu (Rev 31 öncesi). K4 ile git 6fa289a'daki alanlarıyla geri getirildi (K9: 92'den biri yinelenen başlık olduğu için düşürüldü, kalan 91); yalnız category bugünkü kurallarla yeniden hesaplandı; ilk_goruldu bu çalıştırmanın commit zamanı.",
+    "yinelenen_dusuruldu": {
+     "kalem": 1,
+     "tarih": "2026-09-27",
+     "kaynak": "European Security & Defence",
+     "url": "https://euro-sd.com/2026/09/news/air/53941/fq-42-vengeance/",
+     "not": "K4'te geri getirilen 92 kalemden European Security & Defence'ın \"FQ-42 Vengeance Finds New Home at Creech Air Force Base\" kalemi, 11:04 toplamasından beri dosyada olan Armada International kalemiyle aynı başlık anahtarını (title_key) taşıyordu; toplayıcının tekilleştirmesi bunu ayrı kalem saymaz (Armada kaleminin also listesinde zaten European Security & Defence var). K9 ile düşürüldü (müşteri kararı 5, 27 Eylül): 91 kalem geri getirildi, 1 yinelenen düşürüldü; gün 627 kalem. Bu çalıştırmanın yeni: 539 sayısı o anki kayıttır; 539 + 89 = 628'den bu yinelenen düşülünce 627."
+    }
    }
   },
   {
