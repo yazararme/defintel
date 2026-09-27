@@ -49,3 +49,9 @@ after the 23rd. **No conflict needed a decision.**
    - Tested with `DRY=1`, which does everything except the push: 23 conflicts resolved, build OK, merge commit created, and the repo was returned to its prior state.
 2. The rollback has the same problem in reverse: later daily builds rewrite generated pages. → `review/tools/rollback.sh` handles it the same way. It was tested on a simulated merge plus a later day, without a push.
 3. smoke.py needs its date-pinned checks made relative to the newest day before it is useful on main. This is a test-tool change only, suggested for after the merge.
+
+## Update, 27 Sep (late)
+
+smoke.py was made date-independent (`review/builder-notes/smoke-date-independent.md`). On the merged
+tree, including a simulated old-collector 28 Sep, it now reports **93 ok, 0 FAIL**. `merge_day.sh` `DRY=1`
+was re-run against the latest origin/main: 23 generated-file conflicts, build OK.

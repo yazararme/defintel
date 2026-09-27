@@ -150,3 +150,7 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 |---|---|---|---|
 | K8 | PASS (collect-news + pull-drive `publish-${{ github.ref }}`; build, missing-report kendi grupları). Kanıt: collect-news dry_run #39/#40 (36351005079, 36351011322) — #40 "waiting for collect-news #39", 3 sn sonra başladı, ikisi success. pull-drive dalda dispatch edilmedi (main'e rebase edip dala push eder) | 1 | 7577505 |
 | K9 | PASS (Euro-SD "FQ-42 Vengeance…Creech" düştü; 627; K4 notu 91 geri + 1 yinelenen düştü). K9-2 müşteri onayıyla yeniden yazıldı | 1 | 3057874 |
+
+- smoke.py tarihten bağımsız (83b25f3): dal 92 ok / 0 FAIL; birleşik (origin/main + dal, sahte 28 Eyl dahil) 93 ok / 0 FAIL. Eski toplayıcı günleri veriden (toplamalar/ilk_goruldu yok) tanınıyor; tarih sabiti yok. `DEFINTEL_BASE` ile başka sunucuya koşar. merge_day.sh DRY yeniden geçti (23 çakışma, build OK). Not: merge'den sonra eski toplayıcı günleri (24 Eyl → merge günü) için build İPUCU-YOK uyarısı verir — beklenen, karar 4.
+- Drive: `kaynaklar.json` yeni dosya (id `1XQkEwGDArRExmaIRgtWsuDTJwJ5GtcDs`), Defense Studies `dil: id`; bayt bayt doğrulandı; eski dosya `kaynaklar-onceki-2026-09-27.json`. Apps Script: 42. satır ve 16. satır doğru, değişiklik/kaydetme yok; `testToplayici` çalıştırılmadı (main'e gerçek toplama commit'ler).
+- Oturum sonu: 8000 sunucusu durduruldu. Açık: müşteri kararı manşet 65/75; telefon incelemesi; merge onayı.
