@@ -47,9 +47,16 @@ Ertesi sabahın raporu eski kurallarla yazılır. (Drive'daki `task-prompt.md`'y
 
 ## 3 · Kaynak listesi (Drive `kaynaklar.json`)
 
-**Yedek alındı:** Drive → `defintel` klasörü → **`kaynaklar-yedek-2026-09-27.json`** (27 Eylül 2026,
-merge öncesi hiçbir düzenleme yapılmadan; boyutu özgünle aynı, 38.608 bayt). Toplayıcı yalnız tam adı
-`kaynaklar.json` olan dosyayı okur; yedek bu hâliyle hiçbir şeyi etkilemez.
+**Drive'daki üç dosya (27 Eylül 2026 gece):**
+
+| Dosya | İçerik |
+|---|---|
+| `kaynaklar.json` | **Güncel.** "Defense Studies" → `"dil":"id"` (27 Eylül, tek değişiklik; 126 girdi) |
+| `kaynaklar-onceki-2026-09-27.json` | Değişiklikten hemen önceki hâl (17 Eylül'den beri aynı) |
+| `kaynaklar-yedek-2026-09-27.json` | Aynı önceki hâlin ikinci kopyası (merge öncesi alınan yedek) |
+
+Toplayıcı yalnız tam adı `kaynaklar.json` olanı okur; diğerleri hiçbir şeyi etkilemez.
+Merge günü K6 bul/değiştir adımları **güncel** `kaynaklar.json`'a uygulanır.
 
 Geri yüklemek için, Drive'da:
 
@@ -59,7 +66,7 @@ Geri yüklemek için, Drive'da:
 **Görmen gereken:** klasörde tam adı `kaynaklar.json` olan **tek** dosya var. Sonraki toplamadan
 (05:10 civarı) itibaren eski liste kullanılır.
 
-**Dikkat:** yedek, merge öncesi "Defense Studies" `dil` düzeltmesinden de **önce** alındı. Geri
-yüklersen o düzeltme de geri gider; istersen yeniden yap (`"dil": "id"`). Kod geri alındıysa (1. adım)
-Elbit/Northrop girdilerini geri yüklemek gerekmez ama zararı da yok: eski kod yeni alanları okumaz,
-yalnız Elbit yine "yanıt vermedi" görünür.
+**Dikkat:** yedek, "Defense Studies" `dil` düzeltmesinden **önce** alındı. Geri yüklersen o düzeltme
+de geri gider; istersen yeniden yap (`"dil": "id"`). Kod geri alındıysa (1. adım) Elbit/Northrop
+girdilerini geri yüklemek gerekmez ama zararı da yok: eski kod yeni alanları okumaz, yalnız Elbit
+yine "yanıt vermedi" görünür.

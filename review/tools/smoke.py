@@ -94,7 +94,7 @@ evidence workflow ceviri-dedektoru-test.yml has no secret, no Claude CLI install
 K5: İLK-EKRAN tanı — `check_reports.py --ilk-ekran --tani` prints a row for each of the last 10
 reports (first-screen budget and the overflow's cause); no day has a structural cause any more
 (ALARMLAR is behind the summary); with the report prompt's limits applied in a browser-only
-shortened copy (headline ≤65, alarm title ≤70, summary item ≤110 characters), every day —
+shortened copy (headline ≤65, alarm title ≤70, summary item ≤115 characters), every day —
 the alarm day included — passes at 375×812 locally and in the CI worst case (0.3px
 letter-spacing + every "ilk:" token on its own line); 17, 18, 21, 22 and 23 Sep pass as
 published, locally and in the CI worst case; the limits in check_reports.py are the numbers in
@@ -114,6 +114,16 @@ line, applied to sample kaynaklar.json files (compact and spaced), give valid JS
 nothing else, and the note says to paste after the merge. After the CI diagnosis (run 35928738920:
 Elbit's /feed/ 301s to the HTML page www.elbitsystems.com/news) the note's Elbit find/replaces
 (url → /news + ayristirici elbitsystems-news, tur rss → html, only inside that entry) are applied too.
+Date independence (after K9): DEFINTEL_BASE overrides the site URL (default http://localhost:8000).
+Checks whose acceptance is 23 Sep content are pinned to KABUL_GUNU (2026-09-23), which exists on the
+branch and on main after the merge, instead of "the newest day". Where the newest day cannot satisfy a
+check for a documented reason, the check says so and asserts that state: İPUCU-YOK = 0 is required
+for every day collected by the Rev 31 collector; a day whose data has neither `toplamalar` nor any
+`ilk_goruldu` stamp is an old-collector day (eski_toplayici(), no date) and must raise the İPUCU-YOK
+alert. İLK-EKRAN is green on 23 Sep;
+the newest report must be green unless it breaks the prompt limits, in which case it must stay red
+with the alert, for a text-only cause, and pass with the limits applied (K5 simulation). The
+GEÇ-GELEN summary is compared with each day's page line, and 0 is accepted only for unstamped days.
 Later revisions extend CHECKS / PAGES. Exit 1 on any failure.
 """
 import os
@@ -124,7 +134,18 @@ import sys
 import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-BASE = "http://localhost:8000"
+# DEFINTEL_BASE: smoke başka bir sunucuya karşı koşsun (ör. birleştirme denemesinin 8014'ü).
+BASE = (os.environ.get("DEFINTEL_BASE") or "http://localhost:8000").rstrip("/")
+# Rev 23/31/32/33/27/25 kabulleri 23 Eylül içeriğine bağlı; bu gün iki ağaçta da (dal ve
+# main'e birleştirilmiş hâl) var. "En yeni gün" yerine bu sayfaya açıkça bağlanırlar.
+KABUL_GUNU = "2026-09-23"
+
+
+def eski_toplayici(veri):
+    """Günü main'in eski toplayıcısı mı topladı? Veriden: Rev 31 toplayıcısı her kaleme ilk_goruldu
+    damgası ve güne `toplamalar` yazar (23 Eyl sonradan ikisiyle de dolduruldu). İkisi de yoksa eski.
+    Eski günler eski kategorilerle kalır (müşteri kararı); yeni kurallar merge gününden geçerli."""
+    return not veri.get("toplamalar") and not any(i.get("ilk_goruldu") for i in veri.get("items") or [])
 
 
 def latest(folder, pattern):
@@ -323,15 +344,27 @@ with sync_playwright() as p:
     pg.goto(url); pg.wait_for_timeout(400)
     link = pg.locator(f'li.watch-move a.xref[href="#{gid}"]').first
     metin = link.inner_text().strip()
-    link.click(); pg.wait_for_timeout(400)
+    link.click()
+    # Sayfa yumuşak kaydırır; uzun bir günde ~2 s sürer. Sabit bekleme yerine scrollY üç ardışık
+    # okumada (100 ms arayla) değişmeyene dek beklenir, en çok 8 s; oturmazsa kırmızı.
+    son, ayni, oturdu = None, 0, False
+    for _ in range(80):
+        pg.wait_for_timeout(100)
+        y = pg.evaluate("scrollY")
+        ayni = ayni + 1 if y == son else 0
+        son = y
+        if ayni >= 3 and (y > 0 or _ >= 15):   # 0'da oturmak ancak 1,5 s sonra kabul
+            oturdu = True
+            break
     baslik = pg.evaluate(f"(() => {{ const h = document.getElementById('{gid}'); const c = h.cloneNode(true);"
                          f" c.querySelectorAll('button').forEach(x => x.remove()); return c.innerText.trim(); }})()")
     gorunur = pg.evaluate(f"(() => {{ const r = document.getElementById('{gid}').getBoundingClientRect();"
                           f" return r.top >= 0 && r.top < innerHeight; }})()")
     hash_ = pg.evaluate("location.hash")
     b.close()
-ok = metin == baslik and hash_ == "#" + gid and gorunur
-print(f"1440px: '→ bugün: {metin}' → {hash_} başlık '{baslik}' (görünür {gorunur})")
+ok = metin == baslik and hash_ == "#" + gid and gorunur and oturdu
+print(f"1440px: '→ bugün: {metin}' → {hash_} başlık '{baslik}' (kaydırma {'oturdu' if oturdu else 'OTURMADI'}"
+      f" scrollY {son}, görünür {gorunur})")
 sys.exit(0 if ok else 1)
 """
 
@@ -535,6 +568,13 @@ print(json.dumps(out, ensure_ascii=False))
 """
 
 
+def B_split(gun):
+    """source/<gün>.md → (ön bilgi, gövde)."""
+    sys.path.insert(0, str(ROOT))
+    import build as B
+    return B.split_frontmatter((ROOT / "source" / f"{gun}.md").read_text(encoding="utf-8"))
+
+
 def r24_checks(py, fails):
     """Rev 24: İLK-EKRAN — kart etiketi (statik), denetim iki yönde, tarayıcı düzeni."""
     import json
@@ -556,17 +596,58 @@ def r24_checks(py, fails):
         fails.append("İLK-EKRAN")
         return
     env = {k: v for k, v in os.environ.items() if k not in ("ILK_EKRAN_BOZ", "RUNNER_TEMP", "GITHUB_STEP_SUMMARY")}
-    ie = subprocess.run([py, "scripts/check_reports.py", "--ilk-ekran", "--base", BASE],
+    # (1) Kuralın yeşil yolu, bugün geçen bilinen bir günde: 23 Eyl (iki ağaçta da var) yeşil olmalı.
+    ie = subprocess.run([py, "scripts/check_reports.py", "--ilk-ekran", "--base", BASE, "--gun", KABUL_GUNU],
                         cwd=ROOT, capture_output=True, text=True, env=env)
     satir = [l for l in ie.stdout.splitlines() if l.startswith("| 20")]
-    print(f"{'ok  ' if ie.returncode == 0 else 'FAIL'} İLK-EKRAN normal · {satir[0] if satir else ie.stderr[-300:]}")
+    print(f"{'ok  ' if ie.returncode == 0 else 'FAIL'} İLK-EKRAN normal ({KABUL_GUNU}) · {satir[0] if satir else ie.stderr[-300:]}")
     if ie.returncode:
         fails.append("İLK-EKRAN normal")
-    bz = subprocess.run([py, "scripts/check_reports.py", "--ilk-ekran", "--base", BASE],
+    # (2) En yeni rapor (kuralın varsayılanı). İstem sınırlarına uyan bir rapor yeşil olmalı. Sınırlardan
+    # önce yazılmış bir rapor gerçekten taşabilir; ürün o gün kırmızı KALMALI (uyarı kuralı). O zaman
+    # kabul yalnız şu: sınır aşılıyor (tanı tablosundan: manşet > IE_BASLIK_KR ya da ilk 4 maddeden biri
+    # > IE_OZET_KR ya da alarm başlığı > IE_BANT_KR), neden yalnız metin (yapı değil), sınırlar
+    # uygulanınca o gün yerel ve CI en kötü hâlde geçiyor, ve kural o gün için İLK-EKRAN uyarısını verdi.
+    son = raporlar[-1].stem if raporlar else None
+    if son and son != KABUL_GUNU:
+        sys.path.insert(0, str(ROOT / "scripts"))
+        import check_reports as C
+        ie = subprocess.run([py, "scripts/check_reports.py", "--ilk-ekran", "--base", BASE, "--gun", son],
+                            cwd=ROOT, capture_output=True, text=True, env=env)
+        satir = [l for l in ie.stdout.splitlines() if l.startswith("| 20")]
+        if ie.returncode == 0:
+            ok, durum = True, "yeşil"
+        else:
+            tn = subprocess.run([py, "scripts/check_reports.py", "--ilk-ekran", "--tani", "--base", BASE, "--gun", son],
+                                cwd=ROOT, capture_output=True, text=True, env=env)
+            tl = next((l for l in tn.stdout.splitlines() if l.startswith(f"| {son} |")), "")
+            h = [c.strip() for c in tl.strip("|").split("|")] if tl else []
+            uy = [l.strip() for l in ie.stdout.splitlines() if l.strip().startswith("! İLK-EKRAN") and son in l]
+            ok, durum = False, f"tanı satırı yok {tn.stderr[-200:]}"
+            if len(h) == 9:
+                bas_kr = int(re.search(r"(\d+) kr\.", h[4]).group(1))
+                madde_kr = int(re.search(r"(\d+) kr\.$", h[6]).group(1))
+                meta, _ = B_split(son)
+                alarm_kr = len(str(meta.get("alarm_title") or "")) if meta.get("alarm") else 0
+                asim = [x for x in (f"manşet {bas_kr} > {C.IE_BASLIK_KR}" if bas_kr > C.IE_BASLIK_KR else "",
+                                    f"madde {madde_kr} > {C.IE_OZET_KR}" if madde_kr > C.IE_OZET_KR else "",
+                                    f"alarm başlığı {alarm_kr} > {C.IE_BANT_KR}" if alarm_kr > C.IE_BANT_KR else "") if x]
+                metin_ = h[7].startswith("🔴") and "yapı:" not in h[7] and "metin:" in h[7]
+                sinirla = h[8].startswith("🟢")
+                ok = bool(asim) and metin_ and sinirla and bool(uy)
+                durum = (f"kırmızı — rapor sınırlardan önce yazılmış ({', '.join(asim) or 'SINIR AŞIMI YOK'}) · "
+                         f"neden {h[7]} · sınırlar uygulansaydı {h[8]} · uyarı {'çıktı' if uy else 'ÇIKMADI'}")
+        print(f"{'ok  ' if ok else 'FAIL'} İLK-EKRAN en yeni rapor ({son}) · {durum} · "
+              f"{satir[0] if satir else ie.stderr[-300:]}")
+        if not ok:
+            fails.append("İLK-EKRAN en yeni rapor")
+    # Boz, normalde yeşil olan günde koşar (en yeni gün içeriği yüzünden zaten kırmızıysa boz bir şey
+    # kanıtlamaz): yeşil gün + ray geri taşındı → kırmızı.
+    bz = subprocess.run([py, "scripts/check_reports.py", "--ilk-ekran", "--base", BASE, "--gun", KABUL_GUNU],
                         cwd=ROOT, capture_output=True, text=True, env={**env, "ILK_EKRAN_BOZ": "1"})
     uy = [l.strip() for l in bz.stdout.splitlines() if l.strip().startswith("! İLK-EKRAN")]
     ok = bz.returncode == 1 and bool(uy) and "boz uygulanamadı" not in bz.stdout
-    print(f"{'ok  ' if ok else 'FAIL'} İLK-EKRAN ILK_EKRAN_BOZ=1 → uyarı · {uy[0] if uy else bz.stdout[-300:] + bz.stderr[-300:]}")
+    print(f"{'ok  ' if ok else 'FAIL'} İLK-EKRAN ILK_EKRAN_BOZ=1 ({KABUL_GUNU}) → uyarı · {uy[0] if uy else bz.stdout[-300:] + bz.stderr[-300:]}")
     if not ok:
         fails.append("İLK-EKRAN boz")
     tr = subprocess.run([py, "-c", ILK_EKRAN_JS, BASE, ",".join(f.stem for f in raporlar)],
@@ -643,11 +724,17 @@ def k5_checks(py, fails):
     import json
     sys.path.insert(0, str(ROOT / "scripts"))
     import check_reports as C
-    istem = (ROOT / "review" / "builder-notes" / "k5-prompt.md")
-    metin = istem.read_text(encoding="utf-8") if istem.exists() else ""
-    ok = all(f"en fazla {n} karakter" in metin for n in (C.IE_BASLIK_KR, C.IE_BANT_KR, C.IE_OZET_KR))
+    # k5-prompt.md her zaman; merge-day-prompt.md varsa o da (yapıştırılacak metin aynı sayıları taşımalı).
+    istemler = [ROOT / "review" / "builder-notes" / "k5-prompt.md"]
+    istemler += [x for x in [ROOT / "review" / "builder-notes" / "merge-day-prompt.md"] if x.exists()]
+    ok = istemler[0].exists()
+    for istem in istemler:
+        metin = istem.read_text(encoding="utf-8") if istem.exists() else ""
+        sayilar = {int(n) for n in re.findall(r"en fazla (\d+) karakter", metin)}
+        ok = ok and sayilar == {C.IE_BASLIK_KR, C.IE_BANT_KR, C.IE_OZET_KR}
     print(f"{'ok  ' if ok else 'FAIL'} K5 istem sınırları = tanıdaki sınırlar · manşet ≤{C.IE_BASLIK_KR}, "
-          f"alarm başlığı ≤{C.IE_BANT_KR}, özet maddesi ≤{C.IE_OZET_KR} karakter")
+          f"alarm başlığı ≤{C.IE_BANT_KR}, özet maddesi ≤{C.IE_OZET_KR} karakter · "
+          f"{', '.join(x.name for x in istemler)}")
     if not ok:
         fails.append("K5 istem sınırları")
     if not py:
@@ -655,10 +742,15 @@ def k5_checks(py, fails):
         fails.append("K5 tanı")
         return
     env = {k: v for k, v in os.environ.items() if k not in ("ILK_EKRAN_BOZ", "RUNNER_TEMP", "GITHUB_STEP_SUMMARY")}
-    r = subprocess.run([py, "scripts/check_reports.py", "--ilk-ekran", "--tani", "--base", BASE],
+    # Tanı penceresi (son IE_TANI_GUN rapor) + K5-3'ün adıyla sabitlenmiş, bugün geçen günleri: yeni
+    # günler geldikçe 17 Eyl pencereden düşer ama onun kanıtı düşmez — --gun ile açıkça ölçülür.
+    GECEN = ("2026-09-17", "2026-09-18", "2026-09-21", "2026-09-22", "2026-09-23")
+    tum = [f.stem for f in sorted((ROOT / "reports").glob("????-??-??.html"))]
+    gunler = sorted(set(tum[-C.IE_TANI_GUN:]) | {g for g in GECEN if g in tum})
+    r = subprocess.run([py, "scripts/check_reports.py", "--ilk-ekran", "--tani", "--base", BASE, "--gun", *gunler],
                        cwd=ROOT, capture_output=True, text=True, env=env)
     satirlar = [l for l in r.stdout.splitlines() if re.match(r"\| 20\d\d-\d\d-\d\d \|", l)]
-    beklenen = min(C.IE_TANI_GUN, len(list((ROOT / "reports").glob("????-??-??.html"))))
+    beklenen = len(gunler)
     kalan, notlar = [], []
     for l in satirlar:
         h = [c.strip() for c in l.strip("|").split("|")]
@@ -671,7 +763,7 @@ def k5_checks(py, fails):
             kalan.append(f"{gun} sınırla da kalıyor ({tahmin})")
         notlar.append(f"{gun[5:]} {h[1]}/{h[2]} CI {ci.split(' ', 1)[-1]}→{tahmin.split(' ', 1)[-1]}")
     # K5-3: bugün geçen günler geçmeye devam eder, CI en kötü hâlde de (17 Eyl CI'da K5'ten önce 826'ydı).
-    for gun in ("2026-09-17", "2026-09-18", "2026-09-21", "2026-09-22", "2026-09-23"):
+    for gun in GECEN:
         l = next((l for l in satirlar if l.startswith(f"| {gun} ")), None)
         if (ROOT / "reports" / f"{gun}.html").exists() and (
                 not l or "🟢 geçti" not in l or not l.strip("|").split("|")[3].strip().startswith("🟢")):
@@ -749,8 +841,7 @@ def r33_checks(build_stdout, py, fails):
     yabanci = sorted({B.ad_parcalari(a)[0] for a in B.SRC_ULKE if B.yabanci_kaynak(a)})
     noktali = [_tr_upper(a) for a in yabanci if "i" in a]
 
-    def tarayici(etiket):
-        kupur = latest("haberler", "????-??-??.html")
+    def tarayici(etiket, kupur):
         kaynak = kupur.replace(".html", "-kaynaklar.html")
         r = subprocess.run([py, "-c", NOKTALI_JS, BASE + kupur, BASE + kaynak], cwd=ROOT, capture_output=True, text=True)
         if r.returncode:
@@ -762,23 +853,41 @@ def r33_checks(build_stdout, py, fails):
         print("FAIL NOKTALI-İ tarayıcı · Playwright'lı python yok")
         fails.append("NOKTALI-İ tarayıcı")
         return
-    r = tarayici("normal")
-    ok = bool(r)
-    if r:
-        one, tum = " | ".join(r["one"]), " | ".join(r["all"])
-        hatali = sorted({n for n in noktali if n in tum})
-        sn_hatali = [t for t, lang in r["snames"] if B.yabanci_kaynak(t) and t in B.SRC_ULKE and not lang]
-        ok = (r["lang"] == "tr" and "UNMANNED AIRSPACE" in one and "DEFENSE DAILY" in one
-              and "AİRSPACE" not in tum and "DAİLY" not in tum and "ANADOLU AJANSI" in tum
-              and not hatali and not sn_hatali)
-        print(f"{'ok  ' if ok else 'FAIL'} NOKTALI-İ 1440px tr-TR · lang={r['lang']} · Öne çıkanlar: "
-              f"{'“UNMANNED AIRSPACE”' if 'UNMANNED AIRSPACE' in one else 'UNMANNED AIRSPACE yok'}, "
-              f"{'“DEFENSE DAILY”' if 'DEFENSE DAILY' in one else 'DEFENSE DAILY yok'} · "
-              f"{'“ANADOLU AJANSI” değişmedi' if 'ANADOLU AJANSI' in tum else 'ANADOLU AJANSI yok'} · "
-              f"İ'li yabancı ad {len(hatali)}{' ' + str(hatali[:4]) if hatali else ''} · "
-              f"Kaynaklar sayfasında sarmasız yabancı ad {len(sn_hatali)}")
-    if not ok:
-        fails.append("NOKTALI-İ tarayıcı")
+    # R33 kabulü 23 Eylül'ün Öne çıkanlar'ına bağlı (UNMANNED AIRSPACE, DEFENSE DAILY) → o sayfa.
+    # Genel özellik (hiçbir yabancı ad İ'li değil, Kaynaklar'da her yabancı ad sarılı) en yeni
+    # günde de aranır. "ANADOLU AJANSI değişmedi" 23 Eyl'de aranır (orada Öne çıkanlar'da görünür);
+    # en yeni günde AA satırı kapalı Genel dökümde olabilir (innerText büyütülmemiş metni verir), orada
+    # yalnız yanlış büyütme ("AJANSİ") olmadığı aranır.
+    kabul = f"/haberler/{KABUL_GUNU}.html"
+    son_kupur = latest("haberler", "????-??-??.html")
+    haber = B.load_news()
+    if not (ROOT / kabul.lstrip("/")).exists():
+        print(f"FAIL NOKTALI-İ tarayıcı · {kabul} yok (kabul sayfası)")
+        fails.append("NOKTALI-İ tarayıcı kabul sayfası")
+    for kupur in dict.fromkeys(k for k in (kabul, son_kupur) if k and (ROOT / k.lstrip("/")).exists()):
+        gun = pathlib.Path(kupur).stem
+        r = tarayici("normal", kupur)
+        ok = bool(r)
+        if r:
+            one, tum = " | ".join(r["one"]), " | ".join(r["all"])
+            hatali = sorted({n for n in noktali if n in tum})
+            sn_hatali = [t for t, lang in r["snames"] if B.yabanci_kaynak(t) and t in B.SRC_ULKE and not lang]
+            aa = any("Anadolu Ajans" in (i.get("source") or "") for i in (haber.get(gun) or {}).get("items", []))
+            ok = (r["lang"] == "tr" and "AİRSPACE" not in tum and "DAİLY" not in tum
+                  and "AJANSİ" not in tum and not hatali and not sn_hatali)
+            if kupur == kabul:
+                ok = ok and "UNMANNED AIRSPACE" in one and "DEFENSE DAILY" in one and aa and "ANADOLU AJANSI" in tum
+                one_n = (f"Öne çıkanlar: {'“UNMANNED AIRSPACE”' if 'UNMANNED AIRSPACE' in one else 'UNMANNED AIRSPACE yok'}, "
+                         f"{'“DEFENSE DAILY”' if 'DEFENSE DAILY' in one else 'DEFENSE DAILY yok'} · ")
+            else:
+                one_n = "en yeni gün (genel özellik) · "
+            print(f"{'ok  ' if ok else 'FAIL'} NOKTALI-İ 1440px tr-TR {kupur} · lang={r['lang']} · {one_n}"
+                  f"{'“ANADOLU AJANSI” değişmedi' if 'ANADOLU AJANSI' in tum else 'ANADOLU AJANSI yok'}"
+                  f" (veride AA {'var' if aa else 'yok'}) · "
+                  f"İ'li yabancı ad {len(hatali)}{' ' + str(hatali[:4]) if hatali else ''} · "
+                  f"Kaynaklar sayfasında sarmasız yabancı ad {len(sn_hatali)}")
+        if not ok:
+            fails.append(f"NOKTALI-İ tarayıcı {gun}")
 
     # Bozuk derleme: sarmal kapalı → uyarı örneklerle gelir, tarayıcı noktalı İ çizer; sonra normal derleme.
     boz = subprocess.run([sys.executable, "build.py"], cwd=ROOT, capture_output=True, text=True,
@@ -787,13 +896,13 @@ def r33_checks(build_stdout, py, fails):
         bs = [l.strip() for l in boz.stdout.splitlines() if "· NOKTALI-İ:" in l]
         uy = [l.strip() for l in boz.stdout.splitlines() if l.strip().startswith("! NOKTALI-İ ·")]
         m = re.search(r"NOKTALI-İ: (\d+) örnek", bs[0]) if bs else None
-        rb = tarayici("bozuk")
+        rb = tarayici("bozuk", kabul)
         one_b = " | ".join(rb["one"]) if rb else ""
         ok = bool(boz.returncode == 0 and m and int(m.group(1)) > 0 and uy
                   and "(NOKTALI_BOZ=1, bilerek)" in uy[0] and "UNMANNED AİRSPACE" in one_b)
         print(f"{'ok  ' if ok else 'FAIL'} NOKTALI-İ bozuk derleme (NOKTALI_BOZ=1) · "
               f"{bs[0].lstrip('· ') if bs else 'satır yok'} · uyarı {'var' if uy else 'yok'} · tarayıcı "
-              f"{'“UNMANNED AİRSPACE”' if 'UNMANNED AİRSPACE' in one_b else 'noktalı İ görünmedi'}")
+              f"{'“UNMANNED AİRSPACE”' if 'UNMANNED AİRSPACE' in one_b else 'noktalı İ görünmedi'} ({kabul})")
         if uy:
             print(f"       {uy[0][:220]}")
         if not ok:
@@ -814,9 +923,33 @@ def r31_checks(build_stdout, py, fails):
     if t.returncode:
         print(t.stdout[-2500:], t.stderr[-1500:])
         fails.append("test_collect.py")
+    # GEÇ-GELEN özeti yalnız son iki medya gününü yazar; R31 kabulü (23 Eyl: 89) her günün kendi
+    # "haberler/<gün>.html (… · N brifingden sonra)" satırından okunur — 23 Eyl iki ağaçta da var.
+    # Özetteki her gün kendi sayfa satırıyla aynı sayıyı taşımalı; 0 ancak o günün verisinde
+    # hiç ilk_goruldu damgası yoksa (eski toplayıcı: jeton hesaplanamaz) kabul edilir.
+    import json
     satir = [l.strip() for l in build_stdout.splitlines() if "GEÇ-GELEN: BRİFİNGDEN SONRA jetonlu satır" in l]
-    ok = bool(satir) and "2026-09-23: 89" in satir[0]
-    print(f"{'ok  ' if ok else 'FAIL'} GEÇ-GELEN build satırı · {satir[0].lstrip('· ') if satir else 'satır yok'}")
+    sayfa = {m[0]: int(m[1] or 0) for m in re.findall(
+        r"· haberler/(\d{4}-\d\d-\d\d)\.html \([^)]*?(?:· (\d+) brifingden sonra)?\)", build_stdout)}
+    haber_gunleri = sorted(f.stem for f in (ROOT / "data" / "news").glob("????-??-??.json")
+                           if json.loads(f.read_text(encoding="utf-8")).get("items"))
+    ozet = dict((g, int(n)) for g, n in re.findall(r"(\d{4}-\d\d-\d\d): (\d+)", satir[0])) if satir else {}
+    sorun, notlar = [], []
+    if sayfa.get(KABUL_GUNU) != 89:
+        sorun.append(f"{KABUL_GUNU} sayfa satırı {sayfa.get(KABUL_GUNU)} ≠ 89")
+    if list(ozet) != haber_gunleri[-2:]:
+        sorun.append(f"özet günleri {list(ozet)} ≠ son iki medya günü {haber_gunleri[-2:]}")
+    for g, n in ozet.items():
+        if n != sayfa.get(g, 0):
+            sorun.append(f"{g}: özet {n} ≠ sayfa satırı {sayfa.get(g, 0)}")
+        items = json.loads((ROOT / "data" / "news" / f"{g}.json").read_text(encoding="utf-8")).get("items", [])
+        damga = sum(1 for i in items if i.get("ilk_goruldu"))
+        if n == 0 and damga:
+            sorun.append(f"{g}: {damga} damgalı kalem var ama jeton 0")
+        notlar.append(f"{g[5:]}: {n}" + ("" if damga else " (damgasız — eski toplayıcı)"))
+    ok = bool(satir) and not sorun
+    print(f"{'ok  ' if ok else 'FAIL'} GEÇ-GELEN build satırı · {KABUL_GUNU}: {sayfa.get(KABUL_GUNU)} (sayfa satırı) · "
+          f"özet {' · '.join(notlar) or 'satır yok'}" + (f" · SORUN: {sorun}" if sorun else ""))
     if not ok:
         fails.append("GEÇ-GELEN build satırı")
     if py and (ROOT / "haberler" / "2026-09-23.html").exists():
@@ -829,6 +962,25 @@ def r31_checks(build_stdout, py, fails):
     if not aday.exists():
         print("ok   (D) 2026-09-24-aday.md yok (yalnız yerel kanıt; commit edilmez) — atlandı")
         return
+    # main'de aynı adla gerçek aday dosyası var (24 Eyl'ü main'in ESKİ toplayıcısı yazdı). (D) kanıtı
+    # yalnız izlenmeyen yerel dosyadır; izlenen dosya eski toplayıcının çıktısıysa (günün verisinde
+    # Rev 31'in `toplamalar` / ilk_goruldu izi yok) "Dünkü brifingden sonra" bölümü beklenmez — bu
+    # açıkça yazılır. İzlenen dosya yeni toplayıcıdan geldiyse bölüm aşağıda yine aranır.
+    izli = subprocess.run(["git", "ls-files", "--error-unmatch", str(aday.relative_to(ROOT))], cwd=ROOT,
+                          capture_output=True, text=True).returncode == 0
+    if izli:
+        import json
+        veri = ROOT / "data" / "news" / "2026-09-24.json"
+        d = json.loads(veri.read_text(encoding="utf-8")) if veri.exists() else {}
+        if d and eski_toplayici(d):
+            ilk = next((l for l in aday.read_text(encoding="utf-8").splitlines() if l.startswith("## ")), "")
+            ok = not ilk.startswith("## Dünkü brifingden sonra gelenler")
+            print(f"{'ok  ' if ok else 'FAIL'} (D) 2026-09-24-aday.md depoda izli: main'in eski toplayıcısının çıktısı "
+                  f"(2026-09-24.json'da toplamalar/ilk_goruldu yok) — Rev 31 ilk bölümü beklenmez; ilk bölüm '{ilk}'."
+                  " Yerel (D) kanıtı bu ağaçta yok")
+            if not ok:
+                fails.append("(D) aday ilk bölüm")
+            return
     try:
         with urllib.request.urlopen(f"{BASE}/data/news/2026-09-24-aday.md", timeout=10) as r:
             metin = r.read().decode("utf-8")
@@ -905,9 +1057,43 @@ def r25_checks(build_stdout, py, fails):
     if t.returncode:
         print(t.stdout[-2500:], t.stderr[-1500:])
         fails.append("test_silme_yok.py")
+    # Build satırı en yeni medya gününü yazar. İPUCU-YOK = 0 yeni kategori kurallarının günleri için
+    # geçerlidir: Rev 31 toplayıcısının topladığı (eski_toplayici() değil) her gün, yeniden
+    # hesaplanınca 0 vermeli; en az bir böyle gün olmalı. Eski toplayıcının günleri (eski_toplayici():
+    # damga da toplamalar da yok — müşteri kararı: olduğu gibi kalır) için satırın sayısı yeniden
+    # hesapla aynı olmalı ve >0 ise İPUCU-YOK uyarısı çıkmış olmalı (kural çalışıyor).
+    import json
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import collect_news as CN
     satir = [l.strip() for l in build_stdout.splitlines() if "İPUCU-YOK / S8" in l]
-    ok = bool(satir) and "yalnız ipucuyla gelen 0 ·" in satir[0]
-    print(f"{'ok  ' if ok else 'FAIL'} İPUCU-YOK / S8 build satırı · {satir[0].lstrip('· ')[:160] if satir else 'satır yok'}")
+    veri = {}
+    for f in sorted((ROOT / "data" / "news").glob("????-??-??.json")):
+        d = json.loads(f.read_text(encoding="utf-8"))
+        if d.get("items"):
+            veri[f.stem] = d
+    ipucu = {g: sum(r["ipucu"] or 0 for r in CN.s8_counts(d["items"]).values()) for g, d in veri.items()}
+    yeni = [g for g, d in veri.items() if not eski_toplayici(d)]
+    son = max(veri) if veri else None
+    m = re.search(r"İPUCU-YOK / S8 (\S+): yalnız ipucuyla gelen (\d+) ·", satir[0]) if satir else None
+    sorun = []
+    if not m or m.group(1) != son or int(m.group(2)) != ipucu.get(son):
+        sorun.append(f"build satırı {m.groups() if m else 'yok'} ≠ en yeni gün {son}: {ipucu.get(son)}")
+    if not yeni:
+        sorun.append("yeni toplayıcının hiçbir günü yok")
+    sorun += [f"{g} yeni toplayıcı günü, ipucuyla gelen {ipucu[g]}" for g in yeni if ipucu[g]]
+    uy = [l for l in build_stdout.splitlines() if l.strip().startswith(f"! İPUCU-YOK · {son} ·")]
+    if son in yeni:
+        durum = f"en yeni gün {son} yeni kurallarla: 0"
+    else:
+        durum = (f"en yeni gün {son} eski toplayıcının (müşteri kararı: bırakıldı), ipucuyla gelen {ipucu.get(son)}"
+                 f" · uyarı {'çıktı' if uy else 'ÇIKMADI'}")
+        if ipucu.get(son) and not uy:
+            sorun.append(f"{son}: ipucuyla gelen {ipucu.get(son)} ama İPUCU-YOK uyarısı yok")
+    ok = bool(satir) and not sorun
+    print(f"{'ok  ' if ok else 'FAIL'} İPUCU-YOK / S8 build satırı · {durum} · yeni toplayıcı günleri "
+          f"{', '.join(g[5:] + ': ' + str(ipucu[g]) for g in yeni) or '—'}" + (f" · SORUN: {sorun}" if sorun else ""))
+    if satir:
+        print(f"       {satir[0].lstrip('· ')[:160]}")
     if not ok:
         fails.append("İPUCU-YOK satırı")
     r = subprocess.run([sys.executable, "scripts/yeniden_kategorile.py", "2026-09-23"], cwd=ROOT,
@@ -976,26 +1162,29 @@ def r32_checks(build_stdout, py, fails):
           f"{bool(sozluk_ad)} · başka gelişme → {bool(baska)}")
     if not ok:
         fails.append("TEKRAR-MANŞET kural kontrolleri")
-    if iso != "2026-09-23":
+    # R32 kabulü 23 Eyl sayfasına bağlı: o sayfa her ağaçta ölçülür; "/" yalnız 23 Eyl en yeni günse.
+    if not (ROOT / "reports" / f"{KABUL_GUNU}.html").exists():
+        print(f"FAIL TEKRAR-MANŞET 375px · reports/{KABUL_GUNU}.html yok")
+        fails.append("TEKRAR-MANŞET 375px")
         return
     if not py:
         print("FAIL TEKRAR-MANŞET 375px · Playwright'lı python yok")
         fails.append("TEKRAR-MANŞET 375px")
         return
-    for sayfa in (f"/reports/{iso}.html", "/"):
+    for sayfa in [f"/reports/{KABUL_GUNU}.html"] + (["/"] if iso == KABUL_GUNU else []):
         r = subprocess.run([py, "-c", ILK_JS, BASE + sayfa, "ilk: 19 Eyl"], cwd=ROOT, capture_output=True, text=True)
         print(f"{'ok  ' if r.returncode == 0 else 'FAIL'} TEKRAR-MANŞET 375px {sayfa} · {r.stdout.strip() or r.stderr[-300:]}")
         if r.returncode:
             fails.append(f"TEKRAR-MANŞET 375px {sayfa}")
     import json
-    r = subprocess.run([py, "-c", ILK_EKRAN_KOTU_JS, f"{BASE}/reports/{iso}.html"], cwd=ROOT,
+    r = subprocess.run([py, "-c", ILK_EKRAN_KOTU_JS, f"{BASE}/reports/{KABUL_GUNU}.html"], cwd=ROOT,
                        capture_output=True, text=True)
     try:
         olc = json.loads(r.stdout)
     except ValueError:
         olc = []
     ok = bool(olc) and all(h2 <= 300 and m <= 812 for _, h2, m, _n in olc) and olc[0][3] >= 1
-    print(f"{'ok  ' if ok else 'FAIL'} İLK-EKRAN en kötü hâl (375×812, {olc[0][3] if olc else 0} jeton) · "
+    print(f"{'ok  ' if ok else 'FAIL'} İLK-EKRAN en kötü hâl ({KABUL_GUNU}, 375×812, {olc[0][3] if olc else 0} jeton) · "
           + (" · ".join(f"{e}: h2 {h2}px, 4. madde {m}px" for e, h2, m, _n in olc) if olc else r.stderr[-300:]))
     if not ok:
         fails.append("İLK-EKRAN en kötü hâl")
@@ -1483,10 +1672,15 @@ def r27_checks(build_stdout, py, fails):
             print(f"FAIL İPLİK-DURUM tarayıcı · {r.stderr[-400:]}")
             fails.append("İPLİK-DURUM tarayıcı")
         else:
+            # Bilinmeyen ?g= varsayılan günü bırakır: iplik sayfasının kendi daybar'ı = en yeni rapor
+            # (23 Eyl kabulü dalda en yeni gündü). Beklenen, reports/ altındaki son günden hesaplanır.
+            son_rapor = sorted((ROOT / "reports").glob("????-??-??.html"))[-1].stem
+            varsayilan = B.tr_daybar(son_rapor)
             for x in json.loads(r.stdout):
                 if "bogus" in x:
-                    ok = x["bogus"] == "23 Eyl · Çar"
-                    print(f"{'ok  ' if ok else 'FAIL'} R27 {x['w']}px bilinmeyen ?g= · daybar “{x['bogus']}”")
+                    ok = x["bogus"] == varsayilan
+                    print(f"{'ok  ' if ok else 'FAIL'} R27 {x['w']}px bilinmeyen ?g= · daybar “{x['bogus']}”"
+                          f" (varsayılan = en yeni rapor {son_rapor}: “{varsayilan}”)")
                 elif x["from"] == "2026-09-23":
                     links = [e for e in x["rows"] if e["link"]]
                     opn = [e for e in x["rows"] if not e["link"]]

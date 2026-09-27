@@ -49,7 +49,7 @@ taşır — diske ve depoya hiçbir şey yazılmaz; işaret bulunmazsa gün kır
 İLK-EKRAN tanı (K5, bilgi amaçlı — uyarı yazmaz, çıkış 0): son 10 brifingin (ya da --gun)
 375×812'deki ilk ekran bütçesi — başlık satırı, alarm bandı ve (özetten önceyse) ALARMLAR
 yüksekliği, ilk 4 maddenin satırları — ve günün taşma nedeni (metin / yapı), bir de rapor
-isteminin sınırları (manşet ≤65, alarm başlığı ≤70, özet maddesi ≤110 karakter) uygulansaydı
+isteminin sınırları (manşet ≤65, alarm başlığı ≤70, özet maddesi ≤115 karakter) uygulansaydı
 kenarlar: sayfa tarayıcıda kısaltılmış sahte bir kopyayla ölçülür, yerel ve CI en kötü hâlde
 (0,3px harf aralığı + jeton kendi satırında). Tablo (A) özetine.
 
@@ -607,7 +607,7 @@ def ilk_ekran(base=None, gunler=None, boz=False, out=None):
 
 IE_BASLIK_KR = 65        # istem: manşet ≤65 kr. — 0,3–0,45px'te 4. satıra düşen en kısa önek 70 (16 Eyl)
 IE_BANT_KR = 70          # istem: alarm başlığı (bant) ≤70 kr. — 2 satır; 49 metinde en kısa taşan önek 71
-IE_OZET_KR = 110         # istem: her özet maddesi en fazla 110 karakter
+IE_OZET_KR = 115         # istem: her özet maddesi en fazla 115 karakter (müşteri: 110 → 115)
 IE_CI_LS = 0.3           # "CI en kötü" harf aralığı (px)
 IE_TANI_GUN = 10
 IE_SATIR_BUTCE_H2 = 263  # 3 satırlık başlıkla h2#ozet'in üst kenarı, alarm dışı gün (masthead 49 +
