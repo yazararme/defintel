@@ -13,19 +13,25 @@ Manşet en fazla 65 karakterdir, boşluklar dahil (yaklaşık 9 kelime).
 Alarm günü alarm_title en fazla 70 karakterdir, boşluklar dahil; gelişmenin adını ve son tarihini taşır, açıklamayı değil.
 Her özet maddesi kimin ne yaptığını söyler.
 Önceki 7 raporda anlatılmış bir gelişme manşete ya da özete ancak neyin yeni olduğunu ilk cümlesinde söyleyerek girer ('resmîleşti', 'sözleşmeye döndü', 'bedel açıklandı').
-Her özet maddesi en fazla 110 karakterdir, boşluklar dahil (yaklaşık 15 kelime); ayrıntı gelişmenin kendi bloğunda kalır.
+Her özet maddesi en fazla 115 karakterdir, boşluklar dahil (yaklaşık 16 kelime); ayrıntı gelişmenin kendi bloğunda kalır.
 ```
 
-## Tek yere yapıştırmak istersen
+## Nereye (27 Eylül'de panelin gerçek metnine göre düzeltildi)
 
-Talimatın sonuna "Ek kurallar (Eylül 2026)" başlığıyla bu bloğu olduğu gibi ekleyebilirsin. Daha temiz olanı:
+Paneldeki talimatta **"en fazla 14 kelime" kuralı yok** (yedek: `instructions-backup.md`); manşet için
+yalnız frontmatter şablonunda `title: "günün özünü veren tek cümle"` var. Bu yüzden bloğu tek yere koy:
 
-| Cümle | Talimattaki yeri |
-|---|---|
-| 1 (kur) | Gelişme gövdesi kurallarının yanına (sayılar, `[K#]` atıfları) |
-| 2–3 (başlık) | Frontmatter `title` kuralı — **mevcut "en fazla 14 kelime" sınırının yerine** 3. cümle; "tek gelişme" kısmı kalır |
-| 4 (alarm) | Frontmatter `alarm_title` kuralı |
-| 5–7 (özet) | YÖNETİCİ ÖZETİ kurallarının başı, bu sırayla |
+3. bölümde (**Kalite kuralları**), **"Teslimden önce kalite kontrolü."** paragrafının hemen **üstüne**,
+yeni bir satırda şu başlıkla:
+
+```
+**Ek kurallar (Eylül 2026).**
+```
+
+ve altına yukarıdaki 7 cümleyi olduğu gibi yapıştır. Başka hiçbir satırı silme ya da değiştirme.
+
+Not: kalite kontrolündeki "YÖNETİCİ ÖZETİ'nde 8 kelimeden uzun bir gelişme anlatımı var mı?" maddesi
+yerinde kalır; yeni sınır (madde başına 115 karakter) onunla çelişmez, ona üst sınır ekler.
 
 ## Bir ön şart
 

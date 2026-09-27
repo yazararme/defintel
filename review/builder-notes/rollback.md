@@ -40,9 +40,9 @@ Merge'den önce panelin metnini `review/builder-notes/instructions-backup.md`'ye
 
 1. Claude masaüstü → "MKE Uluslararası Pazar İzleme Ajanı (Günlük)" → **Instructions**.
 2. Paneldeki tüm metni seç (⌘A) ve sil.
-3. `instructions-backup.md`'yi aç, ``` işaretleri arasındaki metnin tamamını kopyala, panele yapıştır, kaydet.
+3. `instructions-backup.md`'yi aç, `~~~~` işaretleri arasındaki metnin tamamını kopyala, panele yapıştır, kaydet.
 
-**Görmen gereken:** panelde "Manşet en fazla 65 karakterdir" cümlesi **yok**, "en fazla 14 kelime" **var**.
+**Görmen gereken:** panelde "Ek kurallar (Eylül 2026)" başlığı ve altındaki cümleler **yok**; metin `instructions-backup.md` ile aynı.
 Ertesi sabahın raporu eski kurallarla yazılır. (Drive'daki `task-prompt.md`'ye dokunma — görev onu okumaz.)
 
 ## 3 · Kaynak listesi (Drive `kaynaklar.json`)

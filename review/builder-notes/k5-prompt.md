@@ -7,7 +7,7 @@ sentences into it themselves, on merge day. They join the same block as Rev 23 a
 ```
 Manşet en fazla 65 karakterdir, boşluklar dahil (yaklaşık 9 kelime).
 Alarm günü alarm_title en fazla 70 karakterdir, boşluklar dahil; gelişmenin adını ve son tarihini taşır, açıklamayı değil.
-Her özet maddesi en fazla 110 karakterdir, boşluklar dahil (yaklaşık 15 kelime); ayrıntı gelişmenin kendi bloğunda kalır.
+Her özet maddesi en fazla 115 karakterdir, boşluklar dahil (yaklaşık 16 kelime); ayrıntı gelişmenin kendi bloğunda kalır.
 ```
 
 The whole block after this revision, for a customer pasting it fresh:
@@ -19,7 +19,7 @@ Her özet maddesi kimin ne yaptığını söyler.
 Önceki 7 raporda anlatılmış bir gelişme manşete ya da özete ancak neyin yeni olduğunu ilk cümlesinde söyleyerek girer ('resmîleşti', 'sözleşmeye döndü', 'bedel açıklandı').
 Manşet en fazla 65 karakterdir, boşluklar dahil (yaklaşık 9 kelime).
 Alarm günü alarm_title en fazla 70 karakterdir, boşluklar dahil; gelişmenin adını ve son tarihini taşır, açıklamayı değil.
-Her özet maddesi en fazla 110 karakterdir, boşluklar dahil (yaklaşık 15 kelime); ayrıntı gelişmenin kendi bloğunda kalır.
+Her özet maddesi en fazla 115 karakterdir, boşluklar dahil (yaklaşık 16 kelime); ayrıntı gelişmenin kendi bloğunda kalır.
 ```
 
 What changed from attempt 1: the headline limit goes from 75 to **65**, and there is a new
@@ -98,3 +98,9 @@ line breaks, so its figures are higher than a local run's. Of the numbers above,
 
 Acceptance ("the next reports stay inside the limits") depends on future dates, so the
 reviewer marks it PENDING-HUMAN.
+
+## Update, 27 Sep: customer decision
+
+The summary-item limit is now **115** (was 110). The independent check (`review/verdicts/self-check.md`)
+found that at 110, 3 of the 10 longest items lose a key fact; at 115 only 1 does. With 115, all 10 days
+(18–27 Sep) still pass İLK-EKRAN, but 20 Sep has just 3px to spare. Both paste blocks above now say 115.
