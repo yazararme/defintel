@@ -14,10 +14,7 @@ Her maddede: **nerede**, **ne yapılacak**, **ne görülmeli**. Sırayla, birer 
 
 ## 1. Merge'den önce (sen)
 
-1. **Karar — manşet sınırı: 65 mi, 75 mi?** Oku: `review/verdicts/headline-check.md`.
-   65'te son 10 günün en uzun 10 manşetinden 1'i kilit bilgi kaybediyor (20 Eyl "5,56 mm"); 75'te hiçbiri.
-   Ama 75'te 20 Eylül ilk ekranı CI en kötü hâlinde 840px ile aşıyor (sınır 812); 65'te 10 günün hepsi geçiyor.
-   *Görmen gereken:* sohbette "65" ya da "75" yaz.
+1. **Manşet sınırı: 65 (karar verildi, 27 Eyl).** Kısaltma cümlesi bloğa eklendi. Yapacak bir şey yok.
 2. **Telefonda yerel site, 10 dakika.**
    - Mac'te Terminal'e yapıştır (telefon ve Mac aynı Wi-Fi'da):
      `cd ~/Documents/Projects/defintel-repo && echo "Telefonda aç: http://$(ipconfig getifaddr en0):8000" && python3 -m http.server 8000`
@@ -42,10 +39,9 @@ Pencere: **aynı gün 12:00–23:00**. Sırayla:
    `cd ~/Documents/Projects/defintel-repo && cp review/tools/merge_day.sh /tmp/merge_day.sh && bash /tmp/merge_day.sh`
    *Görmen gereken:* `üretilmiş … dosyada çakışma → …`, `birleşik commit: …`, en sonda `TAMAM: main'e alındı`.
    `DUR:` ile başlayan satır görürsen dur, bana yapıştır. ~3 dk sonra 23 Eylül medya takibi "627 başlık" der.
-5. **Instructions paneli:** `review/builder-notes/merge-day-prompt.md`'deki 7 cümlelik blok, 3. bölümde
+5. **Instructions paneli:** `review/builder-notes/merge-day-prompt.md`'deki 8 cümlelik blok, 3. bölümde
    **"Teslimden önce kalite kontrolü."** paragrafının hemen üstüne, **"Ek kurallar (Eylül 2026)."** başlığıyla. Kaydet.
-   (Manşet kararın 75 olursa bloktaki "65" bu tarihten önce güncellenmiş olur.)
-   *Görmen gereken:* panelde yeni başlık ve altında 7 cümle; başka satır değişmemiş.
+   *Görmen gereken:* panelde yeni başlık ve altında 8 cümle; başka satır değişmemiş.
 6. **Drive `kaynaklar.json`:** `review/builder-notes/k6-kaynaklar.md`'deki bul/değiştir (Northrop, Elbit, isteğe bağlı Elbit Systems UK).
    *Görmen gereken:* dosya hâlâ geçerli JSON; yalnız bu girdiler değişmiş.
 

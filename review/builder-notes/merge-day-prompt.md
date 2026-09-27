@@ -4,12 +4,13 @@
 **Nereye:** Claude masaüstü uygulaması → "MKE Uluslararası Pazar İzleme Ajanı (Günlük)" görevi → **Instructions** paneli.
 Drive'daki `task-prompt.md`'ye değil — o bir kopya, görev onu okumaz.
 
-## Yapıştırılacak blok (7 cümle)
+## Yapıştırılacak blok (8 cümle)
 
 ```
 Tutarı kaynağın verdiği para biriminde yaz. Kaynak kendi çevirisini veriyorsa parantez içinde aynen aktar. Kendin kur çevirme.
 Başlık günün tezidir, özet maddelerinden biri değildir.
 Manşet en fazla 65 karakterdir, boşluklar dahil (yaklaşık 9 kelime).
+Kısaltırken sayı, kalibre ve tutarı asla atma; önce sıfatları kısalt.
 Alarm günü alarm_title en fazla 70 karakterdir, boşluklar dahil; gelişmenin adını ve son tarihini taşır, açıklamayı değil.
 Her özet maddesi kimin ne yaptığını söyler.
 Önceki 7 raporda anlatılmış bir gelişme manşete ya da özete ancak neyin yeni olduğunu ilk cümlesinde söyleyerek girer ('resmîleşti', 'sözleşmeye döndü', 'bedel açıklandı').
@@ -28,7 +29,7 @@ yeni bir satırda şu başlıkla:
 **Ek kurallar (Eylül 2026).**
 ```
 
-ve altına yukarıdaki 7 cümleyi olduğu gibi yapıştır. Başka hiçbir satırı silme ya da değiştirme.
+ve altına yukarıdaki 8 cümleyi olduğu gibi yapıştır. Başka hiçbir satırı silme ya da değiştirme.
 
 Not: kalite kontrolündeki "YÖNETİCİ ÖZETİ'nde 8 kelimeden uzun bir gelişme anlatımı var mı?" maddesi
 yerinde kalır; yeni sınır (madde başına 115 karakter) onunla çelişmez, ona üst sınır ekler.
@@ -43,3 +44,5 @@ yerinde kalır; yeni sınır (madde başına 115 karakter) onunla çelişmez, on
 
 Sonraki raporların günlük uyarı issue'sunda (`DEFINTEL uyarıları · <tarih>`): **KUR**, **H1-TEKRAR**
 ve **İLK-EKRAN** satırlarının seyrekleşmesi. Ayrıntı: `rev-23-prompt.md`, `rev-32-prompt.md`, `k5-prompt.md`.
+
+**27 Eylül, müşteri kararı:** manşet sınırı **65** kalır; kısaltma cümlesi ("Kısaltırken sayı, kalibre ve tutarı asla atma; önce sıfatları kısalt.") manşet cümlesinin hemen altına eklendi.
