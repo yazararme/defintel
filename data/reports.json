@@ -1,5 +1,111 @@
 [
   {
+    "date": "2026-09-27",
+    "title": "ABD Ordusu uygun maliyetli önleyici yarışmasında 30 finalisti açıkladı",
+    "summary": "Yeni ihale açılmadı; günün ağırlığı uygun maliyetli önleyici yarışması ve mühimmat tedarik zinciri. ABD Ordusu, xTech|Apex Intercept yarışmasında dört kategoride 30 finalist açıkladı; liste ABD'nin yanında Avustralya ve Birleşik Krallık firmalarını da içeriyor, gösterimler 1 Ekim–30 Kasım arasında yapılacak ve kazananlar 31 Aralık'a kadar duyurulacak. Ohio'daki Metallus, 155 mm mermi gövdesi için HF-1 çeliğinde beş yıllık, 995 milyon $'a kadar tek kaynak sözleşmesi aldı. ASELSAN, KORKUT 35'i 12 ülkenin heyeti önünde hareket hâlinde canlı atışla sergiledi. İtalya 5,14 milyar €'luk ana muharebe tankı kalemini ilana çıkardı; AB, Ukrayna'ya dron ve hava savunma alımı için 3,3 milyar €'luk kredi görüşüyor.",
+    "lead": "ABD Ordusu, uygun maliyetli önleyici yarışması xTech|Apex Intercept'te dört kategoride 30 finalist açıkladı; liste ABD…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Mühimmat",
+      "Topçu",
+      "TOLGA",
+      "ABD",
+      "Tedarik Zinciri",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "xTech|Apex Intercept 30 finalist",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Metallus HF-1 çelik sözleşmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "KORKUT 35 canlı atış gösterimi",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "İtalya 5,14 milyar € tank kalemi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "AB'den Ukrayna'ya 3,3 milyar € kredi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "30 mm AMPV prototipleri",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "ABD Donanması RASWDC",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "Letonya'nın Barracuda hamlesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "AWEIL'in Afrika pazarı tanıtımı",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "USAF orta kalibreli namlulu hava savunma pazar araştırması",
+        "home": "izleme"
+      },
+      {
+        "id": "G11",
+        "label": "Malezya MERAD (RMK-13)",
+        "home": "izleme"
+      },
+      {
+        "id": "G12",
+        "label": "665 milyon $'lık C-UAS test siparişine itiraz",
+        "home": "izleme"
+      },
+      {
+        "id": "G13",
+        "label": "ABD Deniz Piyadeleri Drone Round",
+        "home": "izleme"
+      },
+      {
+        "id": "G14",
+        "label": "ABD Donanması uygun maliyetli önleyici",
+        "home": "izleme"
+      },
+      {
+        "id": "G15",
+        "label": "Ukrayna'da güdümsüz 155 mm tercihi",
+        "home": "izleme"
+      },
+      {
+        "id": "G16",
+        "label": "Nadir toprak elementlerinde ticaret gerilimi",
+        "home": "izleme"
+      },
+      {
+        "id": "G17",
+        "label": "Ermenistan'ın Divyastra MK-1 seçimi",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-09-27.html"
+  },
+  {
     "date": "2026-09-26",
     "title": "ABD ve İngiltere, C-UAS elemesi FLYTRAP 6.0'ı dünya çapındaki firmalara açtı",
     "summary": "Yeni ihale açılmadı; günün ağırlığı açık C-UAS elemeleri ve topçu teslimatı. ABD ve İngiltere, Mayıs 2027'de yaklaşık 1.000 askerle yapılacak FLYTRAP 6.0 karşı-dron elemesine başvuruyu dünya çapındaki firmalara açtı. Aralık'taki yüksek enerjili lazer atış elemesinin arkasında bir yıl içinde operasyonel değerlendirme sözleşmelerine ayrılacak 200 milyon $ bulunduğu bildirildi. Romanya, 54 K9 ve 36 K10'luk yaklaşık 1 milyar $'lık siparişin ilk partisini teslim aldı; üretimin %80'inin Romanya sanayisinden karşılanması hedefleniyor. Anduril ile ORIGIN, BLAZE önleyicisini Lattice'e bağlamak için Letonya'da mutabakat imzaladı; Deniz Piyadeleri amfibi araçlara 15,7 milyon $'lık karıştırıcı siparişi verdi.",
