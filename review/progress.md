@@ -113,8 +113,19 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 | K2 | PASS (deneme 2; d1 FAIL: ray adları metinde yoktu — alias; alt-64 kanıtı eskiydi). Yan etki: raylardan başlık taramasından gelen Türk oyuncular düştü (17–22 Eyl); 23 Eyl rayında Rheinmetall yok (yalnız basılmayan G9 girişinde geçiyordu) | 2 | 727d21c, 449f883 |
 | K5 | PASS (d2 kodu; 3. inceleme — d1 FAIL alarm günü, d2 incelemesi kesik kanıt yüzünden FAIL). Orkestratör K5-2 ölçütünü yayımlanmış metin değişemediği için "yapısal neden kalktı + sınırla geçer" olarak yeniden yazdı. Prompt sınırları: başlık ≤65, alarm başlığı ≤70, madde ≤110. Tersine dönüş: DECISIONS 10 (Rev 9 → K5). 17 Eyl CI'da 3px payla geçiyor | 3 | aeedc4f, 6f3da19, d417af0 |
 
-- **K4 bekliyor:** müşteriye soruldu — 92 kalem brifingden ÖNCE (05:19) toplanmış, 33ü aday listesindeydi; "BRİFİNGDEN SONRA" yanlış olur. Seçenekler: A etiketsiz, B doğru başka etiket, C yine de BRİFİNGDEN SONRA.
+- **K4 kararı (27 Eyl): A — etiketsiz.** ~~K4 bekliyor:~~ müşteriye soruldu — 92 kalem brifingden ÖNCE (05:19) toplanmış, 33ü aday listesindeydi; "BRİFİNGDEN SONRA" yanlış olur. Seçenekler: A etiketsiz, B doğru başka etiket, C yine de BRİFİNGDEN SONRA.
 | K6 | PASS (deneme 2; d1 FAIL: Elbit nedeni tahmindi, teslim notu yinelenen girdi yaratırdı). Northrop: Accept-Language başlığı (CI'dan doğrulandı). Elbit: /feed/ kaldırılmış → /news HTML ayrıştırıcısı (CI'dan 10 kayıt). Elbit Systems UK isteğe bağlı ek kaynak. İnceleyiciye bu değişiklikte builder notlarını okuma izni verildi (ölçütler notlarla ilgili) | 2 | 6ddf97f, 8545c50, ac112eb |
 
 - 24 Eyl: 5 sınama iş akışı silindi (uyari-test, gec-gelen-test, silme-yok-test, ceviri-dedektoru-test, k6-kaynak-test); smoke.py silinmiş dosyalara dayanmıyor. Issue #5 kapatıldı. merge-day-prompt.md yazıldı. human-checks.md üç bölüm olarak yeniden yazıldı.
 - **Açık:** yalnız K4 (müşteri seçimi A/B/C).
+
+## 27 Eylül oturumu
+
+- Adım 0: "1 kabuk çalışıyor" = 23 Eyl'den kalan yerel site sunucusu (`http.server 8000`); bu oturumun incelemeleri için açık tutuldu, oturum sonunda durduruldu. Ayrıca iki artık süreç durduruldu: 22 Eyl'den `http.server 8802` ve 4 günlük Rev 30 push-worker taklidi (`node e2e.mjs`, localhost:8799, sahte sırlar). Çalışma ağacında `review/human-checks.md` commit'lenmemiş biçimde silinmişti → `git restore` ile geri alındı. `data/news/2026-09-24-aday.md` yerel Rev 31 kanıtı, izlenmiyor, dokunulmadı.
+
+| K | Karar | Deneme | Commit |
+|---|---|---|---|
+| K4 | PASS (A: 92 kalem etiketsiz, `ilk_goruldu` 05:19:10; 536 → 628). Orkestratör K4-4'ü **inceleme öncesi** düzeltti: /oyuncular.html ve brifing sayıları günün başlıklarından türediği için değişir (Bugün 14→17; Saab, Sarsılmaz, STM 23 Eyl bağlantısı). Divyastra kalemi brifingde atıflı → BRİFİNGDE. Bir görünür yinelenen: Euro-SD "FQ-42 Vengeance…" mevcut Armada kalemiyle aynı başlık — A gereği tutuldu (düşerse 627) | 1 | (bu commit) |
+
+- Drive yedeği: `kaynaklar-yedek-2026-09-27.json` (id `1-hX142ZN141ynOcD48CjGqxQcRVf-aYA`, 38.608 B, özgün son düzenleme 17 Eyl). Toplayıcı yalnız tam adı `kaynaklar.json` olanı okur.
+- Adım 3: `review/verdicts/self-check.md` (bağımsız alt ajan): K5-2 yeniden yazımı WEAKER; 110'da 10 maddenin 3'ü kilit bilgi kaybediyor; 120 ve 130 İLK-EKRAN'da 20 Eyl'de kalıyor (CI en kötü 835); 115: 1 kayıp, 10 günün hepsi geçiyor (20 Eyl 3px payla). Hiçbir şey değiştirilmedi — müşteri karar verir.
