@@ -905,16 +905,12 @@
   "segmentler": [],
   "gunler": [
    {
-    "g": "2026-09-28",
-    "u": "/haberler/2026-09-28.html?q=STM"
-   },
-   {
     "g": "2026-09-25",
     "u": "/haberler/2026-09-25.html?q=STM"
    }
   ],
-  "son": "2026-09-28",
-  "sayi_30g": 2
+  "son": "2026-09-25",
+  "sayi_30g": 1
  },
  "asfat": {
   "ad": "ASFAT",
