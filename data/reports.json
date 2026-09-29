@@ -1,5 +1,145 @@
 [
   {
+    "date": "2026-09-29",
+    "title": "AB Konseyi karşı-dron programını ortak çıkar projesi ilan etti",
+    "summary": "Yeni ihale açılmadı; günün ağırlığı AB'nin karşı-dron finansman kanalı, tehdit tarafındaki maliyet dengesi ve mühimmat stoklama programları. AB Konseyi 28 Eylül'de ilk beş Avrupa Ortak Çıkar Savunma Projesi'ni EDIP fonuna uygun ilan etti; biri karşı-dron programı DECODER. Jet motorlu Geran-4'ün sökülüp incelenmesi motor maliyetini 35.000–40.000 $ olarak verirken Ukrayna'nın önleme oranının pervaneli tipte %90'ın üzerinden jet tipte %55'e düştüğü bildirildi. Tayvan mühimmat stokunu 30 günden 120 güne çıkarmak için altı yılda 27,59 milyar TWD ayırdı; öncelik 120 ve 105 mm tank, 30 mm ve 155 mm mühimmatta. KNDS araç üstü C-UAS paketine hit-to-kill önleyici dron ekledi; Alman Bütçe Komisyonu 12 tedarik önergesini onayladı.",
+    "lead": "AB Konseyi 28 Eylül'de ilk beş ortak çıkar savunma projesini EDIP fonuna uygun ilan etti; biri karşı-dron programı DECO…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "C-UAS",
+      "Mühimmat",
+      "Hava Savunma",
+      "Topçu",
+      "AB",
+      "Rakip",
+      "Savunma Bütçesi"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "AB'nin ilk beş ortak çıkar savunma projesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Jet motorlu Geran-4 maliyet analizi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "Tayvan mühimmat stok programı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "KNDS TARGAS'a AERIX önleyici dronu",
+        "home": "rakip"
+      },
+      {
+        "id": "G5",
+        "label": "Alman Bütçe Komisyonu 12 tedarik önergesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "Yuma'da kalıcı C-UAS test şeritleri",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Hollanda–EOS Apollo lazer niyet mektubu",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "Ermenistan'ın Trajan 155 mm atışı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G9",
+        "label": "Hanwha'nın Polonya'daki konumu",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "Fire Point Freyja iki modlu arayıcı",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "EDGE'in ADEX 2026 paketi",
+        "home": "rakip"
+      },
+      {
+        "id": "G12",
+        "label": "UNIFY.C2'ye akustik sensör entegrasyonu",
+        "home": "rakip"
+      },
+      {
+        "id": "G13",
+        "label": "WB Group–Optix teknoloji transferi",
+        "home": "rakip"
+      },
+      {
+        "id": "G14",
+        "label": "USAF orta kalibreli namlulu hava savunma pazar araştırması",
+        "home": "izleme"
+      },
+      {
+        "id": "G15",
+        "label": "Malezya MERAD (RMK-13)",
+        "home": "izleme"
+      },
+      {
+        "id": "G16",
+        "label": "665 milyon $'lık C-UAS test siparişine itiraz",
+        "home": "izleme"
+      },
+      {
+        "id": "G17",
+        "label": "xTech|Apex Intercept gösterimleri",
+        "home": "izleme"
+      },
+      {
+        "id": "G18",
+        "label": "ABD Deniz Piyadeleri Drone Round",
+        "home": "izleme"
+      },
+      {
+        "id": "G19",
+        "label": "ABD Donanması uygun maliyetli önleyici",
+        "home": "izleme"
+      },
+      {
+        "id": "G20",
+        "label": "Ukrayna'da güdümsüz 155 mm tercihi",
+        "home": "izleme"
+      },
+      {
+        "id": "G21",
+        "label": "Nadir toprak ve mıknatıs tedariki",
+        "home": "izleme"
+      },
+      {
+        "id": "G22",
+        "label": "Ermenistan'ın Divyastra MK-1 seçimi",
+        "home": "izleme"
+      },
+      {
+        "id": "G23",
+        "label": "Kazakistan askerî reform planı",
+        "home": "izleme"
+      },
+      {
+        "id": "G24",
+        "label": "NATO'nun küçük insansız deniz aracı değerlendirmesi",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-09-29.html"
+  },
+  {
     "date": "2026-09-28",
     "title": "ABD, Arap müttefiklerine 2025–2026'da 30 milyar $'ı aşan silah paketi onayladı",
     "summary": "Yeni ihale açılmadı; günün ağırlığı Körfez hava savunma harcamasının yönü ve mühimmat stoklama politikaları. ABD'nin Arap müttefiklerine Ocak 2025'ten bu yana onayladığı paketin 30 milyar $'ı aştığı, Katar'ın ~5 milyar $'lık kaleminde Patriot hava savunma sistemlerinin bulunduğu derlendi; aynı gün Husilerin Riyad'a yönelttiği iki dron ile Khamis Mushait'e attığı iki balistik füze koalisyon hava savunmasıyla düşürüldü. Japonya, 2027 mali yılından itibaren en az 65, 2032'ye kadar yaklaşık 130 yeni mühimmat deposu kuruyor; topçu mermisi stoku yaklaşık iki aylık muharebeye yetiyor. İngiliz Cambridge Aerospace, birim maliyeti on binlerce dolar olan Skyhammer önleyicisi için Japonya'da üretim kuruyor. Hindistan savunma ihracatı 38.424 crore ₹'ye çıktı ve piyade tüfeğinde 425.000 adetlik karabina hattıyla ithal ikamesine geçiyor.",
