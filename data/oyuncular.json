@@ -391,6 +391,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-09-30",
+    "u": "/reports/2026-09-30.html#g5"
+   },
+   {
     "g": "2026-09-27",
     "u": "/reports/2026-09-27.html#g6"
    },
@@ -407,8 +411,8 @@
     "u": "/reports/2026-09-14.html#g9"
    }
   ],
-  "son": "2026-09-27",
-  "sayi_30g": 4
+  "son": "2026-09-30",
+  "sayi_30g": 5
  },
  "northrop-grumman": {
   "ad": "Northrop Grumman",
@@ -729,6 +733,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-09-30",
+    "u": "/reports/2026-09-30.html#g10"
+   },
+   {
     "g": "2026-09-29",
     "u": "/haberler/2026-09-29.html?q=Aselsan"
    },
@@ -773,8 +781,8 @@
     "u": "/reports/2026-09-14.html#g10"
    }
   ],
-  "son": "2026-09-29",
-  "sayi_30g": 11
+  "son": "2026-09-30",
+  "sayi_30g": 12
  },
  "roketsan": {
   "ad": "Roketsan",
@@ -900,6 +908,10 @@
   "segmentler": [],
   "gunler": [
    {
+    "g": "2026-09-30",
+    "u": "/haberler/2026-09-30.html?q=Havelsan"
+   },
+   {
     "g": "2026-09-29",
     "u": "/haberler/2026-09-29.html?q=Havelsan"
    },
@@ -912,8 +924,8 @@
     "u": "/haberler/2026-09-17.html?q=Havelsan"
    }
   ],
-  "son": "2026-09-29",
-  "sayi_30g": 3
+  "son": "2026-09-30",
+  "sayi_30g": 4
  },
  "stm": {
   "ad": "STM",
@@ -984,12 +996,16 @@
   "segmentler": [],
   "gunler": [
    {
+    "g": "2026-09-30",
+    "u": "/haberler/2026-09-30.html?q=Nurol%20Makina"
+   },
+   {
     "g": "2026-09-29",
     "u": "/haberler/2026-09-29.html?q=Nurol%20Makina"
    }
   ],
-  "son": "2026-09-29",
-  "sayi_30g": 1
+  "son": "2026-09-30",
+  "sayi_30g": 2
  },
  "meteksan": {
   "ad": "Meteksan",

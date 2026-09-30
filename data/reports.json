@@ -1,5 +1,136 @@
 [
   {
+    "date": "2026-09-30",
+    "title": "ABD karşı-dron tedarikini 10 firmalı 4,15 milyar $'lık çerçeveye bağladı",
+    "summary": "Günün ağırlığı ABD'nin karşı-dron tedarikini tek çerçeveye toplaması ve mühimmat-fünye kaleminin ayrı sipariş olarak büyümesi. JIATF-401 ile ABD Ordusu, sensörden efektöre ve komuta-kontrole uzanan 10 firmalı belirsiz teslim-belirsiz miktar çerçevesinde 4,15 milyar $'lık tavan açtı; tutarın Ekim sonunda 7 milyar $'a çıkması bekleniyor, ancak yalnızca 50 milyon $ bağlandı ve kalanı FY2027 ödeneğine bağlı. L3Harris, APKWS güdümlü 70 mm Hydra roketini dron önleyicisine çeviren FALCO mekanik yakınlık fünyesi için 52,3 milyon $'lık ek sipariş aldı; toplam 100,8 milyon $, teslim Kasım 2027. Pentagon tungsten tedarik zincirine 450 milyon $ koydu ve 1 Ocak 2027'den Çin, Rusya, İran ve Kuzey Kore menşeli tungsten federal alımda yasaklanıyor. Raytheon AMRAAM üretimini 2033'e kadar 20,7 milyar $'lık çok yıllı sözleşmeye bağladı; 16 ülke FMS ortağı. Kongsberg, Hollanda JLTV'lerine karşı-dron kabiliyetli PROTECTOR RS4 uzaktan kumandalı silah istasyonu verecek.",
+    "lead": "JIATF-401 ve ABD Ordusu, karşı-dron tedarikini 10 firmaya açılan 4,15 milyar $ tavanlı tek çerçeveye bağladı; tutarın E…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "C-UAS",
+      "Mühimmat",
+      "Hava Savunma",
+      "Topçu",
+      "ABD",
+      "Tedarik Zinciri",
+      "Rakip",
+      "İhale"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "ABD'nin 10 firmalı karşı-dron çerçevesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "FALCO yakınlık fünyesi ek siparişi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "Pentagon tungsten yatırımı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "Raytheon AMRAAM çok yıllı sözleşmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "Kongsberg–Oshkosh Hollanda RS4",
+        "home": "rakip"
+      },
+      {
+        "id": "G6",
+        "label": "Drone Dominance Faz 3",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Fransız topçu alayının yeniden yapılanması",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "Hindistan Ordusu karşı-dron file perdesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G9",
+        "label": "ABD Donanması 30 MUSV",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G10",
+        "label": "ASELSAN KANGAL ve EJDERHA",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "Robin Radar kapasite artışı",
+        "home": "rakip"
+      },
+      {
+        "id": "G12",
+        "label": "USAF orta kalibreli namlulu hava savunma pazar araştırması",
+        "home": "izleme"
+      },
+      {
+        "id": "G13",
+        "label": "Malezya MERAD (RMK-13)",
+        "home": "izleme"
+      },
+      {
+        "id": "G14",
+        "label": "665 milyon $'lık C-UAS test siparişine itiraz",
+        "home": "izleme"
+      },
+      {
+        "id": "G15",
+        "label": "xTech|Apex Intercept gösterimleri",
+        "home": "izleme"
+      },
+      {
+        "id": "G16",
+        "label": "ABD Deniz Piyadeleri Drone Round",
+        "home": "izleme"
+      },
+      {
+        "id": "G17",
+        "label": "ABD Donanması uygun maliyetli önleyici",
+        "home": "izleme"
+      },
+      {
+        "id": "G18",
+        "label": "Ukrayna'da güdümsüz 155 mm tercihi",
+        "home": "izleme"
+      },
+      {
+        "id": "G19",
+        "label": "Nadir toprak ve mıknatıs tedariki",
+        "home": "izleme"
+      },
+      {
+        "id": "G20",
+        "label": "Ermenistan'ın Divyastra MK-1 seçimi",
+        "home": "izleme"
+      },
+      {
+        "id": "G21",
+        "label": "Kazakistan askerî reform planı",
+        "home": "izleme"
+      },
+      {
+        "id": "G22",
+        "label": "NATO'nun küçük insansız deniz aracı değerlendirmesi",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-09-30.html"
+  },
+  {
     "date": "2026-09-29",
     "title": "AB Konseyi karşı-dron programını ortak çıkar projesi ilan etti",
     "summary": "Yeni ihale açılmadı; günün ağırlığı AB'nin karşı-dron finansman kanalı, tehdit tarafındaki maliyet dengesi ve mühimmat stoklama programları. AB Konseyi 28 Eylül'de ilk beş Avrupa Ortak Çıkar Savunma Projesi'ni EDIP fonuna uygun ilan etti; biri karşı-dron programı DECODER. Jet motorlu Geran-4'ün sökülüp incelenmesi motor maliyetini 35.000–40.000 $ olarak verirken Ukrayna'nın önleme oranının pervaneli tipte %90'ın üzerinden jet tipte %55'e düştüğü bildirildi. Tayvan mühimmat stokunu 30 günden 120 güne çıkarmak için altı yılda 27,59 milyar TWD ayırdı; öncelik 120 ve 105 mm tank, 30 mm ve 155 mm mühimmatta. KNDS araç üstü C-UAS paketine hit-to-kill önleyici dron ekledi; Alman Bütçe Komisyonu 12 tedarik önergesini onayladı.",
