@@ -1,5 +1,156 @@
 [
   {
+    "date": "2026-10-01",
+    "title": "Belçika–Hollanda ortak NASAMS alımı platform, füze ve karşı-dron katmanlarını ayrı sözleşmelere böldü",
+    "summary": "Günün ağırlığı Avrupa'da bir ortak hava savunma alımının katman katman bölünmesi ve ABD'de karşı-dron atış kontrolünün tek tedarikçiye bağlanması. Belçika ve Hollanda, Hollanda Savunma Bakanlığı üzerinden Kongsberg'e 10 milyar NOK (yaklaşık 860 milyon €) değerinde NASAMS sözleşmesi verdi; Belçika 10 sistem (biri Lüksemburg için), Hollanda 6 NASAMS ve 4 hafif NOMADS alıyor, füzeler ise ABD FMS kanalından ayrıca geliyor (1.276 AMRAAM ve 550'den fazla AIM-9X için onaylar, yaklaşık 4,02 milyar $). JIATF-401, kalibreden bağımsız SMASH atış kontrol sistemleri için Smart Shooter'a 36 ay süreli, 150 milyon $ tavanlı tek kaynaklı IDIQ verdi. Pentagon, Gauntlet II kapsamında Neros'a 14.000 dron ve patlayıcı faydalı yük için 100 milyon $'ı aşan sipariş açtı; 800 adet, üretim takvimini kaçıran rakiplerden devredildi. Northrop Grumman, M-SHORAD'ın menzilini uzatacak XRC karşı-dron füzesinin katı yakıtlı ramjet iticisi için 18,8 milyon $ aldı. ABD Savunma Bakanlığı tedarik zinciri ve stratejik rezervi kapsayan FORTRESS America programını başlattı; program ofisi 30 gün içinde kurulacak.",
+    "lead": "Belçika ve Hollanda, Kongsberg'e 10 milyar NOK (yaklaşık 860 milyon €) değerinde ortak NASAMS sözleşmesi verdi; 16 NASA…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Mühimmat",
+      "Hafif Silah",
+      "ABD",
+      "AB",
+      "Rakip",
+      "Tedarik Zinciri"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Belçika–Hollanda ortak NASAMS alımı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Smart Shooter SMASH tek kaynaklı IDIQ",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "Neros Gauntlet II siparişi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "Northrop Grumman XRC itici sözleşmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "FORTRESS America",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "Avio USA katı yakıtlı motor tesisi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "PrSM Increment 4 beş firma",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "American Rheinmetall MK93 siparişi",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "RTX AIM-9X tedarikçi tabanı",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "L3Harris THAAD itici sözleşmesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "Elbit D11A Tayland teslimi",
+        "home": "rakip"
+      },
+      {
+        "id": "G12",
+        "label": "Fortem 50 milyon $ turu",
+        "home": "rakip"
+      },
+      {
+        "id": "G13",
+        "label": "ROKETSAN BARBAROS Azerbaycan",
+        "home": "rakip"
+      },
+      {
+        "id": "G14",
+        "label": "Bayraktar KASIRGA",
+        "home": "rakip"
+      },
+      {
+        "id": "G15",
+        "label": "Pakistan'da LD-2000",
+        "home": "izleme"
+      },
+      {
+        "id": "G16",
+        "label": "USAF orta kalibreli namlulu hava savunma pazar araştırması",
+        "home": "izleme"
+      },
+      {
+        "id": "G17",
+        "label": "Malezya MERAD (RMK-13)",
+        "home": "izleme"
+      },
+      {
+        "id": "G18",
+        "label": "665 milyon $'lık C-UAS test siparişine itiraz",
+        "home": "izleme"
+      },
+      {
+        "id": "G19",
+        "label": "xTech|Apex Intercept gösterimleri",
+        "home": "izleme"
+      },
+      {
+        "id": "G20",
+        "label": "ABD Deniz Piyadeleri Drone Round",
+        "home": "izleme"
+      },
+      {
+        "id": "G21",
+        "label": "ABD Donanması uygun maliyetli önleyici",
+        "home": "izleme"
+      },
+      {
+        "id": "G22",
+        "label": "Ukrayna'da güdümsüz 155 mm tercihi",
+        "home": "izleme"
+      },
+      {
+        "id": "G23",
+        "label": "Nadir toprak ve mıknatıs tedariki",
+        "home": "izleme"
+      },
+      {
+        "id": "G24",
+        "label": "Ermenistan'ın Divyastra MK-1 seçimi",
+        "home": "izleme"
+      },
+      {
+        "id": "G25",
+        "label": "Kazakistan askerî reform planı",
+        "home": "izleme"
+      },
+      {
+        "id": "G26",
+        "label": "NATO'nun küçük insansız deniz aracı değerlendirmesi",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-10-01.html"
+  },
+  {
     "date": "2026-09-30",
     "title": "ABD karşı-dron tedarikini 10 firmalı 4,15 milyar $'lık çerçeveye bağladı",
     "summary": "Günün ağırlığı ABD'nin karşı-dron tedarikini tek çerçeveye toplaması ve mühimmat-fünye kaleminin ayrı sipariş olarak büyümesi. JIATF-401 ile ABD Ordusu, sensörden efektöre ve komuta-kontrole uzanan 10 firmalı belirsiz teslim-belirsiz miktar çerçevesinde 4,15 milyar $'lık tavan açtı; tutarın Ekim sonunda 7 milyar $'a çıkması bekleniyor, ancak yalnızca 50 milyon $ bağlandı ve kalanı FY2027 ödeneğine bağlı. L3Harris, APKWS güdümlü 70 mm Hydra roketini dron önleyicisine çeviren FALCO mekanik yakınlık fünyesi için 52,3 milyon $'lık ek sipariş aldı; toplam 100,8 milyon $, teslim Kasım 2027. Pentagon tungsten tedarik zincirine 450 milyon $ koydu ve 1 Ocak 2027'den Çin, Rusya, İran ve Kuzey Kore menşeli tungsten federal alımda yasaklanıyor. Raytheon AMRAAM üretimini 2033'e kadar 20,7 milyar $'lık çok yıllı sözleşmeye bağladı; 16 ülke FMS ortağı. Kongsberg, Hollanda JLTV'lerine karşı-dron kabiliyetli PROTECTOR RS4 uzaktan kumandalı silah istasyonu verecek.",
