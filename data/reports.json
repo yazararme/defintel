@@ -1,5 +1,186 @@
 [
   {
+    "date": "2026-10-02",
+    "title": "ABD, SM-6 üretimini 24,4 milyar $'lık çok yıllı sözleşmeye bağladı",
+    "summary": "Günün ağırlığı ABD'de füze üretiminin ikinci kez mega çok yıllı sözleşmeye bağlanması ve karşı-dron çerçevesinin müttefik alımlarına açık bir pazar yerine dönüşmesi. ABD Donanması, RTX'e SM-6 üretimi için beş yıl artı iki opsiyon yılı süreli, 24,4 milyar $'a kadar değerinde sözleşme verdi; gerekçe muharebede tükenen stoklar, ödenek ise henüz çıkmadı. JIATF-401'in 10 firmalı IDIQ çerçevesinin adı Domestic Shield olarak açıklandı: 36 aylık sipariş dönemi ve ürünlerin ABD ile müttefik kuvvetlerin erişebildiği bir C-UAS Marketplace'e listelenmesi öngörülüyor. Hindistan ile Güney Kore, çift namlulu 30 mm ve füzeyi birleştiren K30 Biho görüşmelerini 104 sistem ve 21.500-22.400 crore rupi ölçeğinde yeniden açtı (doğrulanmamış). AB'nin karşı-dron projesi DECODER için 2033'e kadar 3,5-5 milyar € bandı ve beş projenin başlatılmasına 325 milyon € EDIP tahsisi yayımlandı. Tiberius Aerospace, 155 mm ramjetli hassas güdümlü mermi Sceptre için 500 milyon $'lık, lisanslamaya dayalı sözleşme duyurdu.",
+    "lead": "ABD Donanması, RTX'e SM-6 üretimi için beş yıl artı iki opsiyon yılı süreli, 24,4 milyar $'a kadar değerinde çok yıllı…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Mühimmat",
+      "Topçu",
+      "ABD",
+      "AB",
+      "Güney Asya",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "SM-6 çok yıllı sözleşmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Domestic Shield ve C-UAS Marketplace",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "Hindistan-Kore K30 Biho görüşmeleri",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "DECODER bütçe bandı ve Polonya",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "Tiberius Sceptre 155 mm ramjet",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "Hollanda CITADEL genişlemesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Otonom Harp Komutanlığı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "Letonya Morana 155 mm alımı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G9",
+        "label": "BAE Systems BATS denemeleri",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "Axon Vision ForceField canlı atışı",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "ASELSAN uzun menzilli seri üretim sözleşmeleri",
+        "home": "rakip"
+      },
+      {
+        "id": "G12",
+        "label": "Fortem turunun lideri Lockheed Martin",
+        "home": "rakip"
+      },
+      {
+        "id": "G13",
+        "label": "Ondas Dronebuster REACH",
+        "home": "rakip"
+      },
+      {
+        "id": "G14",
+        "label": "Kalashnikov SVDM ihracatı",
+        "home": "rakip"
+      },
+      {
+        "id": "G15",
+        "label": "USAF orta kalibreli namlulu hava savunma pazar araştırması",
+        "home": "izleme"
+      },
+      {
+        "id": "G16",
+        "label": "Malezya MERAD (RMK-13)",
+        "home": "izleme"
+      },
+      {
+        "id": "G17",
+        "label": "665 milyon $'lık C-UAS test siparişine itiraz",
+        "home": "izleme"
+      },
+      {
+        "id": "G18",
+        "label": "xTech|Apex Intercept gösterimleri",
+        "home": "izleme"
+      },
+      {
+        "id": "G19",
+        "label": "ABD Deniz Piyadeleri Drone Round",
+        "home": "izleme"
+      },
+      {
+        "id": "G20",
+        "label": "ABD Donanması uygun maliyetli önleyici",
+        "home": "izleme"
+      },
+      {
+        "id": "G21",
+        "label": "Ukrayna'da güdümsüz 155 mm tercihi",
+        "home": "izleme"
+      },
+      {
+        "id": "G22",
+        "label": "Nadir toprak ve mıknatıs tedariki",
+        "home": "izleme"
+      },
+      {
+        "id": "G23",
+        "label": "Ermenistan'ın Divyastra MK-1 seçimi",
+        "home": "izleme"
+      },
+      {
+        "id": "G24",
+        "label": "Kazakistan askerî reform planı",
+        "home": "izleme"
+      },
+      {
+        "id": "G25",
+        "label": "NATO'nun küçük insansız deniz aracı değerlendirmesi",
+        "home": "izleme"
+      },
+      {
+        "id": "G26",
+        "label": "Pakistan'da LD-2000",
+        "home": "izleme"
+      },
+      {
+        "id": "G27",
+        "label": "Etiyopya'nın Orion-E tedariki",
+        "home": "izleme"
+      },
+      {
+        "id": "G28",
+        "label": "Hindistan MMG termal nişangâh RFI'si",
+        "home": "izleme"
+      },
+      {
+        "id": "G29",
+        "label": "Otokar zırhlı araç siparişi",
+        "home": "izleme"
+      },
+      {
+        "id": "G30",
+        "label": "MUSV üretim siparişleri",
+        "home": "izleme"
+      },
+      {
+        "id": "G31",
+        "label": "ABD güney sınırı C-UAS denemesi",
+        "home": "izleme"
+      },
+      {
+        "id": "G32",
+        "label": "JIATF-401 tedarik planlamasında yapay zekâ",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-10-02.html"
+  },
+  {
     "date": "2026-10-01",
     "title": "Belçika–Hollanda ortak NASAMS alımı platform, füze ve karşı-dron katmanlarını ayrı sözleşmelere böldü",
     "summary": "Günün ağırlığı Avrupa'da bir ortak hava savunma alımının katman katman bölünmesi ve ABD'de karşı-dron atış kontrolünün tek tedarikçiye bağlanması. Belçika ve Hollanda, Hollanda Savunma Bakanlığı üzerinden Kongsberg'e 10 milyar NOK (yaklaşık 860 milyon €) değerinde NASAMS sözleşmesi verdi; Belçika 10 sistem (biri Lüksemburg için), Hollanda 6 NASAMS ve 4 hafif NOMADS alıyor, füzeler ise ABD FMS kanalından ayrıca geliyor (1.276 AMRAAM ve 550'den fazla AIM-9X için onaylar, yaklaşık 4,02 milyar $). JIATF-401, kalibreden bağımsız SMASH atış kontrol sistemleri için Smart Shooter'a 36 ay süreli, 150 milyon $ tavanlı tek kaynaklı IDIQ verdi. Pentagon, Gauntlet II kapsamında Neros'a 14.000 dron ve patlayıcı faydalı yük için 100 milyon $'ı aşan sipariş açtı; 800 adet, üretim takvimini kaçıran rakiplerden devredildi. Northrop Grumman, M-SHORAD'ın menzilini uzatacak XRC karşı-dron füzesinin katı yakıtlı ramjet iticisi için 18,8 milyon $ aldı. ABD Savunma Bakanlığı tedarik zinciri ve stratejik rezervi kapsayan FORTRESS America programını başlattı; program ofisi 30 gün içinde kurulacak.",
