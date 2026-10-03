@@ -1,5 +1,186 @@
 [
   {
+    "date": "2026-10-03",
+    "title": "ABD karşı-dron onaylarını 30 günlük tırmandırma kuralı ve tekrar güvenlik incelemesi yasağıyla hızlandırdı",
+    "summary": "Günün ağırlığı ABD'de karşı-dron sistemlerinin sahaya sürülme sürecinin idari olarak kısaltılması ve karşı-dron sensör katmanının ana yüklenicilere konsolide olma ihtimali. ABD Savunma Bakanlığı, 28 Eylül tarihli muhtırayla 30 gün işlem görmeyen taleplerin bakanlık makamına tırmandırılmasını, değişmeyen sistem ve kullanım senaryolarında silah güvenlik incelemesinin tekrarlanmamasını ve hukuki incelemelerin genellikle 10 gün içinde tamamlanmasını emretti; JIATF-401'in eşgüdüm yetkisi genişletildi. Reuters aktarımına göre karşı-dron radar üreticisi Robin Radar yaklaşık 2 milyar € değerlemeyle satışta ve ilgilenenler arasında BAE Systems ile dört finansal yatırımcı var. ABD'nin Suudi Arabistan ve Katar'a birer Patriot bataryası konuşlandırdığı, talebin enerji altyapısının korunması olduğu bildirildi (doğrulanmamış). Almanya 2027'ye kadar hem İHA hem karşı-İHA görevlerini tek alayda birleştiriyor. Avrupa Savunma Ajansı raporu savunma harcamasını 2025'te 418 milyar €, 2026'da 456 milyar €, 2029 projeksiyonunda 547 milyar € olarak veriyor ve ilerlemenin en belirgin olduğu alan olarak dron ve karşı-dron sistemlerini işaretliyor.",
+    "lead": "ABD Savunma Bakanlığı, 28 Eylül tarihli muhtırayla karşı-dron onaylarında 30 gün işlem görmeyen taleplerin bakan makamı…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Dolanan Mühimmat",
+      "Savunma Bütçesi",
+      "ABD",
+      "AB",
+      "Körfez",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "ABD karşı-dron onay hızlandırma muhtırası",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Körfez'e Patriot konuşlandırması",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "Robin Radar satış süreci",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "Almanya'nın İHA/karşı-İHA alayı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "EDA savunma harcaması raporu",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "Almanya orta menzilli dolanan mühimmat nitelendirmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "ASELSAN hava savunma ihracatı",
+        "home": "rakip"
+      },
+      {
+        "id": "G8",
+        "label": "Elbit Sırbistan tesisi",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "Destinus-Aeon önleyici finali",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "Thales İrlanda radarları",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "Rheinmetall Norveç tesisi ve gözetleme uydusu",
+        "home": "rakip"
+      },
+      {
+        "id": "G12",
+        "label": "Diehl IRIS-T SLM F125 uyarlaması",
+        "home": "rakip"
+      },
+      {
+        "id": "G13",
+        "label": "Akash ihracatının genişlemesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G14",
+        "label": "USAF orta kalibreli namlulu hava savunma pazar araştırması",
+        "home": "izleme"
+      },
+      {
+        "id": "G15",
+        "label": "Malezya MERAD (RMK-13)",
+        "home": "izleme"
+      },
+      {
+        "id": "G16",
+        "label": "665 milyon $'lık C-UAS test siparişine itiraz",
+        "home": "izleme"
+      },
+      {
+        "id": "G17",
+        "label": "xTech|Apex Intercept gösterimleri",
+        "home": "izleme"
+      },
+      {
+        "id": "G18",
+        "label": "ABD Deniz Piyadeleri Drone Round",
+        "home": "izleme"
+      },
+      {
+        "id": "G19",
+        "label": "ABD Donanması uygun maliyetli önleyici",
+        "home": "izleme"
+      },
+      {
+        "id": "G20",
+        "label": "Ukrayna'da güdümsüz 155 mm tercihi",
+        "home": "izleme"
+      },
+      {
+        "id": "G21",
+        "label": "Nadir toprak ve mıknatıs tedariki",
+        "home": "izleme"
+      },
+      {
+        "id": "G22",
+        "label": "Ermenistan'ın Divyastra MK-1 seçimi",
+        "home": "izleme"
+      },
+      {
+        "id": "G23",
+        "label": "Kazakistan askerî reform planı",
+        "home": "izleme"
+      },
+      {
+        "id": "G24",
+        "label": "NATO'nun küçük insansız deniz aracı değerlendirmesi",
+        "home": "izleme"
+      },
+      {
+        "id": "G25",
+        "label": "Pakistan'da LD-2000",
+        "home": "izleme"
+      },
+      {
+        "id": "G26",
+        "label": "Etiyopya'nın Orion-E tedariki",
+        "home": "izleme"
+      },
+      {
+        "id": "G27",
+        "label": "Hindistan MMG termal nişangâh RFI'si",
+        "home": "izleme"
+      },
+      {
+        "id": "G28",
+        "label": "Otokar zırhlı araç siparişi",
+        "home": "izleme"
+      },
+      {
+        "id": "G29",
+        "label": "MUSV üretim siparişleri",
+        "home": "izleme"
+      },
+      {
+        "id": "G30",
+        "label": "ABD güney sınırı C-UAS denemesi",
+        "home": "izleme"
+      },
+      {
+        "id": "G31",
+        "label": "JIATF-401 tedarik planlamasında yapay zekâ",
+        "home": "izleme"
+      },
+      {
+        "id": "G32",
+        "label": "DHS kolluk ile karşı-dron testi",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-10-03.html"
+  },
+  {
     "date": "2026-10-02",
     "title": "ABD, SM-6 üretimini 24,4 milyar $'lık çok yıllı sözleşmeye bağladı",
     "summary": "Günün ağırlığı ABD'de füze üretiminin ikinci kez mega çok yıllı sözleşmeye bağlanması ve karşı-dron çerçevesinin müttefik alımlarına açık bir pazar yerine dönüşmesi. ABD Donanması, RTX'e SM-6 üretimi için beş yıl artı iki opsiyon yılı süreli, 24,4 milyar $'a kadar değerinde sözleşme verdi; gerekçe muharebede tükenen stoklar, ödenek ise henüz çıkmadı. JIATF-401'in 10 firmalı IDIQ çerçevesinin adı Domestic Shield olarak açıklandı: 36 aylık sipariş dönemi ve ürünlerin ABD ile müttefik kuvvetlerin erişebildiği bir C-UAS Marketplace'e listelenmesi öngörülüyor. Hindistan ile Güney Kore, çift namlulu 30 mm ve füzeyi birleştiren K30 Biho görüşmelerini 104 sistem ve 21.500-22.400 crore rupi ölçeğinde yeniden açtı (doğrulanmamış). AB'nin karşı-dron projesi DECODER için 2033'e kadar 3,5-5 milyar € bandı ve beş projenin başlatılmasına 325 milyon € EDIP tahsisi yayımlandı. Tiberius Aerospace, 155 mm ramjetli hassas güdümlü mermi Sceptre için 500 milyon $'lık, lisanslamaya dayalı sözleşme duyurdu.",

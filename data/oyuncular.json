@@ -9,6 +9,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-10-03",
+    "u": "/reports/2026-10-03.html#g11"
+   },
+   {
     "g": "2026-10-01",
     "u": "/reports/2026-10-01.html#g8"
    },
@@ -41,8 +45,8 @@
     "u": "/reports/2026-09-14.html#g7"
    }
   ],
-  "son": "2026-10-01",
-  "sayi_30g": 8
+  "son": "2026-10-03",
+  "sayi_30g": 9
  },
  "nammo": {
   "ad": "Nammo",
@@ -89,6 +93,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-10-03",
+    "u": "/reports/2026-10-03.html#g3"
+   },
+   {
     "g": "2026-10-02",
     "u": "/reports/2026-10-02.html#g9"
    },
@@ -113,8 +121,8 @@
     "u": "/reports/2026-09-19.html#g3"
    }
   ],
-  "son": "2026-10-02",
-  "sayi_30g": 6
+  "son": "2026-10-03",
+  "sayi_30g": 7
  },
  "elbit": {
   "ad": "Elbit",
@@ -126,12 +134,16 @@
   ],
   "gunler": [
    {
+    "g": "2026-10-03",
+    "u": "/reports/2026-10-03.html#g8"
+   },
+   {
     "g": "2026-10-01",
     "u": "/reports/2026-10-01.html#g11"
    }
   ],
-  "son": "2026-10-01",
-  "sayi_30g": 1
+  "son": "2026-10-03",
+  "sayi_30g": 2
  },
  "hanwha": {
   "ad": "Hanwha",
@@ -350,9 +362,14 @@
    "muhimmat",
    "hava_savunma"
   ],
-  "gunler": [],
-  "son": "",
-  "sayi_30g": 0
+  "gunler": [
+   {
+    "g": "2026-10-03",
+    "u": "/reports/2026-10-03.html#g12"
+   }
+  ],
+  "son": "2026-10-03",
+  "sayi_30g": 1
  },
  "junghans": {
   "ad": "Junghans",
@@ -494,9 +511,14 @@
    "hava_savunma",
    "roket_bomba"
   ],
-  "gunler": [],
-  "son": "",
-  "sayi_30g": 0
+  "gunler": [
+   {
+    "g": "2026-10-03",
+    "u": "/reports/2026-10-03.html#g10"
+   }
+  ],
+  "son": "2026-10-03",
+  "sayi_30g": 1
  },
  "rafael": {
   "ad": "Rafael",
@@ -771,6 +793,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-10-03",
+    "u": "/reports/2026-10-03.html#g7"
+   },
+   {
     "g": "2026-10-02",
     "u": "/reports/2026-10-02.html#g11"
    },
@@ -827,8 +853,8 @@
     "u": "/reports/2026-09-14.html#g10"
    }
   ],
-  "son": "2026-10-02",
-  "sayi_30g": 14
+  "son": "2026-10-03",
+  "sayi_30g": 15
  },
  "roketsan": {
   "ad": "Roketsan",
@@ -837,6 +863,10 @@
    "roket_bomba"
   ],
   "gunler": [
+   {
+    "g": "2026-10-03",
+    "u": "/haberler/2026-10-03.html?q=Roketsan"
+   },
    {
     "g": "2026-10-02",
     "u": "/haberler/2026-10-02.html?q=Roketsan"
@@ -858,8 +888,8 @@
     "u": "/haberler/2026-09-23.html?q=Roketsan"
    }
   ],
-  "son": "2026-10-02",
-  "sayi_30g": 5
+  "son": "2026-10-03",
+  "sayi_30g": 6
  },
  "repkon": {
   "ad": "Repkon",
@@ -1041,6 +1071,10 @@
   "segmentler": [],
   "gunler": [
    {
+    "g": "2026-10-03",
+    "u": "/reports/2026-10-03.html#g28"
+   },
+   {
     "g": "2026-10-02",
     "u": "/reports/2026-10-02.html#g29"
    },
@@ -1049,8 +1083,8 @@
     "u": "/haberler/2026-09-19.html?q=Otokar"
    }
   ],
-  "son": "2026-10-02",
-  "sayi_30g": 2
+  "son": "2026-10-03",
+  "sayi_30g": 3
  },
  "bmc": {
   "ad": "BMC",
