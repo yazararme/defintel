@@ -1,5 +1,181 @@
 [
   {
+    "date": "2026-10-04",
+    "title": "Leonardo, programlanabilir havada infilaklı mühimmat kullanan kara tabanlı 40 mm karşı-dron topunu prototip denemelerine soktu",
+    "summary": "Günün ağırlığı namlulu karşı-dron katmanında ürün düzeyinde bir rakip hamlesi ve ABD'nin mühimmat sanayii tabanına ilişkin resmî bir boşluk itirafı. Leonardo, Marlin 40 deniz kulesinden türetilen kara tabanlı Hystrix 40 ADS karşı-dron topunun deneme görüntüsünü yayımladı: 40 mm, dakikada 100 veya 300 atım, yaklaşık 4,5 km etkili menzil, programlanabilir fünyeli havada infilak ve yakınlık fünyeli mühimmat. ABD Savunma Bakanlığı'nın 30 Eylül tarihli Üretim Teknolojisi Stratejik Planı (2026-2031) kriz anında kilit sistem ve mühimmatın üretimini hızla ölçekleme kapasitesinin bulunmadığını yazıyor ve tek nokta arızası olarak döküm, dövme ve mikroelektroniği sayıyor. IISS raporu İsrail savunma ihracatını 2020'de 8,3 milyar $'dan 2025'te 19,2 milyar $'a çıkmış olarak veriyor; İbrahim Anlaşmaları ortaklarına giden kümülatif tutar yaklaşık 8,8 milyar $ ve kalemler arasında hava savunma ile dolanan mühimmat sayılıyor. ABD Ordusu, otonom kalemleri 2028 mali yılı teslim hedefiyle yeni Futures and Autonomous Systems Command altında topladı; karşı-dron görevi duyuruda sayılmıyor. Rusya, Tsentr-2026 tatbikatında çift namlulu 30 mm ve füzeyi birleştiren Pantsir-S1M'i Belarus yapımı MZKT gövdesi üzerinde sergiledi.",
+    "lead": "Leonardo, kara tabanlı 40 mm karşı-dron topu Hystrix 40 ADS'nin deneme görüntüsünü 3 Ekim'de yayımladı; sistem dakikada…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Mühimmat",
+      "TOLGA",
+      "KBRN",
+      "ABD",
+      "Körfez",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Leonardo Hystrix 40 ADS denemeleri",
+        "home": "rakip"
+      },
+      {
+        "id": "G2",
+        "label": "IISS İsrail ihracat raporu",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "ABD üretim kapasitesi uyarısı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "ABD Ordusu FASCOM",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "Pantsir-S1M yeni gövde",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "T-90M aktif koruma ile dron önleme",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "İngiltere KBRN destek sözleşmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "Epirus Leonidas Jailbreak tatbikatı",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "Warburg Pincus-KNDS görüşmeleri",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "Fas'ın David's Sling değerlendirmesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "RDM LongClaw üretim hattı",
+        "home": "rakip"
+      },
+      {
+        "id": "G12",
+        "label": "USAF orta kalibreli namlulu hava savunma pazar araştırması",
+        "home": "izleme"
+      },
+      {
+        "id": "G13",
+        "label": "Malezya MERAD (RMK-13)",
+        "home": "izleme"
+      },
+      {
+        "id": "G14",
+        "label": "665 milyon $'lık C-UAS test siparişine itiraz",
+        "home": "izleme"
+      },
+      {
+        "id": "G15",
+        "label": "xTech|Apex Intercept gösterimleri",
+        "home": "izleme"
+      },
+      {
+        "id": "G16",
+        "label": "ABD Deniz Piyadeleri Drone Round",
+        "home": "izleme"
+      },
+      {
+        "id": "G17",
+        "label": "ABD Donanması uygun maliyetli önleyici",
+        "home": "izleme"
+      },
+      {
+        "id": "G18",
+        "label": "Ukrayna'da güdümsüz 155 mm tercihi",
+        "home": "izleme"
+      },
+      {
+        "id": "G19",
+        "label": "Nadir toprak ve mıknatıs tedariki",
+        "home": "izleme"
+      },
+      {
+        "id": "G20",
+        "label": "Ermenistan'ın Divyastra MK-1 seçimi",
+        "home": "izleme"
+      },
+      {
+        "id": "G21",
+        "label": "Kazakistan askerî reform planı",
+        "home": "izleme"
+      },
+      {
+        "id": "G22",
+        "label": "NATO'nun küçük insansız deniz aracı değerlendirmesi",
+        "home": "izleme"
+      },
+      {
+        "id": "G23",
+        "label": "Pakistan'da LD-2000",
+        "home": "izleme"
+      },
+      {
+        "id": "G24",
+        "label": "Etiyopya'nın Orion-E tedariki",
+        "home": "izleme"
+      },
+      {
+        "id": "G25",
+        "label": "Hindistan MMG termal nişangâh RFI'si",
+        "home": "izleme"
+      },
+      {
+        "id": "G26",
+        "label": "Otokar zırhlı araç siparişi",
+        "home": "izleme"
+      },
+      {
+        "id": "G27",
+        "label": "MUSV üretim siparişleri",
+        "home": "izleme"
+      },
+      {
+        "id": "G28",
+        "label": "ABD güney sınırı C-UAS denemesi",
+        "home": "izleme"
+      },
+      {
+        "id": "G29",
+        "label": "JIATF-401 tedarik planlamasında yapay zekâ",
+        "home": "izleme"
+      },
+      {
+        "id": "G30",
+        "label": "DHS kolluk ile karşı-dron testi",
+        "home": "izleme"
+      },
+      {
+        "id": "G31",
+        "label": "Malezya Deniz Ajansı MPMS teslimi",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-10-04.html"
+  },
+  {
     "date": "2026-10-03",
     "title": "ABD karşı-dron onaylarını 30 günlük tırmandırma kuralı ve tekrar güvenlik incelemesi yasağıyla hızlandırdı",
     "summary": "Günün ağırlığı ABD'de karşı-dron sistemlerinin sahaya sürülme sürecinin idari olarak kısaltılması ve karşı-dron sensör katmanının ana yüklenicilere konsolide olma ihtimali. ABD Savunma Bakanlığı, 28 Eylül tarihli muhtırayla 30 gün işlem görmeyen taleplerin bakanlık makamına tırmandırılmasını, değişmeyen sistem ve kullanım senaryolarında silah güvenlik incelemesinin tekrarlanmamasını ve hukuki incelemelerin genellikle 10 gün içinde tamamlanmasını emretti; JIATF-401'in eşgüdüm yetkisi genişletildi. Reuters aktarımına göre karşı-dron radar üreticisi Robin Radar yaklaşık 2 milyar € değerlemeyle satışta ve ilgilenenler arasında BAE Systems ile dört finansal yatırımcı var. ABD'nin Suudi Arabistan ve Katar'a birer Patriot bataryası konuşlandırdığı, talebin enerji altyapısının korunması olduğu bildirildi (doğrulanmamış). Almanya 2027'ye kadar hem İHA hem karşı-İHA görevlerini tek alayda birleştiriyor. Avrupa Savunma Ajansı raporu savunma harcamasını 2025'te 418 milyar €, 2026'da 456 milyar €, 2029 projeksiyonunda 547 milyar € olarak veriyor ve ilerlemenin en belirgin olduğu alan olarak dron ve karşı-dron sistemlerini işaretliyor.",
