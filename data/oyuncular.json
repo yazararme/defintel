@@ -828,10 +828,6 @@
   ],
   "gunler": [
    {
-    "g": "2026-10-04",
-    "u": "/haberler/2026-10-04.html?q=Aselsan"
-   },
-   {
     "g": "2026-10-03",
     "u": "/reports/2026-10-03.html#g7"
    },
@@ -892,8 +888,8 @@
     "u": "/reports/2026-09-14.html#g10"
    }
   ],
-  "son": "2026-10-04",
-  "sayi_30g": 16
+  "son": "2026-10-03",
+  "sayi_30g": 15
  },
  "roketsan": {
   "ad": "Roketsan",
@@ -1043,6 +1039,10 @@
   "segmentler": [],
   "gunler": [
    {
+    "g": "2026-10-04",
+    "u": "/haberler/2026-10-04.html?q=Havelsan"
+   },
+   {
     "g": "2026-09-30",
     "u": "/haberler/2026-09-30.html?q=Havelsan"
    },
@@ -1059,8 +1059,8 @@
     "u": "/haberler/2026-09-17.html?q=Havelsan"
    }
   ],
-  "son": "2026-09-30",
-  "sayi_30g": 4
+  "son": "2026-10-04",
+  "sayi_30g": 5
  },
  "stm": {
   "ad": "STM",
@@ -1133,9 +1133,14 @@
   "ad": "BMC",
   "rol": "emsal",
   "segmentler": [],
-  "gunler": [],
-  "son": "",
-  "sayi_30g": 0
+  "gunler": [
+   {
+    "g": "2026-10-04",
+    "u": "/haberler/2026-10-04.html?q=BMC"
+   }
+  ],
+  "son": "2026-10-04",
+  "sayi_30g": 1
  },
  "nurol-makina": {
   "ad": "Nurol Makina",
