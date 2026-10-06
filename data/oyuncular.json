@@ -1019,10 +1019,6 @@
   "segmentler": [],
   "gunler": [
    {
-    "g": "2026-10-06",
-    "u": "/haberler/2026-10-06.html?q=Baykar"
-   },
-   {
     "g": "2026-10-02",
     "u": "/reports/2026-10-02.html#g27"
    },
@@ -1063,8 +1059,8 @@
     "u": "/haberler/2026-09-22.html?q=Baykar"
    }
   ],
-  "son": "2026-10-06",
-  "sayi_30g": 11
+  "son": "2026-10-02",
+  "sayi_30g": 10
  },
  "tusas": {
   "ad": "TUSAŞ",
