@@ -1,5 +1,196 @@
 [
   {
+    "date": "2026-10-06",
+    "title": "ABD, BAE'ye 1 milyar $ üzerinde APKWS II güdüm kiti ile yakınlık fünyesi ve HE-parça tesirli harp başlığını kalem kalem onayladı",
+    "summary": "Günün ağırlığı karşı-dron efektör tercihinin iki yönden birden kayması: Körfez'de ucuz güdümlü roket, ABD'de ise yönlendirilmiş enerji. ABD Dışişleri Bakanlığı 5 Ekim'de BAE'ye 1 milyar $'ı aşan, 10.000'e kadar APKWS II güdüm kiti ile Mk 152 HE-parça tesirli harp başlığı, Mk 66 roket motoru ve yakınlık fünyesi içeren satışı onayladı; gerekçe jet motorlu dronlar dahil insansız hava araçlarına karşı düşük maliyetli hassas angajman. Aynı gün JIATF-401 karşı-dron yönlendirilmiş enerji pilot programına AeroVironment, Boeing, Epirus ve Kord Technologies seçildi; dördünden üçü lazer, biri yüksek güçlü mikrodalga ve listede namlulu kinetik efektör yok. ASELSAN Savunma Sanayii Başkanlığı ile 2,46 milyar €'luk hava savunma sözleşmesi imzaladığını duyurdu; firma bunu 51 yıllık tarihindeki en büyük tek sözleşme olarak tanımlıyor ve beş gün içindeki üç sözleşmenin toplamı yaklaşık 4 milyar €. ABD 7'nci Hava Kuvvetleri Kore sahnesi için Project Iron Sentry kapsamında katmanlı kinetik ve kinetik olmayan karşı-dron bilgi talebi yayımladı. Elbit'in SIGMA 155 mm/52 kalibre araç üstü obüsü Singapur'da Primus ve FH-2000'in yerini almak üzere sergilendi.",
+    "lead": "ABD 5 Ekim'de BAE'ye 1 milyar $'ı aşan, 10.000'e kadar APKWS II güdüm kiti ile yakınlık fünyesi ve Mk 152 HE-parça tesi…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Mühimmat",
+      "TOLGA",
+      "ATTİLA",
+      "Körfez",
+      "Güneydoğu Asya",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "BAE'ye APKWS II onayı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "JIATF-401 yönlendirilmiş enerji pilot seçimi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "ASELSAN 2,46 milyar € hava savunma sözleşmesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "7'nci Hava Kuvvetleri Project Iron Sentry",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "Elbit SIGMA 155 mm Singapur",
+        "home": "rakip"
+      },
+      {
+        "id": "G6",
+        "label": "Ticari denizcilikte C-UAS talebi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Çin'in katmanlı karşı-sürü tatbikatı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "Swarm Forge elemesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G9",
+        "label": "Küresel mühimmat pazarı öngörüsü",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G10",
+        "label": "Naval Group Rampart CIWS denemesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "Boeing PAC-3 MSE arayıcı sözleşmesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G12",
+        "label": "Azerbaycan menşeli dolanan mühimmatın Pakistan'a satışı",
+        "home": "rakip"
+      },
+      {
+        "id": "G13",
+        "label": "USAF orta kalibreli namlulu hava savunma pazar araştırması",
+        "home": "izleme"
+      },
+      {
+        "id": "G14",
+        "label": "Malezya MERAD (RMK-13)",
+        "home": "izleme"
+      },
+      {
+        "id": "G15",
+        "label": "665 milyon $'lık C-UAS test siparişine itiraz",
+        "home": "izleme"
+      },
+      {
+        "id": "G16",
+        "label": "xTech|Apex Intercept gösterimleri",
+        "home": "izleme"
+      },
+      {
+        "id": "G17",
+        "label": "ABD Deniz Piyadeleri Drone Round",
+        "home": "izleme"
+      },
+      {
+        "id": "G18",
+        "label": "ABD Donanması uygun maliyetli önleyici",
+        "home": "izleme"
+      },
+      {
+        "id": "G19",
+        "label": "Ukrayna'da güdümsüz 155 mm tercihi",
+        "home": "izleme"
+      },
+      {
+        "id": "G20",
+        "label": "Nadir toprak ve mıknatıs tedariki",
+        "home": "izleme"
+      },
+      {
+        "id": "G21",
+        "label": "Ermenistan'ın Divyastra MK-1 seçimi",
+        "home": "izleme"
+      },
+      {
+        "id": "G22",
+        "label": "Kazakistan askerî reform planı",
+        "home": "izleme"
+      },
+      {
+        "id": "G23",
+        "label": "NATO'nun küçük insansız deniz aracı değerlendirmesi",
+        "home": "izleme"
+      },
+      {
+        "id": "G24",
+        "label": "Pakistan'da LD-2000",
+        "home": "izleme"
+      },
+      {
+        "id": "G25",
+        "label": "Etiyopya'nın Orion-E tedariki",
+        "home": "izleme"
+      },
+      {
+        "id": "G26",
+        "label": "Hindistan MMG termal nişangâh RFI'si",
+        "home": "izleme"
+      },
+      {
+        "id": "G27",
+        "label": "Otokar zırhlı araç siparişi",
+        "home": "izleme"
+      },
+      {
+        "id": "G28",
+        "label": "MUSV üretim siparişleri",
+        "home": "izleme"
+      },
+      {
+        "id": "G29",
+        "label": "ABD güney sınırı C-UAS denemesi",
+        "home": "izleme"
+      },
+      {
+        "id": "G30",
+        "label": "JIATF-401 tedarik planlamasında yapay zekâ",
+        "home": "izleme"
+      },
+      {
+        "id": "G31",
+        "label": "DHS kolluk ile karşı-dron testi",
+        "home": "izleme"
+      },
+      {
+        "id": "G32",
+        "label": "Malezya Deniz Ajansı MPMS teslimi",
+        "home": "izleme"
+      },
+      {
+        "id": "G33",
+        "label": "Ukrayna'nın 2026 savunma açığı",
+        "home": "izleme"
+      },
+      {
+        "id": "G34",
+        "label": "IG Defence JWALA mikro-füze denemeleri",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-10-06.html"
+  },
+  {
     "date": "2026-10-05",
     "title": "Malezya Sabah'ta 105 mm kabiliyetinin yerine 155 mm topçu alayı kurmayı planlıyor",
     "summary": "Günün ağırlığı MKE'nin hedef pazarı Malezya'da topçu kalibresinin değişmesi ve karşı-dron hard-kill katmanında angajman ekonomisinin iki cepheden birden rakamlaşması. Malezya'nın Sabah güçlendirme planında 155 mm topçu alayı kurulması ve bunun mevcut 105 mm kabiliyetinin yerini alması yer alıyor; aynı plan kıyı radarları, Layang-Layang'da uzun menzilli radar ve Labuan'daki ANKA'ları sayıyor, savunma harcaması hedefi 2030'a kadar GSYH'nin %1,5'i. Almanya Şansölyesi 4 Ekim'de Kiev'de 1,3 milyar €'luk paket ve Ukrayna'da üretilecek on binlerce Quantum Systems önleyici dronunun finansmanını duyurdu; aynı aktarımda Ukrayna önleyicisinin birim maliyeti 2.000 $, Bars önleyicisinin isabet oranı %30 ve jet motorlu Shahed'lere karşı önleme oranı %55 olarak veriliyor. Rusya tarafında dokuz önleyici dron modelinin fiyatları 1.200-4.030 $ bandında listelendi ve 7,62 mm namlulu Zubr sisteminin önleyici dronlardan daha az etkili bulunduğu aktarıldı. Fransız 68'inci Topçu Alayı CAESAR bataryalarını dört toplu iki kısım yerine iki toplu üç kısma böldü ve metal koruma kafesi ile aldatma maketini mevzi düzenine yerleştirdi. Husi sözcüsü Riyad'daki Aramco tesislerine balistik füze ve dronla saldırı iddiasında bulundu; Suudi yetkililer hasarı teyit etmedi.",
