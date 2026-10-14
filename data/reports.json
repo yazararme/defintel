@@ -1,5 +1,231 @@
 [
   {
+    "date": "2026-10-14",
+    "title": "Raytheon'un Coyote–KuRFS karşı-dron paketi Katar ve Ürdün'le ilk ihracat müşterilerini buldu",
+    "summary": "AUSA 2026'nın ilk iki günü karşı-dron hard-kill katmanını füze, lazer ve önleyici dronla doldururken Körfez'de iki ayrı ulusal ölçekli karşı-dron paketi sözleşmeye bağlandı. RTX'in Raytheon'u ABD Ordusu, Katar ve Ürdün için toplam 729 milyon $'lık Coyote efektörü ve KuRFS radarı sözleşmesi aldığını duyurdu; firma kalem kırılımını ve adedi açıklamadı. Kuveyt'te MARSS 370 milyon £ (489 milyon $) bedelle 24 aylık ulusal karşı-dron programının ana yüklenicisi oldu: sensör ağı, komuta merkezleri, hard-kill önleyici ve soft-kill karıştırıcı sayılıyor, namlulu efektör sayılmıyor. ABD Ordusu dron ve karşı-dron pazar yerlerine sekiz yeni ortak ekleyerek toplamı 30'a çıkardı ve ortakların ABD'ye ve ABD'den satış yapabildiğini belirtti. Ordu E-HEL yüksek enerjili lazer programında Eylül'de 464,8 milyon $'lık sözleşmeyle 26'dan fazla birim bağladı ve ilk harekât kabiliyetini 2028 başına koydu. Northrop Grumman ile Barrett, programlanabilir havada infilaklı ve yakınlık fünyeli mühimmat kullanan 25 mm Precision Grenadier System için üretim anlaşması imzaladı. Hanwha'nın 155 mm/52 kalibre araç üstü obüsü ABD Ordusu'nda XM1776 adını aldı ve dokuz prototip siparişi verildi.",
+    "lead": "Raytheon'un Coyote ve KuRFS karşı-dron paketi 729 milyon $'lık sözleşmelerle ABD Ordusu'nun yanı sıra Katar ve Ürdün'e…",
+    "alarm": true,
+    "alarm_title": "Karşı-dron paketi Körfez'de ilk ihracat sözleşmesini aldı",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Mühimmat",
+      "TOLGA",
+      "Katar",
+      "Körfez",
+      "ABD",
+      "Fuar"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Raytheon Coyote–KuRFS Katar ve Ürdün sözleşmeleri",
+        "home": "rakip"
+      },
+      {
+        "id": "G2",
+        "label": "Kuveyt ulusal karşı-dron programı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "25 mm Precision Grenadier System",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "ABD Ordusu karşı-dron pazar yerinin 30 ortağa genişlemesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "E-HEL yüksek enerjili lazer takvimi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "Patriot mühimmat hedeflerinin yeniden değerlendirilmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "IFPC Inc. 2 ve NGSRI elemelerinin yeniden açılması",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "Hanwha XM1776 araç üstü obüs",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "Anduril Steelfin önleyici füze ailesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "IAI HawkGuard kinetik C-UAS",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "Kongsberg Polonya karşı-dron tesisi",
+        "home": "rakip"
+      },
+      {
+        "id": "G12",
+        "label": "Fransa'nın MX-10 DAMOCLES siparişi",
+        "home": "rakip"
+      },
+      {
+        "id": "G13",
+        "label": "EDGE–Fas silah anlaşmaları",
+        "home": "rakip"
+      },
+      {
+        "id": "G14",
+        "label": "USAF orta kalibreli namlulu hava savunma pazar araştırması",
+        "home": "izleme"
+      },
+      {
+        "id": "G15",
+        "label": "Malezya MERAD (RMK-13)",
+        "home": "izleme"
+      },
+      {
+        "id": "G16",
+        "label": "665 milyon $'lık C-UAS test siparişine itiraz",
+        "home": "izleme"
+      },
+      {
+        "id": "G17",
+        "label": "xTech|Apex Intercept gösterimleri",
+        "home": "izleme"
+      },
+      {
+        "id": "G18",
+        "label": "ABD Deniz Piyadeleri Drone Round",
+        "home": "izleme"
+      },
+      {
+        "id": "G19",
+        "label": "ABD Donanması uygun maliyetli önleyici",
+        "home": "izleme"
+      },
+      {
+        "id": "G20",
+        "label": "Ukrayna'da güdümsüz 155 mm tercihi",
+        "home": "izleme"
+      },
+      {
+        "id": "G21",
+        "label": "Nadir toprak ve mıknatıs tedariki",
+        "home": "izleme"
+      },
+      {
+        "id": "G22",
+        "label": "ABD Ordusu üretim rodeosu",
+        "home": "izleme"
+      },
+      {
+        "id": "G23",
+        "label": "Ermenistan'ın Divyastra MK-1 seçimi",
+        "home": "izleme"
+      },
+      {
+        "id": "G24",
+        "label": "Kazakistan askerî reform planı",
+        "home": "izleme"
+      },
+      {
+        "id": "G25",
+        "label": "NATO'nun küçük insansız deniz aracı değerlendirmesi",
+        "home": "izleme"
+      },
+      {
+        "id": "G26",
+        "label": "Pakistan'da LD-2000",
+        "home": "izleme"
+      },
+      {
+        "id": "G27",
+        "label": "Etiyopya'nın Orion-E tedariki",
+        "home": "izleme"
+      },
+      {
+        "id": "G28",
+        "label": "Hindistan MMG termal nişangâh RFI'si",
+        "home": "izleme"
+      },
+      {
+        "id": "G29",
+        "label": "Otokar zırhlı araç siparişi",
+        "home": "izleme"
+      },
+      {
+        "id": "G30",
+        "label": "MUSV üretim siparişleri",
+        "home": "izleme"
+      },
+      {
+        "id": "G31",
+        "label": "ABD güney sınırı C-UAS denemesi",
+        "home": "izleme"
+      },
+      {
+        "id": "G32",
+        "label": "JIATF-401 tedarik planlamasında yapay zekâ",
+        "home": "izleme"
+      },
+      {
+        "id": "G33",
+        "label": "DHS kolluk ile karşı-dron testi",
+        "home": "izleme"
+      },
+      {
+        "id": "G34",
+        "label": "Malezya Deniz Ajansı MPMS teslimi",
+        "home": "izleme"
+      },
+      {
+        "id": "G35",
+        "label": "Ukrayna'nın 2026 savunma açığı",
+        "home": "izleme"
+      },
+      {
+        "id": "G36",
+        "label": "IG Defence JWALA mikro-füze denemeleri",
+        "home": "izleme"
+      },
+      {
+        "id": "G37",
+        "label": "Rusya yaptırım paketi ve dizel muafiyeti",
+        "home": "izleme"
+      },
+      {
+        "id": "G38",
+        "label": "Japonya'nın Ukrayna'dan önleyici İHA tedariki",
+        "home": "izleme"
+      },
+      {
+        "id": "G39",
+        "label": "Phantom Defense'in Karakurt satın alması",
+        "home": "izleme"
+      },
+      {
+        "id": "G40",
+        "label": "Avio–Lockheed katı yakıtlı motor anlaşması",
+        "home": "izleme"
+      },
+      {
+        "id": "G41",
+        "label": "Jet motorlu Rus dronlarına karşı önleme kabiliyeti talebi",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-10-14.html"
+  },
+  {
     "date": "2026-10-06",
     "title": "ABD, BAE'ye 1 milyar $ üzerinde APKWS II güdüm kiti ile yakınlık fünyesi ve HE-parça tesirli harp başlığını kalem kalem onayladı",
     "summary": "Günün ağırlığı karşı-dron efektör tercihinin iki yönden birden kayması: Körfez'de ucuz güdümlü roket, ABD'de ise yönlendirilmiş enerji. ABD Dışişleri Bakanlığı 5 Ekim'de BAE'ye 1 milyar $'ı aşan, 10.000'e kadar APKWS II güdüm kiti ile Mk 152 HE-parça tesirli harp başlığı, Mk 66 roket motoru ve yakınlık fünyesi içeren satışı onayladı; gerekçe jet motorlu dronlar dahil insansız hava araçlarına karşı düşük maliyetli hassas angajman. Aynı gün JIATF-401 karşı-dron yönlendirilmiş enerji pilot programına AeroVironment, Boeing, Epirus ve Kord Technologies seçildi; dördünden üçü lazer, biri yüksek güçlü mikrodalga ve listede namlulu kinetik efektör yok. ASELSAN Savunma Sanayii Başkanlığı ile 2,46 milyar €'luk hava savunma sözleşmesi imzaladığını duyurdu; firma bunu 51 yıllık tarihindeki en büyük tek sözleşme olarak tanımlıyor ve beş gün içindeki üç sözleşmenin toplamı yaklaşık 4 milyar €. ABD 7'nci Hava Kuvvetleri Kore sahnesi için Project Iron Sentry kapsamında katmanlı kinetik ve kinetik olmayan karşı-dron bilgi talebi yayımladı. Elbit'in SIGMA 155 mm/52 kalibre araç üstü obüsü Singapur'da Primus ve FH-2000'in yerini almak üzere sergilendi.",
