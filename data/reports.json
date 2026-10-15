@@ -1,5 +1,131 @@
 [
   {
+    "date": "2026-10-15",
+    "title": "ABD karşı-dron tedariki iki ayrı çerçevede sensör ve yazılım katmanına bağlandı",
+    "summary": "AUSA 2026'nın kapanış günü karşı-dron tarafında iki büyük tedarik çerçevesi üretti: İç Güvenlik Bakanlığı'nın 1,5 milyar $ tavanlı çoklu ödüllü IDIQ'sinde Honeywell'in iştiraki Track 1 yüklenicisi oldu, JIATF-401 ise en az yedi firmaya üçer yıllık ve her biri 500 milyon $ tavanlı karşı-dron sensör IDIQ'si verdi; her iki çerçevede de efektör ya da mühimmat kalemi tanımlanmadı. ABD Ordusu'nun dron ve karşı-dron pazar yeri sekiz yeni ortakla 33 ülkeye çıktı ve pazar yeri üzerinden 7 milyar $'lık karşı-dron sözleşme aracı verildiği açıklandı. BAE Systems havadan taşınabilir top sistemini hava savunmada güdümlü hiper hızlı mermiyle tanıttı ve yanına %99'dan fazlası ticari bileşenli yüksek güçlü mikrodalga prototipi koydu. Tayvan, 105 mm araç üstü Cheetah programını 178 araç ve yaklaşık 1,8 milyar $ ile 2027–2033 penceresine yerleştirdi. Ordu'nun atış sistemleri yöneticisi önleyici tarafında birim fiyatı 1 milyon $'ı aşmayan düşük maliyetli önleyici hedefini ve çok tipli ortak fırlatıcı ailesini tarif etti.",
+    "lead": "ABD İç Güvenlik Bakanlığı'nın 1,5 milyar $ tavanlı çoklu ödüllü karşı-dron IDIQ'sinde Honeywell'in iştiraki Track 1 yük…",
+    "alarm": true,
+    "alarm_title": "Ön onaylı devletlerarası dron/karşı-dron şeridi MKE'nin rekabet ettiği pazarlara genişledi",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Mühimmat",
+      "Topçu",
+      "URAN",
+      "ABD",
+      "Güneydoğu Asya",
+      "İhale"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "DHS karşı-dron IDIQ'si",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "BAE MDACS ve HPM",
+        "home": "rakip"
+      },
+      {
+        "id": "G3",
+        "label": "Pazar yerinin 33 ülkeye genişlemesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "JIATF-401 sensör IDIQ havuzu",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "Tayvan 105 mm Cheetah programı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "Çok tipli önleyici ve maliyet eğrisi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Dron üretimi için 50 milyar $ talebi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "Tayvan Devil Ray T24 ortak üretimi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G9",
+        "label": "Almanya'nın iki Patriot ateş birimi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G10",
+        "label": "Hindistan 155 mm HE M1A4 ihalesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G11",
+        "label": "L3Harris VAMPIRE teslimleri",
+        "home": "rakip"
+      },
+      {
+        "id": "G12",
+        "label": "Rheinmetall Mangalia tersanesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G13",
+        "label": "Thales Belfast füze kapasitesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G14",
+        "label": "Lockheed Martin mühimmat genişlemesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G15",
+        "label": "Berlin'in KNDS'de %50 hisse değerlendirmesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G16",
+        "label": "Nammo ROCMAN roket motoru hattı",
+        "home": "rakip"
+      },
+      {
+        "id": "G17",
+        "label": "IAI–SIG SAUER FIRE STORM 250",
+        "home": "rakip"
+      },
+      {
+        "id": "G18",
+        "label": "ASELSAN GÖKALP önleme testi",
+        "home": "rakip"
+      },
+      {
+        "id": "G19",
+        "label": "Gauntlet 2.5 ve Drone Dominance yarışması",
+        "home": "izleme"
+      },
+      {
+        "id": "G20",
+        "label": "Merops'un 142 günde program olması",
+        "home": "izleme"
+      },
+      {
+        "id": "G21",
+        "label": "Er seviyesi karşı-dron çalışması",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-10-15.html"
+  },
+  {
     "date": "2026-10-14",
     "title": "Raytheon'un Coyote–KuRFS karşı-dron paketi Katar ve Ürdün'le ilk ihracat müşterilerini buldu",
     "summary": "AUSA 2026'nın ilk iki günü karşı-dron hard-kill katmanını füze, lazer ve önleyici dronla doldururken Körfez'de iki ayrı ulusal ölçekli karşı-dron paketi sözleşmeye bağlandı. RTX'in Raytheon'u ABD Ordusu, Katar ve Ürdün için toplam 729 milyon $'lık Coyote efektörü ve KuRFS radarı sözleşmesi aldığını duyurdu; firma kalem kırılımını ve adedi açıklamadı. Kuveyt'te MARSS 370 milyon £ (489 milyon $) bedelle 24 aylık ulusal karşı-dron programının ana yüklenicisi oldu: sensör ağı, komuta merkezleri, hard-kill önleyici ve soft-kill karıştırıcı sayılıyor, namlulu efektör sayılmıyor. ABD Ordusu dron ve karşı-dron pazar yerlerine sekiz yeni ortak ekleyerek toplamı 30'a çıkardı ve ortakların ABD'ye ve ABD'den satış yapabildiğini belirtti. Ordu E-HEL yüksek enerjili lazer programında Eylül'de 464,8 milyon $'lık sözleşmeyle 26'dan fazla birim bağladı ve ilk harekât kabiliyetini 2028 başına koydu. Northrop Grumman ile Barrett, programlanabilir havada infilaklı ve yakınlık fünyeli mühimmat kullanan 25 mm Precision Grenadier System için üretim anlaşması imzaladı. Hanwha'nın 155 mm/52 kalibre araç üstü obüsü ABD Ordusu'nda XM1776 adını aldı ve dokuz prototip siparişi verildi.",
