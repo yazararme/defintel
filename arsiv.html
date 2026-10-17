@@ -388,7 +388,7 @@
 // An installed app on a phone resumes the page it had open instead of
 // reloading it, so check whether any report changed whenever the app comes back.
 (function () {
-  var shown = "29d8f52c1f0142f3", last = 0;
+  var shown = "d386e4aabcac7cc3", last = 0;
   function check() {
     if (document.visibilityState !== "visible" || Date.now() - last < 30000) return;
     last = Date.now();
