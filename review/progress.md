@@ -161,3 +161,7 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 - Müşteri onayıyla düzeltme (main'e doğrudan push yok): Drive'daki 2026-10-15/16/17.md yeniden oluşturuldu, yalnız KAYNAKLAR satırlarına `- ` eklendi (21/17/16 satır); her biri indirilip yerel düzeltilmiş kopyayla bayt bayt aynı doğrulandı. Eski dosyalar `eski-2026-10-1N.md.bak` adıyla klasörde (desenle eşleşmez). Apps Script tetikledi: pull-drive 39066000822 (15, 16 güncellendi) ve 39066345812 (**success**, 17 güncellendi; 14–17 ok). Canlı sitede çapalar 21/17/16.
 - Müşteriye: Instructions'taki KAYNAKLAR örneği `"- [K1] …"` yapılacak (müşteri yapıyor). Kalıcı: K10 (build iki biçimi kabul eder) dalda.
 - Not: 7–13 Ekim rapor yok (eksik rapor issue'ları #9–#15) — görev o hafta çalışmamış görünüyor; müşteriye soruldu.
+
+| K | Karar | Deneme | Commit |
+|---|---|---|---|
+| K10 | PASS (deneme 2; d1 FAIL yalnız K10-4: orkestratör talimatı smoke'u ana ağaçtan kanıt sitesine (:8000, ek 15 Ekim günü) koşturdu — ağaç/site uyuşmazlığı. d2'de dal kendi sunucusunda (:8015): SMOKE OK). Kod d1 ile aynı. 15 Ekim işaretsiz: 0 → 21 çapa, kırık atıf 68 → 0; 23 Eyl bayt bayt aynı. merge_day DRY: 34 üretilmiş çakışma, build OK. d2'nin ilk denemesi izleme zaman aşımıyla düştü (çıktısız uzun smoke), arka planda yeniden koşuldu | 2 | 3c… (bu commit öncesi kod), bu commit verdict |
