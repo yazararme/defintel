@@ -1,4 +1,6 @@
-# Instructions paneli — yedek (27 Eylül 2026, merge öncesi)
+# Instructions paneli — yedek (27 Eylül 2026, merge öncesi; 17 Ekim güncellemesi)
+
+**17 Ekim 2026:** müşteri KAYNAKLAR örneğini `"- [K1] …"` yaptı (madde işareti eklendi; 15–17 Ekim olayı, bkz. progress.md). Bu yedek o satırla günceldir; başka değişiklik yok.
 
 Kaynak: Claude masaüstü → "MKE Uluslararası Pazar İzleme Ajanı (Günlük)" → Instructions; kullanıcı
 panelden kopyaladı. Görev: Active · Daily at 4:00 AM (Mac saati; 06:00 TSİ) · Automatically approve.
@@ -130,7 +132,7 @@ Arka plan — hangi pazarların önemli olduğunu anlamak için; bu ilişkilerin
 
    **İZLEME LİSTESİ** — Olgunlaşan konular; adım 0'dan taşınan açık maddeler dahil. Evi burası olan maddeler kimlikle başlar: "**G13 · kısa ad** — durum ve izlenecek soru [K#]". Yalnızca başka bir gelişmeyi izleyen maddeler kendi kimliği olmadan "(G1)" ile atıf yapar.
 
-   **KAYNAKLAR** — Her kaynak numaralı: "[K1] başlık — yayın, tarih — bağlantı". Metin içi atıflar bu numarayı kullanır. 30 günden eski kaynak "(arka plan)" etiketi taşır.
+   **KAYNAKLAR** — Her kaynak numaralı: "- [K1] başlık — yayın, tarih — bağlantı". Metin içi atıflar bu numarayı kullanır. 30 günden eski kaynak "(arka plan)" etiketi taşır.
 
    **EK: Katılımcı listeleri** — yalnızca gerekiyorsa.
 
