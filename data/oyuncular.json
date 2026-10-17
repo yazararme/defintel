@@ -1265,10 +1265,6 @@
   "segmentler": [],
   "gunler": [
    {
-    "g": "2026-10-17",
-    "u": "/haberler/2026-10-17.html?q=STM"
-   },
-   {
     "g": "2026-10-15",
     "u": "/haberler/2026-10-15.html?q=STM"
    },
@@ -1277,8 +1273,8 @@
     "u": "/haberler/2026-09-25.html?q=STM"
    }
   ],
-  "son": "2026-10-17",
-  "sayi_30g": 3
+  "son": "2026-10-15",
+  "sayi_30g": 2
  },
  "asfat": {
   "ad": "ASFAT",
