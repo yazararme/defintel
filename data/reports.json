@@ -1,5 +1,96 @@
 [
   {
+    "date": "2026-10-17",
+    "title": "Malezya MERAD ve SHORAD tedarikini RMK-13 kapsamında onayladı: iki MERAD bataryası ve ayrı bir kısa menzil kalemi 2030 ortası hedefiyle takvime girdi",
+    "summary": "Günün en ağır gelişmesi hedef pazardan geldi: Malezya Savunma Bakanı 15 Ekim tarihli yazılı soru cevabında MERAD (orta menzilli) ve SHORAD (kısa menzilli) hava savunma tedarikinin 13. Malezya Planı'nın RP1 diliminde onaylandığını teyit etti; iki MERAD bataryası ve 2030 ortasında harekâta hazır olma hedefi veriliyor, SHORAD adedi, bütçesi ve karşı-dron alt kaleminin pakete dahil olup olmadığı açıklanmadı, kısa liste yok. Avrupa'da Rheinmetall Expal, Albacete'de yaklaşık 20 milyon €'luk yatırımla yılda üç milyon orta kalibre mühimmat bileşeni (1,2 milyon mermi, 1,8 milyon kovan) kapasiteli 20–35 mm hattını ve 60/81/120 mm havan hattını devreye aldı; hattın ürün tanımında hava savunma ve karşı-dron için AHEAD mühimmatı açıkça sayılıyor. Önleyici tarafında maliyet ve hacim iddiaları sertleşti: CHAOS Industries 10 km menzilli, 5,5 kg altı, doğrudan çarpmalı VESPID ailesini yılda 12.000 adet başlangıç oranıyla duyurdu ve katı yakıtlı/turbojetli önleyicilere kıyasla %90'a varan maliyet düşüşü iddia etti; Powerus jet motorlu Shahed'e karşı 600–700 km/s bandında otonom Guardian 3'ü tanıttı ve Kasım'da ayda 5.000 adet üretim hedefi verdi. Rusya'nın Pantsir-SMD'si sabit nokta savunmasında namluyu tamamen bırakıp 12 konumda 48 mini füze taşıyan yapıya geçti. Türkiye ile Kamboçya arasında askeri çerçeve anlaşması imzalandı.",
+    "lead": "Malezya MERAD ve SHORAD tedarikini RMK-13 RP1 diliminde onayladı; iki MERAD bataryası ve 2030 ortası harekât hedefi ver…",
+    "alarm": true,
+    "alarm_title": "Malezya hedef pazarında kısa menzil hava savunma kalemi onaylandı",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Mühimmat",
+      "TOLGA",
+      "Malezya",
+      "Güneydoğu Asya",
+      "AB",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Malezya MERAD ve SHORAD onayı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Rheinmetall Albacete orta kalibre ve AHEAD hattı",
+        "home": "rakip"
+      },
+      {
+        "id": "G3",
+        "label": "CHAOS Industries VESPID önleyici ailesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "Powerus Guardian 3 ve jet tehdide karşı önleyici sınıfı",
+        "home": "rakip"
+      },
+      {
+        "id": "G5",
+        "label": "Pantsir-SMD'nin namlusuz 48 füzeli yapısı",
+        "home": "rakip"
+      },
+      {
+        "id": "G6",
+        "label": "Türkiye–Kamboçya askeri çerçeve anlaşması",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Fransa'da uzun menzilli dolanan mühimmat bataryası",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "Endonezya'da NORINCO 40 mm RPG mühimmat denemesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G9",
+        "label": "Avio USA katı yakıtlı roket motoru tesisi",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "Furientis F1.0 ve CAML konteyner fırlatıcı",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "Raytheon Multi-Mission Launcher (Lynx XM30)",
+        "home": "rakip"
+      },
+      {
+        "id": "G12",
+        "label": "LightPath C-UAS optik montaj siparişi",
+        "home": "rakip"
+      },
+      {
+        "id": "G13",
+        "label": "EFA GROUP–MyDefence mutabakatı",
+        "home": "rakip"
+      },
+      {
+        "id": "G14",
+        "label": "Füze savunma mühimmatı açığının 2030'a kadar sürmesi iddiası",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-10-17.html"
+  },
+  {
     "date": "2026-10-16",
     "title": "Namlulu katman iki ayrı ana yüklenicide hava savunma kalemi olarak tanımlandı: 50 mm güdümlü ve yakınlık fünyeli mermi 2027 yazına, 155 mm top 2027 mali yılı sonuna takvimlendi",
     "summary": "Günün ağırlığı, karşı-dron hard-kill tartışmasında namlulu katmanın iki büyük ana yüklenicide somut program kalemine dönüşmesi. Northrop Grumman'ın Raid Hunter'ı 50×228 mm fişekli, zincir dişlili 50 mm namlulu hava savunma sistemi olarak tarif edildi; 16 Eylül'deki XM913 balistik atışları yakınlık fünyeli güdümlü uçaksavar mermisinin geliştirilmesine kapı açıyor ve harekât testine hazır ilk prototip 2027 yazına konuyor. BAE Systems'in MDACS'i ise 155 mm kalibreyle, FMTV 6×6 gövdesinde ve ABD Ordusu RCCTO programı altında konumlandı: sekiz top, dört MFPR radar, iki muharebe yöneticisi ve en az 144 güdümlü hiper hızlı mermiden oluşan tam bir batarya 2027 mali yılının dördüncü çeyreğinde, harekât gösterimi 2028 mali yılında planlanıyor. Buna karşılık Alman Federal Meclisi bütçe komisyonu üç haneli adette ağ atan önleyici dron için yaklaşık 1,1 milyar € onayladı ve pakette namlulu silah ya da mühimmat kalemi yok. Bulgaristan, Karadeniz'de iki geminin dronla batırılmasının ardından AB SAFE finansmanıyla 20 karşı-dron sistemi için 80 milyon €'luk alım önerdi ve 30 Ekim'e kadar NATO'nun karşı-dron girişimine katılmayı planlıyor. Hanwha, Cheongwang lazerinin atış başına yaklaşık 1,5 $ maliyetle %100 imha oranına ulaştığını duyurdu ve sistemi ihracat kalemi olarak tanımladı. Hindistan'da devlet mühimmat üreticisinin icra direktörü 500 crore ₹'lik mühimmat sözleşmesiyle ilgili rüşvet soruşturmasında tutuklandı.",
