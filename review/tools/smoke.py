@@ -114,6 +114,10 @@ line, applied to sample kaynaklar.json files (compact and spaced), give valid JS
 nothing else, and the note says to paste after the merge. After the CI diagnosis (run 35928738920:
 Elbit's /feed/ 301s to the HTML page www.elbitsystems.com/news) the note's Elbit find/replaces
 (url → /news + ayristirici elbitsystems-news, tur rss → html, only inside that entry) are applied too.
+K10: KAYNAK-BİÇİM — scripts/test_kaynak_bicim.py (offline, fixture scripts/fixtures/k10-2026-10-15-isaretsiz.md:
+the bulleted and unbulleted KAYNAKLAR give the same HTML with k1…k21 anchors and every #kN resolving,
+check_reports is green on both, the alert fires only for the unbulleted one); the build's KAYNAK-BİÇİM lines
+name exactly the source days whose KAYNAKLAR has unbulleted lines (none on a normal tree).
 Date independence (after K9): DEFINTEL_BASE overrides the site URL (default http://localhost:8000).
 Checks whose acceptance is 23 Sep content are pinned to KABUL_GUNU (2026-09-23), which exists on the
 branch and on main after the merge, instead of "the newest day". Where the newest day cannot satisfy a
@@ -1776,6 +1780,32 @@ def k2_check(py, hal, fails):
         fails.append("K2 ray kanıtı")
 
 
+def k10_checks(build_stdout, fails):
+    """K10: KAYNAK-BİÇİM — ağsız sabit test; build'in uyarı satırları kaynak dosyalarla tutarlı."""
+    t = subprocess.run([sys.executable, "scripts/test_kaynak_bicim.py"], cwd=ROOT, capture_output=True, text=True)
+    son = t.stdout.strip().splitlines()[-1] if t.stdout.strip() else t.stderr[-300:]
+    print(f"{'ok  ' if t.returncode == 0 else 'FAIL'} scripts/test_kaynak_bicim.py · {son}")
+    if t.returncode:
+        print(t.stdout[-2500:], t.stderr[-1500:])
+        fails.append("test_kaynak_bicim.py")
+    # Tarihe bağlı değil: KAYNAK-BİÇİM satırı tam olarak KAYNAKLAR'ında işaretsiz satır olan günlere düşer.
+    sys.path.insert(0, str(ROOT))
+    import build as b
+    beklenen = {}
+    for f in sorted((ROOT / "source").glob("*.md")):
+        n = b.kaynak_maddele(f.read_text(encoding="utf-8"))[1]
+        if n:
+            beklenen[f.stem] = n
+    gelen = {m.group(1): int(m.group(2)) for m in
+             re.finditer(r"! KAYNAK-BİÇİM · (\d{4}-\d{2}-\d{2}) · (\d+) kaynak satırı", build_stdout)}
+    ok = gelen == beklenen
+    print(f"{'ok  ' if ok else 'FAIL'} KAYNAK-BİÇİM build satırları · "
+          f"{', '.join(f'{d}: {n}' for d, n in gelen.items()) or 'yok (bütün günler madde işaretli)'}"
+          + ("" if ok else f" · beklenen {beklenen}"))
+    if not ok:
+        fails.append("KAYNAK-BİÇİM build satırları")
+
+
 def k6_checks(fails):
     """K6: Elbit ve Northrop akışları — ağsız ayrıştırıcı testi, kanıt iş akışı, müşteri notu."""
     import json
@@ -1902,6 +1932,9 @@ def main():
 
     # K6: Elbit ve Northrop akışları (ağsız)
     k6_checks(fails)
+
+    # K10: KAYNAK-BİÇİM (ağsız)
+    k10_checks(build.stdout, fails)
 
     # Rev 25: SİLME-YOK · İPUCU-YOK · kategoriler
     r25_checks(build.stdout, py, fails)

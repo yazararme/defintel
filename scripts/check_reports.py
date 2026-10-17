@@ -109,6 +109,10 @@ def check(path):
             problems.append(f"{gid}: expected exactly one anchor in the body, found {hits}")
 
     sources = set(re.findall(r"^-\s+\[K(\d+)\]", body, re.M))
+    # K10: KAYNAKLAR bölümünde madde işaretsiz "[K#] …" satırı da kaynak (build listeye çevirir)
+    bolum = re.search(r"^##\s+KAYNAKLAR\s*$(.*?)(?=^##\s|\Z)", body, re.M | re.S)
+    if bolum:
+        sources |= set(re.findall(r"^\[K(\d+)\]", bolum.group(1), re.M))
     for cited in set(re.findall(r"\[K(\d+)\]", body)):
         if cited not in sources:
             problems.append(f"[K{cited}] cited but missing from KAYNAKLAR")

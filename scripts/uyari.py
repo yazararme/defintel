@@ -40,6 +40,7 @@ KURALLAR = (
     "KAPSAM-SAYI", "DÖRT-DURUM", "ETİKET-BAŞLIK", "KUR", "H1-TEKRAR", "İLK-EKRAN",
     "SİLME-YOK", "İPUCU-YOK", "ÇEVİRİ-DEDEKTÖRÜ", "İPLİK-DURUM", "SLUG", "KANIT-BOŞLUĞU",
     "L1-DOLGU", "ÇİZGİ-KONTRAST", "TİP-BELİRTECİ", "GEÇ-GELEN", "TEKRAR-MANŞET", "NOKTALI-İ",
+    "KAYNAK-BİÇİM",
 )
 BLOKLAYICI = ("DÖRT-DURUM", "SİLME-YOK")   # iş kırmızı biter ama uyarı yine buraya yazılır
 

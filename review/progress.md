@@ -154,3 +154,10 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 - smoke.py tarihten bağımsız (83b25f3): dal 92 ok / 0 FAIL; birleşik (origin/main + dal, sahte 28 Eyl dahil) 93 ok / 0 FAIL. Eski toplayıcı günleri veriden (toplamalar/ilk_goruldu yok) tanınıyor; tarih sabiti yok. `DEFINTEL_BASE` ile başka sunucuya koşar. merge_day.sh DRY yeniden geçti (23 çakışma, build OK). Not: merge'den sonra eski toplayıcı günleri (24 Eyl → merge günü) için build İPUCU-YOK uyarısı verir — beklenen, karar 4.
 - Drive: `kaynaklar.json` yeni dosya (id `1XQkEwGDArRExmaIRgtWsuDTJwJ5GtcDs`), Defense Studies `dil: id`; bayt bayt doğrulandı; eski dosya `kaynaklar-onceki-2026-09-27.json`. Apps Script: 42. satır ve 16. satır doğru, değişiklik/kaydetme yok; `testToplayici` çalıştırılmadı (main'e gerçek toplama commit'ler).
 - Oturum sonu: 8000 sunucusu durduruldu. Açık: müşteri kararı manşet 65/75; telefon incelemesi; merge onayı.
+
+## 17 Ekim — pull-drive kırmızı (15–17 Ekim)
+
+- Neden: ajan 15 Ekim'den beri KAYNAKLAR satırlarını `- ` olmadan yazdı (talimat örneği `"[K1] başlık — …"` da işaretsiz). main'deki check_reports yalnız `- [K#]` sayıyor → her atıf "missing", çalıştırma kırmızı (yayın etkilenmedi, kontrol yayından sonra). Okuyucu etkisi: 15–17 Ekim sayfalarında `id="kN"` çapası yoktu, 68 atıf bağlantısı boşa gidiyordu.
+- Müşteri onayıyla düzeltme (main'e doğrudan push yok): Drive'daki 2026-10-15/16/17.md yeniden oluşturuldu, yalnız KAYNAKLAR satırlarına `- ` eklendi (21/17/16 satır); her biri indirilip yerel düzeltilmiş kopyayla bayt bayt aynı doğrulandı. Eski dosyalar `eski-2026-10-1N.md.bak` adıyla klasörde (desenle eşleşmez). Apps Script tetikledi: pull-drive 39066000822 (15, 16 güncellendi) ve 39066345812 (**success**, 17 güncellendi; 14–17 ok). Canlı sitede çapalar 21/17/16.
+- Müşteriye: Instructions'taki KAYNAKLAR örneği `"- [K1] …"` yapılacak (müşteri yapıyor). Kalıcı: K10 (build iki biçimi kabul eder) dalda.
+- Not: 7–13 Ekim rapor yok (eksik rapor issue'ları #9–#15) — görev o hafta çalışmamış görünüyor; müşteriye soruldu.

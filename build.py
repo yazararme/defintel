@@ -130,6 +130,32 @@ def label_table_cells(table_html):
     return table_html[: body.start()] + labelled + table_html[body.end():]
 
 
+# K10: ajan KAYNAKLAR satırlarını bazen `- ` olmadan yazıyor ("[K1] başlık — yayın, tarih — URL").
+# Markdown o satırları tek paragrafa yapıştırır: liste yok, id="kN" çapası yok, [K#] atıfı boşa
+# gider. Yalnız KAYNAKLAR bölümünde satır başındaki [K#] madde işaretli biçime çevrilir —
+# bellekte; source/*.md dosyası değişmez. Gövdedeki atıflar ve öteki bölümler olduğu gibi kalır.
+KAYNAKLAR_BOLUM_RE = re.compile(r"(?m)^##\s+KAYNAKLAR\s*$(.*?)(?=^##\s|\Z)", re.S)
+KAYNAK_ISARETSIZ_RE = re.compile(r"(?m)^\[K(\d+)\]")
+
+
+def kaynak_maddele(body):
+    """(gövde, işaretsiz kaynak satırı sayısı) — KAYNAKLAR'daki `[K#] …` satırları `- [K#] …` olur."""
+    m = KAYNAKLAR_BOLUM_RE.search(body)
+    if not m:
+        return body, 0
+    bolum, n = KAYNAK_ISARETSIZ_RE.subn(r"- [K\1]", m.group(1))
+    return body[: m.start(1)] + bolum + body[m.end(1):], n
+
+
+def kaynak_bicimi(iso, body):
+    """K10 · KAYNAK-BİÇİM: işaretsiz kaynak satırı görülen gün için tek uyarı satırı."""
+    body, n = kaynak_maddele(body)
+    if n:
+        from scripts import uyari
+        uyari.ekle("KAYNAK-BİÇİM", f"{iso} · {n} kaynak satırı madde işaretsiz; build listeye çevirdi")
+    return body
+
+
 def render_body(md_text, developments=(), alarm=False, report_iso="", slugs=None):
     # A bullet list that starts right under a bold lead-in ("**Taşınanlar:**")
     # would otherwise stay inside that paragraph; give it the blank line it needs.
@@ -1946,7 +1972,7 @@ def main():
         except Exception as exc:
             print(f"  ! skipped {path.name}: {exc}")
             continue
-        sources.append((path.stem, meta, body))
+        sources.append((path.stem, meta, kaynak_bicimi(path.stem, body)))
 
     published = stamp_publish(publish_times(), [iso for iso, _m, _b in sources])
     # Gün -> {kalem anahtarı: iplik slug'ı}: satırdaki ad kendi dosyasına bağlanır.
