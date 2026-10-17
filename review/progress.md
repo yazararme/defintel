@@ -164,4 +164,4 @@ Sıra: 30, 22, 21, 23, 31, 33, 24, 32, 25, 27, 29, 28, 26. Dal: `rev21-33` (main
 
 | K | Karar | Deneme | Commit |
 |---|---|---|---|
-| K10 | PASS (deneme 2; d1 FAIL yalnız K10-4: orkestratör talimatı smoke'u ana ağaçtan kanıt sitesine (:8000, ek 15 Ekim günü) koşturdu — ağaç/site uyuşmazlığı. d2'de dal kendi sunucusunda (:8015): SMOKE OK). Kod d1 ile aynı. 15 Ekim işaretsiz: 0 → 21 çapa, kırık atıf 68 → 0; 23 Eyl bayt bayt aynı. merge_day DRY: 34 üretilmiş çakışma, build OK. d2'nin ilk denemesi izleme zaman aşımıyla düştü (çıktısız uzun smoke), arka planda yeniden koşuldu | 2 | 3c… (bu commit öncesi kod), bu commit verdict |
+| K10 | PASS (deneme 2; d1 FAIL yalnız K10-4: orkestratör talimatı smoke'u ana ağaçtan kanıt sitesine (:8000, ek 15 Ekim günü) koşturdu — ağaç/site uyuşmazlığı. d2'de dal kendi sunucusunda (:8015): SMOKE OK). Kod d1 ile aynı. 15 Ekim işaretsiz: 0 → 21 çapa, kırık atıf 68 → 0; 23 Eyl bayt bayt aynı. merge_day DRY: 34 üretilmiş çakışma, build OK. d2'nin ilk denemesi izleme zaman aşımıyla düştü (çıktısız uzun smoke), arka planda yeniden koşuldu | 2 | a0654ff, a1f8857 |
