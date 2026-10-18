@@ -1,47 +1,817 @@
 [
  {
-  "id": "malezya-merad-rmk-13",
-  "name": "Malezya MERAD (RMK-13)",
-  "son_hareket": "2026-10-17"
- },
- {
   "id": "dhs-c-uas-track-one-yeniden-degerlendirmesi",
   "name": "DHS C-UAS Track One tedarikçi havuzunda yabancı menşe alt sistem kuralları",
-  "son_hareket": "2026-10-17"
+  "son_hareket": "2026-10-18"
  },
  {
   "id": "abd-deniz-piyadeleri-drone-round",
   "name": "ABD Deniz Piyadeleri Drone Round",
-  "son_hareket": "2026-10-17"
+  "son_hareket": "2026-10-18"
  },
  {
   "id": "rheinmetall-in-skyranger-uretim-olcegi",
   "name": "Rheinmetall'in Skyranger üretim ölçeği",
-  "son_hareket": "2026-10-17"
+  "son_hareket": "2026-10-18"
  },
  {
   "id": "ab-ukrayna-dron-ittifaki-nin-calisma-kurallari-v",
   "name": "AB-Ukrayna Dron İttifakı'nın çalışma kuralları ve AB dışı katılım koşulları",
-  "son_hareket": "2026-10-17"
+  "son_hareket": "2026-10-18"
  },
  {
   "id": "kore-menseli-katmanli-hava-savunma-tekliflerinin",
   "name": "Kore menşeli katmanlı hava savunma tekliflerinin sözleşmeye dönüşmesi",
-  "son_hareket": "2026-10-17"
+  "son_hareket": "2026-10-18"
  },
  {
   "id": "xm30-da-organik-c-uas-sarti-18-09-2026-raporu",
   "name": "XM30'da organik C-UAS şartı",
-  "son_hareket": "2026-10-17"
+  "son_hareket": "2026-10-18"
  },
  {
   "id": "kuresel-c-uas-harcamasinin-namlulu-ve-muhimmat-t",
   "name": "Küresel C-UAS harcamasının namlulu ve mühimmat tabanlı katmana düşen payı",
-  "son_hareket": "2026-10-17"
+  "son_hareket": "2026-10-18"
  },
  {
   "id": "genel-transfer-lisanslarinin-ucuncu-ulke-menseli",
   "name": "AB genel transfer lisanslarının üçüncü ülke menşeli bileşenleri kapsaması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "kucuk-kalibre-muhimmatin-2031-e-kadar-tek-tedari",
+  "name": "Küçük kalibre mühimmatın 2031'e kadar tek tedarikçiye bağlanması ve Drone Round'un bu çerçeveyle ilişkisi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "155-mm-obus-alimlarinda-yerli-sanayi-katiliminin",
+  "name": "155 mm obüs alımlarında yerli sanayi katılımının sayısal eşik olarak tanımlanması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "korfez-de-yerli-uretim-ayakli-hava-savunma-paket",
+  "name": "Körfez'de yerli üretim ayaklı hava savunma paketlerinin kısa menzil ve C-UAS kalemine genişlemesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "665-milyon-lik-c-uas-test-siparisine-itiraz",
+  "name": "665 milyon $'lık C-UAS test siparişine itiraz",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "abd-donanmasi-uygun-maliyetli-onleyici",
+  "name": "ABD Donanması uygun maliyetli önleyici",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "topcu-alimlarinda-eslik-eden-kisa-menzil-koruma-",
+  "name": "Topçu alımlarında eşlik eden kısa menzil koruma kaleminin şartnameye girmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "ingiltere-nin-750-milyon-luk-c-uas-butcesinin-ih",
+  "name": "İngiltere'nin 750 milyon £'luk C-UAS bütçesinin ihale kalemlerine bölünmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "cekya-spyder-genislemesinde-c-uas-kaleminin-tani",
+  "name": "Çekya SPYDER genişlemesinde C-UAS kaleminin tanımı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "ermenistan-in-divyastra-mk-1-secimi",
+  "name": "Ermenistan'ın Divyastra MK-1 seçimi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "ukrayna-da-gudumsuz-155-mm-tercihi",
+  "name": "Ukrayna'da güdümsüz 155 mm tercihi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "c-uas-sartnamelerinde-gps-siz-calisma-maddesinin",
+  "name": "C-UAS şartnamelerinde GPS'siz çalışma maddesinin zorunlu kriter hâline gelmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "irak-in-c-uas-ve-hava-savunma-alimlarini-resm-ih",
+  "name": "Irak'ın C-UAS ve hava savunma alımlarını resmî ihaleye dönüştürmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "deniz-topu-ihracatinda-alici-ulkede-uretim-ayagi",
+  "name": "Deniz topu ihracatında alıcı ülkede üretim ayağı sunmanın kriter hâline gelmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "ucuncu-taraf-komuta-kontrol-platformlarina-efekt",
+  "name": "Üçüncü taraf komuta-kontrol platformlarına efektör entegrasyonunun arayüz standardı olarak şartnameye girmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "105-mm-arac-ustu-top-segmentinde-yeni-ihale-ve-u",
+  "name": "105 mm araç üstü top segmentinde yeni ihale ve üretim kararlarının takibi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "105-mm-namlu-ve-top-bileseni-uretiminin-nato-ulk",
+  "name": "105 mm namlu ve top bileşeni üretiminin NATO ülkelerinde yeniden ulusallaştırılması eğilimi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "ana-yuklenicilerin-karsi-dron-sistemlerinde-hard",
+  "name": "Ana yüklenicilerin karşı-dron sistemlerinde hard-kill katmanı için namlulu silah yerine önleyici dron seçmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "cin-menseli-namlulu-fuzeli-shorad-in-afrika-paza",
+  "name": "Çin menşeli namlulu-füzeli SHORAD'ın Afrika pazarındaki yayılımı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "ic-guvenlik-butcelerinden-acilan-mobil-c-uas-ali",
+  "name": "İç güvenlik bütçelerinden açılan mobil C-UAS alımlarının hacmi ve tekrar sıklığı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "hindistan-in-topcu-mermisi-govdesi-kapasitesinin",
+  "name": "Hindistan'ın topçu mermisi gövdesi kapasitesinin ihracata yönelmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "flytrap-6-0-basvuru-ilaninda-mense-guvenlik-sini",
+  "name": "FLYTRAP 6.0 başvuru ilanında menşe, güvenlik sınıflandırması ya da son tarih kısıtı bulunup bulunmadığı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "sehir-ici-c-uas-denemelerinde-tali-hasar-sinirla",
+  "name": "Şehir içi C-UAS denemelerinde tali hasar sınırlamasının efektör seçimine yazılı kriter olarak girmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "12-kalibre-ve-benzeri-hafif-kinetik-karsi-dron-m",
+  "name": "12 kalibre ve benzeri hafif kinetik karşı-dron mühimmatının resmî denemelerde yer alması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "arac-ustu-koruma-paketlerinde-elektronik-harp-ve",
+  "name": "Araç üstü koruma paketlerinde elektronik harp ve kinetik kalemin ayrı ihale edilmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "dolanan-muhimmatta-otonomi-yaziliminin-bagimsiz-",
+  "name": "Dolanan mühimmatta otonomi yazılımının bağımsız bir tedarik kalemi hâline gelmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "onleyici-fuze-tedarikinin-govde-motor-arayici-ve",
+  "name": "Önleyici füze tedarikinin gövde, motor, arayıcı ve atış kontrolü olarak ayrı kalemlere bölünmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "ab-savunma-kredilerinin-tedarikci-uygunluk-kural",
+  "name": "AB savunma kredilerinin tedarikçi uygunluk kurallarında AB dışı menşe oranı sınırı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "zirhli-arac-kulelerinin-organik-karsi-dron-gorev",
+  "name": "Zırhlı araç kulelerinin organik karşı-dron görevi üstlenmesi ve 30 mm programlanabilir mühimmat talebine etkisi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "xtech-apex-intercept-gosterimleri",
+  "name": "xTech|Apex Intercept gösterimleri",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "kazakistan-asker-reform-plani",
+  "name": "Kazakistan askerî reform planı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "muhimmat-stok-aciginin-depolama-altyapisi-yatiri",
+  "name": "Mühimmat stok açığının depolama altyapısı yatırımıyla birlikte planlanması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "obus-ihracatinda-bakim-ve-onarim-teknolojisi-tra",
+  "name": "Obüs ihracatında bakım ve onarım teknolojisi transferinin ayrı rekabet unsuru hâline gelmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "liman-savunma-paketlerinde-sensor-ve-efektor-kal",
+  "name": "Liman savunma paketlerinde sensör ve efektör kalemlerinin ayrı ihale edilmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "yeni-nesil-muhrip-hava-savunma-paketlerinde-guve",
+  "name": "Yeni nesil muhrip hava savunma paketlerinde güverte topu kaleminin ayrı tanımlanıp tanımlanmadığı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "nadir-toprak-ve-miknatis-tedariki",
+  "name": "Nadir toprak ve mıknatıs tedariki",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "nato-nun-kucuk-insansiz-deniz-araci-degerlendirm",
+  "name": "NATO'nun küçük insansız deniz aracı değerlendirmesi ve Yunan Donanması Corsair USV denemesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "jet-motorlu-yuksek-irtifadan-gelen-tek-yonlu-sal",
+  "name": "Jet motorlu, yüksek irtifadan gelen tek yönlü saldırı dronlarının kısa menzil hava savunma şartnamelerine ayrı tehdit sınıfı olarak girmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "muhimmat-stoklarinin-gun-cinsinden-muharebe-sure",
+  "name": "Mühimmat stoklarının \"gün cinsinden muharebe süresi\" hedefiyle ifade edilmesinin ihale ilanlarına yansıması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "esik-alti-hizli-tedarik-onaylarinin-avrupa-da-mu",
+  "name": "Eşik altı hızlı tedarik onaylarının Avrupa'da mühimmat kalemlerindeki payı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "kalici-karsi-dron-test-seritlerinin-yabanci-teda",
+  "name": "Kalıcı karşı-dron test şeritlerinin yabancı tedarikçilere açık olup olmadığı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "akustik-tespit-katmaninin-karsi-dron-sartnameler",
+  "name": "Akustik tespit katmanının karşı-dron şartnamelerinde zorunlu sensör olarak tanımlanması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "kucuk-insansiz-deniz-araclarina-karsi-deniz-topu",
+  "name": "Küçük insansız deniz araçlarına karşı deniz topu ve mühimmat kaleminin ayrı tanımlanması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "yakinlik-ve-programlanabilir-funyenin-muhimmatta",
+  "name": "Yakınlık ve programlanabilir fünyenin mühimmattan ayrı bir ihracat kalemi olarak ihalelere girmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "kritik-hammaddede-tarihli-mense-yasaklarinin-mut",
+  "name": "Kritik hammaddede tarihli menşe yasaklarının müttefik alım şartnamelerine yayılması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "topcu-mevzi-koruma-ekipmaninin-kafes-aldatma-mak",
+  "name": "Topçu mevzi koruma ekipmanının (kafes, aldatma maketi) ayrı tedarik kalemi hâline gelmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "karsi-dron-paketlerinde-pasif-fiziksel-bariyer-k",
+  "name": "Karşı-dron paketlerinde pasif fiziksel bariyer kaleminin ihaleye girmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "abd-de-aralik-ortasindaki-odenek-kararinin-karsi",
+  "name": "ABD'de aralık ortasındaki ödenek kararının karşı-dron çerçeve tavanını serbest bırakması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "dron-tedarikinde-teslim-performansinin-siparis-y",
+  "name": "Dron tedarikinde teslim performansının sipariş yeniden dağıtımı ölçütü hâline gelmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "pakistan-da-ld-2000",
+  "name": "Pakistan'da LD-2000",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "kati-yakitli-roket-motoru-kapasitesinin-2029-onc",
+  "name": "Katı yakıtlı roket motoru kapasitesinin 2029 öncesinde mühimmat teslim takvimlerine koyduğu sınır",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "uzun-menzilli-roket-muhimmatinda-ortak-uretim-ay",
+  "name": "Uzun menzilli roket mühimmatında ortak üretim ayağının Güneydoğu Asya tekliflerinde şart hâline gelmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "kiyi-savunma-sistemi-ihracatinda-sistem-duzeyind",
+  "name": "Kıyı savunma sistemi ihracatında sistem düzeyinde paket sunmanın rekabet unsuru hâline gelmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "dikey-kalkisli-dolanan-muhimmatin-barkin-in-reka",
+  "name": "Dikey kalkışlı dolanan mühimmatın BARKIN'ın rekabet ettiği segmentte yeni bir alt kategori açması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "etiyopya-nin-orion-e-tedariki",
+  "name": "Etiyopya'nın Orion-E tedariki ve Etiyopya topçu alımı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "hindistan-mmg-termal-nisang-h-rfi-si",
+  "name": "Hindistan MMG termal nişangâh RFI'si",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "otokar-zirhli-arac-siparisi",
+  "name": "Otokar zırhlı araç siparişi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "musv-uretim-siparisleri",
+  "name": "MUSV üretim siparişleri",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "abd-guney-siniri-c-uas-denemesi",
+  "name": "ABD güney sınırı C-UAS denemesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "ab-ortak-cikar-projelerinde-ilan-edilen-butce-ba",
+  "name": "AB ortak çıkar projelerinde ilan edilen bütçe bantlarının yıllık ihale ilanlarına bölünmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "muhimmat-teknolojisinin-lisanslanarak-ortak-ulke",
+  "name": "Mühimmat teknolojisinin lisanslanarak ortak ülkelerde üretilmesi modelinin topçu mühimmatında yayılması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "fiber-optik-kumandali-fpv-dronun-karsi-dron-sart",
+  "name": "Fiber optik kumandalı FPV dronun karşı-dron şartnamelerinde ayrı tehdit sınıfı olarak tanımlanması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "otonom-sistemler-icin-ayri-bir-musterek-komutanl",
+  "name": "Otonom sistemler için ayrı bir müşterek komutanlık kurulmasının karşı-dron tedarik yetkisini nasıl böldüğü",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "enerji-ve-kritik-altyapi-korumasinin-korfez-de-a",
+  "name": "Enerji ve kritik altyapı korumasının Körfez'de ayrı bir hava savunma tedarik kalemi olarak tanımlanması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "karsi-dron-sensor-ureticilerinin-ana-yuklenicile",
+  "name": "Karşı-dron sensör üreticilerinin ana yüklenicilere konsolide olmasının sensör–efektör paket rekabetine etkisi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "karsi-iha-gorevine-ayrilmis-alay-yapisinin-techi",
+  "name": "Karşı-İHA görevine ayrılmış alay yapısının teçhiz kalemlerinde namlulu ve kinetik katmanı tanımlaması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "avrupa-savunma-harcamasindaki-artisin-dron-ve-ka",
+  "name": "Avrupa savunma harcamasındaki artışın dron ve karşı-dron kalemine düşen payının yıllık ihale ilanlarına yansıması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "dolanan-muhimmatta-muhimmat-guvenlik-nitelendirm",
+  "name": "Dolanan mühimmatta mühimmat güvenlik nitelendirmesinin pazara giriş sırasını belirleyen unsur hâline gelmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "hava-savunma-ihracat-sozlesmelerinde-kalem-kiril",
+  "name": "Hava savunma ihracat sözleşmelerinde kalem kırılımının açıklanmamasının pazar okumasını nasıl sınırladığı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "balkanlar-da-ortak-uretim-ortakliklarinin-muhimm",
+  "name": "Balkanlar'da ortak üretim ortaklıklarının mühimmat ve dolanan mühimmat kalemlerine yayılması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "malezya-deniz-ajansi-mpms-teslimi",
+  "name": "Malezya Deniz Ajansı MPMS teslimi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "40-mm-programlanabilir-havada-infilakli-muhimmat",
+  "name": "40 mm programlanabilir havada infilaklı mühimmatın silah sisteminden ayrı bir ihracat kalemi olarak şartnamelere girmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "resm-uretim-kapasitesi-boslugu-taniminin-muttefi",
+  "name": "Resmî üretim kapasitesi boşluğu tanımının müttefik şartnamelerinde ikinci kaynak ya da kapasite şartına dönüşmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "aktif-koruma-sistemi-onleyici-muhimmatinin-platf",
+  "name": "Aktif koruma sistemi önleyici mühimmatının platformdan ayrı bir sarf kalemi olarak ihale edilmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "kbrn-hizmet-ici-destek-sozlesmelerinin-icine-yer",
+  "name": "KBRN hizmet içi destek sözleşmelerinin içine yerleştirilen sermaye ekipmanı alımının menşe kurallarına bağlanması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "ana-yuklenici-sermaye-yapilarina-finansal-yatiri",
+  "name": "Ana yüklenici sermaye yapılarına finansal yatırımcı ve devlet girişinin topçu ve araç üstü silah segmentindeki fiyat rekabetine etkisi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "israil-menseli-hava-savunma-ve-topcu-paketlerini",
+  "name": "İsrail menşeli hava savunma ve topçu paketlerinin Afrika'da tek tedarikçili mimariye dönüşmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "onleyici-dron-birim-maliyeti-ile-isabet-oraninin",
+  "name": "Önleyici dron birim maliyeti ile isabet oranının karşı-dron şartnamelerinde birlikte ölçüt hâline gelmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "namlulu-karsi-dron-efektorunun-etkinlik-karsilas",
+  "name": "Namlulu karşı-dron efektörünün etkinlik karşılaştırmalarında sahadan gelen rakamlarla savunulup savunulamayacağı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "topcu-birliklerinde-dagitilmis-kisim-duzeninin-b",
+  "name": "Topçu birliklerinde dağıtılmış kısım düzeninin batarya başına mühimmat ikmali ve araç ihtiyacına etkisi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "muttefiklere-devredilen-konvansiyonel-savunma-yu",
+  "name": "Müttefiklere devredilen konvansiyonel savunma yükünün mühimmat kalemlerinde ulusal ihaleye dönüşmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "nspa-elektronik-dogrudan-siparis-modelinin-muhim",
+  "name": "NSPA elektronik doğrudan sipariş modelinin mühimmat ve yedek parça kalemlerine yayılması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "arac-ustu-karsi-dron-tespit-sensorunun-platform-",
+  "name": "Araç üstü karşı-dron tespit sensörünün platform sözleşmesinden ayrı bir kalem olarak ihale edilmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "hafif-taktik-arac-ustu-havan-tasiyicilarinin-gun",
+  "name": "Hafif taktik araç üstü havan taşıyıcılarının Güneydoğu Asya'da yerelleşmiş rekabet standardı hâline gelmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "hard-kill-karsi-dron-gorevinde-2-5-km-bandindaki",
+  "name": "Hard-kill karşı-dron görevinde 2–5 km bandındaki mikro-füzenin namlulu çözümle maliyet karşılaştırmasına girmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "ig-defence-jwala-mikro-fuze-denemeleri",
+  "name": "IG Defence JWALA mikro-füze denemeleri",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "kucuk-kalibre-muhimmat-pazarindaki-bolgesel-yogu",
+  "name": "Küçük kalibre mühimmat pazarındaki bölgesel yoğunlaşmanın ihracat rekabetine etkisi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "yabanci-asker-satis-onaylarinda-funye-ve-harp-ba",
+  "name": "Yabancı Askerî Satış onaylarında fünye ve harp başlığının silahtan ayrı kalem olarak sayılmasının ihracat rekabetine etkisi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "turkiye-kaynakli-hava-savunma-kapasitesinin-ic-s",
+  "name": "Türkiye kaynaklı hava savunma kapasitesinin iç siparişlerle bağlanmasının ihracat teklif takvimlerine etkisi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "apfit-benzeri-hizlandirilmis-tedarik-yetkilerini",
+  "name": "APFIT benzeri hızlandırılmış tedarik yetkilerinin yabancı menşeli tedarikçiye açık olup olmadığı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "guneydogu-asya-da-52-kalibre-155-mm-arac-ustu-ob",
+  "name": "Güneydoğu Asya'da 52 kalibre 155 mm araç üstü obüsün fiili rekabet eşiği hâline gelmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "canli-atisli-karsi-suru-tatbikatlarindan-kalibre",
+  "name": "Canlı atışlı karşı-sürü tatbikatlarından kalibre ve atım sayısı verisinin yayımlanması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "muhimmat-pazari-ongorulerinin-kalibre-ve-kalem-b",
+  "name": "Mühimmat pazarı öngörülerinin kalibre ve kalem bazında kırılım vermesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "moduler-roket-firlaticisinin-yakin-savunmada-den",
+  "name": "Modüler roket fırlatıcısının yakın savunmada deniz topuna alternatif olarak sözleşmeye dönüşmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "arayici-ve-gudum-bileseni-kapasitesinin-hava-sav",
+  "name": "Arayıcı ve güdüm bileşeni kapasitesinin hava savunma teslim takvimlerinde darboğaz hâline gelmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "kucuk-olcekli-dolanan-muhimmat-ureticilerinin-ih",
+  "name": "Küçük ölçekli dolanan mühimmat üreticilerinin ihracat pazarlarında fiyat eşiğini aşağı çekmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "abd-ordusu-uretim-rodeosu",
+  "name": "ABD Ordusu üretim rodeosu",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "japonya-nin-ukrayna-dan-onleyici-iha-tedariki",
+  "name": "Japonya'nın Ukrayna'dan önleyici İHA tedariki",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "phantom-defense-in-karakurt-satin-almasi",
+  "name": "Phantom Defense'in Karakurt satın alması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "avio-lockheed-martin-kati-yakitli-motor-anlasmas",
+  "name": "Avio–Lockheed Martin katı yakıtlı motor anlaşması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "muttefik-pazar-yerinde-abd-disi-bir-tedarikcinin",
+  "name": "Pazar yerinde ABD dışı bir tedarikçinin fiilen satıcı olarak listelenmesi ve listeleme, menşe, siber güvenlik ölçütlerinin yayımlanması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "25-mm-sinifinda-programlanabilir-ve-yakinlik-fun",
+  "name": "25 mm sınıfında programlanabilir ve yakınlık fünyeli mühimmatın fırlatıcıdan ayrı ihale kalemine dönüşmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "induktif-funye-programlayicisinin-muhimmatla-bir",
+  "name": "İndüktif fünye programlayıcısının bağımsız bileşen hâline gelmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "yonlendirilmis-enerji-tedarik-programlarinda-ang",
+  "name": "Yönlendirilmiş enerji tedarik programlarında angajman başına maliyetin yayımlanması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "moduler-onleyici-fuze-ailelerinin-yilda-binlerce",
+  "name": "Modüler önleyici füze ailelerinin yılda binlerce adet ölçeğinde üretime geçmesinin namlulu çözümün maliyet argümanına etkisi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "merops-un-142-gunde-program-olmasi",
+  "name": "Merops'un 142 günde program olması ve hızlandırılmış dönüşümün yabancı menşeli sistemlere uygulanıp uygulanmadığı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "usaf-orta-kalibreli-20-50-mm-namlulu-hava-savunm",
+  "name": "USAF orta kalibreli (20–50 mm) namlulu hava savunma pazar araştırması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "fortress-america-program-ofisinin-30-ekim-e-kada",
+  "name": "FORTRESS America program ofisinin 30 Ekim'e kadar kurulması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "tungsten-mense-yasaginin-1-ocak-2027-de-yururlug",
+  "name": "Tungsten menşe yasağının 1 Ocak 2027'de yürürlüğe girmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "swarm-forge-dorduncu-saha-denemesinin-ocak-2027-",
+  "name": "Swarm Forge dördüncü saha denemesinin Ocak 2027 sonunda yapılması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "buyuk-karsi-dron-cercevelerinde-sensor-havuzunun",
+  "name": "Büyük karşı-dron çerçevelerinde sensör havuzunun yanına ayrı bir efektör ya da mühimmat havuzu açılıp açılmayacağı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "devletlerarasi-on-onayli-katalogda-listeleme-men",
+  "name": "Devletlerarası ön onaylı katalogda listeleme, menşe ve siber güvenlik ölçütlerinin yayımlanması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "gudumlu-top-mermisinin-hava-savunma-gorevinde-si",
+  "name": "Güdümlü top mermisinin hava savunma görevinde silah sisteminden ayrı tedarik kalemine dönüşmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "dusuk-maliyetli-onleyicide-1-milyon-birim-fiyat-",
+  "name": "Düşük maliyetli önleyicide 1 milyon $ birim fiyat hedefinin ihale ilanlarına ve müttefik şartnamelerine yazılması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "ortak-firlatici-ailesi-caml-arayuz-sartlarinin-u",
+  "name": "Ortak fırlatıcı ailesi (CAML) arayüz şartlarının üçüncü taraf efektörlere açık olup olmadığı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "kitlesel-dron-uretimi-icin-istenen-tek-seferlik-",
+  "name": "Kitlesel dron üretimi için istenen tek seferlik finansmanın karşı-dron ve mühimmat kalemini kapsayıp kapsamadığı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "edip-sanayi-hizlandirma-hibelerinde-topcu-muhimm",
+  "name": "EDIP sanayi hızlandırma hibelerinde topçu mühimmatı kaleminin payı ve AB dışı menşe kuralı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "askerin-uzerinde-tasinan-dron-tespiti",
+  "name": "Askerin üzerinde taşınan dron tespiti ve er seviyesi karşı-dron kabiliyetinin hangi kalibrede mühimmat talebi doğurduğu",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "ifpc-inc-2-ve-ngsri-elemelerinin-yeniden-acilmas",
+  "name": "IFPC Inc. 2 ve NGSRI elemelerinin yeniden açılması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "gauntlet-2-5-ve-450-milyon-lik-drone-dominance-y",
+  "name": "Gauntlet 2.5 ve 450 milyon $'lık Drone Dominance yarışması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "patriot-muhimmat-hedeflerinin-2-000-den-8-000-e-",
+  "name": "Patriot mühimmat hedeflerinin 2.000'den 8.000'e kadar yeniden değerlendirilmesinin bütçeye yazılması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "50-mm-hava-savunma-muhimmatinin-50-228-mm-silah-",
+  "name": "50 mm hava savunma mühimmatının (50×228 mm) silah sisteminden ayrı bir ihracat ve ihale kalemi olarak tanımlanması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "yakinlik-funyeli-gudumlu-ucaksavar-mermisinin-20",
+  "name": "Yakınlık fünyeli güdümlü uçaksavar mermisinin 2027 yazındaki prototip takvimine bağlı kalıp kalmaması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "155-mm-topun-hava-savunma-gorevinde-batarya-basi",
+  "name": "155 mm topun hava savunma görevinde batarya başına güdümlü mermi sarfının ikmal kalemi olarak ilan edilmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "ag-atan-fiziksel-yakalamali-onleyici-dron-modeli",
+  "name": "Ağ atan / fiziksel yakalamalı önleyici dron modelinin başka NATO ülkelerinin karşı-dron bütçelerinde tekrarlanması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "safe-kapsamindaki-karsi-dron-alimlarinda-ab-disi",
+  "name": "SAFE kapsamındaki karşı-dron alımlarında AB dışı menşe oranı ve ortak alım kurallarının yayımlanması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "nato-karsi-dron-girisimine-katilimin-uye-ulkeler",
+  "name": "NATO karşı-dron girişimine katılımın üye ülkelerde ulusal ihale ilanına dönüşüp dönüşmediği",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "lazerde-aciklanan-atis-basina-maliyet-rakaminin-",
+  "name": "Lazerde açıklanan atış başına maliyet rakamının bağımsız denemelerde doğrulanması ve ihracat şartnamelerine girmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "rakip-ihracatci-pazarlarinda-devlet-muhimmat-ali",
+  "name": "Rakip ihracatçı pazarlarında devlet mühimmat alıcılarındaki soruşturmaların açık ihaleleri askıya alıp almadığı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "hafif-silah-ureticilerinin-c-uas-sensor-ve-efekt",
+  "name": "Hafif silah üreticilerinin C-UAS sensör ve efektör kalemlerine girişinin mühimmat rekabetine etkisi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "fuze-savunma-muhimmati-aciginin-2030-a-kadar-sur",
+  "name": "Füze savunma mühimmatı açığının 2030'a kadar sürmesi iddiası",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "ukrayna-da-patriot-onleyici-stoku-ve-ukrayna-nin",
+  "name": "Ukrayna'da Patriot önleyici stoku ve Ukrayna'nın 2026 savunma açığı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "hindistan-155-mm-he-m1a4-ihalesi-ve-munitions-in",
+  "name": "Hindistan 155 mm HE M1A4 ihalesi ve Munitions India soruşturması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "bulgaristan-c-uas-alimi-ve-nato-karsi-dron-giris",
+  "name": "Bulgaristan C-UAS alımı ve NATO karşı-dron girişimine 30 Ekim'e kadar katılım",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "uzun-menzilli-dolanan-muhimmatin-topcu-birlik-ya",
+  "name": "Uzun menzilli dolanan mühimmatın topçu birlik yapısında ayrı batarya olarak kurumsallaşması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "ahead-ve-kinetik-enerjili-zaman-funyeli-muhimmat",
+  "name": "AHEAD ve kinetik enerjili zaman fünyeli mühimmatın bileşen hattından bitmiş mühimmat ihracat kalemine dönüşmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "orta-kalibre-bilesen-uretimi-ile-bitmis-muhimmat",
+  "name": "Orta kalibre bileşen üretimi ile bitmiş mühimmat montajının farklı ülkelere dağıtılmasının menşe ve lisans kurallarına etkisi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "harp-basliksiz-dogrudan-carpmali-onleyicinin-muh",
+  "name": "Harp başlıksız, doğrudan çarpmalı önleyicinin mühimmat sarfını tamamen dışarıda bırakan bir maliyet modeli kurup kurmadığı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "600-km-s-uzeri-jet-motorlu-tehdit-sinifinin-kisa",
+  "name": "600 km/s üzeri jet motorlu tehdit sınıfının kısa menzil hava savunma şartnamelerinde ayrı kalem hâline gelmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "namlusuz-sabit-nokta-savunma-modulunun-pantsir-s",
+  "name": "Namlusuz sabit nokta savunma modülünün (Pantsir-SMD-E) ihracat müşterisi bulması ve mini füze birim maliyetinin açıklanması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "turkiye-kambocya-cercevesinin-muhimmat-ve-topcu-",
+  "name": "Türkiye–Kamboçya çerçevesinin mühimmat ve topçu kalemlerinde ulusal ihale ilanına dönüşmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "fransiz-ordusunun-uzun-menzilli-teleoperasyonlu-",
+  "name": "Fransız ordusunun uzun menzilli teleoperasyonlu mühimmat modelini seçmesi ve adedi açıklaması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "guneydogu-asya-da-cin-menseli-roketatar-muhimmat",
+  "name": "Güneydoğu Asya'da Çin menşeli roketatar mühimmatı değerlendirmelerinin siparişe dönüşmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "bulgaristan-in-nato-dan-hava-savunma-talebi",
+  "name": "Bulgaristan'ın NATO'dan hava savunma talebi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "abd-ordusu-ace-elektromanyetik-spektrum-cagrisi",
+  "name": "ABD Ordusu ACE elektromanyetik spektrum çağrısı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "malezya-merad-ve-shorad-rmk-13",
+  "name": "Malezya MERAD ve SHORAD (RMK-13)",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "rusya-yaptirim-paketi-ve-18-ekim-ikincil-yaptiri",
+  "name": "Rusya yaptırım paketi ve 18 Ekim ikincil yaptırım penceresi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "suudi-arabistan-in-hava-savunma-ihtiyacini-resm-",
+  "name": "Suudi Arabistan'ın hava savunma ihtiyacını resmî bir talep ya da ihale ilanına dönüştürmesi ve kısa menzil / C-UAS kaleminin balistik katmandan ayrı tanımlanması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "onleyici-sarf-oraninin-fuze-basina-atilan-onleyi",
+  "name": "Önleyici sarf oranının (füze başına atılan önleyici sayısı) alıcı ülkelerde tedarik kararlarını belirleyen açık bir ölçüt hâline gelmesi",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "afrika-daki-saha-degerlendirmelerinde-kinetik-im",
+  "name": "Afrika'daki saha değerlendirmelerinde kinetik imha kategorisinin kalibre ve mühimmat tanımına bağlanması ile katılımın yabancı tedarikçilere açık olup olmadığı",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "180-gunluk-sahaya-verme-hedefinin-bolgesel-komut",
+  "name": "180 günlük sahaya verme hedefinin bölgesel komutanlık tedarik yetkisiyle birlikte kurumsallaşması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "ifpc-inc-2-ikinci-onleyici-elemesinde-kalan-uc-f",
+  "name": "IFPC Inc 2 ikinci önleyici elemesinde kalan üç firmanın açıklanması ve birim fiyatın yayımlanması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "rusya-kaynakli-ticarete-uygulanan-tarife-askisin",
+  "name": "Rusya kaynaklı ticarete uygulanan tarife askısının süresi ve savunma kalemlerine özgü istisna içerip içermediği",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "50-kw-sinifi-arac-ustu-lazerin-2027-sonu-uretim-",
+  "name": "50 kW sınıfı araç üstü lazerin 2027 sonu üretim hedefinin tutması ve ilk ihracat müşterisinin açıklanması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "g-tead-yaristirilmis-kabiliyetler-kutuphanesi-ne",
+  "name": "G-TEAD Yarıştırılmış Kabiliyetler Kütüphanesi'ne kabul ölçütlerinin, menşe şartının ve son başvuru tarihinin yayımlanması",
+  "son_hareket": "2026-10-18"
+ },
+ {
+  "id": "malezya-merad-rmk-13",
+  "name": "Malezya MERAD (RMK-13)",
   "son_hareket": "2026-10-17"
  },
  {
@@ -50,408 +820,8 @@
   "son_hareket": "2026-10-17"
  },
  {
-  "id": "kucuk-kalibre-muhimmatin-2031-e-kadar-tek-tedari",
-  "name": "Küçük kalibre mühimmatın 2031'e kadar tek tedarikçiye bağlanması ve Drone Round'un bu çerçeveyle ilişkisi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "155-mm-obus-alimlarinda-yerli-sanayi-katiliminin",
-  "name": "155 mm obüs alımlarında yerli sanayi katılımının sayısal eşik olarak tanımlanması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "korfez-de-yerli-uretim-ayakli-hava-savunma-paket",
-  "name": "Körfez'de yerli üretim ayaklı hava savunma paketlerinin kısa menzil ve C-UAS kalemine genişlemesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "665-milyon-lik-c-uas-test-siparisine-itiraz",
-  "name": "665 milyon $'lık C-UAS test siparişine itiraz",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "abd-donanmasi-uygun-maliyetli-onleyici",
-  "name": "ABD Donanması uygun maliyetli önleyici",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "topcu-alimlarinda-eslik-eden-kisa-menzil-koruma-",
-  "name": "Topçu alımlarında eşlik eden kısa menzil koruma kaleminin şartnameye girmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "ingiltere-nin-750-milyon-luk-c-uas-butcesinin-ih",
-  "name": "İngiltere'nin 750 milyon £'luk C-UAS bütçesinin ihale kalemlerine bölünmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "cekya-spyder-genislemesinde-c-uas-kaleminin-tani",
-  "name": "Çekya SPYDER genişlemesinde C-UAS kaleminin tanımı",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "ermenistan-in-divyastra-mk-1-secimi",
-  "name": "Ermenistan'ın Divyastra MK-1 seçimi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "ukrayna-da-gudumsuz-155-mm-tercihi",
-  "name": "Ukrayna'da güdümsüz 155 mm tercihi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "c-uas-sartnamelerinde-gps-siz-calisma-maddesinin",
-  "name": "C-UAS şartnamelerinde GPS'siz çalışma maddesinin zorunlu kriter hâline gelmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "irak-in-c-uas-ve-hava-savunma-alimlarini-resm-ih",
-  "name": "Irak'ın C-UAS ve hava savunma alımlarını resmî ihaleye dönüştürmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "deniz-topu-ihracatinda-alici-ulkede-uretim-ayagi",
-  "name": "Deniz topu ihracatında alıcı ülkede üretim ayağı sunmanın kriter hâline gelmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "ucuncu-taraf-komuta-kontrol-platformlarina-efekt",
-  "name": "Üçüncü taraf komuta-kontrol platformlarına efektör entegrasyonunun arayüz standardı olarak şartnameye girmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "105-mm-arac-ustu-top-segmentinde-yeni-ihale-ve-u",
-  "name": "105 mm araç üstü top segmentinde yeni ihale ve üretim kararlarının takibi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "105-mm-namlu-ve-top-bileseni-uretiminin-nato-ulk",
-  "name": "105 mm namlu ve top bileşeni üretiminin NATO ülkelerinde yeniden ulusallaştırılması eğilimi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "ana-yuklenicilerin-karsi-dron-sistemlerinde-hard",
-  "name": "Ana yüklenicilerin karşı-dron sistemlerinde hard-kill katmanı için namlulu silah yerine önleyici dron seçmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "cin-menseli-namlulu-fuzeli-shorad-in-afrika-paza",
-  "name": "Çin menşeli namlulu-füzeli SHORAD'ın Afrika pazarındaki yayılımı",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "ic-guvenlik-butcelerinden-acilan-mobil-c-uas-ali",
-  "name": "İç güvenlik bütçelerinden açılan mobil C-UAS alımlarının hacmi ve tekrar sıklığı",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "hindistan-in-topcu-mermisi-govdesi-kapasitesinin",
-  "name": "Hindistan'ın topçu mermisi gövdesi kapasitesinin ihracata yönelmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "flytrap-6-0-basvuru-ilaninda-mense-guvenlik-sini",
-  "name": "FLYTRAP 6.0 başvuru ilanında menşe, güvenlik sınıflandırması ya da son tarih kısıtı bulunup bulunmadığı",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "sehir-ici-c-uas-denemelerinde-tali-hasar-sinirla",
-  "name": "Şehir içi C-UAS denemelerinde tali hasar sınırlamasının efektör seçimine yazılı kriter olarak girmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "12-kalibre-ve-benzeri-hafif-kinetik-karsi-dron-m",
-  "name": "12 kalibre ve benzeri hafif kinetik karşı-dron mühimmatının resmî denemelerde yer alması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "arac-ustu-koruma-paketlerinde-elektronik-harp-ve",
-  "name": "Araç üstü koruma paketlerinde elektronik harp ve kinetik kalemin ayrı ihale edilmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "dolanan-muhimmatta-otonomi-yaziliminin-bagimsiz-",
-  "name": "Dolanan mühimmatta otonomi yazılımının bağımsız bir tedarik kalemi hâline gelmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "onleyici-fuze-tedarikinin-govde-motor-arayici-ve",
-  "name": "Önleyici füze tedarikinin gövde, motor, arayıcı ve atış kontrolü olarak ayrı kalemlere bölünmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "ab-savunma-kredilerinin-tedarikci-uygunluk-kural",
-  "name": "AB savunma kredilerinin tedarikçi uygunluk kurallarında AB dışı menşe oranı sınırı",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "zirhli-arac-kulelerinin-organik-karsi-dron-gorev",
-  "name": "Zırhlı araç kulelerinin organik karşı-dron görevi üstlenmesi ve 30 mm programlanabilir mühimmat talebine etkisi",
-  "son_hareket": "2026-10-17"
- },
- {
   "id": "namlulu-kisa-menzil-hava-savunmada-hareket-h-lin",
   "name": "Namlulu kısa menzil hava savunmada hareket hâlinde angajman gösteriminin ihracat şartnamelerine girmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "xtech-apex-intercept-gosterimleri",
-  "name": "xTech|Apex Intercept gösterimleri",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "kazakistan-asker-reform-plani",
-  "name": "Kazakistan askerî reform planı",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "muhimmat-stok-aciginin-depolama-altyapisi-yatiri",
-  "name": "Mühimmat stok açığının depolama altyapısı yatırımıyla birlikte planlanması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "obus-ihracatinda-bakim-ve-onarim-teknolojisi-tra",
-  "name": "Obüs ihracatında bakım ve onarım teknolojisi transferinin ayrı rekabet unsuru hâline gelmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "liman-savunma-paketlerinde-sensor-ve-efektor-kal",
-  "name": "Liman savunma paketlerinde sensör ve efektör kalemlerinin ayrı ihale edilmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "yeni-nesil-muhrip-hava-savunma-paketlerinde-guve",
-  "name": "Yeni nesil muhrip hava savunma paketlerinde güverte topu kaleminin ayrı tanımlanıp tanımlanmadığı",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "nadir-toprak-ve-miknatis-tedariki",
-  "name": "Nadir toprak ve mıknatıs tedariki",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "nato-nun-kucuk-insansiz-deniz-araci-degerlendirm",
-  "name": "NATO'nun küçük insansız deniz aracı değerlendirmesi ve Yunan Donanması Corsair USV denemesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "jet-motorlu-yuksek-irtifadan-gelen-tek-yonlu-sal",
-  "name": "Jet motorlu, yüksek irtifadan gelen tek yönlü saldırı dronlarının kısa menzil hava savunma şartnamelerine ayrı tehdit sınıfı olarak girmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "muhimmat-stoklarinin-gun-cinsinden-muharebe-sure",
-  "name": "Mühimmat stoklarının \"gün cinsinden muharebe süresi\" hedefiyle ifade edilmesinin ihale ilanlarına yansıması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "esik-alti-hizli-tedarik-onaylarinin-avrupa-da-mu",
-  "name": "Eşik altı hızlı tedarik onaylarının Avrupa'da mühimmat kalemlerindeki payı",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "kalici-karsi-dron-test-seritlerinin-yabanci-teda",
-  "name": "Kalıcı karşı-dron test şeritlerinin yabancı tedarikçilere açık olup olmadığı",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "akustik-tespit-katmaninin-karsi-dron-sartnameler",
-  "name": "Akustik tespit katmanının karşı-dron şartnamelerinde zorunlu sensör olarak tanımlanması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "kucuk-insansiz-deniz-araclarina-karsi-deniz-topu",
-  "name": "Küçük insansız deniz araçlarına karşı deniz topu ve mühimmat kaleminin ayrı tanımlanması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "yakinlik-ve-programlanabilir-funyenin-muhimmatta",
-  "name": "Yakınlık ve programlanabilir fünyenin mühimmattan ayrı bir ihracat kalemi olarak ihalelere girmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "kritik-hammaddede-tarihli-mense-yasaklarinin-mut",
-  "name": "Kritik hammaddede tarihli menşe yasaklarının müttefik alım şartnamelerine yayılması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "topcu-mevzi-koruma-ekipmaninin-kafes-aldatma-mak",
-  "name": "Topçu mevzi koruma ekipmanının (kafes, aldatma maketi) ayrı tedarik kalemi hâline gelmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "karsi-dron-paketlerinde-pasif-fiziksel-bariyer-k",
-  "name": "Karşı-dron paketlerinde pasif fiziksel bariyer kaleminin ihaleye girmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "abd-de-aralik-ortasindaki-odenek-kararinin-karsi",
-  "name": "ABD'de aralık ortasındaki ödenek kararının karşı-dron çerçeve tavanını serbest bırakması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "dron-tedarikinde-teslim-performansinin-siparis-y",
-  "name": "Dron tedarikinde teslim performansının sipariş yeniden dağıtımı ölçütü hâline gelmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "pakistan-da-ld-2000",
-  "name": "Pakistan'da LD-2000",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "kati-yakitli-roket-motoru-kapasitesinin-2029-onc",
-  "name": "Katı yakıtlı roket motoru hattı yatırımlarında dış müşterilere ayrılan kapasite payının açıklanması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "uzun-menzilli-roket-muhimmatinda-ortak-uretim-ay",
-  "name": "Uzun menzilli roket mühimmatında ortak üretim ayağının Güneydoğu Asya tekliflerinde şart hâline gelmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "kiyi-savunma-sistemi-ihracatinda-sistem-duzeyind",
-  "name": "Kıyı savunma sistemi ihracatında sistem düzeyinde paket sunmanın rekabet unsuru hâline gelmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "dikey-kalkisli-dolanan-muhimmatin-barkin-in-reka",
-  "name": "Dikey kalkışlı dolanan mühimmatın BARKIN'ın rekabet ettiği segmentte yeni bir alt kategori açması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "etiyopya-nin-orion-e-tedariki",
-  "name": "Etiyopya'nın Orion-E tedariki ve Etiyopya topçu alımı",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "hindistan-mmg-termal-nisang-h-rfi-si",
-  "name": "Hindistan MMG termal nişangâh RFI'si",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "otokar-zirhli-arac-siparisi",
-  "name": "Otokar zırhlı araç siparişi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "musv-uretim-siparisleri",
-  "name": "MUSV üretim siparişleri",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "abd-guney-siniri-c-uas-denemesi",
-  "name": "ABD güney sınırı C-UAS denemesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "ab-ortak-cikar-projelerinde-ilan-edilen-butce-ba",
-  "name": "AB ortak çıkar projelerinde ilan edilen bütçe bantlarının yıllık ihale ilanlarına bölünmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "muhimmat-teknolojisinin-lisanslanarak-ortak-ulke",
-  "name": "Mühimmat teknolojisinin lisanslanarak ortak ülkelerde üretilmesi modelinin topçu mühimmatında yayılması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "fiber-optik-kumandali-fpv-dronun-karsi-dron-sart",
-  "name": "Fiber optik kumandalı FPV dronun karşı-dron şartnamelerinde ayrı tehdit sınıfı olarak tanımlanması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "otonom-sistemler-icin-ayri-bir-musterek-komutanl",
-  "name": "Otonom sistemler için ayrı bir müşterek komutanlık kurulmasının karşı-dron tedarik yetkisini nasıl böldüğü",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "enerji-ve-kritik-altyapi-korumasinin-korfez-de-a",
-  "name": "Enerji ve kritik altyapı korumasının Körfez'de ayrı bir hava savunma tedarik kalemi olarak tanımlanması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "karsi-dron-sensor-ureticilerinin-ana-yuklenicile",
-  "name": "Karşı-dron sensör üreticilerinin ana yüklenicilere konsolide olmasının sensör–efektör paket rekabetine etkisi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "karsi-iha-gorevine-ayrilmis-alay-yapisinin-techi",
-  "name": "Karşı-İHA görevine ayrılmış alay yapısının teçhiz kalemlerinde namlulu ve kinetik katmanı tanımlaması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "avrupa-savunma-harcamasindaki-artisin-dron-ve-ka",
-  "name": "Avrupa savunma harcamasındaki artışın dron ve karşı-dron kalemine düşen payının yıllık ihale ilanlarına yansıması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "dolanan-muhimmatta-muhimmat-guvenlik-nitelendirm",
-  "name": "Dolanan mühimmatta mühimmat güvenlik nitelendirmesinin pazara giriş sırasını belirleyen unsur hâline gelmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "hava-savunma-ihracat-sozlesmelerinde-kalem-kiril",
-  "name": "Hava savunma ihracat sözleşmelerinde kalem kırılımının açıklanmamasının pazar okumasını nasıl sınırladığı",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "balkanlar-da-ortak-uretim-ortakliklarinin-muhimm",
-  "name": "Balkanlar'da ortak üretim ortaklıklarının mühimmat ve dolanan mühimmat kalemlerine yayılması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "malezya-deniz-ajansi-mpms-teslimi",
-  "name": "Malezya Deniz Ajansı MPMS teslimi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "40-mm-programlanabilir-havada-infilakli-muhimmat",
-  "name": "40 mm programlanabilir havada infilaklı mühimmatın silah sisteminden ayrı bir ihracat kalemi olarak şartnamelere girmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "resm-uretim-kapasitesi-boslugu-taniminin-muttefi",
-  "name": "Resmî üretim kapasitesi boşluğu tanımının müttefik şartnamelerinde ikinci kaynak ya da kapasite şartına dönüşmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "aktif-koruma-sistemi-onleyici-muhimmatinin-platf",
-  "name": "Aktif koruma sistemi önleyici mühimmatının platformdan ayrı bir sarf kalemi olarak ihale edilmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "kbrn-hizmet-ici-destek-sozlesmelerinin-icine-yer",
-  "name": "KBRN hizmet içi destek sözleşmelerinin içine yerleştirilen sermaye ekipmanı alımının menşe kurallarına bağlanması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "ana-yuklenici-sermaye-yapilarina-finansal-yatiri",
-  "name": "Ana yüklenici sermaye yapılarına finansal yatırımcı ve devlet girişinin topçu ve araç üstü silah segmentindeki fiyat rekabetine etkisi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "israil-menseli-hava-savunma-ve-topcu-paketlerini",
-  "name": "İsrail menşeli hava savunma ve topçu paketlerinin Afrika'da tek tedarikçili mimariye dönüşmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "onleyici-dron-birim-maliyeti-ile-isabet-oraninin",
-  "name": "Önleyici dron birim maliyeti ile isabet oranının karşı-dron şartnamelerinde birlikte ölçüt hâline gelmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "namlulu-karsi-dron-efektorunun-etkinlik-karsilas",
-  "name": "Namlulu karşı-dron efektörünün etkinlik karşılaştırmalarında sahadan gelen rakamlarla savunulup savunulamayacağı",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "topcu-birliklerinde-dagitilmis-kisim-duzeninin-b",
-  "name": "Topçu birliklerinde dağıtılmış kısım düzeninin batarya başına mühimmat ikmali ve araç ihtiyacına etkisi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "muttefiklere-devredilen-konvansiyonel-savunma-yu",
-  "name": "Müttefiklere devredilen konvansiyonel savunma yükünün mühimmat kalemlerinde ulusal ihaleye dönüşmesi",
   "son_hareket": "2026-10-17"
  },
  {
@@ -460,283 +830,13 @@
   "son_hareket": "2026-10-17"
  },
  {
-  "id": "nspa-elektronik-dogrudan-siparis-modelinin-muhim",
-  "name": "NSPA elektronik doğrudan sipariş modelinin mühimmat ve yedek parça kalemlerine yayılması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "arac-ustu-karsi-dron-tespit-sensorunun-platform-",
-  "name": "Araç üstü karşı-dron tespit sensörünün platform sözleşmesinden ayrı bir kalem olarak ihale edilmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "hafif-taktik-arac-ustu-havan-tasiyicilarinin-gun",
-  "name": "Hafif taktik araç üstü havan taşıyıcılarının Güneydoğu Asya'da yerelleşmiş rekabet standardı hâline gelmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "hard-kill-karsi-dron-gorevinde-2-5-km-bandindaki",
-  "name": "Hard-kill karşı-dron görevinde 2–5 km bandındaki mikro-füzenin namlulu çözümle maliyet karşılaştırmasına girmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "ig-defence-jwala-mikro-fuze-denemeleri",
-  "name": "IG Defence JWALA mikro-füze denemeleri",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "kucuk-kalibre-muhimmat-pazarindaki-bolgesel-yogu",
-  "name": "Küçük kalibre mühimmat pazarındaki bölgesel yoğunlaşmanın ihracat rekabetine etkisi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "yabanci-asker-satis-onaylarinda-funye-ve-harp-ba",
-  "name": "Yabancı Askerî Satış onaylarında fünye ve harp başlığının silahtan ayrı kalem olarak sayılmasının ihracat rekabetine etkisi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "turkiye-kaynakli-hava-savunma-kapasitesinin-ic-s",
-  "name": "Türkiye kaynaklı hava savunma kapasitesinin iç siparişlerle bağlanmasının ihracat teklif takvimlerine etkisi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "apfit-benzeri-hizlandirilmis-tedarik-yetkilerini",
-  "name": "APFIT benzeri hızlandırılmış tedarik yetkilerinin yabancı menşeli tedarikçiye açık olup olmadığı",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "guneydogu-asya-da-52-kalibre-155-mm-arac-ustu-ob",
-  "name": "Güneydoğu Asya'da 52 kalibre 155 mm araç üstü obüsün fiili rekabet eşiği hâline gelmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "canli-atisli-karsi-suru-tatbikatlarindan-kalibre",
-  "name": "Canlı atışlı karşı-sürü tatbikatlarından kalibre ve atım sayısı verisinin yayımlanması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "muhimmat-pazari-ongorulerinin-kalibre-ve-kalem-b",
-  "name": "Mühimmat pazarı öngörülerinin kalibre ve kalem bazında kırılım vermesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "moduler-roket-firlaticisinin-yakin-savunmada-den",
-  "name": "Modüler roket fırlatıcısının yakın savunmada deniz topuna alternatif olarak sözleşmeye dönüşmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "arayici-ve-gudum-bileseni-kapasitesinin-hava-sav",
-  "name": "Arayıcı ve güdüm bileşeni kapasitesinin hava savunma teslim takvimlerinde darboğaz hâline gelmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "kucuk-olcekli-dolanan-muhimmat-ureticilerinin-ih",
-  "name": "Küçük ölçekli dolanan mühimmat üreticilerinin ihracat pazarlarında fiyat eşiğini aşağı çekmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "abd-ordusu-uretim-rodeosu",
-  "name": "ABD Ordusu üretim rodeosu",
-  "son_hareket": "2026-10-17"
- },
- {
   "id": "rusya-yaptirim-paketi-ve-dizel-muafiyeti",
   "name": "Rusya yaptırım paketi ve dizel muafiyeti",
   "son_hareket": "2026-10-17"
  },
  {
-  "id": "japonya-nin-ukrayna-dan-onleyici-iha-tedariki",
-  "name": "Japonya'nın Ukrayna'dan önleyici İHA tedariki",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "phantom-defense-in-karakurt-satin-almasi",
-  "name": "Phantom Defense'in Karakurt satın alması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "avio-lockheed-martin-kati-yakitli-motor-anlasmas",
-  "name": "Avio–Lockheed Martin katı yakıtlı motor anlaşması",
-  "son_hareket": "2026-10-17"
- },
- {
   "id": "jet-motorlu-rus-dronlarina-karsi-onleme-kabiliye",
   "name": "Jet motorlu Rus dronlarına karşı önleme kabiliyeti talebi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "muttefik-pazar-yerinde-abd-disi-bir-tedarikcinin",
-  "name": "Pazar yerinde ABD dışı bir tedarikçinin fiilen satıcı olarak listelenmesi ve listeleme, menşe, siber güvenlik ölçütlerinin yayımlanması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "25-mm-sinifinda-programlanabilir-ve-yakinlik-fun",
-  "name": "25 mm sınıfında programlanabilir ve yakınlık fünyeli mühimmatın fırlatıcıdan ayrı ihale kalemine dönüşmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "induktif-funye-programlayicisinin-muhimmatla-bir",
-  "name": "İndüktif fünye programlayıcısının bağımsız bileşen hâline gelmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "yonlendirilmis-enerji-tedarik-programlarinda-ang",
-  "name": "Yönlendirilmiş enerji tedarik programlarında angajman başına maliyetin yayımlanması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "moduler-onleyici-fuze-ailelerinin-yilda-binlerce",
-  "name": "Modüler önleyici füze ailelerinin yılda binlerce adet ölçeğinde üretime geçmesinin namlulu çözümün maliyet argümanına etkisi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "merops-un-142-gunde-program-olmasi",
-  "name": "Merops'un 142 günde program olması ve hızlandırılmış dönüşümün yabancı menşeli sistemlere uygulanıp uygulanmadığı",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "usaf-orta-kalibreli-20-50-mm-namlulu-hava-savunm",
-  "name": "USAF orta kalibreli (20–50 mm) namlulu hava savunma pazar araştırması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "fortress-america-program-ofisinin-30-ekim-e-kada",
-  "name": "FORTRESS America program ofisinin 30 Ekim'e kadar kurulması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "tungsten-mense-yasaginin-1-ocak-2027-de-yururlug",
-  "name": "Tungsten menşe yasağının 1 Ocak 2027'de yürürlüğe girmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "swarm-forge-dorduncu-saha-denemesinin-ocak-2027-",
-  "name": "Swarm Forge dördüncü saha denemesinin Ocak 2027 sonunda yapılması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "buyuk-karsi-dron-cercevelerinde-sensor-havuzunun",
-  "name": "Büyük karşı-dron çerçevelerinde sensör havuzunun yanına ayrı bir efektör ya da mühimmat havuzu açılıp açılmayacağı",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "devletlerarasi-on-onayli-katalogda-listeleme-men",
-  "name": "Devletlerarası ön onaylı katalogda listeleme, menşe ve siber güvenlik ölçütlerinin yayımlanması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "gudumlu-top-mermisinin-hava-savunma-gorevinde-si",
-  "name": "Güdümlü top mermisinin hava savunma görevinde silah sisteminden ayrı tedarik kalemine dönüşmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "dusuk-maliyetli-onleyicide-1-milyon-birim-fiyat-",
-  "name": "Düşük maliyetli önleyicide 1 milyon $ birim fiyat hedefinin ihale ilanlarına ve müttefik şartnamelerine yazılması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "ortak-firlatici-ailesi-caml-arayuz-sartlarinin-u",
-  "name": "Ortak fırlatıcı ailesi (CAML) arayüz şartlarının üçüncü taraf efektörlere açık olup olmadığı",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "kitlesel-dron-uretimi-icin-istenen-tek-seferlik-",
-  "name": "Kitlesel dron üretimi için istenen tek seferlik finansmanın karşı-dron ve mühimmat kalemini kapsayıp kapsamadığı",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "edip-sanayi-hizlandirma-hibelerinde-topcu-muhimm",
-  "name": "EDIP sanayi hızlandırma hibelerinde topçu mühimmatı kaleminin payı ve AB dışı menşe kuralı",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "askerin-uzerinde-tasinan-dron-tespiti",
-  "name": "Askerin üzerinde taşınan dron tespiti ve er seviyesi karşı-dron kabiliyetinin hangi kalibrede mühimmat talebi doğurduğu",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "ifpc-inc-2-ve-ngsri-elemelerinin-yeniden-acilmas",
-  "name": "IFPC Inc. 2 ve NGSRI elemelerinin yeniden açılması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "gauntlet-2-5-ve-450-milyon-lik-drone-dominance-y",
-  "name": "Gauntlet 2.5 ve 450 milyon $'lık Drone Dominance yarışması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "patriot-muhimmat-hedeflerinin-2-000-den-8-000-e-",
-  "name": "Patriot mühimmat hedeflerinin 2.000'den 8.000'e kadar yeniden değerlendirilmesinin bütçeye yazılması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "50-mm-hava-savunma-muhimmatinin-50-228-mm-silah-",
-  "name": "50 mm hava savunma mühimmatının (50×228 mm) silah sisteminden ayrı bir ihracat ve ihale kalemi olarak tanımlanması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "yakinlik-funyeli-gudumlu-ucaksavar-mermisinin-20",
-  "name": "Yakınlık fünyeli güdümlü uçaksavar mermisinin 2027 yazındaki prototip takvimine bağlı kalıp kalmaması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "155-mm-topun-hava-savunma-gorevinde-batarya-basi",
-  "name": "155 mm topun hava savunma görevinde batarya başına güdümlü mermi sarfının ikmal kalemi olarak ilan edilmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "ag-atan-fiziksel-yakalamali-onleyici-dron-modeli",
-  "name": "Ağ atan / fiziksel yakalamalı önleyici dron modelinin başka NATO ülkelerinin karşı-dron bütçelerinde tekrarlanması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "safe-kapsamindaki-karsi-dron-alimlarinda-ab-disi",
-  "name": "SAFE kapsamındaki karşı-dron alımlarında AB dışı menşe oranı ve ortak alım kurallarının yayımlanması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "nato-karsi-dron-girisimine-katilimin-uye-ulkeler",
-  "name": "NATO karşı-dron girişimine katılımın üye ülkelerde ulusal ihale ilanına dönüşüp dönüşmediği",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "lazerde-aciklanan-atis-basina-maliyet-rakaminin-",
-  "name": "Lazerde açıklanan atış başına maliyet rakamının bağımsız denemelerde doğrulanması ve ihracat şartnamelerine girmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "rakip-ihracatci-pazarlarinda-devlet-muhimmat-ali",
-  "name": "Rakip ihracatçı pazarlarında devlet mühimmat alıcılarındaki soruşturmaların açık ihaleleri askıya alıp almadığı",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "hafif-silah-ureticilerinin-c-uas-sensor-ve-efekt",
-  "name": "Hafif silah üreticilerinin C-UAS sensör ve efektör kalemlerine girişinin mühimmat rekabetine etkisi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "fuze-savunma-muhimmati-aciginin-2030-a-kadar-sur",
-  "name": "Füze savunma mühimmatı açığının 2030'a kadar sürmesi iddiası",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "ukrayna-da-patriot-onleyici-stoku-ve-ukrayna-nin",
-  "name": "Ukrayna'da Patriot önleyici stoku ve Ukrayna'nın 2026 savunma açığı",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "hindistan-155-mm-he-m1a4-ihalesi-ve-munitions-in",
-  "name": "Hindistan 155 mm HE M1A4 ihalesi ve Munitions India soruşturması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "bulgaristan-c-uas-alimi-ve-nato-karsi-dron-giris",
-  "name": "Bulgaristan C-UAS alımı ve NATO karşı-dron girişimine 30 Ekim'e kadar katılım",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "uzun-menzilli-dolanan-muhimmatin-topcu-birlik-ya",
-  "name": "Uzun menzilli dolanan mühimmatın topçu birlik yapısında ayrı batarya olarak kurumsallaşması",
   "son_hareket": "2026-10-17"
  },
  {
@@ -757,46 +857,6 @@
  {
   "id": "malezya-onayinda-teknik-degerlendirmenin-kisa-li",
   "name": "Malezya onayında teknik değerlendirmenin kısa listeye ve 2027 kabul mektubuna dönüşme takvimi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "ahead-ve-kinetik-enerjili-zaman-funyeli-muhimmat",
-  "name": "AHEAD ve kinetik enerjili zaman fünyeli mühimmatın bileşen hattından bitmiş mühimmat ihracat kalemine dönüşmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "orta-kalibre-bilesen-uretimi-ile-bitmis-muhimmat",
-  "name": "Orta kalibre bileşen üretimi ile bitmiş mühimmat montajının farklı ülkelere dağıtılmasının menşe ve lisans kurallarına etkisi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "harp-basliksiz-dogrudan-carpmali-onleyicinin-muh",
-  "name": "Harp başlıksız, doğrudan çarpmalı önleyicinin mühimmat sarfını tamamen dışarıda bırakan bir maliyet modeli kurup kurmadığı",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "600-km-s-uzeri-jet-motorlu-tehdit-sinifinin-kisa",
-  "name": "600 km/s üzeri jet motorlu tehdit sınıfının kısa menzil hava savunma şartnamelerinde ayrı kalem hâline gelmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "namlusuz-sabit-nokta-savunma-modulunun-pantsir-s",
-  "name": "Namlusuz sabit nokta savunma modülünün (Pantsir-SMD-E) ihracat müşterisi bulması ve mini füze birim maliyetinin açıklanması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "turkiye-kambocya-cercevesinin-muhimmat-ve-topcu-",
-  "name": "Türkiye–Kamboçya çerçevesinin mühimmat ve topçu kalemlerinde ulusal ihale ilanına dönüşmesi",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "fransiz-ordusunun-uzun-menzilli-teleoperasyonlu-",
-  "name": "Fransız ordusunun uzun menzilli teleoperasyonlu mühimmat modelini seçmesi ve adedi açıklaması",
-  "son_hareket": "2026-10-17"
- },
- {
-  "id": "guneydogu-asya-da-cin-menseli-roketatar-muhimmat",
-  "name": "Güneydoğu Asya'da Çin menşeli roketatar mühimmatı değerlendirmelerinin siparişe dönüşmesi",
   "son_hareket": "2026-10-17"
  },
  {

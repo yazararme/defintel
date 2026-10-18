@@ -1,5 +1,61 @@
 [
   {
+    "date": "2026-10-18",
+    "title": "Suudi Arabistan'da hava savunma talebi Avrupalı tedarikçilerin kapasite sınırına çarptı: önleyici sarfı füze başına 5–7'den 2'ye indirildi",
+    "summary": "Günün ağırlığı Körfez'den geldi: 10 Ekim'de Riyad'daki King Khalid Havalimanı'na yapılan ve 12 ölü, 309 yaralıyla sonuçlanan füze saldırısının ardından Suudi Arabistan'ın önleyici stokunu korumak için gelen füze başına atılan önleyici sayısını 5–7'den yaklaşık 2'ye indirdiği, Londra'nın ek sistem verecek durumda olmadığı ve Fransa ile İtalya'nın SAMP/T kapasitesinin mevcut taahhütlerle bağlı olduğu aktarıldı; aktarım isimsiz savunma kaynaklarına dayanıyor. Afrika tarafında ABD Ordusu, erken giriş komuta mevzilerinin korunması için 15'e kadar karşı-dron ve koruma çözümünü Fas'ın Tan-Tan bölgesinde Şubat–Mart 2027'de asker denemelerine, Nisan–Mayıs 2027'de African Lion 2027 kapsamında harekât değerlendirmesine alacağını ve kazananları 180 gün içinde sahaya vereceğini açıkladı; kategoriler arasında kinetik imha ayrı bir başlık olarak sayılıyor. Önleyici tarafında bir yaşındaki Furientis, IFPC Inc 2 ikinci önleyici füze elemesine seçilen dört firmadan biri oldu ve atışlı eleme 2027 mali yılı sonuna konuldu. ABD, 18 Ekim'de yürürlüğe girecek Rusya kaynaklı ithalat tarifelerini askıya aldı. Hanwha, Cheongwang lazerinden yaklaşık beş adedin sahada olduğunu ve ihracata yönelik 50 kW'lık araç üstü varyantın 2027 sonunda üretime girmesinin planlandığını açıkladı.",
+    "lead": "Riyad'daki havalimanı saldırısı 12 ölü ve 309 yaralıyla sonuçlandı; Suudi Arabistan önleyici sarfını füze başına 5–7'de…",
+    "alarm": true,
+    "alarm_title": "Hedef pazar Suudi Arabistan'da hava savunma arz boşluğu kamuya açık hâle geldi",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "TOLGA",
+      "Suudi Arabistan",
+      "Körfez",
+      "Afrika",
+      "ABD",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Suudi Arabistan'da hava savunma arz boşluğu",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Fas'ta karşı-dron saha değerlendirmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "Furientis IFPC Inc 2 elemesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "Rusya tarifelerinin askıya alınması",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "Hanwha Cheongwang saha ve ihracat durumu",
+        "home": "rakip"
+      },
+      {
+        "id": "G6",
+        "label": "Bulgaristan'ın NATO'dan hava savunma talebi",
+        "home": "izleme"
+      },
+      {
+        "id": "G7",
+        "label": "ABD Ordusu ACE elektromanyetik spektrum çağrısı",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-10-18.html"
+  },
+  {
     "date": "2026-10-17",
     "title": "Malezya MERAD ve SHORAD tedarikini RMK-13 kapsamında onayladı: iki MERAD bataryası ve ayrı bir kısa menzil kalemi 2030 ortası hedefiyle takvime girdi",
     "summary": "Günün en ağır gelişmesi hedef pazardan geldi: Malezya Savunma Bakanı 15 Ekim tarihli yazılı soru cevabında MERAD (orta menzilli) ve SHORAD (kısa menzilli) hava savunma tedarikinin 13. Malezya Planı'nın RP1 diliminde onaylandığını teyit etti; iki MERAD bataryası ve 2030 ortasında harekâta hazır olma hedefi veriliyor, SHORAD adedi, bütçesi ve karşı-dron alt kaleminin pakete dahil olup olmadığı açıklanmadı, kısa liste yok. Avrupa'da Rheinmetall Expal, Albacete'de yaklaşık 20 milyon €'luk yatırımla yılda üç milyon orta kalibre mühimmat bileşeni (1,2 milyon mermi, 1,8 milyon kovan) kapasiteli 20–35 mm hattını ve 60/81/120 mm havan hattını devreye aldı; hattın ürün tanımında hava savunma ve karşı-dron için AHEAD mühimmatı açıkça sayılıyor. Önleyici tarafında maliyet ve hacim iddiaları sertleşti: CHAOS Industries 10 km menzilli, 5,5 kg altı, doğrudan çarpmalı VESPID ailesini yılda 12.000 adet başlangıç oranıyla duyurdu ve katı yakıtlı/turbojetli önleyicilere kıyasla %90'a varan maliyet düşüşü iddia etti; Powerus jet motorlu Shahed'e karşı 600–700 km/s bandında otonom Guardian 3'ü tanıttı ve Kasım'da ayda 5.000 adet üretim hedefi verdi. Rusya'nın Pantsir-SMD'si sabit nokta savunmasında namluyu tamamen bırakıp 12 konumda 48 mini füze taşıyan yapıya geçti. Türkiye ile Kamboçya arasında askeri çerçeve anlaşması imzalandı.",
