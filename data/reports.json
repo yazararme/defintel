@@ -1,5 +1,81 @@
 [
   {
+    "date": "2026-10-19",
+    "title": "Riyad pahalı katmanın yetmediğini kabul edip ucuz karşı-dron ve füze savunması arıyor",
+    "summary": "Günün ağırlığı yine Körfez'de. Defence24'ün 18 Ekim tarihli analizi Riyad'daki King Khalid Havalimanı'na 5, 8 ve 10 Ekim'de yapılan üç saldırının nedenlerini radar geometrisi ve maliyet dengesine bağlıyor: Patriot ve THAAD radarları 120°'yi aşmayan sektörlerde ve doğuya dönük, erken uyarı radarlarının 17 adedinden yalnızca biri 1.450 km'yi aşan Yemen sınırı tarafında, bir Filistin-2 füzesi yaklaşık 1 milyon $ iken PAC-3 MSE 4 milyon $'ın, THAAD önleyicisi 12 milyon $'ın üzerinde; analiz Riyad'ın acilen daha ucuz anti-füze ve karşı-dron sistemleri aradığını yazıyor. Mühimmat tarafında CSIS'li iki araştırmacının açık kaynak tahmini ABD Patriot önleyici stokunu Temmuz 2026 sonunda 759–827 adet (savaş öncesi ~2.330'dan %65 düşüş), THAAD'ı 234–278 adet olarak veriyor; yıllık üretim 600–650 PAC-3 MSE seviyesinde, 2030'a kadar 2.000 adet/yıl hedefi var ve savaş öncesi seviyeye dönüş en az üç yıl olarak öngörülüyor. Namlulu katmanda SRC, Northrop Grumman'ın Raid Hunter'ı için hem hedefi hem atılan önleyici mermiyi izleyen Gryphon R1810 radarını tanıttı: Grup 1 dronda 21,6 km, Grup 3'te 49,4 km tespit menzili veriliyor. Slovenya'dan Valhalla Turrets, Skythunder'ın 20 mm M197 Gatling ve 70 mm lazer güdümlü roketle katmanlı kinetik yapan yeni sürümünü duyurdu. Lockheed Martin PAC-3 ACE'yi MSE'nin birim maliyetinin yarısının altını hedefleyen önleyici olarak konumlandırdı. Anduril, Steelfin önleyicilerini Avrupa'da üretmeyi değerlendirebileceğini söyledi. Mısır Millî Savunma Konseyi Suudi Arabistan'a 'gerekli ve mümkün her türlü destek' sözü verdi.",
+    "lead": "Riyad'daki havalimanına 5, 8 ve 10 Ekim'de yapılan üç saldırının ardından, bir Filistin-2 füzesinin ~1 milyon $, PAC-3…",
+    "alarm": true,
+    "alarm_title": "Suudi Arabistan ucuz karşı-dron ve anti-füze çözümü aradığını kamuya yansıttı",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Mühimmat",
+      "TOLGA",
+      "Suudi Arabistan",
+      "Dolanan Mühimmat",
+      "Rakip",
+      "ABD"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Suudi hava savunmasında boşluk analizi ve ucuz çözüm arayışı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "ABD Patriot ve THAAD stok tahmini",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "SRC Gryphon R1810 atış kontrol radarı",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "Valhalla Turrets Skythunder 20 mm Gatling",
+        "home": "rakip"
+      },
+      {
+        "id": "G5",
+        "label": "Lockheed Martin PAC-3 ACE maliyet hedefi",
+        "home": "rakip"
+      },
+      {
+        "id": "G6",
+        "label": "Mısır'ın Suudi Arabistan'a destek taahhüdü",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Anduril Steelfin'in Avrupa üretimi değerlendirmesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G8",
+        "label": "NIOA–MBDA Deluge Avustralya mutabakatı",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "AeroVironment–NIOA tek yönlü saldırı mühimmatı mutabakatı",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "Bharat Dynamics tek kaynak nişangâh ihalesi",
+        "home": "izleme"
+      },
+      {
+        "id": "G11",
+        "label": "Rusya yaptırımlarının geri alınabilirliği",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-10-19.html"
+  },
+  {
     "date": "2026-10-18",
     "title": "Suudi Arabistan'da hava savunma talebi Avrupalı tedarikçilerin kapasite sınırına çarptı: önleyici sarfı füze başına 5–7'den 2'ye indirildi",
     "summary": "Günün ağırlığı Körfez'den geldi: 10 Ekim'de Riyad'daki King Khalid Havalimanı'na yapılan ve 12 ölü, 309 yaralıyla sonuçlanan füze saldırısının ardından Suudi Arabistan'ın önleyici stokunu korumak için gelen füze başına atılan önleyici sayısını 5–7'den yaklaşık 2'ye indirdiği, Londra'nın ek sistem verecek durumda olmadığı ve Fransa ile İtalya'nın SAMP/T kapasitesinin mevcut taahhütlerle bağlı olduğu aktarıldı; aktarım isimsiz savunma kaynaklarına dayanıyor. Afrika tarafında ABD Ordusu, erken giriş komuta mevzilerinin korunması için 15'e kadar karşı-dron ve koruma çözümünü Fas'ın Tan-Tan bölgesinde Şubat–Mart 2027'de asker denemelerine, Nisan–Mayıs 2027'de African Lion 2027 kapsamında harekât değerlendirmesine alacağını ve kazananları 180 gün içinde sahaya vereceğini açıkladı; kategoriler arasında kinetik imha ayrı bir başlık olarak sayılıyor. Önleyici tarafında bir yaşındaki Furientis, IFPC Inc 2 ikinci önleyici füze elemesine seçilen dört firmadan biri oldu ve atışlı eleme 2027 mali yılı sonuna konuldu. ABD, 18 Ekim'de yürürlüğe girecek Rusya kaynaklı ithalat tarifelerini askıya aldı. Hanwha, Cheongwang lazerinden yaklaşık beş adedin sahada olduğunu ve ihracata yönelik 50 kW'lık araç üstü varyantın 2027 sonunda üretime girmesinin planlandığını açıkladı.",
