@@ -1,5 +1,96 @@
 [
   {
+    "date": "2026-10-20",
+    "title": "Çin 18 Kasım'dan itibaren dron tahrik bileşenlerini ihracat lisansına bağladı",
+    "summary": "Günün ağırlığı tedarik zincirinde. Çin Ticaret Bakanlığı 19 Ekim'de yayımladığı revize ihracat kontrol listesiyle 48 V ve 3 kW üzeri fırçasız dron motorlarını, eşleşen hız kontrol ünitelerini, 762 mm üzeri karbon fiber ve her uzunlukta değişken hatveli pervaneleri, otopilotları ve uzun havada kalışlı görüş hattı dışı dronları lisans kapsamına aldı; kural 18 Kasım'da yürürlüğe giriyor ve gümrük el koyma usulü hemen devreye girdi. Efektör tarafında BAE Systems, AUSA 2026'da kamyon üstü 155 mm Çok Alanlı Topçu Top Sistemi'ni (MDACS) Mach 5'e kadar hızlanan güdümlü hipervelosite mermiyle seyir füzesi ve sürü saldırılarına karşı konumlandırdı; batarya seviyesinde harekât değerlendirmesi ve canlı atış 2027–2028'e konuldu. ABD Ordusu IFPC Inc 2'nin ikinci önleyici elemesini Lockheed Martin ve Boeing dışına açarak xTech|Disrupt Fires kapsamında dört firmaya 1'er milyon $ verdi: Furientis, Singularity Defense, Wardstone ve Zone 5 Technologies. NATO Müttefik Dönüşüm Komutanlığı 500 m–11 km arasında ayarlanabilir, GPS/GLONASS/Galileo/BeiDou ile dron kumanda ve video bağlarını karıştıran altı taşınabilir kit için 26 Ekim'de teklif çağrısı açıyor; teklifler 30 Kasım, sözleşme 11 Aralık. Avustralya 13 Ekim'de Land 6504 orta menzil hava savunma çağrısını açtı, tedarikçi seçimi 2027 sonunda. FEMA 2027 mali yılı için 250 milyon $'lık karşı-dron hibesini 50 eyaletin tamamına yaydı, başvurular 16 Kasım'da kapanıyor; Frontex 23–26 Kasım sanayi günleri için son kayıt 8 Kasım.",
+    "lead": "Çin, 48 V / 3 kW üzeri dron motorlarını, 762 mm üzeri pervaneleri, otopilotları ve hız kontrol ünitelerini 18 Kasım 202…",
+    "alarm": true,
+    "alarm_title": "Çin dron motor, pervane ve otopilotlarını ihracat lisansına bağladı",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Mühimmat",
+      "Topçu",
+      "Dolanan Mühimmat",
+      "Tedarik Zinciri",
+      "ABD",
+      "NATO/NSPA"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Çin dron tahrik bileşenlerinde ihracat lisansı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "BAE MDACS 155 mm seyir füzesi savunma topu",
+        "home": "rakip"
+      },
+      {
+        "id": "G3",
+        "label": "IFPC Inc 2 ikinci önleyici elemesinde dört firma",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "NATO ACT taşınabilir karıştırıcı alımı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "Avustralya Land 6504 orta menzil hava savunma çağrısı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "FEMA 2027 karşı-dron hibesinin ülke geneline yayılması",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Frontex C-UAS sanayi günleri",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "APKWS güdüm kiti çerçeve anlaşması",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G9",
+        "label": "FD-1 önleyicide ikinci G-TEAD siparişi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G10",
+        "label": "CHAOS Industries VESPID önleyici ailesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "Elbit EXTRA-MR ve PULS Avrupa sözleşmesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G12",
+        "label": "Rheinmetall ve MSC Mangalia Tersanesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G13",
+        "label": "Lockheed Martin ER GMLRS üretim onayı",
+        "home": "rakip"
+      },
+      {
+        "id": "G14",
+        "label": "Batı'da enerjetik malzeme talep sinyali",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-10-20.html"
+  },
+  {
     "date": "2026-10-19",
     "title": "Riyad pahalı katmanın yetmediğini kabul edip ucuz karşı-dron ve füze savunması arıyor",
     "summary": "Günün ağırlığı yine Körfez'de. Defence24'ün 18 Ekim tarihli analizi Riyad'daki King Khalid Havalimanı'na 5, 8 ve 10 Ekim'de yapılan üç saldırının nedenlerini radar geometrisi ve maliyet dengesine bağlıyor: Patriot ve THAAD radarları 120°'yi aşmayan sektörlerde ve doğuya dönük, erken uyarı radarlarının 17 adedinden yalnızca biri 1.450 km'yi aşan Yemen sınırı tarafında, bir Filistin-2 füzesi yaklaşık 1 milyon $ iken PAC-3 MSE 4 milyon $'ın, THAAD önleyicisi 12 milyon $'ın üzerinde; analiz Riyad'ın acilen daha ucuz anti-füze ve karşı-dron sistemleri aradığını yazıyor. Mühimmat tarafında CSIS'li iki araştırmacının açık kaynak tahmini ABD Patriot önleyici stokunu Temmuz 2026 sonunda 759–827 adet (savaş öncesi ~2.330'dan %65 düşüş), THAAD'ı 234–278 adet olarak veriyor; yıllık üretim 600–650 PAC-3 MSE seviyesinde, 2030'a kadar 2.000 adet/yıl hedefi var ve savaş öncesi seviyeye dönüş en az üç yıl olarak öngörülüyor. Namlulu katmanda SRC, Northrop Grumman'ın Raid Hunter'ı için hem hedefi hem atılan önleyici mermiyi izleyen Gryphon R1810 radarını tanıttı: Grup 1 dronda 21,6 km, Grup 3'te 49,4 km tespit menzili veriliyor. Slovenya'dan Valhalla Turrets, Skythunder'ın 20 mm M197 Gatling ve 70 mm lazer güdümlü roketle katmanlı kinetik yapan yeni sürümünü duyurdu. Lockheed Martin PAC-3 ACE'yi MSE'nin birim maliyetinin yarısının altını hedefleyen önleyici olarak konumlandırdı. Anduril, Steelfin önleyicilerini Avrupa'da üretmeyi değerlendirebileceğini söyledi. Mısır Millî Savunma Konseyi Suudi Arabistan'a 'gerekli ve mümkün her türlü destek' sözü verdi.",
