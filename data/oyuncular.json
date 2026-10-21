@@ -1015,10 +1015,6 @@
   ],
   "gunler": [
    {
-    "g": "2026-10-21",
-    "u": "/haberler/2026-10-21.html?q=Aselsan"
-   },
-   {
     "g": "2026-10-20",
     "u": "/haberler/2026-10-20.html?q=Aselsan"
    },
@@ -1107,8 +1103,8 @@
     "u": "/reports/2026-09-14.html#g10"
    }
   ],
-  "son": "2026-10-21",
-  "sayi_30g": 17
+  "son": "2026-10-20",
+  "sayi_30g": 16
  },
  "roketsan": {
   "ad": "Roketsan",
