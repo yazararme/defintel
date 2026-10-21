@@ -9,6 +9,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-10-21",
+    "u": "/reports/2026-10-21.html#g2"
+   },
+   {
     "g": "2026-10-20",
     "u": "/reports/2026-10-20.html#g12"
    },
@@ -65,8 +69,8 @@
     "u": "/reports/2026-09-14.html#g7"
    }
   ],
-  "son": "2026-10-20",
-  "sayi_30g": 11
+  "son": "2026-10-21",
+  "sayi_30g": 12
  },
  "nammo": {
   "ad": "Nammo",
@@ -359,7 +363,7 @@
    }
   ],
   "son": "2026-09-21",
-  "sayi_30g": 1
+  "sayi_30g": 0
  },
  "munitions-india": {
   "ad": "Munitions India",
@@ -586,6 +590,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-10-21",
+    "u": "/reports/2026-10-21.html#g7"
+   },
+   {
     "g": "2026-10-19",
     "u": "/reports/2026-10-19.html#g3"
    },
@@ -614,8 +622,8 @@
     "u": "/reports/2026-09-19.html#g2"
    }
   ],
-  "son": "2026-10-19",
-  "sayi_30g": 6
+  "son": "2026-10-21",
+  "sayi_30g": 7
  },
  "saab": {
   "ad": "Saab",
@@ -692,7 +700,7 @@
    }
   ],
   "son": "2026-10-18",
-  "sayi_30g": 3
+  "sayi_30g": 2
  },
  "iai": {
   "ad": "Israel Aerospace Industries",
@@ -740,6 +748,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-10-21",
+    "u": "/reports/2026-10-21.html#g9"
+   },
+   {
     "g": "2026-10-19",
     "u": "/reports/2026-10-19.html#g7"
    },
@@ -784,8 +796,8 @@
     "u": "/reports/2026-09-17.html#g9"
    }
   ],
-  "son": "2026-10-19",
-  "sayi_30g": 9
+  "son": "2026-10-21",
+  "sayi_30g": 10
  },
  "epirus": {
   "ad": "Epirus",
@@ -795,6 +807,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-10-21",
+    "u": "/reports/2026-10-21.html#g10"
+   },
+   {
     "g": "2026-10-06",
     "u": "/reports/2026-10-06.html#g2"
    },
@@ -803,8 +819,8 @@
     "u": "/reports/2026-10-04.html#g8"
    }
   ],
-  "son": "2026-10-06",
-  "sayi_30g": 2
+  "son": "2026-10-21",
+  "sayi_30g": 3
  },
  "smart-shooter": {
   "ad": "Smart Shooter",
@@ -999,6 +1015,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-10-21",
+    "u": "/haberler/2026-10-21.html?q=Aselsan"
+   },
+   {
     "g": "2026-10-20",
     "u": "/haberler/2026-10-20.html?q=Aselsan"
    },
@@ -1087,7 +1107,7 @@
     "u": "/reports/2026-09-14.html#g10"
    }
   ],
-  "son": "2026-10-20",
+  "son": "2026-10-21",
   "sayi_30g": 17
  },
  "roketsan": {
@@ -1275,6 +1295,10 @@
   "segmentler": [],
   "gunler": [
    {
+    "g": "2026-10-21",
+    "u": "/haberler/2026-10-21.html?q=TUSA%C5%9E"
+   },
+   {
     "g": "2026-10-18",
     "u": "/haberler/2026-10-18.html?q=TUSA%C5%9E"
    },
@@ -1291,14 +1315,18 @@
     "u": "/haberler/2026-10-14.html?q=TUSA%C5%9E"
    }
   ],
-  "son": "2026-10-18",
-  "sayi_30g": 4
+  "son": "2026-10-21",
+  "sayi_30g": 5
  },
  "havelsan": {
   "ad": "Havelsan",
   "rol": "emsal",
   "segmentler": [],
   "gunler": [
+   {
+    "g": "2026-10-21",
+    "u": "/haberler/2026-10-21.html?q=Havelsan"
+   },
    {
     "g": "2026-10-16",
     "u": "/haberler/2026-10-16.html?q=Havelsan"
@@ -1332,14 +1360,18 @@
     "u": "/haberler/2026-09-17.html?q=Havelsan"
    }
   ],
-  "son": "2026-10-16",
-  "sayi_30g": 6
+  "son": "2026-10-21",
+  "sayi_30g": 7
  },
  "stm": {
   "ad": "STM",
   "rol": "emsal",
   "segmentler": [],
   "gunler": [
+   {
+    "g": "2026-10-21",
+    "u": "/haberler/2026-10-21.html?q=STM"
+   },
    {
     "g": "2026-10-15",
     "u": "/haberler/2026-10-15.html?q=STM"
@@ -1349,8 +1381,8 @@
     "u": "/haberler/2026-09-25.html?q=STM"
    }
   ],
-  "son": "2026-10-15",
-  "sayi_30g": 2
+  "son": "2026-10-21",
+  "sayi_30g": 3
  },
  "asfat": {
   "ad": "ASFAT",

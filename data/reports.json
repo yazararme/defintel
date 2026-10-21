@@ -1,5 +1,86 @@
 [
   {
+    "date": "2026-10-21",
+    "title": "Türkiye–Suudi Arabistan–Pakistan arasındaki 16 maddelik Mekke İttifakı Anlaşması TBMM'ye sunuldu",
+    "summary": "Günün ağırlığı pazar koşullarında. Türkiye, Suudi Arabistan ve Pakistan arasındaki 16 maddelik Mekke İttifakı Anlaşması'nın onay kanunu teklifi TBMM'ye sunuldu; 7. madde savunma sanayii kurumları arasında teknoloji paylaşımı, ortak teknoloji geliştirme ve ortak üretimi, 10. madde ise barışta, savaşta ve olağanüstü hâlde silah, mühimmat, yakıt ve yedek parça dahil lojistik desteği çerçeveye bağlıyor; teklif önce Dışişleri Komisyonu'na gidiyor, komisyon ve Genel Kurul tarihi ilan edilmedi. Mühimmat tarafında Rheinmetall Expal Munitions'ın Albacete tesisi, yaklaşık 20 milyon € yatırımla 20–35 mm bandında yılda yaklaşık 1,2 milyon mermi ve 1,8 milyon kovan kapasiteli yeni orta kalibre hattını devreye aldı; ürün yelpazesinde kinetik enerjili zaman fünyeli mühimmat, zırh delici mermi ve uçaksavar ile karşı-dron kullanımı için AHEAD mühimmatı sayılıyor, personel 210'dan 300'e çıkıyor, ayrıca yılda 650'den fazla 60, 81 ve 120 mm havan üretimi ilan edildi. Japonya, Resmî Güvenlik Yardımı (OSA) çerçevesinde ilk kez bir karşı-dron sistemini hibe konusu yaptı: Malezya Deniz Kuvvetleri için 1,65 milyar ¥'lik nota 20 Ekim'de Tokyo'da imzalandı, sistem adlandırılmadı. Türkiye'nin 2027 bütçe teklifinde silah, mühimmat, silah sistemleri ve diğer savunma teçhizatı ödeneği %229 artırıldı; toplam savunma harcaması 2,206 trilyon TL (~44,5 milyar $), iç güvenlik ayrıca 25,2 milyar $ olarak verildi. ABD Ordusu, 155 mm XM1180 güdümlü hit-to-kill mermisinin üç prototipini Yuma'da atarak arayıcı teknolojisini denedi; seri 2027 mali yılı sonuna kadar sürüyor ve aynı arayıcı XM1230 uzun menzilli mermiye konulacak. AB Konseyi Nijerya için 20 milyon €'luk karşı-dron ve karşı-EYP destek tedbirini kabul etti.",
+    "lead": "Türkiye, Suudi Arabistan ve Pakistan arasındaki 16 maddelik anlaşmanın onay teklifi TBMM'ye sunuldu; 7. madde ortak üre…",
+    "alarm": true,
+    "alarm_title": "Hedef pazar Suudi Arabistan'ı kapsayan savunma anlaşması ortak üretim ve mühimmat lojistiği maddeleriyle TBMM'de",
+    "tags": [
+      "Mühimmat",
+      "C-UAS",
+      "Topçu",
+      "TOLGA",
+      "Suudi Arabistan",
+      "Malezya",
+      "Ortak Üretim",
+      "Savunma Bütçesi"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Mekke İttifakı Anlaşması'nın TBMM'ye sunulması",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Rheinmetall Albacete orta kalibre hattı",
+        "home": "rakip"
+      },
+      {
+        "id": "G3",
+        "label": "Japonya'nın Malezya Deniz Kuvvetleri'ne OSA karşı-dron tedariki",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "Türkiye 2027 bütçe teklifinde mühimmat ödeneği",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "XM1180 155 mm güdümlü hit-to-kill mermi denemesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "AB'nin Nijerya için EPF karşı-dron tedbiri",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Northrop Grumman Raid Hunter ürün hattı ilanı",
+        "home": "rakip"
+      },
+      {
+        "id": "G8",
+        "label": "ER GMLRS Alternatif Harp Başlığı testlerinin tamamlanması",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "Ghost Shark'ta deniz mayını ve dolanan mühimmat faydalı yükü",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "Epirus Leonidas'ın JIATF-401 pazar yerinde listelenmesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "Exail Neptis C-UAS kabiliyetli USV",
+        "home": "rakip"
+      },
+      {
+        "id": "G12",
+        "label": "Letonya'da çok tedarikçili C-UAS saha testi",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-10-21.html"
+  },
+  {
     "date": "2026-10-20",
     "title": "Çin 18 Kasım'dan itibaren dron tahrik bileşenlerini ihracat lisansına bağladı",
     "summary": "Günün ağırlığı tedarik zincirinde. Çin Ticaret Bakanlığı 19 Ekim'de yayımladığı revize ihracat kontrol listesiyle 48 V ve 3 kW üzeri fırçasız dron motorlarını, eşleşen hız kontrol ünitelerini, 762 mm üzeri karbon fiber ve her uzunlukta değişken hatveli pervaneleri, otopilotları ve uzun havada kalışlı görüş hattı dışı dronları lisans kapsamına aldı; kural 18 Kasım'da yürürlüğe giriyor ve gümrük el koyma usulü hemen devreye girdi. Efektör tarafında BAE Systems, AUSA 2026'da kamyon üstü 155 mm Çok Alanlı Topçu Top Sistemi'ni (MDACS) Mach 5'e kadar hızlanan güdümlü hipervelosite mermiyle seyir füzesi ve sürü saldırılarına karşı konumlandırdı; batarya seviyesinde harekât değerlendirmesi ve canlı atış 2027–2028'e konuldu. ABD Ordusu IFPC Inc 2'nin ikinci önleyici elemesini Lockheed Martin ve Boeing dışına açarak xTech|Disrupt Fires kapsamında dört firmaya 1'er milyon $ verdi: Furientis, Singularity Defense, Wardstone ve Zone 5 Technologies. NATO Müttefik Dönüşüm Komutanlığı 500 m–11 km arasında ayarlanabilir, GPS/GLONASS/Galileo/BeiDou ile dron kumanda ve video bağlarını karıştıran altı taşınabilir kit için 26 Ekim'de teklif çağrısı açıyor; teklifler 30 Kasım, sözleşme 11 Aralık. Avustralya 13 Ekim'de Land 6504 orta menzil hava savunma çağrısını açtı, tedarikçi seçimi 2027 sonunda. FEMA 2027 mali yılı için 250 milyon $'lık karşı-dron hibesini 50 eyaletin tamamına yaydı, başvurular 16 Kasım'da kapanıyor; Frontex 23–26 Kasım sanayi günleri için son kayıt 8 Kasım.",
