@@ -1,5 +1,66 @@
 [
   {
+    "date": "2026-10-22",
+    "title": "İsveç, dron ve füzelere karşı programlanabilir yakınlık fünyeli 3P mühimmatla birlikte dört 57Mk3 deniz topu sipariş etti",
+    "summary": "Günün ağırlığı mühimmat ve efektör seçiminde. İsveç Savunma Malzeme İdaresi (FMV), BAE Systems Bofors'tan dört 57Mk3 deniz topunu ön parçalı, programlanabilir ve yakınlık fünyeli 3P mühimmatıyla birlikte sipariş etti; üreticiye göre 3P mühimmatı dron, uçak, füze ve su üstü hedeflere karşı kullanılıyor, teslim 2028–2029'a konuldu, bedel açıklanmadı. İspanya Ordusu Uçaksavar Topçu Komutanlığı'nın 19–23 Ekim'de Huelva'daki Médano del Loro sahasında yürüttüğü Atlas 26 karşı-dron tatbikatında, GDELS'in paletli ASCOD lojistik aracı açık kasasında kutu lançerlerle ARMMO Bandit-X önleyici dronlarını taşıdı: hard-kill katmanı namlulu silah yerine 360 km/s üzeri hız, 0,8 kg faydalı yük ve 50–60 km menzille tanımlanan bir önleyici dronla kuruldu. BAE Systems, TRV-150 elektrikli kargo dronuna üç gözlü lançer takarak 70 mm APKWS güdümlü roketleri art arda, inip yeniden yüklemeden atıp tek yönlü saldırı dronlarını düşürdü; deneme 21–25 Eylül'de Eglin'de yapıldı ve firma aynı yapılandırmayı gemi savunması için deniz görevine uyarlamayı planlıyor. Hindistan'da Munitions India, Hava Kuvvetleri'nin 2,24 crore adetlik 7,62x39 mm A-07 MK-II fişek ihalesinde 140,09 crore ₹ ile tek teknik uygun teklifçi olarak L1 çıktı. Indrajaal, 30 crore ₹'lik yatırımla geliştirdiği karşı-dron sistemiyle 2026 başında 100 crore ₹'nin üzerinde Savunma Bakanlığı siparişi, Ağustos 2026'da yaklaşık 155 crore ₹'lik Ranger siparişi aldığını aktardı; karşı tedbirler ağ tabanlı fiziksel önleme ve dron kurtarma olarak tanımlanıyor, kinetik efektör anılmıyor. Elbit Systems, Vancouver merkezli International Submarine Engineering'i satın aldı; gerekçede mayın karşı tedbirleri, sualtı istihbaratı ve denizaltı savunma harbi sayılıyor, bedel 'maddi olmayan' olarak nitelendi.",
+    "lead": "İsveç Savunma Malzeme İdaresi, BAE Systems Bofors'tan dört 57Mk3 deniz topunu dron, uçak ve füzelere karşı kullanılan ö…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "Mühimmat",
+      "Deniz Sistemleri",
+      "C-UAS",
+      "DENİZHAN",
+      "Hava Savunma",
+      "Güney Asya",
+      "Rakip",
+      "AB"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "İsveç 57Mk3 deniz topu ve 3P mühimmat siparişi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Atlas 26'da araç üstü önleyici dron katmanı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "TRV-150 kargo dronundan APKWS güdümlü roket",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "Munitions India 7,62x39 mm fişek ihalesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "Indrajaal karşı-dron siparişleri",
+        "home": "rakip"
+      },
+      {
+        "id": "G6",
+        "label": "Elbit'in ISE satın alması",
+        "home": "rakip"
+      },
+      {
+        "id": "G7",
+        "label": "Stellios yüksek güçlü mikrodalga finansmanı",
+        "home": "rakip"
+      },
+      {
+        "id": "G8",
+        "label": "OpenWorks Vision Pace'in DHS'e tedariki",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-10-22.html"
+  },
+  {
     "date": "2026-10-21",
     "title": "Türkiye–Suudi Arabistan–Pakistan arasındaki 16 maddelik Mekke İttifakı Anlaşması TBMM'ye sunuldu",
     "summary": "Günün ağırlığı pazar koşullarında. Türkiye, Suudi Arabistan ve Pakistan arasındaki 16 maddelik Mekke İttifakı Anlaşması'nın onay kanunu teklifi TBMM'ye sunuldu; 7. madde savunma sanayii kurumları arasında teknoloji paylaşımı, ortak teknoloji geliştirme ve ortak üretimi, 10. madde ise barışta, savaşta ve olağanüstü hâlde silah, mühimmat, yakıt ve yedek parça dahil lojistik desteği çerçeveye bağlıyor; teklif önce Dışişleri Komisyonu'na gidiyor, komisyon ve Genel Kurul tarihi ilan edilmedi. Mühimmat tarafında Rheinmetall Expal Munitions'ın Albacete tesisi, yaklaşık 20 milyon € yatırımla 20–35 mm bandında yılda yaklaşık 1,2 milyon mermi ve 1,8 milyon kovan kapasiteli yeni orta kalibre hattını devreye aldı; ürün yelpazesinde kinetik enerjili zaman fünyeli mühimmat, zırh delici mermi ve uçaksavar ile karşı-dron kullanımı için AHEAD mühimmatı sayılıyor, personel 210'dan 300'e çıkıyor, ayrıca yılda 650'den fazla 60, 81 ve 120 mm havan üretimi ilan edildi. Japonya, Resmî Güvenlik Yardımı (OSA) çerçevesinde ilk kez bir karşı-dron sistemini hibe konusu yaptı: Malezya Deniz Kuvvetleri için 1,65 milyar ¥'lik nota 20 Ekim'de Tokyo'da imzalandı, sistem adlandırılmadı. Türkiye'nin 2027 bütçe teklifinde silah, mühimmat, silah sistemleri ve diğer savunma teçhizatı ödeneği %229 artırıldı; toplam savunma harcaması 2,206 trilyon TL (~44,5 milyar $), iç güvenlik ayrıca 25,2 milyar $ olarak verildi. ABD Ordusu, 155 mm XM1180 güdümlü hit-to-kill mermisinin üç prototipini Yuma'da atarak arayıcı teknolojisini denedi; seri 2027 mali yılı sonuna kadar sürüyor ve aynı arayıcı XM1230 uzun menzilli mermiye konulacak. AB Konseyi Nijerya için 20 milyon €'luk karşı-dron ve karşı-EYP destek tedbirini kabul etti.",
