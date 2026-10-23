@@ -1,5 +1,86 @@
 [
   {
+    "date": "2026-10-23",
+    "title": "EDGE'in 40x53 mm mühimmat hattı yılda 1,5 milyon mermi kapasitesiyle tam üretime geçti",
+    "summary": "Günün ağırlığı namlu ve mühimmat üretim kapasitesinde. BAE'li EDGE Grubu'nun LAHAB iştiraki, 2025 sonundan beri çalışan otomatik 40x53 mm bombaatar mühimmatı hattını yılda 1,5 milyon mermi kapasitesiyle tam üretime geçirdi; hat alt bileşenden bantlanmış bitmiş mermiye kadar elle müdahale olmadan çalışıyor ve el emeği ihtiyacı yaklaşık %60 azaldı. ABD Ordusu, SAM.gov'da 155 mm obüs namlusu için kaynak araştırması ilanı yayımladı: 36 ay içinde ayda 10 namlu kapasitesi, 18 ay içinde kapasite tahmini ve 40 namluluk ilk üretim partisi için maliyet tahmini isteniyor, yanıt son tarihi 23 Kasım; tek devlet kaynağı olan Watervliet Arsenal'in talebi karşılayamadığı 2024 bütçe belgesine dayandırılıyor, ABD dışı üretici uygunluğu ilanda ele alınmıyor. Rheinmetall, Telford'da 11.500 m²'lik UK Gun Hall'u açtı: tam kapasitede 120 ve 155 mm'de yılda 245 namlu ve 50'den fazla kama, beş yılda 200 milyon £'un üzerinde yatırım. Pentagon ve DIU, silahlı karşı-dron insansız deniz araçları için 120 günlük bir sprint açtı; üç aşamalı 12 aylık yarışmada 100 milyon $'a kadar ödül, karşı-hava aşamasında 40 milyon $ ve takip prototip-üretim anlaşmaları için ayrıca 200 milyon $ bütçelendi, istenen efektörler Longbow Hellfire, JAGM, APKWS ve Stinger olarak sayılıyor — top ve kalibre anılmıyor. Tayland Savunma Bakanlığı, mevcut tüfeklerin alt gövdesini bilgisayarlı atış kontrol ünitesiyle değiştiren ve standart 5,56 mm mühimmat kullanan IWI ARBEL karşı-dron sistemini harekâta soktu; ülke tam silah almak yerine mevcut tüfekleri modernize etmeyi seçti. Suudi Arabistan 21 Ekim'de Shaybah petrol sahasını hedefleyen bir dronu önledi; önleme parçaları sahanın çevresi dışında bir araçta yangın çıkardı, iki yabancı işçi öldü, ikisi yaralandı, saha harekâtı etkilenmedi.",
+    "lead": "EDGE Grubu'nun LAHAB iştiraki 40x53 mm bombaatar mühimmatı hattını yılda 1,5 milyon mermi kapasitesiyle tam üretime geç…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "Mühimmat",
+      "Topçu",
+      "C-UAS",
+      "ATTİLA",
+      "Hafif Silah",
+      "Körfez",
+      "Suudi Arabistan",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "EDGE LAHAB 40x53 mm hattının tam üretime geçmesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G2",
+        "label": "ABD Ordusu 155 mm namlu kaynak araştırması",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "DIU silahlı karşı-dron USV sprinti",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "Tayland'da ARBEL tüfek üstü karşı-dron atış kontrolü",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "Shaybah petrol sahasında dron önlemesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "Hindistan'da BEL LLLR-I sözleşmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Rheinmetall UK Gun Hall namlu fabrikası",
+        "home": "rakip"
+      },
+      {
+        "id": "G8",
+        "label": "MSI DS30M'in F128 firkateynlerine siparişi",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "LIONFISH 20'nin Yunan Island sınıfına entegrasyonu",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "Singularity karşı-dron önleyici motoru atımı",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "Global Ordnance–Sparkz yerli dron bataryası",
+        "home": "rakip"
+      },
+      {
+        "id": "G12",
+        "label": "Malezya'nın havadan atılan BrahMos değerlendirmesi",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-10-23.html"
+  },
+  {
     "date": "2026-10-22",
     "title": "İsveç, dron ve füzelere karşı programlanabilir yakınlık fünyeli 3P mühimmatla birlikte dört 57Mk3 deniz topu sipariş etti",
     "summary": "Günün ağırlığı mühimmat ve efektör seçiminde. İsveç Savunma Malzeme İdaresi (FMV), BAE Systems Bofors'tan dört 57Mk3 deniz topunu ön parçalı, programlanabilir ve yakınlık fünyeli 3P mühimmatıyla birlikte sipariş etti; üreticiye göre 3P mühimmatı dron, uçak, füze ve su üstü hedeflere karşı kullanılıyor, teslim 2028–2029'a konuldu, bedel açıklanmadı. İspanya Ordusu Uçaksavar Topçu Komutanlığı'nın 19–23 Ekim'de Huelva'daki Médano del Loro sahasında yürüttüğü Atlas 26 karşı-dron tatbikatında, GDELS'in paletli ASCOD lojistik aracı açık kasasında kutu lançerlerle ARMMO Bandit-X önleyici dronlarını taşıdı: hard-kill katmanı namlulu silah yerine 360 km/s üzeri hız, 0,8 kg faydalı yük ve 50–60 km menzille tanımlanan bir önleyici dronla kuruldu. BAE Systems, TRV-150 elektrikli kargo dronuna üç gözlü lançer takarak 70 mm APKWS güdümlü roketleri art arda, inip yeniden yüklemeden atıp tek yönlü saldırı dronlarını düşürdü; deneme 21–25 Eylül'de Eglin'de yapıldı ve firma aynı yapılandırmayı gemi savunması için deniz görevine uyarlamayı planlıyor. Hindistan'da Munitions India, Hava Kuvvetleri'nin 2,24 crore adetlik 7,62x39 mm A-07 MK-II fişek ihalesinde 140,09 crore ₹ ile tek teknik uygun teklifçi olarak L1 çıktı. Indrajaal, 30 crore ₹'lik yatırımla geliştirdiği karşı-dron sistemiyle 2026 başında 100 crore ₹'nin üzerinde Savunma Bakanlığı siparişi, Ağustos 2026'da yaklaşık 155 crore ₹'lik Ranger siparişi aldığını aktardı; karşı tedbirler ağ tabanlı fiziksel önleme ve dron kurtarma olarak tanımlanıyor, kinetik efektör anılmıyor. Elbit Systems, Vancouver merkezli International Submarine Engineering'i satın aldı; gerekçede mayın karşı tedbirleri, sualtı istihbaratı ve denizaltı savunma harbi sayılıyor, bedel 'maddi olmayan' olarak nitelendi.",
