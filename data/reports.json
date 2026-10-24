@@ -1,5 +1,80 @@
 [
   {
+    "date": "2026-10-24",
+    "title": "Malezya'nın 155 mm CAESAR filosu için 34 destek aracı sözleşmesi imzalandı",
+    "summary": "Günün ağırlığı topçu destek lojistiği ile karşı-dron efektör seçiminde. Malezya'da SHAFLEENA ile Tayland'ın Chaiseri/TDI ikilisi, Malezya Kara Kuvvetleri'nin CAESAR 155 mm obüs sistemini destekleyecek beş kategoride 34 araç (mühimmat ikmal, ileri onarım, atış kontrol koordinasyon, orta kurtarma ve JACKAL 4x4) için 20 Ekim'de Bangkok'ta sözleşme imzaladı; bedel açıklanmadı. ABD Ordusu, Uzatılmış Menzilli Karşı-sUAS Füzesi (XRCM) programı kapsamında L3Harris'e üç yıllık ve 60 milyon $'a kadar değerli bir sözleşmeyle hava solumalı ramjet motorlu uzun menzilli dron önleyicinin geliştirilmesini ve uçuş denemelerini finanse etti; firma bütünleşik önleyicinin uçuş performansı testlerini kapsayan ikinci aşamaya geçti, önleyici mevcut lançerlerden atılabilir olarak tanımlanıyor, namlulu alternatif ve angajman başına maliyet aktarımda anılmıyor. NATO Destek ve Tedarik Ajansı'nın yürüttüğü Güvenlik İşbirliği Destek Ortaklığı'na Ukrayna'nın katılımı 14 Ekim'de Kiev'de duyuruldu: Kuzey Atlantik Konseyi Nisan 2026'da NSPA'ya Ukrayna sanayisiyle ihale açma ve sözleşme imzalama yetkisi verdi, Ukraynalı firmalar NSPA tedarikçi veri tabanına kayıt olup yabancı üreticilerle birlikte teklif verebiliyor, etkinliğe yaklaşık 150 Ukraynalı sanayi temsilcisi katıldı. Fransa, OCCAR üzerinden eurosam'a dört ek SAMP/T NG ateş birimi siparişi vererek toplamı on ikiye çıkardı; yapılandırma Aster ve MICA VL füzelerini birleştiriyor, kısa menzil ya da karşı-dron katmanı siparişte anılmıyor. Ukrayna Savunma Bakanlığı 22 Ekim'de 2026 başından bu yana 400.000'den fazla Rus dronunu etkisizleştirdiğini bildirdi (yaklaşık 248.000 sabit kanatlı, 25.000 çok pervaneli, 35.000'den fazla Shahed tipi); acil ihtiyaç önleyici füze ve PAC-3 olarak tanımlanıyor, namlulu efektör ya da top mühimmatı anılmıyor.",
+    "lead": "Malezya Kara Kuvvetleri'nin CAESAR 155 mm obüs sistemi için beş kategoride 34 destek aracı sözleşmesi 20 Ekim'de Bangko…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "Topçu",
+      "ATTİLA",
+      "C-UAS",
+      "Hava Savunma",
+      "Malezya",
+      "NATO/NSPA",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Malezya CAESAR destek aracı sözleşmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "L3Harris XRCM ramjet önleyici finansmanı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "NSPA ihalelerinin Ukrayna sanayiine açılması",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "Fransa'nın dört ek SAMP/T NG ateş birimi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "Ukrayna'nın 400 bin dron etkisizleştirme bildirimi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "Leonardo–Rheinmetall İtalya zırhlı araç sözleşmeleri",
+        "home": "rakip"
+      },
+      {
+        "id": "G7",
+        "label": "KNDS–Ground A Boxer üstü lazer atışı",
+        "home": "rakip"
+      },
+      {
+        "id": "G8",
+        "label": "Kongsberg PROTECTOR RS4 Polonya siparişi",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "Quantum Systems Apex Recordhunter hız denemesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "EOS–VOP CZ zırhlı araç mutabakatı",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "Solar Defence Nagastra-2 teslimi",
+        "home": "rakip"
+      }
+    ],
+    "path": "reports/2026-10-24.html"
+  },
+  {
     "date": "2026-10-23",
     "title": "EDGE'in 40x53 mm mühimmat hattı yılda 1,5 milyon mermi kapasitesiyle tam üretime geçti",
     "summary": "Günün ağırlığı namlu ve mühimmat üretim kapasitesinde. BAE'li EDGE Grubu'nun LAHAB iştiraki, 2025 sonundan beri çalışan otomatik 40x53 mm bombaatar mühimmatı hattını yılda 1,5 milyon mermi kapasitesiyle tam üretime geçirdi; hat alt bileşenden bantlanmış bitmiş mermiye kadar elle müdahale olmadan çalışıyor ve el emeği ihtiyacı yaklaşık %60 azaldı. ABD Ordusu, SAM.gov'da 155 mm obüs namlusu için kaynak araştırması ilanı yayımladı: 36 ay içinde ayda 10 namlu kapasitesi, 18 ay içinde kapasite tahmini ve 40 namluluk ilk üretim partisi için maliyet tahmini isteniyor, yanıt son tarihi 23 Kasım; tek devlet kaynağı olan Watervliet Arsenal'in talebi karşılayamadığı 2024 bütçe belgesine dayandırılıyor, ABD dışı üretici uygunluğu ilanda ele alınmıyor. Rheinmetall, Telford'da 11.500 m²'lik UK Gun Hall'u açtı: tam kapasitede 120 ve 155 mm'de yılda 245 namlu ve 50'den fazla kama, beş yılda 200 milyon £'un üzerinde yatırım. Pentagon ve DIU, silahlı karşı-dron insansız deniz araçları için 120 günlük bir sprint açtı; üç aşamalı 12 aylık yarışmada 100 milyon $'a kadar ödül, karşı-hava aşamasında 40 milyon $ ve takip prototip-üretim anlaşmaları için ayrıca 200 milyon $ bütçelendi, istenen efektörler Longbow Hellfire, JAGM, APKWS ve Stinger olarak sayılıyor — top ve kalibre anılmıyor. Tayland Savunma Bakanlığı, mevcut tüfeklerin alt gövdesini bilgisayarlı atış kontrol ünitesiyle değiştiren ve standart 5,56 mm mühimmat kullanan IWI ARBEL karşı-dron sistemini harekâta soktu; ülke tam silah almak yerine mevcut tüfekleri modernize etmeyi seçti. Suudi Arabistan 21 Ekim'de Shaybah petrol sahasını hedefleyen bir dronu önledi; önleme parçaları sahanın çevresi dışında bir araçta yangın çıkardı, iki yabancı işçi öldü, ikisi yaralandı, saha harekâtı etkilenmedi.",
