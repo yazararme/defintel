@@ -135,7 +135,7 @@
    }
   ],
   "son": "2026-10-24",
-  "sayi_30g": 6
+  "sayi_30g": 5
  },
  "bae-systems": {
   "ad": "BAE Systems",
@@ -199,7 +199,7 @@
    }
   ],
   "son": "2026-10-22",
-  "sayi_30g": 10
+  "sayi_30g": 9
  },
  "elbit": {
   "ad": "Elbit",
@@ -354,6 +354,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-10-25",
+    "u": "/reports/2026-10-25.html#g7"
+   },
+   {
     "g": "2026-10-02",
     "u": "/reports/2026-10-02.html#g8"
    },
@@ -366,8 +370,8 @@
     "u": "/reports/2026-09-19.html#g1"
    }
   ],
-  "son": "2026-10-02",
-  "sayi_30g": 1
+  "son": "2026-10-25",
+  "sayi_30g": 2
  },
  "pgz": {
   "ad": "PGZ",
@@ -575,6 +579,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-10-25",
+    "u": "/reports/2026-10-25.html#g5"
+   },
+   {
     "g": "2026-10-24",
     "u": "/reports/2026-10-24.html#g8"
    },
@@ -615,8 +623,8 @@
     "u": "/reports/2026-09-14.html#g9"
    }
   ],
-  "son": "2026-10-24",
-  "sayi_30g": 7
+  "son": "2026-10-25",
+  "sayi_30g": 8
  },
  "northrop-grumman": {
   "ad": "Northrop Grumman",
@@ -837,7 +845,7 @@
    }
   ],
   "son": "2026-10-21",
-  "sayi_30g": 9
+  "sayi_30g": 8
  },
  "epirus": {
   "ad": "Epirus",
@@ -1060,6 +1068,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-10-25",
+    "u": "/haberler/2026-10-25.html?q=Aselsan"
+   },
+   {
     "g": "2026-10-24",
     "u": "/haberler/2026-10-24.html?q=Aselsan"
    },
@@ -1156,7 +1168,7 @@
     "u": "/reports/2026-09-14.html#g10"
    }
   ],
-  "son": "2026-10-24",
+  "son": "2026-10-25",
   "sayi_30g": 17
  },
  "roketsan": {
@@ -1204,7 +1216,7 @@
    }
   ],
   "son": "2026-10-17",
-  "sayi_30g": 8
+  "sayi_30g": 7
  },
  "repkon": {
   "ad": "Repkon",
@@ -1340,7 +1352,7 @@
    }
   ],
   "son": "2026-10-22",
-  "sayi_30g": 11
+  "sayi_30g": 10
  },
  "tusas": {
   "ad": "TUSAŞ",
@@ -1380,6 +1392,10 @@
   "rol": "emsal",
   "segmentler": [],
   "gunler": [
+   {
+    "g": "2026-10-25",
+    "u": "/haberler/2026-10-25.html?q=Havelsan"
+   },
    {
     "g": "2026-10-24",
     "u": "/haberler/2026-10-24.html?q=Havelsan"
@@ -1429,8 +1445,8 @@
     "u": "/haberler/2026-09-17.html?q=Havelsan"
    }
   ],
-  "son": "2026-10-24",
-  "sayi_30g": 10
+  "son": "2026-10-25",
+  "sayi_30g": 11
  },
  "stm": {
   "ad": "STM",
@@ -1459,7 +1475,7 @@
    }
   ],
   "son": "2026-10-23",
-  "sayi_30g": 5
+  "sayi_30g": 4
  },
  "asfat": {
   "ad": "ASFAT",

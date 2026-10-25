@@ -1,5 +1,66 @@
 [
   {
+    "date": "2026-10-25",
+    "title": "İspanya'nın ARACNE karşı-dron mimarisi ulusal hava savunma ağına bağlandı",
+    "summary": "Günün ağırlığı karşı-dron mimarisinin kalem kırılımında. Indra ve EM&E, İspanya'nın ARACNE karşı-dron sistemini Hava ve Uzay Harekât Komutanlığı'nın hava savunma ağına, Indra'nın COAAAS+ uçaksavar topçu harekât merkezi üzerinden bağladı; paket NEMUS radarı, C4ARMS komuta-kontrolü, Brontes karıştırıcısı, OTEOS elektro-optik sensörü ve EM&E GUARDIAN uzaktan kumandalı silah istasyonlarını birleştiriyor, denemeler 19–23 Ekim'de Huelva'daki Atlas 26 tatbikatında Sınıf I ve II insansız hava araçlarına karşı yapıldı, silah istasyonunun kalibresi ve mühimmatı açıklanmadı. ABD Özel Harekât Komutanlığı, Modüler Kinetik Öldürücü Dron (MKLD) programının üçüncü aşamasında taktik birlikler için küçük, sarf edilebilir FPV kinetik dron çözümlerini olgunlaştırmak üzere altı firmaya toplam yaklaşık 8,7 milyon $'lık sözleşme verdi; bedeller 111.640 $ ile 3,1 milyon $ arasında, angajman başına maliyet ve adet açıklanmadı. Çin Bilim ve Teknoloji Üniversitesi ile Hebei Jeoloji Üniversitesi'nden Yang Xiaoyong'un yürüttüğü çalışma, Türkiye'nin bilinen en önemli nadir toprak yatağı Kızılcaören'in mineralizasyonunu 'küçük ölçekli' bulup sahanın yakın vadede mevcut üreticilere küresel alternatif olmasının beklenmediği sonucuna vardı; rezerv tonajı ve element kırılımı yayımlanmadı. Karman Space & Defense, THAAD önleyicilerinin koruyucu başlıklarını tedarik etmek üzere Lockheed Martin ile 29 Eylül'de yedi yıllık ve 218 milyon $'lık bir anlaşma imzaladığını duyurdu; firma anlaşmanın artan ABD ve müttefik talebi için imalat kapasitesini büyütmesine imkân verdiğini bildiriyor, adet ve teslim takvimi yok. Danimarka Savunma Bakanı Jeppe Bruus 22 Ekim'de yerden atılan Anthem uzun menzilli vuruş mühimmatı ile F-35A'lar için Kongsberg JSM seyir füzesi alımını duyurdu; adet ve bedel açıklanmadı, topçu ve hava savunma / karşı-dron kalemi duyuruda yok.",
+    "lead": "İspanya'nın ARACNE karşı-dron paketi, 19–23 Ekim'deki Atlas 26 tatbikatında Sınıf I ve II insansız hava araçlarına karş…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "TOLGA",
+      "Dolanan Mühimmat",
+      "Tedarik Zinciri",
+      "Rakip",
+      "AB",
+      "Türkiye"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "ARACNE'nin İspanya hava savunma ağına entegrasyonu",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "SOCOM MKLD Faz III FPV kinetik dron sözleşmeleri",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "Kızılcaören nadir toprak yatağı değerlendirmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "Karman–Lockheed Martin THAAD koruyucu başlık anlaşması",
+        "home": "rakip"
+      },
+      {
+        "id": "G5",
+        "label": "Danimarka'nın Anthem ve JSM alımı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "Long Wall Cyclops uçuş denemesi finansmanı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "North Vector Dynamics CM-70 – CSG iş birliği",
+        "home": "rakip"
+      },
+      {
+        "id": "G8",
+        "label": "KBP INTERNATIONAL GRYF karşı-dron taşıyıcısı",
+        "home": "rakip"
+      }
+    ],
+    "path": "reports/2026-10-25.html"
+  },
+  {
     "date": "2026-10-24",
     "title": "Malezya'nın 155 mm CAESAR filosu için 34 destek aracı sözleşmesi imzalandı",
     "summary": "Günün ağırlığı topçu destek lojistiği ile karşı-dron efektör seçiminde. Malezya'da SHAFLEENA ile Tayland'ın Chaiseri/TDI ikilisi, Malezya Kara Kuvvetleri'nin CAESAR 155 mm obüs sistemini destekleyecek beş kategoride 34 araç (mühimmat ikmal, ileri onarım, atış kontrol koordinasyon, orta kurtarma ve JACKAL 4x4) için 20 Ekim'de Bangkok'ta sözleşme imzaladı; bedel açıklanmadı. ABD Ordusu, Uzatılmış Menzilli Karşı-sUAS Füzesi (XRCM) programı kapsamında L3Harris'e üç yıllık ve 60 milyon $'a kadar değerli bir sözleşmeyle hava solumalı ramjet motorlu uzun menzilli dron önleyicinin geliştirilmesini ve uçuş denemelerini finanse etti; firma bütünleşik önleyicinin uçuş performansı testlerini kapsayan ikinci aşamaya geçti, önleyici mevcut lançerlerden atılabilir olarak tanımlanıyor, namlulu alternatif ve angajman başına maliyet aktarımda anılmıyor. NATO Destek ve Tedarik Ajansı'nın yürüttüğü Güvenlik İşbirliği Destek Ortaklığı'na Ukrayna'nın katılımı 14 Ekim'de Kiev'de duyuruldu: Kuzey Atlantik Konseyi Nisan 2026'da NSPA'ya Ukrayna sanayisiyle ihale açma ve sözleşme imzalama yetkisi verdi, Ukraynalı firmalar NSPA tedarikçi veri tabanına kayıt olup yabancı üreticilerle birlikte teklif verebiliyor, etkinliğe yaklaşık 150 Ukraynalı sanayi temsilcisi katıldı. Fransa, OCCAR üzerinden eurosam'a dört ek SAMP/T NG ateş birimi siparişi vererek toplamı on ikiye çıkardı; yapılandırma Aster ve MICA VL füzelerini birleştiriyor, kısa menzil ya da karşı-dron katmanı siparişte anılmıyor. Ukrayna Savunma Bakanlığı 22 Ekim'de 2026 başından bu yana 400.000'den fazla Rus dronunu etkisizleştirdiğini bildirdi (yaklaşık 248.000 sabit kanatlı, 25.000 çok pervaneli, 35.000'den fazla Shahed tipi); acil ihtiyaç önleyici füze ve PAC-3 olarak tanımlanıyor, namlulu efektör ya da top mühimmatı anılmıyor.",
