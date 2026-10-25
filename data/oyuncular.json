@@ -1275,9 +1275,14 @@
   "segmentler": [
    "hafif_silah"
   ],
-  "gunler": [],
-  "son": "",
-  "sayi_30g": 0
+  "gunler": [
+   {
+    "g": "2026-10-25",
+    "u": "/haberler/2026-10-25.html?q=Kalekal%C4%B1p"
+   }
+  ],
+  "son": "2026-10-25",
+  "sayi_30g": 1
  },
  "tubitak-sage": {
   "ad": "TÜBİTAK SAGE",
