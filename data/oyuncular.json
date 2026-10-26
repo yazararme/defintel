@@ -301,7 +301,7 @@
    }
   ],
   "son": "2026-10-20",
-  "sayi_30g": 7
+  "sayi_30g": 6
  },
  "poongsan": {
   "ad": "Poongsan",
@@ -382,12 +382,16 @@
   ],
   "gunler": [
    {
+    "g": "2026-10-26",
+    "u": "/reports/2026-10-26.html#g8"
+   },
+   {
     "g": "2026-09-21",
     "u": "/reports/2026-09-21.html#g5"
    }
   ],
-  "son": "2026-09-21",
-  "sayi_30g": 0
+  "son": "2026-10-26",
+  "sayi_30g": 1
  },
  "munitions-india": {
   "ad": "Munitions India",
@@ -569,7 +573,7 @@
    }
   ],
   "son": "2026-10-24",
-  "sayi_30g": 8
+  "sayi_30g": 7
  },
  "kongsberg": {
   "ad": "Kongsberg",
@@ -735,6 +739,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-10-26",
+    "u": "/reports/2026-10-26.html#g4"
+   },
+   {
     "g": "2026-10-18",
     "u": "/reports/2026-10-18.html#g3"
    },
@@ -747,8 +755,8 @@
     "u": "/reports/2026-09-21.html#g3"
    }
   ],
-  "son": "2026-10-18",
-  "sayi_30g": 2
+  "son": "2026-10-26",
+  "sayi_30g": 3
  },
  "iai": {
   "ad": "Israel Aerospace Industries",
@@ -845,7 +853,7 @@
    }
   ],
   "son": "2026-10-21",
-  "sayi_30g": 8
+  "sayi_30g": 7
  },
  "epirus": {
   "ad": "Epirus",
@@ -1216,7 +1224,7 @@
    }
   ],
   "son": "2026-10-17",
-  "sayi_30g": 7
+  "sayi_30g": 6
  },
  "repkon": {
   "ad": "Repkon",
@@ -1357,7 +1365,7 @@
    }
   ],
   "son": "2026-10-22",
-  "sayi_30g": 10
+  "sayi_30g": 9
  },
  "tusas": {
   "ad": "TUSAŞ",

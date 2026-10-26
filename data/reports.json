@@ -1,5 +1,86 @@
 [
   {
+    "date": "2026-10-26",
+    "title": "Birleşik Krallık'ın 2 milyar £'a kadar değerli SA80 yenileme programı sanayi kaydını 30 Ekim'de kapatıyor",
+    "summary": "Birleşik Krallık, SA80 ailesini değiştirecek 2 milyar £'a kadar değerli Project GRAYBURN'ün sanayi kaydını 30 Ekim'de kapatıyor; kalibre belirlenmedi. Malezya 40 milyon ringitlik Japon karşı-dron sistemini iki üsse konuşlandırıyor, Rosoboronexport ise 30 mm havada infilak eden mühimmatlı karşı-dron paketini Rusya–Afrika Zirvesi'nde tanıtacak.",
+    "lead": "Birleşik Krallık, SA80 ailesini değiştirecek 2 milyar £'a (KDV dahil) kadar değerli Project GRAYBURN'ün sanayi kaydını…",
+    "alarm": true,
+    "alarm_title": "Project GRAYBURN sanayi kaydı 30 Ekim'de kapanıyor",
+    "tags": [
+      "C-UAS",
+      "Hafif Silah",
+      "Mühimmat",
+      "Dolanan Mühimmat",
+      "Türkiye",
+      "Malezya",
+      "İhale",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Project GRAYBURN",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Malezya'ya Japon OSA karşı-dron sistemi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "TSK kamikaze sistem üretim hedefi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "Rosoboronexport Anti-Drone Dome",
+        "home": "rakip"
+      },
+      {
+        "id": "G5",
+        "label": "Hindistan 155 mm mermi fiyat avantajı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "Riyad ve Cizan'a balistik füze saldırısı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Hindistan Kuzey Komutanlığı karşı-dron ihalesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "Polonya'nın Vietnam ihracat görüşmeleri",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "Lockheed Martin PAC-3 ACE",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "EDGE–Fas güdümlü mühimmat sözleşmesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "Intelic NEXUS çok üreticili karşı-dron akışı",
+        "home": "rakip"
+      },
+      {
+        "id": "G12",
+        "label": "Hindistan Talon K önleyici İHA seçimi",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-10-26.html"
+  },
+  {
     "date": "2026-10-25",
     "title": "İspanya'nın ARACNE karşı-dron mimarisi ulusal hava savunma ağına bağlandı",
     "summary": "Günün ağırlığı karşı-dron mimarisinin kalem kırılımında. Indra ve EM&E, İspanya'nın ARACNE karşı-dron sistemini Hava ve Uzay Harekât Komutanlığı'nın hava savunma ağına, Indra'nın COAAAS+ uçaksavar topçu harekât merkezi üzerinden bağladı; paket NEMUS radarı, C4ARMS komuta-kontrolü, Brontes karıştırıcısı, OTEOS elektro-optik sensörü ve EM&E GUARDIAN uzaktan kumandalı silah istasyonlarını birleştiriyor, denemeler 19–23 Ekim'de Huelva'daki Atlas 26 tatbikatında Sınıf I ve II insansız hava araçlarına karşı yapıldı, silah istasyonunun kalibresi ve mühimmatı açıklanmadı. ABD Özel Harekât Komutanlığı, Modüler Kinetik Öldürücü Dron (MKLD) programının üçüncü aşamasında taktik birlikler için küçük, sarf edilebilir FPV kinetik dron çözümlerini olgunlaştırmak üzere altı firmaya toplam yaklaşık 8,7 milyon $'lık sözleşme verdi; bedeller 111.640 $ ile 3,1 milyon $ arasında, angajman başına maliyet ve adet açıklanmadı. Çin Bilim ve Teknoloji Üniversitesi ile Hebei Jeoloji Üniversitesi'nden Yang Xiaoyong'un yürüttüğü çalışma, Türkiye'nin bilinen en önemli nadir toprak yatağı Kızılcaören'in mineralizasyonunu 'küçük ölçekli' bulup sahanın yakın vadede mevcut üreticilere küresel alternatif olmasının beklenmediği sonucuna vardı; rezerv tonajı ve element kırılımı yayımlanmadı. Karman Space & Defense, THAAD önleyicilerinin koruyucu başlıklarını tedarik etmek üzere Lockheed Martin ile 29 Eylül'de yedi yıllık ve 218 milyon $'lık bir anlaşma imzaladığını duyurdu; firma anlaşmanın artan ABD ve müttefik talebi için imalat kapasitesini büyütmesine imkân verdiğini bildiriyor, adet ve teslim takvimi yok. Danimarka Savunma Bakanı Jeppe Bruus 22 Ekim'de yerden atılan Anthem uzun menzilli vuruş mühimmatı ile F-35A'lar için Kongsberg JSM seyir füzesi alımını duyurdu; adet ve bedel açıklanmadı, topçu ve hava savunma / karşı-dron kalemi duyuruda yok.",
