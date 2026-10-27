@@ -1,5 +1,10 @@
 [
  {
+  "id": "xrcm-ikinci-faz",
+  "name": "XRCM ikinci faz",
+  "son_hareket": "2026-10-27"
+ },
+ {
   "id": "hindistan-talon-k-onleyici-iha-secimi",
   "name": "Hindistan Talon K önleyici İHA seçimi",
   "son_hareket": "2026-10-26"
