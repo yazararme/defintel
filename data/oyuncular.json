@@ -1252,10 +1252,6 @@
   ],
   "gunler": [
    {
-    "g": "2026-10-27",
-    "u": "/haberler/2026-10-27.html?q=Sars%C4%B1lmaz"
-   },
-   {
     "g": "2026-10-26",
     "u": "/haberler/2026-10-26.html?q=Sars%C4%B1lmaz"
    },
@@ -1280,8 +1276,8 @@
     "u": "/reports/2026-10-05.html#g13"
    }
   ],
-  "son": "2026-10-27",
-  "sayi_30g": 7
+  "son": "2026-10-26",
+  "sayi_30g": 6
  },
  "canik": {
   "ad": "Canik",
@@ -1323,10 +1319,6 @@
   "rol": "emsal",
   "segmentler": [],
   "gunler": [
-   {
-    "g": "2026-10-27",
-    "u": "/haberler/2026-10-27.html?q=Baykar"
-   },
    {
     "g": "2026-10-22",
     "u": "/haberler/2026-10-22.html?q=Baykar"
@@ -1384,14 +1376,18 @@
     "u": "/haberler/2026-09-22.html?q=Baykar"
    }
   ],
-  "son": "2026-10-27",
-  "sayi_30g": 9
+  "son": "2026-10-22",
+  "sayi_30g": 8
  },
  "tusas": {
   "ad": "TUSAŞ",
   "rol": "emsal",
   "segmentler": [],
   "gunler": [
+   {
+    "g": "2026-10-27",
+    "u": "/haberler/2026-10-27.html?q=TUSA%C5%9E"
+   },
    {
     "g": "2026-10-22",
     "u": "/haberler/2026-10-22.html?q=TUSA%C5%9E"
@@ -1417,8 +1413,8 @@
     "u": "/haberler/2026-10-14.html?q=TUSA%C5%9E"
    }
   ],
-  "son": "2026-10-22",
-  "sayi_30g": 6
+  "son": "2026-10-27",
+  "sayi_30g": 7
  },
  "havelsan": {
   "ad": "Havelsan",
