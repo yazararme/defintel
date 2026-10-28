@@ -1,5 +1,76 @@
 [
   {
+    "date": "2026-10-28",
+    "title": "Birleşik Krallık'ın 2 milyar £'lık tüfek yenileme programı Project GRAYBURN kamuya açık ihale olarak çerçevelendi ve sanayi kaydı 30 Ekim'de kapanıyor",
+    "summary": "Günün ağırlığı hafif silah ve karşı-dron efektör katmanında. Birleşik Krallık'ın L85 ailesini değiştirecek Project GRAYBURN programı 2 milyar £ olarak teyit edildi; ortak alt gövdeli beş varyant ve Temmuz 2029 – Mart 2045 sözleşme dönemi öngörülüyor, kalibre kararı resmî değil. Anduril, iki kademeli ve açık arayüzlü Steelfin yüzeyden havaya önleyici ailesini duyurdu; yılda birkaç bin adet üretim hedefi ve 2027'de uçuş testi. Polonya'nın SAN bütünleşik karşı-dron programında Weibel, PIT-RADWAR ile 84 milyon €'luk XENTA-M5 radar sözleşmesi imzaladı; efektör kalemi ilan edilmedi. Hindistan dört yılda 872 milyon $'lık mühimmat ihracatıyla Avrupa'nın aynı tedarik boşluğuna giriyor.",
+    "lead": "Birleşik Krallık, L85A3, L85A2, L22A2 ve L98A2'yi ortak alt gövdeli beş varyantla değiştirecek Project GRAYBURN'ü yakla…",
+    "alarm": true,
+    "alarm_title": "Project GRAYBURN sanayi kaydı 30 Ekim'de kapanıyor",
+    "tags": [
+      "C-UAS",
+      "Hafif Silah",
+      "MPT-76",
+      "Mühimmat",
+      "Polonya",
+      "Balkanlar",
+      "İhale",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Project GRAYBURN 2 milyar £",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Anduril Steelfin önleyici ailesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G3",
+        "label": "Polonya SAN radar sözleşmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "Hindistan'ın Avrupa mühimmat ihracatı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "IWI ARBEL Tayland konuşlandırması",
+        "home": "rakip"
+      },
+      {
+        "id": "G6",
+        "label": "Karadağ CZ BREN 3 alımı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Sigma 155 mm bileşen siparişi",
+        "home": "rakip"
+      },
+      {
+        "id": "G8",
+        "label": "Teledyne FLIR Bulgaristan KBRN sözleşmesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "Platforma gömülü namlulu karşı-dron",
+        "home": "izleme"
+      },
+      {
+        "id": "G10",
+        "label": "Hindistan Pantsir-S1 değerlendirmesi",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-10-28.html"
+  },
+  {
     "date": "2026-10-27",
     "title": "Helsing, atış başına 100 bin $'ın altında fiyatlandırdığı iki önleyicili Contra hava savunma sistemini tanıttı",
     "summary": "Günün ağırlığı karşı-dron angajman maliyetinin fiyatlanmasında ve mühimmat tedarik zincirinin Avrupa'da yeniden kurulmasında. Helsing, konteynerden atılan AD-1 Inferno ve AD-2 Ambush önleyicilerini içeren Contra sistemini atış başına 100 bin $'ın altında maliyetle duyurdu; pazar hazırlığı 2027'nin ikinci yarısı. AB, EDIP sanayi güçlendirme çağrısında TNT, nitroselüloz, katı yakıtlı motor ve küçük kalibre fişek projelerine 168,2 milyon € hibe verdi; ilk sonuçlar 2027, Finlandiya TNT tesisi 2028. Hindistan Savunma Alım Konseyi 2,12 lakh crore ₹'lik paketi onayladı, 300 ek K9 Vajra 155 mm/52 kalibre obüsle filoyu 500'e çıkarıyor.",
