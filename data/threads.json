@@ -1,5 +1,15 @@
 [
  {
+  "id": "nspa-rq-35-heidrun-cerceve-anlasmasi",
+  "name": "NSPA RQ-35 Heidrun çerçeve anlaşması",
+  "son_hareket": "2026-10-29"
+ },
+ {
+  "id": "fcc-dron-spektrum-oylamasi",
+  "name": "FCC dron spektrum oylaması",
+  "son_hareket": "2026-10-29"
+ },
+ {
   "id": "platforma-gomulu-namlulu-karsi-dron",
   "name": "Platforma gömülü namlulu karşı-dron",
   "son_hareket": "2026-10-28"

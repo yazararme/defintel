@@ -1,5 +1,96 @@
 [
   {
+    "date": "2026-10-29",
+    "title": "ABD'nin 60.000 taarruz dronu taahhüdü HMX ve RDX üretiminin tek tesise bağlı kalmasıyla enerjetik malzeme darboğazına girdi",
+    "summary": "Günün ağırlığı enerjetik malzeme kapasitesinde ve topçu mühimmatı arzının hedef pazarlarda yerelleşmesinde. ABD'nin 60.000 taarruz dronu taahhüdü, HMX ve RDX üretiminin 1944 zirvesinin yaklaşık %3'ünde çalışan İkinci Dünya Savaşı dönemi tek tesise bağlı kalmasıyla darboğaza girdi; 1 milyar $'lık modernizasyon 2025'ten 2029 sonrasına kaydı, yeni bir girişim 115 milyon $ taahhütle konteyner tesisi kuruyor. Suudi Arabistan'ın Hindistan'dan 10.000 ek 155 mm mermi talep ettiği bildirildi, karar açıklanmadı. EDGE, HAZEEM programında 52 kalibre namludan 155 mm menzili uzatılmış merminin ilk atışını yaptı. ABD Ordusu'nun XRC C-sUAS programının ikinci turu üç firmaya ve 57,3 milyon $'a çıktı, Avrupa'nın PAC-3 bakım merkezi Polonya'ya verildi.",
+    "lead": "ABD'nin 60.000 taarruz dronu taahhüdü, HMX ve RDX üretiminin 1944 zirvesinin yaklaşık %3'ünde çalışan tek tesise bağlı…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "Barut ve Patlayıcı",
+      "Mühimmat",
+      "Topçu",
+      "C-UAS",
+      "ABD",
+      "Körfez",
+      "Suudi Arabistan",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "ABD enerjetik malzeme darboğazı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Suudi Arabistan'ın 10.000 ek Hindistan mermisi talebi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "EDGE HAZEEM 155 mm ilk atış",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "XRC C-sUAS ikinci turu",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "Polonya PAC-3 bakım merkezi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "İsviçre uzun menzilli hava savunma kısa listesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Etiyopya'nın S-400 beklentisi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "İsveç 57Mk3 ve 3P mühimmat siparişi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G9",
+        "label": "Hanwha XM1776 Mobile Tactical Cannon",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "Hanwha Litvanya 40 mm mutabakatları",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "Hanwha Romanya K9A1 ilk teslim",
+        "home": "rakip"
+      },
+      {
+        "id": "G12",
+        "label": "49North–UNWAVE ortak karşı-dron üretimi",
+        "home": "rakip"
+      },
+      {
+        "id": "G13",
+        "label": "NSPA RQ-35 Heidrun çerçeve anlaşması",
+        "home": "izleme"
+      },
+      {
+        "id": "G14",
+        "label": "FCC dron spektrum oylaması",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-10-29.html"
+  },
+  {
     "date": "2026-10-28",
     "title": "Birleşik Krallık'ın 2 milyar £'lık tüfek yenileme programı Project GRAYBURN kamuya açık ihale olarak çerçevelendi ve sanayi kaydı 30 Ekim'de kapanıyor",
     "summary": "Günün ağırlığı hafif silah ve karşı-dron efektör katmanında. Birleşik Krallık'ın L85 ailesini değiştirecek Project GRAYBURN programı 2 milyar £ olarak teyit edildi; ortak alt gövdeli beş varyant ve Temmuz 2029 – Mart 2045 sözleşme dönemi öngörülüyor, kalibre kararı resmî değil. Anduril, iki kademeli ve açık arayüzlü Steelfin yüzeyden havaya önleyici ailesini duyurdu; yılda birkaç bin adet üretim hedefi ve 2027'de uçuş testi. Polonya'nın SAN bütünleşik karşı-dron programında Weibel, PIT-RADWAR ile 84 milyon €'luk XENTA-M5 radar sözleşmesi imzaladı; efektör kalemi ilan edilmedi. Hindistan dört yılda 872 milyon $'lık mühimmat ihracatıyla Avrupa'nın aynı tedarik boşluğuna giriyor.",

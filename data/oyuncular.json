@@ -139,7 +139,7 @@
    }
   ],
   "son": "2026-10-24",
-  "sayi_30g": 5
+  "sayi_30g": 4
  },
  "bae-systems": {
   "ad": "BAE Systems",
@@ -149,6 +149,10 @@
    "topcu"
   ],
   "gunler": [
+   {
+    "g": "2026-10-29",
+    "u": "/reports/2026-10-29.html#g8"
+   },
    {
     "g": "2026-10-22",
     "u": "/reports/2026-10-22.html#g3"
@@ -202,8 +206,8 @@
     "u": "/reports/2026-09-19.html#g3"
    }
   ],
-  "son": "2026-10-22",
-  "sayi_30g": 8
+  "son": "2026-10-29",
+  "sayi_30g": 9
  },
  "elbit": {
   "ad": "Elbit",
@@ -251,6 +255,10 @@
    "hava_savunma"
   ],
   "gunler": [
+   {
+    "g": "2026-10-29",
+    "u": "/reports/2026-10-29.html#g9"
+   },
    {
     "g": "2026-10-20",
     "u": "/reports/2026-10-20.html#g5"
@@ -304,7 +312,7 @@
     "u": "/reports/2026-09-14.html#g11"
    }
   ],
-  "son": "2026-10-20",
+  "son": "2026-10-29",
   "sayi_30g": 6
  },
  "poongsan": {
@@ -405,6 +413,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-10-29",
+    "u": "/reports/2026-10-29.html#g2"
+   },
+   {
     "g": "2026-10-22",
     "u": "/reports/2026-10-22.html#g4"
    },
@@ -417,8 +429,8 @@
     "u": "/reports/2026-10-15.html#g10"
    }
   ],
-  "son": "2026-10-22",
-  "sayi_30g": 3
+  "son": "2026-10-29",
+  "sayi_30g": 4
  },
  "solar-industries": {
   "ad": "Solar Industries",
@@ -642,6 +654,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-10-29",
+    "u": "/reports/2026-10-29.html#g4"
+   },
+   {
     "g": "2026-10-21",
     "u": "/reports/2026-10-21.html#g7"
    },
@@ -674,8 +690,8 @@
     "u": "/reports/2026-09-19.html#g2"
    }
   ],
-  "son": "2026-10-21",
-  "sayi_30g": 6
+  "son": "2026-10-29",
+  "sayi_30g": 7
  },
  "saab": {
   "ad": "Saab",
@@ -743,6 +759,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-10-29",
+    "u": "/reports/2026-10-29.html#g7"
+   },
+   {
     "g": "2026-10-26",
     "u": "/reports/2026-10-26.html#g4"
    },
@@ -759,8 +779,8 @@
     "u": "/reports/2026-09-21.html#g3"
    }
   ],
-  "son": "2026-10-26",
-  "sayi_30g": 3
+  "son": "2026-10-29",
+  "sayi_30g": 4
  },
  "iai": {
   "ad": "Israel Aerospace Industries",
@@ -1102,6 +1122,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-10-29",
+    "u": "/haberler/2026-10-29.html?q=Aselsan"
+   },
+   {
     "g": "2026-10-28",
     "u": "/haberler/2026-10-28.html?q=Aselsan"
    },
@@ -1210,7 +1234,7 @@
     "u": "/reports/2026-09-14.html#g10"
    }
   ],
-  "son": "2026-10-28",
+  "son": "2026-10-29",
   "sayi_30g": 17
  },
  "roketsan": {
@@ -1311,9 +1335,14 @@
   "segmentler": [
    "hafif_silah"
   ],
-  "gunler": [],
-  "son": "",
-  "sayi_30g": 0
+  "gunler": [
+   {
+    "g": "2026-10-29",
+    "u": "/haberler/2026-10-29.html?q=Canik"
+   }
+  ],
+  "son": "2026-10-29",
+  "sayi_30g": 1
  },
  "kalekalip": {
   "ad": "Kalekalıp",
@@ -1448,6 +1477,10 @@
   "segmentler": [],
   "gunler": [
    {
+    "g": "2026-10-29",
+    "u": "/haberler/2026-10-29.html?q=Havelsan"
+   },
+   {
     "g": "2026-10-28",
     "u": "/haberler/2026-10-28.html?q=Havelsan"
    },
@@ -1508,7 +1541,7 @@
     "u": "/haberler/2026-09-17.html?q=Havelsan"
    }
   ],
-  "son": "2026-10-28",
+  "son": "2026-10-29",
   "sayi_30g": 13
  },
  "stm": {
@@ -1642,7 +1675,7 @@
    }
   ],
   "son": "2026-09-30",
-  "sayi_30g": 2
+  "sayi_30g": 1
  },
  "meteksan": {
   "ad": "Meteksan",
