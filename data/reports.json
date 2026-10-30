@@ -1,5 +1,81 @@
 [
   {
+    "date": "2026-10-30",
+    "title": "Çin'in dron tahrik, uçuş kontrol ve haberleşme bileşenlerinde ihracat lisansı rejimi 18 Kasım'da yürürlüğe giriyor",
+    "summary": "Günün ağırlığı tedarik zinciri ve alçak irtifa efektör katmanında. Çin Ticaret Bakanlığı'nın 49 No'lu Duyurusu 13 kategoride dron motoru, fırçasız motor, otopilot, elektronik hız kontrolcüsü ve haberleşme ekipmanını eşik değerlerle lisansa bağlıyor; rejim 18 Kasım 2026'da yürürlüğe giriyor. Romanya'nın Aralık 2023'te 330 milyon €'ya imzaladığı dört batarya Oerlikon GDF-009 TREO modernizasyonunda ilk 12 ateş birimi Nisan'daki kabul testlerini geçemedi, bakanlık cezai şart uyguladığını teyit etti. L3Harris, 106 milyon $'lık sözleşmeden iki ay sonra ABD Ordusu'na yakınlık fünyeli 70 mm güdümlü roket atan VAMPIRE sistemlerinin ilk teslimlerini yaptı. ABD Ordusu Future Interceptor'ü 1,08 milyar $ tahmini değerle Lockheed Martin'in PAC-3 Edge'ine verdi, ABD Deniz Kuvvetleri FMU-139D/B elektronik bomba fünyesi sözleşme tavanını 97 milyon $ artırdı.",
+    "lead": "Çin'in 19 Ekim'de yayımladığı 49 No'lu Duyuru, 16 kW üzeri dron motoru, 48 V ve 3 kW üzeri fırçasız motor, otopilot ve…",
+    "alarm": true,
+    "alarm_title": "Çin dron tahrik ve uçuş kontrol bileşenlerinde ihracat lisansı 18 Kasım'da yürürlüğe giriyor",
+    "tags": [
+      "Tedarik Zinciri",
+      "C-UAS",
+      "Hava Savunma",
+      "Mühimmat",
+      "Balkanlar",
+      "ABD",
+      "Türkiye",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Çin dron bileşeni ihracat lisansı rejimi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Romanya Oerlikon GDF-009 TREO gecikmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "VAMPIRE ilk teslimleri",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "Future Interceptor PAC-3 Edge",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "FMU-139D/B fünye tavan artışı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "ASELSAN 523 milyon €'luk geliştirme sözleşmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "ABD Ordusu ek permissive test sahaları",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "EDGE–CMD motor devralması",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "Sentrycs Ranger 99.000 $ sabit fiyat",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "Destinus Ruta B1 üretim ölçeği",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "Bulgaristan NBCRV KBRN sensör sözleşmesi",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-10-30.html"
+  },
+  {
     "date": "2026-10-29",
     "title": "ABD'nin 60.000 taarruz dronu taahhüdü HMX ve RDX üretiminin tek tesise bağlı kalmasıyla enerjetik malzeme darboğazına girdi",
     "summary": "Günün ağırlığı enerjetik malzeme kapasitesinde ve topçu mühimmatı arzının hedef pazarlarda yerelleşmesinde. ABD'nin 60.000 taarruz dronu taahhüdü, HMX ve RDX üretiminin 1944 zirvesinin yaklaşık %3'ünde çalışan İkinci Dünya Savaşı dönemi tek tesise bağlı kalmasıyla darboğaza girdi; 1 milyar $'lık modernizasyon 2025'ten 2029 sonrasına kaydı, yeni bir girişim 115 milyon $ taahhütle konteyner tesisi kuruyor. Suudi Arabistan'ın Hindistan'dan 10.000 ek 155 mm mermi talep ettiği bildirildi, karar açıklanmadı. EDGE, HAZEEM programında 52 kalibre namludan 155 mm menzili uzatılmış merminin ilk atışını yaptı. ABD Ordusu'nun XRC C-sUAS programının ikinci turu üç firmaya ve 57,3 milyon $'a çıktı, Avrupa'nın PAC-3 bakım merkezi Polonya'ya verildi.",
