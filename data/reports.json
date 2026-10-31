@@ -1,5 +1,81 @@
 [
   {
+    "date": "2026-10-31",
+    "title": "Birleşik Krallık 50 milyon £ üzeri tüm savunma sözleşmelerinde yabancı tedarikçiye sözleşme değerine kadar yerli yatırım şartı getirdi",
+    "summary": "Günün ağırlığı ihracat koşulları ve karşı-dron doktrininde. Birleşik Krallık Savunma Bakanlığı, 50 milyon £ ve üzeri sözleşmelerde yabancı tedarikçilerden fabrika kurma, yerli tedarikçiye yatırım ve teknoloji aktarımı isteyen, sözleşme değerine kadar ulaşabilen bir fayda taahhüdü getirdi; politika Nisan 2027'de yürürlüğe giriyor ve yeni bir Offset Authority tarafından denetlenecek. Afrika Stratejik Çalışmalar Merkezi'nin raporu Afrika güvenlik güçleri için katmanlı karşı-dron yatırımı önerirken yakın mesafe için çok parçacıklı av tüfeği mermisini ve düşük maliyetli önleyici dronu sayıyor. AB, insansız ve karşı-dron kavram geliştirme merkezlerini 2027'de Letonya'daki Selonia ile Hollanda'daki Scheveningen'de kuracak. ABD, üç müttefik finansmanıyla Ukrayna'ya 500 PAC-3 MSE için 2,1 milyar $'lık satışı onayladı; Kongsberg'in sipariş girişi iki kattan fazla artarak 23,3 milyar NOK'a, bakiyesi rekor 174,2 milyar NOK'a çıktı.",
+    "lead": "Birleşik Krallık, 50 milyon £ ve üzeri savunma sözleşmelerinde yabancı tedarikçilere sözleşme değerine kadar ulaşabilen…",
+    "alarm": true,
+    "alarm_title": "Birleşik Krallık 50 milyon £ üzeri sözleşmelerde offset şartı getirdi, Nisan 2027'de yürürlüğe giriyor",
+    "tags": [
+      "Regülasyon",
+      "C-UAS",
+      "Mühimmat",
+      "Hafif Silah",
+      "Hava Savunma",
+      "Afrika",
+      "AB",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Birleşik Krallık 50 milyon £ offset politikası",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Afrika karşı-dron doktrini raporu",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "AB Letonya ve Hollanda karşı-dron merkezleri",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "Ukrayna'ya 500 PAC-3 MSE onayı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "Kongsberg rekor sipariş bakiyesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G6",
+        "label": "ABD Deniz Piyadeleri Bahreyn karşı-dron tedbirleri",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Singapur Wallaby mobil karşı-dron değerlendirmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "FCC spektrum kararları",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G9",
+        "label": "EDGE SOFEX 2026 ve yakıt hücresi ortaklığı",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "EOS Slinger ABD üretimi",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "Hindistan 13 Pantsir-S1 değerlendirmesi",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-10-31.html"
+  },
+  {
     "date": "2026-10-30",
     "title": "Çin'in dron tahrik, uçuş kontrol ve haberleşme bileşenlerinde ihracat lisansı rejimi 18 Kasım'da yürürlüğe giriyor",
     "summary": "Günün ağırlığı tedarik zinciri ve alçak irtifa efektör katmanında. Çin Ticaret Bakanlığı'nın 49 No'lu Duyurusu 13 kategoride dron motoru, fırçasız motor, otopilot, elektronik hız kontrolcüsü ve haberleşme ekipmanını eşik değerlerle lisansa bağlıyor; rejim 18 Kasım 2026'da yürürlüğe giriyor. Romanya'nın Aralık 2023'te 330 milyon €'ya imzaladığı dört batarya Oerlikon GDF-009 TREO modernizasyonunda ilk 12 ateş birimi Nisan'daki kabul testlerini geçemedi, bakanlık cezai şart uyguladığını teyit etti. L3Harris, 106 milyon $'lık sözleşmeden iki ay sonra ABD Ordusu'na yakınlık fünyeli 70 mm güdümlü roket atan VAMPIRE sistemlerinin ilk teslimlerini yaptı. ABD Ordusu Future Interceptor'ü 1,08 milyar $ tahmini değerle Lockheed Martin'in PAC-3 Edge'ine verdi, ABD Deniz Kuvvetleri FMU-139D/B elektronik bomba fünyesi sözleşme tavanını 97 milyon $ artırdı.",
