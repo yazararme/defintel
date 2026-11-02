@@ -1,5 +1,76 @@
 [
   {
+    "date": "2026-11-02",
+    "title": "Fransa, dron düşürmek için 68 mm lazer güdümlü LADAC roketini muharip uçağa taşıdı",
+    "summary": "Günün ağırlığı alçak irtifa efektör tercihinde ve kamikaze insansız deniz aracının sanayileşmesinde. Fransa, pahalı hava-hava füzesine alternatif olarak DGA ve hava kuvvetleri test merkezinin birlikte geliştirdiği 68 mm lazer güdümlü LADAC çözümünü Rafale ve Mirage 2000 RMV'ye taşıdı; karşılaştırmada MICA füzesi yaklaşık 700.000 $, Shahed sınıfı dron 50.000–80.000 € olarak veriliyor, sözleşme bedeli açıklanmadı. DGA, kendi geliştirdiği 500 kg'lık kamikaze insansız deniz aracı SMOKERS'ın seri üretimi için KDV dahil 36 milyon €'luk, dört yıl artı iki yıl opsiyonlu ihale açtı. FEMA'nın 2027 mali yılı karşı-dron hibesinde 250 milyon $ için başvurular 16 Kasım'da kapanıyor; etkisizleştirme ekipmanının elde taşınabilir ya da araç üstü olması şart koşuldu. Rheinmetall–KNDS ortak girişimi Artec, 30 mm havada infilak eden mühimmat atan MK 30-2/ABM silahlı 69 Schakal için opsiyon kullandırdı; Lockheed Martin Polonya'da PAC-3 bakım tesisi kuracağını açıkladı.",
+    "lead": "Fransa, dron düşürmede pahalı hava-hava füzesinin yerine 68 mm lazer güdümlü LADAC çözümünü Rafale ve Mirage 2000 RMV'y…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Mühimmat",
+      "PİRANA",
+      "İhale",
+      "AB",
+      "Polonya",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Fransa LADAC 68 mm karşı-dron roketi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "DGA SMOKERS seri üretim ihalesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "FEMA 250 milyon $ karşı-dron hibesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "Artec 69 Schakal opsiyonu (30 mm ABM)",
+        "home": "rakip"
+      },
+      {
+        "id": "G5",
+        "label": "Lockheed Martin Polonya PAC-3 bakım tesisi",
+        "home": "rakip"
+      },
+      {
+        "id": "G6",
+        "label": "NSPA mini İHA çerçevesinde Sky-Watch seçimi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Pine Bluff ARSENAL READY piroteknik modernizasyonu",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "ASELSAN KORKUT 35 ARMA II konfigürasyonu",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "FIU pasif manyetik dron tespiti",
+        "home": "izleme"
+      },
+      {
+        "id": "G10",
+        "label": "Polonya çekili topçusunun 155 mm'ye geçişi",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-11-02.html"
+  },
+  {
     "date": "2026-11-01",
     "title": "Northrop Grumman güdümlü 50 mm mühimmatlı namlulu hava savunmayı dron sürüsü yanıtı olarak öne çıkarıp uluslararası satışlarını 2031'e kadar ikiye katlama hedefini yineledi",
     "summary": "Günün ağırlığı alçak irtifa namlulu hava savunmada ve mühimmat kapasitesinde. Northrop Grumman'ın CEO'su Bushmaster zincirli top teknolojisini güdümlü 50 mm mühimmatla birleştiren namlulu bir hava savunma sistemini dron sürüsü ve seyir füzesi yanıtı olarak sundu ve uluslararası satışları 2031'e kadar ikiye katlama hedefini yineledi; müşteri ve sipariş açıklanmadı. Rheinmetall Hava Savunma, Silvus Technologies'in pasif radyo frekansı sensörlerini Skynex ve Skymaster komuta-kontrol platformuna entegre etmek üzere anlaştı. Raytheon kritik mühimmat üretimini 2026'nın ilk dokuz ayında %90'ın üzerinde artırdı; Tomahawk, AMRAAM, SM-6 ve SM-3 IB için toplam yaklaşık 70 milyar $'lık dört çok yıllık sözleşme mevcut üretim hızlarının iki–dört katını destekliyor ve tam kapasite 2030 olarak veriliyor. ABD'nin ucuz dron üretimi 2027 sonu için 250.000 adet hedefinde, Rusya'nın bu yıl beklenen 7,3 milyonu karşısında; Letonya'nın AB SAFE kaynaklı 27,8 milyon €'luk kask çerçevesini Kanadalı Galvion aldı.",

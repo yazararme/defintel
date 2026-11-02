@@ -1,5 +1,15 @@
 [
  {
+  "id": "fiu-pasif-manyetik-dron-tespiti",
+  "name": "FIU pasif manyetik dron tespiti",
+  "son_hareket": "2026-11-02"
+ },
+ {
+  "id": "polonya-cekili-topcusunun-155-mm-ye-gecisi",
+  "name": "Polonya çekili topçusunun 155 mm'ye geçişi",
+  "son_hareket": "2026-11-02"
+ },
+ {
   "id": "abd-deniz-piyadeleri-drone-round",
   "name": "ABD Deniz Piyadeleri \"Drone Round\" 5,56x45 mm çok parçacıklı mermi",
   "son_hareket": "2026-11-01"
