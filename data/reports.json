@@ -1,5 +1,86 @@
 [
   {
+    "date": "2026-11-03",
+    "title": "Hindistan Deniz Kuvvetleri mevcut güverte toplarına takılacak düşük maliyetli yerli karşı-dron mermisi arıyor ve merminin önleme başarısını sensörden ayrı ölçecek",
+    "summary": "Günün ağırlığı namlulu karşı-dron mühimmatında, çekili hafif topçuda ve kritik mineral girdisinde. Hindistan Deniz Kuvvetleri, filoda hâlihazırda kurulu güverte toplarından atılacak, yeni kule ya da tadilat gerektirmeyen düşük maliyetli yerli karşı-dron mermisi arıyor ve merminin önleme başarısını radar ve sensörlerden ayrı değerlendirmeyi öngörüyor; kalibre, adet ve takvim açıklanmadı. Brezilya'nın çekili 105 mm obüs programında yerel basına dayanan haber BAE Systems Light Gun'ı öne çıkarıyor, karşısındaki Kalyani Garuda 105 V2 için planlanan adet 54 olarak veriliyor ve Rio de Janeiro Harp Arsenali 21 Ekim 2026'da lisanslı üretim ayrıntıları için BAE'yi ağırladı. Bir ABD düşünce kuruluşu raporu, antimon, galyum, germanyum ve tungsten içeren 28.000'den fazla bileşeni 1.400 sistemde tespit ederken Çin ihracat kısıtlarının askıya alınmasının Kasım 2026'da sona ermesini kriz tarihi olarak veriyor; antimon mühimmat sertleştirmede, tungsten harp başlığı ve ısıya dayanıklı parçada girdi olarak sayılıyor. AeroVironment'ın Eylül'de aldığı yaklaşık 500 milyon $'lık Enduring-High Energy Laser sözleşmesinde Leonardo DRS araç entegrasyonu, güç ve termal yönetim alt yüklenicisi seçildi; FEMA karşı-dron hibesinde eyalet son tarihleri 4 Kasım'dan başlıyor ve etkisizleştirme kalemi fiilen karıştırıcıyla sınırlı.",
+    "lead": "Hindistan Deniz Kuvvetleri, 2 Kasım 2026'da aktarılan arayışta filoda kurulu güverte toplarından atılacak, yeni kule ya…",
+    "alarm": true,
+    "alarm_title": "Çin kritik mineral ihracat kısıtlarının askıya alınması Kasım 2026'da sona eriyor; antimon mühimmat sertleştirmede, tungsten harp başlığında girdi",
+    "tags": [
+      "Mühimmat",
+      "C-UAS",
+      "Topçu",
+      "DENİZHAN",
+      "BORAN",
+      "Tedarik Zinciri",
+      "Güney Asya",
+      "Balkanlar"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Hindistan Deniz Kuvvetleri karşı-dron güverte topu mermisi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Brezilya çekili 105 mm obüs programı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "Kritik mineral kısıtlarının yeniden devreye girmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "Leonardo DRS E-HEL alt yüklenicisi",
+        "home": "rakip"
+      },
+      {
+        "id": "G5",
+        "label": "FEMA hibesinde eyalet son tarihleri ve etkisizleştirme sınırı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "Almanya iki Patriot ateş birimi siparişi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Hırvatistan 18 Chunmoo sözleşmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "Kalashnikov Krona devlet denemeleri",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "Allen Control Systems–CX2 ortaklığı",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "LMT Defence–Thales Italia mutabakatı",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "Naval Group Seaquest M ve DANAE",
+        "home": "rakip"
+      },
+      {
+        "id": "G12",
+        "label": "Neros 450 milyon $ devlet kredisi",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-11-03.html"
+  },
+  {
     "date": "2026-11-02",
     "title": "Fransa, dron düşürmek için 68 mm lazer güdümlü LADAC roketini muharip uçağa taşıdı",
     "summary": "Günün ağırlığı alçak irtifa efektör tercihinde ve kamikaze insansız deniz aracının sanayileşmesinde. Fransa, pahalı hava-hava füzesine alternatif olarak DGA ve hava kuvvetleri test merkezinin birlikte geliştirdiği 68 mm lazer güdümlü LADAC çözümünü Rafale ve Mirage 2000 RMV'ye taşıdı; karşılaştırmada MICA füzesi yaklaşık 700.000 $, Shahed sınıfı dron 50.000–80.000 € olarak veriliyor, sözleşme bedeli açıklanmadı. DGA, kendi geliştirdiği 500 kg'lık kamikaze insansız deniz aracı SMOKERS'ın seri üretimi için KDV dahil 36 milyon €'luk, dört yıl artı iki yıl opsiyonlu ihale açtı. FEMA'nın 2027 mali yılı karşı-dron hibesinde 250 milyon $ için başvurular 16 Kasım'da kapanıyor; etkisizleştirme ekipmanının elde taşınabilir ya da araç üstü olması şart koşuldu. Rheinmetall–KNDS ortak girişimi Artec, 30 mm havada infilak eden mühimmat atan MK 30-2/ABM silahlı 69 Schakal için opsiyon kullandırdı; Lockheed Martin Polonya'da PAC-3 bakım tesisi kuracağını açıkladı.",
