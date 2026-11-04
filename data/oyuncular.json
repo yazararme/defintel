@@ -9,6 +9,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-11-04",
+    "u": "/reports/2026-11-04.html#g7"
+   },
+   {
     "g": "2026-11-02",
     "u": "/reports/2026-11-02.html#g4"
    },
@@ -93,8 +97,8 @@
     "u": "/reports/2026-09-14.html#g7"
    }
   ],
-  "son": "2026-11-02",
-  "sayi_30g": 11
+  "son": "2026-11-04",
+  "sayi_30g": 12
  },
  "nammo": {
   "ad": "Nammo",
@@ -162,6 +166,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-11-04",
+    "u": "/reports/2026-11-04.html#g2"
+   },
+   {
     "g": "2026-11-03",
     "u": "/reports/2026-11-03.html#g2"
    },
@@ -222,8 +230,8 @@
     "u": "/reports/2026-09-19.html#g3"
    }
   ],
-  "son": "2026-11-03",
-  "sayi_30g": 8
+  "son": "2026-11-04",
+  "sayi_30g": 9
  },
  "elbit": {
   "ad": "Elbit",
@@ -337,7 +345,7 @@
    }
   ],
   "son": "2026-11-03",
-  "sayi_30g": 7
+  "sayi_30g": 6
  },
  "poongsan": {
   "ad": "Poongsan",
@@ -735,7 +743,7 @@
    }
   ],
   "son": "2026-11-01",
-  "sayi_30g": 8
+  "sayi_30g": 7
  },
  "saab": {
   "ad": "Saab",
@@ -1182,6 +1190,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-11-04",
+    "u": "/haberler/2026-11-04.html?q=Aselsan"
+   },
+   {
     "g": "2026-11-03",
     "u": "/haberler/2026-11-03.html?q=Aselsan"
    },
@@ -1310,7 +1322,7 @@
     "u": "/reports/2026-09-14.html#g10"
    }
   ],
-  "son": "2026-11-03",
+  "son": "2026-11-04",
   "sayi_30g": 17
  },
  "roketsan": {
@@ -1415,7 +1427,7 @@
    }
   ],
   "son": "2026-10-26",
-  "sayi_30g": 6
+  "sayi_30g": 5
  },
  "canik": {
   "ad": "Canik",
@@ -1453,9 +1465,14 @@
   "segmentler": [
    "roket_bomba"
   ],
-  "gunler": [],
-  "son": "",
-  "sayi_30g": 0
+  "gunler": [
+   {
+    "g": "2026-11-04",
+    "u": "/haberler/2026-11-04.html?q=T%C3%9CB%C4%B0TAK%20SAGE"
+   }
+  ],
+  "son": "2026-11-04",
+  "sayi_30g": 1
  },
  "baykar": {
   "ad": "Baykar",
@@ -1577,6 +1594,10 @@
   "segmentler": [],
   "gunler": [
    {
+    "g": "2026-11-04",
+    "u": "/haberler/2026-11-04.html?q=Havelsan"
+   },
+   {
     "g": "2026-11-03",
     "u": "/haberler/2026-11-03.html?q=Havelsan"
    },
@@ -1657,8 +1678,8 @@
     "u": "/haberler/2026-09-17.html?q=Havelsan"
    }
   ],
-  "son": "2026-11-03",
-  "sayi_30g": 15
+  "son": "2026-11-04",
+  "sayi_30g": 16
  },
  "stm": {
   "ad": "STM",
@@ -1782,7 +1803,7 @@
    }
   ],
   "son": "2026-11-02",
-  "sayi_30g": 4
+  "sayi_30g": 3
  },
  "bmc": {
   "ad": "BMC",

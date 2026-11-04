@@ -1,5 +1,71 @@
 [
   {
+    "date": "2026-11-04",
+    "title": "NATO'nun 150 m altı hava tehditleri projesi NSPA pazar araştırması ve ortak kataloğa bağlanırken Bulgaristan projeye katıldı",
+    "summary": "Günün ağırlığı alçak irtifa katmanının çok uluslu bir NATO kalemi haline gelmesinde, namlulu hava savunmanın yerli üretim şartıyla üçüncü pazarlara taşınmasında ve karşı-dron etkisizleştirme bütçesinin daralmasında. Bulgaristan, NATO'nun 150 m altındaki dron, seyir füzesi ve süzülen bombalara karşı üç yıllık projesine 30 Ekim'de katıldı; tedarik NSPA'nın yürüteceği pazar araştırması ve üyelerin ortak alım yapabileceği bir katalog üzerinden tanımlanıyor, mutabakatı imzalayanlar arasında Türkiye de sayılıyor, Bulgaristan'ın payı yılda 220.000 € ve ülkenin AB SAFE üzerinden 20 karşı-dron sistemi için ayırdığı 80 milyon €'luk kalem bu projeden ayrı duruyor. BAE Systems, 3P programlanabilir ve yakınlık fünyeli mühimmat atan 40 mm Bofors Tridon Mk2'yi Hindistan'da yerli bir ortakla üretmek üzere partner arayışını duyurdu; program, ihale, adet ve bedel verilmedi. FEMA'nın ikinci 250 milyon $'lık turunda Teksas'ın payı 30.276.431 $'dan 10.508.140 $'a indi ve etkisizleştirme kalemi karıştırıcı, radyo protokol müdahalesi ile siber devralma olarak sayıldı; namlulu ya da mühimmatlı efektör anılmadı. Ukrayna'ya onaylanan 500 PAC-3 MSE kaleminde teslimlerin 2029'da başlaması bekleniyor ve SOCOM omuzdan atılan Zeus güdümlü füzesi için 13,8 milyon $'lık ilk üretim sözleşmesi verdi.",
+    "lead": "Bulgaristan, NATO'nun 150 m altındaki hava tehditlerine karşı üç yıllık projesine 30 Ekim 2026'da katıldı; ülke payı yı…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Mühimmat",
+      "TOLGA",
+      "NATO/NSPA",
+      "Balkanlar",
+      "Güney Asya",
+      "ABD"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "NATO 150 m altı hava tehditleri projesi ve NSPA kataloğu",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "BAE Bofors Tridon Mk2 40 mm Hindistan arayışı",
+        "home": "rakip"
+      },
+      {
+        "id": "G3",
+        "label": "FEMA ikinci turunda etkisizleştirme kalemi ve eyalet payları",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "Ukrayna PAC-3 MSE teslim başlangıcı 2029",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "SOCOM–Aeon omuzdan atılan Zeus sözleşmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "Güney Kore Millî Savunma Dron Merkezi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Rheinmetall–Silvus RFeye pasif sensör entegrasyonu",
+        "home": "rakip"
+      },
+      {
+        "id": "G8",
+        "label": "Project COURAGEOUS² test standardı",
+        "home": "izleme"
+      },
+      {
+        "id": "G9",
+        "label": "Armscor R4/R5 yenileme bilgi talebi",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-11-04.html"
+  },
+  {
     "date": "2026-11-03",
     "title": "Hindistan Deniz Kuvvetleri mevcut güverte toplarına takılacak düşük maliyetli yerli karşı-dron mermisi arıyor ve merminin önleme başarısını sensörden ayrı ölçecek",
     "summary": "Günün ağırlığı namlulu karşı-dron mühimmatında, çekili hafif topçuda ve kritik mineral girdisinde. Hindistan Deniz Kuvvetleri, filoda hâlihazırda kurulu güverte toplarından atılacak, yeni kule ya da tadilat gerektirmeyen düşük maliyetli yerli karşı-dron mermisi arıyor ve merminin önleme başarısını radar ve sensörlerden ayrı değerlendirmeyi öngörüyor; kalibre, adet ve takvim açıklanmadı. Brezilya'nın çekili 105 mm obüs programında yerel basına dayanan haber BAE Systems Light Gun'ı öne çıkarıyor, karşısındaki Kalyani Garuda 105 V2 için planlanan adet 54 olarak veriliyor ve Rio de Janeiro Harp Arsenali 21 Ekim 2026'da lisanslı üretim ayrıntıları için BAE'yi ağırladı. Bir ABD düşünce kuruluşu raporu, antimon, galyum, germanyum ve tungsten içeren 28.000'den fazla bileşeni 1.400 sistemde tespit ederken Çin ihracat kısıtlarının askıya alınmasının Kasım 2026'da sona ermesini kriz tarihi olarak veriyor; antimon mühimmat sertleştirmede, tungsten harp başlığı ve ısıya dayanıklı parçada girdi olarak sayılıyor. AeroVironment'ın Eylül'de aldığı yaklaşık 500 milyon $'lık Enduring-High Energy Laser sözleşmesinde Leonardo DRS araç entegrasyonu, güç ve termal yönetim alt yüklenicisi seçildi; FEMA karşı-dron hibesinde eyalet son tarihleri 4 Kasım'dan başlıyor ve etkisizleştirme kalemi fiilen karıştırıcıyla sınırlı.",
