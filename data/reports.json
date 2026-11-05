@@ -1,5 +1,96 @@
 [
   {
+    "date": "2026-11-05",
+    "title": "Euronaval 2026'da namlulu karşı-dron iki ana yüklenicide konteynerli ve mühimmatı adlandırılmış pakete dönüşürken İsrailli bir hafif silah üreticisi tüfek entegreli karşı-dron sistemini Tayland'a teslim etti ve Ukrayna robotik hava savunma kulelerinin etkinliğini mühimmat tipiyle artırmayı değerlendirdiğini bildirdi",
+    "summary": "Günün ağırlığı namlulu karşı-dronun konteynerli ürün ailesine dönüşmesinde, karşı-dron mermisinin ana yüklenici paketinin içinde adlandırılmasında ve hafif silah esaslı karşı-dron çözümünün Güneydoğu Asya'ya girmesinde. BAE Systems, Euronaval 2026'da 40 mm/L70 Mk IV esaslı üç varyantlı Sea Tridon ailesini tanıttı; 3P programlanabilir ve yakınlık fünyeli mühimmat atan sistem dakikada 300 atım veriyor, kara testleri tamamlandı, konteynerli varyant dahil deniz testleri 12 ay içinde İsveç Silahlı Kuvvetleri ile planlanıyor, firma geliştirmeyi kendi kaynağıyla finanse ediyor ve ilk müşterisini arıyor. Elbit Systems, radar, elektro-optik, elektronik harp ve 30 mm güverte topu ile SkyBurst karşı-dron yakınlık fünyeli mermisini tek deniz paketinde sundu; müşteri ve bedel açıklanmadı. Israel Weapons Industry, mevcut tüfeklerin alt gövdesi değiştirilerek entegre edilen ARBEL karşı-dron sistemini Tayland Savunma Bakanlığı'na teslim etti ve dört Güneydoğu Asya ülkesinin tedarik sürecinin farklı aşamalarında olduğunu bildirdi. Ukrayna Savunma Bakanlığı robotik hava savunma kulelerinin Geran-4 ve Geran-5 dronlarını önlediğini, etkinliğin farklı mühimmat tipleriyle artırılmasının değerlendirildiğini açıkladı; INLEAP Photonics ise Hannover'de lazer esaslı karşı-dron sisteminin altı istasyonlu seri üretim hattını kurdu ve Kasım'da rampaya çıkıyor.",
+    "lead": "BAE Systems, 40 mm/L70 Mk IV esaslı, 3P programlanabilir ve yakınlık fünyeli mühimmat atan, dakikada 300 atım veren üç…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Mühimmat",
+      "TOLGA",
+      "DENİZHAN",
+      "Hafif Silah",
+      "Güneydoğu Asya",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "BAE Sea Tridon 40 mm konteynerli C-UAS ailesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G2",
+        "label": "Elbit SkyBurst 30 mm deniz karşı-dron paketi",
+        "home": "rakip"
+      },
+      {
+        "id": "G3",
+        "label": "IWI ARBEL karşı-dron sisteminin Tayland'a teslimi",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "Ukrayna robotik kulelerde mühimmat tipi değerlendirmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "INLEAP FASTLIGHT HELD seri üretimi",
+        "home": "rakip"
+      },
+      {
+        "id": "G6",
+        "label": "Project GRAYBURN kavram aşaması ve 2 milyar £ tahmini",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Norveç NASAMS IV bataryası teslimi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "Galvion Letonya kask çerçevesi (AB SAFE)",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G9",
+        "label": "MBDA–Terma SPIMM konteynerli Mistral 3 modülü",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "Hanwha WB Polonya CGR080 fabrikası",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "Saab CB90 CX uçaksavar toplu SHORAD teknesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G12",
+        "label": "Wescom POMBS talebinin on katına çıkması",
+        "home": "rakip"
+      },
+      {
+        "id": "G13",
+        "label": "ParaZero DefendAir dördüncü siparişi",
+        "home": "rakip"
+      },
+      {
+        "id": "G14",
+        "label": "Ukrayna Ekim ayı hava savunma bilançosu",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-11-05.html"
+  },
+  {
     "date": "2026-11-04",
     "title": "NATO'nun 150 m altı hava tehditleri projesi NSPA pazar araştırması ve ortak kataloğa bağlanırken Bulgaristan projeye katıldı",
     "summary": "Günün ağırlığı alçak irtifa katmanının çok uluslu bir NATO kalemi haline gelmesinde, namlulu hava savunmanın yerli üretim şartıyla üçüncü pazarlara taşınmasında ve karşı-dron etkisizleştirme bütçesinin daralmasında. Bulgaristan, NATO'nun 150 m altındaki dron, seyir füzesi ve süzülen bombalara karşı üç yıllık projesine 30 Ekim'de katıldı; tedarik NSPA'nın yürüteceği pazar araştırması ve üyelerin ortak alım yapabileceği bir katalog üzerinden tanımlanıyor, mutabakatı imzalayanlar arasında Türkiye de sayılıyor, Bulgaristan'ın payı yılda 220.000 € ve ülkenin AB SAFE üzerinden 20 karşı-dron sistemi için ayırdığı 80 milyon €'luk kalem bu projeden ayrı duruyor. BAE Systems, 3P programlanabilir ve yakınlık fünyeli mühimmat atan 40 mm Bofors Tridon Mk2'yi Hindistan'da yerli bir ortakla üretmek üzere partner arayışını duyurdu; program, ihale, adet ve bedel verilmedi. FEMA'nın ikinci 250 milyon $'lık turunda Teksas'ın payı 30.276.431 $'dan 10.508.140 $'a indi ve etkisizleştirme kalemi karıştırıcı, radyo protokol müdahalesi ile siber devralma olarak sayıldı; namlulu ya da mühimmatlı efektör anılmadı. Ukrayna'ya onaylanan 500 PAC-3 MSE kaleminde teslimlerin 2029'da başlaması bekleniyor ve SOCOM omuzdan atılan Zeus güdümlü füzesi için 13,8 milyon $'lık ilk üretim sözleşmesi verdi.",
