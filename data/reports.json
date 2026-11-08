@@ -1,5 +1,66 @@
 [
   {
+    "date": "2026-11-08",
+    "title": "Pentagon 2026'da CENTCOM'a 782 milyon $ ile 25.000'den fazla insansız ve karşı-dron sistemi teslim ettiğini açıkladı ve gerekçeyi pahalı mühimmat sarfını azaltmak olarak yazdı",
+    "summary": "Günün ağırlığı karşı-dron tedarikinin kitle ve maliyet gerekçesiyle tanımlanmasında, büyük kalibre mühimmat üretim altyapısının mülkiyet ve imtiyaz kalemine dönüşmesinde ve çekili topçuda ağırlık sınırının tedarik kriteri olmasında. ABD Savunma Bakanlığı, 2026'da CENTCOM sorumluluk sahasına yaklaşık 782 milyon $ ile 25.000'den fazla insansız ve karşı-dron sistemi teslim ettiğini, bunun 24.000'den fazlasının JIATF-401 üzerinden karşı-dron, 1.300'den fazlasının tek yönlü taarruz dronu ve 100'den fazlasının insansız deniz ve sualtı aracı olduğunu açıkladı; yetkili gerekçeyi 'milyon dolarlık mühimmatın daha az kullanılması' olarak veriyor ve yapı 1 Ekim 2027'de kurulacak Otonom Harp Komutanlığı'na bağlanıyor. Yunanistan'da EAS'ın Aigio tesislerinde büyük kalibre mermi ve kovan üretiminin finansmanı, modernizasyonu ve işletmesi uluslararası imtiyaz ihalesine açıldı; Hint Kalyani Strategic Systems Yunan GEK TERNA ile, Rheinmetall Waffe Munition ise tek başına ilgi beyanı verdi. Hindistan, 1.400'ü aşan çekili topçu ihtiyacının ilk 307 adedi için ATAGS seri üretim iznini verdi; iş Bharat Forge'a %60, TASL'a %40 dağıtıldı, yılda 15 adet üretim ve FY2028 1. çeyreğinde teslim öngörülüyor, 18 tonluk ağırlık mevcut 15 ton altı altyapıyla uyumsuz. RTX yılda 1.000'den fazla Tomahawk üretimi için Alman tedarikçi arıyor; 17 Ağustos'ta imzalanan çok yıllı çerçeve 22,9 milyar $. Rheinmetall, Arminius Boxer sözleşmesinde fiyat denetiminin parlamento onayını 2027 1. çeyreğine ötelediğini ve 155 mm mühimmat kabul testlerinin yavaşlamasının 2026 satış beklentisini düşürdüğünü bildirdi.",
+    "lead": "ABD Savunma Bakanlığı, 2026'da CENTCOM'a yaklaşık 782 milyon $ ile 25.000'den fazla insansız ve karşı-dron sistemi tesl…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "C-UAS",
+      "Mühimmat",
+      "Topçu",
+      "Mayın ve Geçit Açma",
+      "ABD",
+      "Güney Asya",
+      "İhale",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "CENTCOM'a 25.000 insansız ve karşı-dron sistemi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Yunanistan EAS Aigio mühimmat tesisi imtiyaz ihalesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "Hindistan 307 ATAGS seri üretim izni",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "RTX Tomahawk için Alman tedarikçi arayışı",
+        "home": "rakip"
+      },
+      {
+        "id": "G5",
+        "label": "Rheinmetall fiyat denetimi ve 155 mm kabul testi",
+        "home": "rakip"
+      },
+      {
+        "id": "G6",
+        "label": "HII–Thales otonom mayın karşı tedbir gösterimi",
+        "home": "rakip"
+      },
+      {
+        "id": "G7",
+        "label": "Hindistan üç katmanlı deniz hava savunması",
+        "home": "izleme"
+      },
+      {
+        "id": "G8",
+        "label": "Barak 8'in Avrupa'da öne çıkması",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-11-08.html"
+  },
+  {
     "date": "2026-11-07",
     "title": "ABD Ordusu yedi mühimmat fabrikasının modernizasyonunu 4,2 milyar $ tavanlı beş yıllık bir çerçeveye bağladı ve bir Orta Avrupa mühimmat grubu ABD'li iştirakiyle çerçeveye girdi",
     "summary": "Günün ağırlığı mühimmat sanayi tabanının çerçeve sözleşmeye bağlanmasında, namlulu hava savunmada mühimmat ikmalinin ayrı kaleme dönüşmesinde ve karşı-dron maliyet tartışmasının rakamla somutlaşmasında. ABD Ordusu, Holston (patlayıcı), Radford (barut ve enerjetik malzeme), Lake City (küçük kalibre), Iowa (orta ve büyük kalibre dolum), Scranton (topçu metal bileşen), Quad City (büyük kalibre kovan) ve Milan fabrikalarının tasarım, inşa ve devreye alma işlerini yaklaşık 4,2 milyar $ ortak tavanlı, beş yıllık Çoklu Tahsisli Görev Emri Sözleşmesi'ne (MATOC) bağladı; Çek CSG'nin ABD iştiraki MSM North America seçilen yükleniciler arasına girdi, diğer yükleniciler açıklanmadı ve görev emirleri ayrıca yarışmaya açılıyor. Rheinmetall, 30x173 mm Skyranger 30 için robot kollu şarjör değişimi konseptini duyurdu; 250 atımlık ve yaklaşık 400 kg'lık şarjörlerle ikmal süresi birkaç dakikaya iniyor, 8x8 kamyon 6, römorkla birlikte 18 ateş birimi taşıyor, henüz sipariş yok. TBMM, 7 Ağustos'ta imzalanan Mekke Ortak Savunma Anlaşması'nın onay tasarısını 279'a 119 oyla kabul etti; Pakistan ve Suudi Arabistan onayı tamamlamış durumda. ABD Ordusu 2-6 Kasım'da Polonya Ustka'da FD-1 önleyicisini Grup 1-3 dronlara karşı 'maliyet eğrisinin doğru tarafında kalma' gerekçesiyle denedi, rakam vermedi. Hanwha Systems, hizmette olan 20 kW Cheongwang için atış başına 1,50 $ maliyet verdi ve K808 üzerindeki 50 kW lazer aracının üretimini 2027 sonunda başlatmayı hedeflediğini açıkladı.",
