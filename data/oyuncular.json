@@ -1695,6 +1695,10 @@
   "segmentler": [],
   "gunler": [
    {
+    "g": "2026-11-09",
+    "u": "/haberler/2026-11-09.html?q=Havelsan"
+   },
+   {
     "g": "2026-11-07",
     "u": "/haberler/2026-11-07.html?q=Havelsan"
    },
@@ -1791,8 +1795,8 @@
     "u": "/haberler/2026-09-17.html?q=Havelsan"
    }
   ],
-  "son": "2026-11-07",
-  "sayi_30g": 19
+  "son": "2026-11-09",
+  "sayi_30g": 20
  },
  "stm": {
   "ad": "STM",
