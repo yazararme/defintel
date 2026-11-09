@@ -1,5 +1,61 @@
 [
   {
+    "date": "2026-11-09",
+    "title": "Lockheed Martin 2030'a kadar 8 milyar $'ın üzerinde yatırımla 20'den fazla tesisi genişletip füze üretimini büyüteceğini açıkladı",
+    "summary": "Günün ağırlığı ana yüklenici füze üretim kapasitesinin tek elde büyütülmesinde, enerji altyapısının alçak irtifa tehdidiyle durdurulmasında ve karşı-dron etkisizleştirmelerinde efektör kırılımının resmî olarak gizli kalmasında. Lockheed Martin üst yönetimi, 2030'a kadar 8 milyar $'ın üzerinde yatırımla 20'den fazla tesisi modernize edeceğini, üç yılda sekiz sahada yaklaşık 2 milyon ft² üretim alanı ekleyeceğini ve PAC-3, THAAD, JATM ile PrSM Increment 2 hatlarını büyüteceğini açıkladı; PAC-3 sözleşmesinin tavanı 58,6 milyar $, PrSM Increment 2 üretim kalemi 1,2 milyar $, tahrik ve bileşen kalemleri L3Harris'e 4,7 milyar $ ve Northrop Grumman'a 1,6 milyar $ ile ayrı ayrı verilmiş durumda. Kuzey Irak'ta Pearl Petroleum konsorsiyumunun işlettiği Khor Mor gaz sahası 8 Kasım akşamı dron saldırısıyla durdu; bölgenin yaklaşık 4 GW'lık üretiminden 2,8 GW düştü, saldırının sorumluluğu üstlenilmedi ve sahada herhangi bir karşı-dron ya da hava savunma katmanı anılmadı. ABD Kuzey Komutanlığı 2026'da Meksika sınırında 300'den fazla dronun etkisizleştirildiğini bildirdi; bunun yalnızca 11'i 20 kW'lık AMP-HEL lazeriyle yapıldı, kalan etkisizleştirmelerin kinetik/namlulu kırılımı açıklanmadı. Shield AI'ın Echodyne alımında kapanışta 4,8 milyar $ ödeme, performansa bağlı 500 milyon $'a kadar ek bedel ve 2027 başı kapanış takvimi netleşti; hedef firmanın Kirkland tesisi yılda yaklaşık 30.000 radar kapasitesine sahip ve radarlar uzaktan komutalı silah istasyonlarına entegre ediliyor. Kalashnikov, 12 kalibre MP-155 yarı otomatik tüfeğinin Hindistan'da lisanslı üretimi için anlaşma yaptı; firma tüfeğin alçak irtifa hedeflere karşı özel bir sürümünü de üretiyor, Hint ortağın adı ve adetler açıklanmadı.",
+    "lead": "Lockheed Martin üst yönetimi, füze üretimini büyütmek için 2030'a kadar 8 milyar $'ın üzerinde yatırımla 20'den fazla t…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Mühimmat",
+      "Hafif Silah",
+      "Sivil Pazar",
+      "Rakip",
+      "ABD",
+      "Güney Asya"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Lockheed Martin 8 milyar $ füze üretimi genişlemesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G2",
+        "label": "Khor Mor dron saldırısı ve Kürdistan elektrik kaybı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "Shield AI–Echodyne işleminin yapısı ve kapanış takvimi",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "ABD sınırında 300'den fazla dron etkisizleştirme",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "Kalashnikov MP-155'in Hindistan'da lisanslı üretimi",
+        "home": "rakip"
+      },
+      {
+        "id": "G6",
+        "label": "Almanya'nın Ukrayna'ya ek Patriot vermemesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Indiana ticari karşı-dron test sahasında kinetik test",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-11-09.html"
+  },
+  {
     "date": "2026-11-08",
     "title": "Pentagon 2026'da CENTCOM'a 782 milyon $ ile 25.000'den fazla insansız ve karşı-dron sistemi teslim ettiğini açıkladı ve gerekçeyi pahalı mühimmat sarfını azaltmak olarak yazdı",
     "summary": "Günün ağırlığı karşı-dron tedarikinin kitle ve maliyet gerekçesiyle tanımlanmasında, büyük kalibre mühimmat üretim altyapısının mülkiyet ve imtiyaz kalemine dönüşmesinde ve çekili topçuda ağırlık sınırının tedarik kriteri olmasında. ABD Savunma Bakanlığı, 2026'da CENTCOM sorumluluk sahasına yaklaşık 782 milyon $ ile 25.000'den fazla insansız ve karşı-dron sistemi teslim ettiğini, bunun 24.000'den fazlasının JIATF-401 üzerinden karşı-dron, 1.300'den fazlasının tek yönlü taarruz dronu ve 100'den fazlasının insansız deniz ve sualtı aracı olduğunu açıkladı; yetkili gerekçeyi 'milyon dolarlık mühimmatın daha az kullanılması' olarak veriyor ve yapı 1 Ekim 2027'de kurulacak Otonom Harp Komutanlığı'na bağlanıyor. Yunanistan'da EAS'ın Aigio tesislerinde büyük kalibre mermi ve kovan üretiminin finansmanı, modernizasyonu ve işletmesi uluslararası imtiyaz ihalesine açıldı; Hint Kalyani Strategic Systems Yunan GEK TERNA ile, Rheinmetall Waffe Munition ise tek başına ilgi beyanı verdi. Hindistan, 1.400'ü aşan çekili topçu ihtiyacının ilk 307 adedi için ATAGS seri üretim iznini verdi; iş Bharat Forge'a %60, TASL'a %40 dağıtıldı, yılda 15 adet üretim ve FY2028 1. çeyreğinde teslim öngörülüyor, 18 tonluk ağırlık mevcut 15 ton altı altyapıyla uyumsuz. RTX yılda 1.000'den fazla Tomahawk üretimi için Alman tedarikçi arıyor; 17 Ağustos'ta imzalanan çok yıllı çerçeve 22,9 milyar $. Rheinmetall, Arminius Boxer sözleşmesinde fiyat denetiminin parlamento onayını 2027 1. çeyreğine ötelediğini ve 155 mm mühimmat kabul testlerinin yavaşlamasının 2026 satış beklentisini düşürdüğünü bildirdi.",
