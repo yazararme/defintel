@@ -9,6 +9,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-11-10",
+    "u": "/reports/2026-11-10.html#g1"
+   },
+   {
     "g": "2026-11-08",
     "u": "/reports/2026-11-08.html#g5"
    },
@@ -105,8 +109,8 @@
     "u": "/reports/2026-09-14.html#g7"
    }
   ],
-  "son": "2026-11-08",
-  "sayi_30g": 14
+  "son": "2026-11-10",
+  "sayi_30g": 15
  },
  "nammo": {
   "ad": "Nammo",
@@ -133,6 +137,10 @@
    "topcu"
   ],
   "gunler": [
+   {
+    "g": "2026-11-10",
+    "u": "/reports/2026-11-10.html#g1"
+   },
    {
     "g": "2026-11-06",
     "u": "/reports/2026-11-06.html#g10"
@@ -166,8 +174,8 @@
     "u": "/reports/2026-09-19.html#g6"
    }
   ],
-  "son": "2026-11-06",
-  "sayi_30g": 4
+  "son": "2026-11-10",
+  "sayi_30g": 5
  },
  "bae-systems": {
   "ad": "BAE Systems",
@@ -844,6 +852,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-11-10",
+    "u": "/reports/2026-11-10.html#g2"
+   },
+   {
     "g": "2026-11-08",
     "u": "/reports/2026-11-08.html#g6"
    },
@@ -872,8 +884,8 @@
     "u": "/reports/2026-10-03.html#g10"
    }
   ],
-  "son": "2026-11-08",
-  "sayi_30g": 5
+  "son": "2026-11-10",
+  "sayi_30g": 6
  },
  "rafael": {
   "ad": "Rafael",
@@ -1143,9 +1155,14 @@
   "segmentler": [
    "hafif_silah"
   ],
-  "gunler": [],
-  "son": "",
-  "sayi_30g": 0
+  "gunler": [
+   {
+    "g": "2026-11-10",
+    "u": "/reports/2026-11-10.html#g5"
+   }
+  ],
+  "son": "2026-11-10",
+  "sayi_30g": 1
  },
  "cz": {
   "ad": "Colt CZ",
@@ -1573,6 +1590,10 @@
   "segmentler": [],
   "gunler": [
    {
+    "g": "2026-11-10",
+    "u": "/haberler/2026-11-10.html?q=Baykar"
+   },
+   {
     "g": "2026-11-06",
     "u": "/haberler/2026-11-06.html?q=Baykar"
    },
@@ -1649,8 +1670,8 @@
     "u": "/haberler/2026-09-22.html?q=Baykar"
    }
   ],
-  "son": "2026-11-06",
-  "sayi_30g": 9
+  "son": "2026-11-10",
+  "sayi_30g": 10
  },
  "tusas": {
   "ad": "TUSAŞ",
@@ -1804,6 +1825,10 @@
   "segmentler": [],
   "gunler": [
    {
+    "g": "2026-11-10",
+    "u": "/haberler/2026-11-10.html?q=STM"
+   },
+   {
     "g": "2026-11-03",
     "u": "/haberler/2026-11-03.html?q=STM"
    },
@@ -1840,14 +1865,18 @@
     "u": "/haberler/2026-09-25.html?q=STM"
    }
   ],
-  "son": "2026-11-03",
-  "sayi_30g": 8
+  "son": "2026-11-10",
+  "sayi_30g": 9
  },
  "asfat": {
   "ad": "ASFAT",
   "rol": "emsal",
   "segmentler": [],
   "gunler": [
+   {
+    "g": "2026-11-10",
+    "u": "/haberler/2026-11-10.html?q=ASFAT"
+   },
    {
     "g": "2026-10-31",
     "u": "/haberler/2026-10-31.html?q=ASFAT"
@@ -1857,8 +1886,8 @@
     "u": "/haberler/2026-10-30.html?q=ASFAT"
    }
   ],
-  "son": "2026-10-31",
-  "sayi_30g": 2
+  "son": "2026-11-10",
+  "sayi_30g": 3
  },
  "fnss": {
   "ad": "FNSS",

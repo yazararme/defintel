@@ -1,5 +1,56 @@
 [
   {
+    "date": "2026-11-10",
+    "title": "Belçika, kritik altyapı savunması için Rheinmetall'den programlanabilir AHEAD mühimmatı atan 20 adet 30 mm Skyranger 30 sipariş etti ve hava savunma taburunu 37 yıl sonra yeniden kurdu",
+    "summary": "Günün ağırlığı namlulu kısa menzil hava savunmasının bir NATO ülkesinde kritik altyapı koruması kalemi olarak sözleşmeye bağlanmasında, karşı-dron efektörlerinin sivil hava sahası güvenlik incelemesine tabi tutulmasında ve hedef pazarlardan birinde kolektif savunma çerçevesinin genişleme ihtimalinde. Rheinmetall, Belçika'ya sabit şasi üzerinde 20 adet Skyranger 30 sistemi ile lojistik destek paketi için sipariş aldığını 9 Kasım'da duyurdu; sistem 30x173 mm KCE revolver topuyla programlanabilir AHEAD havada infilak eden mühimmat atıyor, etkili menzil 3.000 m'ye kadar veriliyor, bedel 'yüz milyonlu avro aralığı' olarak tarif ediliyor ve teslimler 2028 sonunda başlıyor. Belçika aynı gün 1959'da kurulup 1989'da dağıtılan 51. Hava Savunma Taburu'nu yeniden faaliyete geçirdi; Blue Dome paketi 10 NASAMS, 20 Skyranger, 14 radar ve 54 komuta aracından oluşuyor, birlik Beauvechain'de başlayıp en geç 2032'de Ursel'e taşınıyor ve ilk NASAMS sistemlerinin önümüzdeki yıl sonunda gelmesi bekleniyor. ABD'de Savunma, Ulaştırma, İç Güvenlik, Enerji ve Adalet bakanlıkları karşı-dron teknolojilerinin test ve konuşlandırılmasını ortak bir federal sürece bağlayan mutabakat zaptını imzaladı; FAA önerilen sistemleri güvenlik riski açısından inceliyor ve gerekirse hava sahası kısıtlaması dahil kendi tedbirlerini alabiliyor, metinde karıştırma ve lazer anılıyor, namlulu efektör anılmıyor. Suriye'nin, Türkiye, Suudi Arabistan ve Pakistan arasındaki Mekke Ortak Savunma Anlaşması'na katılma kararı aldığı ancak bunu resmen açıklamadığı iki Suriyeli yetkiliye dayanarak bildirildi. ABD Deniz Piyadeleri 5,56x45 mm M27 tüfek çerçevesinin tavanını 84,6 milyon $'a çıkardı.",
+    "lead": "Rheinmetall, Belçika'ya kritik altyapı koruması için programlanabilir AHEAD havada infilak eden mühimmat atan 30x173 mm…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Mühimmat",
+      "Hafif Silah",
+      "AB",
+      "Suudi Arabistan",
+      "ABD",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Belçika'nın 20 Skyranger 30 siparişi",
+        "home": "rakip"
+      },
+      {
+        "id": "G2",
+        "label": "Belçika 51. Hava Savunma Taburu ve Blue Dome paketi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "ABD federal karşı-dron mutabakat zaptı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "Suriye'nin Mekke Ortak Savunma Anlaşması'na katılımı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "M27 tüfek çerçevesinin 84,6 milyon $'a çıkması",
+        "home": "rakip"
+      },
+      {
+        "id": "G6",
+        "label": "Akeron MP çerçevesinde AB SAFE finansmanı",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-11-10.html"
+  },
+  {
     "date": "2026-11-09",
     "title": "Lockheed Martin 2030'a kadar 8 milyar $'ın üzerinde yatırımla 20'den fazla tesisi genişletip füze üretimini büyüteceğini açıkladı",
     "summary": "Günün ağırlığı ana yüklenici füze üretim kapasitesinin tek elde büyütülmesinde, enerji altyapısının alçak irtifa tehdidiyle durdurulmasında ve karşı-dron etkisizleştirmelerinde efektör kırılımının resmî olarak gizli kalmasında. Lockheed Martin üst yönetimi, 2030'a kadar 8 milyar $'ın üzerinde yatırımla 20'den fazla tesisi modernize edeceğini, üç yılda sekiz sahada yaklaşık 2 milyon ft² üretim alanı ekleyeceğini ve PAC-3, THAAD, JATM ile PrSM Increment 2 hatlarını büyüteceğini açıkladı; PAC-3 sözleşmesinin tavanı 58,6 milyar $, PrSM Increment 2 üretim kalemi 1,2 milyar $, tahrik ve bileşen kalemleri L3Harris'e 4,7 milyar $ ve Northrop Grumman'a 1,6 milyar $ ile ayrı ayrı verilmiş durumda. Kuzey Irak'ta Pearl Petroleum konsorsiyumunun işlettiği Khor Mor gaz sahası 8 Kasım akşamı dron saldırısıyla durdu; bölgenin yaklaşık 4 GW'lık üretiminden 2,8 GW düştü, saldırının sorumluluğu üstlenilmedi ve sahada herhangi bir karşı-dron ya da hava savunma katmanı anılmadı. ABD Kuzey Komutanlığı 2026'da Meksika sınırında 300'den fazla dronun etkisizleştirildiğini bildirdi; bunun yalnızca 11'i 20 kW'lık AMP-HEL lazeriyle yapıldı, kalan etkisizleştirmelerin kinetik/namlulu kırılımı açıklanmadı. Shield AI'ın Echodyne alımında kapanışta 4,8 milyar $ ödeme, performansa bağlı 500 milyon $'a kadar ek bedel ve 2027 başı kapanış takvimi netleşti; hedef firmanın Kirkland tesisi yılda yaklaşık 30.000 radar kapasitesine sahip ve radarlar uzaktan komutalı silah istasyonlarına entegre ediliyor. Kalashnikov, 12 kalibre MP-155 yarı otomatik tüfeğinin Hindistan'da lisanslı üretimi için anlaşma yaptı; firma tüfeğin alçak irtifa hedeflere karşı özel bir sürümünü de üretiyor, Hint ortağın adı ve adetler açıklanmadı.",
