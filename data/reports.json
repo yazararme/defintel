@@ -1,5 +1,86 @@
 [
   {
+    "date": "2026-11-11",
+    "title": "Fransız Harmattan AI ile Katar devlet holdingi Barzan, otonom çok kısa menzilli hava savunması için mutabakat imzaladı",
+    "summary": "Günün ağırlığı bir hedef pazarda karşı-dron kabiliyetinin yabancı bir firma ile devlet holdingi arasında mutabakata bağlanmasında, ABD'de mühimmat üretim altyapısının beş yıllık bir inşaat ve otomasyon çerçevesine devredilmesinde ve akıllı deniz mayınının çok uluslu ortak alım kalemine dönüşmesinde. Harmattan AI ile Barzan Holdings, Katar'da otonom çok kısa menzilli hava savunma (VSHORAD) sistemlerinin konuşlandırılmasını araştırmak ve GOBI TEMPEST önleyicisini göstermek üzere mutabakat zaptı imzaladı; bedel, adet ve takvim açıklanmadı, efektör tipi ile kalibre verilmedi. ABD Ordusu, yedi mühimmat tesisinde yeni tesis inşası, üretim hattı iyileştirmesi ve otomasyon için 4,17 milyar $ tavanlı beş yıllık çoklu ödüllü çerçeveyi 11 firmaya dağıttı; kapsamdaki tesisler arasında barut ve patlayıcı üreten Holston ile Radford, küçük kalibre mühimmat üreten Lake City, orta ve büyük kalibre dolum yapan Iowa, topçu mühimmatı bileşeni üreten Scranton ve büyük kalibre kovan üreten Quad City yer alıyor, çerçeve Kasım 2031'e kadar sürüyor ve görev emirleri ayrı verilecek. Danimarka ve Finlandiya, Finlandiya öncülüğündeki beş ülkeli Uluslararası Deniz Mayınları İş Birliği kapsamında Forcit'in BLOCKER akıllı tesir mayınını almak için anlaşma imzaladı; mayın 1.000 kg TNT eşdeğerinin üzerinde harp başlığı taşıyor, deniz tabanında iki yıla kadar aktif kalıyor ve akustik, basınç, manyetik ve inertial sensörlerle programlanabilir algoritmalara sahip. TYTAN Technologies ile KNDS, Dingo 2 Pick-Up üzerine kurulu, önleyici dron fırlatıcısı, dönen sensör direği ve uzaktan komutalı ağır makineli tüfek istasyonu taşıyan Dron Savunma Aracı'nı Münih'teki yeni tesiste tanıttı; firma ayda 3.000 adede kadar otonom önleyici dron kapasitesi hedefliyor. Hensoldt 2035 için 10 milyar € satış hedefi açıkladı ve TRML-4D radar kapasitesini iki yılda ikiye katlayacağını bildirdi.",
+    "lead": "Harmattan AI ile Barzan Holdings, Katar'da otonom VSHORAD sistemleri ve GOBI TEMPEST önleyicisinin gösterimi için mutab…",
+    "alarm": true,
+    "alarm_title": "Hedef pazar Katar'da rakip firma devlet holdingiyle otonom VSHORAD mutabakatı imzaladı",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "TOLGA",
+      "Mühimmat",
+      "Mayın ve Geçit Açma",
+      "Katar",
+      "ABD",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Katar'da Harmattan AI–Barzan VSHORAD mutabakatı",
+        "home": "rakip"
+      },
+      {
+        "id": "G2",
+        "label": "ABD Ordusu 4,17 milyar $'lık mühimmat tesisi çerçevesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "Danimarka ve Finlandiya BLOCKER akıllı deniz mayını",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "TYTAN–KNDS Dingo 2 dron savunma aracı",
+        "home": "rakip"
+      },
+      {
+        "id": "G5",
+        "label": "Hensoldt TRML-4D radar kapasitesinin ikiye katlanması",
+        "home": "rakip"
+      },
+      {
+        "id": "G6",
+        "label": "İspanyol NH90'larının Romanya'da dron alarmıyla havalanması",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "ABD Ordusu 6,8 mm M250'yi Pasifik'te sahaya sürdü",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "Suriye'nin Suudi Arabistan'a özel kuvvet göndermesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G9",
+        "label": "Thales GM200 MM/C'nin Blue Dome'da kullanılması",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "IWI–AIA Hollanda'da hafif silah fabrikası",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "Slovenya'nın Almanya ile MARS 3 ortak alımı",
+        "home": "izleme"
+      },
+      {
+        "id": "G12",
+        "label": "Malezya'da MERAD ve SHORAD'ın RMK-13'te onaylanması",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-11-11.html"
+  },
+  {
     "date": "2026-11-10",
     "title": "Belçika, kritik altyapı savunması için Rheinmetall'den programlanabilir AHEAD mühimmatı atan 20 adet 30 mm Skyranger 30 sipariş etti ve hava savunma taburunu 37 yıl sonra yeniden kurdu",
     "summary": "Günün ağırlığı namlulu kısa menzil hava savunmasının bir NATO ülkesinde kritik altyapı koruması kalemi olarak sözleşmeye bağlanmasında, karşı-dron efektörlerinin sivil hava sahası güvenlik incelemesine tabi tutulmasında ve hedef pazarlardan birinde kolektif savunma çerçevesinin genişleme ihtimalinde. Rheinmetall, Belçika'ya sabit şasi üzerinde 20 adet Skyranger 30 sistemi ile lojistik destek paketi için sipariş aldığını 9 Kasım'da duyurdu; sistem 30x173 mm KCE revolver topuyla programlanabilir AHEAD havada infilak eden mühimmat atıyor, etkili menzil 3.000 m'ye kadar veriliyor, bedel 'yüz milyonlu avro aralığı' olarak tarif ediliyor ve teslimler 2028 sonunda başlıyor. Belçika aynı gün 1959'da kurulup 1989'da dağıtılan 51. Hava Savunma Taburu'nu yeniden faaliyete geçirdi; Blue Dome paketi 10 NASAMS, 20 Skyranger, 14 radar ve 54 komuta aracından oluşuyor, birlik Beauvechain'de başlayıp en geç 2032'de Ursel'e taşınıyor ve ilk NASAMS sistemlerinin önümüzdeki yıl sonunda gelmesi bekleniyor. ABD'de Savunma, Ulaştırma, İç Güvenlik, Enerji ve Adalet bakanlıkları karşı-dron teknolojilerinin test ve konuşlandırılmasını ortak bir federal sürece bağlayan mutabakat zaptını imzaladı; FAA önerilen sistemleri güvenlik riski açısından inceliyor ve gerekirse hava sahası kısıtlaması dahil kendi tedbirlerini alabiliyor, metinde karıştırma ve lazer anılıyor, namlulu efektör anılmıyor. Suriye'nin, Türkiye, Suudi Arabistan ve Pakistan arasındaki Mekke Ortak Savunma Anlaşması'na katılma kararı aldığı ancak bunu resmen açıklamadığı iki Suriyeli yetkiliye dayanarak bildirildi. ABD Deniz Piyadeleri 5,56x45 mm M27 tüfek çerçevesinin tavanını 84,6 milyon $'a çıkardı.",
