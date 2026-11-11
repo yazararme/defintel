@@ -1622,10 +1622,6 @@
   "segmentler": [],
   "gunler": [
    {
-    "g": "2026-11-11",
-    "u": "/haberler/2026-11-11.html?q=Baykar"
-   },
-   {
     "g": "2026-11-10",
     "u": "/haberler/2026-11-10.html?q=Baykar"
    },
@@ -1706,8 +1702,8 @@
     "u": "/haberler/2026-09-22.html?q=Baykar"
    }
   ],
-  "son": "2026-11-11",
-  "sayi_30g": 11
+  "son": "2026-11-10",
+  "sayi_30g": 10
  },
  "tusas": {
   "ad": "TUSAŞ",
@@ -1861,6 +1857,10 @@
   "segmentler": [],
   "gunler": [
    {
+    "g": "2026-11-11",
+    "u": "/haberler/2026-11-11.html?q=STM"
+   },
+   {
     "g": "2026-11-10",
     "u": "/haberler/2026-11-10.html?q=STM"
    },
@@ -1901,8 +1901,8 @@
     "u": "/haberler/2026-09-25.html?q=STM"
    }
   ],
-  "son": "2026-11-10",
-  "sayi_30g": 9
+  "son": "2026-11-11",
+  "sayi_30g": 10
  },
  "asfat": {
   "ad": "ASFAT",
