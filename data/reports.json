@@ -1,5 +1,86 @@
 [
   {
+    "date": "2026-11-12",
+    "title": "İtalya Savunma Bakanı Ukrayna'nın SAMP/T sistemleri için verdiği Aster füzesi stokunun tükendiğini ve Avrupa sanayiinin talebi karşılayacak hızda üretemediğini açıkladı",
+    "summary": "Günün ağırlığı Avrupa'da önleyici füze arzının resmî ağızdan yetersiz ilan edilmesinde, av uçağıyla dron önlemenin bir NATO ülkesinde iki kez başarısız olmasında ve ucuz önleyici ile mühimmat kapasitesinin ayrı ayrı sanayi programına dönüşmesinde. İtalya Savunma Bakanı Guido Crosetto, Ukrayna'ya SAMP/T sistemleri için verilen Aster füzesi stokunun tükendiğini, kalan füzelerin ülke savunması için tutulacağını ve Avrupa savunma sanayiinin yeni füzeleri acil talebi karşılayacak hızda üretemediğini söyledi; destek onarım için bileşen ve ekipmanla sınırlandı, adet ve takvim verilmedi. Litvanya'da gece 01.20 civarında hava sahasına giren bilinmeyen bir dron, önce Kaunas üzerinde yerleşim alanı gerekçesiyle vurulmadı, ardından Biržai yakınında NATO av uçaklarının iki önleme denemesi de başarısız oldu ve atılan füzelerden biri hedefi ıskalayıp kendini imha etti, enkaz Biržai ilçesinde bulundu; kara konuşlu hava savunması ya da namlulu efektör anılmadı. Hollanda'da Guardian Dynamics öncülüğündeki konsorsiyum, Shahed tipi dron ve seyir füzelerine karşı 5, 10 ve 20 km menzilli üç sürümlü WARDEN önleyici füze ailesini EDIF 2026'da mutabakatla başlattı; ilk testler 2027'de Hollanda ve Ukrayna'da yapılacak, üretim yeni fabrika yerine otomotiv dahil mevcut sivil kapasiteye dayandırılacak ve birim maliyet açıklanmadı. Çek CSG, Eylül sonu itibarıyla sipariş bakiyesinin 18 milyar €'ya çıktığını, 2027 sonunda 1,1 milyon adet mühimmat üretim kapasitesi ile tam şirket içi enerjetik malzeme üretimi hedeflediğini bildirdi, yıllık faaliyet kârı marjı öngörüsünü %24–25'ten yaklaşık %21'e indirdi. Diehl ile Nammo, Almanya'nın Röthenbach tesisinde DiNa 155 mm mermi gövdesi hattını açtı.",
+    "lead": "İtalya Savunma Bakanı, Ukrayna'nın SAMP/T sistemleri için verilen Aster füzesi stokunun tükendiğini ve Avrupa sanayiini…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "TOLGA",
+      "Mühimmat",
+      "Topçu",
+      "AB",
+      "ABD",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "İtalya'nın SAMP/T için Aster stokunun tükenmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Litvanya'da av uçaklarının dronu düşürememesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "Hollanda WARDEN ucuz önleyici füze konsorsiyumu",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "CSG sipariş bakiyesi ve 1,1 milyon adet kapasite hedefi",
+        "home": "rakip"
+      },
+      {
+        "id": "G5",
+        "label": "Diehl–Nammo DiNa 155 mm mermi gövdesi hattı",
+        "home": "rakip"
+      },
+      {
+        "id": "G6",
+        "label": "Bundeswehr'in Çin yapımı dronları yasaklaması",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "AeroVironment 940 milyon $ tavanlı çoklu yıl sözleşmesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G8",
+        "label": "GMLRS üretim hızı ve üçüncü roket motoru kaynağı",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "EchoShield radarının BAE BATS'a entegre edilmesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "Mission Defense Partners karşı-dron füzesi girişimi",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "İki Ukraynalı firmanın NSPA ihalesi kazanması",
+        "home": "izleme"
+      },
+      {
+        "id": "G12",
+        "label": "Katar öncülüğünde havalimanı karşı-dron tavsiyeleri",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-11-12.html"
+  },
+  {
     "date": "2026-11-11",
     "title": "Fransız Harmattan AI ile Katar devlet holdingi Barzan, otonom çok kısa menzilli hava savunması için mutabakat imzaladı",
     "summary": "Günün ağırlığı bir hedef pazarda karşı-dron kabiliyetinin yabancı bir firma ile devlet holdingi arasında mutabakata bağlanmasında, ABD'de mühimmat üretim altyapısının beş yıllık bir inşaat ve otomasyon çerçevesine devredilmesinde ve akıllı deniz mayınının çok uluslu ortak alım kalemine dönüşmesinde. Harmattan AI ile Barzan Holdings, Katar'da otonom çok kısa menzilli hava savunma (VSHORAD) sistemlerinin konuşlandırılmasını araştırmak ve GOBI TEMPEST önleyicisini göstermek üzere mutabakat zaptı imzaladı; bedel, adet ve takvim açıklanmadı, efektör tipi ile kalibre verilmedi. ABD Ordusu, yedi mühimmat tesisinde yeni tesis inşası, üretim hattı iyileştirmesi ve otomasyon için 4,17 milyar $ tavanlı beş yıllık çoklu ödüllü çerçeveyi 11 firmaya dağıttı; kapsamdaki tesisler arasında barut ve patlayıcı üreten Holston ile Radford, küçük kalibre mühimmat üreten Lake City, orta ve büyük kalibre dolum yapan Iowa, topçu mühimmatı bileşeni üreten Scranton ve büyük kalibre kovan üreten Quad City yer alıyor, çerçeve Kasım 2031'e kadar sürüyor ve görev emirleri ayrı verilecek. Danimarka ve Finlandiya, Finlandiya öncülüğündeki beş ülkeli Uluslararası Deniz Mayınları İş Birliği kapsamında Forcit'in BLOCKER akıllı tesir mayınını almak için anlaşma imzaladı; mayın 1.000 kg TNT eşdeğerinin üzerinde harp başlığı taşıyor, deniz tabanında iki yıla kadar aktif kalıyor ve akustik, basınç, manyetik ve inertial sensörlerle programlanabilir algoritmalara sahip. TYTAN Technologies ile KNDS, Dingo 2 Pick-Up üzerine kurulu, önleyici dron fırlatıcısı, dönen sensör direği ve uzaktan komutalı ağır makineli tüfek istasyonu taşıyan Dron Savunma Aracı'nı Münih'teki yeni tesiste tanıttı; firma ayda 3.000 adede kadar otonom önleyici dron kapasitesi hedefliyor. Hensoldt 2035 için 10 milyar € satış hedefi açıkladı ve TRML-4D radar kapasitesini iki yılda ikiye katlayacağını bildirdi.",
