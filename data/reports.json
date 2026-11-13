@@ -1,5 +1,96 @@
 [
   {
+    "date": "2026-11-13",
+    "title": "AeroVironment, Orta Doğu'da adı açıklanmayan bir müşteriye 405 milyon $'lık LOCUST X3 yüksek enerjili lazer karşı-dron siparişi aldığını ve ülke içinde bakım-idame deposu kuracağını duyurdu",
+    "summary": "Günün ağırlığı karşı-dron bütçesinin Orta Doğu'da yönlendirilmiş enerjiye kayması, hedef pazarlardan birinde kritik altyapıya yönelik saldırı iddiası ve roket mühimmatının çok yıllı bir çerçeveye bağlanmasında. AeroVironment, Group 1-3 sınıfı insansız hava araçlarına karşı LOCUST X3 yüksek enerjili lazer sistemleri için 405 milyon $'lık doğrudan ticari satış siparişi aldığını 11 Kasım'da duyurdu; müşteri ve ülke açıklanmadı, bölge olarak Orta Doğu veriliyor, firma sistemi 'geleneksel füze önleyicilere kıyasla angajman başına düşük maliyetli seçenek' diye tanımlıyor, mühimmat ikmali gerekmediğini vurguluyor ve ülke içinde bakım-idame deposu kuracağını bildiriyor; adet, lazer gücü, teslim takvimi ve angajman başına rakam verilmedi. Husi askerî sözcüsü, Riyad'da bir Suudi Aramco tesisine ve Şarura Havalimanı'ndaki bir askerî nakliye uçağına dronla, Hamis Müşeyt hava üssüne balistik füzeyle saldırdıklarını Telegram üzerinden açıkladı; Suudi tarafının teyidi, hasar değerlendirmesi ve herhangi bir önleme bilgisi kaynakta yok, bu nedenle kalem doğrulanmamış sayılmalıdır. Elbit Systems, adı açıklanmayan bir Avrupa NATO ülkesinden PULS roketatar sistemleri ve mühimmatı için beş yılda icra edilecek yaklaşık 260 milyon $'lık sözleşme aldığını 12 Kasım'da bildirdi; kalibre, adet ve teslim takvimi açıklanmadı. Malezya Savunma Bakanlığı, Norveç'in ihracat lisansını iptal etmesiyle düşen NSM'nin yerine Littoral Combat Ship sınıfı için Roketsan Atmaca'yı belirledi ve Türk tarafıyla müzakerelere başlanacağını bildirdi; bedel, adet ve imza tarihi açıklanmadı. Kalashnikov, MP-155 yarı otomatik av tüfeğinin Hindistan'da lisanslı üretimi için anlaşma duyurdu ve ürünü karşı-dron mimarisinin son katmanı olarak konumlandırdı.",
+    "lead": "AeroVironment, Orta Doğu'da adı açıklanmayan bir müşteriden LOCUST X3 yüksek enerjili lazer karşı-dron sistemleri için…",
+    "alarm": true,
+    "alarm_title": "Orta Doğu'da 405 milyon $'lık karşı-dron lazer siparişi",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Körfez",
+      "Mühimmat",
+      "Topçu",
+      "Hafif Silah",
+      "Malezya",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "AeroVironment LOCUST X3 Orta Doğu siparişi",
+        "home": "rakip"
+      },
+      {
+        "id": "G2",
+        "label": "Suudi Arabistan'da Aramco tesisi ve hava üssüne saldırı iddiası",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "Elbit 260 milyon $'lık beş yıllık PULS sözleşmesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "Kalashnikov MP-155'in Hindistan'da lisanslı üretimi",
+        "home": "rakip"
+      },
+      {
+        "id": "G5",
+        "label": "Malezya'nın NSM yerine Atmaca'yı belirlemesi",
+        "home": "izleme"
+      },
+      {
+        "id": "G6",
+        "label": "ABD'nin Etiyopya'yı ITAR ret listesinden çıkarması",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "AB'nin 2027 savunma ve güvenlik bütçesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "Royal Navy Sea Giraffe 1X karşı-dron radar sözleşmesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "WB Group'un Almanya'da şirket kurması",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "Global Ordnance–ARQUIMEA USA ortaklığı",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "Jotov & Son'un Afrika hamlesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G12",
+        "label": "KSSL 120 mm araç üstü havan sistemi",
+        "home": "rakip"
+      },
+      {
+        "id": "G13",
+        "label": "Mission Defense Partners'ın 25 bin $ önleyici hedefi",
+        "home": "izleme"
+      },
+      {
+        "id": "G14",
+        "label": "ELT Group – Barzan Holdings elektronik harp mutabakatı",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-11-13.html"
+  },
+  {
     "date": "2026-11-12",
     "title": "İtalya Savunma Bakanı Ukrayna'nın SAMP/T sistemleri için verdiği Aster füzesi stokunun tükendiğini ve Avrupa sanayiinin talebi karşılayacak hızda üretemediğini açıkladı",
     "summary": "Günün ağırlığı Avrupa'da önleyici füze arzının resmî ağızdan yetersiz ilan edilmesinde, av uçağıyla dron önlemenin bir NATO ülkesinde iki kez başarısız olmasında ve ucuz önleyici ile mühimmat kapasitesinin ayrı ayrı sanayi programına dönüşmesinde. İtalya Savunma Bakanı Guido Crosetto, Ukrayna'ya SAMP/T sistemleri için verilen Aster füzesi stokunun tükendiğini, kalan füzelerin ülke savunması için tutulacağını ve Avrupa savunma sanayiinin yeni füzeleri acil talebi karşılayacak hızda üretemediğini söyledi; destek onarım için bileşen ve ekipmanla sınırlandı, adet ve takvim verilmedi. Litvanya'da gece 01.20 civarında hava sahasına giren bilinmeyen bir dron, önce Kaunas üzerinde yerleşim alanı gerekçesiyle vurulmadı, ardından Biržai yakınında NATO av uçaklarının iki önleme denemesi de başarısız oldu ve atılan füzelerden biri hedefi ıskalayıp kendini imha etti, enkaz Biržai ilçesinde bulundu; kara konuşlu hava savunması ya da namlulu efektör anılmadı. Hollanda'da Guardian Dynamics öncülüğündeki konsorsiyum, Shahed tipi dron ve seyir füzelerine karşı 5, 10 ve 20 km menzilli üç sürümlü WARDEN önleyici füze ailesini EDIF 2026'da mutabakatla başlattı; ilk testler 2027'de Hollanda ve Ukrayna'da yapılacak, üretim yeni fabrika yerine otomotiv dahil mevcut sivil kapasiteye dayandırılacak ve birim maliyet açıklanmadı. Çek CSG, Eylül sonu itibarıyla sipariş bakiyesinin 18 milyar €'ya çıktığını, 2027 sonunda 1,1 milyon adet mühimmat üretim kapasitesi ile tam şirket içi enerjetik malzeme üretimi hedeflediğini bildirdi, yıllık faaliyet kârı marjı öngörüsünü %24–25'ten yaklaşık %21'e indirdi. Diehl ile Nammo, Almanya'nın Röthenbach tesisinde DiNa 155 mm mermi gövdesi hattını açtı.",

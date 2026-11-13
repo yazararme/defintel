@@ -9,6 +9,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-11-13",
+    "u": "/reports/2026-11-13.html#g9"
+   },
+   {
     "g": "2026-11-11",
     "u": "/reports/2026-11-11.html#g9"
    },
@@ -113,8 +117,8 @@
     "u": "/reports/2026-09-14.html#g7"
    }
   ],
-  "son": "2026-11-11",
-  "sayi_30g": 16
+  "son": "2026-11-13",
+  "sayi_30g": 17
  },
  "nammo": {
   "ad": "Nammo",
@@ -187,7 +191,7 @@
    }
   ],
   "son": "2026-11-11",
-  "sayi_30g": 6
+  "sayi_30g": 5
  },
  "bae-systems": {
   "ad": "BAE Systems",
@@ -275,7 +279,7 @@
    }
   ],
   "son": "2026-11-12",
-  "sayi_30g": 11
+  "sayi_30g": 10
  },
  "elbit": {
   "ad": "Elbit",
@@ -286,6 +290,10 @@
    "roket_bomba"
   ],
   "gunler": [
+   {
+    "g": "2026-11-13",
+    "u": "/reports/2026-11-13.html#g3"
+   },
    {
     "g": "2026-11-05",
     "u": "/reports/2026-11-05.html#g2"
@@ -319,8 +327,8 @@
     "u": "/reports/2026-10-01.html#g11"
    }
   ],
-  "son": "2026-11-05",
-  "sayi_30g": 4
+  "son": "2026-11-13",
+  "sayi_30g": 5
  },
  "hanwha": {
   "ad": "Hanwha",
@@ -401,7 +409,7 @@
    }
   ],
   "son": "2026-11-07",
-  "sayi_30g": 8
+  "sayi_30g": 7
  },
  "poongsan": {
   "ad": "Poongsan",
@@ -777,7 +785,7 @@
    }
   ],
   "son": "2026-11-11",
-  "sayi_30g": 7
+  "sayi_30g": 6
  },
  "northrop-grumman": {
   "ad": "Northrop Grumman",
@@ -836,7 +844,7 @@
    }
   ],
   "son": "2026-11-09",
-  "sayi_30g": 8
+  "sayi_30g": 7
  },
  "saab": {
   "ad": "Saab",
@@ -846,12 +854,16 @@
   ],
   "gunler": [
    {
+    "g": "2026-11-13",
+    "u": "/reports/2026-11-13.html#g8"
+   },
+   {
     "g": "2026-11-05",
     "u": "/reports/2026-11-05.html#g11"
    }
   ],
-  "son": "2026-11-05",
-  "sayi_30g": 1
+  "son": "2026-11-13",
+  "sayi_30g": 2
  },
  "mbda": {
   "ad": "MBDA",
@@ -985,7 +997,7 @@
    }
   ],
   "son": "2026-10-15",
-  "sayi_30g": 2
+  "sayi_30g": 1
  },
  "hensoldt": {
   "ad": "Hensoldt",
@@ -1071,7 +1083,7 @@
    }
   ],
   "son": "2026-11-07",
-  "sayi_30g": 6
+  "sayi_30g": 5
  },
  "epirus": {
   "ad": "Epirus",
@@ -1138,6 +1150,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-11-13",
+    "u": "/reports/2026-11-13.html#g12"
+   },
+   {
     "g": "2026-11-08",
     "u": "/reports/2026-11-08.html#g2"
    },
@@ -1150,8 +1166,8 @@
     "u": "/reports/2026-09-28.html#g6"
    }
   ],
-  "son": "2026-11-08",
-  "sayi_30g": 2
+  "son": "2026-11-13",
+  "sayi_30g": 3
  },
  "tata": {
   "ad": "Tata Advanced Systems",
@@ -1338,6 +1354,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-11-13",
+    "u": "/haberler/2026-11-13.html?q=Aselsan"
+   },
+   {
     "g": "2026-11-12",
     "u": "/haberler/2026-11-12.html?q=Aselsan"
    },
@@ -1498,7 +1518,7 @@
     "u": "/reports/2026-09-14.html#g10"
    }
   ],
-  "son": "2026-11-12",
+  "son": "2026-11-13",
   "sayi_30g": 23
  },
  "roketsan": {
@@ -1508,6 +1528,10 @@
    "roket_bomba"
   ],
   "gunler": [
+   {
+    "g": "2026-11-13",
+    "u": "/reports/2026-11-13.html#g5"
+   },
    {
     "g": "2026-11-01",
     "u": "/haberler/2026-11-01.html?q=Roketsan"
@@ -1557,7 +1581,7 @@
     "u": "/haberler/2026-09-23.html?q=Roketsan"
    }
   ],
-  "son": "2026-11-01",
+  "son": "2026-11-13",
   "sayi_30g": 6
  },
  "repkon": {
@@ -1736,7 +1760,7 @@
    }
   ],
   "son": "2026-11-12",
-  "sayi_30g": 11
+  "sayi_30g": 10
  },
  "tusas": {
   "ad": "TUSAŞ",
@@ -1773,7 +1797,7 @@
    }
   ],
   "son": "2026-10-27",
-  "sayi_30g": 7
+  "sayi_30g": 6
  },
  "havelsan": {
   "ad": "Havelsan",
@@ -1882,13 +1906,17 @@
    }
   ],
   "son": "2026-11-09",
-  "sayi_30g": 20
+  "sayi_30g": 19
  },
  "stm": {
   "ad": "STM",
   "rol": "emsal",
   "segmentler": [],
   "gunler": [
+   {
+    "g": "2026-11-13",
+    "u": "/haberler/2026-11-13.html?q=STM"
+   },
    {
     "g": "2026-11-12",
     "u": "/haberler/2026-11-12.html?q=STM"
@@ -1938,8 +1966,8 @@
     "u": "/haberler/2026-09-25.html?q=STM"
    }
   ],
-  "son": "2026-11-12",
-  "sayi_30g": 11
+  "son": "2026-11-13",
+  "sayi_30g": 12
  },
  "asfat": {
   "ad": "ASFAT",
@@ -2026,7 +2054,7 @@
    }
   ],
   "son": "2026-11-02",
-  "sayi_30g": 2
+  "sayi_30g": 1
  },
  "bmc": {
   "ad": "BMC",
