@@ -1,5 +1,20 @@
 [
  {
+  "id": "kongsberg-deniz-alti-karsi-tedbir-acigi",
+  "name": "Kongsberg deniz altı karşı tedbir açığı",
+  "son_hareket": "2026-11-16"
+ },
+ {
+  "id": "bahreyn-in-iran-kaynakli-dron-saldirilarini-onle",
+  "name": "Bahreyn'in İran kaynaklı dron saldırılarını önlemesi",
+  "son_hareket": "2026-11-16"
+ },
+ {
+  "id": "hurmuz-de-ucuncu-tanker-mayin-iddiasi",
+  "name": "Hürmüz'de üçüncü tanker mayın iddiası",
+  "son_hareket": "2026-11-16"
+ },
+ {
   "id": "turkiye-misir-ortak-gemi-insa-gorusmeleri",
   "name": "Türkiye–Mısır ortak gemi inşa görüşmeleri",
   "son_hareket": "2026-11-15"

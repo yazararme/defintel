@@ -1,5 +1,76 @@
 [
   {
+    "date": "2026-11-16",
+    "title": "Malezya, LCS fırkateynlerinde NSM yerine ATMACA'yı tercih ettiğini açıkladı ve Sayıştay 57 mm güverte topu mühimmatı ile VL-MICA kalemlerinin hâlâ sözleşmeye bağlanmadığını ortaya koydu",
+    "summary": "Günün ağırlığı hedef pazarlardan birinde güverte topu mühimmatının ayrı ve hâlâ bağlanmamış bir kalem olarak kayda geçmesinde, önleyici başına maliyetin ilk kez rakamla karşılaştırılmasında ve karşı-dron son katmanında mühimmatsız çözüm iddiasının seri üretim seviyesine çıkmasında. Malezya Savunma Bakanı Mohamed Khaled Nordin, beş gemilik LCS programında Kongsberg NSM yerine ATMACA'nın tercih edilen çözüm olduğunu 12 Kasım'da açıkladı; sözleşme imzalanmadı, adet verilmedi, Sayıştay raporuna göre 57 mm Bofors güverte topu mühimmatı, VL-MICA ve entegre karıştırma atıcı sistemi kalemleri hâlâ kesinleşmemiş durumda ve ilk geminin teslimi Aralık 2026'dan Nisan 2027'ye kaydı. Romanya, Patriot'a PAC-2 ve PAC-3'ten sonra üçüncü bir önleyici aile olacak SkyCeptor'un ulusal üretimi için Rafael ile görüşmeleri Kasım başında yeniden başlattı; İsrail kaynaklarına göre adet maliyeti yaklaşık 1 milyon dolar, güncel Patriot önleyicileri 4–5 milyon dolar. Aselsan, EJDERHA yüksek güçlü elektromanyetik hava savunma sisteminin aynı anda havalanan 51 dronu saniyeler içinde etkisizleştirdiğini, sistemin seri üretimde ve harekâtta olduğunu ve 'füze atmadan, mühimmat kullanmadan' çalıştığını bildirdi; test tarihi, yeri ve güç çıkışı açıklanmadı. NATO, derin hassas vuruş sistemlerinde ulusal ihtiyaçların birleştirilmesini tedariki hızlandırma yolu olarak sundu; üçüncü ülke tedarikçilere ilişkin bir ölçüt anılmadı. Birleşik Krallık, Project BEEHIVE kapsamındaki Kraken K3 Scout insansız botlarına Saab Sea Giraffe 1X karşı-dron radarı için 15 milyon £'luk sözleşme verdi; efektör ve mühimmat kalemi adlandırılmadı.",
+    "lead": "Malezya, beş gemilik LCS programında NSM yerine ATMACA'yı tercih ettiğini 12 Kasım'da açıkladı; 57 mm güverte topu mühi…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Mühimmat",
+      "Deniz Sistemleri",
+      "Barut ve Patlayıcı",
+      "Malezya",
+      "NATO/NSPA",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Malezya LCS'de ATMACA tercihi ve açık silah-mühimmat kalemleri",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Romanya SkyCeptor önleyici maliyeti",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "Aselsan EJDERHA HPEM 51 dron denemesi",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "NATO derin hassas vuruşta ortak alım",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "Project BEEHIVE Sea Giraffe 1X siparişi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "Zaslon S-8VTs 80 mm karşı-dron roketi",
+        "home": "rakip"
+      },
+      {
+        "id": "G7",
+        "label": "Premier Explosives katı yakıt tedarik payı",
+        "home": "rakip"
+      },
+      {
+        "id": "G8",
+        "label": "Kongsberg deniz altı karşı tedbir açığı",
+        "home": "izleme"
+      },
+      {
+        "id": "G9",
+        "label": "Bahreyn'in İran kaynaklı dron saldırılarını önlemesi",
+        "home": "izleme"
+      },
+      {
+        "id": "G10",
+        "label": "Hürmüz'de üçüncü tanker mayın iddiası",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-11-16.html"
+  },
+  {
     "date": "2026-11-15",
     "title": "Beretta Defense Technologies ile DUALEE, sekiz adet 12 kalibre Benelli M4 av tüfeğini programlanabilir havada infilak eden mühimmatla tek bir uzaktan komutalı istasyonda birleştiren LIVET sistemini tanıttı ve Danimarka'da canlı gösterim yaptı",
     "summary": "Günün ağırlığı karşı-dron son katmanının namlulu ve mühimmat esaslı çözümlere geri dönmesinde, ortak alım yollarının üçüncü ülke tedarikçiye kapalı tek sözleşmelere bağlanmasında ve Afrika'daki talebin AB finansmanına eklenmesinde. Beretta Defense Technologies ile İtalyan DUALEE, sekiz adet Benelli M4 Drone Guardian yarı otomatik av tüfeğini tek uzaktan komutalı istasyonda birleştiren LIVET sistemini tanıttı; mühimmat 12 kalibre ve hedeften seçilen mesafede parçacık yükünü dağıtan programlanabilir havada infilak eden tipte, yapay zekâ esaslı tespit ve takip aynı anda beş hedefe kadar çalışıyor, sistem harici radyo frekansı ve radar sensörlerine entegre olabiliyor, angajman kararı operatörde kalıyor ve sistem Danimarka Silahlı Kuvvetleri önünde canlı gösterime çıktı; sipariş, yarışma ya da atım başına maliyet açıklanmadı. ABD Ordusu, elektronik harp seçeneklerinin kullanılamadığı durumlarda yakın mesafede yerel etkisizleştirme sağlayacak el ile taşınabilir kinetik karşı-dron önleyicisi için ilan yayımladı; teklif son tarihi 23 Kasım, önleyicinin füze, namlulu ya da dron olduğu, adet ve maliyet hedefi belirtilmedi. Bulgaristan ile İspanya, kinetik mobil ve konteyner esaslı sistemlerden 20 adede kadar alım için mutabakat imzaladı; alımı İspanya yürütecek, Bulgaristan İspanya'nın sözleşmesine katılacak, bedel ve üçüncü ülke tedarikçi uygunluğu açıklanmadı. AB, Nijerya Silahlı Kuvvetleri için karşı-dron kabiliyeti, gece görüş ve el yapımı patlayıcıya karşı sistemleri içeren 20 milyon euroluk paketi Avrupa Barış Fonu üzerinden açtı. Belçika'nın hava savunma paketinde ilk kez kalem adetleri verildi: 10 NASAMS, 20 Skyranger 30, 14 GM200 MM/C radar ve 54 komuta aracı.",
