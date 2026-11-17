@@ -1,5 +1,81 @@
 [
   {
+    "date": "2026-11-17",
+    "title": "Katar'ın savunma sanayii şirketi Barzan Holdings, Dassault destekli Fransız Harmattan AI ile Şahid sınıfı dronlara karşı Gobi Tempest çok kısa menzilli önleyicisini değerlendirmek üzere 6 Kasım'da duyurulan bir mutabakata vardı",
+    "summary": "Günün ağırlığı hedef pazarlardan birinde alçak irtifa önleyici kaleminin bir Avrupa tedarikçisiyle değerlendirme aşamasına geçmesinde, karşı-dron hard-kill denemelerinin doğrudan satın alma emrine bağlanmasında ve mühimmat talebinin arkasındaki katı yakıt ile finansman kalemlerinin aynı gün rakamlanmasında. Katar'ın devlet savunma şirketi Barzan Holdings ile Dassault Aviation destekli Harmattan AI, Şahid ve Geran sınıfı saldırı dronlarına karşı geliştirilen Gobi Tempest otonom çok kısa menzilli önleyicisinin gösterim ve testlerle değerlendirilmesi için 6 Kasım 2026'da duyurulan bir mutabakata vardı; alım sözleşmesi imzalanmadı, adet ve bedel verilmedi, firma sistem için 310 km/s azami hız, 12 km menzil, 4,4 kg ağırlık ve beş saniyede kalkış hazırlığı bildiriyor. ABD Savunma Bakanlığı, 13 teknik bildiriden seçtiği yedi ekibi Dugway Deneme Sahası'nda karşı-dron yüksek enerjili lazer canlı atışlarına davet etti; lazer güvenlik sertifikasyonu ve komuta-kontrol entegrasyonu Kasım'da, canlı atış Aralık ortasında başlıyor ve iyi sonuç veren sistemler doğrudan satın alma emrine dönüşebiliyor. Northrop Grumman, Lockheed Martin'in PAC-3 MSE önleyicileri için katı yakıtlı roket motoru ve ateşleme emniyet tertibatı üretimine 1,6 milyar dolarlık çok yıllı sipariş aldığını bildirdi; firma 2021'den bu yana Batı Virginia'da motor kapasitesini neredeyse üçe, Utah'ta ikiye katladığını açıklıyor. Rusya Savunma Bakanlığı bir gecede 1.336 Ukrayna dronunu önlediğini veya imha ettiğini bildirdi; önceki gece rekoru 29 Ekim'de 1.254'tü, 24 saatlik toplam 2.049 olarak veriliyor ve rakamlar bağımsız olarak doğrulanmadı. Avrupa Komisyonu, 90 milyar euroluk Ukrayna Destek Kredisi kapsamındaki sekizinci savunma ödemesiyle 1,71 milyar euro aktardı; ödemenin yaklaşık %40'ı AB merkezli üreticilerle sözleşmelere gidiyor.",
+    "lead": "Katar'ın Barzan Holdings'i, Dassault destekli Harmattan AI'nın 12 km menzilli Gobi Tempest önleyicisini değerlendirmek…",
+    "alarm": true,
+    "alarm_title": "Katar'da karşı-dron önleyici kaleminin Fransız tedarikçiyle değerlendirmeye alınması",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Mühimmat",
+      "Barut ve Patlayıcı",
+      "TOLGA",
+      "Katar",
+      "ABD",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Katar Barzan – Harmattan AI Gobi Tempest mutabakatı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Dugway karşı-dron lazer canlı atışları",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "PAC-3 MSE katı yakıtlı motor siparişi",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "Bir gecede 1.336 dron önleme bildirimi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "AB'nin Ukrayna'ya 1,71 milyar euroluk savunma ödemesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "Anduril CAMP konteyner fırlatıcı prototipi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "ABD Deniz Piyadeleri M27 çerçevesinin iki katına çıkması",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "DND–Cerberon Modular Lethality Kit",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "Aselsan–Roketsan 1,28 milyar euroluk arayıcı ve veri bağı anlaşması",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "JIATF-401 karşı-dron pazaryeri",
+        "home": "izleme"
+      },
+      {
+        "id": "G11",
+        "label": "Rusya–BAE hava savunma iş birliği",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-11-17.html"
+  },
+  {
     "date": "2026-11-16",
     "title": "Malezya, LCS fırkateynlerinde NSM yerine ATMACA'yı tercih ettiğini açıkladı ve Sayıştay 57 mm güverte topu mühimmatı ile VL-MICA kalemlerinin hâlâ sözleşmeye bağlanmadığını ortaya koydu",
     "summary": "Günün ağırlığı hedef pazarlardan birinde güverte topu mühimmatının ayrı ve hâlâ bağlanmamış bir kalem olarak kayda geçmesinde, önleyici başına maliyetin ilk kez rakamla karşılaştırılmasında ve karşı-dron son katmanında mühimmatsız çözüm iddiasının seri üretim seviyesine çıkmasında. Malezya Savunma Bakanı Mohamed Khaled Nordin, beş gemilik LCS programında Kongsberg NSM yerine ATMACA'nın tercih edilen çözüm olduğunu 12 Kasım'da açıkladı; sözleşme imzalanmadı, adet verilmedi, Sayıştay raporuna göre 57 mm Bofors güverte topu mühimmatı, VL-MICA ve entegre karıştırma atıcı sistemi kalemleri hâlâ kesinleşmemiş durumda ve ilk geminin teslimi Aralık 2026'dan Nisan 2027'ye kaydı. Romanya, Patriot'a PAC-2 ve PAC-3'ten sonra üçüncü bir önleyici aile olacak SkyCeptor'un ulusal üretimi için Rafael ile görüşmeleri Kasım başında yeniden başlattı; İsrail kaynaklarına göre adet maliyeti yaklaşık 1 milyon dolar, güncel Patriot önleyicileri 4–5 milyon dolar. Aselsan, EJDERHA yüksek güçlü elektromanyetik hava savunma sisteminin aynı anda havalanan 51 dronu saniyeler içinde etkisizleştirdiğini, sistemin seri üretimde ve harekâtta olduğunu ve 'füze atmadan, mühimmat kullanmadan' çalıştığını bildirdi; test tarihi, yeri ve güç çıkışı açıklanmadı. NATO, derin hassas vuruş sistemlerinde ulusal ihtiyaçların birleştirilmesini tedariki hızlandırma yolu olarak sundu; üçüncü ülke tedarikçilere ilişkin bir ölçüt anılmadı. Birleşik Krallık, Project BEEHIVE kapsamındaki Kraken K3 Scout insansız botlarına Saab Sea Giraffe 1X karşı-dron radarı için 15 milyon £'luk sözleşme verdi; efektör ve mühimmat kalemi adlandırılmadı.",

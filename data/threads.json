@@ -1,5 +1,15 @@
 [
  {
+  "id": "jiatf-401-karsi-dron-pazaryeri",
+  "name": "JIATF-401 karşı-dron pazaryeri",
+  "son_hareket": "2026-11-17"
+ },
+ {
+  "id": "rusya-bae-hava-savunma-is-birligi",
+  "name": "Rusya–BAE hava savunma iş birliği",
+  "son_hareket": "2026-11-17"
+ },
+ {
   "id": "kongsberg-deniz-alti-karsi-tedbir-acigi",
   "name": "Kongsberg deniz altı karşı tedbir açığı",
   "son_hareket": "2026-11-16"
