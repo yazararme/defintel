@@ -1,5 +1,71 @@
 [
   {
+    "date": "2026-11-18",
+    "title": "Northrop Grumman, 30x113 mm Bushmaster topunun yakınlık fünyeli XM1211 mühimmatıyla canlı atışta birden fazla dronu düşürdüğünü bildirdi ve aynı gün NATO Genel Sekreteri Rutte Patriot stoklarının sınırlı olduğunu söyleyip jet motorlu dronlara karşı 20 mm uçak topu mühimmatını saydı, Dugway'deki Aralık ortası lazer canlı atışının karşı-dron pazaryerini de yürüten JIATF-401 tarafından yürütüldüğü ortaya çıktı, Tiberius Aerospace 155 mm ramjetli mermisi için 85 milyon dolar topladı ve Romanya 35 mm Oerlikon modernizasyonundaki gecikme için Rheinmetall'e 8,7 milyon euro ceza kesti",
+    "summary": "Günün ağırlığı karşı-dron hard-kill tartışmasının namlulu ve yakınlık fünyeli mühimmat tarafına dönmesinde, bunun ilk kez NATO Genel Sekreteri düzeyinde bir kalibre adıyla anılmasında ve 155 mm pazarında lisanslama esaslı yeni bir rakip modelinin sermaye bulmasında. Northrop Grumman, 30x113 mm M230LF Bushmaster topunun XM1211 yakınlık fünyeli mühimmatla ve M-ACE tespit-takip sistemiyle canlı atışta birden fazla dronu hareket halinde düşürdüğünü bildirdi; dron adedi, test yeri ve tarihi, menzil ve atım başına maliyet açıklanmadı, iddia firmaya ait. NATO Genel Sekreteri Mark Rutte, Brüksel'deki Ukrayna Savunma Temas Grubu toplantısının ardından ABD ve Avrupa'daki Patriot stoklarının bir sınırı bulunduğunu, 'Patriot'lara fazla odaklanma riski' olduğunu söyledi ve Ukrayna hava savunmasının yalnızca PAC-2 ile PAC-3'e dayanmadığını, jet motorlu dronlara karşı F-16'nın 20 mm mühimmatının kullanıldığını aktardı; PURL kapsamında bugüne kadar 10 milyar doları aşan taahhüt verildi, aylık 1 milyar dolarlık hedefe ulaşılamadı. Dugway Deneme Sahası'nda Aralık ortasında başlayacak karşı-dron yüksek enerjili lazer canlı atışlarının, ticari karşı-dron kataloğunu da yürüten Joint Interagency Task Force 401 ile Araştırma ve Mühendislik Ofisi tarafından Faz II değerlendirmesi olarak yürütüldüğü bildirildi; 13 bildiriden yedi sistem seçildi, güç sınıfı ve kabul ölçütleri yayımlanmadı. Tiberius Aerospace, NATO standardı 155 mm obüslerden atılan sıvı yakıtlı ramjetli Sceptre mermisi için 85 milyon dolarlık Seri A turunu 1 milyar doları aşan değerlemeyle kapattı; firma tasarımı ülkelere lisanslayıp fikrî mülkiyeti elinde tutuyor, birim maliyet ve üretim hedefi verilmedi. Romanya Savunma Bakanlığı, 328 milyon euroluk 35 mm Oerlikon GDF 103 C-RAM modernizasyonunda ilk iki sistemin kabul testinden geçmemesi ve teslim tarihlerinin kaçırılması nedeniyle Rheinmetall'e 8,7 milyon euroluk ilk ceza faturasını kesti.",
+    "lead": "Northrop Grumman, 30x113 mm M230LF Bushmaster topunun XM1211 yakınlık fünyeli mühimmatla canlı atışta birden fazla dron…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "C-UAS",
+      "Mühimmat",
+      "Hava Savunma",
+      "Topçu",
+      "TOLGA",
+      "ABD",
+      "NATO/NSPA",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Bushmaster 30x113 mm yakınlık fünyeli karşı-dron atışı",
+        "home": "rakip"
+      },
+      {
+        "id": "G2",
+        "label": "Rutte'nin Patriot stok sınırı ve 20 mm beyanı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "Dugway lazer değerlendirmesinin JIATF-401 tarafından yürütülmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "Tiberius Sceptre 85 milyon dolarlık tur",
+        "home": "rakip"
+      },
+      {
+        "id": "G5",
+        "label": "Romanya'nın Rheinmetall'e 35 mm gecikme cezası",
+        "home": "rakip"
+      },
+      {
+        "id": "G6",
+        "label": "Slovakya ve Litvanya'nın Polonya sistemlerine ilgisi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Hanwha Chunmoo denizden paletli fırlatıcı atışı",
+        "home": "rakip"
+      },
+      {
+        "id": "G8",
+        "label": "Milkor–MBDA Milkor 380 silah entegrasyonu mutabakatı",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "Irak hava savunmasında entegrasyon sorusu",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-11-18.html"
+  },
+  {
     "date": "2026-11-17",
     "title": "Katar'ın savunma sanayii şirketi Barzan Holdings, Dassault destekli Fransız Harmattan AI ile Şahid sınıfı dronlara karşı Gobi Tempest çok kısa menzilli önleyicisini değerlendirmek üzere 6 Kasım'da duyurulan bir mutabakata vardı",
     "summary": "Günün ağırlığı hedef pazarlardan birinde alçak irtifa önleyici kaleminin bir Avrupa tedarikçisiyle değerlendirme aşamasına geçmesinde, karşı-dron hard-kill denemelerinin doğrudan satın alma emrine bağlanmasında ve mühimmat talebinin arkasındaki katı yakıt ile finansman kalemlerinin aynı gün rakamlanmasında. Katar'ın devlet savunma şirketi Barzan Holdings ile Dassault Aviation destekli Harmattan AI, Şahid ve Geran sınıfı saldırı dronlarına karşı geliştirilen Gobi Tempest otonom çok kısa menzilli önleyicisinin gösterim ve testlerle değerlendirilmesi için 6 Kasım 2026'da duyurulan bir mutabakata vardı; alım sözleşmesi imzalanmadı, adet ve bedel verilmedi, firma sistem için 310 km/s azami hız, 12 km menzil, 4,4 kg ağırlık ve beş saniyede kalkış hazırlığı bildiriyor. ABD Savunma Bakanlığı, 13 teknik bildiriden seçtiği yedi ekibi Dugway Deneme Sahası'nda karşı-dron yüksek enerjili lazer canlı atışlarına davet etti; lazer güvenlik sertifikasyonu ve komuta-kontrol entegrasyonu Kasım'da, canlı atış Aralık ortasında başlıyor ve iyi sonuç veren sistemler doğrudan satın alma emrine dönüşebiliyor. Northrop Grumman, Lockheed Martin'in PAC-3 MSE önleyicileri için katı yakıtlı roket motoru ve ateşleme emniyet tertibatı üretimine 1,6 milyar dolarlık çok yıllı sipariş aldığını bildirdi; firma 2021'den bu yana Batı Virginia'da motor kapasitesini neredeyse üçe, Utah'ta ikiye katladığını açıklıyor. Rusya Savunma Bakanlığı bir gecede 1.336 Ukrayna dronunu önlediğini veya imha ettiğini bildirdi; önceki gece rekoru 29 Ekim'de 1.254'tü, 24 saatlik toplam 2.049 olarak veriliyor ve rakamlar bağımsız olarak doğrulanmadı. Avrupa Komisyonu, 90 milyar euroluk Ukrayna Destek Kredisi kapsamındaki sekizinci savunma ödemesiyle 1,71 milyar euro aktardı; ödemenin yaklaşık %40'ı AB merkezli üreticilerle sözleşmelere gidiyor.",
