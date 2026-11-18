@@ -1602,10 +1602,6 @@
   ],
   "gunler": [
    {
-    "g": "2026-11-18",
-    "u": "/haberler/2026-11-18.html?q=Roketsan"
-   },
-   {
     "g": "2026-11-17",
     "u": "/reports/2026-11-17.html#g9"
    },
@@ -1670,8 +1666,8 @@
     "u": "/haberler/2026-09-23.html?q=Roketsan"
    }
   ],
-  "son": "2026-11-18",
-  "sayi_30g": 8
+  "son": "2026-11-17",
+  "sayi_30g": 7
  },
  "repkon": {
   "ad": "Repkon",
@@ -1690,6 +1686,10 @@
    "hafif_silah"
   ],
   "gunler": [
+   {
+    "g": "2026-11-18",
+    "u": "/haberler/2026-11-18.html?q=Sars%C4%B1lmaz"
+   },
    {
     "g": "2026-10-26",
     "u": "/haberler/2026-10-26.html?q=Sars%C4%B1lmaz"
@@ -1715,8 +1715,8 @@
     "u": "/reports/2026-10-05.html#g13"
    }
   ],
-  "son": "2026-10-26",
-  "sayi_30g": 1
+  "son": "2026-11-18",
+  "sayi_30g": 2
  },
  "canik": {
   "ad": "Canik",
@@ -1763,10 +1763,6 @@
   "rol": "emsal",
   "segmentler": [],
   "gunler": [
-   {
-    "g": "2026-11-18",
-    "u": "/haberler/2026-11-18.html?q=Baykar"
-   },
    {
     "g": "2026-11-12",
     "u": "/haberler/2026-11-12.html?q=Baykar"
@@ -1852,8 +1848,8 @@
     "u": "/haberler/2026-09-22.html?q=Baykar"
    }
   ],
-  "son": "2026-11-18",
-  "sayi_30g": 9
+  "son": "2026-11-12",
+  "sayi_30g": 8
  },
  "tusas": {
   "ad": "TUSAŞ",
