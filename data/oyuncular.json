@@ -126,7 +126,7 @@
    }
   ],
   "son": "2026-11-18",
-  "sayi_30g": 16
+  "sayi_30g": 15
  },
  "nammo": {
   "ad": "Nammo",
@@ -291,7 +291,7 @@
    }
   ],
   "son": "2026-11-17",
-  "sayi_30g": 9
+  "sayi_30g": 8
  },
  "elbit": {
   "ad": "Elbit",
@@ -340,7 +340,7 @@
    }
   ],
   "son": "2026-11-13",
-  "sayi_30g": 5
+  "sayi_30g": 4
  },
  "hanwha": {
   "ad": "Hanwha",
@@ -351,6 +351,10 @@
    "hava_savunma"
   ],
   "gunler": [
+   {
+    "g": "2026-11-19",
+    "u": "/reports/2026-11-19.html#g8"
+   },
    {
     "g": "2026-11-18",
     "u": "/reports/2026-11-18.html#g7"
@@ -424,7 +428,7 @@
     "u": "/reports/2026-09-14.html#g11"
    }
   ],
-  "son": "2026-11-18",
+  "son": "2026-11-19",
   "sayi_30g": 6
  },
  "poongsan": {
@@ -467,12 +471,16 @@
   ],
   "gunler": [
    {
+    "g": "2026-11-19",
+    "u": "/reports/2026-11-19.html#g2"
+   },
+   {
     "g": "2026-11-12",
     "u": "/reports/2026-11-12.html#g8"
    }
   ],
-  "son": "2026-11-12",
-  "sayi_30g": 1
+  "son": "2026-11-19",
+  "sayi_30g": 2
  },
  "csg": {
   "ad": "CSG",
@@ -809,7 +817,7 @@
    }
   ],
   "son": "2026-11-16",
-  "sayi_30g": 7
+  "sayi_30g": 6
  },
  "northrop-grumman": {
   "ad": "Northrop Grumman",
@@ -937,6 +945,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-11-19",
+    "u": "/reports/2026-11-19.html#g1"
+   },
+   {
     "g": "2026-11-18",
     "u": "/reports/2026-11-18.html#g9"
    },
@@ -977,8 +989,8 @@
     "u": "/reports/2026-10-03.html#g10"
    }
   ],
-  "son": "2026-11-18",
-  "sayi_30g": 7
+  "son": "2026-11-19",
+  "sayi_30g": 8
  },
  "rafael": {
   "ad": "Rafael",
@@ -1411,6 +1423,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-11-19",
+    "u": "/haberler/2026-11-19.html?q=Aselsan"
+   },
+   {
     "g": "2026-11-18",
     "u": "/haberler/2026-11-18.html?q=Aselsan"
    },
@@ -1591,7 +1607,7 @@
     "u": "/reports/2026-09-14.html#g10"
    }
   ],
-  "son": "2026-11-18",
+  "son": "2026-11-19",
   "sayi_30g": 24
  },
  "roketsan": {
@@ -1857,6 +1873,10 @@
   "segmentler": [],
   "gunler": [
    {
+    "g": "2026-11-19",
+    "u": "/haberler/2026-11-19.html?q=TUSA%C5%9E"
+   },
+   {
     "g": "2026-11-18",
     "u": "/haberler/2026-11-18.html?q=TUSA%C5%9E"
    },
@@ -1893,8 +1913,8 @@
     "u": "/haberler/2026-10-14.html?q=TUSA%C5%9E"
    }
   ],
-  "son": "2026-11-18",
-  "sayi_30g": 5
+  "son": "2026-11-19",
+  "sayi_30g": 6
  },
  "havelsan": {
   "ad": "Havelsan",
@@ -2130,6 +2150,10 @@
   "segmentler": [],
   "gunler": [
    {
+    "g": "2026-11-19",
+    "u": "/haberler/2026-11-19.html?q=Otokar"
+   },
+   {
     "g": "2026-11-18",
     "u": "/haberler/2026-11-18.html?q=Otokar"
    },
@@ -2174,8 +2198,8 @@
     "u": "/haberler/2026-09-19.html?q=Otokar"
    }
   ],
-  "son": "2026-11-18",
-  "sayi_30g": 4
+  "son": "2026-11-19",
+  "sayi_30g": 5
  },
  "bmc": {
   "ad": "BMC",
