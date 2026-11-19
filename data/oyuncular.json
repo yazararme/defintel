@@ -1922,6 +1922,10 @@
   "segmentler": [],
   "gunler": [
    {
+    "g": "2026-11-19",
+    "u": "/haberler/2026-11-19.html?q=Havelsan"
+   },
+   {
     "g": "2026-11-09",
     "u": "/haberler/2026-11-09.html?q=Havelsan"
    },
@@ -2022,8 +2026,8 @@
     "u": "/haberler/2026-09-17.html?q=Havelsan"
    }
   ],
-  "son": "2026-11-09",
-  "sayi_30g": 17
+  "son": "2026-11-19",
+  "sayi_30g": 18
  },
  "stm": {
   "ad": "STM",
@@ -2150,10 +2154,6 @@
   "segmentler": [],
   "gunler": [
    {
-    "g": "2026-11-19",
-    "u": "/haberler/2026-11-19.html?q=Otokar"
-   },
-   {
     "g": "2026-11-18",
     "u": "/haberler/2026-11-18.html?q=Otokar"
    },
@@ -2198,8 +2198,8 @@
     "u": "/haberler/2026-09-19.html?q=Otokar"
    }
   ],
-  "son": "2026-11-19",
-  "sayi_30g": 5
+  "son": "2026-11-18",
+  "sayi_30g": 4
  },
  "bmc": {
   "ad": "BMC",
