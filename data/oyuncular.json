@@ -1901,10 +1901,6 @@
   "segmentler": [],
   "gunler": [
    {
-    "g": "2026-11-20",
-    "u": "/haberler/2026-11-20.html?q=TUSA%C5%9E"
-   },
-   {
     "g": "2026-11-19",
     "u": "/haberler/2026-11-19.html?q=TUSA%C5%9E"
    },
@@ -1945,8 +1941,8 @@
     "u": "/haberler/2026-10-14.html?q=TUSA%C5%9E"
    }
   ],
-  "son": "2026-11-20",
-  "sayi_30g": 6
+  "son": "2026-11-19",
+  "sayi_30g": 5
  },
  "havelsan": {
   "ad": "Havelsan",
@@ -2067,10 +2063,6 @@
   "segmentler": [],
   "gunler": [
    {
-    "g": "2026-11-20",
-    "u": "/haberler/2026-11-20.html?q=STM"
-   },
-   {
     "g": "2026-11-17",
     "u": "/haberler/2026-11-17.html?q=STM"
    },
@@ -2131,8 +2123,8 @@
     "u": "/haberler/2026-09-25.html?q=STM"
    }
   ],
-  "son": "2026-11-20",
-  "sayi_30g": 13
+  "son": "2026-11-17",
+  "sayi_30g": 12
  },
  "asfat": {
   "ad": "ASFAT",
