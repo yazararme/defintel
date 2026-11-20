@@ -1,5 +1,101 @@
 [
   {
+    "date": "2026-11-20",
+    "title": "ABD Sayıştayı, Savunma Bakanlığı'nın mühimmat üretimini ihtiyaç ve finansmana bağlayan üst düzey bir planı bulunmadığını ve sorumlu bir makam belirlenmediğini bildirdi",
+    "summary": "Günün ağırlığı ABD mühimmat tedarikinin yapısal boşluğunun resmî denetim raporuyla kayda geçmesinde, stok tükenmesinin ilk kez oran olarak yayımlanmasında ve Avrupa'da kış hava savunması talebinin sekiz ülkede ayrı paketlere bölünmesinde. ABD Sayıştayı (GAO), Savunma Bakanlığı'nın mühimmat üretimi ile finansmanı ihtiyaçlara bağlayan üst düzey bir planı bulunmadığını, envanterleri bakanlık genelinde iyileştirmekle yetkili bir makam belirlenmediğini ve Mühimmat Hazırlık Girişimi'nin 37 ayrı veri kaynağından kısmen elle beslendiğini bildirdi; rapor Eylül 2026'da tamamlanan gizlilik dereceli çalışmanın kamuya açık sürümü. CSIS, 8 Nisan ateşkesiyle sona eren 39 günlük İran harekâtı ve izleyen operasyonlarda kilit mühimmat stoklarının üçte biri ile üçte ikisinin harcandığını, dokuz füze kategorisinden yedisinde ikmalin olumsuz etkilendiğini ve Patriot, THAAD ile Standard Missile kalemlerinin yoğun kullanılıp yerine konulabilir muadili bulunmadığını yazdı. Ramstein formatının 17 Kasım'da Brüksel'de yapılan 37. toplantısında sekiz ülke kış hava savunması ve dron için ayrı paketler açıkladı; Norveç yaklaşık 800 milyon dolar, Hollanda 500 milyon euro, İspanya 400 milyon euronun üzerinde ve Danimarka 645 milyon euroluk paket içinde 200 milyon euro hava savunması bildirdi, kalemlerde önleyici dron, radar ve IRIS-T anıldı, namlulu efektör ve kalibre anılmadı. KNDS Deutschland, Rotterdam'daki NEDS fuarında FENNEK keşif aracına dayanan ve KNDS France yapımı ARX30 silah istasyonunda 30x113 mm top taşıyan FENNEK AIR mobil karşı-dron prototipini tanıttı; sipariş, müşteri ve mühimmat tipi açıklanmadı. Malezya Savunma Bakanı, 36 adet 105 mm LG1 Mk III kalemini 150 milyon doları aşan, dört CSAR helikopteriyle birlikte yaklaşık 500 milyon dolar olarak tahmin etti; niyet mektubu yerel montaj ya da entegrasyon için silah bileşenleri ile destek ekipmanını kapsıyor, ayrı bir 105 mm mühimmat kalemi anılmadı.",
+    "lead": "ABD Sayıştayı, Savunma Bakanlığı'nın mühimmat üretimini ihtiyaç ve finansmana bağlayan üst düzey bir planı ve yetkili b…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "Mühimmat",
+      "Hava Savunma",
+      "C-UAS",
+      "Topçu",
+      "BORAN",
+      "Malezya",
+      "ABD",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "GAO mühimmat üretim planı bulgusu",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "CSIS stok tükenme oranları",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G3",
+        "label": "Ramstein 37 kış hava savunması paketleri",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G4",
+        "label": "KNDS FENNEK AIR 30x113 mm prototipi",
+        "home": "rakip"
+      },
+      {
+        "id": "G5",
+        "label": "Malezya LG1 Mk III kaleminin rakamlanması",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "USMC'ye 14 MRADR hava savunma radarı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "İsviçre'nin GM200 radar seçimi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G8",
+        "label": "Bundeswehr Virtus ve HX-2 Hot Strike kampanyası",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G9",
+        "label": "Hensoldt–ZF Spexer seri üretim iş birliği",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "Hollanda–Almanya Knifefish karıştırıcı siparişi",
+        "home": "rakip"
+      },
+      {
+        "id": "G11",
+        "label": "Seasats Quickfish'in Altius ile silahlandırılması",
+        "home": "rakip"
+      },
+      {
+        "id": "G12",
+        "label": "SG Defence Pinaka MK-I lüle siparişi",
+        "home": "rakip"
+      },
+      {
+        "id": "G13",
+        "label": "FCC dron ve karşı-dron radar spektrum kararı",
+        "home": "izleme"
+      },
+      {
+        "id": "G14",
+        "label": "Prime Toolings SR-69 güdümlü mermi",
+        "home": "izleme"
+      },
+      {
+        "id": "G15",
+        "label": "ABD Ordusu 12,7 mm emniyet mesafesinin daraltılması",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-11-20.html"
+  },
+  {
     "date": "2026-11-19",
     "title": "Malezya, 105 mm hafif obüs hattını 36 ek LG1 Mk III için KNDS'ye verdiği niyet mektubuyla bir Avrupa tedarikçisine bağladı",
     "summary": "Günün ağırlığı hedef pazarlardan birinde hafif çekili obüs kaleminin bir Avrupa tedarikçisine niyet mektubuyla bağlanmasında, roket ve 155 mm mühimmat tarafında kapasite ile fiyat tabanının aynı gün rakamlanmasında ve karşı-dron tedarikinin ihale dışı hızlı yollara kaymasının resmî beyanla teyit edilmesinde. Malezya Savunma Bakanlığı, Fransız savunma bakanının ziyaretinde imzalanan yedi belgeden biri olarak KNDS'ye 105 mm LG1 Mk III hafif obüs sistemi için niyet mektubu verdi; fotoğraf altyazısı 36 ek obüsten söz ediyor ve bu envanteri 54 adede çıkarıyor, gövde metninde adet, bedel ve teslim takvimi yok. Lockheed Martin GMLRS üretim kapasitesini yılda 14.000 rokete çıkardığını, Mayıs 2026'da duyurulan 3 milyar dolarlık üretim ödülünün standart ve uzatılmış menzilli roketleri kapsadığını, 150 km menzilli ER GMLRS'nin Milestone C incelemesini geçtiğini ve General Dynamics OTS'nin standart menzilli roket motorunda üçüncü yerli kaynak olabileceğini bildirdi; motor niteliklendirmesi 2027'ye planlanıyor. İsrail devlet şirketi Tomer, ABD Ordusu ile beş yıl süreli 830 milyon dolarlık 155 mm mermi anlaşması yaptı; kaynak merminin alt mühimmat taşıyan bir sınıf olduğunu ve ayda 100.000 mermi hedefini desteklediğini yazıyor, imza tarihi ve üretim yeri verilmedi. ABD Dışişleri Bakanlığı Arnavutluk'a iki M142 HIMARS, altı M31A2 ve altı M30A2 roket paketi ile destek kalemlerinin 210 milyon dolarlık olası satışını onayladı; finansman askerî dış finansman kredisiyle, ana yüklenici Lockheed Martin. NATO Savunma Sanayii ve Silahlandırma Bölümü yetkilisi, karşı-dron pazaryerinde sözleşmenin 24 saat içinde kapanabildiğini ve çözümün aylar içinde sahaya çıkabildiğini söyledi; satıcı ve alıcı uygunluk ölçütleri ile fiyatlar açıklanmadı.",

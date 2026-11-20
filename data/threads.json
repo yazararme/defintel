@@ -1,5 +1,20 @@
 [
  {
+  "id": "fcc-dron-ve-karsi-dron-radar-spektrum-karari",
+  "name": "FCC dron ve karşı-dron radar spektrum kararı",
+  "son_hareket": "2026-11-20"
+ },
+ {
+  "id": "prime-toolings-sr-69-gudumlu-mermi",
+  "name": "Prime Toolings SR-69 güdümlü mermi",
+  "son_hareket": "2026-11-20"
+ },
+ {
+  "id": "abd-ordusu-12-7-mm-emniyet-mesafesinin-daraltilm",
+  "name": "ABD Ordusu 12,7 mm emniyet mesafesinin daraltılması",
+  "son_hareket": "2026-11-20"
+ },
+ {
   "id": "fcc-dron-tespit-radari-spektrum-karari",
   "name": "FCC dron tespit radarı spektrum kararı",
   "son_hareket": "2026-11-19"
