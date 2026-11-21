@@ -1,5 +1,86 @@
 [
   {
+    "date": "2026-11-21",
+    "title": "Fransa 155 mm üretimini 2029'a kadar yılda 150.000 mermiye çıkarmak için KNDS'ye kapasite artışı ve 50.000 mermi sipariş etti, ancak ülkedeki tek 155 mm boş gövde üreticisi mahkeme gözetiminde ve alıcı kararı 7 Aralık'ta verilecek",
+    "summary": "Günün ağırlığı Avrupa'da 155 mm mühimmat kapasitesinin iki ayrı ülkede aynı gün rakamlanmasında ve Fransa'da gövde tedarikinin tek firmaya bağlı olduğunun mahkeme takvimiyle birlikte kayda geçmesinde. Fransız DGA, KNDS Ammo France'a 155 mm üretim altyapısında büyük ölçekli kapasite artışı ile Kara Kuvvetleri için 2029–2030'da teslim edilecek 50.000 mermi sipariş etti; La Chapelle-Saint-Ursin'de çıktı 2022–2025 arasında 30.000'den 60.000'e çıktı, hedef 2029'a kadar yılda 150.000 ve tesise yeni bir patlayıcı döküm hattı ile iki büyük kalibre işleme ünitesi kuruluyor. Fransa'da 155 mm boş gövde üretebilen tek firma olan Forges de Tarbes Ekim'de mahkeme gözetimine alındı, KNDS firmaya yılda 60.000–150.000 gövde için üç yıllık çerçeve anlaşması bildirmişti ve Tarbes ticaret mahkemesi olası alıcı konusunda 7 Aralık'ta karar verecek. BAE Systems, Güney Galler Glascoed'da 180 milyon £'luk yatırımla ülkenin ilk tam otomatik büyük kalibre dolum tesisini açtı; tesis melt-cast yöntemiyle patlayıcıyı eritip mermiye döküyor, robot ve otonom araçlarla sınırlı personelle çalışıyor ve 155 mm kapasitesinde 16 kat artış hedefliyor, yıllık çıktı rakamı verilmedi. ACS, SOFEX 2026'da sergilediği Bullfrog otonom silah istasyonunun M240 7,62x51 mm ile hâlihazırda mevcut olduğunu, M2 12,7x99 mm varyantının 2027 başında geleceğini ve atım başına kill maliyetinin 10 dolara kadar indiğini beyan etti; iddianın dayanağı ve herhangi bir sipariş açıklanmadı. ABD FCC, 19 Kasım'da 3-0 ile kabul ettiği kararla 24,45–24,65 GHz bandında yer konuşlu karşı-dron tespit ve takip radarına kalıcı lisanslama yolu açtı ancak kaynaklar kararın dronu etkisizleştirme yetkisi vermediğini belirtiyor. Kanada Savunma Bakanlığı IDEaS programı, yabancı firmalara açık, 1,75 milyon CAD ödüllü kentsel karşı-dron sandbox'ı için 1 Aralık başvuru son tarihi ilan etti; kapsam tespit, takip ve teşhisle sınırlı, efektör kalemi yok.",
+    "lead": "Fransız DGA, KNDS Ammo France'a 155 mm üretim altyapısında büyük ölçekli kapasite artışı ile 50.000 mermi sipariş etti…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "Mühimmat",
+      "Barut ve Patlayıcı",
+      "Topçu",
+      "C-UAS",
+      "Hafif Silah",
+      "AB",
+      "ABD",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Fransa 155 mm kapasite artışı ve gövde tedarikçisi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "BAE Glascoed otomatik melt-cast dolum tesisi",
+        "home": "rakip"
+      },
+      {
+        "id": "G3",
+        "label": "ACS Bullfrog 7,62 mm ve atım başına maliyet iddiası",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "FCC karşı-dron radar kararının kabulü",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "Kanada kentsel karşı-dron sandbox'ı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G6",
+        "label": "CAMP düşük maliyetli karşı-hava füzesi prototipleri",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "Saab–Dezamet MAPAM havan mühimmatı lisansı",
+        "home": "rakip"
+      },
+      {
+        "id": "G8",
+        "label": "Nordic Air Defence K200 önleyicisi",
+        "home": "rakip"
+      },
+      {
+        "id": "G9",
+        "label": "SRC UK SERPENS karşı-atış radarı",
+        "home": "rakip"
+      },
+      {
+        "id": "G10",
+        "label": "ABD Ordusu Fires Threat Coordination Group",
+        "home": "izleme"
+      },
+      {
+        "id": "G11",
+        "label": "Türkmen tersanesi piroteknik ekipman ihalesi",
+        "home": "izleme"
+      },
+      {
+        "id": "G12",
+        "label": "Tayland'ın HIMARS alım değerlendirmesi",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-11-21.html"
+  },
+  {
     "date": "2026-11-20",
     "title": "ABD Sayıştayı, Savunma Bakanlığı'nın mühimmat üretimini ihtiyaç ve finansmana bağlayan üst düzey bir planı bulunmadığını ve sorumlu bir makam belirlenmediğini bildirdi",
     "summary": "Günün ağırlığı ABD mühimmat tedarikinin yapısal boşluğunun resmî denetim raporuyla kayda geçmesinde, stok tükenmesinin ilk kez oran olarak yayımlanmasında ve Avrupa'da kış hava savunması talebinin sekiz ülkede ayrı paketlere bölünmesinde. ABD Sayıştayı (GAO), Savunma Bakanlığı'nın mühimmat üretimi ile finansmanı ihtiyaçlara bağlayan üst düzey bir planı bulunmadığını, envanterleri bakanlık genelinde iyileştirmekle yetkili bir makam belirlenmediğini ve Mühimmat Hazırlık Girişimi'nin 37 ayrı veri kaynağından kısmen elle beslendiğini bildirdi; rapor Eylül 2026'da tamamlanan gizlilik dereceli çalışmanın kamuya açık sürümü. CSIS, 8 Nisan ateşkesiyle sona eren 39 günlük İran harekâtı ve izleyen operasyonlarda kilit mühimmat stoklarının üçte biri ile üçte ikisinin harcandığını, dokuz füze kategorisinden yedisinde ikmalin olumsuz etkilendiğini ve Patriot, THAAD ile Standard Missile kalemlerinin yoğun kullanılıp yerine konulabilir muadili bulunmadığını yazdı. Ramstein formatının 17 Kasım'da Brüksel'de yapılan 37. toplantısında sekiz ülke kış hava savunması ve dron için ayrı paketler açıkladı; Norveç yaklaşık 800 milyon dolar, Hollanda 500 milyon euro, İspanya 400 milyon euronun üzerinde ve Danimarka 645 milyon euroluk paket içinde 200 milyon euro hava savunması bildirdi, kalemlerde önleyici dron, radar ve IRIS-T anıldı, namlulu efektör ve kalibre anılmadı. KNDS Deutschland, Rotterdam'daki NEDS fuarında FENNEK keşif aracına dayanan ve KNDS France yapımı ARX30 silah istasyonunda 30x113 mm top taşıyan FENNEK AIR mobil karşı-dron prototipini tanıttı; sipariş, müşteri ve mühimmat tipi açıklanmadı. Malezya Savunma Bakanı, 36 adet 105 mm LG1 Mk III kalemini 150 milyon doları aşan, dört CSAR helikopteriyle birlikte yaklaşık 500 milyon dolar olarak tahmin etti; niyet mektubu yerel montaj ya da entegrasyon için silah bileşenleri ile destek ekipmanını kapsıyor, ayrı bir 105 mm mühimmat kalemi anılmadı.",

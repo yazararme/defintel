@@ -1,5 +1,20 @@
 [
  {
+  "id": "abd-ordusu-fires-threat-coordination-group",
+  "name": "ABD Ordusu Fires Threat Coordination Group",
+  "son_hareket": "2026-11-21"
+ },
+ {
+  "id": "turkmen-tersanesi-piroteknik-ekipman-ihalesi",
+  "name": "Türkmen tersanesi piroteknik ekipman ihalesi",
+  "son_hareket": "2026-11-21"
+ },
+ {
+  "id": "tayland-in-himars-alim-degerlendirmesi",
+  "name": "Tayland'ın HIMARS alım değerlendirmesi",
+  "son_hareket": "2026-11-21"
+ },
+ {
   "id": "fcc-dron-ve-karsi-dron-radar-spektrum-karari",
   "name": "FCC dron ve karşı-dron radar spektrum kararı",
   "son_hareket": "2026-11-20"

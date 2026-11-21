@@ -218,6 +218,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-11-21",
+    "u": "/reports/2026-11-21.html#g2"
+   },
+   {
     "g": "2026-11-17",
     "u": "/reports/2026-11-17.html#g11"
    },
@@ -298,7 +302,7 @@
     "u": "/reports/2026-09-19.html#g3"
    }
   ],
-  "son": "2026-11-17",
+  "son": "2026-11-21",
   "sayi_30g": 8
  },
  "elbit": {
@@ -348,7 +352,7 @@
    }
   ],
   "son": "2026-11-13",
-  "sayi_30g": 4
+  "sayi_30g": 3
  },
  "hanwha": {
   "ad": "Hanwha",
@@ -456,9 +460,14 @@
   "segmentler": [
    "muhimmat"
   ],
-  "gunler": [],
-  "son": "",
-  "sayi_30g": 0
+  "gunler": [
+   {
+    "g": "2026-11-21",
+    "u": "/reports/2026-11-21.html#g1"
+   }
+  ],
+  "son": "2026-11-21",
+  "sayi_30g": 1
  },
  "chemring": {
   "ad": "Chemring",
@@ -539,6 +548,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-11-21",
+    "u": "/reports/2026-11-21.html#g7"
+   },
+   {
     "g": "2026-11-12",
     "u": "/reports/2026-11-12.html#g4"
    },
@@ -551,8 +564,8 @@
     "u": "/reports/2026-09-21.html#g5"
    }
   ],
-  "son": "2026-11-12",
-  "sayi_30g": 2
+  "son": "2026-11-21",
+  "sayi_30g": 3
  },
  "munitions-india": {
   "ad": "Munitions India",
@@ -579,7 +592,7 @@
    }
   ],
   "son": "2026-10-29",
-  "sayi_30g": 2
+  "sayi_30g": 1
  },
  "solar-industries": {
   "ad": "Solar Industries",
@@ -902,6 +915,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-11-21",
+    "u": "/reports/2026-11-21.html#g7"
+   },
+   {
     "g": "2026-11-13",
     "u": "/reports/2026-11-13.html#g8"
    },
@@ -910,8 +927,8 @@
     "u": "/reports/2026-11-05.html#g11"
    }
   ],
-  "son": "2026-11-13",
-  "sayi_30g": 2
+  "son": "2026-11-21",
+  "sayi_30g": 3
  },
  "mbda": {
   "ad": "MBDA",
@@ -1098,6 +1115,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-11-21",
+    "u": "/reports/2026-11-21.html#g6"
+   },
+   {
     "g": "2026-11-20",
     "u": "/reports/2026-11-20.html#g11"
    },
@@ -1162,8 +1183,8 @@
     "u": "/reports/2026-09-17.html#g9"
    }
   ],
-  "son": "2026-11-20",
-  "sayi_30g": 4
+  "son": "2026-11-21",
+  "sayi_30g": 5
  },
  "epirus": {
   "ad": "Epirus",
@@ -1443,6 +1464,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-11-21",
+    "u": "/haberler/2026-11-21.html?q=Aselsan"
+   },
+   {
     "g": "2026-11-20",
     "u": "/haberler/2026-11-20.html?q=Aselsan"
    },
@@ -1631,7 +1656,7 @@
     "u": "/reports/2026-09-14.html#g10"
    }
   ],
-  "son": "2026-11-20",
+  "son": "2026-11-21",
   "sayi_30g": 25
  },
  "roketsan": {
@@ -1804,6 +1829,10 @@
   "segmentler": [],
   "gunler": [
    {
+    "g": "2026-11-21",
+    "u": "/haberler/2026-11-21.html?q=Baykar"
+   },
+   {
     "g": "2026-11-20",
     "u": "/haberler/2026-11-20.html?q=Baykar"
    },
@@ -1892,7 +1921,7 @@
     "u": "/haberler/2026-09-22.html?q=Baykar"
    }
   ],
-  "son": "2026-11-20",
+  "son": "2026-11-21",
   "sayi_30g": 9
  },
  "tusas": {
@@ -1942,7 +1971,7 @@
    }
   ],
   "son": "2026-11-19",
-  "sayi_30g": 5
+  "sayi_30g": 4
  },
  "havelsan": {
   "ad": "Havelsan",
@@ -2055,13 +2084,17 @@
    }
   ],
   "son": "2026-11-19",
-  "sayi_30g": 17
+  "sayi_30g": 16
  },
  "stm": {
   "ad": "STM",
   "rol": "emsal",
   "segmentler": [],
   "gunler": [
+   {
+    "g": "2026-11-21",
+    "u": "/haberler/2026-11-21.html?q=STM"
+   },
    {
     "g": "2026-11-17",
     "u": "/haberler/2026-11-17.html?q=STM"
@@ -2123,7 +2156,7 @@
     "u": "/haberler/2026-09-25.html?q=STM"
    }
   ],
-  "son": "2026-11-17",
+  "son": "2026-11-21",
   "sayi_30g": 12
  },
  "asfat": {
@@ -2161,6 +2194,10 @@
   "segmentler": [],
   "gunler": [
    {
+    "g": "2026-11-21",
+    "u": "/haberler/2026-11-21.html?q=FNSS"
+   },
+   {
     "g": "2026-09-28",
     "u": "/haberler/2026-09-28.html?q=FNSS"
    },
@@ -2173,8 +2210,8 @@
     "u": "/haberler/2026-09-17.html?q=FNSS"
    }
   ],
-  "son": "2026-09-28",
-  "sayi_30g": 0
+  "son": "2026-11-21",
+  "sayi_30g": 1
  },
  "otokar": {
   "ad": "Otokar",
