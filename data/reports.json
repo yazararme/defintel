@@ -1,5 +1,61 @@
 [
   {
+    "date": "2026-11-22",
+    "title": "İran Devrim Muhafızları 21 Kasım'da Bahreyn'de iki ABD Patriot radarını imha ettiğini iddia etti ve Bahreyn hava savunmasının saldırıları önlediğini bildirdi",
+    "summary": "Günün ağırlığı Körfez'de alçak irtifa tehdidinin yeniden faal hale gelmesinde ve hava savunma radarının saldıran taraf tarafından açıkça hedef ilan edilmesinde; ikinci ağırlık 155 mm boş mermi gövdesi arzının üçüncü bir ülkede özel sektör partisine ulaşmasında. İran Devrim Muhafızları 21 Kasım gecesi Bahreyn'deki al-Riffa ve Awali üslerine füze ve dronla birleşik bir harekât yürüttüğünü ve ABD'ye ait iki Patriot hava savunma radarını imha ettiğini duyurdu; Bahreyn Savunma Kuvvetleri hava savunmasının 'bir dizi İran hava saldırısını' önlediğini, İçişleri Bakanlığı ise bir sivil sanayi tesisinin isabet aldığını, maddi hasar oluştuğunu ve yaralı bulunmadığını bildirdi, radar imhası iddiası bağımsız olarak teyit edilmedi. Saldırı 13 ve 15 Kasım'daki iddiaların ardından geldi; 13 Kasım'da CENTCOM hasarı yalanlayıp iki İran dronunu düşürdüğünü, 15 Kasım'da Devrim Muhafızları Riffa Hava Üssü'ndeki bir ABD hava savunma radarına altı dron attığını açıklamıştı. Hindistan'da Tirupati Forge, 155 mm M107 mühimmatı için ilk 200 adetlik boş gövde partisini tamamladığını ve nihai muayenenin atış denemesi öncesinde yapıldığını bildirdi; firmanın sınai lisansı 105, 120, 122, 125, 130, 152 ve 155 mm boş gövdeleri kapsıyor, M107'de ticari üretim FY27 4. çeyreğinde, uzatılmış menzilli tam çaplı gövdede FY28 ilk yarısında bekleniyor, müşteri ve sipariş açıklanmadı. Konya Karapınar'daki SKY SHOW 2026'da SKYDAGGER'ın dört rotorlu HUNTER önleyici dronu, ASELSAN AURA 200-G AESA radarının verdiği hedef bilgisiyle hedefi imha etti; 500 gramlık harp başlığı ve 300 km/s azami hız beyan edildi, aynı gösteride TOYCA-05 kamikaze insansız hava aracı 5 kg harp başlığı ve 70 km menzille tanıtıldı, sipariş ya da müşteri duyurulmadı. ABD Savunma Bakanlığı, GAO'nun üst düzey bir mühimmat çerçevesi önerisine katıldığını bildirdi ancak veri yönetimi önerisine kısmen katıldı; kaynak Patriot önleyici üretiminin iki yıldan uzun sürdüğünü aktarıyor. Filipinler'in HIMARS ve K239 Chunmoo'ya daha ucuz seçenek olarak Hint Pinaka ÇNRA'sını değerlendirdiği bildirildi; resmî bir karar, ilan ya da fiyat rakamı yok.",
+    "lead": "İran Devrim Muhafızları 21 Kasım gecesi Bahreyn'deki al-Riffa ve Awali üslerinde iki ABD Patriot hava savunma radarını…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "C-UAS",
+      "Hava Savunma",
+      "Mühimmat",
+      "Topçu",
+      "Körfez",
+      "Güney Asya",
+      "Türkiye",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Bahreyn'de yenilenen İran saldırıları ve radarın hedef ilan edilmesi",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Tirupati Forge 155 mm boş gövde partisi",
+        "home": "rakip"
+      },
+      {
+        "id": "G3",
+        "label": "SKYDAGGER HUNTER'ın ASELSAN radarıyla angajmanı",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "Savunma Bakanlığı'nın GAO mühimmat planı önerisine yanıtı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G5",
+        "label": "Filipinler'in Pinaka ÇNRA değerlendirmesi",
+        "home": "izleme"
+      },
+      {
+        "id": "G6",
+        "label": "D-Propulse RDE mikro önleyicisi",
+        "home": "rakip"
+      },
+      {
+        "id": "G7",
+        "label": "Hindistan'da Çin menşeli dron bileşeni ihalelerinin sayımı",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-11-22.html"
+  },
+  {
     "date": "2026-11-21",
     "title": "Fransa 155 mm üretimini 2029'a kadar yılda 150.000 mermiye çıkarmak için KNDS'ye kapasite artışı ve 50.000 mermi sipariş etti, ancak ülkedeki tek 155 mm boş gövde üreticisi mahkeme gözetiminde ve alıcı kararı 7 Aralık'ta verilecek",
     "summary": "Günün ağırlığı Avrupa'da 155 mm mühimmat kapasitesinin iki ayrı ülkede aynı gün rakamlanmasında ve Fransa'da gövde tedarikinin tek firmaya bağlı olduğunun mahkeme takvimiyle birlikte kayda geçmesinde. Fransız DGA, KNDS Ammo France'a 155 mm üretim altyapısında büyük ölçekli kapasite artışı ile Kara Kuvvetleri için 2029–2030'da teslim edilecek 50.000 mermi sipariş etti; La Chapelle-Saint-Ursin'de çıktı 2022–2025 arasında 30.000'den 60.000'e çıktı, hedef 2029'a kadar yılda 150.000 ve tesise yeni bir patlayıcı döküm hattı ile iki büyük kalibre işleme ünitesi kuruluyor. Fransa'da 155 mm boş gövde üretebilen tek firma olan Forges de Tarbes Ekim'de mahkeme gözetimine alındı, KNDS firmaya yılda 60.000–150.000 gövde için üç yıllık çerçeve anlaşması bildirmişti ve Tarbes ticaret mahkemesi olası alıcı konusunda 7 Aralık'ta karar verecek. BAE Systems, Güney Galler Glascoed'da 180 milyon £'luk yatırımla ülkenin ilk tam otomatik büyük kalibre dolum tesisini açtı; tesis melt-cast yöntemiyle patlayıcıyı eritip mermiye döküyor, robot ve otonom araçlarla sınırlı personelle çalışıyor ve 155 mm kapasitesinde 16 kat artış hedefliyor, yıllık çıktı rakamı verilmedi. ACS, SOFEX 2026'da sergilediği Bullfrog otonom silah istasyonunun M240 7,62x51 mm ile hâlihazırda mevcut olduğunu, M2 12,7x99 mm varyantının 2027 başında geleceğini ve atım başına kill maliyetinin 10 dolara kadar indiğini beyan etti; iddianın dayanağı ve herhangi bir sipariş açıklanmadı. ABD FCC, 19 Kasım'da 3-0 ile kabul ettiği kararla 24,45–24,65 GHz bandında yer konuşlu karşı-dron tespit ve takip radarına kalıcı lisanslama yolu açtı ancak kaynaklar kararın dronu etkisizleştirme yetkisi vermediğini belirtiyor. Kanada Savunma Bakanlığı IDEaS programı, yabancı firmalara açık, 1,75 milyon CAD ödüllü kentsel karşı-dron sandbox'ı için 1 Aralık başvuru son tarihi ilan etti; kapsam tespit, takip ve teşhisle sınırlı, efektör kalemi yok.",
