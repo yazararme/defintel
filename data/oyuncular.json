@@ -130,7 +130,7 @@
    }
   ],
   "son": "2026-11-20",
-  "sayi_30g": 14
+  "sayi_30g": 13
  },
  "nammo": {
   "ad": "Nammo",
@@ -207,7 +207,7 @@
    }
   ],
   "son": "2026-11-20",
-  "sayi_30g": 5
+  "sayi_30g": 4
  },
  "bae-systems": {
   "ad": "BAE Systems",
@@ -548,6 +548,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-11-23",
+    "u": "/reports/2026-11-23.html#g4"
+   },
+   {
     "g": "2026-11-21",
     "u": "/reports/2026-11-21.html#g7"
    },
@@ -564,8 +568,8 @@
     "u": "/reports/2026-09-21.html#g5"
    }
   ],
-  "son": "2026-11-21",
-  "sayi_30g": 3
+  "son": "2026-11-23",
+  "sayi_30g": 4
  },
  "munitions-india": {
   "ad": "Munitions India",
@@ -767,7 +771,7 @@
    }
   ],
   "son": "2026-11-06",
-  "sayi_30g": 3
+  "sayi_30g": 2
  },
  "kongsberg": {
   "ad": "Kongsberg",
@@ -776,6 +780,10 @@
    "hava_savunma"
   ],
   "gunler": [
+   {
+    "g": "2026-11-23",
+    "u": "/reports/2026-11-23.html#g5"
+   },
    {
     "g": "2026-11-16",
     "u": "/reports/2026-11-16.html#g8"
@@ -837,7 +845,7 @@
     "u": "/reports/2026-09-14.html#g9"
    }
   ],
-  "son": "2026-11-16",
+  "son": "2026-11-23",
   "sayi_30g": 6
  },
  "northrop-grumman": {
@@ -915,6 +923,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-11-23",
+    "u": "/reports/2026-11-23.html#g4"
+   },
+   {
     "g": "2026-11-21",
     "u": "/reports/2026-11-21.html#g7"
    },
@@ -927,8 +939,8 @@
     "u": "/reports/2026-11-05.html#g11"
    }
   ],
-  "son": "2026-11-21",
-  "sayi_30g": 3
+  "son": "2026-11-23",
+  "sayi_30g": 4
  },
  "mbda": {
   "ad": "MBDA",
@@ -1019,7 +1031,7 @@
    }
   ],
   "son": "2026-11-20",
-  "sayi_30g": 9
+  "sayi_30g": 8
  },
  "rafael": {
   "ad": "Rafael",
@@ -1464,6 +1476,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-11-23",
+    "u": "/haberler/2026-11-23.html?q=Aselsan"
+   },
+   {
     "g": "2026-11-22",
     "u": "/reports/2026-11-22.html#g3"
    },
@@ -1660,7 +1676,7 @@
     "u": "/reports/2026-09-14.html#g10"
    }
   ],
-  "son": "2026-11-22",
+  "son": "2026-11-23",
   "sayi_30g": 26
  },
  "roketsan": {
@@ -1670,6 +1686,10 @@
    "roket_bomba"
   ],
   "gunler": [
+   {
+    "g": "2026-11-23",
+    "u": "/reports/2026-11-23.html#g9"
+   },
    {
     "g": "2026-11-22",
     "u": "/haberler/2026-11-22.html?q=Roketsan"
@@ -1739,8 +1759,8 @@
     "u": "/haberler/2026-09-23.html?q=Roketsan"
    }
   ],
-  "son": "2026-11-22",
-  "sayi_30g": 8
+  "son": "2026-11-23",
+  "sayi_30g": 9
  },
  "repkon": {
   "ad": "Repkon",
@@ -1991,6 +2011,10 @@
   "segmentler": [],
   "gunler": [
    {
+    "g": "2026-11-23",
+    "u": "/haberler/2026-11-23.html?q=Havelsan"
+   },
+   {
     "g": "2026-11-19",
     "u": "/haberler/2026-11-19.html?q=Havelsan"
    },
@@ -2095,7 +2119,7 @@
     "u": "/haberler/2026-09-17.html?q=Havelsan"
    }
   ],
-  "son": "2026-11-19",
+  "son": "2026-11-23",
   "sayi_30g": 15
  },
  "stm": {
@@ -2103,6 +2127,10 @@
   "rol": "emsal",
   "segmentler": [],
   "gunler": [
+   {
+    "g": "2026-11-23",
+    "u": "/haberler/2026-11-23.html?q=STM"
+   },
    {
     "g": "2026-11-22",
     "u": "/haberler/2026-11-22.html?q=STM"
@@ -2168,8 +2196,8 @@
     "u": "/haberler/2026-09-25.html?q=STM"
    }
   ],
-  "son": "2026-11-22",
-  "sayi_30g": 11
+  "son": "2026-11-23",
+  "sayi_30g": 12
  },
  "asfat": {
   "ad": "ASFAT",

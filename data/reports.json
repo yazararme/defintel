@@ -1,5 +1,71 @@
 [
   {
+    "date": "2026-11-23",
+    "title": "Bingazi'de 22 Kasım'da insansız deniz aracıyla bir ticari gemi ve limanda bir Rus gemisi hedef alındı, doğu Libya deniz kuvvetleri 12 İDA'yı imha ettiğini bildirdi ve aynı gün deniz üssündeki bir mühimmat deposunda patlama oldu",
+    "summary": "Günün ağırlığı insansız deniz aracı saldırısının Akdeniz'in güney kıyısında ticari ve askerî gemilere karşı aynı gün içinde tekrarlanmasında ve boş mermi gövdesi arzına iki gün içinde ikinci bir özel sektör girişinin eklenmesinde. Libya medyası 22 Kasım'da Bingazi açıklarında bir insansız deniz aracının bir ticari gemiyi hedef aldığını bildirdi, doğu Libya hükümeti aynı sabah limandaki bir Rus gemisinin vurulduğunu açıkladı ancak bunu insansız hava aracı saldırısı olarak varsaydı; doğu Libya deniz kuvvetleri 12 insansız deniz aracını imha ettiğini, doğu sağlık bakanlığı limanda 10 kişinin yaralandığını bildirdi, saldırgan taraf adlandırılmadı ve hiçbir iddia bağımsız olarak teyit edilmedi. Aynı gün Bingazi deniz üssündeki bir mühimmat deposunda patlama olduğu bildirildi; sivil savunma yangını sınırlamak için ekip gönderdi, patlamanın nedeni, mühimmat tipi ve zarar açıklanmadı ve kaynak olayı liman saldırısıyla ilişkilendirmedi. Hindistan'da Sunita Tools, Faridabad tesisinde 81–155 mm aralığında boş topçu mermisi gövdesi üretmek için DPIIT'ten stratejik sınai lisans aldığını ve başlangıç kapasitesinin yılda 300.000 adet olduğunu açıkladı; yaklaşık 550 crore rupilik sipariş defterinden ve bekleyen uluslararası teklif taleplerinden söz edildi, müşteri ve ülke adlandırılmadı. ABD'li Vector, 1.100 km azami menzil, 50 kg faydalı yük ve darbeli jet tahrik beyan ettiği BOMBARD tek yönlü taarruz dronunu tanıttı ve SR2Vector ortak girişimi üzerinden Suudi Arabistan'da yerel üretim ile SKYWASP adıyla pazarlama planını duyurdu; imzalı anlaşma, takvim, müşteri ve birim maliyet açıklanmadı. Saab Bofors Dynamics Switzerland ile PGZ'ye bağlı Dezamet arasındaki havan mühimmatı lisansının STANAG 4425 uyumlu 60,7 mm MAPAM olduğu ve menzil uzatılmış varyantın yaklaşık 4 km'ye ulaştığı bildirildi; adet, bedel, takvim ve bir Polonya ordusu siparişi yok. Kongsberg Australia ile Zone 5 Technologies, Avustralya ve Yeni Zelanda için ucuz ve seri üretilebilir uzun menzilli taarruz, hava savunma ve karşı-dron füzeleri üzerinde iş birliğini araştırmak üzere mutabakat imzaladı; karşı-dron önleyicisi White Spike NASAMS komuta-kontrolüne entegre ediliyor, sipariş ve maliyet rakamı yok.",
+    "lead": "Bingazi'de 22 Kasım'da bir insansız deniz aracı ticari gemiyi hedef aldı, doğu Libya deniz kuvvetleri 12 İDA'yı imha et…",
+    "alarm": false,
+    "alarm_title": "",
+    "tags": [
+      "Deniz Sistemleri",
+      "Mühimmat",
+      "C-UAS",
+      "Dolanan Mühimmat",
+      "Topçu",
+      "Afrika",
+      "Suudi Arabistan",
+      "Rakip"
+    ],
+    "developments": [
+      {
+        "id": "G1",
+        "label": "Bingazi'de insansız deniz aracı saldırıları ve mühimmat deposu patlaması",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G2",
+        "label": "Sunita Tools 81–155 mm boş gövde lisansı",
+        "home": "rakip"
+      },
+      {
+        "id": "G3",
+        "label": "Vector BOMBARD ve Suudi Arabistan'da SKYWASP üretim planı",
+        "home": "rakip"
+      },
+      {
+        "id": "G4",
+        "label": "Saab–Dezamet 60,7 mm MAPAM lisansının kırılımı",
+        "home": "rakip"
+      },
+      {
+        "id": "G5",
+        "label": "Kongsberg Australia – Zone 5 ucuz önleyici mutabakatı",
+        "home": "rakip"
+      },
+      {
+        "id": "G6",
+        "label": "101. Hava İndirme'nin DARK ve BLADE canlı atışı",
+        "home": "gelismeler"
+      },
+      {
+        "id": "G7",
+        "label": "ABD Ordusu'nun Saab XM919 siparişi",
+        "home": "rakip"
+      },
+      {
+        "id": "G8",
+        "label": "WITU dron harp başlığı ailesi",
+        "home": "izleme"
+      },
+      {
+        "id": "G9",
+        "label": "Azroksan'ın Azerbaycan'da 122 mm roket üretim planı",
+        "home": "izleme"
+      }
+    ],
+    "path": "reports/2026-11-23.html"
+  },
+  {
     "date": "2026-11-22",
     "title": "İran Devrim Muhafızları 21 Kasım'da Bahreyn'de iki ABD Patriot radarını imha ettiğini iddia etti ve Bahreyn hava savunmasının saldırıları önlediğini bildirdi",
     "summary": "Günün ağırlığı Körfez'de alçak irtifa tehdidinin yeniden faal hale gelmesinde ve hava savunma radarının saldıran taraf tarafından açıkça hedef ilan edilmesinde; ikinci ağırlık 155 mm boş mermi gövdesi arzının üçüncü bir ülkede özel sektör partisine ulaşmasında. İran Devrim Muhafızları 21 Kasım gecesi Bahreyn'deki al-Riffa ve Awali üslerine füze ve dronla birleşik bir harekât yürüttüğünü ve ABD'ye ait iki Patriot hava savunma radarını imha ettiğini duyurdu; Bahreyn Savunma Kuvvetleri hava savunmasının 'bir dizi İran hava saldırısını' önlediğini, İçişleri Bakanlığı ise bir sivil sanayi tesisinin isabet aldığını, maddi hasar oluştuğunu ve yaralı bulunmadığını bildirdi, radar imhası iddiası bağımsız olarak teyit edilmedi. Saldırı 13 ve 15 Kasım'daki iddiaların ardından geldi; 13 Kasım'da CENTCOM hasarı yalanlayıp iki İran dronunu düşürdüğünü, 15 Kasım'da Devrim Muhafızları Riffa Hava Üssü'ndeki bir ABD hava savunma radarına altı dron attığını açıklamıştı. Hindistan'da Tirupati Forge, 155 mm M107 mühimmatı için ilk 200 adetlik boş gövde partisini tamamladığını ve nihai muayenenin atış denemesi öncesinde yapıldığını bildirdi; firmanın sınai lisansı 105, 120, 122, 125, 130, 152 ve 155 mm boş gövdeleri kapsıyor, M107'de ticari üretim FY27 4. çeyreğinde, uzatılmış menzilli tam çaplı gövdede FY28 ilk yarısında bekleniyor, müşteri ve sipariş açıklanmadı. Konya Karapınar'daki SKY SHOW 2026'da SKYDAGGER'ın dört rotorlu HUNTER önleyici dronu, ASELSAN AURA 200-G AESA radarının verdiği hedef bilgisiyle hedefi imha etti; 500 gramlık harp başlığı ve 300 km/s azami hız beyan edildi, aynı gösteride TOYCA-05 kamikaze insansız hava aracı 5 kg harp başlığı ve 70 km menzille tanıtıldı, sipariş ya da müşteri duyurulmadı. ABD Savunma Bakanlığı, GAO'nun üst düzey bir mühimmat çerçevesi önerisine katıldığını bildirdi ancak veri yönetimi önerisine kısmen katıldı; kaynak Patriot önleyici üretiminin iki yıldan uzun sürdüğünü aktarıyor. Filipinler'in HIMARS ve K239 Chunmoo'ya daha ucuz seçenek olarak Hint Pinaka ÇNRA'sını değerlendirdiği bildirildi; resmî bir karar, ilan ya da fiyat rakamı yok.",
