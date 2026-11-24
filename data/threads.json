@@ -1,5 +1,210 @@
 [
  {
+  "id": "abd-deniz-piyadeleri-drone-round",
+  "name": "ABD Deniz Piyadeleri \"Drone Round\" 5,56x45 mm çok parçacıklı mermi",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "polonya-da-hava-savunma-ve-karsi-dron-mimarisini",
+  "name": "Polonya'da hava savunma ve karşı-dron mimarisinin kalemlere bölünmesi",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "angajman-basina-ve-mermi-basina-maliyetin-resm-k",
+  "name": "Angajman başına ve mermi başına maliyetin resmî kriter olması",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "hard-kill-de-namlulu-cozum-yerine-fuze-lazer-ya-",
+  "name": "Hard-kill'de namlulu çözüm yerine füze, lazer ya da havadan önleyici tercihi",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "havada-infilak-eden-programlanabilir-muhimmatin-",
+  "name": "Havada infilak eden / programlanabilir mühimmatın ve yakınlık fünyesinin karşı-dron kaleminde ayrı tanımlanması",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "cok-ureticili-entegrasyon-ve-arayuz-uyumlulugu",
+  "name": "Çok üreticili entegrasyon ve arayüz uyumluluğu",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "resm-kapasite-boslugunun-ikinci-kaynak-ve-sartna",
+  "name": "Resmî kapasite boşluğunun ikinci kaynak ve şartname şartına dönüşmesi",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "patriot-ve-thaad-stok-acigi-ile-ana-yuklenici-ka",
+  "name": "Patriot ve THAAD stok açığı ile ana yüklenici kapasite yatırımları",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "yerli-icerik-offset-ve-mense-sartlarinin-sartnam",
+  "name": "Yerli içerik, offset ve menşe şartlarının şartnamelere yayılması",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "korfez-ve-orta-dogu-da-karsi-dron-kalemlerinin-a",
+  "name": "Körfez ve Orta Doğu'da karşı-dron kalemlerinin ayrı sözleşmeye bağlanması",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "suudi-arabistan-da-yerli-uretim-ve-ortak-girisim",
+  "name": "Suudi Arabistan'da yerli üretim ve ortak girişim şartının yaygınlaşması",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "deniz-mayininin-ve-insansiz-deniz-aracinin-ticar",
+  "name": "Deniz mayınının ve insansız deniz aracının ticari ve askerî deniz trafiğine etkisinin bölgesel risk kalemi olarak anılması",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "malezya-merad-rmk-13-kisa-menzil-ve-karsi-dron-k-2",
+  "name": "Malezya MERAD / RMK-13 kısa menzil ve karşı-dron kaleminin bütçelenmesi",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "guneydogu-ve-dogu-asya-da-topcu-ve-roket-kalemle",
+  "name": "Güneydoğu ve Doğu Asya'da topçu ve roket kalemlerinin ABD kaynağına bağlanması",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "hindistan-da-karsi-dron-topcu-ve-muhimmat-kaleml",
+  "name": "Hindistan'da karşı-dron, topçu ve mühimmat kalemlerinin kırılımı",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "romanya-da-namlulu-hava-savunma-modernizasyonunu",
+  "name": "Romanya'da namlulu hava savunma modernizasyonunun takvim ve kalite riski",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "birlesik-krallik-ta-karsi-dron-ve-karsi-atis-kal",
+  "name": "Birleşik Krallık'ta karşı-dron ve karşı-atış kalemlerinin ayrı ihale edilmesi",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "balkanlar-baltiklar-kafkasya-ve-afrika-da-kalem-",
+  "name": "Balkanlar, Baltıklar, Kafkasya ve Afrika'da kalem kırılımı",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "avrupa-da-orta-ve-uzun-menzil-hava-savunma-acigi",
+  "name": "Avrupa'da orta ve uzun menzil hava savunma açığının ithal önleyiciyle kapatılması",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "bos-mermi-govdesi-ve-dovme-kaleminde-ikinci-kayn",
+  "name": "Boş mermi gövdesi ve dövme kaleminde ikinci kaynak",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "105-mm-ve-155-mm-namlu-ile-mermi-uretiminin-ulus",
+  "name": "105 mm ve 155 mm namlu ile mermi üretiminin ulusallaşması",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "orta-kalibre-muhimmatin-ayri-adetli-kalem-olarak",
+  "name": "Orta kalibre mühimmatın ayrı adetli kalem olarak ilan edilmesi",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "barut-patlayici-ve-enerjetik-malzeme-darbogazini",
+  "name": "Barut, patlayıcı ve enerjetik malzeme darboğazının ayrı kalem olarak fiyatlanması",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "muhimmat-raf-omru-ve-stok-tazeleme-kaleminin-ayr",
+  "name": "Mühimmat raf ömrü ve stok tazeleme kaleminin ayrı tanımlanması",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "avrupa-ve-nato-muhimmat-talebine-ucuncu-ulke-arz",
+  "name": "Avrupa ve NATO mühimmat talebine üçüncü ülke arzının girmesi",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "dolum-kapasitesinde-otomasyonun-rekabet-olcutune",
+  "name": "Dolum kapasitesinde otomasyonun rekabet ölçütüne dönüşmesi",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "muhimmat-deposu-ve-stok-guvenliginin-ayri-risk-k",
+  "name": "Mühimmat deposu ve stok güvenliğinin ayrı risk kalemi olması",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "namlulu-yakin-savunmanin-insansiz-deniz-araci-te",
+  "name": "Namlulu yakın savunmanın insansız deniz aracı tehdidinde ayrı kalem olarak tanımlanması",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "karsi-dron-sensorunun-efektorden-ayri-ihale-edil-2",
+  "name": "Karşı-dron sensörünün efektörden ayrı ihale edilmesi",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "karsi-dron-yetkilerinin-ve-sertifikasyon-rejimin",
+  "name": "Karşı-dron yetkilerinin ve sertifikasyon rejiminin tanımlanması",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "karsi-dron-tedarikinin-merkez-katalog-ve-hizli-a",
+  "name": "Karşı-dron tedarikinin merkezî katalog ve hızlı alım yollarında toplanması",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "yonlendirilmis-enerjinin-muhimmat-esasli-son-kat",
+  "name": "Yönlendirilmiş enerjinin mühimmat esaslı son katmana alternatif olarak sunulması",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "soft-kill-karistirmanin-arac-ustu-ayri-tedarik-k",
+  "name": "Soft-kill karıştırmanın araç üstü ayrı tedarik kalemi olması",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "akustik-tespitin-karsi-dron-sartnamelerinde-ayri",
+  "name": "Akustik tespitin karşı-dron şartnamelerinde ayrı kalem olması",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "dolanan-muhimmatta-platform-ile-harp-basliginin-",
+  "name": "Dolanan mühimmatta platform ile harp başlığının ayrı tedarik kalemi olması",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "insansiz-deniz-aracinin-harp-basligi-ve-patlayic",
+  "name": "İnsansız deniz aracının harp başlığı ve patlayıcı dolumunun ayrı kalem olarak tanımlanması",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "er-seviyesi-karsi-dron-kabiliyetinin-kalibre-tal-2",
+  "name": "Er seviyesi karşı-dron kabiliyetinin kalibre talebi",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "omuzdan-atilan-ve-tek-kullanimlik-muhimmat-kalem",
+  "name": "Omuzdan atılan ve tek kullanımlık mühimmat kaleminin çerçeve sözleşmelere bağlanması",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "cin-dron-ve-bilesen-ihracat-lisans-rejiminin-kap",
+  "name": "Çin dron ve bileşen ihracat lisans rejiminin kapsamının mühimmat ve efektör bileşenlerine uzanması",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "rakip-ekosisteminde-sensor-uretiminin-dis-tedari",
+  "name": "Rakip ekosisteminde sensör üretiminin dış tedarikçiye devredilmesi",
+  "son_hareket": "2026-11-24"
+ },
+ {
+  "id": "cin-kritik-mineral-ihracat-kisitlarinda-askinin-",
+  "name": "Çin kritik mineral ihracat kısıtlarında askının sona ermesi",
+  "son_hareket": "2026-11-24"
+ },
+ {
   "id": "witu-dron-harp-basligi-ailesi",
   "name": "WITU dron harp başlığı ailesi",
   "son_hareket": "2026-11-23"
@@ -185,11 +390,6 @@
   "son_hareket": "2026-11-02"
  },
  {
-  "id": "abd-deniz-piyadeleri-drone-round",
-  "name": "ABD Deniz Piyadeleri \"Drone Round\" 5,56x45 mm çok parçacıklı mermi",
-  "son_hareket": "2026-11-01"
- },
- {
   "id": "hindistan-13-pantsir-s1-degerlendirmesi",
   "name": "Hindistan'ın 13 Pantsir-S1 değerlendirmesinin resmî alım adımına dönüşmesi",
   "son_hareket": "2026-11-01"
@@ -225,11 +425,6 @@
   "son_hareket": "2026-11-01"
  },
  {
-  "id": "polonya-da-hava-savunma-ve-karsi-dron-mimarisini",
-  "name": "Polonya'da hava savunma ve karşı-dron mimarisinin kalemlere bölünmesi",
-  "son_hareket": "2026-11-01"
- },
- {
   "id": "arnavutluk-ve-balkanlar-da-hafif-cekili-obus-tal",
   "name": "Arnavutluk ve Balkanlar'da hafif çekili obüs talebinin tekrarlanması",
   "son_hareket": "2026-11-01"
@@ -255,16 +450,6 @@
   "son_hareket": "2026-11-01"
  },
  {
-  "id": "angajman-basina-ve-mermi-basina-maliyetin-resm-k",
-  "name": "Angajman başına ve mermi başına maliyetin resmî kriter olması",
-  "son_hareket": "2026-11-01"
- },
- {
-  "id": "hard-kill-de-namlulu-cozum-yerine-fuze-lazer-ya-",
-  "name": "Hard-kill'de namlulu çözüm yerine füze, lazer ya da havadan önleyici tercihi",
-  "son_hareket": "2026-11-01"
- },
- {
   "id": "onleyici-fuzenin-kalemlere-bolunmesi-ve-ucuz-onl",
   "name": "Önleyici füzenin kalemlere bölünmesi ve ucuz önleyicinin Avrupa'da üretimi",
   "son_hareket": "2026-11-01"
@@ -275,18 +460,8 @@
   "son_hareket": "2026-11-01"
  },
  {
-  "id": "havada-infilak-eden-programlanabilir-muhimmatin-",
-  "name": "Havada infilak eden / programlanabilir mühimmatın ve yakınlık fünyesinin karşı-dron kaleminde ayrı tanımlanması",
-  "son_hareket": "2026-11-01"
- },
- {
   "id": "karsi-dron-sensorunun-efektorden-ayri-ihale-edil",
   "name": "Karşı-dron sensörünün efektörden ayrı ihale edilmesi ve sensör üreticilerinin konsolidasyonu",
-  "son_hareket": "2026-11-01"
- },
- {
-  "id": "cok-ureticili-entegrasyon-ve-arayuz-uyumlulugu",
-  "name": "Çok üreticili entegrasyon ve arayüz uyumluluğu",
   "son_hareket": "2026-11-01"
  },
  {
@@ -350,11 +525,6 @@
   "son_hareket": "2026-11-01"
  },
  {
-  "id": "resm-kapasite-boslugunun-ikinci-kaynak-ve-sartna",
-  "name": "Resmî kapasite boşluğunun ikinci kaynak ve şartname şartına dönüşmesi",
-  "son_hareket": "2026-11-01"
- },
- {
   "id": "enerjetik-malzeme-ve-harp-basligi-dolum-kapasite",
   "name": "Enerjetik malzeme ve harp başlığı dolum kapasitesinin alıcı tarafında darboğaz olması",
   "son_hareket": "2026-11-01"
@@ -367,11 +537,6 @@
  {
   "id": "orta-kalibre-muhimmatta-bilesen-ve-montaj-dagili",
   "name": "Orta kalibre mühimmatta bileşen ve montaj dağılımı; güverte topu ve 20 mm uzaktan komutalı silah kalemlerinin ayrı tanımı",
-  "son_hareket": "2026-11-01"
- },
- {
-  "id": "patriot-ve-thaad-stok-acigi-ile-ana-yuklenici-ka",
-  "name": "Patriot ve THAAD stok açığı ile ana yüklenici kapasite yatırımları",
   "son_hareket": "2026-11-01"
  },
  {
@@ -417,11 +582,6 @@
  {
   "id": "dron-bileseninde-mense-bagimliliginin-olculmesi",
   "name": "Dron bileşeninde menşe bağımlılığının ölçülmesi",
-  "son_hareket": "2026-11-01"
- },
- {
-  "id": "yerli-icerik-offset-ve-mense-sartlarinin-sartnam",
-  "name": "Yerli içerik, offset ve menşe şartlarının şartnamelere yayılması",
   "son_hareket": "2026-11-01"
  },
  {

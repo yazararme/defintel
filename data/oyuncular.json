@@ -537,7 +537,7 @@
    }
   ],
   "son": "2026-11-15",
-  "sayi_30g": 4
+  "sayi_30g": 3
  },
  "pgz": {
   "ad": "PGZ",
@@ -846,7 +846,7 @@
    }
   ],
   "son": "2026-11-23",
-  "sayi_30g": 6
+  "sayi_30g": 5
  },
  "northrop-grumman": {
   "ad": "Northrop Grumman",
@@ -1476,6 +1476,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-11-24",
+    "u": "/reports/2026-11-24.html#g2"
+   },
+   {
     "g": "2026-11-23",
     "u": "/haberler/2026-11-23.html?q=Aselsan"
    },
@@ -1676,7 +1680,7 @@
     "u": "/reports/2026-09-14.html#g10"
    }
   ],
-  "son": "2026-11-23",
+  "son": "2026-11-24",
   "sayi_30g": 26
  },
  "roketsan": {
@@ -1839,7 +1843,7 @@
    }
   ],
   "son": "2026-10-25",
-  "sayi_30g": 1
+  "sayi_30g": 0
  },
  "tubitak-sage": {
   "ad": "TÜBİTAK SAGE",
@@ -2120,13 +2124,17 @@
    }
   ],
   "son": "2026-11-23",
-  "sayi_30g": 15
+  "sayi_30g": 14
  },
  "stm": {
   "ad": "STM",
   "rol": "emsal",
   "segmentler": [],
   "gunler": [
+   {
+    "g": "2026-11-24",
+    "u": "/haberler/2026-11-24.html?q=STM"
+   },
    {
     "g": "2026-11-23",
     "u": "/haberler/2026-11-23.html?q=STM"
@@ -2196,8 +2204,8 @@
     "u": "/haberler/2026-09-25.html?q=STM"
    }
   ],
-  "son": "2026-11-23",
-  "sayi_30g": 12
+  "son": "2026-11-24",
+  "sayi_30g": 13
  },
  "asfat": {
   "ad": "ASFAT",
