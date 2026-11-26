@@ -134,7 +134,7 @@
    }
   ],
   "son": "2026-11-25",
-  "sayi_30g": 14
+  "sayi_30g": 13
  },
  "nammo": {
   "ad": "Nammo",
@@ -1492,6 +1492,10 @@
   ],
   "gunler": [
    {
+    "g": "2026-11-26",
+    "u": "/haberler/2026-11-26.html?q=Aselsan"
+   },
+   {
     "g": "2026-11-25",
     "u": "/haberler/2026-11-25.html?q=Aselsan"
    },
@@ -1700,7 +1704,7 @@
     "u": "/reports/2026-09-14.html#g10"
    }
   ],
-  "son": "2026-11-25",
+  "son": "2026-11-26",
   "sayi_30g": 27
  },
  "roketsan": {
@@ -1881,6 +1885,10 @@
   "segmentler": [],
   "gunler": [
    {
+    "g": "2026-11-26",
+    "u": "/haberler/2026-11-26.html?q=Baykar"
+   },
+   {
     "g": "2026-11-25",
     "u": "/haberler/2026-11-25.html?q=Baykar"
    },
@@ -1981,14 +1989,18 @@
     "u": "/haberler/2026-09-22.html?q=Baykar"
    }
   ],
-  "son": "2026-11-25",
-  "sayi_30g": 11
+  "son": "2026-11-26",
+  "sayi_30g": 12
  },
  "tusas": {
   "ad": "TUSAŞ",
   "rol": "emsal",
   "segmentler": [],
   "gunler": [
+   {
+    "g": "2026-11-26",
+    "u": "/haberler/2026-11-26.html?q=TUSA%C5%9E"
+   },
    {
     "g": "2026-11-19",
     "u": "/haberler/2026-11-19.html?q=TUSA%C5%9E"
@@ -2030,7 +2042,7 @@
     "u": "/haberler/2026-10-14.html?q=TUSA%C5%9E"
    }
   ],
-  "son": "2026-11-19",
+  "son": "2026-11-26",
   "sayi_30g": 4
  },
  "havelsan": {
@@ -2038,6 +2050,10 @@
   "rol": "emsal",
   "segmentler": [],
   "gunler": [
+   {
+    "g": "2026-11-26",
+    "u": "/haberler/2026-11-26.html?q=Havelsan"
+   },
    {
     "g": "2026-11-25",
     "u": "/haberler/2026-11-25.html?q=Havelsan"
@@ -2151,7 +2167,7 @@
     "u": "/haberler/2026-09-17.html?q=Havelsan"
    }
   ],
-  "son": "2026-11-25",
+  "son": "2026-11-26",
   "sayi_30g": 15
  },
  "stm": {
@@ -2159,6 +2175,10 @@
   "rol": "emsal",
   "segmentler": [],
   "gunler": [
+   {
+    "g": "2026-11-26",
+    "u": "/reports/2026-11-26.html#g11"
+   },
    {
     "g": "2026-11-25",
     "u": "/haberler/2026-11-25.html?q=STM"
@@ -2236,7 +2256,7 @@
     "u": "/haberler/2026-09-25.html?q=STM"
    }
   ],
-  "son": "2026-11-25",
+  "son": "2026-11-26",
   "sayi_30g": 13
  },
  "asfat": {
